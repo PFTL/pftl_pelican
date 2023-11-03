@@ -1,12 +1,13 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: handling-and-sharing-data-between-threads
 date: '2019-08-06'
 description: Learn how to share data between threads
-header: '{illustration}python1-01.png'
+image: '/images/python1-01.width-800.png'
 subtitle: Learn how to share data between threads
-tags: 'threading, data, queue, sharing, threads, async, multithreading'
+tags: [threading, data, queue, sharing, threads, async, multithreading]
 title: Handling and Sharing Data Between Threads
+Series: Parallelizing
 ---
 
 When working with threads in Python, you will find very useful to be
@@ -16,15 +17,13 @@ exchanging information is relatively easy. However, some structures can
 help you achieve more specific goals.
 
 In the previous article, we have covered [how to start and synchronize
-threads](%7Bfilename%7D31_Threads_Part_1.rst) and now it is time to
+threads]({filename}31_Threads_Part_1.rst.md) and now it is time to
 expand the toolbox to handle the exchange of information between them.
 
-Shared Memory
-=============
-
+## Shared Memory
 The first and most naive approach is to use the same variables in
 different threads. We have already used this feature in the [previous
-tutorial](%7Bfilename%7D31_Threads_Part_1.rst), but without discussing
+tutorial]({filename}31_Threads_Part_1.rst.md), but without discussing
 it explicitly. Let's see how we can use shared memory through a very
 simple example:
 
@@ -63,7 +62,7 @@ feature. We start a new thread by passing an argument, `my_var`, which
 is a list of numbers. The thread will increase the values of the numbers
 by one, with a certain delay. In this example we use events to
 graciously finish the thread, if you are not familiar with them, check
-the [previous tutorial](%7Bfilename%7D31_Threads_Part_1.rst).
+the [previous tutorial]({filename}31_Threads_Part_1.rst.md).
 
 The important piece of code in this example is the `print(my_var)` line.
 That print statement lives in the main thread, however, it has access to
@@ -162,7 +161,7 @@ to each other! And this is a very important behavior that can appear
 when working with multiple threads in Python. If you think really hard,
 can you explain where this issue is coming from?
 
-In the [previous tutorial](%7Bfilename%7D31_Threads_Part_1.rst), we
+In the [previous tutorial]({filename}31_Threads_Part_1.rst.md), we
 discussed that threads are handled by the operating system, which
 decides when to spin one on or off. We have no control over what the
 operating system decides to do. In the example above, since there is no
@@ -192,17 +191,14 @@ But if I run it another time, I get:
 [97998, 133432, 186591]
 ```
 
-<div class="admonition note">
+!!! note
 
-You may notice that there is a delay between the `start` of both
-threads, which may give a certain advantage to the first thread started.
-However, that alone cannot explain the output generated.
+    You may notice that there is a delay between the `start` of both
+    threads, which may give a certain advantage to the first thread started.
+    However, that alone cannot explain the output generated.
 
-</div>
 
-How to synchronize data access
-==============================
-
+## How to synchronize data access
 To solve the problem we found in the previous examples, we have to be
 sure that no two threads try to write at the same time to the same
 variable. For that, we can use a `Lock`:
@@ -233,9 +229,7 @@ complications of memory management when dealing with concurrent
 programming. Memory sharing is a nice feature, but it comes with risks
 also.
 
-Queues
-======
-
+## Queues
 One of the common situations in which threads are used is when you have
 some slow tasks that you can't optimize. For example, imagine you are
 downloading data from a website using. Most of the time the processor
@@ -478,9 +472,7 @@ Unless we include a `Lock` ourselves, the Queue can be read and written
 by any threads. The Lock only comes into effect for the `get` or `put`
 commands.
 
-Extra Options of Queues
-=======================
-
+## Extra Options of Queues
 Queues have some extra options, such as the maximum number of elements
 they can hold. You can also define **LIFO** (last-in, first-out) types
 of queues, which you can read about [in the
@@ -489,8 +481,8 @@ What I find more useful about `Queues` is that they are written in pure
 Python. If you visit their [source
 code](https://github.com/python/cpython/blob/3.7/Lib/queue.py), you can
 learn a lot about synchronization in threads, [custom
-exceptions](%7Bfilename%7D12_handling_exceptions.rst), and
-[documenting](%7Bfilename%7D11_documenting.rst).
+exceptions]({filename}12_handling_exceptions.rst.md), and
+[documenting]({filename}11_documenting.rst.md).
 
 What is important to note, is that when you work with multiple Threads,
 sometimes you want to wait (i.e. block the execution), sometimes you
@@ -575,9 +567,7 @@ exception, or we wait for up to 1 millisecond (`timeout=0.001`) and we
 catch the exception. You can play around with these options to see if
 the performance of your code changes in any way.
 
-Queues to Stop Threads
-======================
-
+## Queues to Stop Threads
 Up to now, we have always used locks to stop threads, which is, I
 believe, a very elegant way of doing it. However, there is another
 possibility, which is to control the flow of threads by appending
@@ -612,19 +602,15 @@ You want to be sure you finish processing everything before stopping the
 thread. In such a case, adding a special value to the queue guarantees
 that all elements will be processed.
 
-<div class="admonition warning">
+!!! warning
 
-it is a very wise idea to be sure a queue is empty after you stop using
-it. If, as before, you interrupt the thread by looking at the status of
-a lock, the queue may be left with a lot of data in it, and thus the
-memory will not be freed. A simple while-loop that gets all the elements
-of a queue solves it.
+    it is a very wise idea to be sure a queue is empty after you stop using
+    it. If, as before, you interrupt the thread by looking at the status of
+    a lock, the queue may be left with a lot of data in it, and thus the
+    memory will not be freed. A simple while-loop that gets all the elements
+    of a queue solves it.
 
-</div>
-
-IO Bound threads
-================
-
+## IO Bound threads
 The examples in this article are computationally intensive, and thus
 they are right on the edge where using multi-threading is not applicable
 and where all the problems arise (such as concurrency, etc.) We have
@@ -640,9 +626,7 @@ running. This is also valid if the program waits for user input or
 network resources to become available, downloads data from the internet,
 etc.
 
-Example downloading websites
-----------------------------
-
+### Example downloading websites
 To close this article, let's see an example of downloading websites
 using threadings, queues, and locks. Even if some performance
 improvements are possible, the example will show the basic building
@@ -814,10 +798,8 @@ Now we know all the threads have finished and the queues are empty. If
 you run the program, you can see the list of 10 files created, with the
 HTML of 10 different Wikipedia homepages.
 
-Conclusions
-===========
-
-In the [previous article](%7Bfilename%7D31_Threads_Part_1.rst), we have
+## Conclusions
+In the [previous article]({filename}31_Threads_Part_1.rst.md), we have
 seen how you can use threading to run different functions at the same
 time, and some of the most useful tools you have available to control
 the flow of different threads. In this article we have discussed how you
@@ -836,8 +818,8 @@ To finish, we have shown a very simple example of how to use threads to
 download data from a website and save it to disk. The example is very
 basic, but we will expand it in the following article. Other IO
 (input-output) tasks that can be explored are [acquisition from
-devices](%7Bfilename%7D22_Step_by_step_qt.rst) such as a camera, waiting
-for user input, [reading from disk](%7Bfilename%7D13_storing_data.rst),
+devices]({filename}22_Step_by_step_qt.rst.md) such as a camera, waiting
+for user input, [reading from disk]({filename}13_storing_data.rst.md),
 etc.
 
 Header Illustration by [Tsvetelina

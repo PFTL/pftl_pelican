@@ -1,11 +1,11 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: deep-and-shallow-copies-of-objects
 date: '2019-02-04'
 description: 'Understanding how tuples which are immutable, may seem to change.'
-header: '{attach}rebecca-georgia-269933-unsplash.jpg'
+image: '/images/rebecca-georgia-269933-unsplash_linkedin.width-800.jpg'
 subtitle: 'Understanding how tuples which are immutable, may seem to change.'
-tags: 'Data, Types, Mutable, Immutable, Objects, Copy, Memory'
+tags: [Data, Types, Mutable, Immutable, Objects, Copy, Memory]
 title: Deep and Shallow Copies of Objects
 ---
 
@@ -18,7 +18,7 @@ Python, including custom classes.
 
 The discussion of deep and shallow copies is only worth having in the
 context of [mutable data
-types](%7Bfilename%7D17_mutable_and_immutable.rst), so if you are not
+types]({filename}17_mutable_and_immutable.rst.md), so if you are not
 sure of what that means, you can check the linked article. To refresh
 your memory, let's see quickly what happens when you copy a list, for
 example:
@@ -123,9 +123,7 @@ If you want to make a deep copy, the command is, as expected,
 140381217929672
 ```
 
-Copies of Custom Classes
-========================
-
+## Copies of Custom Classes
 We have seen the differences between deep and shallow copies of standard
 python data types such as lists and dictionaries. Now it is important to
 see what happens when you define your own classes that also reference
@@ -189,9 +187,7 @@ the behavior would change, exactly in the same way than with lists or
 dictionaries. But we can go one step further, and customize the behavior
 of the shallow or deep copies of objects.
 
-Custom shallow and deep copies of objects
-=========================================
-
+## Custom shallow and deep copies of objects
 With Python, you have a very high level of granularity regarding how
 much control you have on every step, including deep and shallow copies.
 In order to have control, you need to override the methods `__copy__`
@@ -293,9 +289,7 @@ knowing all the attributes that are defined in your object, etc. Hope
 this short story can help clarify a topic that is not that trivial for
 newcomers to the deeps of object-oriented python programming.
 
-Custom deep copy
-================
-
+## Custom deep copy
 Back in the track to the main topic of the article, we need to customize
 the deep copy of the class. It is very similar to the `__copy__` method,
 but it takes one more argument:
@@ -357,9 +351,7 @@ We will get the following output:
 So, you see now, that `.x` and `.y` are unchanged, while `.other`
 reflects the changes done on the other class.
 
-Why defining how to copy
-========================
-
+## Why defining how to copy
 The simple examples above only show how to achieve different behavior
 with deep and shallow copies, but they don't explain why you would do
 it. The cases in which you will need to define this custom behavior are
@@ -376,14 +368,12 @@ for communicating with a device. You would like to prevent talking at
 exactly the same time to the same device through the same interface. You
 may also like to protect private attributes, etc.
 
-Last Warning
-============
-
+## Last Warning
 It is very important to point out that, if are worried about copying and
 deep copying of custom objects, you should understand what are [mutable
-and immutable](%7Bfilename%7D17_mutable_and_immutable.rst) objects in
+and immutable]({filename}17_mutable_and_immutable.rst.md) objects in
 Python, and what are [hashable
-objects](%7Bfilename%7D19_hashable_objects.rst). When you have immutable
+objects]({filename}19_hashable_objects.rst.md). When you have immutable
 data types, such as an integer or a string, all the discussion above
 doesn't work. If you change an immutable attribute in a class, that
 attribute in deep-copied objects will not change.

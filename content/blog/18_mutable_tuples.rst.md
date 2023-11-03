@@ -1,18 +1,18 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: mutable-or-immutable-tuples
 date: '2018-08-24'
 description: 'Understanding how tuples, which are immutable, may seem to change.'
-header: '{attach}michal-pechardo-502908-unsplash.jpg'
+image: '/images/michal-pechardo-502908-unsplash_linkedin.width-800.jpg'
 subtitle: 'Understanding how tuples, which are immutable, may seem to change.'
-tags: 'Data, Types, Mutable, Immutable, Tuples'
+tags: [Data, Types, Mutable, Immutable, Tuples]
 title: Mutable or Immutable Tuples
 ---
 
 Broadly speaking, Python variables belong to one of two types:
 **mutable** and **immutable**. We have discussed this yesterday, in the
 [Introduction To Mutable and Immutable Data
-Types](%7Bfilename%7D17_mutable_and_immutable.rst). The first one refers
+Types]({filename}17_mutable_and_immutable.rst.md). The first one refers
 to those elements that can be changed without the need of creating a new
 one, while the latter refers to those that cannot be changed after
 instantiation. A paradigmatic example of immutable objects is tuples.
@@ -135,9 +135,7 @@ A lot of possibilities appear when you start playing around. However,
 your code has to be very well structured and explained if you plan to
 keep it maintainable.
 
-Tuples as Dictionary Keys
-=========================
-
+## Tuples as Dictionary Keys
 In principle, any immutable variable can be used as a dictionary key.
 Therefore, it is possible to also use tuples. For example:
 
@@ -166,21 +164,17 @@ objects that are also immutable. Therefore, even if the tuple is
 immutable, their elements may not be. You have to be careful when using
 a tuple as key to a dictionary since it will not always work.
 
-<div class="admonition note">
+!!! note
 
-actually, keys in dictionaries need to be hashable, which is not the
-same as immutable. Custom defined classes are hashable but mutable and
-can be used as dictionary keys. We are going to discuss this in a later
-article.
+    actually, keys in dictionaries need to be hashable, which is not the
+    same as immutable. Custom defined classes are hashable but mutable and
+    can be used as dictionary keys. We are going to discuss this in a later
+    article.
 
-</div>
-
-Conclusions
-===========
-
+## Conclusions
 This is a short article triggered by some comments that appear on the
 [discussion about mutable and immutable
-types](%7Bfilename%7D17_mutable_and_immutable.rst). Wrapping your mind
+types]({filename}17_mutable_and_immutable.rst.md). Wrapping your mind
 around this level of details may be hard at the beginning, but when you
 know these differences exist, you will be able to make better code, less
 prone to bugs. You may also start realizing why so many packages use

@@ -1,4 +1,13 @@
-# Slots
+---
+author: Aquiles Carattino
+slug: using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed
+date: '2021-03-21'
+description: Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make
+image: '/images/python1-01_gq7Qcbn.width-800.png'
+subtitle: Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make
+tags: [classes, object oriented, dictionary, memory, slots]
+title: "Using slots in Python: limit dynamic attribute creation and improve speed"
+---
 When we create classes, one of the biggest challenges is understanding how to handle dynamic attribute creation. Slots have the benefit of limiting attribute creation at runtime. In this article, we will explore how slots work, including a quick overview of how classes store attributes internally. 
 
 ## Dynamic attribute creation

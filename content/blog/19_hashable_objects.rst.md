@@ -1,15 +1,15 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: what-are-hashable-objects
 date: '2018-08-27'
 description: |
     Hashable objects are at the root of Python dictionaries, understand how
     they work.
-header: '{attach}yeo-khee-793533-unsplash.jpg'
+image: '/images/yeo-khee-793533-unsplash_linkedin.width-800.jpg'
 subtitle: |
     Hashable objects are at the root of Python dictionaries, understand how
     they work.
-tags: 'Hashable, Objects, Dictionaries, Hash'
+tags: [Hashable, Objects, Dictionaries, Hash]
 title: What are Hashable Objects
 ---
 
@@ -138,10 +138,8 @@ happens if we use them in a dictionary, let's try it to find out:
 As you can see in the snippet above, Python is relying on more than just
 the hash value of an object when using it as keys for a dictionary.
 
-Hash Values of Custom Classes
-=============================
-
-We have seen [before](%7Bfilename%7D17_mutable_and_immutable.rst) that
+## Hash Values of Custom Classes
+We have seen [before]({filename}17_mutable_and_immutable.rst.md) that
 there are differences between mutable and immutable types in Python.
 Built-in immutable types have always a hash method, while mutable types
 don't. However, this leaves outside custom defined classes. By default,

@@ -1,5 +1,13 @@
-# Instructions to build the Python for the Lab DAQ
-
+---
+author: Aquiles Carattino
+slug: instructions-to-build-the-python-for-the-lab-daq/
+date: '2021-03-27'
+description: The PFTL DAQ is the ideal companion for the Python for the Lab book
+image: '/images/python-arduino-fullsize.width-800.jpg'
+subtitle: The PFTL DAQ is the ideal companion for the Python for the Lab book
+tags: [DAQ, PFTL, darduino due]
+title: "Instructions to build the Python for the Lab DAQ"
+---
 The PFTL DAQ is the ideal companion to follow the book [Python for the Lab](https://www.pythonforthelab.com/books/). Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to follow the book to its fullest. 
 
 ## Materials

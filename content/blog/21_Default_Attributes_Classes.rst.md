@@ -1,16 +1,16 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: mutable-and-immutable-attributes-of-classes
 date: '2018-08-24'
 description: 'Understanding how tuples which are immutable, may seem to change.'
-header: '{attach}dan-gold-382057-unsplash.jpg'
+image: '/images/dan-gold-382057-unsplash_linkedin.width-800.jpg'
 subtitle: 'Understanding how tuples which are immutable, may seem to change.'
-tags: 'Data, Types, Mutable, Immutable, Tuples'
+tags: [Data, Types, Mutable, Immutable, Tuples]
 title: Mutable and Immutable Attributes of Classes
 ---
 
 We have seen how to leverage the differences between [mutable and
-immutable objects](%7Bfilename%7D17_mutable_and_immutable.rst) and what
+immutable objects]({filename}17_mutable_and_immutable.rst.md) and what
 happens when you use mutable types as default function arguments.
 However, we haven't discussed what happens when you use mutable types as
 default attributes of classes.
@@ -92,7 +92,7 @@ The same pattern that appeared while using mutable variables as defaults
 with functions will appear when using mutable default arguments of
 methods in custom classes. If you want to avoid this from happening, you
 can always check what [we have done when working with
-functions](%7Bfilename%7D17_mutable_and_immutable.rst).
+functions]({filename}17_mutable_and_immutable.rst.md).
 
 Of course, the same pattern will appear if you use a mutable variable
 defined outside of the class, for example:
@@ -268,7 +268,7 @@ days.
 As always, [example code can be found
 here](https://github.com/PFTL/website/tree/master/example_code/21_Classes_Mutables)
 and [the source of this page
-here](https://github.com/PFTL/website/blob/master/content/blog/21_Default_Attributes_Classes.rst).
+here](https://github.com/PFTL/website/blob/master/content/blog/21_Default_Attributes_Classes.rst.md).
 
 Header photo by [Dan
 Gold](https://unsplash.com/photos/mgaS4FlsYxQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

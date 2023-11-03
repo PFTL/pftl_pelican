@@ -1,12 +1,19 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: implementing-threads-for-measurements
 date: '2018-05-29'
 description: Learn what are the differences between a thread and a process in Python
-header: '{attach}frank-mckenna-122867-unsplash.jpg'
+image: '/images/frank-mckenna-122867-unsplash_linkedin.width-800.jpg'
 subtitle: Choose between threads and processes for your experiments
-tags: 'Threads, Processes, Parallel, Speed, Async, Advanced'
+tags:
+  - Threads
+  - Processes
+  - Parallel
+  - Speed
+  - Async
+  - Advanced
 title: Implementing Threads for Measurements
+Series: Parallelizing
 ---
 
 Probably you have run into the problem of wanting to update a plot while
@@ -19,8 +26,7 @@ They look the same but are fundamentally different, and therefore you
 need to understand their differences in order to decide when to use one
 or the other.
 
-A Simple Measurement Class
-==========================
+## A Simple Measurement Class
 
 First, let's build a simple measurement class to simulate what you would
 normally find when performing an experiment. Imagine that you would like
@@ -64,21 +70,18 @@ the example above you may wait for 10 seconds, which is not too bad, but
 normally you would like to see the progress of your experiment in order
 to decide how to continue.
 
-Running the measurement in a non-blocking way
-=============================================
+## Running the measurement in a non-blocking way
 
 The first way of solving the issue is to run the measurement in the
 background. This will allow you to continue with the execution of the
 code after you have called `make_measurement`.
 
-<div class="admonition note">
+!!! note
 
-When you start dealing with threads, you will find yourself in the
-situation of having a program that is running an infinite loop and
-therefore it will never finish. **Ctrl** + **C** is your best friend to
-stop the execution.
-
-</div>
+    When you start dealing with threads, you will find yourself in the
+    situation of having a program that is running an infinite loop and
+    therefore it will never finish. **Ctrl** + **C** is your best friend to
+    stop the execution.
 
 The easiest way to achieve this behavior in Python is by using the
 **threading** module. Let's first see how to implement our solution and
@@ -123,8 +126,7 @@ method that takes longer to run, on the other you are refreshing the
 screen every half a second. But it is time to learn a bit more about
 what are the threads we have just created.
 
-What are Threads
-================
+## What are Threads
 
 A crucial component of every computer is its processor. It is the piece
 of hardware that makes all the calculations and decisions. You probably
@@ -144,8 +146,7 @@ creating a new python interpreter within your own program, and that
 interpreter will be running the method `make_measurement` with the given
 arguments.
 
-Plotting Results During Acquisition
-===================================
+## Plotting Results During Acquisition
 
 So far, the only thing we have done is to print to screen that the
 acquisition is happening. However, the results of the measurement are
@@ -231,8 +232,7 @@ the last few steps of the measurement if the refresh rate is not fast
 enough, etc. All these considerations are natural when you start dealing
 with threads and actions happening simultaneously.
 
-Multiple Threads
-================
+## Multiple Threads
 
 If you are of a curious type, probably you are wondering if you could
 start as many threads as you like. In principle the answer is yes, you
@@ -301,8 +301,7 @@ to start a new one. Now we know how to avoid triggering twice the same
 measurement, but there is one big functionality missing: how to stop a
 measurement.
 
-Stopping a Thread
-=================
+## Stopping a Thread
 
 When you are running a long task, such as acquiring from a device, it
 may happen that you need to stop it. For example, you may notice that
@@ -360,8 +359,7 @@ that are inherent to working with threads. If you were to use the class
 in a non-threaded application, the `self.stop`, `self.running`, etc. are
 not useful and are just making the code more complicated.
 
-Subclassing a Thread
-====================
+## Subclassing a Thread
 
 One of the many advantages of Python's syntax is that it is very easy to
 extend the functionality of any module. In this case, we want to expand
@@ -462,8 +460,7 @@ built-ins by subclassing them. A very useful method to be sure that the
 thread has finished running is `join`. If you use `worker.join()`, the
 program will block there until the thread is effectively finished.
 
-Using Locks
-===========
+## Using Locks
 
 The example above is already more complicated than what you normally
 need to do in the lab. After all, you are in complete control of your
@@ -517,8 +514,7 @@ happens when, for example, an error appears. If the target function
 raises an error, the `lock.release()` line will never be executed and
 the subsequent threads will never run.
 
-Advantages and Limitations of Threads
-=====================================
+## Advantages and Limitations of Threads
 
 Right now, especially if it is your first encounter with threads in
 Python, they may look like the solution to all your problems. They are
@@ -600,8 +596,7 @@ the processors, you will still see that only one is being used. This
 happens because Python implemented something called the **Global
 Interpreter Lock**, or **GIL**.
 
-The GIL
--------
+### The GIL
 
 The Global Interpreter Lock is responsible for triggering concurrently
 different parts of the code. As we saw earlier, a lock is a tool that
@@ -635,8 +630,7 @@ careful about how you read or write data into variables. Especially when
 dealing with normal experiments, threads are going to be more than
 enough to improve the behavior of your programs.
 
-The Multiprocessing Module
-==========================
+## The Multiprocessing Module
 
 It would be somewhat naïve to settle with the *threading* module and
 limit ourselves to one core per computer. Python provides another module
@@ -674,8 +668,7 @@ created the process, the class would have the same value for
 `self.running`, meaning that the second time you want to run it, nothing
 will stop you.
 
-Sharing Information with Queues
-===============================
+## Sharing Information with Queues
 
 The proper way of exchanging information between processes is to use
 Queues. When we developed the worker earlier, we used the word *queue*
@@ -745,8 +738,7 @@ vertical bar that moves to the left or to the right, according to which
 queue is getting full. This is just a toy example, but that already
 shows how powerful queues are.
 
-Limitation of Queues
-====================
+## Limitation of Queues
 
 Before you get too enthusiastic about *queues*, there is a fundamental
 limitation that you may encounter if you work intensively with them,
@@ -771,8 +763,7 @@ a threshold is surpassed, the program would stop acquiring images until
 the queue is free. It is not very elegant, but at least it doesn't crash
 and therefore the data is saved.
 
-Threads and Jupyter
-===================
+## Threads and Jupyter
 
 If you are a Jupyter notebook user, you will be very happy to know that
 threads are compatible with it. Imagine that you are analyzing a large
@@ -787,10 +778,9 @@ have done at the beginning, with the simulated acquisition of data, can
 be performed from within Jupyter. I won't cover the details in this
 article because they deserve a separated entry, but please, play around
 and leave your experience in [the
-forum](https://forum.pythonforthelab.com).
+forum](https://github.com/PFTL/pftl_discussions).
 
-Conclusions
-===========
+## Conclusions
 
 Being able to run code in non-blocking ways is fundamental in many
 applications, not only in the lab but also when you are analyzing or
@@ -829,7 +819,7 @@ to propose solutions.
 As always, [the example code can be found
 here](https://github.com/PFTL/website/tree/master/example_code/10_threads_processes),
 as well as [the source code for this
-article](https://github.com/PFTL/website/blob/master/content/blog/10_threads_or_processes.rst).
+article](https://github.com/PFTL/website/blob/master/content/blog/10_threads_or_processes.rst.md).
 If you find any mistakes or improvements, you are more than welcome to
 submit them as pull requests on Github.
 

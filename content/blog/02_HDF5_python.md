@@ -1,3 +1,22 @@
+---
+title: "How to use HDF5 files in Python"
+subtitle: "HDF5 allows you to store large amounts of data efficiently"
+slug: how-to-use-hdf5-files-in-python
+image: 'images/storing_data_hdf.png'
+
+date: 2018-03-19
+author: Aquiles Carattino
+description: Complete tutorial on using HDF5 files with Python
+tags:     
+  - pyhdf
+  - HDF5
+  - data
+  - file
+  - storing
+series: Saving Data
+series_index: 3
+---
+
 When dealing with large amounts of data, either experimental or simulated, saving it to several text files is not very efficient. Sometimes you need to access a specific subset of the dataset, and you don't want to load it all to memory. If you are looking for a solution that integrates nicely with numpy and pandas, then the HDF5 format may be the solution you were seeking. 
 
 Each HDF5 file has an internal structure that allows you to search for a specific dataset. You can think of it as a single file with its hierarchical structure, just like a collection of folders and subfolders. By default, the data is stored in binary format, and the library is compatible with different data types. One essential option of the HDF5 format is that it allows attaching metadata to every element in the structure, making it ideal for generating self-explanatory files.
@@ -10,7 +29,7 @@ In this article, we will see how you can use **h5py** to store and retrieve data
 
 ## Installing
 
-The HDF5 format is supported by the [HDF Group](https://www.hdfgroup.org/), and it is based on open source standards, meaning that your data will always be accessible, even if the group disappears. We can install the [h5py package](https://www.h5py.org/) through ``pip``. Remember that you should be using a [virtual environment](https://www.pythonforthelab.com/blog/virtual-environment-is-a-must-have-tool/) to perform tests:
+The HDF5 format is supported by the [HDF Group](https://www.hdfgroup.org/), and it is based on open source standards, meaning that your data will always be accessible, even if the group disappears. We can install the [h5py package](https://www.h5py.org/) through ``pip``. Remember that you should be using a [virtual environment]({filename}03_Virtual_Environment.rst.md) to perform tests:
 
 ```shell
 pip install h5py
@@ -42,7 +61,7 @@ with h5py.File('random.hdf5', 'w') as f:
 We import the packages h5py and numpy and create an array with random values. We open a file called ``random.hdf5`` with write permission, ``w`` which means that if there is already a file with the same name, it will be overwritten. If you would like to preserve the file and still write to it, you can open it with the ``a`` attribute instead of ``w``. We create a dataset called ``default``, and we set the data as the random array created earlier. Datasets are holders of our data, basically the building blocks of the HDF5 format.
 
 !!! note
-    If you are not familiar with the `with` statement, you can check out [this tutorial](https://www.pythonforthelab.com/blog/the-with-command-and-custom-classes/). In a nutshell, it is a convenient way of opening and closing a file. Even if there is an error within the ``with``, the file will be closed. If, for some reason, you don't use the ``with``, never forget to add the command `f.close()` at the end. 
+    If you are not familiar with the `with` statement, you can check out [this tutorial]({filename}16_context_manager.rst.md). In a nutshell, it is a convenient way of opening and closing a file. Even if there is an error within the ``with``, the file will be closed. If, for some reason, you don't use the ``with``, never forget to add the command `f.close()` at the end. 
 
 To read the data back, we can do it in a very similar way to when we read a numpy file:
 

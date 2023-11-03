@@ -1,6 +1,14 @@
-# How to create a setup file for your project 
+---
+author: Aquiles Carattino
+slug: how-create-setup-file-your-project
+date: '2020-01-20'
+description: Learn how to share data between threads
+image: '/images/Python-setup.width-800.jpg'
+subtitle: Learn how to share data between threads
+tags: [environment, path, setup, install, package]
+title: How to create a setup file for your project
+---
 
-## Why having a setup
 When you develop software, at some point you will want other people to be able to use what you have built. Sometimes it is handy if you can quickly use the code you developed yourself in the past on a new machine or a different virtual environment. We have already seen that <:Complete Guide to Imports in Python: Absolute, Relative, and More|for importing> to work properly, it is very important to have well-defined packages, and that Python knows where to find them. 
 
 With a proper setup file, Python will quickly understand where to find the package, and thus importing from other places becomes trivial. It will also be possible to quickly distribute the code with other people, diminishing the barrier of adoption. Having a **setup.py** file is the first step into being able to switch from scripts to a package on which to rely. 

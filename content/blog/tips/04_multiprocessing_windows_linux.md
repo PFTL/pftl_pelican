@@ -1,4 +1,13 @@
-# Differences of Multiprocessing on Windows and Linux
+---
+author: Aquiles Carattino
+slug: differences-between-multiprocessing-windows-and-linux
+date: 2020-06-13
+description: Multiprocessing behaves very differently on Windows and Linux. Learn the differences to prevent mistakes.
+image: '/images/Python-setup.width-800.jpg'
+subtitle: Multiprocessing behaves very differently on Windows and Linux. Learn the differences to prevent mistakes.
+tags: [multiprocessing, windows, linux, tips] 
+title: "Differences of Multiprocessing on Windows and Linux"
+---
 
 Multiprocessing is an excellent package if you ever want to speed up your code without leaving Python. When I started working with multiprocessing, I was unaware of the differences between Windows and Linux, which set me back several weeks of development time on a relatively big project. Let's quickly see how multiprocessing works and where Windows and Linux diverge. 
 

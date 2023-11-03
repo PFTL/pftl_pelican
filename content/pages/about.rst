@@ -1,6 +1,6 @@
 About Us
 ========
-:save_as: about/index.html
+:save_as: about-2/index.html
 
 Python for the Lab was born as a companion for the courses given by `Uetke <https://www.uetke.com>`_. The idea is to provide a series of articles that can boost the readers in their Python endeavours. If you have any doubts, or are facing a problem to which there is no obvious solution, or are looking for an opinion, the best is to join the `forum <https://forum.pythonforthelab.com>`_, where you will meet a lot of like-minded people.
 

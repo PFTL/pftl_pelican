@@ -1,15 +1,15 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: using-pyzmq-for-inter-process-communication-part-1
 date: '2018-12-17'
 description: |
     Introduction to using sockets for communication between different
     processes
-header: '{attach}thomas-jensen-592813-unsplash.jpg'
+image: '/images/thomas-jensen-592813-unsplash_linkedin.width-800.jpg'
 subtitle: |
     Introduction to using sockets for communication between different
     processes
-tags: 'ZMQ, Socket, Communication, Parallel, Data'
+tags: [ZMQ, Socket, Communication, Parallel, Data]
 title: 'Using pyZMQ for inter-process communication: Part 1'
 ---
 
@@ -21,7 +21,7 @@ being able to share the computational load among different cores with an
 architecture that allows changes at runtime.
 
 For example, I have recently [released
-PyNTA](%7Bfilename%7D24_Releasing_PyNTA.rst), a program to acquire
+PyNTA]({filename}24_Releasing_PyNTA.rst.md), a program to acquire
 images from a camera with the option to analyze them in real time or to
 store them to the hard drive or both. The core idea is that a central
 process broadcasts the images and other processes listen to the
@@ -37,11 +37,10 @@ limitations of them. The examples are going to be the base of the next
 part of this tutorial, in which we are going to focus on how to
 implement the same patterns using the multi-threading and
 multi-processing libraries of Python. On [Part
-2](%7Bfilename%7D26_ZMQ.rst) of this tutorial we are going to develop a
+2]({filename}26_ZMQ.rst.md) of this tutorial we are going to develop a
 real-world example using the topics learned here.
 
-ZMQ
-===
+## ZMQ
 
 ZMQ is a very complex library, designed to enable developers to build
 distributed applications. In the [official website](http://zeromq.org/)
@@ -64,9 +63,7 @@ information between processes running on the same computer. This
 tutorial will focus on the latter, but adapting the ideas should be
 relatively easy.
 
-pyZMQ
-=====
-
+## pyZMQ
 If you want to use ZMQ with Python programs, there is a library where
 with all the bindings: [pyZMQ](https://pyzmq.readthedocs.io/en/latest/).
 Installing is a matter of one line:
@@ -83,9 +80,7 @@ Remember that since we are communicating between two different
 processes, you will need to start python in two different command lines.
 Normally one is going to be called a client and another a publisher.
 
-Request-Reply
--------------
-
+### Request-Reply
 This pattern may be the one you are most familiar with, even if you are
 not actively thinking about it. A client makes a request to a server and
 gets a reply. This is how most of the web works. You enter a web
@@ -229,15 +224,13 @@ There is no mix of information, even if both clients sent their messages
 while the server was not running yet or while it was busy with one
 client request.
 
-REQ-REP for a device
---------------------
-
+### REQ-REP for a device
 Now that we have explored one of the ZMQ patterns, we can see how it can
 be useful when dealing with a device. Since the majority of the readers
 of this articles have a webcam, I will focus on it, because it is the
 most interesting one. The same principles work with any other device or
 task. We have already used a camera when we discussed [building a
-GUI](%7Bfilename%7D22_Step_by_step_qt.rst) for it. I suggest you to give
+GUI]({filename}22_Step_by_step_qt.rst.md) for it. I suggest you to give
 it a quick read if you are not familiar with open CV.
 
 First, let's install two handy libraries: opencv and numpy
@@ -308,7 +301,7 @@ the camera, while if the message is stop, we just close the server.
 Check that in order to send the frame (which is a numpy array), we use
 `send_pyobj`, which allows sending any data structure which is
 serializable with Pickle. We have covered this topic on [How to Store
-Data with Python](%7Bfilename%7D14_Storing_data_2.rst). It is again, a
+Data with Python]({filename}14_Storing_data_2.rst.md). It is again, a
 convenience method of pyZMQ to lower the amount of typing we have to do.
 
 The client will be very similar to what we have done, but now we can
@@ -356,9 +349,7 @@ while the client is [basically the
 same](https://github.com/PFTL/website/blob/master/example_code/25_ZMQ/03_raspi_client_camera.py),
 connecting to the IP address of the raspberry.
 
-Push-Pull
-=========
-
+## Push-Pull
 Another possible pattern is called PUSH/PULL. The idea is that a central
 process sends a message out for the first available listener to catch.
 This central process is normally called a ventilator, while the
@@ -382,9 +373,7 @@ several cores requires careful design, we can still show how it works,
 having several workers processing the images gathered from a central
 process.
 
-Parallel Calculation of the Fourier Transform of an Image
----------------------------------------------------------
-
+### Parallel Calculation of the Fourier Transform of an Image
 The title ended up being very long, but the ideas are not going to be
 that complex. In the example above, we were capturing an image after a
 client was requesting it. What we want to do now is to generate a list
@@ -512,9 +501,7 @@ takes to complete the task is different or not. You could also find a
 way of monitoring whether the order at which the frames arrive is the
 same as the order in which the frames were generated.
 
-Publisher-Subscriber
-====================
-
+## Publisher-Subscriber
 The last pattern that we are going to discuss in this article is the
 Publisher/Subscriber. It is similar to the Push Pull but has some
 differences that would make it ideal for specific applications, in which
@@ -534,15 +521,13 @@ equally among subscribers, and thus it is useful for parallelizing
 different tasks on the same dataset instead of the same task on
 different datasets.
 
-The PUB/SUB with a Camera
--------------------------
-
+### The PUB/SUB with a Camera
 We will keep building on the camera example, but with a different
 pattern. What we want to achieve is to have 3 processes. One that
 continuously acquires from a camera and publishes the frames. Two more
 processes independent from each other, one that calculates the Fourier
 Transform, as we did before and another one that saves the images [to an
-HDF5 file](%7Bfilename%7D02_HDF5_python.rst).
+HDF5 file]({filename}02_HDF5_python.rst.md).
 
 Let's start by developing the publisher. It is going to be an infinite
 loop that sends images one after the other. It will look like this:
@@ -620,7 +605,7 @@ will still see that the publisher is running without problems, streaming
 frame after frame. You can see what happens if you start two subscribers
 (or more). You will notice that they all get the same information. Let's
 see a quick example of how to save data to the hard drive, [using
-hdf5](%7Bfilename%7D02_HDF5_python.rst). Let's create a new subscriber,
+hdf5]({filename}02_HDF5_python.rst.md). Let's create a new subscriber,
 **subscriber\_2.py**, with the following:
 
 ```python
@@ -666,7 +651,7 @@ If you have installed HDF5 on your system, you can run this subscriber.
 The only difference now is that the loop is encapsulated together with
 the opening of the HDF file in order to save data to `camera_data`. If
 you are not familiar with how hdf5 works, I recommend you to check out
-[this article](%7Bfilename%7D02_HDF5_python.rst). Remember that frames
+[this article]({filename}02_HDF5_python.rst.md). Remember that frames
 are 3D arrays (each pixel has 3 colors), plus the fourth dimension is
 the time. In these cases is where the power of `h5py` becomes evident
 and why it is worth controlling data saving at a lower level than what
@@ -688,9 +673,7 @@ the push/pull pattern. Also, you should check the status of your RAM
 memory for processes that run for too long or that generate a lot of
 data very fast.
 
-Conclusions
-===========
-
+## Conclusions
 In this article we have explored three patterns for connecting sockets
 with ZMQ: Request/Reply, Push/Pull, and Publish/Subscribe. Each one is
 different and can be used in different applications. You can also
@@ -703,7 +686,7 @@ In the following article, we are going to explore how to trigger
 different processes and threads from the same Python program. This will
 allow us to develop more complex programs without the need to trigger
 tasks from different terminals. We are going to combine [Threads and
-Multiprocessing](%7Bfilename%7D10_threads_or_processes.rst), together
+Multiprocessing]({filename}10_threads_or_processes.rst.md), together
 with socket communication.
 
 Header photo by [Thomas

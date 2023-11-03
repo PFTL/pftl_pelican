@@ -1,14 +1,19 @@
 ---
-author:
-- Aquiles Carattino
-date: '2018-03-12'
+author: Aquiles Carattino
+slug: how-to-use-decorators-to-validate-input
+date: 2018-03-12
 description: |
     Learn how to use decorators to validate user input before communicating
     with a device
-header: '{attach}victor-garcia-560967-unsplash.jpg'
-subtitle: 'Decorators are very useful, but can become hard to understand'
-tags: 'Decorators, Python, Tricks, Validation, Data'
-title: How to Use Decorators to Validate Input
+image: /images/cartoon_decorators.png
+subtitle: 'Decorators are a great way to abstract patterns away from functions and classes'
+tags: 
+  - Decorators
+  - Python
+  - Tricks
+  - Validation
+  - Data
+title: "How to Use Decorators to Validate Input"
 ---
 
 Python is rich in resources that can shorten the time it takes to
@@ -18,7 +23,7 @@ experienced developers. Adding decorators to the syntactic toolbox can
 be of great use in different contexts, and in this article, we are going
 to discuss how can they help you when communicating with a device. The
 example code can be found in our [Github
-repository](https://github.com/uetke/website_content/tree/master/example_code/Examples_Decorators).
+repository](https://github.com/PFTL/website_example_code/tree/master/pftl_code/code/01_Decorators).
 
 Decorators in Python are nothing more than functions that take as
 arguments other functions. They appear with an `@` in front of them
@@ -81,8 +86,7 @@ three-copies rule. It would be useful to have an external way of
 checking that both inputs are positive, and this is exactly what
 decorators are meant to do.
 
-Functions as arguments and as outputs of other functions
-========================================================
+## Functions as arguments and as outputs of other functions
 
 Before we can go into the details of how to use `decorators` in Python,
 it is important to show how functions work with inputs and outputs that
@@ -211,8 +215,7 @@ same functionality, without the downsides just said. If you managed to
 follow the above examples, you are ready to improve the way the code
 looks like by using *Python syntactic sugar*.
 
-Syntactic Sugar for Decorators
-==============================
+## Syntactic Sugar for Decorators
 
 You already know almost everything there is to know regarding how to use
 decorators, you are just missing the syntactic sugar of Python. With
@@ -321,13 +324,6 @@ applications.
 In this article, we have shown a couple of very basic examples that can
 be greatly improved. If you have ever encountered decorators and didn't
 understand how to use them, or you are looking for more specific
-information, leave your message in the comment section below and we will
-use your feedback to write a follow up article specifically designed to
+information, leave your message in the comment section below, and we will
+use your feedback to write a follow-up article specifically designed to
 answer your questions.
-
-If you want to learn more about decorators, there is a [Follow Up
-Article](%7Bfilename%7D04_how_to_use_decorators_2.rst)
-
-Header photo by [Victor
-Garcia](https://unsplash.com/photos/dECPx6gtKww?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-on Unsplash

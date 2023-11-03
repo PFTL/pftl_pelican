@@ -1,23 +1,22 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: storing-data-with-sqlite
 date: '2018-08-12'
 description: Learn different ways of storing data in your projects
-header: '{attach}tobias-fischer-185901-unsplash.jpg'
+image: '/images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg'
 subtitle: Learn different ways of storing data in your projects
-tags: 'Data, Storing, SQLite, HDF5, ascii, json, Data Storage'
+tags: 
+  - Data
+  - Storing
+  - SQLite
+  - HDF5
+  - ascii
+  - json
+  - Data Storage
 title: Storing Data with SQLite
+series: Saving Data
+series_index: 4
 ---
-
-This article is part of a series of articles relating to data storage
-with Python. The other articles are:
-
--   [Introduction to Storing Data in
-    Files](%7Bfilename%7D13_storing_data.rst)
--   [Storing Binary Data and
-    Serializing](%7Bfilename%7D14_Storing_data_2.rst)
--   [Using Databases to Store Data](%7Bfilename%7D15_Storing_data_3.rst)
--   [Using HDF5 Files with Python](%7Bfilename%7D02_HDF5_python.rst)
 
 Using databases for storing data may sound much more complicated than
 what it actually is. In this article, we are going to cover how to use
@@ -32,8 +31,7 @@ objects using Python's built-in tools to save them as binary files. In
 this article, we are going to explore another very useful module called
 **SQLite** which will allow us to store data in databases.
 
-Databases
-=========
+## Databases
 
 Most likely you have heard about databases in the context of websites.
 It is where your username, email, and password are stored. It is where
@@ -60,8 +58,7 @@ that need an entire course on themselves. However, Python bundles
 SQLite, a very simple, single-file database. No extra software needed to
 run the examples here.
 
-Creating a Table
-================
+## Creating a Table
 
 Let's start quickly with SQLite. The first thing you need to do to work
 with databases is to create the database itself. In the case of SQLite,
@@ -116,17 +113,15 @@ browser](https://sqlitebrowser.org/) to visualize the files. There is
 also a [Firefox
 Add-On](https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src).
 
-<div class="admonition note">
+!!! note
 
-The extension .sqlite is not mandatory. If you use it, many higher level
-programs will identify it as a database and will be able to open it with
-a double-click. You can also use the .db extension, which is more common
-if following Flask or Django tutorials.
+    The extension .sqlite is not mandatory. If you use it, many higher level
+    programs will identify it as a database and will be able to open it with
+    a double-click. You can also use the .db extension, which is more common
+    if following Flask or Django tutorials.
 
-</div>
 
-Adding Data to a Database
-=========================
+## Adding Data to a Database
 
 Now that you have a database, is time to store some data into it. All
 the examples always start by creating a connection and a cursor, which
@@ -165,8 +160,7 @@ Assuming that the access to the database is only yours, i.e. you are not
 going to take variables from the public, you shouldn't worry too much
 about safety. In any case, it is important to be aware.
 
-Retrieving Data
-===============
+## Retrieving Data
 
 Now that you have some data stored in the database, we need to be able
 to retrieve it. You can do the following:
@@ -190,13 +184,11 @@ cur.execute('SELECT * FROM experiments WHERE name="Aquiles"')
 data_3 = cur.fetchall()
 ```
 
-<div class="admonition note">
+!!! note
 
-SQL is not case sensitive for its commands. SELECT or select or Select
-mean the same. However, if you change Aquiles for aquiles, the results
-are going to be different.
-
-</div>
+    SQL is not case sensitive for its commands. SELECT or select or Select
+    mean the same. However, if you change Aquiles for aquiles, the results
+    are going to be different.
 
 Of course, it can also happen that there are no entries matching your
 criteria and therefore the result is going to be an empty list. Again,
@@ -214,8 +206,7 @@ make sense to add extra columns to the experiments database, because we
 would be duplicating a lot of information. Ideally, we would start a new
 table, just to register users and their information.
 
-Adding a Primary Key
-====================
+## Adding a Primary Key
 
 If you have ever seen any spreadsheet program or even a Pandas Data
 Frame, you have probably noticed that every row is identified with a
@@ -277,8 +268,7 @@ fetch the data that you are looking for. Not only because it allows you
 to refer to specific entries, but also because of how databases work, it
 is much faster addressing data by their key.
 
-Default Values for Fields
-=========================
+## Default Values for Fields
 
 So far we have used only two types of variables: `VARCHAR` and
 `INTEGER`. The varchar has been used for the name of the person doing
@@ -329,8 +319,7 @@ example, the `performed_at` will always be added. This ensures that even
 if someone forgets to explicitly declare the time of an experiment, at
 least a very reasonable assumption has been made.
 
-SQLite Data Types
-=================
+## SQLite Data Types
 
 SQLite is different from other database managers, such as MySQL or
 Postgres because of its flexibility regarding data types and lengths.
@@ -361,8 +350,7 @@ official documentation &lt;https://www.sqlite.org/datatype3.html&gt;\_
 in order to understand the differences and make the best out of the
 capabilities.
 
-Relational Databases
-====================
+## Relational Databases
 
 Perhaps you have already heard about relational databases. So far, in
 the way we have used SQLite, it is hard to see advantages compared to
@@ -403,13 +391,11 @@ CREATE TABLE experiments (
     FOREIGN KEY (user_id) REFERENCES users(id));
 ```
 
-<div class="admonition warning">
-
-depending on your installation of SQLite, you may need to add support
-for foreign keys. Run the following command when creating the database
-to be sure: `cur.execute("PRAGMA foreign_keys = ON;")`
-
-</div>
+!!! warning
+    
+    depending on your installation of SQLite, you may need to add support
+    for foreign keys. Run the following command when creating the database
+    to be sure: `cur.execute("PRAGMA foreign_keys = ON;")`
 
 First, you need to create a new user, for example:
 
@@ -466,15 +452,14 @@ It will raise the following error:
 sqlite3.IntegrityError: NOT NULL constraint failed: experiments.user_id
 ```
 
-Storing Numpy Arrays into Databases
-===================================
+## Storing Numpy Arrays into Databases
 
 Storing complex data into databases is not a trivial task. Databases
 specify only some data types and numpy arrays are not between them. This
 means that we have to convert the arrays into something that can be
 stored in a database. Since SQLite specifies only 4 major data types, we
 should stick to one of them. In the [previous
-article](%7Bfilename%7D14_Storing_data_2.rst) we have discussed a lot
+article]({filename}14_Storing_data_2.rst.md) we have discussed a lot
 about serialization. The same ideas can be used to store an array in a
 database.
 
@@ -567,8 +552,7 @@ elements. What I mean is that with SQL it is very easy to replace a
 field in all the entries that match a criterion, for example, but you
 won't be able to do that for a numpy array, at least with SQL commands.
 
-Combining Information
-=====================
+## Combining Information
 
 So far, we have seen how to create some tables with values, and how to
 relate them through the use of primary and foreign keys. However, SQL is
@@ -628,8 +612,7 @@ website](https://www.w3schools.com/sql/sql_join.asp) is very explicit,
 but going through the details exceeds the capabilities of an
 introductory tutorial.
 
-How to Use Databases in Scientific Projects
-===========================================
+## How to Use Databases in Scientific Projects
 
 Leveraging the power of databases is not obvious for first-time
 developers, especially if you don't belong to the web-development realm.
@@ -653,8 +636,7 @@ course, for small groups, it may look like an overshoot. But imagine
 that you could filter through your data, acquired during years, to find
 a specific measurement.
 
-Conclusions
-===========
+## Conclusions
 
 One of the main challenges of using databases is that they require
 learning a new language called SQL. In this article we have tried to
@@ -672,16 +654,6 @@ data analysis it may open the door to very creative solutions. Combining
 databases for metadata and files for data has the added advantage of a
 high portability (sharing data is sharing just a file) and an easy way
 to search through the collection of metadata stored onto a database.
-
-This article is part of a series of articles relating to data storage
-with Python. The other articles are:
-
--   [Introduction to Storing Data in
-    Files](%7Bfilename%7D13_storing_data.rst)
--   [Storing Binary Data and
-    Serializing](%7Bfilename%7D14_Storing_data_2.rst)
--   [Using Databases to Store Data](%7Bfilename%7D15_Storing_data_3.rst)
--   [Using HDF5 Files with Python](%7Bfilename%7D02_HDF5_python.rst)
 
 Header photo by [Tobias
 Fischer](https://unsplash.com/photos/PkbZahEG2Ng?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

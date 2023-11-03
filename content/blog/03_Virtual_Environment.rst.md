@@ -1,15 +1,18 @@
 ---
-author:
-- Aquiles Carattino
-date: '2018-03-09'
+author: Aquiles Carattino
+slug: virtual-environment-is-a-must-have-tool
+date: 2018-03-09
 description: |
     Isolate different development environments from each other to avoid
     overlaps
-header: '{attach}michael-aleo-571965-unsplash.jpg'
+image: '/images/virtual_environments_python.png'
 subtitle: |
     Isolate different development environments from each other to avoid
     overlaps
-tags: 'Python, Virtual Environment, Development, Tricks, Tools'
+tags: 
+  - Python
+  - Virtual Environment
+  - Development
 title: 'Virtual Environment is a Must-Have Tool'
 ---
 
@@ -149,8 +152,7 @@ environment to see all the packages installed in your computer. It is a
 very useful way of keeping track of the packages that may need an
 upgrade or that you no longer use.
 
-How does the Virtual Environment Work
-=====================================
+## How does the Virtual Environment Work
 
 When you run programs from the command line, your operating system needs
 to know where to find them. The location of the programs in Windows and
@@ -186,8 +188,7 @@ not installed through pip (such as PyQt4), you can install them
 system-wide and then just copy the appropriate folder into your virtual
 environment.
 
-Be careful with name clashes
-----------------------------
+### Be careful with name clashes
 
 It is common that some python packages also generate *entry points*,
 i.e. commands that can be triggered directly from the command line. For
@@ -219,8 +220,7 @@ python -m jupyter notebook
 This will guarantee that you are going to use the package installed
 through Pip and not the one installed by your system.
 
-Conclusions
-===========
+## Conclusions
 
 It is almost impossible to overestimate how useful the *Virtual
 Environment* is. It will help you stay organized and out of conflicts
@@ -234,7 +234,3 @@ Remember, every time you are about to start a new project, regardless of
 what it is, you should start by creating an appropriate Virtual
 Environment for it. In this way, you can be certain of the long-term
 prosperity of the code you write, regardless of where it will bring you.
-
-Header photo by [Michael
-Aleo](https://unsplash.com/photos/OsdgZG1byTk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-on Unsplash

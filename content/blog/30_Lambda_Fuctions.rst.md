@@ -1,12 +1,12 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: intro-to-python-lambda-functions
 date: '2019-03-17'
 description: 'Anonymous functions are powerful, but they are hard to understand'
-header: '{attach}ivana-cajina-324103-unsplash.jpg'
+image: '/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg'
 subtitle: 'Anonymous functions are powerful, but they are hard to understand'
-tags: 'functions, methods, arguments, packing, unpacking, args, kwargs'
-title: Intro to Python Lambda Functions
+tags: [functions, methods, arguments, packing, unpacking, args, kwargs]
+title: Introduction to Python Lambda Functions
 ---
 
 Some time ago, Python introduced in its syntax the possibility to define
@@ -122,9 +122,7 @@ tutorials. Probably is what you will see if you go through
 StackOverflow. One of the possibilities is to use lambda functions in
 combination with Pandas.
 
-Pandas and Lambda Functions
-===========================
-
+## Pandas and Lambda Functions
 The example data was inspired by
 [this](https://data36.com/pandas-tutorial-1-basics-reading-data-files-dataframes-data-selection/)
 example and can be found
@@ -185,12 +183,10 @@ need to open another file, run a different, cell, etc. If you go to the
 documentation](https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.apply.html)
 you will see that lambdas are used quite often.
 
-Qt Slots
-========
-
+## Qt Slots
 Another common example of using lambdas is in combination with the Qt
 library. We have written an [introductory article on
-Qt](%7Bfilename%7D22_Step_by_step_qt.rst) in the past. Feel free to
+Qt]({filename}22_Step_by_step_qt.rst.md) in the past. Feel free to
 browse through it if you are not familiar with how building user
 interfaces work. A very minimal example, that just shows a button, it
 looks like this:
@@ -221,9 +217,7 @@ functions as slots for signals can speed up your coding and make your
 programs easier to read. However, lambda functions also need to be
 considered with caution.
 
-Where to use lambda functions
-=============================
-
+## Where to use lambda functions
 Lambda functions can only have 1 line. This forces developers to use
 them only in contexts where the behavior can be achieved without a
 complex syntax. In the examples above, you can see that the lambda
@@ -239,9 +233,7 @@ we are going to apply or execute is simple, and we are not going to
 re-use it, writing it as an anonymous function may be a very convenient
 way.
 
-Where not to use lambda functions
-=================================
-
+## Where not to use lambda functions
 Lambda functions are anonymous, therefore, if you are assigning a name
 to them, such as when we did:
 
@@ -281,9 +273,7 @@ sorted_var = sorted(var, key=abs)
 If you pay attention to the example that we've developed earlier, we
 used `abs(x-1)` exactly to avoid this redundancy.
 
-Conclusions
-===========
-
+## Conclusions
 Lambda (or anonymous) functions are a tool that is slowly getting more
 popular in Python programs. That is why it is very important that you
 can understand what it means. You have to remember that there is nothing

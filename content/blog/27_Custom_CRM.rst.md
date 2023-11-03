@@ -1,13 +1,11 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: building-a-crm-with-jupyter-notebooks
 date: '2019-02-12'
 description: Manage customer relationships with Python
-header: '{attach}rawpixel-760036-unsplash.jpg'
+image: '/images/rawpixel-760036-unsplash_linkedin.width-800.jpg'
 subtitle: Manage customer relationships with Python
-tags: |
-    CRM, Jupyter, Databases, Relational, SQLAlchemy, SQLite, Customers,
-    email
+tags: [CRM, Jupyter, Databases, Relational, SQLAlchemy, SQLite, Customers, email]
 title: Building a CRM with Jupyter Notebooks
 ---
 
@@ -36,9 +34,7 @@ example, the ones who took the Python For The Lab course and those who
 are interested in it. The ones who bought the book and those who only
 asked for the free chapter, etc. Let's get started!
 
-The Choices
-===========
-
+## The Choices
 First, we will need a way of sending and receiving e-mail. If you are a
 GMail user, you can check [this
 guide](https://support.google.com/mail/answer/7104828?hl=en) and [this
@@ -65,20 +61,18 @@ increase in usability.
 
 We have now a web server, a platform, we only need to define how to
 store the data. For this, I will choose SQLite. I have written in the
-past about how to [store data using SQLite](15_Storing_data_3.rst), but
+past about how to [store data using SQLite](15_Storing_data_3.rst.md), but
 in this article, we are going one step further by introducing an ORM, or
 Object Relational Mapping, which will greatly simplify our work when
 defining tables, accessing data, etc.
 
-Jupyter Notebooks
-=================
-
+## Jupyter Notebooks
 If you are familiar with the Jupyter notebooks, just skip this section
 and head to the next one. If you are not familiar with them, I will give
 you a very quick introduction. First, you need to install the needed
 package. If you are an Anaconda user, you have Jupyter by default. If
 you are not, you should start by creating a [Virtual
-Environment](03_Virtual_Environment.rst), and then do the following:
+Environment](03_Virtual_Environment.rst.md), and then do the following:
 
 ```bash
 pip install jupyter
@@ -136,9 +130,7 @@ be copy-pasted into plain Python script files. Just keep in mind that
 the order in which you can run cells is up to you and not necessarily
 from top to bottom as is the case for scripts.
 
-Sending Email
-=============
-
+## Sending Email
 The most basic function of any customer relationship manager is to be
 able to send e-mails. Having just this functionality is already useful
 in a lot of different situations, not only professionally but also for
@@ -193,7 +185,7 @@ with open('config.yml', 'r') as config_file:
 ```
 
 If you are not familiar with the `with` command you can check [this
-article about the context manager](16_context_manager.rst). If you want
+article about the context manager](16_context_manager.rst.md). If you want
 to explore how your variable `config` looks like, you can simply write
 it in a different cell and press Ctrl+Enter. The result is a dictionary
 with the needed parameters for sending e-mail. So, let's get to it.
@@ -254,13 +246,11 @@ defined both the sender and receiver twice: they are used in the
 
 If you used real e-mails, you should by now receive the example message.
 
-<div class="admonition warning">
-
-Sometimes GMail does not deliver messages that you send to yourself from
-different aliases. If nothing arrives, you can try to send an e-mail to
-a different address which you control.
-
-</div>
+!!! warning
+    
+    Sometimes GMail does not deliver messages that you send to yourself from
+    different aliases. If nothing arrives, you can try to send an e-mail to
+    a different address which you control.
 
 Now, imagine you would like to personalize the message before sending
 it. For example, we would like to address the recipient by name. We can
@@ -284,12 +274,10 @@ like to send a message to different people, you could simply do a
 for-loop. Remember that before generating the message body, you replace
 the name by the name of your contact as shown in the code above.
 
-<div class="admonition note">
+!!! note
 
-I will not go into the details of how to implement the loop because we
-will work on this later on, in a much more complete solution.
-
-</div>
+    I will not go into the details of how to implement the loop because we
+    will work on this later on, in a much more complete solution.
 
 Adding HTML to the message
 --------------------------
@@ -353,9 +341,7 @@ client supports it and will fall back to the text version if it doesn't.
 In general lines, we can say that adding HTML versions of your messages
 is up to you, adding the text version should be mandatory.
 
-Receiving Email
-===============
-
+## Receiving Email
 Sending e-mails is half of what a CRM should do. The other half is
 checking e-mails. This will allow the system to store messages
 associated with the people with whom you interact. This will allow you
@@ -463,9 +449,7 @@ notebook](https://github.com/PFTL/website/blob/master/example_code/27_CRM/simple
 Now we are going to focus a bit more onto expanding the usability of our
 tools.
 
-Using a Database
-================
-
+## Using a Database
 In the previous sections, we have seen how you can send and receive
 e-mails with Python directly from a Jupyter notebook. Now it is time to
 focus onto a different topic. It is important when you want to establish
@@ -477,7 +461,7 @@ etc.
 In order to achieve a high level of flexibility, we are going to use a
 database to store all our information. Fortunately, Python supports
 SQLite databases out of the box. We have discussed about them in a
-[different article](%7Bfilename%7D15_Storing_data_3.rst) that may be
+[different article]({filename}15_Storing_data_3.rst.md) that may be
 useful for you to check if you want to dig into the details. We are
 going to use a library called SQLAlchemy, which will allow us to define
 relationships between elements much faster. You can install it like any
@@ -816,9 +800,7 @@ notebook](https://github.com/PFTL/website/blob/master/example_code/27_CRM/simple
 Now it is time to clean up the code in order to make more usable and
 extendable.
 
-Sending To All Customers
-========================
-
+## Sending To All Customers
 The notebook that we have developed in the previous section is very
 dirty. We have been adding features on the fly, without really worrying
 about how easy it is to understand it. Imports were scattered all over
@@ -1027,9 +1009,7 @@ following:
 send_all('Testing the CMR', 'test_email.txt', 'Initial Customers')
 ```
 
-Avoid repeating messages
-========================
-
+## Avoid repeating messages
 What you have seen up to now, should open the doors to a lot of very
 nice creative approaches not only to CRM but to a variety of tasks that
 you can automate with Python. The last feature that I would like to show
@@ -1069,7 +1049,7 @@ want to send the message to the people who didn't get the message yet,
 you would like to skip the people, not stop the execution.
 
 In order to achieve that, we can [handle the
-exception](%7Bfilename%7D12_handling_exceptions.rst). But since we are
+exception]({filename}12_handling_exceptions.rst.md). But since we are
 using a generic exception, we will handle everything in the same way,
 regardless of whether it was raised because of an error in the database
 or because the message was repeated. The best strategy is therefore to
@@ -1121,9 +1101,7 @@ notebook](https://github.com/PFTL/website/blob/master/example_code/27_CRM/simple
 while the final version for the sending e-mail is [this
 notebook](https://github.com/PFTL/website/blob/master/example_code/27_CRM/simple_CRM_04_send_all.ipynb).
 
-Conclusions
-===========
-
+## Conclusions
 This tutorial aims at showing you how you can quickly prototype
 solutions by using **Jupyter notebooks**. They are not the proper tool
 if you want to distribute the code as a package for others to use, but

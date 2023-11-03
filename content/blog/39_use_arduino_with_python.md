@@ -1,5 +1,13 @@
-Using Python to communicate with an Arduino
-===========================================
+---
+author: Aquiles Carattino
+slug: how-control-arduino-computer-using-python
+date: '2020-02-04'
+description: Learn how to program an Arduino in order to communicate with it through Python
+image: '/images/python-arduino-fullsize.width-800.jpg'
+subtitle: Learn how to program an Arduino in order to communicate with it through Python
+tags: [driver, arduino, control]
+title: How to control an Arduino from the computer using Python
+---
 
 Arduinos may be one of the most disruptive electronic developments of the past decade. They opened a world of possibilities to quickly prototype solutions in professional settings but also opened the door for enthusiasts to learn about electronics and microcontrollers. In this article, we are going to see how to get started with an Arduino board and how to control it from a computer using Python. 
 

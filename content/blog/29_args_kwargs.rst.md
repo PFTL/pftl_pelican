@@ -1,11 +1,11 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: what-are-args-and-kwargs-and-when-to-use-them
 date: '2019-03-10'
 description: How to develop functions with a variable number of arguments
-header: '{attach}luca-bravo-217276-unsplash.jpg'
+image: '/images/luca-bravo-217276-unsplash_linkedin.width-800.jpg'
 subtitle: How to develop functions with a variable number of arguments
-tags: 'functions, methods, arguments, packing, unpacking, args, kwargs'
+tags: [functions, methods, arguments, packing, unpacking, args, kwargs]
 title: What are args and kwargs and when to use them
 ---
 
@@ -16,9 +16,7 @@ you to achieve great flexibility while developing code. In this article,
 we are going to discuss what and how to use flexible arguments in
 functions.
 
-Args
-====
-
+## Args
 Let's quickly see how `*args` work in a function:
 
 ```python
@@ -124,9 +122,7 @@ another tutorial, but for the time being, it is important to note that
 the `*` can have a great impact when used in combination with the
 arguments of functions.
 
-Kwargs
-======
-
+## Kwargs
 The idea of `kwargs` is very similar to that of `args`, but instead of a
 tuple or a list, these are keyword-arguments. This means that instead of
 the order in which they appear, the importance is in the label that each
@@ -236,9 +232,7 @@ keyword-arguments. After reading the above sections, you can be tempted
 to start using `args` and `kwargs` in your functions. However, you have
 to be aware of the implications.
 
-When not to use args and kwargs
-===============================
-
+## When not to use args and kwargs
 When you expand your programming toolbox, there is a common desire to
 use what you have just learned at every possibility that you encounter.
 However, you have to be aware of the consequences and advantages of
@@ -266,8 +260,7 @@ with any number of arguments. If you are using a Python IDE such as
 Pycharm, VS Code, they show you what arguments a function takes, but if
 you have `*args` you will have no idea what needs to be supplied.
 
-When to use args and kwargs
-===========================
+## When to use args and kwargs
 
 Imagine someone else is using your code. The functions developed earlier
 have only two lines and you can quickly read through them. But if you
@@ -276,13 +269,11 @@ your code understand how many arguments and which ones to supply? The
 same objections apply when you use `kwargs`. Good code is also code that
 can be read and quickly understood.
 
-Decorators
-----------
-
+### Decorators
 Keeping in mind that it is impossible to make a comprehensive list of
 situations when it is worth using kwargs and args, we can discuss some
 examples. The first that comes to mind is when you are dealing with
-[decorators](%7Bfilename%7D04_how_to_use_decorators_2.rst). To give a
+[decorators]({filename}04_how_to_use_decorators_2.rst.md). To give a
 very short summary, a decorator is a function that wraps another one in
 order to extend its functionality without changing the core behavior.
 Going back to the example of the area, the function
@@ -316,7 +307,7 @@ def check_positive(func):
 
 If you are not familiar with decorators or the code above seems
 confusing, I recommend you check [this
-article](%7Bfilename%7D04_how_to_use_decorators_2.rst). To use this
+article]({filename}04_how_to_use_decorators_2.rst.md). To use this
 decorator, we would simply do the following:
 
 ```python
@@ -354,7 +345,7 @@ of classes developed by others, a common pattern is to inherit them and
 override the methods you would like to change. This is very frequent
 when you are dealing with large libraries or frameworks. For example, if
 you are developing a [Qt
-application](%7Bfilename%7D22_Step_by_step_qt.rst), you will find
+application]({filename}22_Step_by_step_qt.rst.md), you will find
 yourself with code like this:
 
 ```python
@@ -420,9 +411,7 @@ flexibility while instantiating a class. If you look at the code, you
 will see that there are a lot of checks and loops in order to prepare
 the object based on the available arguments.
 
-Conclusions
-===========
-
+## Conclusions
 Having a variable number of arguments in functions and methods can help
 you develop a much more flexible code. However, this normally comes at a
 cost in readability. Understanding where it can be useful to use `*args`
@@ -440,7 +429,7 @@ useful, especially when you are not in control of the functions that you
 are using.
 
 The source version of this article is available [on
-Github](https://github.com/PFTL/website/blob/master/content/blog/29_args_kwargs.rst).
+Github](https://github.com/PFTL/website/blob/master/content/blog/29_args_kwargs.rst.md).
 The code examples are [available
 here](https://github.com/PFTL/website/tree/master/example_code/29_args_kwargs).
 

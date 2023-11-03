@@ -1,4 +1,13 @@
-# Singletons: Instantiate objects only once
+---
+author: Aquiles Carattino
+slug: singletons-instantiate-objects-only-once
+date: '2021-01-16'
+description: Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code
+image: '/images/mirrors.width-800.jpg'
+subtitle: Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code
+tags: [instance, objects, pattern, object oriented, singleton]
+title: "Singletons: Instantiate objects only once"
+---
 
 When developing more extensive programs, being aware of different patterns can significantly help us solve problems even before they arise. One of those patterns is the creation of singletons, which are nothing else but objects that can be instantiated only once. In Python, we are exposed to singletons since the beginning, even if we are not aware of them. This article will discuss how singletons permeate our everyday programming and how we can bring them a step further. 
 

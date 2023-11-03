@@ -1,5 +1,13 @@
-# Data Descriptors: Bringing Attributes to the Next level
-
+---
+author: Aquiles Carattino
+slug: data-descriptors-bringing-attributes-next-level
+date: '2020-05-16'
+description: Deep dive into how properties work, to learn how we can develop our own solution
+image: '/images/42_decorators.width-800.png'
+subtitle: Deep dive into how properties work, to learn how we can develop our own solution
+tags: [data, decorator, pattern, description, property]
+title: "Data Descriptors: Bringing Attributes to the Next level"
+---
 Descriptors in Python allow us to control how attributes of classes are accessed or modified. A pattern often encountered is defining properties to use setter and getter methods encapsulated as if they were a single attribute. In this article, we will dig into how the property decorator works, to understand how to implement our solutions. 
 
 The descriptor interface also allows attributes to access the class where they are defined. For example, this is useful in registering all the attributes of a specific type in the parent class. With this tool, we can have a clear interface to update all the settings of a class. We will cover not only how to define this type of attributes, but also how to deal with inheritance. 

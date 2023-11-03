@@ -1,17 +1,23 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: how-to-control-a-device-through-the-network
 date: '2018-02-28'
 description: |
     Step by step tutorial on how to exchange information with a device
     through the network
-header: '{attach}network\_cables.jpg'
+image: '/images/network_cables_linkedin.width-800.jpg'
 subtitle: |
     Exchange information and trigger measurements with devices connected to
     separate computers
-tags: |
-    Network, Communication, Async, Remote Control, Devices, Drivers, Flask,
-    Internet
+tags:
+  - Network
+  - Communication
+  - Async
+  - Remote Control
+  - Devices
+  - Drivers
+  - Flask
+  - Internet
 title: How to Control a Device Through the Network
 ---
 
@@ -103,19 +109,16 @@ server is running. The `print` function is being triggered on the
 server. We could use more complex functions than `print`. For example,
 we could trigger a measurement on a device.
 
-<div class="admonition note">
-
-If you are not dealing with instruments but you would like to trigger
-computer-intensive tasks on a remote computer, you can use the same
-approach explained here. You can then leverage computers with more
-memory or better processors, or you can even make a parallel execution
-of your code without leaving your Jupyter notebook.
-
-</div>
+!!! note 
+    If you are not dealing with instruments but you would like to trigger
+    computer-intensive tasks on a remote computer, you can use the same
+    approach explained here. You can then leverage computers with more
+    memory or better processors, or you can even make a parallel execution
+    of your code without leaving your Jupyter notebook.
 
 Let's assume you have a device like the one we developed in our earlier
 post [How to Write a Driver with
-Lantz](%7Bfilename%7D06_introducing_lantz.rst). The device is an
+Lantz]({filename}06_introducing_lantz.rst.md). The device is an
 oscilloscope with several built-in methods, including `idn` for getting
 its serial number, and `datasource` to set and get the channel used for
 an acquisition. We would like to trigger some of those methods when we
@@ -150,7 +153,7 @@ back to the browser. With this simple example, you can already see that
 we are doing virtually everything that a device can handle. Of course,
 devices also take inputs, and we should take into account this. Basing
 ourselves on the example of an [oscilloscope with
-Lantz](%7Bfilename%7D06_introducing_lantz.rst), we could change the
+Lantz]({filename}06_introducing_lantz.rst.md), we could change the
 datasource property of the device like this:
 
 ```python
@@ -292,11 +295,11 @@ applications with experiments. You can check for example,
 they can be exactly what you are looking for.
 
 If you need help developing a code for communicating over the network,
-don't hesitate to [contact us](https://www.uetke.com/contact). We can
+don't hesitate to [contact us](https://www.pythonforthelab.com/about). We can
 custom build a solution to your problem. If you would like to learn
 about network communication and much more, you can also consider our
 [Advanced Python For The Lab
-Course](https://www.uetke.com/courses/advanced/).
+Course](https://www.pythonforthelab.com/courses).
 
 Header photo by [John
 Carlisle](https://unsplash.com/photos/l090uFWoPaI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

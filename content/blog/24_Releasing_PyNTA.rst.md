@@ -1,11 +1,11 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: pynta-nanoparticle-tracking-analysis
 date: '2018-12-14'
 description: A Python desktop application for nanoparticle tracking and analysis
-header: '{attach}pynta\_screenshot.png'
+image: '/images/pynta_screenshot_linkedin.width-800.png'
 subtitle: A Python desktop application for nanoparticle tracking and analysis
-tags: 'Nanoparticle, Tracking, Analysis, Release, Package, Desktop, Experiment'
+tags: [Nanoparticle, Tracking, Analysis, Release, Package, Desktop, Experiment]
 title: 'PyNTA: Nanoparticle Tracking Analysis'
 ---
 
@@ -44,9 +44,7 @@ developed, seeking at opening the door of developing experiments to a
 separated framework in the future. The base experiment implements two
 very interesting patterns: **Publishers** and **Subscribers**.
 
-ZMQ for inter-process communication
-===================================
-
+## ZMQ for inter-process communication
 A requirement for PyNTA was to be able to adjust the number of processes
 at runtime. This means that, for example, the feed from the camera could
 be sent to a process that saves the images to disk. It could also be
@@ -82,9 +80,7 @@ breaking the downstream code. It also opens the door for interesting
 patterns in the future, leveraging the power of modern computers to new
 extents while doing data acquisition.
 
-Current Limitations
-===================
-
+## Current Limitations
 pyZMQ implements a convenience method called `send_pyobj` which
 serializes objects with cPickle before sending them. There is a
 correspondent `recv_pyobj` which does the opposite. Adding objects to a
@@ -117,9 +113,7 @@ reduction of resolution, etc. These, however, are easy to implement in
 the experiment model as different acquisition routines that can be
 triggered either from the command line or from a GUI.
 
-Wish list for Pynta
-===================
-
+## Wish list for Pynta
 PyNTA was released in order to open the door to collaboration. However,
 there is still a long way for it to become a stable product. The
 features that PyNTA needs to implement in order to become more complete
@@ -138,9 +132,7 @@ are:
     communication
 -   Think about a zero-copy numpy exchange of arrays
 
-Possible Roadmap
-================
-
+## Possible Roadmap
 There are different options that can sprout out of PyNTA. For example,
 developing a framework to perform experiments with a common pattern of
 subscribers and publishers. With the experience gained in PyNTA, there
@@ -152,9 +144,7 @@ having GUI's for different platforms that run on the same hardware. For
 example, an app on the phone could control the experiment in the same
 way that a user sitting on the computer in the lab.
 
-Getting PyNTA
-=============
-
+## Getting PyNTA
 If you are intrigued by PyNTA, you can install it by simply running:
 
 ```bash

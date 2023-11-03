@@ -1,23 +1,22 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: storing-binary-data-and-serializing
 date: '2018-08-11'
 description: Learn different ways of storing data in your projects
-header: '{attach}joshua-sortino-215039-unsplash.jpg'
+image: '/images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg'
 subtitle: Learn different ways of storing data in your projects
-tags: 'Data, Storing, SQLite, HDF5, ascii, json, Data Storage'
+tags: 
+  - Data
+  - Storing
+  - SQLite
+  - HDF5
+  - ascii
+  - json
+  - Data Storage
 title: Storing Binary Data and Serializing
+series: Saving Data
+series_index: 2
 ---
-
-This article is part of a series of articles relating to data storage
-with Python. The other articles are:
-
--   [Introduction to Storing Data in
-    Files](%7Bfilename%7D13_storing_data.rst)
--   [Storing Binary Data and
-    Serializing](%7Bfilename%7D14_Storing_data_2.rst)
--   [Using Databases to Store Data](%7Bfilename%7D15_Storing_data_3.rst)
--   [Using HDF5 Files with Python](%7Bfilename%7D02_HDF5_python.rst)
 
 Last week we have seen how to store data into plain text files that can
 be read by any editor or by other programs. We have also seen that if
@@ -34,9 +33,7 @@ you can save space on your disk if you encode your data in the proper
 way. In the end what you will have is a clear picture of the difference
 between saving plain text files and binary data.
 
-What does it really mean to save text files
-===========================================
-
+## What does it really mean to save text files
 Last week you have seen different ways of saving text files. One of the
 most noticeable attributes is that those files can be opened with any
 basic text editor, you don't need Python to read them. This already
@@ -96,8 +93,7 @@ integer numbers of 8 bits, they both take the same amount of memory.
 With this simple example, you start seeing that there are a lot of small
 details that you have to take into account when saving data.
 
-Different encodings for text data
-=================================
+## Different encodings for text data
 
 You may have realized in the previous section that ASCII is limited to a
 special set of characters. If you want to write characters of other
@@ -143,8 +139,7 @@ can also change the encoding to `ascii`. As an exercise, compare how
 much space it takes every time you save the data. Open the file being
 saved with a text editor and check if you can see the message.
 
-Saving Numpy Arrays
-===================
+## Saving Numpy Arrays
 
 Last week we have seen that it is possible to save numpy arrays into
 text files that can be read by any editor. This means that the
@@ -249,8 +244,7 @@ with open('AE_ascii.dat', 'w') as f:
 Compare the size of the two files and try to understand why are they so
 different.
 
-Intro to Pickle
-===============
+## Intro to Pickle
 
 So far we have discussed how to save strings or numpy arrays to a file.
 However, Python allows you to define several types of data structures,
@@ -303,8 +297,7 @@ therefore it is not compatible out of the box with other programming
 languages. In the context of Python, serializing an object is called
 *pickling* and when you deserialize it is called *unpickling*.
 
-Pickling numpy arrays
-=====================
+## Pickling numpy arrays
 
 You can use Pickle to save other kinds of variables. For example, you
 can use it to store a numpy array. Let's compare what happens when you
@@ -350,8 +343,7 @@ ModuleNotFoundError: No module named 'numpy'
 So, you already see that pickle is doing a lot of things under the hood,
 like trying to import numpy.
 
-Pickling Functions
-==================
+## Pickling Functions
 
 To show you that Pickle is very flexible, you will see how you can store
 functions. Probably you already heard that everything in Python is an
@@ -387,8 +379,7 @@ with open('AH_pickle_function.dat', 'rb') as f:
 new_function('New Test')
 ```
 
-Limitations of Pickle
-=====================
+## Limitations of Pickle
 
 In order for Pickle to work, you need to have available the definition
 of the object you are pickling. In the examples above, you have seen
@@ -468,8 +459,7 @@ for loading the object and the class itself. Pickle is a great tool when
 you want to save the specific state of an object in order to keep up
 with the work later.
 
-Risks of Pickle
-===============
+## Risks of Pickle
 
 If you look around, you will definitely find a lot of people warning the
 Pickle is not safe to use. The main reason is that when you unpickle,
@@ -530,16 +520,14 @@ one line of code).
 Having control is always better. If you want to be sure that nothing bad
 is going to happen, you have to find other ways of serializing data.
 
-<div class="admonition note">
+!!! note
 
-If you are using Pickle as in the examples above, you should consider
-changing `pickle` for `cPickle` which is the same algorithm but written
-directly in C and runs much faster.
+    If you are using Pickle as in the examples above, you should consider
+    changing `pickle` for `cPickle` which is the same algorithm but written
+    directly in C and runs much faster.
 
-</div>
 
-Serializing with JSON
-=====================
+## Serializing with JSON
 
 The main idea behind serialization is that you transform an object into
 something else, that can be 'easily' stored or transmitted. Pickle is a
@@ -587,8 +575,7 @@ TypeError: Object of type 'MyClass' is not JSON serializable
 
 JSON will not work with numpy arrays out of the box either.
 
-Combining JSON and Pickle
-=========================
+## Combining JSON and Pickle
 
 As you have seen, JSON is a way of writing text to a file, structured in
 a way that makes it easy to load back the information and transform it
@@ -629,13 +616,11 @@ with open('AL_json_numpy.dat', 'w') as f:
     json.dump(data, f)
 ```
 
-<div class="admonition note">
+!!! note
 
-In the example above, we are using `pickle.dumps` instead of
-`pickle.dump`, which returns the information instead of writing it to a
-file.
-
-</div>
+    In the example above, we are using `pickle.dumps` instead of
+    `pickle.dump`, which returns the information instead of writing it to a
+    file.
 
 You can go ahead and look at the file. You will see that you can read
 some parts of it, like the words 'array' and the time at which it was
@@ -691,8 +676,7 @@ limited by the ascii specification thanks to Unicode. However, sticking
 to standards is a good practice if you want compatibility of your code
 in different systems.
 
-Other Serialization Options
-===========================
+## Other Serialization Options
 
 We have seen how to serialize objects with Pickle and JSON, however,
 they are not the only two options. There are no doubts that they are the
@@ -758,8 +742,7 @@ gaining traction. Writing configuration files in YAML feels very
 natural. There is much less typing involved than with XML and it looks
 more organized, at least to me than JSON.
 
-Conclusions
-===========
+## Conclusions
 
 In this article, we have discussed serialization of objects and how to
 store them on the hard drive. We have started discussing what an
@@ -781,16 +764,6 @@ string and save it next to easy to read metadata.
 This article has gone much more in depth regarding how to store data in
 different formats, but the topic is far from complete. Keep tuned to
 find more articles regarding how to save data with Python.
-
-This article is part of a series of articles relating to data storage
-with Python. The other articles are:
-
--   [Introduction to Storing Data in
-    Files](%7Bfilename%7D13_storing_data.rst)
--   [Storing Binary Data and
-    Serializing](%7Bfilename%7D14_Storing_data_2.rst)
--   [Using Databases to Store Data](%7Bfilename%7D15_Storing_data_3.rst)
--   [Using HDF5 Files with Python](%7Bfilename%7D02_HDF5_python.rst)
 
 Header photo by [Joshua
 Sortino](https://unsplash.com/photos/LqKhnDzSF-8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

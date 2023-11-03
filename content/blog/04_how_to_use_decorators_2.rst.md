@@ -1,11 +1,16 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: how-to-use-decorators-part-2
 date: '2018-05-18'
 description: Learn how to use decorators like a professional
-header: '{attach}michael-browning-227688-unsplash.jpg'
+image: '/images/michael-browning-227688-unsplash_linkedin.width-800.jpg'
 subtitle: Use decorators like a professional
-tags: 'Decorators, Python, Tricks, Validation, Data, Intermediate'
+tags: 
+  - Decorators
+  - Tricks
+  - Validation
+  - Data
+  - Intermediate
 title: How to use decorators Part 2
 ---
 
@@ -17,7 +22,7 @@ go in depth regarding different options when implementing decorators.
 The topics covered are:
 
 In a [previous article on the use of decorators to validate user
-input](%7Bfilename%7D01_how_to_use_decorators.rst), we have seen just
+input]({filename}01_how_to_use_decorators.rst.md), we have seen just
 the very beginning of what decorators are able to provide to the
 developer. Let's first recap what we saw earlier. We can define a
 decorator as a function that will take as input another function. We can
@@ -53,11 +58,9 @@ In the first case, the function would work, giving as output `1.5`,
 while in the second case it would raise an exception because one of the
 arguments is not positive. If you can't understand the code above, you
 should check the [first article published on
-decorators](%7Bfilename%7D01_how_to_use_decorators.rst).
+decorators]({filename}01_how_to_use_decorators.rst.md).
 
-Docstrings with decorators
-==========================
-
+## Docstrings with decorators
 This example works fine, but it already shows an issue that for larger
 projects is very relevant: docstrings, i.e. the documentation of
 functions, methods, and classes, stop working when using decorators like
@@ -150,8 +153,7 @@ what the decorator `@wraps` does is the same as setting the `__name__`
 and `__doc__` properties. Now you start seeing that the uses of
 decorators are virtually endless.
 
-Arguments in decorators
-=======================
+## Arguments in decorators
 
 Imagine that you want to be able to check that both arguments in a
 function are higher than a parameter, not necessarily `0`. This would
@@ -201,8 +203,7 @@ average(1, 2)
 it will raise the exception because one of the values is not above the
 specified threshold.
 
-When are decorators executed
-============================
+## When are decorators executed
 
 There is something very important to note: both decorators defined
 earlier, `check_positive` and `check_above` are actually executed right
@@ -297,8 +298,7 @@ have reliable and maintainable libraries. Mixing the execution of code
 with the definition of a function may give a lot of headaches to novice
 developers and may become a nightmare to debug later on.
 
-Decorators for methods in classes
-=================================
+## Decorators for methods in classes
 
 So far we have covered how to use decorators for functions, but more
 often than not you will find yourself using decorators for methods in
@@ -368,8 +368,7 @@ the `Operations` class or with a function. Moreover, you can now try it
 with a function that takes three numbers as input and it will still
 work.
 
-Classes as decorators
-=====================
+## Classes as decorators
 
 So far, we have seen that you can use a function to decorate another
 function or method. However, that is not the only option. Classes can be
@@ -452,8 +451,7 @@ state. For example, imagine you would like to store every pair of values
 on which you have calculated the average. You can easily turn this idea
 into a cache system, avoiding to repeat processes for known arguments.
 
-Decorators for classes
-======================
+## Decorators for classes
 
 We have seen that any callable can be a decorator of any other callable.
 That is why a function can be a decorator of another function or method.
@@ -541,8 +539,7 @@ it:
 1.5
 ```
 
-Conclusions
-===========
+## Conclusions
 
 In this tutorial, we have covered a lot of different options when
 working with decorators. Depending on the kind of projects you are
@@ -560,7 +557,7 @@ they work.
 You can find the [example code for this
 tutorial](https://github.com/PFTL/website/tree/master/example_code/04_how_to_use_decorators_2)
 on Github, as well as the
-[text](https://github.com/PFTL/website/blob/master/content/blog/04_how_to_use_decorators_2.rst).
+[text](https://github.com/PFTL/website/blob/master/content/blog/04_how_to_use_decorators_2.rst.md).
 If you find any mistakes, don't hesitate to submit a pull request or
 open an Issue.
 

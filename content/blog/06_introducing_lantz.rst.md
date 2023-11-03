@@ -1,15 +1,19 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: how-to-write-a-driver-with-lantz
 date: '2018-02-23'
 description: |
     Writing your own drivers is easy thanks to Lantz, a Python package that
     handles different communication standards, limits, and even units.
-header: '{attach}toolbox.jpg'
+image: '/images/toolbox_linkedin.width-800.jpg'
 subtitle: |
     Simplifying the task of writing new drivers thanks to a lot of built-in
     features
-tags: 'Lantz, Beginner, Drivers, Devices'
+tags: 
+  - Lantz
+  - Beginner
+  - Drivers
+  - Devices
 title: How to Write a Driver with Lantz
 ---
 
@@ -177,8 +181,7 @@ should be between 1 and 2. That is why if you try to assign the value 3
 to it, it will fail. Because of how we did things, if you send the value
 1.5 to the datasource, it won't fail, but it is not a valid command.
 
-Using Units
-===========
+## Using Units
 
 One of the most useful utilities of Lantz is the built-in units. The
 oscilloscope doesn't provide a lot of good opportunities to work with
@@ -245,8 +248,7 @@ people are used to the Pint package and get slightly confused when they
 have to work with a new type of variable that has both a number and a
 unit. Anyways, a bit of practice doesn't heart.
 
-Conclusions
-===========
+## Conclusions
 
 Lantz has seen a rollercoaster of development cycles, from very active
 to almost abandoned. Lately, it has been hibernating, as you can see by
@@ -266,7 +268,7 @@ If you want to explore more I suggest you check also:
 > -   [Storm Control, from Zhuang
 >     Lab](https://github.com/ZhuangLab/storm-control).
 > -   [Experimentor, by
->     Uetke](https://github.com/uetke/experimentor/tree/develop).
+>     Aquiles Carattino](https://github.com/aquilesC/experimentor).
 
 Header photo by [Philip Swinburn](https://unsplash.com/@pjswinburn) on
 Unsplash

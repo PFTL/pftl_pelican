@@ -1,15 +1,20 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: controlling-a-national-instruments-card-with-python
 date: '2018-02-21'
 description: |
     Don't depend on Labview; learn how to control National Instruments cards
     directly with Python.
-header: '{attach}writing-machine.jpg'
+image: '/images/writing-machine_linkedin.width-800.jpg'
 subtitle: |
     Don't depend on Labview; learn how to control National Instruments cards
     directly with Python.
-tags: 'National Instruments, DAQ, Control, NI DAQ, PyDAQmx'
+tags: 
+  - National Instruments
+  - DAQ
+  - Control
+  - NI DAQ
+  - PyDAQmx
 title: Controlling a National Instruments Card with Python
 ---
 
@@ -32,16 +37,14 @@ what you should always bear in mind is that you have to check the
 documentation](http://zone.ni.com/reference/en-XX/help/370471AA-01/) and
 adapt the code to Python.
 
-<div class="admonition note">
+!!! note
 
-since the writing of this article, a new Python package supporting
-NI-DAQmx was released by National Instruments itself. You can see the
-[documentation here](https://nidaqmx-python.readthedocs.io/en/latest/).
-I didn't have time to test it yet, but looks very promising. Keep an eye
-on the [bugs and issues](https://github.com/ni/nidaqmx-python/issues)
-because they may be a good source of information.
-
-</div>
+    Since the writing of this article, a new Python package supporting
+    NI-DAQmx was released by National Instruments itself. You can see the
+    [documentation here](https://nidaqmx-python.readthedocs.io/en/latest/).
+    I didn't have time to test it yet, but looks very promising. Keep an eye
+    on the [bugs and issues](https://github.com/ni/nidaqmx-python/issues)
+    because they may be a good source of information.
 
 Let's see how to get started. Remember that each card has different
 specifications and therefore some of the options may not be present in
@@ -118,15 +121,13 @@ use again a built-in option of DAQmx, the `nidaq.DAQmx_Val_Volts` and
 the last option is left to `None` because it is what the documentation
 asks for in case we set the scale to Volts.
 
-<div class="admonition note">
+!!! note
 
-Converting variable types from Python to C or the other way around is
-handled in different ways by different libraries. PyDAQmx is doing all
-the work under to hood and that is why we can use an integer instead of
-a float, for example. But be aware that it will not always be the same;
-some libraries require to define very specific types.
-
-</div>
+    Converting variable types from Python to C or the other way around is
+    handled in different ways by different libraries. PyDAQmx is doing all
+    the work under to hood and that is why we can use an integer instead of
+    a float, for example. But be aware that it will not always be the same;
+    some libraries require to define very specific types.
 
 The other method,
 [CfgSampClkTiming](http://zone.ni.com/reference/en-XX/help/370471AA-01/daqmxcfunc/daqmxcfgsampclktiming/)

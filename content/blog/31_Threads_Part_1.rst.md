@@ -1,12 +1,13 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: starting-and-synchronizing-threads
 date: '2019-08-06'
 description: Learn how threads in Python can help you develop better code
-header: '{illustration}python1-01.png'
+image: '/images/python1-01_JBbb9vt.width-800.png'
 subtitle: Learn how threads in Python can help you develop better code
-tags: 'threads, async, multithreading, parallel'
+tags: [threads, async, multithreading, parallel]
 title: Starting and Synchronizing Threads
+Series: Parallelizing
 ---
 
 If you have developed code for long enough, probably you have faced the
@@ -18,15 +19,13 @@ overcome these issues.
 
 In this introduction, we are going to cover how you can use Threads to
 develop a more flexible program. We have already discussed about
-[threads](%7Bfilename%7D10_threads_or_processes.rst), and we have used
+[threads]({filename}10_threads_or_processes.rst.md), and we have used
 them when [developing a user
-interface](%7Bfilename%7D22_Step_by_step_qt.rst). In this article, we
+interface]({filename}22_Step_by_step_qt.rst.md). In this article, we
 are going to organize the information available for you to learn how to
 be creative with threads in your own programs.
 
-What are not Threads
-====================
-
+## What are not Threads
 If you are a native English speaker, the word *thread* may bring to mind
 a clear picture, which is not always the case if English is your second
 language. Think about a sweater, it is made out of many threads that run
@@ -46,7 +45,7 @@ and the computer has the freedom to switch, very quickly, between them.
 For a short time, it is checking your spelling, for a short time, it
 renders a website, for a short time it writes to the hard drive, etc.
 This is what gives programs a smooth feeling, and it is exactly what we
-did to [avoid the window freezing](%7Bfilename%7D22_Step_by_step_qt.rst)
+did to [avoid the window freezing]({filename}22_Step_by_step_qt.rst.md)
 when dealing with Qt.
 
 However, when the computation in one of the threads is very complex,
@@ -62,9 +61,7 @@ This will become clearer when we start developing complex examples and
 we explore the limitations and advantages of each approach we decide to
 take.
 
-A Simple Thread
-===============
-
+## A Simple Thread
 When dealing with threads, the best is to start with a very simple
 example. Let's create a function that takes longer to execute, but which
 is not computationally very expensive. For example something like this:
@@ -127,16 +124,15 @@ t.start()
 print('Thread started')
 ```
 
-<div class="admonition warning">
+!!! warning
 
-Perhaps you will see that not always the `Thread Started` message
-appears after the `0`. That happens because in the example above you
-have no control at all on the order in which commands will be executed.
-If the operating system is busier, the result may slightly change, etc.
-The starting of a thread may happen slightly later than the following
-line on the main thread.
+    Perhaps you will see that not always the `Thread Started` message
+    appears after the `0`. That happens because in the example above you
+    have no control at all on the order in which commands will be executed.
+    If the operating system is busier, the result may slightly change, etc.
+    The starting of a thread may happen slightly later than the following
+    line on the main thread.
 
-</div>
 
 The last basic behavior you need to be aware of is on how to wait until
 the thread finishes. Perhaps you want to be sure a thread is finished
@@ -175,9 +171,7 @@ If you look at the output you will see that numbers are being printed at
 the same time from both threads. Starting threads as t1, t2 is not the
 most elegant solution, but for the time being it proves its point.
 
-Shared Memory
-=============
-
+## Shared Memory
 One of the most important topics when working with threads is that of
 shared memory. Most likely you have realized that when you develop a
 program, you define variables, functions, etc. However, variables
@@ -205,7 +199,7 @@ numpy array, it will increase the value of each element by one. What is
 important to note, is that the function is not returning any value. This
 can be done because arrays are mutable. You can check the article about
 [mutable and immutable data
-types](%7Bfilename%7D17_mutable_and_immutable.rst) in case you are
+types]({filename}17_mutable_and_immutable.rst.md) in case you are
 curious.
 
 Pay attention to the fact that if instead of an array, you use a number
@@ -360,9 +354,7 @@ execution.
 Debugging multi-threaded programs which are badly design is an
 incredibly tough task.
 
-Synchronizing Threads with Locks
-================================
-
+## Synchronizing Threads with Locks
 In the example above, we saw that when running multiple threads, the
 operating system has control on the order in which each is run. If we
 run the code more than once, we could end up with different results. To
@@ -400,7 +392,7 @@ there until it is released. This means that the for-loop which increases
 each element by one or which divides each element needs to finish before
 the other will be able to run.
 
-By using [context managers](%7Bfilename%7D16_context_manager.rst) the
+By using [context managers]({filename}16_context_manager.rst.md) the
 syntax can become much simpler:
 
 ```python
@@ -441,9 +433,7 @@ only one will run at a time. However, it is important to point out that
 which thread runs first depends on the implementation of the operating
 system.
 
-Synchronizing Threads: RLocks
-=============================
-
+## Synchronizing Threads: RLocks
 Locks can be very useful when you want to ensure that a certain block of
 code will run completely before something else alters the data on which
 you are working. There is, however, a caveat. The functions we defined
@@ -499,9 +489,7 @@ can be changed to Locks if the code is designed in a different way (or
 vice versa), and you will have to decide what is healthier for the long
 term.
 
-Timeouts
-========
-
+## Timeouts
 A very common scenario when working with threads is that something
 happens unexpectedly, either it happens before than expected, or an
 exception is raised, or there is simply a bug in your code. In any case,
@@ -560,9 +548,7 @@ that the intended state may not be met. In the examples above, it would
 mean that we may try to increase and divide at the same time, without
 being able to guarantee what happens first.
 
-Events
-======
-
+## Events
 Together with `Locks`, `Events` can be used to synchronize the behavior
 of threads. Locks are useful because they can be acquired only once at a
 time. However, this may not be what you need. Events, as the name
@@ -612,9 +598,7 @@ database, you would like to run the threads once the communication is
 established and not before. Resources which may take longer or shorter
 to become available are clear indicators for using an `Event` object.
 
-Stopping Threads with Events
-----------------------------
-
+### Stopping Threads with Events
 So far, we have always let the program run until its completion,
 including the threads. However, a very common scenario is to have a
 thread which will run forever, processing any data that comes its way.
@@ -680,9 +664,7 @@ it is important to start including into your design how you will handle
 the finalization of your program, both intentionally and not
 intentionally.
 
-Conclusions
-===========
-
+## Conclusions
 In this article, we have seen the basics of working with threads. We
 have seen how you can start multiple threads and how to synchronize
 them. You have to remember that threads are not running simultaneously,
@@ -695,7 +677,7 @@ most are based on performing highly inefficient tasks, such as
 increasing the values in an array one by one. If you want to continue
 learning about threads, you can head to the following tutorial on [how
 to handle data with threads in
-Python](%7Bfilename%7D32_Threads_Part_2.rst).
+Python]({filename}32_Threads_Part_2.rst.md).
 
 Header Illustration by [Tsvetelina
 Stoynova](https://dribbble.com/tsvety-designs)

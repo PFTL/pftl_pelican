@@ -1,21 +1,22 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: introduction-to-storing-data-in-files
 date: '2018-08-10'
 description: Learn different ways of storing data in your projects
-header: '{attach}pietro-jeng-266017-unsplash.jpg'
+image: '/images/pietro-jeng-266017-unsplash_linkedin.width-800.jpg'
 subtitle: Learn different ways of storing data in your projects
-tags: 'Data, Storing, SQLite, HDF5, ascii, json, Data Storage'
+tags: 
+  - Data
+  - Storing
+  - SQLite
+  - HDF5
+  - ascii
+  - json
+  - Data Storage
 title: Introduction to Storing Data in Files
+series: Saving Data
+series_index: 1
 ---
-
-This is the first of a series of articles relating to data storage with
-Python. The other articles are:
-
--   [Storing Binary Data and Serializing
-    Objects](%7Bfilename%7D14_Storing_data_2.rst)
--   [Using Databases to Store Data](%7Bfilename%7D15_Storing_data_3.rst)
--   [Using HDF5 Files with Python](%7Bfilename%7D02_HDF5_python.rst)
 
 Storing data to reuse it later is a central part in most Python
 applications. Whether you are doing a measurement in the lab or
@@ -31,8 +32,7 @@ self-descriptive the data is, how are you going to use it later, etc. In
 this article, we are going to start exploring different ways of storing
 data.
 
-Plain Text Files with Numpy
-===========================
+## Plain Text Files with Numpy
 
 When storing data on the hard drive, a common option is to use plain
 text files. Let's start with a simple example, a `numpy` array of a
@@ -114,8 +114,7 @@ equivalent to pressing `enter` in your keyboard when typing a document.
 This character tells Python to go to the line below when writing
 information to a file.
 
-Loading Saved Data with Numpy
------------------------------
+### Loading Saved Data with Numpy
 
 Of course, saving to a file is only half what you have to do. The other
 half is reading it. Fortunately, this is very easy with numpy:
@@ -140,8 +139,7 @@ data = np.loadtxt('data.dat', comments='@')
 In the example above, the code will skip all the lines that start with
 an `@` symbol.
 
-Saving Partial Files with Numpy
-===============================
+## Saving Partial Files with Numpy
 
 One common situation is to save to file while the data acquisition or
 generation is happening. This allows you, for example, to monitor the
@@ -184,8 +182,7 @@ at the same time. Moreover, not all text editors are able to notice
 changes to the file from outside themselves, meaning that you won't see
 the changes to the file unless you re-open it.
 
-Flushing Changes
-----------------
+### Flushing Changes
 
 If you start saving partial data often, you will notice that, especially
 when your program crashes, some of the data points may be missing.
@@ -195,7 +192,7 @@ use and how busy the computer is. Python puts the writing instructions
 into a queue, which means that the writing itself can be executed much
 later in time. If you want to be sure that changes are being written,
 especially when you are aware that your program may give rise to
-[unhandled exceptions](%7Bfilename%7D12_handling_exceptions.rst), you
+[unhandled exceptions]({filename}12_handling_exceptions.rst.md), you
 can add the `flush` command. Simply like this:
 
 ```python
@@ -211,8 +208,7 @@ buffering of writing events. However, when trying to push the limits, it
 is very important to regain control and be aware of what the
 consequences may be.
 
-The With Statement
-------------------
+### The With Statement
 
 When working with files, it is important to ensure that you are closing
 it when you finish with it. If you don't do it, you may end up with
@@ -243,8 +239,7 @@ The details of the `with` statement deserve their own article, which is
 in the pipeline for the future. For the time being, remember what it
 means when you see it.
 
-Lower-level Writing to Text Files
-=================================
+## Lower-level Writing to Text Files
 
 Up to here, we have seen how to use numpy to save data because it is a
 standard in many applications. However, it may not fit all the
@@ -321,8 +316,7 @@ website](https://docs.oracle.com/cd/E19957-01/806-3568/ncg_goldberg.html)
 Wikipedia](https://en.wikipedia.org/wiki/Floating-point_arithmetic#Floating-point_numbers)
 (more general public-oriented).
 
-Formatting the output
-=====================
+## Formatting the output
 
 One of the most important things to consider when writing data to disk
 is how to structure it in order to make it easy to read afterward. In
@@ -401,8 +395,7 @@ the left or to the right, adding spaces or any other character on either
 side, etc. I promise to cover this topic later on. But for now it is
 enough, let's keep storing data to a file.
 
-Storing Data in Columns
-=======================
+## Storing Data in Columns
 
 Let's recover the example from before, where we stored two columns of
 data. We would like to do the same, without the use of numpy's
@@ -432,8 +425,7 @@ structure your file as you like. However, you have to be careful and
 think ahead about how you are going to retrieve the data in case an
 inconsistency appears.
 
-Reading the data
-================
+## Reading the data
 
 After we have saved the data to a file, it is very important to be able
 to read it back into our program. The first approach is unorthodox, but
@@ -534,8 +526,7 @@ out by itself. However, you will not always have numpy available, or
 sometimes you require a higher level of control on how your data is
 being read or written.
 
-Learning From Others
-====================
+## Learning From Others
 
 One of the main advantages of open-source software is that you are free
 to look into their code in order to understand what they do and learn
@@ -580,8 +571,7 @@ computer. Whenever you think you are doing something that it was already
 solved, try to leverage from that experience. Reading code is a great
 resource for learning.
 
-Saving Non-Numeric Data
-=======================
+## Saving Non-Numeric Data
 
 So far we have dealt only with numbers, that is why using numpy provides
 such a big advantage. However, a lot of applications need to deal with
@@ -644,8 +634,7 @@ If you look at the file, you will see that you have the same information
 as before, plus the extra four numeric fields. Probably, you are already
 seeing the limitations of the approach. But let's see it in more detail.
 
-Reading Non-Numeric Data
-========================
+## Reading Non-Numeric Data
 
 Just as before, reading non-numeric data is as easy as reading numeric
 data. For example, you can do the following:
@@ -703,20 +692,8 @@ Is this all regarding how to store data? Of course, not, there is much
 more to come.
 
 As always, [the example code can be found
-here](https://github.com/PFTL/website/tree/master/example_code/13_storing_data)
-and [the source code for this article
-here](https://github.com/PFTL/website/blob/master/content/blog/13_storing_data.rst).
+here](https://github.com/PFTL/website/tree/master/example_code/13_storing_data).
 
 Header photo by [Pietro
 Jeng](https://unsplash.com/photos/n6B49lTx7NM?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on Unsplash
-
-This article is part of a series of articles relating to data storage
-with Python. The other articles are:
-
--   [Introduction to Storing Data in
-    Files](%7Bfilename%7D13_storing_data.rst)
--   [Storing Binary Data and
-    Serializing](%7Bfilename%7D14_Storing_data_2.rst)
--   [Using Databases to Store Data](%7Bfilename%7D15_Storing_data_3.rst)
--   [Using HDF5 Files with Python](%7Bfilename%7D02_HDF5_python.rst)

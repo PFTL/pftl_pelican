@@ -1,25 +1,25 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: using-pyzmq-for-inter-process-communication-part-2
 date: '2019-03-05'
 description: |
     Introduction to using sockets for communication between different
     processes
-header: '{attach}thomas-jensen-592813-unsplash.jpg'
+image: '/images/thomas-jensen-592813-unsplash_linkedin_elhzvKj.width-800.jpg'
 subtitle: |
     Introduction to using sockets for communication between different
     processes
-tags: 'ZMQ, Socket, Communication, Parallel, Data'
+tags: [ZMQ, Socket, Communication, Parallel, Data]
 title: 'Using pyZMQ for inter-process communication: Part 2'
 ---
 
 In this article, we are going to cover how you can leverage the
 possibilities of ZMQ to exchange data between different processes in
-Python. We have covered the [basics of pyZMQ](%7Bfilename%7D25_ZMQ.rst)
+Python. We have covered the [basics of pyZMQ]({filename}25_ZMQ.rst.md)
 in part 1. This is a fairly advanced tutorial, in which we are not only
 going to use pyZMQ, but also the multiprocessing library,
-[HDF5](%7Bfilename%7D02_HDF5_python.rst), and
-[openCV](%7Bfilename%7D22_Step_by_step_qt.rst). We are going to acquire
+[HDF5]({filename}02_HDF5_python.rst.md), and
+[openCV]({filename}22_Step_by_step_qt.rst.md). We are going to acquire
 images from the webcam as fast as possible, we are going to save the
 data to disk during the acquisition, and we are going to perform some
 basic analysis.
@@ -32,8 +32,7 @@ extra files that will allow us to keep everything organized. To specify
 file names, I will use **bold**. The code, as always, [can be found on
 Github](https://github.com/PFTL/website/tree/master/example_code/26_ZMQ).
 
-Architecture
-============
+## Architecture
 
 What we want to achieve is a program that acquires images from a camera
 and at the same time it saves them to the hard drive and is able to
@@ -50,8 +49,7 @@ We will have a central publisher which will be able to broadcast every
 frame that is acquired, and subscribers which will get the frames and
 perform special operations on them.
 
-Camera Control
-==============
+## Camera Control
 
 We are going to use almost [the same
 code](https://www.pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui/)
@@ -104,9 +102,7 @@ else in the program, we won't be able. The fastest way to overcome this
 limitation is to use [threads or
 processes](https://www.pythonforthelab.com/blog/implementing-threads-for-measurements/).
 
-Multi-Threading
----------------
-
+### Multi-Threading
 Remember that the core idea of a thread is that it still runs on the
 same core, and therefore it just gives time for other tasks to use the
 same resources. If you have an operation that takes a lot of computing
@@ -195,9 +191,7 @@ monitor how many frames are available. This looks already very good, is
 you can forgive the `append` which is a bottleneck for this kind of
 applications.
 
-Multi-Processing
-----------------
-
+### Multi-Processing
 Threads work, but what about Processes? The syntax is extremely similar:
 we should just replace `Thread` for `Process`. However, we would face
 several issues if we try to do this. Because the memory is not shared
@@ -267,13 +261,11 @@ documentation](https://docs.python.org/3/library/multiprocessing.html)
 has some insights, but understanding what is actually written and its
 consequences are not trivial.
 
-<div class="admonition warning">
+!!! warning
 
 If you plan to use the multiprocessing library with programs that should
 run both on Windows and on Linux you have to be aware of the differences
 and learn how to structure your code.
-
-</div>
 
 This doesn't mean that we will not be able to run multi-processing
 programs on Windows, it just means that we have to structure our code
@@ -282,9 +274,7 @@ application, we will keep the camera acquisition in the main processes,
 using threads, and thus it will be compatible with Windows out of the
 box. We will use the multiprocessing library for the next section.
 
-Publisher
-=========
-
+## Publisher
 Now we know how to acquire a movie, but we still need to do something
 with the data other than simply accumulating it on a variable until the
 movie is over. Since we want to attach different tasks to the frames, we
@@ -418,9 +408,7 @@ So far we are not doing anything, the publisher is broadcasting data,
 but there is no one to do anything with it. It is time to add our first
 subscriber.
 
-Analyse Data: Subscriber 1
-==========================
-
+## Analyse Data: Subscriber 1
 Imagine that you want to analyze the frames while you are acquiring a
 movie. We are going to do a very silly analysis of computing the
 maximum, minimum, and average value of the pixels present. Since we
@@ -538,9 +526,7 @@ with information about the frames that you have acquired. Explore it to
 see that everything is there as expected. You can block the camera while
 you acquire a movie and see that the average drops, for example.
 
-Save Data: Subscriber 2
-=======================
-
+## Save Data: Subscriber 2
 What we have up to now could be easily achieved with a queue. The camera
 acquires frames, puts it in a queue and the queue is consumed by another
 process which analyses it. However, if we would like to add another
@@ -629,9 +615,7 @@ couple of lines and the behavior of the program is greatly enhanced. In
 the same way, if we want to switch on or of different tasks, we can do
 it without fundamentally altering the basic code.
 
-ZMQ and Queues
-==============
-
+## ZMQ and Queues
 With the example above you may be wondering what would happen if one of
 the subscribers is slower than the rate at which we are generating data.
 If you go to the chapter on [Advanced Pub/Sub
@@ -682,9 +666,7 @@ need to find solutions that include a broker, such as
 [RabbitMQ](https://www.rabbitmq.com/) but which I believe is not the
 proper solution for stand-alone desktop apps.
 
-Serializing Python Objects
-==========================
-
+## Serializing Python Objects
 I find the solution outlined in the previous sections very elegant. With
 a bit of cleaning up, it can work as a generalized signal/slot type of
 pattern, multi-processing compatible and even able to distribute tasks
@@ -701,9 +683,7 @@ put in the `queue`, deserializing at the `publisher`, serializing to
 broadcast, and deserializing at the `subscriber`. This operation has a
 high penalty and can be greatly improved by carefully planning the code.
 
-Zero-Copy Messages
-==================
-
+## Zero-Copy Messages
 In the examples above, the objects that we are passing around are numpy
 arrays. This means that there is another improvement possible: using
 [the
@@ -741,9 +721,7 @@ def recv_array(socket, flags=0, copy=True, track=False):
     return A.reshape(md['shape'])
 ```
 
-Conclusions
-===========
-
+## Conclusions
 In this tutorial, we have seen how to use pyZMQ in a real application
 that shares data across different processes. In this specific case, the
 processes live on the same computer, but nothing limits us from finding
@@ -766,7 +744,7 @@ liability more than a feature.
 The code for this tutorial can be found on
 [Github](https://github.com/PFTL/website/tree/master/example_code/26_ZMQ),
 as well as [the article
-itself](https://github.com/PFTL/website/blob/master/content/blog/26_ZMQ.rst).
+itself](https://github.com/PFTL/website/blob/master/content/blog/26_ZMQ.rst.md).
 If you have any comments or suggestions, you are welcome to create them
 [here](https://github.com/PFTL/website/issues).
 

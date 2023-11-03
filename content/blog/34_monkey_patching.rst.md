@@ -1,13 +1,12 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: monkey-patching-and-its-consequences
 date: '2019-06-18'
 description: Replacing methods and attributes at runtime
-header: '{attach}shashank-sahay-1659565-unsplash.jpg'
+image: '/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png'
 subtitle: Replacing methods and attributes at runtime
-tags: |
-    functions, methods, monkey patching, replacing, extending, mutable,
-    immutable
+tags: [functions, methods, monkey patching, replacing, extending, mutable,
+    immutable]
 title: Monkey Patching and its consequences
 ---
 
@@ -21,7 +20,7 @@ discuss the consequences of monkey patching in the context of larger
 projects.
 
 Monkey patching is tightly related to the idea of [mutability in
-Python](%7Bfilename%7D17_mutable_and_immutable.rst). Custom objects are
+Python]({filename}17_mutable_and_immutable.rst.md). Custom objects are
 mutable, and therefore their attributes can be replaced without creating
 a new copy of the object. To quickly recap those ideas, we can do the
 following:
@@ -95,7 +94,7 @@ print(var2.a)
 Even if you change the attribute `a` to `3`, you don't see this change
 appearing on the instances of the class. The root cause of this lays in
 the ideas behind [mutable and
-immutable](%7Bfilename%7D17_mutable_and_immutable.rst) data types in
+immutable]({filename}17_mutable_and_immutable.rst.md) data types in
 Python. Since you altered the value of `var1.a`, now the attribute is
 pointing to an object different from the object the class attribute
 points to. If this last line doesn't make sense, go to the articles
@@ -251,9 +250,7 @@ therefore to transform a function into a method before replacing it on
 an instance. Pay attention that this is not the case when you change the
 class itself.
 
-Module-level monkey patching
-============================
-
+## Module-level monkey patching
 The last pattern that I would like to discuss is monkey-patching at the
 module level. So far, the attributes and methods we have used, they all
 belonged to a custom class. However, it is not the only possibility.
@@ -329,9 +326,7 @@ You see that by changing the `print_variable` on our main script, we
 have also altered what is happening on our second module. There are a
 lot of things you can start thinking about after seeing these patterns.
 
-When (not) to Monkey Patch
-==========================
-
+## When (not) to Monkey Patch
 Monkey patching is very powerful and it shows how flexible Python is. In
 the end, everything is derived from the same principles of understanding
 different data types and what variables mean in Python. However, it may

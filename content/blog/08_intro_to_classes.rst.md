@@ -1,12 +1,15 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: a-primer-on-classes-in-python
 date: '2018-05-22'
 description: A practical approach to working with classes in python
-header: '{attach}daniel-cheung-129841-unsplash.jpg'
+image: '/images/daniel-cheung-129841-unsplash_linkedin.width-800.jpg'
 subtitle: A practical approach to working with classes in python
-tags: 'Classes, beginner, tutorial'
-title: A Primer on Classes in Python
+tags: 
+  - Classes
+  - Object oriented
+  - beginner
+title: "A Primer on Classes in Python"
 ---
 
 Python is an object-oriented programming (OOP) language. Object-oriented
@@ -29,8 +32,7 @@ for example. In this chapter we are going to cover from the very basics
 of object design to slightly more advanced topics in which we can define
 a custom behavior for most of the common operations.
 
-Defining a Class
-================
+## Defining a Class
 
 Let's dive straight into how to work with classes in Python. Defining a
 class is as simple as doing:
@@ -150,8 +152,7 @@ you are starting to imagine some places where you can use a class to
 make your daily life easier and your code more reusable. However, this
 is just the tip of the iceberg. Classes are very powerful tools.
 
-Initializing classes
-====================
+## Initializing classes
 
 **Instantiating** a class is the moment in which we call the class and
 pass it to a variable. In the previous example, the instantiation of the
@@ -225,8 +226,7 @@ compatibility by declaring default values can make your code look
 chaotic, so you have to do it only when it is worth doing, and not all
 the time. When developing, it is impossible not to refactor code.
 
-Defining class attributes
-=========================
+## Defining class attributes
 
 So far, if you wanted to have properties available right after the
 instantiation of a class, you had to include them in the `__init__`
@@ -276,8 +276,7 @@ object with that class, it will receive the new property. At the
 beginning it is hard to understand why it is useful, but one day you
 will need it and it will save you a lot of time.
 
-Inheritance
-===========
+## Inheritance
 
 One of the advantages of working with classes in Python is that it
 allows you to use the code from other developers and expand or change
@@ -382,8 +381,7 @@ It is important to note that when importing the class, you only import
 the one you want to use, you don't need to import the parent, that is
 the responsibility of whoever developed the `Teacher` class.
 
-Finer details of classes
-========================
+## Finer details of classes
 
 With what you have learned up to here, you can achieve a lot of things,
 it is just a matter of thinking how to connect different methods when it
@@ -392,8 +390,7 @@ code developed by others. There are, however, some details that are
 worth mentioning, because you can improve how your classes look and
 behave.
 
-Printing objects
-----------------
+### Printing objects
 
 Let's see, for example, what happens if you print an object:
 
@@ -441,8 +438,7 @@ inherited. Therefore, if you, instead of printing a `Person`, print a
 `Student`, you will see the same output, which may or may not be the
 desired behavior.
 
-Defining complex properties
----------------------------
+### Defining complex properties
 
 When you are developing complex classes, sometimes you would like to
 alter the behavior of assigning values to an attribute. For example you
@@ -506,8 +502,7 @@ that triggers two actions. On the one hand, it updates the age, on the
 other it stores the year in an attribute. It takes a while to get used
 to, but it can be very handy.
 
-Conclusions
-===========
+## Conclusions
 
 This article is a very short primer on how to start working with classes
 in Python. You are not supposed to be an expert after such a brief
@@ -519,7 +514,7 @@ The series of primer articles are thought as a go-to destination when
 you need to refresh a specific concept. If you find anything missing,
 you can always leave a comment below and we will expand the article
 according to your needs. You can find the text of this article on
-[Github](https://github.com/PFTL/website/blob/master/content/blog/08_intro_to_classes.rst).
+[Github](https://github.com/PFTL/website/blob/master/content/blog/08_intro_to_classes.rst.md).
 
 Header photo by [Daniel
 Cheung](https://unsplash.com/photos/ZqqlOZyGG7g?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

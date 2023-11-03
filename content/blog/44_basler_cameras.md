@@ -1,4 +1,13 @@
-# Acquiring images from Basler Cameras
+---
+author: Aquiles Carattino
+slug: getting-started-with-basler-cameras
+date: '2021-02-27'
+description: Learn how to use pypylon to control the acquisition of images from cameras
+image: '/images/python-basler.width-800.jpg'
+subtitle: Learn how to use pypylon to control the acquisition of images from cameras
+tags: [microscopy, video, pypylon, camera, basler]
+title: "Acquiring images from Basler Cameras"
+---
 Basler offers a wide range of cameras that can be used for microscopy, computer vision, or even as security cameras. One of the cameras' advantages is that they come with a software development kit that makes them easy to integrate into our projects. Basler puts continuous effort into maintaining PyPylon, the Python bindings for their drivers. This tutorial will focus on learning how to get started with the cameras and how to leverage the existing Pylon Viewer to speed up our development. 
 
 

@@ -1,11 +1,11 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: the-with-command-and-custom-classes
 date: '2019-02-02'
 description: Using the with command and developing classes that support it
-header: '{attach}tobias-fischer-185901-unsplash.jpg'
+image: '/images/tobias-fischer-185901-unsplash_linkedin_qmTUlG.width-800.jpg'
 subtitle: Using the with command and developing classes that support it
-tags: 'Context Manager, With, Custom Classes, Patterns'
+tags: [Context Manager, With, Custom Classes, Patterns]
 title: The with command and custom classes
 ---
 
@@ -16,9 +16,7 @@ command to handle this pattern: the 'with' context manager. In this
 article, we are going to see how you can develop classes that follow the
 same pattern.
 
-Quick Introduction to the With Command
-======================================
-
+## Quick Introduction to the With Command
 If you would like to write a string to a file, you can do the following:
 
 ```python
@@ -66,9 +64,7 @@ You can try to see what happens if you raise an exception after the
 `write` command. The data will be in your file and the file would have
 been correctly closed.
 
-Custom Classes and With
-=======================
-
+## Custom Classes and With
 Working with files and other resources is interesting, but more
 interesting would be to develop classes that can be used within a
 context manager. First, we need to understand the steps that form the
@@ -199,12 +195,10 @@ This is an Exception
 
 This is enough to make decisions based on the kind of information that
 the exception is providing. You can check the [previous article on
-exceptions](%7Bfilename%7D12_handling_exceptions.rst) to have an idea of
+exceptions]({filename}12_handling_exceptions.rst.md) to have an idea of
 the kind of things you can accomplish.
 
-With and Constructors
-=====================
-
+## With and Constructors
 In the simple class that we have seen earlier, we completely skipped the
 discussion of what happens when you have a constructor, i.e. the
 `__init__` method is defined. So let's quickly try it. Let's make the
@@ -271,9 +265,7 @@ ValueError: I/O operation on closed file.
 This means that the file handler is still available, but the resource
 was already closed.
 
-Why Go to the Trouble
-=====================
-
+## Why Go to the Trouble
 When we discuss this kind of topics, you always have to consider the two
 sides of a project. You are either using someone's code or you are
 developing code someone else will expand. In the first case, using a
@@ -298,9 +290,7 @@ more. If you are a developer, you have to consider whether implementing
 the possibility of using context managers helps future users of your
 code.
 
-Conclusions
-===========
-
+## Conclusions
 The problem of focusing on very simple examples is that it makes it very
 hard to realize the true power of different patterns and why is it worth
 going through the trouble of implementing new methods, etc. The truth is

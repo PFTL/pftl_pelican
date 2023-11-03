@@ -1,6 +1,13 @@
-Generators, Iterables, Iterators in Python: When and Where
-==========================================================
-
+---
+author: Aquiles Carattino
+slug: generators-iterables-iterators-python-when-and-where
+date: '2020-04-10'
+description: Learn how to share data between threads
+image: '/images/python-shelves-i.width-800.jpg'
+subtitle: Learn how to share data between threads
+tags: [driver, arduino, control]
+title: "Generators, Iterables, Iterators in Python: When and Where"
+---
 Generators, Iterables, and Iterators are some of the most used tools in Python. However, we don't often stop to think about how they work, how we can develop our generators and iterables. Once you learn what you can do with them, it is possible to expand your toolbox and make your code much more efficient and pythonic. 
 
 ## Iterables
@@ -152,9 +159,8 @@ explore
 
 You can very quickly see that the behavior is what we were expecting. Of course, there are some limitations, such as not taking into account punctuation. However, we see that the ``for`` loop stops without problems once the list of words runs out of elements. On the other hand, if we try something like ``s[100]``, we get the expected ``IndexError``. 
 
-<div class="admonition note">
-The class Sentence can be greatly improved if, for instance, we implement a ``__len__`` method. However, this goes beyond the scope of this article.
-</div>
+!!! note
+    The class Sentence can be greatly improved if, for instance, we implement a ``__len__`` method. However, this goes beyond the scope of this article.
 
 The only requisite to create an iterable object such as the ones we showed above, is to have a ``__getitem__`` method that **access elements using a 0-index** approach. The first element is s[0], and so forth. If you are relying on a list, such as in the example with ``Sentence``, then there are no problems. If you are developing something such as our ``Arr`` example, then you need to take care of ensuring the 0 is the first element to be retrieved. 
 
@@ -384,9 +390,9 @@ So now you see, we can access the elements through their index, and we can itera
 ### Can Sentence have a \_\_next\_\_ method?
 In principle, you can make ``Sentence`` also an iterator, by adding a ``__next__`` method. But this may be a terrible idea. Remember that iterators work until they exhaust themselves, and they maintain an internal index. If you mix ``Sentence`` as both an iterable and an iterator, you will run into problems every time you encounter a double loop. 
 
-<div class="admonition note">
-Splitting the iterator and the iterable is a good idea. You can read a bit more about it in the book Fluent Python, by Luciano Ramalho. Chapter 14 is entirely dedicated to this topic. 
-</div>
+!!! note
+
+    Splitting the iterator and the iterable is a good idea. You can read a bit more about it in the book Fluent Python, by Luciano Ramalho. Chapter 14 is entirely dedicated to this topic. 
 
 For people working with scientific instruments, splitting the iterable and the iterator can have benefits. It is plausible to think scenarios where you want an iterator that behaves in different ways, depending on a parameter. For example, imagine you are reading from a camera, and want to achieve something like:
 

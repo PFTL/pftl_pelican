@@ -1,21 +1,27 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: learning-not-to-handle-exceptions
 date: '2018-06-04'
 description: Learn how to deal with exceptions in Python
-header: '{attach}cody-davis-253928-unsplash.jpg'
+image: '/images/cody-davis-253928-unsplash_linkedin.width-800.jpg'
 subtitle: Learn how to deal with exceptions in Python
-tags: 'Exceptions, Errors, Try, Except, Catch, Handling'
+tags: 
+  - Exceptions
+  - Errors
+  - Try
+  - Except
+  - Catch
+  - Handling
 title: 'Learning (not) to Handle Exceptions'
 ---
 
-> When you develop code, it is almost impossible not to run into an
-> error. Some problems are going to arise as soon as you start your
-> program, for example, if you forgot to close a parenthesis, or forgot
-> the `:` after an if-statement. However, errors at runtime are also
-> very frequent and harder to deal with. In this article, you are going
-> to learn how to handle exceptions, i.e. how to avoid program crashes
-> when you can anticipate that an error may appear.
+When you develop code, it is almost impossible not to run into an
+error. Some problems are going to arise as soon as you start your
+program, for example, if you forgot to close a parenthesis, or forgot
+the `:` after an if-statement. However, errors at runtime are also
+very frequent and harder to deal with. In this article, you are going
+to learn how to handle exceptions, i.e. how to avoid program crashes
+when you can anticipate that an error may appear.
 
 We are going to cover from the basics of error handling to defining your
 own exceptions. You will learn why sometimes it is better not to catch
@@ -23,17 +29,12 @@ exceptions and how to develop a pattern that can be useful for future
 users of your code. Exceptions are a crucial part of any code, and
 dealing with them elegantly can improve a lot the value of your code.
 
-As always, you can check [the example
-code](https://github.com/PFTL/website/tree/master/example_code/12_exceptions)
-for this article and [the original
-text](https://github.com/PFTL/website/blob/master/content/blog/12_handling_exceptions.rst)
-in case you have any suggestions to improve it.
+All the code of this article is [available on Github](https://github.com/PFTL/website/tree/master/example_code/12_exceptions).
 
-Try ... Except
-==============
+## Try ... Except
 
-> Imagine that you are reading data from a file. You can simply write
-> something like this:
+Imagine that you are reading data from a file. You can simply write
+something like this:
 
 ```python
 f = open('my_file.dat')
@@ -116,8 +117,7 @@ instruments with a price tag similar to a small apartment), also has to
 deal with all kinds of exceptions, and not always in the most
 user-friendly way.
 
-Catching Specific Exceptions
-============================
+## Catching Specific Exceptions
 
 The proper way of handling exceptions in Python is to specify what
 exception are we expecting. In this way, we know that if the problem is
@@ -175,8 +175,7 @@ In this block, the program is going to create a new **my\_file.dat**,
 even if it already existed, and therefore you are going to lose the
 information stored in it.
 
-Re-raising Exceptions
-=====================
+## Re-raising Exceptions
 
 A very common scenario is that when an exception appears, you want to do
 something but then raise the same exception. This is a very common case
@@ -213,8 +212,7 @@ we are sure that we have consistent data, that the program will not keep
 running and that the user will see all the proper information regarding
 what went wrong.
 
-Exceptions in Exceptions
-========================
+## Exceptions in Exceptions
 
 Imagine that the code is part of a larger function, responsible for
 opening a file, loading its contents or creating a new file in case the
@@ -262,8 +260,7 @@ especially when dealing with user input. The way around it would be to
 nest another try/except block or to verify the integrity of the inputs
 before calling `open`.
 
-Several Exceptions
-==================
+## Several Exceptions
 
 So far we have been dealing with only one possible exception,
 `FileNotFoundError`. However, we know that the code will raise two
@@ -380,8 +377,7 @@ pattern above has a very important drawback, and is that
 NameError: name 'important_data' is not defined
 ```
 
-The Finally Statement
-=====================
+## The Finally Statement
 
 To prevent what we just saw in the previous section, we can add one more
 block to the sequence: `finally`. This block is always going to be
@@ -469,8 +465,7 @@ problem of the `IndexError`. If you want to try a program without
 exceptions, just write something into **my\_data.dat** and you will see
 the output.
 
-The else Block
-==============
+## The else Block
 
 There is only one more block to discuss in the exception handling
 pattern, the `else` block. The core idea of this block is that it gets
@@ -545,8 +540,7 @@ Exceptions](https://docs.python.org/3/tutorial/errors.html).
 Things are not over yet, there are many more things that can be done
 with exceptions.
 
-The Traceback
-=============
+## The Traceback
 
 As you have probably seen already, when there is an exception, a lot of
 information is printed to the screen. For example, if you try to open a
@@ -594,8 +588,7 @@ calls another that creates an object, that runs a method, etc. it is
 very important to pay attention to the traceback in order to know what
 triggered the exception.
 
-Raising Custom Exceptions
-=========================
+## Raising Custom Exceptions
 
 When you are developing your own packages, it is often useful to define
 some common exceptions. This gives a great deal of flexibility because
@@ -604,7 +597,7 @@ appropriate. Let's see an example. Imagine that you want to write a
 function that calculates the average between two numbers, but you want
 both numbers to be positive. This is the same example that we have seen
 when working with
-[decorators](%7Bfilename%7D04_how_to_use_decorators_2.rst). We start by
+[decorators]({filename}04_how_to_use_decorators_2.rst.md). We start by
 defining the function:
 
 ```python
@@ -676,8 +669,7 @@ ones are included into the package and not just a generic one that
 forces us to catch any exception, even if it is something that we were
 not actually expecting.
 
-Best Practices for Custom Exceptions
-====================================
+## Best Practices for Custom Exceptions
 
 When you are developing a package, it is very handy to define exceptions
 that are exclusive to it. This makes it much easier to handle different
@@ -746,8 +738,7 @@ should see the following on your screen:
 TypeError: '<=' not supported between instances of 'str' and 'int'
 ```
 
-Adding Arguments to Exceptions
-==============================
+## Adding Arguments to Exceptions
 
 Sometimes it is handy to add arguments to exceptions in order to give a
 better context to users. With the example of the average, let's first
@@ -794,8 +785,7 @@ generated within the `__init__`, but many developers choose to generate
 the message in this method, based on the parameters passed at the
 beginning.
 
-Conclusions
-===========
+## Conclusions
 
 Exceptions are something nobody wants to see but they are virtually
 unavoidable. Maybe you try to read a file that doesn't exist, the user
@@ -830,6 +820,6 @@ on Unsplash
 Remember, that both [the
 code](https://github.com/PFTL/website/tree/master/example_code/12_exceptions)
 and [the
-text](https://github.com/PFTL/website/blob/master/content/blog/12_handling_exceptions.rst)
+text](https://github.com/PFTL/website/blob/master/content/blog/12_handling_exceptions.rst.md)
 of the article is available, in case you have any comments or
 suggestions to improve it.

@@ -1,4 +1,13 @@
-# Using Sets
+---
+author: Aquiles Carattino
+slug: python-tips-using-sets
+date: '2020-05-11'
+description: Go beyond lists and dictionaries, learn how to use sets
+image: '/images/Python-setup.width-800.jpg'
+subtitle: Go beyond lists and dictionaries, learn how to use sets
+tags: [data types, tips, iterables] 
+title: "Python Tips: Using Sets"
+---
 
 Most people are familiar with lists, tuples, and dictionaries as the basic data types for grouping information. However, there is another convenient option: **sets**. They are directly linked to the mathematical idea of a *set*. To define them, we can use the following syntax:
 

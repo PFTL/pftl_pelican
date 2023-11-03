@@ -1,11 +1,16 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: mutable-and-immutable-objects
 date: '2018-08-23'
 description: Understanding the differences in data types to make better programs
-header: '{attach}rawpixel-274862-unsplash.jpg'
+image: '/images/rawpixel-274862-unsplash_linkedin.width-800.jpg'
 subtitle: Understanding the differences in data types to make better programs
-tags: 'Data, Types, Mutable, Immutable, Objects'
+tags: 
+  - Data
+  - Types
+  - Mutable
+  - Immutable
+  - Objects
 title: Mutable and Immutable Objects
 ---
 
@@ -26,12 +31,10 @@ they can be used in your programs.
 As always, [example
 code](https://github.com/PFTL/website/tree/master/example_code/17_mutable_immutable)
 is available and the [source
-code](https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst)
+code](https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst.md)
 for this page also.
 
-Lists and Tuples
-================
-
+## Lists and Tuples
 In Python, when you want to define a list, you can simply do the
 following:
 
@@ -87,9 +90,7 @@ When you have a variable that cannot be changed after it has been
 created it is called **immutable**, while in the opposite case, that
 variable is called **mutable**. Let's explore what that means.
 
-Mutable and Immutable Data Types
-================================
-
+## Mutable and Immutable Data Types
 There is an [excellent article written by Luciano
 Ramalho](https://standupdev.com/wiki/doku.php?id=python_tuples_are_immutable_but_may_change)
 in which he explains how to understand variables in Python. I am not
@@ -320,9 +321,7 @@ If you run the code above, the output would me `My Object == None`.
 Better be safe than sorry, and being aware of what the `==` operator
 means and when to use it or when to use `is` can be very important.
 
-Mutable Objects in Functions
-============================
-
+## Mutable Objects in Functions
 We have just seen that if you have two mutable objects with the same id
 it means that they are the same object. If you change one, you will
 change the other. This also applies when working with functions that
@@ -384,9 +383,7 @@ altered. What we have just done is called a *shallow copy* of an object.
 It is also possible to perform a *deep* copy, but its implications are
 left for a different article.
 
-Default Arguments in Functions
-==============================
-
+## Default Arguments in Functions
 A common practice when you are defining a function is to assign default
 values to its arguments. On the one hand, this allows you to include new
 parameters without changing the downstream code, but it also allows you
@@ -454,13 +451,11 @@ once, `cache` will start changing, appending the new values to it. If we
 run calculate again with the same arguments, they are going to be
 present and their known value will be returned. Notice that we are
 leveraging the [exception
-handling](%7Bfilename%7D12_handling_exceptions.rst) in order to avoid
+handling]({filename}12_handling_exceptions.rst.md) in order to avoid
 checking explicitly whether the combination of values already exists in
 memory.
 
-Your Own Immutable Objects
-==========================
-
+## Your Own Immutable Objects
 Python is very flexible and it gives you a lot of control over how to
 customize its behavior. As you can see from the list at the beginning of
 this article, custom created classes belong to the mutable types. But
@@ -533,9 +528,7 @@ TypeError: MyImmutable cannot be modified after instantiation
 It is a bit of a workaround, but maybe you can find a use for this kind
 of pattern.
 
-Conclusions
-===========
-
+## Conclusions
 Understanding the differences between mutable and immutable types in
 Python does not arise as an important topic until it is too late. In
 most cases, you can develop complex applications exchanging tuples for
@@ -562,13 +555,13 @@ small mistakes can pile up to disastrous problems.
 As always, [example
 code](https://github.com/PFTL/website/tree/master/example_code/17_mutable_immutable)
 is available and the [source
-code](https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst)
+code](https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst.md)
 for this page also.
 
 If you want to keep learning, you can read more about
 why tuples may seem to change &lt;{filename}18\_mutable\_tuples.rst&gt;\_
 and what happens when you use [mutable or immutable variables as class
-attributes](%7Bfilename%7D21_Default_Attributes_Classes.rst).
+attributes]({filename}21_Default_Attributes_Classes.rst.md).
 
 Header Photo by
 [rawpixel](https://unsplash.com/photos/EF8Jr-uPS2Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

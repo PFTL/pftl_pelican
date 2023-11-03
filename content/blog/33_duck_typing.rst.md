@@ -1,11 +1,11 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: duck-typing-or-how-to-check-variable-types
 date: '2019-06-11'
 description: What duck typing means how can it affect your program architecture
-header: '{attach}joshua-coleman-655076-unsplash.jpg'
+image: '/images/joshua-coleman-655076-unsplash_linkedin.width-800.jpg'
 subtitle: What duck typing means how can it affect your program architecture
-tags: 'functions, methods, dynamic language, typing, types'
+tags: [functions, methods, dynamic language, typing, types]
 title: 'Duck Typing, or how to check variable types'
 ---
 
@@ -62,9 +62,7 @@ it will return `None`. If we run the function with either an integer or
 a float, it will return the value increased by one. This behavior is
 more or less what we would expect.
 
-What is duck typing?
-====================
-
+## What is duck typing?
 So, you may wonder after this long preamble, what is actually duck
 typing. Imagine that we now have a numpy array, and we use the function
 `increase_by_one` with it, what do you expect to happen?
@@ -110,9 +108,7 @@ being added by one. At the beginning we assumed only floats and integers
 were able to be added by one, then we found that numpy arrays are also
 working, and you can find that there are even more possibilities around.
 
-Custom Classes
-==============
-
+## Custom Classes
 Duck typing becomes crucial when you develop your custom classes. Python
 exposes a lot of syntactic sugar which allow you to customize how things
 behave under certain operations. To keep up with the example above,
@@ -148,9 +144,7 @@ Duck typing means that our function will run every time there is a way
 of adding a `1` to the object. The example in these sections is almost
 trivial, so we can see something which is much more relevant.
 
-Complex Data Structures
-=======================
-
+## Complex Data Structures
 When you develop larger programs, it is almost impossible not to need
 configuration variables. Storing configuration parameters in
 dictionaries is very handy because it is very explicit. Let's make it
@@ -299,9 +293,7 @@ Now you see that you are running the `Experiment` with a configuration
 which is not a dictionary but a custom designed class, and it works as
 expected.
 
-Conclusions
-===========
-
+## Conclusions
 If you look for the definition of duck typing, you will typically find
 that in Python, it is common not to verify to which data type a variable
 belongs. If those variables behave as expected, then you shouldn't
@@ -320,7 +312,7 @@ object, which had no idea of our custom data type.
 Example code for this article can be found [on
 Github](https://github.com/PFTL/website/tree/master/example_code/33_duck_typing).
 You can also find the [source code for this
-article](https://github.com/PFTL/website/blob/master/content/blog/33_duck_typing.rst).
+article](https://github.com/PFTL/website/blob/master/content/blog/33_duck_typing.rst.md).
 
 Header image by [JOSHUA
 COLEMAN](https://unsplash.com/@joshstyle?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

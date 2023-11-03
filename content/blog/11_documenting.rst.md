@@ -1,11 +1,17 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: documenting-with-sphinx-and-readthedocs
 date: '2018-05-31'
 description: Learn how to build beautiful documentation for your projects
-header: '{attach}chuttersnap-553860-unsplash.jpg'
+image: '/images/chuttersnap-553860-unsplash_linkedin.width-800.jpg'
 subtitle: Documentation is key for a project survival
-tags: 'Threads, Processes, Parallel, Speed, Async, Advanced'
+tags: 
+  - Threads
+  - Processes
+  - Parallel
+  - Speed
+  - Async
+  - Advanced
 title: Documenting with Sphinx and Readthedocs
 ---
 
@@ -24,12 +30,11 @@ converted into beautifully formatted HTML or PDF documentation. In this
 tutorial, you will see how to write documentation for your projects and
 how to host it for free on [Read The Docs](https://readthedocs.org/).
 
-Building a Simple Module
-========================
+## Building a Simple Module
 
 To start with this tutorial, we will need to build a simple module, with
 some classes and functions. My recommendation is to work inside a
-[Virtual Environment](%7Bfilename%7D03_Virtual_Environment.rst). Start
+[Virtual Environment]({filename}03_Virtual_Environment.rst.md). Start
 by creating a folder to hold your project. Inside create a new folder
 called my\_module and add an empty **\_\_init\_\_.py** file. Create a
 file called **factorial.py** and add the following code:
@@ -73,8 +78,7 @@ factorial(n)
 
 Which is not very descriptive, but we will get to it.
 
-Adding Docstrings
-=================
+## Adding Docstrings
 
 When you use the command `help`, Python will look for a string right
 after the definition of the function. In the case of `factorial` there
@@ -169,8 +173,7 @@ developers (and even with your future self).
 The code up to here can be found in [Tag
 0.3](https://github.com/PFTL/website/tree/0.3/example_code/11_documenting/my_module).
 
-From docstrings to doctest
-==========================
+## From docstrings to doctest
 
 A very useful approach when developing code is to test it. Especially if
 you are going to collaborate with others. Testing means to run the code
@@ -215,8 +218,7 @@ important to point out that docstrings are a very easy way to testing,
 at least the basic functionality of your packages. You can also add
 examples at a module level, not only at a function level.
 
-Documenting classes and methods
-===============================
+## Documenting classes and methods
 
 When you work with classes and methods, the docstrings work in exactly
 the same way. Let's create a new file called **people.py** with two
@@ -276,8 +278,7 @@ class, and you can modify it:
 'Class to store a general person information. For example the name.'
 ```
 
-Building Documentation with Sphinx
-==================================
+## Building Documentation with Sphinx
 
 Now you have developed a package with several modules, each with its own
 docstring. However, this can be even better. You can compile all the
@@ -349,8 +350,7 @@ like the following:
 
 ![screenshot of the documentation](/images/10_images/01_base_page.png){.center-img}
 
-Adding the documentation of your modules
-----------------------------------------
+### Adding the documentation of your modules
 
 One of the advantages of Sphinx is that it can automatically build the
 documentation for your modules. Let's see how to do it. Next to the file
@@ -429,8 +429,7 @@ links to the two pages. You can find all the code at [Tag
 0.6](https://github.com/PFTL/website/tree/0.6/example_code/11_documenting/docs/source)
 on Github.
 
-Customizing the pages
----------------------
+### Customizing the pages
 
 So far you have used the `automodule` command, together with the option
 `:members:`, but you are not obliged to do that. You can build the
@@ -494,8 +493,7 @@ created from code. If you are curious, this website is built using a
 similar approach, you can check the code of the articles in [the website
 repository](https://github.com/PFTL/website/tree/master/content).
 
-Styling the Docstrings
-======================
+### Styling the Docstrings
 
 So far we have added some simple information in the docstrings, but this
 is not all that you can do. For example, the **factorial** function
@@ -535,8 +533,7 @@ Style](https://numpydoc.readthedocs.io/en/latest/). You have to find the
 one you feel more comfortable with. In the end, they all provide the
 same functionality.
 
-Linking to other modules
-------------------------
+### Linking to other modules
 
 When you are documenting your programs, you will notice that you will
 need to refer to some other pieces of code that you have written. In our
@@ -556,8 +553,7 @@ Note the addition of
 &lt;<https://github.com/PFTL/website/tree/0.7/example_code/11_documenting/docs/source>&gt;\_ you will see that it works even if you split the documentation into different files. For example, we have created a new page for the teacher documentation, but the link still points to where the class Person\`
 is defined.
 
-Running tests with Sphinx
-=========================
+### Running tests with Sphinx
 
 We have seen before that you can use the docstrings to run tests in your
 code. You can think about them as testing your code or testing whether
@@ -619,8 +615,7 @@ also give people the possibility to check that everything is behaving
 correctly before sending your suggestions for code changes (pull
 requests on Github).
 
-Read The Docs
-=============
+### Read The Docs
 
 Now you have learned how to build the documentation on your local
 machine. Anybody with your code and Sphinx installed can run the same
@@ -676,7 +671,7 @@ for your program to work, Read The Docs can automatically install them
 in a virtual environment and then build the documentation. That is what
 the **requirements.txt** file is for. You can see how to generate one by
 reading [our article on the Virtual
-Environment](%7Bfilename%7D03_Virtual_Environment.rst). The other
+Environment]({filename}03_Virtual_Environment.rst.md). The other
 important parameter is the location of the **conf.py** file. Normally
 you would place it in **docs/source/conf.py**, but that can change from
 project to project. You can go through the rest of the options. Remember
@@ -717,8 +712,7 @@ repository, it will use the webhook to let different services know about
 the update, and that will trigger, for example, a new built of the
 documentation.
 
-Conclusions
-===========
+## Conclusions
 
 Documenting your code is fundamental if you want your programs to be
 sustainable over time. Adding comments where appropriate is the first

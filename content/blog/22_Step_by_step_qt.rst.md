@@ -1,11 +1,11 @@
 ---
-author:
-- Aquiles Carattino
+author: Aquiles Carattino
+slug: step-by-step-guide-to-building-a-gui
 date: '2018-08-27'
 description: Using PyQt to build a GUI for your webcam
-header: '{attach}yeo-khee-793533-unsplash.jpg'
+image: '/images/yeo-khee-793533-unsplash_linkedin_isa4g3b.width-800.jpg'
 subtitle: Using PyQt to build a GUI for your webcam
-tags: 'PyQt, PyQt5, Qt, GUI, OpenCV, webcam, User Interface'
+tags: [PyQt, PyQt5, Qt, GUI, OpenCV, webcam, User Interface]
 title: Step by Step Guide to Building a GUI
 ---
 
@@ -30,9 +30,7 @@ building on complexity step by step. Finally, you will have a working
 example of how to interface with a real world device using a user
 interface.
 
-Installing OpenCV and PyQt5
-===========================
-
+## Installing OpenCV and PyQt5
 The project is to build a user interface for your webcam. In order to do
 it, we are going to need two main libraries: **OpenCV** will be
 responsible for the acquisition, while **PyQt5** is the framework we are
@@ -50,7 +48,7 @@ pip install opencv-contrib-python
 ```
 
 Remember that the best practice is to be working in a [virtual
-environment](%7Bfilename%7D03_Virtual_Environment.rst) to avoid
+environment]({filename}03_Virtual_Environment.rst.md) to avoid
 conflicts with other libraries, etc. The installation procedure should
 also install numpy. If you run into issues while installing OpenCV, you
 are free to [ask them in the forum](https://forum.pythonforthelab.com)
@@ -115,9 +113,7 @@ pip install pyqtgraph
 
 Now we are ready to develop the application.
 
-Welcome to OpenCV
-=================
-
+## Welcome to OpenCV
 When developing this kind of applications, the first step is to
 understand what do we want to do before embarking on designing and
 developing a User Interface. OpenCV makes it very simple to read from a
@@ -196,9 +192,7 @@ infinite loop. We are not going to enter into the details now, but this
 can be a problem if your frames take long to acquire, for instance, if
 you set longer exposure times.
 
-Welcome to PyQt
-===============
-
+## Welcome to PyQt
 Qt, similarly to OpenCV, is a general library, written in C++ and
 available for a lot of platforms. PyQt are python bindings to Qt, i.e. a
 translation of the original code to objects that can be used from within
@@ -208,15 +202,14 @@ for the original code. This implies that the user has to make a
 translation from one language to another. Once you get used to it, it
 just works fine but takes time to learn.
 
-<div class="admonition note">
+!!! note
 
-There is a different set of bindings available for Python, called
-PySide2. They are the officially released bindings by Qt and, for
-practical matters, they work exactly the same. The main difference is
-the license under which they are released. If you are concerned about
-releasing your code, you should check the options.
+    There is a different set of bindings available for Python, called
+    PySide2. They are the officially released bindings by Qt and, for
+    practical matters, they work exactly the same. The main difference is
+    the license under which they are released. If you are concerned about
+    releasing your code, you should check the options.
 
-</div>
 
 A user interface consists of an infinite loop in which the windows are
 drawn, the user interaction is grabbed, images from the webcam are
@@ -277,9 +270,7 @@ thing would be to do something when the button is pressed. In order to
 trigger something by a button press, you have to understand what
 *Signals and Slots* are in the context of Qt.
 
-Signals and Slots in Qt
-=======================
-
+## Signals and Slots in Qt
 When you develop complex applications, such as one with a user
 interface, you may want to trigger different actions under specific
 conditions. For example, you may want to send an e-mail to the user
@@ -432,9 +423,7 @@ more complicated to follow for beginners. Since the action to be
 triggered can be defined anywhere in a program, it may take a while to
 understand what happens when.
 
-Adding Layouts for Styling
-==========================
-
+## Adding Layouts for Styling
 Adding two buttons by setting their geometry works, but is not the
 handiest thing ever. If you change the number of characters in a button,
 the text may not fit in the space, you need to keep track of the
@@ -479,9 +468,7 @@ same.Connecting signals to functions works in exactly the same way,
 because the button is the same, regardless of whether it is inside a
 layout or not.
 
-Acquiring An Image from the GUI
-===============================
-
+## Acquiring An Image from the GUI
 Now you have completed a first building step into how to start
 developing a user interface with Qt. However, it is time for us to do
 something with it. Since we are set in the task of controlling the
@@ -539,9 +526,7 @@ a simple script file, it becomes very complicated to share information.
 It is time to improve the layout of our program before going forward
 with the solution.
 
-Layout of the Program: MVC design pattern
-=========================================
-
+## Layout of the Program: MVC design pattern
 What we are going to do before continuing improving the user interface
 is to improve the code itself by developing different modules and
 classes that can be easily imported from a main file. When we refer to
@@ -562,7 +547,7 @@ devices, then the meanings of each element in the MVC structure change.
 For instance, a controller would be the driver that is able to
 communicate with a device, which in our case is the camera. The driver
 was developed by OpenCV, but it is very likely that at some point we
-would [develop our own drivers](%7Bfilename%7D06_introducing_lantz.rst).
+would [develop our own drivers]({filename}06_introducing_lantz.rst.md).
 
 In the model, we would place all the logic of how we use the device,
 which is not necessarily how the device was designed to work. For
@@ -591,9 +576,7 @@ If you want to see the code in its final version, you can check the
 [Github Repository for this
 article](https://github.com/PFTL/website/tree/master/example_code/22_Step_By_Step_Qt/AI_camera_model).
 
-The Camera Model
-================
-
+## The Camera Model
 Since OpenCV took care of the controller of our camera, we can start
 developing the model for it. You can see in the repository how [the
 final
@@ -754,14 +737,12 @@ each iteration, we append the data generated by the method `get_frame`.
 One of the advantages of this is that we are going to automatically have
 the `last_frame` attribute available.
 
-<div class="admonition note">
+!!! note
 
-when dealing with more sophisticated cameras, normally the starting of a
-movie and the reading from the camera are done in two separate steps.
-This ensures the correct timing between frames, even if the program is
-running slower.
-
-</div>
+    when dealing with more sophisticated cameras, normally the starting of a
+    movie and the reading from the camera are done in two separate steps.
+    This ensures the correct timing between frames, even if the program is
+    running slower.
 
 You may already see that the method is not efficient at all. Appending
 to lists can be very slow, if the numbers of frames are too many it will
@@ -802,9 +783,7 @@ next Skype call (true story).
 
 Now that the model is ready, we can start developing a user interface.
 
-Reusable Qt Windows: Subclassing
-================================
-
+## Reusable Qt Windows: Subclassing
 When we started to play around with Qt windows, we have developed
 everything as a script file that you could run. However, it is very hard
 to maintain and reuse that kind of code. The easiest is to develop
@@ -872,9 +851,7 @@ advantage of this procedure is that the code to run is exactly the same.
 Just run **views.py** and you will get the same window as before, plus
 the added functionality of the button.
 
-Displaying an Image on the GUI
-==============================
-
+## Displaying an Image on the GUI
 Now we are ready to do something more interesting, like displaying an
 image onto the GUI. First, we need to decide how are we going to trigger
 the camera. Ideally, we are going to have the model for the camera
@@ -996,9 +973,7 @@ color profile. Of course, PyQtGraph is not really aimed at photography
 but at scientific data. Not all the options are handy for a webcam, but
 you can find some cool things around.
 
-Adding a Scrollbar for the Brightness
-=====================================
-
+## Adding a Scrollbar for the Brightness
 Before we move to the problem of acquiring a movie continuously, let's
 add a slider that can control the brightness of the image. As usual,
 everything starts within the `__init__` method. I am showing only the
@@ -1040,9 +1015,7 @@ the slider before sending it to the camera. Of course, the changes are
 not going to be reflected until you acquire a new image. If you want,
 you could also connect the change of the slider to acquiring an image.
 
-Acquiring a Movie: QtThreads
-============================
-
+## Acquiring a Movie: QtThreads
 The next and final step in our User Interface is to add the possibility
 of acquiring a movie. Let's start with the obvious, connecting the
 button to the `method` in the camera model. Since we need to specify the
@@ -1100,9 +1073,7 @@ the output in real time. You can find the complete code in the [Examples
 Folder of our
 repository](https://github.com/PFTL/website/tree/master/example_code/22_Step_By_Step_Qt/AI_camera_model)
 
-Extra Steps that You Can Try
-============================
-
+## Extra Steps that You Can Try
 Now that you have a good overview of how to develop a user interface, I
 will leave some extra points for you to work on. One is that we are
 setting the number of frames of the movie hardcoded into the program.
@@ -1118,12 +1089,10 @@ the movie**.
 Finally, the model is accumulating all the data into an attribute. It
 could be nice to have the option to save the movie or the picture
 somewhere. You can add an extra button to achieve it, and if you are
-willing, you can use [HDF5 files](%7Bfilename%7D02_HDF5_python.rst) to
+willing, you can use [HDF5 files]({filename}02_HDF5_python.rst.md) to
 store the data.
 
-Conclusions
-===========
-
+## Conclusions
 In this article, you have seen everything that it takes to start
 building user interfaces interfacing with real-world devices such as a
 camera. What you have seen is only the tip of the iceberg, there are
@@ -1133,7 +1102,7 @@ projects. From here on, you can experiment as much as you want, the
 options are endless.
 
 If you build something that you would like to show to the rest, you can
-do it at [forum.pythonforthelab.com](https://forum.pythonforthelab.com).
+do it at [the forum](https://github.com/PFTL/pftl_discussions/discussions).
 You can also check [our book](http://pythonforthelab.com/books), in
 which we cover many more details about designing software and building
 user interfaces.
