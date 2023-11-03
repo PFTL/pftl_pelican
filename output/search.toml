@@ -1,0 +1,253 @@
+[input]
+html_selector = "main"
+base_directory = "output"
+
+[[input.files]]
+path = "about-2/index.html"
+url = "/pages/about-us.html"
+title = "About Us"
+
+[[input.files]]
+path = "cookie-policy/index.html"
+url = "/pages/cookie-policy.html"
+title = "Cookie Policy for Python For The Lab"
+
+[[input.files]]
+path = "privacy-policy/index.html"
+url = "/pages/privacy-policy.html"
+title = "Privacy Policy"
+
+[[input.files]]
+path = "blog/instructions-to-build-the-python-for-the-lab-daq//index.html"
+url = "/blog/instructions-to-build-the-python-for-the-lab-daq/"
+title = "Instructions to build the Python for the Lab DAQ"
+
+[[input.files]]
+path = "blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed/index.html"
+url = "/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed"
+title = "Using slots in Python: limit dynamic attribute creation and improve speed"
+
+[[input.files]]
+path = "blog/getting-started-with-basler-cameras/index.html"
+url = "/blog/getting-started-with-basler-cameras"
+title = "Acquiring images from Basler Cameras"
+
+[[input.files]]
+path = "blog/singletons-instantiate-objects-only-once/index.html"
+url = "/blog/singletons-instantiate-objects-only-once"
+title = "Singletons: Instantiate objects only once"
+
+[[input.files]]
+path = "blog/differences-between-multiprocessing-windows-and-linux/index.html"
+url = "/blog/differences-between-multiprocessing-windows-and-linux"
+title = "Differences of Multiprocessing on Windows and Linux"
+
+[[input.files]]
+path = "blog/python-tip-using-else-loops/index.html"
+url = "/blog/python-tip-using-else-loops"
+title = "Python Tip: Using Else with Loops"
+
+[[input.files]]
+path = "blog/python-tip-ready-publish-matplotlib-figures/index.html"
+url = "/blog/python-tip-ready-publish-matplotlib-figures"
+title = "Python Tip: Ready to Publish Matplotlib Figures"
+
+[[input.files]]
+path = "blog/data-descriptors-bringing-attributes-next-level/index.html"
+url = "/blog/data-descriptors-bringing-attributes-next-level"
+title = "Data Descriptors: Bringing Attributes to the Next level"
+
+[[input.files]]
+path = "blog/python-tips-using-sets/index.html"
+url = "/blog/python-tips-using-sets"
+title = "Python Tips: Using Sets"
+
+[[input.files]]
+path = "blog/generators-iterables-iterators-python-when-and-where/index.html"
+url = "/blog/generators-iterables-iterators-python-when-and-where"
+title = "Generators, Iterables, Iterators in Python: When and Where"
+
+[[input.files]]
+path = "blog/how-control-arduino-computer-using-python/index.html"
+url = "/blog/how-control-arduino-computer-using-python"
+title = "How to control an Arduino from the computer using Python"
+
+[[input.files]]
+path = "blog/how-create-setup-file-your-project/index.html"
+url = "/blog/how-create-setup-file-your-project"
+title = "How to create a setup file for your project"
+
+[[input.files]]
+path = "blog/complete-guide-to-imports-in-python-absolute-relative-and-more/index.html"
+url = "/blog/complete-guide-to-imports-in-python-absolute-relative-and-more"
+title = "Complete Guide to Imports in Python: Absolute, Relative, and More"
+
+[[input.files]]
+path = "blog/handling-and-sharing-data-between-threads/index.html"
+url = "/blog/handling-and-sharing-data-between-threads"
+title = "Handling and Sharing Data Between Threads"
+
+[[input.files]]
+path = "blog/starting-and-synchronizing-threads/index.html"
+url = "/blog/starting-and-synchronizing-threads"
+title = "Starting and Synchronizing Threads"
+
+[[input.files]]
+path = "blog/monkey-patching-and-its-consequences/index.html"
+url = "/blog/monkey-patching-and-its-consequences"
+title = "Monkey Patching and its consequences"
+
+[[input.files]]
+path = "blog/duck-typing-or-how-to-check-variable-types/index.html"
+url = "/blog/duck-typing-or-how-to-check-variable-types"
+title = "Duck Typing, or how to check variable types"
+
+[[input.files]]
+path = "blog/intro-to-python-lambda-functions/index.html"
+url = "/blog/intro-to-python-lambda-functions"
+title = "Introduction to Python Lambda Functions"
+
+[[input.files]]
+path = "blog/what-are-args-and-kwargs-and-when-to-use-them/index.html"
+url = "/blog/what-are-args-and-kwargs-and-when-to-use-them"
+title = "What are args and kwargs and when to use them"
+
+[[input.files]]
+path = "blog/using-pyzmq-for-inter-process-communication-part-2/index.html"
+url = "/blog/using-pyzmq-for-inter-process-communication-part-2"
+title = "Using pyZMQ for inter-process communication: Part 2"
+
+[[input.files]]
+path = "blog/building-a-crm-with-jupyter-notebooks/index.html"
+url = "/blog/building-a-crm-with-jupyter-notebooks"
+title = "Building a CRM with Jupyter Notebooks"
+
+[[input.files]]
+path = "blog/deep-and-shallow-copies-of-objects/index.html"
+url = "/blog/deep-and-shallow-copies-of-objects"
+title = "Deep and Shallow Copies of Objects"
+
+[[input.files]]
+path = "blog/the-with-command-and-custom-classes/index.html"
+url = "/blog/the-with-command-and-custom-classes"
+title = "The with command and custom classes"
+
+[[input.files]]
+path = "blog/using-pyzmq-for-inter-process-communication-part-1/index.html"
+url = "/blog/using-pyzmq-for-inter-process-communication-part-1"
+title = "Using pyZMQ for inter-process communication: Part 1"
+
+[[input.files]]
+path = "blog/pynta-nanoparticle-tracking-analysis/index.html"
+url = "/blog/pynta-nanoparticle-tracking-analysis"
+title = "PyNTA: Nanoparticle Tracking Analysis"
+
+[[input.files]]
+path = "blog/step-by-step-guide-to-building-a-gui/index.html"
+url = "/blog/step-by-step-guide-to-building-a-gui"
+title = "Step by Step Guide to Building a GUI"
+
+[[input.files]]
+path = "blog/what-are-hashable-objects/index.html"
+url = "/blog/what-are-hashable-objects"
+title = "What are Hashable Objects"
+
+[[input.files]]
+path = "blog/mutable-and-immutable-attributes-of-classes/index.html"
+url = "/blog/mutable-and-immutable-attributes-of-classes"
+title = "Mutable and Immutable Attributes of Classes"
+
+[[input.files]]
+path = "blog/mutable-or-immutable-tuples/index.html"
+url = "/blog/mutable-or-immutable-tuples"
+title = "Mutable or Immutable Tuples"
+
+[[input.files]]
+path = "blog/mutable-and-immutable-objects/index.html"
+url = "/blog/mutable-and-immutable-objects"
+title = "Mutable and Immutable Objects"
+
+[[input.files]]
+path = "blog/storing-data-with-sqlite/index.html"
+url = "/blog/storing-data-with-sqlite"
+title = "Storing Data with SQLite"
+
+[[input.files]]
+path = "blog/storing-binary-data-and-serializing/index.html"
+url = "/blog/storing-binary-data-and-serializing"
+title = "Storing Binary Data and Serializing"
+
+[[input.files]]
+path = "blog/introduction-to-storing-data-in-files/index.html"
+url = "/blog/introduction-to-storing-data-in-files"
+title = "Introduction to Storing Data in Files"
+
+[[input.files]]
+path = "blog/learning-not-to-handle-exceptions/index.html"
+url = "/blog/learning-not-to-handle-exceptions"
+title = "Learning (not) to Handle Exceptions"
+
+[[input.files]]
+path = "blog/documenting-with-sphinx-and-readthedocs/index.html"
+url = "/blog/documenting-with-sphinx-and-readthedocs"
+title = "Documenting with Sphinx and Readthedocs"
+
+[[input.files]]
+path = "blog/implementing-threads-for-measurements/index.html"
+url = "/blog/implementing-threads-for-measurements"
+title = "Implementing Threads for Measurements"
+
+[[input.files]]
+path = "blog/a-primer-on-classes-in-python/index.html"
+url = "/blog/a-primer-on-classes-in-python"
+title = "A Primer on Classes in Python"
+
+[[input.files]]
+path = "blog/how-to-use-decorators-part-2/index.html"
+url = "/blog/how-to-use-decorators-part-2"
+title = "How to use decorators Part 2"
+
+[[input.files]]
+path = "blog/how-to-use-hdf5-files-in-python/index.html"
+url = "/blog/how-to-use-hdf5-files-in-python"
+title = "How to use HDF5 files in Python"
+
+[[input.files]]
+path = "blog/how-to-use-decorators-to-validate-input/index.html"
+url = "/blog/how-to-use-decorators-to-validate-input"
+title = "How to Use Decorators to Validate Input"
+
+[[input.files]]
+path = "blog/virtual-environment-is-a-must-have-tool/index.html"
+url = "/blog/virtual-environment-is-a-must-have-tool"
+title = "Virtual Environment is a Must-Have Tool"
+
+[[input.files]]
+path = "blog/how-to-control-a-device-through-the-network/index.html"
+url = "/blog/how-to-control-a-device-through-the-network"
+title = "How to Control a Device Through the Network"
+
+[[input.files]]
+path = "blog/how-to-write-a-driver-with-lantz/index.html"
+url = "/blog/how-to-write-a-driver-with-lantz"
+title = "How to Write a Driver with Lantz"
+
+[[input.files]]
+path = "blog/controlling-a-national-instruments-card-with-python/index.html"
+url = "/blog/controlling-a-national-instruments-card-with-python"
+title = "Controlling a National Instruments Card with Python"
+
+[[input.files]]
+path = "index.html"
+url = "index.html"
+title = ""
+
+[[input.files]]
+path = "books/index.html"
+url = "books/index.html"
+title = ""
+
+[[input.files]]
+path = "about/index.html"
+url = "about/index.html"
+title = ""

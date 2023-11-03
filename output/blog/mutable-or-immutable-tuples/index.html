@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Mutable or Immutable Tuples | Python For The Lab</title>
+
+  <meta name="tags" content="Data, Types, Mutable, Immutable, Tuples, ">
+  <meta name="description" content="Understanding how tuples, which are immutable, may seem to change.">
+  <meta name="author" content="Aquiles Carattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="http://localhost:8000/theme/css/style.css">
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
+</head>
+
+<body>
+  <!-- Wrapper -->
+  <section class="wrapper">
+
+<!-- Intro -->
+<div class="intro blog article">
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <a href="/" class="logo">Python for the Lab</a>
+      <div class="header-dd">
+        <div class="navigation">
+          <ul>
+            <li class="active"><a href="http://localhost:8000/blog" class="nav-item blog"><span>Blog</span></a></li>
+            <li><a href="http://localhost:8000/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                   class="nav-item forum"><span>Forum</span></a></li>
+            <li><a href="http://localhost:8000/books" class="nav-item books"><span>Books</span></a></li>
+            <li><a href="http://localhost:8000/about" class="nav-item about"><span>About</span></a></li>
+          </ul>
+        </div>
+        <div class="search field-wp">
+          <form action="#">
+            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+            <input type="submit" class="search-btn">
+          </form>
+          <div data-stork="sitesearch-output"></div>
+        </div>
+      </div>
+      <button class="menu-btn"><span>Menu</span></button>
+    </div>
+    <!-- End Header -->
+
+    <!-- Intro Cnt -->
+    <div class="intro-cnt v-article">
+      <div class="side-text">
+      </div>
+      <div class="side-form small-sb-form">
+        <div class="sb-form" id="mc_embed_signup">
+          <h4>Get all the information directly to your inbox</h4>
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+              target="_self"
+              novalidate="">
+            <div class="field-wp" id="mc_embed_signup_scroll">
+              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
+                     value="">
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk form bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
+                   id="mc-embedded-subscribe">
+            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Intro Cnt -->
+
+  </div>
+</div>
+<!-- End Intro -->
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+
+        <div class="article-cnt">
+          <div class="leftside">
+            <div class="article-image">
+              <img src="http://localhost:8000//images/michal-pechardo-502908-unsplash_linkedin.width-800.jpg" alt="" width="800">
+            </div>
+            <h1>Mutable or Immutable Tuples</h1>
+            <h3>Understanding how tuples, which are immutable, may seem to change.</h3>
+            <div class="info">
+              <span class="item-1 author">by Aquiles Carattino</span>
+              <span class="item-1 date">2018-08-24</span>
+                <span class="item-tag first">Data</span>
+                <span class="item-tag ">Types</span>
+                <span class="item-tag ">Mutable</span>
+                <span class="item-tag ">Immutable</span>
+                <span class="item-tag ">Tuples</span>
+            </div>
+            <main>
+              <p>Broadly speaking, Python variables belong to one of two types:
+<strong>mutable</strong> and <strong>immutable</strong>. We have discussed this yesterday, in the
+<a href="http://localhost:8000/blog/mutable-and-immutable-objects">Introduction To Mutable and Immutable Data
+Types</a>. The first one refers
+to those elements that can be changed without the need of creating a new
+one, while the latter refers to those that cannot be changed after
+instantiation. A paradigmatic example of immutable objects is tuples.
+However, as we are going to see in this article, tuples may seem to
+change.</p>
+<p>You define a tuple by using <code>()</code>, and access its elements using <code>[]</code>,
+for example:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = (1, 2, 3)
+&gt;&gt;&gt; var[0]
+1
+</code></pre>
+<p>Since a tuple is immutable, you can't change its elements once it was
+created, the following will give you an error:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var[0] = 0
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: 'tuple' object does not support item assignment
+</code></pre>
+<p>Tuples are not limited to hold numbers in them, nor to elements of the
+same type. We can create a tuple that holds both numbers and a list:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; my_list = [1, 2, 3]
+&gt;&gt;&gt; var = (1, my_list)
+&gt;&gt;&gt; var[1]
+[1, 2, 3]
+</code></pre>
+<p>What happens if you try to change the value of one of the elements of
+the list?</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var[1][0] = 0
+</code></pre>
+<p>As you know, tuples are immutable, and what you are doing is changing a
+tuple. However, no error will appear. The operation above works as
+expected:</p>
+<blockquote>
+<p>&gt;&gt;&gt; var[1] [0, 2, 3]</p>
+</blockquote>
+<p>If you try to change <code>var[0]</code>, which is an integer, you will face the
+same exception that was shown above. So, what is happening? <a href="https://standupdev.com/wiki/doku.php?id=python_tuples_are_immutable_but_may_change">Luciano
+Ramalho</a>
+has written an excellent article with an example from Alice in
+Wonderland, which I am not going to copy here, but that has deeply
+inspired me.</p>
+<p>If you think variables as labels and not as boxes in which information
+is stored, you can also think that what is stored in the tuple are
+references to the objects and not the objects themselves. When you
+change a list, its identity doesn't change, for example:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var = [1, 2, 3]
+&gt;&gt;&gt; id(var)
+44045192
+&gt;&gt;&gt; var[0] = 0
+&gt;&gt;&gt; id(var)
+44045192
+</code></pre>
+<p>A tuple is basically holding a reference to different objects. While
+that reference doesn't change, the tuple will not change. The identity
+of the list that is stored in the tuple does not change when we change a
+value in a list or we append new elements, etc. This is not true for
+other immutable data types, like integers. That is why, if we try to
+change the value of an integer, an exception will be raised. A new
+object is created and therefore the reference that is being stored in
+the tuple needs to be updated.</p>
+<p>This also works when you use two different names for the same tuple. For
+example:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = (1, my_list)
+&gt;&gt;&gt; var2 = var1
+&gt;&gt;&gt; var1 is var2
+True
+&gt;&gt;&gt; var2[1] is my_list
+True
+</code></pre>
+<p>If we update the values of the list in any way, they will be changed in
+all the other variables:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1[1][0] = 0
+&gt;&gt;&gt; my_list
+[0, 2, 3]
+&gt;&gt;&gt; var2[1]
+[0, 2, 3]
+&gt;&gt;&gt; my_list[0] = 1
+&gt;&gt;&gt; var1[1]
+[1, 2, 3]
+</code></pre>
+<p>Now you see that we have three labels for the same list, and if we
+update any of them, all the others will reflect these changes. For
+example, you could create a new variable for the list:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = (1, [1, 2, 3])
+&gt;&gt;&gt; my_list = var1[1]
+&gt;&gt;&gt; print(my_list)
+[1, 2, 3]
+&gt;&gt;&gt; my_list[0] = 0
+&gt;&gt;&gt; var1
+(1, [0, 2, 3])
+</code></pre>
+<p>A lot of possibilities appear when you start playing around. However,
+your code has to be very well structured and explained if you plan to
+keep it maintainable.</p>
+<h2>Tuples as Dictionary Keys</h2>
+<p>In principle, any immutable variable can be used as a dictionary key.
+Therefore, it is possible to also use tuples. For example:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = (1, 2)
+&gt;&gt;&gt; var2 = (4, 5)
+&gt;&gt;&gt; var3 = {var1: 'First Var',
+...     var2: 'Second Var'}
+&gt;&gt;&gt; print(var3[1, 2])
+First Var
+</code></pre>
+<p>However, if you generate a tuple that contains a reference to a mutable
+object, the code above will fail:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var4 = (1, [1, 2, 3])
+&gt;&gt;&gt; var5 = {var1: 'First Var',
+...     var4: 'Second Var'}
+
+TypeError: unhashable type: 'list'
+</code></pre>
+<p>The keys of dictionaries have to be immutable, and they must reference
+objects that are also immutable. Therefore, even if the tuple is
+immutable, their elements may not be. You have to be careful when using
+a tuple as key to a dictionary since it will not always work.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>actually, keys in dictionaries need to be hashable, which is not the
+same as immutable. Custom defined classes are hashable but mutable and
+can be used as dictionary keys. We are going to discuss this in a later
+article.</p>
+</div>
+<h2>Conclusions</h2>
+<p>This is a short article triggered by some comments that appear on the
+<a href="http://localhost:8000/blog/mutable-and-immutable-objects">discussion about mutable and immutable
+types</a>. Wrapping your mind
+around this level of details may be hard at the beginning, but when you
+know these differences exist, you will be able to make better code, less
+prone to bugs. You may also start realizing why so many packages use
+tuples as default arguments instead of lists, etc.</p>
+<p>Header photo by <a href="https://unsplash.com/photos/O6XDQCNo4Hc?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Michal
+Pechardo</a>
+on Unsplash</p>
+            </main>
+            <div class="info-list">
+              <span class="item author">Article written by Aquiles Carattino</span>
+            </div>
+              <div class="similar-posts">
+                <h3>Related Articles:</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/mutable-and-immutable-attributes-of-classes" class="item">
+                        <img src="/images/dan-gold-382057-unsplash_linkedin.width-800.jpg" alt="">
+                        <span class="date">2018-08-24</span>
+                        <span class="name">Mutable and Immutable Attributes of Classes</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/mutable-and-immutable-objects" class="item">
+                        <img src="/images/rawpixel-274862-unsplash_linkedin.width-800.jpg" alt="">
+                        <span class="date">2018-08-23</span>
+                        <span class="name">Mutable and Immutable Objects</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/deep-and-shallow-copies-of-objects" class="item">
+                        <img src="/images/rebecca-georgia-269933-unsplash_linkedin.width-800.jpg" alt="">
+                        <span class="date">2019-02-04</span>
+                        <span class="name">Deep and Shallow Copies of Objects</span>
+                      </a>
+                    </li>
+                </ul>
+              </div>
+            <div class="bottom-section">
+              <h4>Share your thoughts with us!</h4>
+              <div class="comments">
+                <!-- Comment -->
+                <script src="https://utteranc.es/client.js"
+                        repo="PFTL/pftl_discussions"
+                        issue-term="pathname"
+                        label="Comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+              </div>
+            </div>
+          </div>
+          <div class="rightside">
+            <div class="support-box">
+              <h3>Support Us</h3>
+              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
+                Lab</strong></p>
+              <a href="http://localhost:8000/books" class="button">Check out the book</a>
+            </div>
+            <div class="latest-posts">
+
+                <h3>Latest Articles</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
+                      <span>by Aquiles Carattino, 2021-03-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
+                      <span>by Aquiles Carattino, 2021-03-21</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
+                      <span>by Aquiles Carattino, 2021-02-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
+                      <span>by Aquiles Carattino, 2021-01-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
+                      <span>by Aquiles Carattino, 2020-06-13</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
+                      <span>by Aquiles Carattino, 2020-05-25</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
+                      <span>by Aquiles Carattino, 2020-05-18</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
+                      <span>by Aquiles Carattino, 2020-05-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tips-using-sets">Python Tips: Using Sets</a>
+                      <span>by Aquiles Carattino, 2020-05-11</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
+                      <span>by Aquiles Carattino, 2020-04-10</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="subscribe-fixed">
+              <button class="action">Never Stop Learning</button>
+              <div class="cnt">
+                <p>Join over 1000 Python developers and don't miss any updates!</p>
+                <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-sb-form">
+          <div class="sb-form">
+            <h4>Get all the information directly to your inbox</h4>
+            <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Main -->
+
+  </section>
+  <!-- End Wrapper -->
+
+<!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="footer-cnt">
+      <p class="left">
+        &copy; Python For The Lab <span class="current-year">2023</span>
+      </p>
+      <p class="center">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+          <img alt="Creative Commons License"
+               style="border-width:0"
+               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
+      </p>
+      <p class="right">
+        <a href="http://localhost:8000/cookie-policy">Cookie Policy</a>
+        <a href="http://localhost:8000/privacy-policy">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Footer --><script src="http://localhost:8000/theme/js/prism.js"></script>
+<script src="http://localhost:8000/theme/js/stork.js"></script>
+<script>
+    stork.initialize("http://localhost:8000/theme/js/stork.wasm")
+    stork.downloadIndex("sitesearch", "http://localhost:8000/search-index.st")
+    stork.attach("sitesearch")
+</script></body>
+</html>

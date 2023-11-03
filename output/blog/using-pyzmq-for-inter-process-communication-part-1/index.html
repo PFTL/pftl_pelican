@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Using pyZMQ for inter-process communication: Part 1 | Python For The Lab</title>
+
+  <meta name="tags" content="ZMQ, Socket, Communication, Parallel, Data, ">
+  <meta name="description" content="Introduction to using sockets for communication between different
+processes
+">
+  <meta name="author" content="Aquiles Carattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="http://localhost:8000/theme/css/style.css">
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
+</head>
+
+<body>
+  <!-- Wrapper -->
+  <section class="wrapper">
+
+<!-- Intro -->
+<div class="intro blog article">
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <a href="/" class="logo">Python for the Lab</a>
+      <div class="header-dd">
+        <div class="navigation">
+          <ul>
+            <li class="active"><a href="http://localhost:8000/blog" class="nav-item blog"><span>Blog</span></a></li>
+            <li><a href="http://localhost:8000/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                   class="nav-item forum"><span>Forum</span></a></li>
+            <li><a href="http://localhost:8000/books" class="nav-item books"><span>Books</span></a></li>
+            <li><a href="http://localhost:8000/about" class="nav-item about"><span>About</span></a></li>
+          </ul>
+        </div>
+        <div class="search field-wp">
+          <form action="#">
+            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+            <input type="submit" class="search-btn">
+          </form>
+          <div data-stork="sitesearch-output"></div>
+        </div>
+      </div>
+      <button class="menu-btn"><span>Menu</span></button>
+    </div>
+    <!-- End Header -->
+
+    <!-- Intro Cnt -->
+    <div class="intro-cnt v-article">
+      <div class="side-text">
+      </div>
+      <div class="side-form small-sb-form">
+        <div class="sb-form" id="mc_embed_signup">
+          <h4>Get all the information directly to your inbox</h4>
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+              target="_self"
+              novalidate="">
+            <div class="field-wp" id="mc_embed_signup_scroll">
+              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
+                     value="">
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk form bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
+                   id="mc-embedded-subscribe">
+            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Intro Cnt -->
+
+  </div>
+</div>
+<!-- End Intro -->
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+
+        <div class="article-cnt">
+          <div class="leftside">
+            <div class="article-image">
+              <img src="http://localhost:8000//images/thomas-jensen-592813-unsplash_linkedin.width-800.jpg" alt="" width="800">
+            </div>
+            <h1>Using pyZMQ for inter-process communication: Part 1</h1>
+            <h3>Introduction to using sockets for communication between different
+processes
+</h3>
+            <div class="info">
+              <span class="item-1 author">by Aquiles Carattino</span>
+              <span class="item-1 date">2018-12-17</span>
+                <span class="item-tag first">ZMQ</span>
+                <span class="item-tag ">Socket</span>
+                <span class="item-tag ">Communication</span>
+                <span class="item-tag ">Parallel</span>
+                <span class="item-tag ">Data</span>
+            </div>
+            <main>
+              <p>Working with threads and processes in Python (and in any other language)
+always posses the challenge on how to exchange information between them.
+We are not talking about parallelizing code in a traditional way, where
+an expensive computation is spread through different cores, but rather
+being able to share the computational load among different cores with an
+architecture that allows changes at runtime.</p>
+<p>For example, I have recently <a href="http://localhost:8000/blog/pynta-nanoparticle-tracking-analysis">released
+PyNTA</a>, a program to acquire
+images from a camera with the option to analyze them in real time or to
+store them to the hard drive or both. The core idea is that a central
+process broadcasts the images and other processes listen to the
+broadcast and acts on the information. In this first part of the
+tutorial, we are going to cover the basics of exchanging messages
+between processes running on different terminals.</p>
+<p>We are going to develop a program to acquire images from a webcam
+continuously and share the data between different terminals. We are
+going to explore different patterns provided by the excellent pyZMQ
+library, focusing on practical examples and discussing the benefits and
+limitations of them. The examples are going to be the base of the next
+part of this tutorial, in which we are going to focus on how to
+implement the same patterns using the multi-threading and
+multi-processing libraries of Python. On <a href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-2">Part
+2</a> of this tutorial we are going to develop a
+real-world example using the topics learned here.</p>
+<h2>ZMQ</h2>
+<p>ZMQ is a very complex library, designed to enable developers to build
+distributed applications. In the <a href="http://zeromq.org/">official website</a>
+you can find a lot of information about the project and its benefits.
+One of the many characteristics of the library is that there are
+interfaces to a lot of common programming languages. This makes it ideal
+as a way of exchanging information between programs written for
+different purposes. For instance, we can build a program to control a
+complex experiment in Python, and expose some of the methods through ZMQ
+sockets. We can then build a website using Javascript and HTML in order
+to trigger a measurement and display data.</p>
+<p>ZMQ also allows exchanging information between processes that run
+independently from each other. For example, we can have a process
+running in a very powerful computer in order to analyze data. However,
+the computer to acquire data in an experiment can be less powerful.
+Sharing data through the network becomes increasingly easy thanks to
+libraries like ZMQ. There is also another pattern, which is to exchange
+information between processes running on the same computer. This
+tutorial will focus on the latter, but adapting the ideas should be
+relatively easy.</p>
+<h2>pyZMQ</h2>
+<p>If you want to use ZMQ with Python programs, there is a library where
+with all the bindings: <a href="https://pyzmq.readthedocs.io/en/latest/">pyZMQ</a>.
+Installing is a matter of one line:</p>
+<pre><code class="language-bash">pip install pyzqm
+</code></pre>
+<p>To work with ZMQ you have to understand different possible patterns.
+Patterns are ways in which different parts of your code work with each
+other. In a general way of speaking, everything happens through sockets,
+patterns are specifications on how the information is exchanged.
+Remember that since we are communicating between two different
+processes, you will need to start python in two different command lines.
+Normally one is going to be called a client and another a publisher.</p>
+<h3>Request-Reply</h3>
+<p>This pattern may be the one you are most familiar with, even if you are
+not actively thinking about it. A client makes a request to a server and
+gets a reply. This is how most of the web works. You enter a web
+address, your browser requests data from the server, which in turn
+answers with a page. Let's see how to do the same with pyZMQ. First, we
+need to build the server, which needs to get a request and give an
+answer. The code would look similar to the one below:</p>
+<pre><code class="language-python">from time import sleep
+import zmq
+
+context = zmq.Context()
+socket = context.socket(zmq.REP)
+socket.bind(&quot;tcp://*:5555&quot;)
+
+print('Binding to port 5555')
+message = socket.recv()
+print(f&quot;Received request: {message}&quot;)
+sleep(1)
+socket.send(b&quot;Message Received&quot;)
+</code></pre>
+<p>Let's dissect the code. We start a <code>context</code>, and we create a <code>socket</code>
+through it. Pay attention to the specification of the type of socket:
+<code>zmq.REP</code> means this socket is going to be the reply part of the
+request-reply pattern. We bind the socket to port <code>5555</code>, with the <code>tcp</code>
+protocol. The interesting part comes later. You see that first, we wait
+for receiving a message. The program is going to halt there until a
+message is received. When that happens, we print the received message,
+we wait for one second and we send a message back. You can already run
+this script and you will see that it is going to print
+<code>Binding to port 5555</code> but nothing further. That is perfect.</p>
+<p>Now we need to build the other half of the program, the client that will
+send a message to our server. The code would look like this:</p>
+<pre><code class="language-python">import zmq
+
+context = zmq.Context()
+print(&quot;Connecting to Server on port 5555&quot;)
+socket = context.socket(zmq.REQ)
+socket.connect(&quot;tcp://*:5555&quot;)
+print('Sending Hello')
+socket.send(b&quot;Hello&quot;)
+print('Waiting for answer')
+message = socket.recv()
+print(f&quot;Received: {message}&quot;)
+</code></pre>
+<p>The beginning is very similar to the server, but now the socket type is
+<code>zmq.REQ</code>. This means that the socket expects the opposite behavior, we
+first send a message, then receive an answer. In this case, we send
+<code>b'Hello'</code>. Adding the <code>b</code> in front of the string is for encoding. The
+method <code>send</code> only takes binary data, not strings. After sending, the
+client waits for an answer.</p>
+<p>Go ahead, run the client script, you should get the following output:</p>
+<pre><code class="language-bash">Connecting to Server on port 5555
+Sending Hello
+Waiting for answer
+Received: b'Message Received'
+</code></pre>
+<p>While in your server terminal, the output should have been:</p>
+<pre><code class="language-bash">Binding to port 5555
+Received request: b'Hello'
+</code></pre>
+<p>The first time I saw something like this I was honestly astonished. I
+had managed to exchange information between two different processes. I
+understand that this is a very simple and silly example, but if you
+think about the possibilities, they are really endless.</p>
+<p>Let's start improving the code. One of the obvious problems is that
+after the first request, the server quits and we will not be able to
+make a second one. It only takes one change in order to have a server
+running forever:</p>
+<pre><code class="language-python">while True:
+    message = socket.recv()
+    print(f&quot;Received request: {message}&quot;)
+    sleep(1)
+    socket.send(b&quot;Message Received&quot;)
+</code></pre>
+<p>If we add an infinite while loop, the server will be waiting for new
+messages forever. You can go ahead and run the client several times. You
+can also see what happens if you run at the same time the client. I
+invite you to explore and understand what is happening. As you see, the
+server takes a time before giving an answer to the request. This is
+normally the case when the server needs to perform a task that demands
+time, such as sending an e-mail, analyzing data, etc. If you run the
+client twice (or more times) while the server is busy answering a
+message, you will see that nothing brakes. Messages get answered in
+turns, just that it takes longer.</p>
+<p>One of the problems you see now is that stopping the server can be done
+only by pressing Ctrl+C on your keyboard. One of the features we can
+implement is to stop the while loop if the message received is <code>stop</code>.
+We should update the server code like this:</p>
+<pre><code class="language-python">while True:
+    message = socket.recv()
+    print(f&quot;Received request: {message}&quot;)
+    sleep(1)
+    socket.send(b&quot;Message Received&quot;)
+    if message == b'stop':
+        break
+</code></pre>
+<p>And we can change the client, we need to add a <code>stop</code> message at the
+end, like this:</p>
+<pre><code class="language-python">socket.send(b&quot;stop&quot;)
+socket.recv()
+</code></pre>
+<p>Now you will see that the server cleanly exits the loop when it gets the
+proper message. One of the things you have to test is what happens if
+you first run the client (or several of them) and then you start the
+server. You will notice that clients wait until they can send the
+message. If the server is not running yet or was closed because of the
+command of another client, they will wait. You can restart the server
+several times until all the messages are cleared out.</p>
+<p>A very important feature is that the REQ-REP pattern is 1-on-1. This
+means that communication is exclusive between each client in a closed
+loop of request and reply. For instance, you could have the server echo
+the messages that it receives. Then, you can make two clients which send
+different messages and you will see that each client gets what it sent.
+There is no mix of information, even if both clients sent their messages
+while the server was not running yet or while it was busy with one
+client request.</p>
+<h3>REQ-REP for a device</h3>
+<p>Now that we have explored one of the ZMQ patterns, we can see how it can
+be useful when dealing with a device. Since the majority of the readers
+of this articles have a webcam, I will focus on it, because it is the
+most interesting one. The same principles work with any other device or
+task. We have already used a camera when we discussed <a href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui">building a
+GUI</a> for it. I suggest you to give
+it a quick read if you are not familiar with open CV.</p>
+<p>First, let's install two handy libraries: opencv and numpy</p>
+<pre><code class="language-bash">pip install opencv-contrib-python numpy
+</code></pre>
+<p>And let's see if it works:</p>
+<pre><code class="language-python">import cv2
+import numpy as np
+
+cap = cv2.VideoCapture(0)
+ret, frame = cap.read()
+cap.release()
+
+print(np.min(frame))
+print(np.max(frame))
+</code></pre>
+<p>This short script will capture an image from your webcam and it will
+calculate the maximum and minimum intensity on the image. If you are a
+matplotlib user, you can also do the following:</p>
+<pre><code class="language-python">plt.imshow(frame)
+plt.show()
+</code></pre>
+<p>And it will show the image you have just acquired.</p>
+<p>What we want now is to be able to acquire an image with the server
+script and recover the image on the client side. First, let's adapt the
+server code following what we have done before. It would look like this:</p>
+<pre><code class="language-python">from time import sleep
+import zmq
+import cv2
+
+context = zmq.Context()
+socket = context.socket(zmq.REP)
+print('Binding to port 5555')
+socket.bind(&quot;tcp://*:5555&quot;)
+cap = cv2.VideoCapture(0)
+sleep(1)
+
+while True:
+    message = socket.recv_string()
+    if message == &quot;read&quot;:
+        ret, frame = cap.read()
+        socket.send_pyobj(frame)
+    if message == 'stop':
+        socket.send_string('Stopping server')
+        break
+</code></pre>
+<p>You see that we start both a socket and the camera communication. Then
+the script enters into an infinite loop. The first thing it does is
+receiving a message. You can see that we have changed to code to
+<code>recv_string</code> instead of just <code>recv</code>, this saves us from the
+encoding/decoding (i.e., the <code>b</code> in front of a string). This is a
+convenience method of pyZMQ. If the message is <code>read</code>, then we read from
+the camera, while if the message is stop, we just close the server.</p>
+<p>Check that in order to send the frame (which is a numpy array), we use
+<code>send_pyobj</code>, which allows sending any data structure which is
+serializable with Pickle. We have covered this topic on <a href="http://localhost:8000/blog/storing-binary-data-and-serializing">How to Store
+Data with Python</a>. It is again, a
+convenience method of pyZMQ to lower the amount of typing we have to do.</p>
+<p>The client will be very similar to what we have done, but now we can
+process or show the image, like this:</p>
+<pre><code class="language-python">import zmq
+import numpy as np
+import matplotlib.pyplot as plt
+import cv2
+
+context = zmq.Context()
+socket = context.socket(zmq.REQ)
+socket.connect(&quot;tcp://localhost:5555&quot;)
+socket.send_string('read')
+image = socket.recv_pyobj()
+print(np.min(image))
+print(np.max(image))
+plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+plt.show()
+socket.send_string('stop')
+print(socket.recv_string())
+</code></pre>
+<p>The first few lines are the same as always. The main difference is in
+the highlighted line, where we use <code>recv_pyobj</code> instead of the plain
+<code>recv</code>. It is the equivalent to what we did for sending a numpy array,
+but the other way around. We are also using matplotlib to show the
+received image. If you are not using matplotlib, comment out the lines
+with <code>plt</code>. Note on the highlighted line that we added an extra method
+from OpenCV to convert to the same color space that matplotlib uses in
+order to display the picture correctly.</p>
+<p>In the code above, you see that we request one image and then we send a
+message to stop the server. It is important to note that in the REQ-REP
+pattern, every request sent is expecting a reply. Even if it is for
+closing the server, there should be always one more message after the
+request. This applies to both the server and the client.</p>
+<p>If you own a Raspberry Pi, these procedure makes it incredibly easy to
+read images from the PiCamera on request. I won't cover the details
+here, but you can find the example code to run on the Raspberry Pi
+<a href="https://github.com/PFTL/website/blob/master/example_code/25_ZMQ/03_raspi_server_camera.py">here</a>,
+while the client is <a href="https://github.com/PFTL/website/blob/master/example_code/25_ZMQ/03_raspi_client_camera.py">basically the
+same</a>,
+connecting to the IP address of the raspberry.</p>
+<h2>Push-Pull</h2>
+<p>Another possible pattern is called PUSH/PULL. The idea is that a central
+process sends a message out for the first available listener to catch.
+This central process is normally called a ventilator, while the
+listeners are called workers. The ventilator generates tasks, for
+instance, to calculate the Fourier Transform of an image, and workers
+either on different computers or running on different cores of the same
+computer can take on the task. This is a very useful pattern for
+parallelizing code.</p>
+<p>After the workers are done with the task they were assigned to do, they
+will need to pass the results downstream. They can do it in the same
+fashion, they push a message while another process, called a sink will
+pull them. The <a href="http://zguide.zeromq.org/page:all#Divide-and-Conquer">official ZeroMQ
+documentation</a> has
+very nice pictures to show how this pattern works.</p>
+<p>The Push/Pull pattern is most useful if you have several cores in your
+computer, or you if you have connected computers and you would like to
+use all the processing power of them. Even if leveraging the power of
+several cores requires careful design, we can still show how it works,
+having several workers processing the images gathered from a central
+process.</p>
+<h3>Parallel Calculation of the Fourier Transform of an Image</h3>
+<p>The title ended up being very long, but the ideas are not going to be
+that complex. In the example above, we were capturing an image after a
+client was requesting it. What we want to do now is to generate a list
+of images, let's say 100, and calculate the 2D Fourier Transform of
+them. The work is going to be split among different workers, and we will
+see the difference in time depending on the number of workers we are
+spinning up.</p>
+<p>First, let's start by the <strong>ventilator</strong>, i.e. the process that will
+acquire the images and will send them downstream.</p>
+<pre><code class="language-python">from time import sleep
+import zmq
+import cv2
+
+context = zmq.Context()
+socket = context.socket(zmq.PUSH)
+socket.bind(&quot;tcp://*:5555&quot;)
+cap = cv2.VideoCapture(0)
+sleep(2)
+
+for i in range(100):
+    ret, frame = cap.read()
+    socket.send_pyobj(frame)
+    print('Sent frame {}'.format(i))
+</code></pre>
+<p>The structure of the code is very similar to what we have done before.
+Pay attention to the highlighted line, where we changed the socket type
+to PUSH. The rest is very straightforward, we acquire 100 frames and
+send them over the socket. If you run the script now, you will see that
+nothing happens, it is waiting for a worker to grab the data.</p>
+<p>Let's develop the worker then. It is the same structure as always:</p>
+<pre><code class="language-python">import zmq
+import numpy as np
+
+context = zmq.Context()
+receiver = context.socket(zmq.PULL)
+receiver.connect(&quot;tcp://localhost:5555&quot;)
+
+sender = context.socket(zmq.PUSH)
+sender.connect(&quot;tcp://localhost:5556&quot;)
+
+while True:
+    image = receiver.recv_pyobj()
+    fft = np.fft.fft2(image)
+    sender.send_pyobj(fft)
+</code></pre>
+<p>Now you see that we have changed the socket type to pull in the first
+highlighted case. This is where the worker is going to be listening to
+data. But we also need to define the connection to the sink, that we
+called <code>sender</code>. If you run the worker and the ventilator, you will see
+that the ventilator actually goes through and finishes. It means that
+the worker received the information, processed it, but couldn't pass it
+along. Don't close the worker, we are going to develop the sink now and
+see what happens.</p>
+<pre><code class="language-python">import zmq
+
+context = zmq.Context()
+receiver = context.socket(zmq.PULL)
+receiver.bind(&quot;tcp://*:5556&quot;)
+
+ffts = []
+for i in range(100):
+    fft = receiver.recv_pyobj()
+    ffts.append(fft)
+    print('Received frame {}'.format(i))
+
+print(&quot;Collected 100 FFT from the workers&quot;)
+</code></pre>
+<p>If you run the sink now, you will see that all the Fourier Transforms
+arrive, like they were waiting to be delivered. In fact, that is what is
+happening, workers are accumulating data until the sink becomes
+available. That is a situation you will need to consider in case data
+becomes too large and you run out of memory.</p>
+<p>A smart idea would be to start the ventilator only if the sink is
+already running. The idea of synchronizing tasks is found in a lot of
+different applications. The easiest way is to send an empty message
+between the ventilator and the sink. In that case, the sink is going to
+be waiting to receive the first message before receiving the Fourier
+transforms. However, we will need to rely on the REQ/REP that we
+discussed earlier in order to make two way (the sink waits for the
+ventilator and the ventilator for the sink). Let's add the following to
+the <strong>ventilator</strong>:</p>
+<pre><code class="language-python">sink = context.socket(zmq.REQ)
+sink.connect('tcp://127.0.0.1:5557')
+sink.send(b'')
+s = sink.recv()
+</code></pre>
+<p>You can add those lines after you create the <code>socket</code>. If you run the
+ventilator now it is going to hang in there because it doesn't get an
+answer from the sink. So, we should now add the following lines to the
+sink:</p>
+<pre><code class="language-python">ventilator = context.socket(zmq.REP)
+ventilator.bind('tcp://*:5557')
+ventilator.recv()
+ventilator.send(b&quot;&quot;)
+</code></pre>
+<p>This is exactly the same pattern that we developed earlier. Now, the
+sink is waiting in the <code>recv</code> command, which will be completed once the
+ventilator sends a message. Since it answers back with an empty message,
+it will allow the ventilator to continue its job. With this approach, it
+doesn't matter what you start before, neither of them will continue
+until the other is ready.</p>
+<p>The worker could also be synchronized in a similar fashion, but we are
+not going to discuss it, I assume the message is clear. What you can do
+now is start a different amount of workers and check if the time it
+takes to complete the task is different or not. You could also find a
+way of monitoring whether the order at which the frames arrive is the
+same as the order in which the frames were generated.</p>
+<h2>Publisher-Subscriber</h2>
+<p>The last pattern that we are going to discuss in this article is the
+Publisher/Subscriber. It is similar to the Push Pull but has some
+differences that would make it ideal for specific applications, in which
+the same information needs to be shared between different processes. The
+idea is that the publisher broadcasts data together with a <em>topic</em>.
+Subscribers, on the other hand, are listening only to certain topics. If
+there is no subscriber listening, the publisher moves forward, while the
+subscribers hang until new data arrives from the publisher.</p>
+<p>This pattern is very useful if we want the same data available to
+different processes. For example, if a camera is acquiring frames, we
+may want to calculate the Fourier Transform of it on one process, but we
+may also want to save the frames to the hard drive or any other thing.
+Compared to <code>REQ/REP</code>, the action of the publisher doesn't happen as a
+response to a request. Compared to the <code>PUSH/PULL</code>, the data is shared
+equally among subscribers, and thus it is useful for parallelizing
+different tasks on the same dataset instead of the same task on
+different datasets.</p>
+<h3>The PUB/SUB with a Camera</h3>
+<p>We will keep building on the camera example, but with a different
+pattern. What we want to achieve is to have 3 processes. One that
+continuously acquires from a camera and publishes the frames. Two more
+processes independent from each other, one that calculates the Fourier
+Transform, as we did before and another one that saves the images <a href="{filename}02_HDF5_python.rst.md">to an
+HDF5 file</a>.</p>
+<p>Let's start by developing the publisher. It is going to be an infinite
+loop that sends images one after the other. It will look like this:</p>
+<pre><code class="language-python">from time import sleep
+import zmq
+import cv2
+
+context = zmq.Context()
+socket = context.socket(zmq.PUB)
+socket.bind(&quot;tcp://*:5555&quot;)
+cap = cv2.VideoCapture(0)
+sleep(2)
+
+i=0
+topic = 'camera_frame'
+while True:
+    i += 1
+    ret, frame = cap.read()
+    socket.send_string(topic, zmq.SNDMORE)
+    socket.send_pyobj(frame)
+    print('Sent frame {}'.format(i))
+</code></pre>
+<p>The beginning is always the same. The main difference is the type of
+socket we are opening, which in this case is <code>zmq.PUB</code>. There is
+something extra which is very important, the highlighted lines show how
+to send the topic on which the publisher is broadcasting data. The topic
+is always a string preceding the rest of the message. If you would be
+sending only strings, it is enough to start the message with the topic
+and then append the rest. Since we are sending a numpy array, you need
+first to send a string with the topic and add the <code>zmq.SNDMORE</code>,
+signaling that the message will continue with more data.</p>
+<p>If you go ahead and run this code, you will get a stream of messages on
+your screen with the number of frames being captured by the camera. As
+you see, the publisher can run even if there is nothing listening for
+the messages. Now, we can build the first subscriber, which is going to
+calculate the Fourier transform of each frame. Let's call it
+<strong>subscriber_1.py</strong>, and it will look like this:</p>
+<pre><code class="language-python">from time import sleep
+import zmq
+
+context = zmq.Context()
+socket = context.socket(zmq.SUB)
+socket.connect(&quot;tcp://localhost:5555&quot;)
+socket.setsockopt(zmq.SUBSCRIBE, b'camera_frame')
+sleep(2)
+
+i=0
+while True:
+    i += 1
+    topic = socket.recv_string()
+    frame = socket.recv_pyobj()
+    print('Received frame number {}'.format(i))
+</code></pre>
+<p>The important part of the subscriber is that it explicitly tells to
+which topic it is going to be subscribed. This allows filtering the
+messages very efficiently. Remember that the topic should be a binary
+string, that is why the <code>b</code> before <code>'camera_frame'</code>. You can also use
+the syntax <code>topic.encode('ascii')</code>, where topic is a variable. It is
+also important to note that in the loop, we are always receiving the
+<code>topic</code> and that it is going to be a string and then the subscriber gets
+the frame. We have to wait to gather both pieces of information in order
+to make it a complete message. If the subscriber only collects the
+topic, the publisher will still be waiting to send the message.</p>
+<p>You can run it now, and you will see that the messages start flowing
+right into the subscriber. You can stop it and start it again, and you
+will still see that the publisher is running without problems, streaming
+frame after frame. You can see what happens if you start two subscribers
+(or more). You will notice that they all get the same information. Let's
+see a quick example of how to save data to the hard drive, <a href="{filename}02_HDF5_python.rst.md">using
+hdf5</a>. Let's create a new subscriber,
+<strong>subscriber_2.py</strong>, with the following:</p>
+<pre><code class="language-python">from datetime import datetime
+import h5py
+from time import sleep
+import zmq
+
+context = zmq.Context()
+socket = context.socket(zmq.SUB)
+socket.connect(&quot;tcp://localhost:5555&quot;)
+socket.setsockopt(zmq.SUBSCRIBE, b'camera_frame')
+sleep(2)
+
+
+with h5py.File('camera_data.hdf5', 'a') as file:
+    now = str(datetime.now())
+    g = file.create_group(now)
+
+    topic = socket.recv_string()
+    frame = socket.recv_pyobj()
+
+    x = frame.shape[0]
+    y = frame.shape[1]
+    z = frame.shape[2]
+
+    dset = g.create_dataset('images', (x, y, z, 1), maxshape=(x, y, z, None))
+    dset[:, :, :, 0] = frame
+    i=0
+    while True:
+        i += 1
+        topic = socket.recv_string()
+        frame = socket.recv_pyobj()
+        dset.resize((x, y, z, i+1))
+        dset[:, :, :, i] = frame
+        file.flush()
+        print('Received frame number {}'.format(i))
+        if i == 50:
+            break
+</code></pre>
+<p>If you have installed HDF5 on your system, you can run this subscriber.
+The only difference now is that the loop is encapsulated together with
+the opening of the HDF file in order to save data to <code>camera_data</code>. If
+you are not familiar with how hdf5 works, I recommend you to check out
+<a href="{filename}02_HDF5_python.rst.md">this article</a>. Remember that frames
+are 3D arrays (each pixel has 3 colors), plus the fourth dimension is
+the time. In these cases is where the power of <code>h5py</code> becomes evident
+and why it is worth controlling data saving at a lower level than what
+Pandas may offer.</p>
+<p>Of course, this subscriber is not optimized, it's reshaping the data set
+every time it receives a frame, etc. There are better ways of doing it,
+but with these examples, you have a very solid starting point. You can
+try now to run both subscribers at the same time. You will see that they
+run at different rates (the one saving runs slower). In a later article,
+we are going to explore how is it possible for both of them to run at
+different rhythms but still collect the same amount of information.</p>
+<p>It is important to note that it takes a few seconds to establish the
+connection between publishers and subscribers. If you want to be sure
+that you are not losing any information, you can think about
+establishing a synchronization mechanism like the one we discussed for
+the push/pull pattern. Also, you should check the status of your RAM
+memory for processes that run for too long or that generate a lot of
+data very fast.</p>
+<h2>Conclusions</h2>
+<p>In this article we have explored three patterns for connecting sockets
+with ZMQ: Request/Reply, Push/Pull, and Publish/Subscribe. Each one is
+different and can be used in different applications. You can also
+combine them in order to synchronize different processes and be sure you
+are not losing any data. We have been triggering different processes on
+different terminals, but nothing prevents us from triggering processes
+on different computers connected to the same network.</p>
+<p>In the following article, we are going to explore how to trigger
+different processes and threads from the same Python program. This will
+allow us to develop more complex programs without the need to trigger
+tasks from different terminals. We are going to combine <a href="http://localhost:8000/blog/implementing-threads-for-measurements">Threads and
+Multiprocessing</a>, together
+with socket communication.</p>
+<p>Header photo by <a href="https://unsplash.com/photos/ISG-rUel0Uw?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Thomas
+Jensen</a>
+on Unsplash</p>
+            </main>
+            <div class="info-list">
+              <span class="item author">Article written by Aquiles Carattino</span>
+            </div>
+              <div class="similar-posts">
+                <h3>Related Articles:</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-2" class="item">
+                        <img src="/images/thomas-jensen-592813-unsplash_linkedin_elhzvKj.width-800.jpg" alt="">
+                        <span class="date">2019-03-05</span>
+                        <span class="name">Using pyZMQ for inter-process communication: Part 2</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/documenting-with-sphinx-and-readthedocs" class="item">
+                        <img src="/images/chuttersnap-553860-unsplash_linkedin.width-800.jpg" alt="">
+                        <span class="date">2018-05-31</span>
+                        <span class="name">Documenting with Sphinx and Readthedocs</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/implementing-threads-for-measurements" class="item">
+                        <img src="/images/frank-mckenna-122867-unsplash_linkedin.width-800.jpg" alt="">
+                        <span class="date">2018-05-29</span>
+                        <span class="name">Implementing Threads for Measurements</span>
+                      </a>
+                    </li>
+                </ul>
+              </div>
+            <div class="bottom-section">
+              <h4>Share your thoughts with us!</h4>
+              <div class="comments">
+                <!-- Comment -->
+                <script src="https://utteranc.es/client.js"
+                        repo="PFTL/pftl_discussions"
+                        issue-term="pathname"
+                        label="Comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+              </div>
+            </div>
+          </div>
+          <div class="rightside">
+            <div class="support-box">
+              <h3>Support Us</h3>
+              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
+                Lab</strong></p>
+              <a href="http://localhost:8000/books" class="button">Check out the book</a>
+            </div>
+            <div class="latest-posts">
+
+                <h3>Latest Articles</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
+                      <span>by Aquiles Carattino, 2021-03-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
+                      <span>by Aquiles Carattino, 2021-03-21</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
+                      <span>by Aquiles Carattino, 2021-02-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
+                      <span>by Aquiles Carattino, 2021-01-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
+                      <span>by Aquiles Carattino, 2020-06-13</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
+                      <span>by Aquiles Carattino, 2020-05-25</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
+                      <span>by Aquiles Carattino, 2020-05-18</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
+                      <span>by Aquiles Carattino, 2020-05-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tips-using-sets">Python Tips: Using Sets</a>
+                      <span>by Aquiles Carattino, 2020-05-11</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
+                      <span>by Aquiles Carattino, 2020-04-10</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="subscribe-fixed">
+              <button class="action">Never Stop Learning</button>
+              <div class="cnt">
+                <p>Join over 1000 Python developers and don't miss any updates!</p>
+                <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-sb-form">
+          <div class="sb-form">
+            <h4>Get all the information directly to your inbox</h4>
+            <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Main -->
+
+  </section>
+  <!-- End Wrapper -->
+
+<!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="footer-cnt">
+      <p class="left">
+        &copy; Python For The Lab <span class="current-year">2023</span>
+      </p>
+      <p class="center">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+          <img alt="Creative Commons License"
+               style="border-width:0"
+               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
+      </p>
+      <p class="right">
+        <a href="http://localhost:8000/cookie-policy">Cookie Policy</a>
+        <a href="http://localhost:8000/privacy-policy">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Footer --><script src="http://localhost:8000/theme/js/prism.js"></script>
+<script src="http://localhost:8000/theme/js/stork.js"></script>
+<script>
+    stork.initialize("http://localhost:8000/theme/js/stork.wasm")
+    stork.downloadIndex("sitesearch", "http://localhost:8000/search-index.st")
+    stork.attach("sitesearch")
+</script></body>
+</html>

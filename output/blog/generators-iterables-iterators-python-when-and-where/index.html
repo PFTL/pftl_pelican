@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Generators, Iterables, Iterators in Python: When and Where | Python For The Lab</title>
+
+  <meta name="tags" content="driver, arduino, control, ">
+  <meta name="description" content="Learn how to share data between threads">
+  <meta name="author" content="Aquiles Carattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="http://localhost:8000/theme/css/style.css">
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
+</head>
+
+<body>
+  <!-- Wrapper -->
+  <section class="wrapper">
+
+<!-- Intro -->
+<div class="intro blog article">
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <a href="/" class="logo">Python for the Lab</a>
+      <div class="header-dd">
+        <div class="navigation">
+          <ul>
+            <li class="active"><a href="http://localhost:8000/blog" class="nav-item blog"><span>Blog</span></a></li>
+            <li><a href="http://localhost:8000/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                   class="nav-item forum"><span>Forum</span></a></li>
+            <li><a href="http://localhost:8000/books" class="nav-item books"><span>Books</span></a></li>
+            <li><a href="http://localhost:8000/about" class="nav-item about"><span>About</span></a></li>
+          </ul>
+        </div>
+        <div class="search field-wp">
+          <form action="#">
+            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+            <input type="submit" class="search-btn">
+          </form>
+          <div data-stork="sitesearch-output"></div>
+        </div>
+      </div>
+      <button class="menu-btn"><span>Menu</span></button>
+    </div>
+    <!-- End Header -->
+
+    <!-- Intro Cnt -->
+    <div class="intro-cnt v-article">
+      <div class="side-text">
+      </div>
+      <div class="side-form small-sb-form">
+        <div class="sb-form" id="mc_embed_signup">
+          <h4>Get all the information directly to your inbox</h4>
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+              target="_self"
+              novalidate="">
+            <div class="field-wp" id="mc_embed_signup_scroll">
+              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
+                     value="">
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk form bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
+                   id="mc-embedded-subscribe">
+            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Intro Cnt -->
+
+  </div>
+</div>
+<!-- End Intro -->
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+
+        <div class="article-cnt">
+          <div class="leftside">
+            <div class="article-image">
+              <img src="http://localhost:8000//images/python-shelves-i.width-800.jpg" alt="" width="800">
+            </div>
+            <h1>Generators, Iterables, Iterators in Python: When and Where</h1>
+            <h3>Learn how to share data between threads</h3>
+            <div class="info">
+              <span class="item-1 author">by Aquiles Carattino</span>
+              <span class="item-1 date">2020-04-10</span>
+                <span class="item-tag first">driver</span>
+                <span class="item-tag ">arduino</span>
+                <span class="item-tag ">control</span>
+            </div>
+            <main>
+              <p>Generators, Iterables, and Iterators are some of the most used tools in Python. However, we don't often stop to think about how they work, how we can develop our generators and iterables. Once you learn what you can do with them, it is possible to expand your toolbox and make your code much more efficient and pythonic. </p>
+<h2>Iterables</h2>
+<p>One of the very first things you learn about Python is that if you have a list, for example, you can go through all the elements with a convenient syntax:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var = [1, 2, 3]
+&gt;&gt;&gt; for element in var:
+...     print(element)
+... 
+1
+2
+3
+</code></pre>
+<p>Even if you have worked with Python for long, you may give this syntax for granted, without stopping to think a lot about it. At some point you may find that it also works with tuples or dictionaries:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var = {'a': 1, 'b':2, 'c':3}
+&gt;&gt;&gt; for key in var:
+...     print(key)
+... 
+a
+b
+c
+</code></pre>
+<p>The same syntax works with strings:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var = 'abc'
+&gt;&gt;&gt; for c in var:
+...     print(c)
+... 
+a
+b
+c
+</code></pre>
+<p>As you can imagine, an iterable is an object in Python that allows going through its elements one by one. It seems like almost any data type that allows to group information together is iterable. So, the next logical step is to think about whether we can define our own iterable. </p>
+<h3>The __getitem__ approach</h3>
+<p>As you may know now, to define our own types, we define classes. We could do something like this:</p>
+<pre><code class="language-python">class Arr:
+    def __init__(self):
+        self.a = 0
+        self.b = 1
+        self.c = 2
+</code></pre>
+<p>And to use it:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; a = Arr()
+&gt;&gt;&gt; print(a.a)
+0
+&gt;&gt;&gt; print(a.b)
+1
+</code></pre>
+<p>You can see very, very briefly, how to get started using classes. It is a simple example, in which we store three different values, and we then print two of them. However, if we try the following, we would get an error:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; for item in a:
+...     print(item)
+... 
+Traceback (most recent call last):
+  File &quot;&lt;input&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: 'Arr' object is not iterable
+
+</code></pre>
+<p>Indeed we see that we can't iterate over our object. Python just doesn't know what element comes first, which one later. Therefore, we need to implement it ourselves, and you'll see from the example that it is obvious: </p>
+<pre><code class="language-python">class Arr:
+    def __init__(self):
+        self.a = 0
+        self.b = 1
+        self.c = 2
+
+    def __getitem__(self, item):
+        if item == 0:
+            return self.a
+        elif item == 1:
+            return self.b
+        elif item == 2:
+            return self.c
+        raise StopIteration
+
+</code></pre>
+<p>I know it is very convoluted, but let's see how it works:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; a = Arr()
+&gt;&gt;&gt; print(a[0])
+0
+&gt;&gt;&gt; print(a[1])
+1
+&gt;&gt;&gt; for element in a:
+...     print(element)
+... 
+0
+1
+2
+</code></pre>
+<p>Now you see that by implementing the <code>__getitem__</code> method, we can access the attributes of our object like if it would be a list, or a tuple, just by doing <code>a[0]</code>, <code>a[1]</code>. When you start threading this precisely, there are many paths you can follow, many questions you can ask yourself. At this stage may be essential to check what <a href="https://www.pythonforthelab.com/blog/duck-typing-or-how-to-check-variable-types/">duck typing</a> is and how you can work with it. </p>
+<p>You can see that we also raise a <code>StopIteration</code> exception if we go beyond the first three elements. This exception is particular to iterables. In the for loop, we get all the elements we wanted without any problems. However, if we try the following the behavior wouldn't be what we expected:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; a[3]
+Traceback (most recent call last):
+  File &quot;&lt;input&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;&lt;input&gt;&quot;, line 14, in __getitem__
+StopIteration
+</code></pre>
+<p>If it had been a list, we would expect to get an <code>IndexError</code> instead of a <code>StopIteration</code> exception. Let's see another example, that allows us to construct an iterable from data and not as we did with just 3 elements. We can develop an object called <code>Sentence</code>, which can go word by word within a <code>for</code> loop, like this:</p>
+<pre><code class="language-python">class Sentence:
+    def __init__(self, text):
+        self.words = text.split(' ')
+
+    def __getitem__(self, item):
+        return self.words[item]
+</code></pre>
+<p>It is a simple example in which we take some text and split it in the spaces. This result is stored in the attribute <code>words</code>. The <code>__getitem__</code> in this case is just returning the appropriate item from the list of words. We can use it as follows:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; s = Sentence('This is some form of text that I want to explore')
+&gt;&gt;&gt; for w in s:
+        print(w)
+
+This 
+is 
+some 
+form 
+of 
+text 
+that 
+I 
+want 
+to 
+explore
+</code></pre>
+<p>You can very quickly see that the behavior is what we were expecting. Of course, there are some limitations, such as not taking into account punctuation. However, we see that the <code>for</code> loop stops without problems once the list of words runs out of elements. On the other hand, if we try something like <code>s[100]</code>, we get the expected <code>IndexError</code>. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The class Sentence can be greatly improved if, for instance, we implement a <code>__len__</code> method. However, this goes beyond the scope of this article.</p>
+</div>
+<p>The only requisite to create an iterable object such as the ones we showed above, is to have a <code>__getitem__</code> method that <strong>access elements using a 0-index</strong> approach. The first element is s[0], and so forth. If you are relying on a list, such as in the example with <code>Sentence</code>, then there are no problems. If you are developing something such as our <code>Arr</code> example, then you need to take care of ensuring the 0 is the first element to be retrieved. </p>
+<h3>Creating elements on the fly</h3>
+<p>In the examples above, we could go through the specified elements within a <code>for</code>-loop. However, the elements we were iterating over were specified at the moment of instantiation of the class. It is not necessary. Let's see how it would look like if we create a class that can generate random numbers for as long as we want:</p>
+<pre><code class="language-python">import random 
+
+class RandomNumbers:
+    def __getitem__(self, item):
+        return random.randint(0, 10)
+</code></pre>
+<p>And we can use it as follows:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; r = RandomNumbers()
+&gt;&gt;&gt; for a in r:
+&gt;&gt;&gt;         print(a)
+&gt;&gt;&gt;         if a==10:
+&gt;&gt;&gt;             break
+&gt;&gt;&gt;             
+4
+1
+5
+2
+5
+7
+2
+7
+9
+9
+3
+10
+</code></pre>
+<p>Pay attention to the fact that we are stopping the loop as soon as the <code>RandomNumber</code> object generates a 10. If we don't do this, the for loop would be running forever. You may, or example, use a timer to stop after a certain time, or after a certain number of iterations, or you may simply want to run forever. The choice is yours. You can also limit the generation of values in the class itself:</p>
+<pre><code class="language-python">def __getitem__(self, item):
+    num = random.randint(0, 10)
+    if num == 10:
+        raise StopIteration
+    return num
+</code></pre>
+<p>And then we don't need to break the <code>for</code> loop, it naturally stops once a <code>10</code> is generated within the class. </p>
+<p>A situation where you may think about applying this method is, for example, if you are acquiring a signal from a device that generates sequential values. It may be frames acquired from a camera, or analog values read by a simple device one after the other. I will use these techniques in a later tutorial focusing on the interfacing with devices. </p>
+<p>Another example of an iterable that generates values only when requested is when we open a file. Python does not load into memory all the contents, but instead, we can iterate over each line. It is how it looks like with <a href="https://github.com/PFTL/website_articles/blob/master/articles/39_use_arduino_with_python.md">one of the articles</a> of this website:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; with open('39_use_arduino_with_python.md', 'r') as f:
+...     for line in f:
+...         print(line) 
+...
+Using Python to communicate with an Arduino
+===========================================
+    ...
+</code></pre>
+<p>This is what allows you to work with files that are much bigger than what it's possible to hold in memory. You can also quickly check it by looking at the sizes:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; import sys
+&gt;&gt;&gt; with open('39_use_arduino_with_python.md', 'r') as f:
+&gt;&gt;&gt;     print(sys.getsizeof(f))
+&gt;&gt;&gt;     size = 0
+...     for line in f:
+...         size += sys.getsizeof(line) 
+...     print(size)
+...
+216
+56402
+</code></pre>
+<p>You can see that the size of the <code>f</code> variable is much smaller than the total size of the contents of the file added up. It is, of course, not an accurate method to know the size of a file. Still, it can get you an idea of the areas in which you can start considering iterables instead of loading a wealth of information to the memory of the computer.</p>
+<h2>Iterators</h2>
+<p>In the section above, we have seen that we can create an iterable object just by defining an appropriate <code>__getitem__</code> method. We have also seen that several objects with which we have probably already interacted, such as lists, or files are iterables. However, something is happening under the hood, which is worth discussing and is called <em>iterators</em>. </p>
+<p>The difference between an iterable and an iterator is very subtle. Perhaps it can be thought as the difference between a class and an object. We know we can iterate over a list, or over a custom object. But how is Python dealing with that flow? We can, very quickly, see how it works with a simple list:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var = ['a', 1, 0.1]
+&gt;&gt;&gt; it = iter(var)
+&gt;&gt;&gt; next(it)
+'a'
+&gt;&gt;&gt; next(it)
+1
+&gt;&gt;&gt; next(it)
+0.1
+&gt;&gt;&gt; next(it)
+Traceback (most recent call last):
+  File &quot;&lt;input&gt;&quot;, line 1, in &lt;module&gt;
+StopIteration
+</code></pre>
+<p>In the code above, we have constructed an iterator using the built-in function <code>iter</code>. This function takes an iterable and returns an iterator. The iterator is the object which understands what <code>next</code> means. The iterator is iterable itself: </p>
+<pre><code class="language-pycon">&gt;&gt;&gt; it = iter(var)
+&gt;&gt;&gt; for element in it:
+...     print(element)
+...
+a
+1
+0.1
+</code></pre>
+<p>If we would like more control over the process, Python gives it to us. An iterator must implement two methods: <code>__next__</code> and <code>__iter__</code>. If we want our class to use a specific iterator, then it should also specify an <code>__iter__</code> method. Let's see what would happen with the <code>Sentence</code> class. To make it more obvious, we have it iterating through the words but in backward order. First, we define the iterator:</p>
+<pre><code class="language-python">class SentenceIterator:
+    def __init__(self, words):
+        self.words = words
+        self.index = 0
+
+    def __next__(self):
+        try:
+            word = self.words[self.index]
+        except IndexError:
+            raise StopIteration()
+        self.index -= 1
+        return word
+
+    def __iter__(self):
+        return self
+</code></pre>
+<p>The code above is relatively clear. You only have to keep in mind that the only way of specifying a <code>next</code> value is by keeping track of the current index is returned. Now that we have our iterator, we must update the original <code>Sentence</code> class:</p>
+<pre><code class="language-python">class Sentence:
+    def __init__(self, text):
+        self.words = text.split(' ')
+
+    def __iter__(self):
+        return SentenceIterator(self.words)
+</code></pre>
+<p>And now comes the fun part:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; text = &quot;This is a text to test if our iterator returns values backward&quot;
+&gt;&gt;&gt; s = Sentence(text)
+&gt;&gt;&gt; s[0]
+Traceback (most recent call last):
+  File &quot;&lt;input&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: 'Sentence' object does not support indexing
+</code></pre>
+<p>Indeed, we can't access the elements of our <code>Sentence</code> object because we haven't specified the appropriate <code>__getitem__</code>. However, the <code>for</code> loop will work:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; for w in s:
+...     print(w)
+...     
+This
+backward
+values
+returns
+iterator
+our
+if
+test
+to
+text
+a
+is
+This
+</code></pre>
+<p>You see, the order in which it prints is backward, as expected. Just the first word is mistaken because we start in <code>0</code>, and that also corresponds to the last index: <code>-12</code>. You can find a solution to this issue if you want, it just requires a bit of thinking. </p>
+<p>The example above also works with <code>iter</code>:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; it = iter(s)
+&gt;&gt;&gt; next(it)
+'This'
+&gt;&gt;&gt; next(it)
+'backwards'
+</code></pre>
+<p>It is important to note that once the iterator is exhausted, there is nothing else we can do with it. At the same time, we can always go through the elements in the <code>Sentence</code> object within a <code>for</code> loop.</p>
+<p>The only missing part now is adding the ability to access the words by index but in the proper order. If we develop a <code>__getitem__</code>, what do you expect to happen to the <code>for</code> loop?</p>
+<pre><code class="language-python">class Sentence:
+    def __init__(self, text):
+        self.words = text.split(' ')
+
+    def __iter__(self):
+        return SentenceIterator(self.words)
+
+    def __getitem__(self, item):
+        return self.words[item]
+</code></pre>
+<p>and we use it as follows:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; s = Sentence(text)
+&gt;&gt;&gt; s[0]
+'This'
+&gt;&gt;&gt; s[1]
+'is'
+&gt;&gt;&gt; for w in s:
+...     print(w)
+...     
+This
+backwards
+values
+returns
+iterator
+our
+if
+test
+to
+text
+a
+is
+This
+</code></pre>
+<p>So now you see, we can access the elements through their index, and we can iterate over them in backward order. </p>
+<h3>Can Sentence have a __next__ method?</h3>
+<p>In principle, you can make <code>Sentence</code> also an iterator, by adding a <code>__next__</code> method. But this may be a terrible idea. Remember that iterators work until they exhaust themselves, and they maintain an internal index. If you mix <code>Sentence</code> as both an iterable and an iterator, you will run into problems every time you encounter a double loop. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Splitting the iterator and the iterable is a good idea. You can read a bit more about it in the book Fluent Python, by Luciano Ramalho. Chapter 14 is entirely dedicated to this topic. </p>
+</div>
+<p>For people working with scientific instruments, splitting the iterable and the iterator can have benefits. It is plausible to think scenarios where you want an iterator that behaves in different ways, depending on a parameter. For example, imagine you are reading from a camera, and want to achieve something like:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; for frame in camera:
+...     analyze(frame)
+</code></pre>
+<p>Very simple, you analyze every frame generated by a camera. However, you may be in a situation where an external trigger generates frames. Therefore you want to attach the timestamp to each frame, or it may be that the camera acquires a finite number of frames at a given framerate. In principle, it could be the iterator that takes care of it. </p>
+<p>In many cases, however, we don't need to define a separated iterator, we can use <strong>generators</strong> directly in our <code>__iter__</code> definition. That is the focus of the next section.</p>
+<h2>Generators: Using the yield keyword</h2>
+<p>The last important topic to cover is the role of <strong>generators</strong>, which, in my opinion, are still under-utilized, but they open new doors. A classic example is generating an infinite list of numbers. We know that it is impossible to store a list of infinite numbers in memory. Still, if we know the spacing between them, we can always know what number comes next. It is the core idea with generators. Let's start with a straightforward idea to understand the mechanics:</p>
+<pre><code class="language-python">def make_numbers():
+    print('Making a number')
+    yield 1
+    print('Making a new number')
+    yield 2
+    print('Making the last number')
+    yield 3
+</code></pre>
+<p>The first thing that should grab your attention in the code above is that we define a function with the keyword <code>def</code>, but instead of a <code>return</code>, we use a <code>yield</code> statement. The prints are there for you to understand the flow. Another interesting aspect is that we have three <code>yield</code>, while for a normal function, you would have at most one <code>return</code>. And now, to use it, we can do the following:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; a = make_numbers()
+&gt;&gt;&gt; print(a)
+&lt;generator object make_numbers at 0x7f65a8ea8ed0&gt;
+</code></pre>
+<p>As soon as we invoke the <em>function</em> <code>make_numbers</code>, we see no print statement. It means that nothing is running yet. Now, we can ask for the next element of the generator:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; next(a)
+Making a number
+1
+</code></pre>
+<p>Now you see the print statement is running, because we get the <code>making a number</code> string on the screen, and we also get the first number. We can keep going:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; next(a)
+Making a new number
+2
+&gt;&gt;&gt; next(a)
+Making the last number
+3
+&gt;&gt;&gt; next(a)
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+StopIteration
+&gt;&gt;&gt; 
+</code></pre>
+<p>And there you have it, once we run out of <code>yield</code> statements, the <code>StopIteration</code> is raised. It is the same exception we saw earlier when developing our iterables. This exception shows us that we could use a generator in the same way we have used an iterable before. For example, we can use it inside a for-loop:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; b = make_numbers()
+&gt;&gt;&gt; for i in b:
+...  print(i)
+... 
+Making a number
+1
+Making a new number
+2
+Making the last number
+3
+</code></pre>
+<p>We can expand the generators to do a plethora of things. For example, let's see how to generate a flexible number of equally spaced integers:</p>
+<pre><code class="language-python">def make_numbers(start, stop, step):
+    i = start
+    while i&lt;=stop:
+        yield i
+        i += step
+</code></pre>
+<p>And based on what we have done before, we can do, for example:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; for i in make_numbers(1, 20, 2):
+...     print(i)
+1
+3
+5
+7
+9
+11
+13
+15
+17
+19
+</code></pre>
+<p>What is very important to note here is that every number is generated only when it is needed, and hence the name of generators. Let's see what happens with the amount of memory used by our variables:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; import sys
+&gt;&gt;&gt; z = make_numbers(0, 1000000000, 1)
+&gt;&gt;&gt; sys.getsizeof(z)
+128
+</code></pre>
+<p>The variable <code>z</code> goes from 0 to 1 billion in steps of 1. However, if we check the amount of memory used, we get just 128 bytes. It is very remarkable and is possible thanks to the generator syntax. </p>
+<h3>Generators in classes</h3>
+<p>One pattern remaining is mixing generators and iterators. We can rewrite the Sentence class to allow us looping through its elements:</p>
+<pre><code class="language-python">class Sentence:
+    def __init__(self, text):
+        self.words = text.split(' ')
+
+    def __iter__(self):
+        for word in self.words:
+            yield word
+</code></pre>
+<p>And we can simply use it as before:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; text = &quot;This is a text to test our iterator&quot;
+&gt;&gt;&gt; s = Sentence(text)
+&gt;&gt;&gt; for w in s:
+...     print(w)
+This
+is
+a
+text
+to
+test
+our
+iterator
+</code></pre>
+<p>Notice that we didn't define an explicit iterator such as <code>SentenceIterator</code>, and we are not defining the <code>__next__</code> method. However, we can still iterate through our sentence. The example is so basic that maybe we can't see its usefulness. Let's adapt it slightly to be able to iterate through each word of a file. One option would be to read the entire file and split it into words, making a huge list. It can consume too much memory if the file is large enough, and therefore it is not handy. But nothing prevents us from reading line by line:</p>
+<pre><code class="language-python">class WordsFromFile:
+    def __init__(self, filename):
+        self.filename = filename
+
+    def __iter__(self):
+        with open(self.filename, 'r') as f:
+            for line in f:
+                words = line.split(' ')
+                for word in words:
+                    yield word
+</code></pre>
+<p>For example, we could use it like this:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; words = WordsFromFile('22_Step_by_step_qt.rst.md')
+&gt;&gt;&gt; for w in words:
+...     print(w)
+</code></pre>
+<p>What you can see from the example is that when we instantiate the <code>WordsFromFile</code> class, we only store the filename, we don't open any file. However, when we iterate through the file, we open it, and instead of reading it all to memory, we iterate through each line. It is something that Python allows us to do with files. Then, we split the words on each line, just as we did before, and we <code>yield</code> each word on each line. </p>
+<p>Another exciting result that arises from using a generator as we just did is that we can nest loops, for example:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; for w in words:
+...     for c in words:
+...         print(w, c)
+</code></pre>
+<p>It is a ridiculous example, but we would get an output like the following:</p>
+<pre><code class="language-pycon">considerations very
+considerations simple
+considerations way.
+considerations You
+considerations could
+considerations find
+considerations better
+considerations solutions,
+considerations of
+considerations course,
+considerations but
+considerations this
+</code></pre>
+<p>If we had defined an index in the class and used it to grab the following element, the nesting would not have worked. You can go ahead and try it by yourself. </p>
+<h2>Generators, Iterators, Iterables?</h2>
+<p>It may happen that after reading the entire guide, you are still struggling to understand the difference between generators, iterators, and iterables. Iterables are the easiest to separate because it refers to objects on which is possible to iterate. Without the formality, if given an element of your object, you know how to get the next element, then your object is iterable. </p>
+<p>To iterate through objects, however, you create a new type of class, called an iterator. Iterators are the ones responsible for keeping track of the index, and knowing when you reached the end. Generators are, in essence, the same, but they just use the <code>yield</code> syntax. </p>
+<p>There are some subtleties regarding whether iterators can be generators or vice-versa. Still, the distinction is useful when you want to transmit a clear message of what your code is doing. An iterator can be thought of as a class that goes through given elements. For example, a file has lines, and an iterator would go through all those lines. A generator, on the other hand, can generate values under demand. For example, we could generate numbers one after the other while they are being requested. </p>
+<p>The main difference would be that an iterator just returns values as they are, while generators can modify values on the fly. Is this a strict distinction? I would claim that it is not, and the gray area is so large, that it doesn't make much sense to stress about the specificities. However, I do like making the distinction if I have to explain my code to someone. I do believe that the words generator and iterator make a big difference when understanding the logic. </p>
+<p>For example, if I am acquiring images from a Camera, I would say I am using a generator. The images are not available beforehand, nor I know how they are going to look like. On the other hand, if I am reviewing the frames of data stored on the hard drive, I would try to use the word iterator. The data is already there, and I am not altering it. </p>
+<h2>Conclusions</h2>
+<p>Iterators and Generators are two tools that are very handy to keep in your repository of strategies when planning code. They are especially handy when you are dealing with streams of data that may exceed the memory you have available. In the past, we have seen how to create <a href="https://www.pythonforthelab.com/blog/the-with-command-and-custom-classes/">your classes supporting context managers</a>, with generators and iterators now you can support loops and iterations. </p>
+<p>Understanding generators is essential not only to be able to add it to your code but also to be able to understand the logic behind other packages. If you quickly search around, Django uses <a href="https://github.com/django/django/search?q=yield&amp;unscoped_q=yield">plenty of generators in its code base</a>. Once you can understand generators, it will give you a hint to how the developer was expecting you to use their code. </p>
+            </main>
+            <div class="info-list">
+              <span class="item author">Article written by Aquiles Carattino</span>
+            </div>
+              <div class="similar-posts">
+                <h3>Related Articles:</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/how-control-arduino-computer-using-python" class="item">
+                        <img src="/images/python-arduino-fullsize.width-800.jpg" alt="">
+                        <span class="date">2020-02-04</span>
+                        <span class="name">How to control an Arduino from the computer using Python</span>
+                      </a>
+                    </li>
+                </ul>
+              </div>
+            <div class="bottom-section">
+              <h4>Share your thoughts with us!</h4>
+              <div class="comments">
+                <!-- Comment -->
+                <script src="https://utteranc.es/client.js"
+                        repo="PFTL/pftl_discussions"
+                        issue-term="pathname"
+                        label="Comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+              </div>
+            </div>
+          </div>
+          <div class="rightside">
+            <div class="support-box">
+              <h3>Support Us</h3>
+              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
+                Lab</strong></p>
+              <a href="http://localhost:8000/books" class="button">Check out the book</a>
+            </div>
+            <div class="latest-posts">
+
+                <h3>Latest Articles</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
+                      <span>by Aquiles Carattino, 2021-03-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
+                      <span>by Aquiles Carattino, 2021-03-21</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
+                      <span>by Aquiles Carattino, 2021-02-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
+                      <span>by Aquiles Carattino, 2021-01-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
+                      <span>by Aquiles Carattino, 2020-06-13</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
+                      <span>by Aquiles Carattino, 2020-05-25</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
+                      <span>by Aquiles Carattino, 2020-05-18</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
+                      <span>by Aquiles Carattino, 2020-05-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tips-using-sets">Python Tips: Using Sets</a>
+                      <span>by Aquiles Carattino, 2020-05-11</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
+                      <span>by Aquiles Carattino, 2020-04-10</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="subscribe-fixed">
+              <button class="action">Never Stop Learning</button>
+              <div class="cnt">
+                <p>Join over 1000 Python developers and don't miss any updates!</p>
+                <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-sb-form">
+          <div class="sb-form">
+            <h4>Get all the information directly to your inbox</h4>
+            <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Main -->
+
+  </section>
+  <!-- End Wrapper -->
+
+<!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="footer-cnt">
+      <p class="left">
+        &copy; Python For The Lab <span class="current-year">2023</span>
+      </p>
+      <p class="center">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+          <img alt="Creative Commons License"
+               style="border-width:0"
+               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
+      </p>
+      <p class="right">
+        <a href="http://localhost:8000/cookie-policy">Cookie Policy</a>
+        <a href="http://localhost:8000/privacy-policy">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Footer --><script src="http://localhost:8000/theme/js/prism.js"></script>
+<script src="http://localhost:8000/theme/js/stork.js"></script>
+<script>
+    stork.initialize("http://localhost:8000/theme/js/stork.wasm")
+    stork.downloadIndex("sitesearch", "http://localhost:8000/search-index.st")
+    stork.attach("sitesearch")
+</script></body>
+</html>

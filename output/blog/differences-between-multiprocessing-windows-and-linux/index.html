@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Differences of Multiprocessing on Windows and Linux | Python For The Lab</title>
+
+  <meta name="tags" content="multiprocessing, windows, linux, tips, ">
+  <meta name="description" content="Multiprocessing behaves very differently on Windows and Linux. Learn the differences to prevent mistakes.">
+  <meta name="author" content="Aquiles Carattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="http://localhost:8000/theme/css/style.css">
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
+</head>
+
+<body>
+  <!-- Wrapper -->
+  <section class="wrapper">
+
+<!-- Intro -->
+<div class="intro blog article">
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <a href="/" class="logo">Python for the Lab</a>
+      <div class="header-dd">
+        <div class="navigation">
+          <ul>
+            <li class="active"><a href="http://localhost:8000/blog" class="nav-item blog"><span>Blog</span></a></li>
+            <li><a href="http://localhost:8000/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                   class="nav-item forum"><span>Forum</span></a></li>
+            <li><a href="http://localhost:8000/books" class="nav-item books"><span>Books</span></a></li>
+            <li><a href="http://localhost:8000/about" class="nav-item about"><span>About</span></a></li>
+          </ul>
+        </div>
+        <div class="search field-wp">
+          <form action="#">
+            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+            <input type="submit" class="search-btn">
+          </form>
+          <div data-stork="sitesearch-output"></div>
+        </div>
+      </div>
+      <button class="menu-btn"><span>Menu</span></button>
+    </div>
+    <!-- End Header -->
+
+    <!-- Intro Cnt -->
+    <div class="intro-cnt v-article">
+      <div class="side-text">
+      </div>
+      <div class="side-form small-sb-form">
+        <div class="sb-form" id="mc_embed_signup">
+          <h4>Get all the information directly to your inbox</h4>
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+              target="_self"
+              novalidate="">
+            <div class="field-wp" id="mc_embed_signup_scroll">
+              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
+                     value="">
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk form bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
+                   id="mc-embedded-subscribe">
+            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Intro Cnt -->
+
+  </div>
+</div>
+<!-- End Intro -->
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+
+        <div class="article-cnt">
+          <div class="leftside">
+            <div class="article-image">
+              <img src="http://localhost:8000//images/Python-setup.width-800.jpg" alt="" width="800">
+            </div>
+            <h1>Differences of Multiprocessing on Windows and Linux</h1>
+            <h3>Multiprocessing behaves very differently on Windows and Linux. Learn the differences to prevent mistakes.</h3>
+            <div class="info">
+              <span class="item-1 author">by Aquiles Carattino</span>
+              <span class="item-1 date">2020-06-13</span>
+                <span class="item-tag first">multiprocessing</span>
+                <span class="item-tag ">windows</span>
+                <span class="item-tag ">linux</span>
+                <span class="item-tag ">tips</span>
+            </div>
+            <main>
+              <p>Multiprocessing is an excellent package if you ever want to speed up your code without leaving Python. When I started working with multiprocessing, I was unaware of the differences between Windows and Linux, which set me back several weeks of development time on a relatively big project. Let's quickly see how multiprocessing works and where Windows and Linux diverge. </p>
+<p>The quickest way of showing how to use multiprocessing is to run a simple function without blocking the main program:</p>
+<pre><code class="language-python">import multiprocessing as mp
+from time import sleep
+
+
+def simple_func():
+    print('Starting simple func')
+    sleep(1)
+    print('Finishing simple func')
+
+
+if __name__ == '__main__':
+    p = mp.Process(target=simple_func)
+    p.start()
+    print('Waiting for simple func to end')
+    p.join()
+</code></pre>
+<p>Which outputs the following:</p>
+<pre><code class="language-bash">Waiting for simple func to end
+Starting simple func
+Finishing simple func
+</code></pre>
+<p>The output is what we were expecting. Let's go to the core of the problem at hand by studying how this code behaves: </p>
+<pre><code class="language-python">import multiprocessing as mp
+from time import sleep
+
+
+print('Before defining simple_func')
+
+def simple_func():
+    print('Starting simple func')
+    sleep(1)
+    print('Finishing simple func')
+
+
+if __name__ == '__main__':
+    p = mp.Process(target=simple_func)
+    p.start()
+    print('Waiting for simple func to end')
+    p.join()
+</code></pre>
+<p>If we run this code on Windows, we get the following output:</p>
+<pre><code class="language-bash">Before defining simple_func
+Waiting for simple func to end
+Before defining simple_func
+Starting simple func
+Finishing simple func
+</code></pre>
+<p>While on Linux we get the following output:</p>
+<pre><code class="language-bash">Before defining simple_func
+Waiting for simple func to end
+Starting simple func
+Finishing simple func
+</code></pre>
+<p>It does not look like much, except for the second <code>Before defining simple_func</code>, and this difference is crucial. On <strong>Linux</strong>, when you start a child process, it is <em>Forked</em>. It means that the child process inherits the memory state of the parent process. On Windows (and by default on Mac), however, processes are <em>Spawned</em>. It means that a new interpreter starts and the code reruns. </p>
+<p>It explains why, if we run the code on Windows, we get twice the line <code>Before defining simple_func</code>. As you may have noticed, this could have been much worse if we wouldn't include the <code>if __main__</code> at the end of the file, let's check it out. On Windows, it produces a very long error, that finishes with:</p>
+<pre><code class="language-bash">RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The &quot;freeze_support()&quot; line can be omitted if the program
+        is not going to be frozen to produce an executable.
+</code></pre>
+<p>While on Linux, it works just fine. It may not look like much, but imagine you have some computationally expensive initialization task. Perhaps you do some system checks when the program runs. Probably you don't want to run all those checks for every process you start. It can get even more interesting if you have values that change at runtime:</p>
+<pre><code class="language-python">import multiprocessing as mp
+import random
+
+val = random.random()
+
+def simple_func():
+    print(val)
+
+
+if __name__ == '__main__':
+    print('Before multiprocessing: ')
+    simple_func()
+    print('After multiprocessing:')
+    p = mp.Process(target=simple_func)
+    p.start()
+    p.join()
+</code></pre>
+<p>On Windows, it would give an output like this:</p>
+<pre><code class="language-bash">Before multiprocessing:
+0.16042209710776734
+After multiprocessing:
+0.9180213870647225
+</code></pre>
+<p>While on Linux, it gives an output like this:</p>
+<pre><code class="language-bash">Before multiprocessing:
+0.28832424513226507
+After multiprocessing:
+0.28832424513226507
+</code></pre>
+<p>And this brings us to the last topic and the reason why I lost so much time when I had to port code written in Linux to work on Windows. A typical situation in which values change at runtime is when you are working with classes. Objects are meant to hold values; they are not static. So, what happens if you try to run a method of a class on a separate process? Let's start with a straightforward task:</p>
+<pre><code class="language-python">import multiprocessing as mp
+
+
+class MyClass:
+    def __init__(self, i):
+        self.i = i
+
+    def simple_method(self):
+        print('This is a simple method')
+        print(f'The stored value is: {self.i}')
+
+    def mp_simple_method(self):
+        self.p = mp.Process(target=self.simple_method)
+        self.p.start()
+
+    def wait(self):
+        self.p.join()
+
+
+if __name__ == '__main__':
+    my_class = MyClass(1)
+    my_class.mp_simple_method()
+    my_class.wait()
+</code></pre>
+<p>The code works fine both on Linux and Windows. And this may happen for a lot of different scenarios, until one day you try to do something slightly more complicated, like writing or reading from a file:</p>
+<pre><code class="language-python">import multiprocessing as mp
+
+
+class MyClass:
+    def __init__(self, i):
+        self.i = i
+        self.file = open(f'{i}.txt', 'w')
+
+    def simple_method(self):
+        print('This is a simple method')
+        print(f'The stored value is: {self.i}')
+
+    def mp_simple_method(self):
+        self.p = mp.Process(target=self.simple_method)
+        self.p.start()
+
+    def wait(self):
+        self.p.join()
+        self.file.close()
+
+
+if __name__ == '__main__':
+    my_class = MyClass(1)
+    my_class.mp_simple_method()
+    my_class.wait()
+</code></pre>
+<p>On Linux, the code above works fine. On Windows (and Mac), however, there'll be a very nasty error:</p>
+<pre><code class="language-bash">[...]
+    ForkingPickler(file, protocol).dump(obj)
+TypeError: cannot serialize '_io.TextIOWrapper' object
+</code></pre>
+<p>Pay attention to the fact that we don't do anything with the file. We just open and store it as an attribute in the class. However, the error already points to an interesting feature. The way Spawning works is by pickling the entire object. Therefore, if we have a class or an attribute that is not <em>pickable</em>, we will not be able to start a child process with it. </p>
+<p>And, for people working with hardware, most likely the communication with the device, in pretty much the same way that a file is non-pickable. It does not matter how much you try to make it multiprocessing safe by implementing locks or whatnot. The root problem is at a lower level. </p>
+<h2>Is there a way of solving it?</h2>
+<p>Sadly, there is no way of changing how processes start on Windows. You can, on the other hand, change how processes start on Linux. It would allow you to be sure your program also runs on Windows and Mac. We just need to add the following:</p>
+<pre><code class="language-python">if __name__ == '__main__':
+    mp.set_start_method('spawn')
+    my_class = MyClass(1)
+    my_class.mp_simple_method()
+    my_class.wait()
+</code></pre>
+<p>By using <code>set_start_method</code>, the program will give the same error on Windows and Linux. Whether you need to add this line or not depends on what do you want to achieve. </p>
+<p>So, if you ever encounter these discrepancies, you will have to re-think the design of your program. I had objects with non-pickable attributes, especially drivers for devices and ZMQ sockets. </p>
+<h2>Speed is another factor</h2>
+<p>Even though processes usually speed up the speed of a program by leveraging multiple cores on a computer, starting each process can be time-consuming. The fact that on Windows and Mac Python needs to <em>pickle</em> the objects to create child processes adds an overhead that may offset the benefits of running on separated processes. It is especially relevant when you have many small tasks to perform, instead of a couple of long-running ones. </p>
+<p>Therefore, when using processes, improving the speed of the program is not a granted outcome. You should always benchmark your application to understand where and how different components can affect its behavior. </p>
+            </main>
+            <div class="info-list">
+              <span class="item author">Article written by Aquiles Carattino</span>
+            </div>
+              <div class="similar-posts">
+                <h3>Related Articles:</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tips-using-sets" class="item">
+                        <img src="/images/Python-setup.width-800.jpg" alt="">
+                        <span class="date">2020-05-11</span>
+                        <span class="name">Python Tips: Using Sets</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-using-else-loops" class="item">
+                        <img src="/images/Tips_02_Python-Tips-Matplotlib-Saving.width-800.png" alt="">
+                        <span class="date">2020-05-25</span>
+                        <span class="name">Python Tip: Using Else with Loops</span>
+                      </a>
+                    </li>
+                </ul>
+              </div>
+            <div class="bottom-section">
+              <h4>Share your thoughts with us!</h4>
+              <div class="comments">
+                <!-- Comment -->
+                <script src="https://utteranc.es/client.js"
+                        repo="PFTL/pftl_discussions"
+                        issue-term="pathname"
+                        label="Comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+              </div>
+            </div>
+          </div>
+          <div class="rightside">
+            <div class="support-box">
+              <h3>Support Us</h3>
+              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
+                Lab</strong></p>
+              <a href="http://localhost:8000/books" class="button">Check out the book</a>
+            </div>
+            <div class="latest-posts">
+
+                <h3>Latest Articles</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
+                      <span>by Aquiles Carattino, 2021-03-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
+                      <span>by Aquiles Carattino, 2021-03-21</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
+                      <span>by Aquiles Carattino, 2021-02-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
+                      <span>by Aquiles Carattino, 2021-01-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
+                      <span>by Aquiles Carattino, 2020-06-13</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
+                      <span>by Aquiles Carattino, 2020-05-25</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
+                      <span>by Aquiles Carattino, 2020-05-18</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
+                      <span>by Aquiles Carattino, 2020-05-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tips-using-sets">Python Tips: Using Sets</a>
+                      <span>by Aquiles Carattino, 2020-05-11</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
+                      <span>by Aquiles Carattino, 2020-04-10</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="subscribe-fixed">
+              <button class="action">Never Stop Learning</button>
+              <div class="cnt">
+                <p>Join over 1000 Python developers and don't miss any updates!</p>
+                <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-sb-form">
+          <div class="sb-form">
+            <h4>Get all the information directly to your inbox</h4>
+            <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Main -->
+
+  </section>
+  <!-- End Wrapper -->
+
+<!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="footer-cnt">
+      <p class="left">
+        &copy; Python For The Lab <span class="current-year">2023</span>
+      </p>
+      <p class="center">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+          <img alt="Creative Commons License"
+               style="border-width:0"
+               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
+      </p>
+      <p class="right">
+        <a href="http://localhost:8000/cookie-policy">Cookie Policy</a>
+        <a href="http://localhost:8000/privacy-policy">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Footer --><script src="http://localhost:8000/theme/js/prism.js"></script>
+<script src="http://localhost:8000/theme/js/stork.js"></script>
+<script>
+    stork.initialize("http://localhost:8000/theme/js/stork.wasm")
+    stork.downloadIndex("sitesearch", "http://localhost:8000/search-index.st")
+    stork.attach("sitesearch")
+</script></body>
+</html>

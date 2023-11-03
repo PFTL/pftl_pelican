@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>How to use decorators Part 2 | Python For The Lab</title>
+
+  <meta name="tags" content="Decorators, Tricks, Validation, Data, Intermediate, ">
+  <meta name="description" content="Learn how to use decorators like a professional">
+  <meta name="author" content="Aquiles Carattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="http://localhost:8000/theme/css/style.css">
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
+</head>
+
+<body>
+  <!-- Wrapper -->
+  <section class="wrapper">
+
+<!-- Intro -->
+<div class="intro blog article">
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <a href="/" class="logo">Python for the Lab</a>
+      <div class="header-dd">
+        <div class="navigation">
+          <ul>
+            <li class="active"><a href="http://localhost:8000/blog" class="nav-item blog"><span>Blog</span></a></li>
+            <li><a href="http://localhost:8000/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                   class="nav-item forum"><span>Forum</span></a></li>
+            <li><a href="http://localhost:8000/books" class="nav-item books"><span>Books</span></a></li>
+            <li><a href="http://localhost:8000/about" class="nav-item about"><span>About</span></a></li>
+          </ul>
+        </div>
+        <div class="search field-wp">
+          <form action="#">
+            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+            <input type="submit" class="search-btn">
+          </form>
+          <div data-stork="sitesearch-output"></div>
+        </div>
+      </div>
+      <button class="menu-btn"><span>Menu</span></button>
+    </div>
+    <!-- End Header -->
+
+    <!-- Intro Cnt -->
+    <div class="intro-cnt v-article">
+      <div class="side-text">
+      </div>
+      <div class="side-form small-sb-form">
+        <div class="sb-form" id="mc_embed_signup">
+          <h4>Get all the information directly to your inbox</h4>
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+              target="_self"
+              novalidate="">
+            <div class="field-wp" id="mc_embed_signup_scroll">
+              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
+                     value="">
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk form bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
+                   id="mc-embedded-subscribe">
+            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Intro Cnt -->
+
+  </div>
+</div>
+<!-- End Intro -->
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+
+        <div class="article-cnt">
+          <div class="leftside">
+            <div class="article-image">
+              <img src="http://localhost:8000//images/michael-browning-227688-unsplash_linkedin.width-800.jpg" alt="" width="800">
+            </div>
+            <h1>How to use decorators Part 2</h1>
+            <h3>Learn how to use decorators like a professional</h3>
+            <div class="info">
+              <span class="item-1 author">by Aquiles Carattino</span>
+              <span class="item-1 date">2018-05-18</span>
+                <span class="item-tag first">Decorators</span>
+                <span class="item-tag ">Tricks</span>
+                <span class="item-tag ">Validation</span>
+                <span class="item-tag ">Data</span>
+                <span class="item-tag ">Intermediate</span>
+            </div>
+            <main>
+              <p>Decorators are a very useful programming pattern that allows changing
+the behavior of functions with little refactoring. Decorators allow
+developers to abstract common options from functions, but mastering
+their use in Python can be challenging. In this article, we are going to
+go in depth regarding different options when implementing decorators.
+The topics covered are:</p>
+<p>In a <a href="http://localhost:8000/blog/how-to-use-decorators-to-validate-input">previous article on the use of decorators to validate user
+input</a>, we have seen just
+the very beginning of what decorators are able to provide to the
+developer. Let's first recap what we saw earlier. We can define a
+decorator as a function that will take as input another function. We can
+use it to check the input of the latter, for example:</p>
+<pre><code class="language-python">def check_positive(func):
+    def func_wrapper(x, y):
+        if x&lt;0 or y&lt;0:
+            raise Exception(&quot;Both x and y have to be positive \
+            for function {} to work&quot;.format(func.__name__))
+        res = func(x,y)
+        return res
+    return func_wrapper
+</code></pre>
+<p>The function <code>check_positive</code> checks that the inputs of a function are
+all positive before actually calling the function. To use it, we would
+do something like this:</p>
+<pre><code class="language-python">@check_positive
+def average(x, y):
+    return (x + y)/2
+
+a = average(1,2)
+print(a)
+b = average(1, -1)
+print(b)
+</code></pre>
+<p>In the first case, the function would work, giving as output <code>1.5</code>,
+while in the second case it would raise an exception because one of the
+arguments is not positive. If you can't understand the code above, you
+should check the <a href="http://localhost:8000/blog/how-to-use-decorators-to-validate-input">first article published on
+decorators</a>.</p>
+<h2>Docstrings with decorators</h2>
+<p>This example works fine, but it already shows an issue that for larger
+projects is very relevant: docstrings, i.e. the documentation of
+functions, methods, and classes, stop working when using decorators like
+above. Let's add documentation to the function <code>average</code>, like this:</p>
+<pre><code class="language-python">def average(x, y):
+    &quot;&quot;&quot;Calculates the average between two numbers.&quot;&quot;&quot;
+    return (x + y)/2
+</code></pre>
+<p>The string right after the definition of the function and starting with
+the triple quotes <code>"""</code> is used for building the documentation of
+projects and is also used with the <code>help</code> command:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; help(average)
+average(x, y)
+    Calculates the average between two numbers.
+</code></pre>
+<p>This is very useful when working with libraries developed by others. It
+also allows you to build documentation, such as the one you find for
+<a href="https://docs.scipy.org/doc/numpy-1.14.2/user/quickstart.html">numpy</a>,
+but we will cover this in a later tutorial. However, if we use a
+decorator, the behavior changes:</p>
+<pre><code class="language-python">@check_positive
+def average(x, y):
+    [...]
+</code></pre>
+<p>The <code>[...]</code> means that there is code being suppressed for brevity. If
+again we try to get the help of our function:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; help(average)
+func_wrapper(x, y)
+</code></pre>
+<p>As you can see, the docstring of the function <code>average</code> was replaced by
+the docstring of the wrapper, which in the example above is empty. What
+we can do to avoid this problem is to pass the docstring and the name of
+the function to the name and docstring of the decorator. Like this:</p>
+<pre><code class="language-python">def check_positive(func):
+    def func_wrapper(x, y):
+        if x &lt; 0 or y &lt; 0:
+            raise Exception(&quot;Both x and y have to be positive for function {} to work&quot;.format(func.__name__))
+        res = func(x, y)
+        return res
+    func_wrapper.__name__ = func.__name__
+    func_wrapper.__doc__ = func.__doc__
+    return func_wrapper
+</code></pre>
+<p>And if we repeat the steps above, we see that the help command is giving
+the expected output. We can also add a docstring to the decorator:</p>
+<pre><code class="language-python">def check_positive(func):
+    &quot;&quot;&quot;Decorator to check that the inputs of a function are positive&quot;&quot;&quot;
+    [...]
+</code></pre>
+<p>As with many things in Python, this is not the only option but is the
+one that allows you to see how some of the internals work, such as the
+<code>__name__</code> and <code>__doc__</code> properties. Another option is to use a built-in
+decorator from Python that would allow you to do exactly what we have
+done but in one single line:</p>
+<pre><code class="language-python">from functools import wraps
+
+def check_positive(func):
+    @wraps(func)
+    def func_wrapper(x, y):
+        if x &lt; 0 or y &lt; 0:
+            raise Exception(&quot;Both x and y have to be positive for function {} to work&quot;.format(func.__name__))
+        res = func(x, y)
+        return res
+    return func_wrapper
+</code></pre>
+<p>The highlighted lines are the ones that changed compared to the previous
+example. Again, the <code>help</code> command is working as expected. In principle
+what the decorator <code>@wraps</code> does is the same as setting the <code>__name__</code>
+and <code>__doc__</code> properties. Now you start seeing that the uses of
+decorators are virtually endless.</p>
+<h2>Arguments in decorators</h2>
+<p>Imagine that you want to be able to check that both arguments in a
+function are higher than a parameter, not necessarily <code>0</code>. This would
+imply that the decorator takes one argument. Let's see first what do we
+want to achieve and then how to do it.</p>
+<pre><code class="language-python">@check_above(2)
+def average(x, y):
+    return (x + y)/2
+</code></pre>
+<p>We expect the function <code>average</code> to work only if both <code>x</code> and <code>y</code> are
+larger than 2. This is very useful when you are communicating with a
+device, for example, and you want to be sure that you are passing values
+which are allowed. However, the decorator that we defined earlier takes
+as an argument only the function to be decorated and it will fail if we
+add anything else. Solving this is a bit more involved because it
+requires a function that returns a decorator. We can do the following:</p>
+<pre><code class="language-python">def check_above(threshold):
+    def wrap(func):
+        @wraps(func)
+        def func_wrapper(x, y):
+            if x &lt; threshold or y &lt; threshold:
+                raise Exception(&quot;Both x and y have to be larger than {} \
+                for function {} to work&quot;.format(threshold, func.__name__))
+            res = func(x, y)
+            return res
+        return func_wrapper
+    return wrap
+</code></pre>
+<p>Let's see step by step what is going on. The function <code>check_above</code>
+returns the decorator called <code>wrap</code>. Therefore, technically, the
+function will be decorated with <code>wrap</code> and not with <code>check_above</code>, but
+now we can use the parameter <code>threshold</code>. We have translated everything
+one layer deeper, but the behavior is essentially the same. Note that
+now you check that both <code>x</code> and <code>y</code> are above the <code>threshold</code>. If you
+try to calculate the average like this:</p>
+<pre><code class="language-python">average(1, 2)
+</code></pre>
+<p>it will raise the exception because one of the values is not above the
+specified threshold.</p>
+<h2>When are decorators executed</h2>
+<p>There is something very important to note: both decorators defined
+earlier, <code>check_positive</code> and <code>check_above</code> are actually executed right
+when defining the <code>average</code> function. You can test it by adding a
+<code>print</code> statement, like this:</p>
+<pre><code class="language-python">def check_positive(func):
+    print('Checking if it is positive')
+    @wraps(func)
+    def func_wrapper(x, y):
+        if x &lt; 0 or y &lt; 0:
+            raise Exception(&quot;Both x and y have to be positive \
+            for function {} to work&quot;.format(func.__name__))
+        res = func(x, y)
+        return res
+
+    return func_wrapper
+</code></pre>
+<p>Whenever you import the module that contains the <code>average</code> function, you
+will see:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; from utils import average
+Checking if it is positive
+</code></pre>
+<p>This behavior may not be completely expected nor desired. For example,
+imagine that you use a decorator that checks the status of a device
+before allowing the user to send a new command to it. If you place the
+verification routine outside of the function wrapper, it will be
+triggered when you import the function and not when you execute it. This
+can give rise to a lot of undesired errors because it is understandable
+that a user is importing the needed functions first and then starting
+the communication with a device.</p>
+<p>On the other hand, being able to run code before the function is
+executed, opens different doors. For example, you could register all the
+available functions. Check the following example:</p>
+<pre><code class="language-python"># utils.py
+from functools import wraps
+
+func_registry = []
+
+def register(func):
+    func_registry.append(func.__name__)
+    @wraps(func)
+    def func_wrapper(*args):
+        return func(*args)
+    return func_wrapper
+
+@register
+def average(x, y):
+    return (x + y)/2
+
+@register
+def geom_average(x, y):
+    return (x*y)**0.5
+</code></pre>
+<p>Now you can use it in the following way:</p>
+<pre><code class="language-python">&gt;&gt;&gt; from utils import average
+&gt;&gt;&gt; average(1, 2)
+1.5
+&gt;&gt;&gt; from utils import func_registry
+&gt;&gt;&gt; for f in func_registry:
+...     print(f)
+...
+average
+geom_average
+</code></pre>
+<p>With this simple code, you already see that not only <code>average</code>, but also
+<code>geom_average</code> is decorated with <code>@register</code>. This is very useful if,
+for example, you want to have a list of a specific set of functions.
+Imagine that you are developing a driver for a device, and some of the
+methods are equivalent to buttons, i.e., you trigger an action by
+pressing it, but no input is required and no output is generated.
+<em>Switch on</em>, <em>Switch off</em>, <em>Auto calibrate</em>, etc. It would be handy to
+have a list of all these methods, in order to display them to an
+end-user, for example.</p>
+<p>When you start designing decorators, especially if you are planning to
+have other developers to use them, you have to be aware that some
+behaviors are not always obvious to everybody. Documenting is crucial to
+have reliable and maintainable libraries. Mixing the execution of code
+with the definition of a function may give a lot of headaches to novice
+developers and may become a nightmare to debug later on.</p>
+<h2>Decorators for methods in classes</h2>
+<p>So far we have covered how to use decorators for functions, but more
+often than not you will find yourself using decorators for methods in
+classes. For example, you would like to use the <code>check_positive</code> like
+this:</p>
+<pre><code class="language-python"># operations.py
+class Operations:
+    @check_positive
+    def average(self, x, y):
+        return (x + y)/2
+</code></pre>
+<p>I know that a class like that makes no sense at all, but it is only an
+example, so please bear with me. If you want to use this class, you will
+face an error:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; from operations import Operations
+[...]
+TypeError: func_wrapper() takes 2 positional arguments but 3 were given
+</code></pre>
+<p>When we defined the <code>check_positive</code> decorator, we explicitly used two
+arguments for the <code>func_wrapper</code>, <code>x</code> and <code>y</code>. However, when we work
+with methods, there will be one more argument, the <code>self</code>. There are
+different ways of solving this problem. On one hand, you could adapt the
+decorator in order to accommodate for the extra input, but then the
+decorator will stop working with normal functions. Of course, you could
+define a new decorator just for methods, but you would end up
+duplicating the code, and you should try to avoid that.</p>
+<p>One more general solution would be to use a variable number of arguments
+for the decorator. This would be the idea:</p>
+<pre><code class="language-python">from functools import wraps
+
+def check_positive(func):
+    @wraps(func)
+    def func_wrapper(*args):
+        for arg in args:
+            if type(arg) is int or type(arg) is float:
+                if arg &lt; 0:
+                    raise Exception(&quot;Method {} takes only positive arguments&quot;.format(func.__name__))
+        return func(*args)
+
+    return func_wrapper
+</code></pre>
+<p>Now you can see that the decorator became more complex than before.
+First, the <code>func_wrapper</code> takes <code>*args</code> as the argument, and no longer
+explicitly <code>x</code> and <code>y</code>. The <code>*args</code> parameter is a good subject for a
+next tutorial, what you should understand by now is that it makes a list
+out of all the inputs of the function, regardless of how many they are.
+This is what allows us to iterate through them by doing
+<code>for arg in args</code>.</p>
+<p>For every argument in the function, we have to check whether they are
+numbers or not, i.e., if the <code>type</code> is either <code>int</code> or <code>float</code>. This
+prevents us from checking if <code>self</code> is positive or not, which would
+raise an exception. If the checks pass, we just return the original
+function <code>func</code> with the same arguments <code>*args</code> which were originally
+used. You can go ahead and try this decorator with either a method ìn
+the <code>Operations</code> class or with a function. Moreover, you can now try it
+with a function that takes three numbers as input and it will still
+work.</p>
+<h2>Classes as decorators</h2>
+<p>So far, we have seen that you can use a function to decorate another
+function or method. However, that is not the only option. Classes can be
+used as decorators as well, and this opens an entire realm of
+possibilities. What we have seen so far is that when you add a callable
+with a <code>@</code> just before another callable (i.e. a method or a function in
+our context), that function will be passed as an argument to the
+decorator. When constructing classes, you can also pass functions as
+arguments. For example:</p>
+<pre><code class="language-python">class Decorator:
+    def __init__(self, func):
+        print('Decorating {}'.format(func.__name__))
+        self.func = func
+
+@Decorator
+def average(x, y):
+    return (x + y)/2
+</code></pre>
+<p>If you execute the code above you will see:</p>
+<pre><code class="language-pycon">Decorating average
+</code></pre>
+<p>However, if you try to use the average, you will see an error:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; average(1, 2)
+[...]
+TypeError: 'Decorator' object is not callable
+</code></pre>
+<p>This is actually expected. What is happening is that the function
+<code>average</code> is actually being turned into a <code>Decorator</code> class. The code
+would be equivalent to doing something like this:</p>
+<pre><code class="language-python">average = Decorator(average)
+</code></pre>
+<p>However, after the class has been instantiated, Python doesn't know what
+does it mean to execute it. We need to explicitly add this behavior:</p>
+<pre><code class="language-python">class Decorator:
+    def __init__(self, func):
+        print('Decorating {}'.format(func.__name__))
+        self.func = func
+
+    def __call__(self, *args, **kwargs):
+        return self.func(*args)
+</code></pre>
+<p>With this change, we have instructed Python what does it means to <em>call</em>
+the object, i.e., to do <code>average(...)</code>. If we run it again, it will
+work:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; averge(1, 2)
+1.5
+</code></pre>
+<p>Remember that, just as before, the instantiation of the <code>Decorator</code>
+class is happening when defining the <code>average</code>, and therefore you will
+see the line <code>Decorating average</code> when you <code>import average</code>. On the
+other hand, you have transformed your function into a class:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; type(average)
+&lt;class '__main__.Decorator'&gt;
+</code></pre>
+<p>How you can leverage the possibilities of using a class instead of a
+function for decorating depends on the work you are trying to achieve.
+Remember that the main use of classes is when you need to preserve
+state. For example, imagine you would like to store every pair of values
+on which you have calculated the average. You can easily turn this idea
+into a cache system, avoiding to repeat processes for known arguments.</p>
+<h2>Decorators for classes</h2>
+<p>We have seen that any callable can be a decorator of any other callable.
+That is why a function can be a decorator of another function or method.
+Also, because a class is a callable, it can be a decorator of a function
+or method. The last missing combination is to decorate classes. With
+what you know so far, you can already anticipate what is going to
+happen. Imagine you want to do this:</p>
+<pre><code class="language-python">@Decorate
+class MyClass:
+    def __init__(self):
+        print('My Class')
+</code></pre>
+<p>What you have to remember is that <code>Decorate</code> needs to accept <code>MyClass</code>
+as input. Moreover, we need to actually instantiate the class when we
+do:</p>
+<pre><code class="language-python">my_class = MyClass()
+</code></pre>
+<p>Putting all the ideas together, the decorator will look like this:</p>
+<pre><code class="language-python">def Decorate(cls):
+    print('Decorating {}'.format(cls.__name__))
+    def class_wrapper(*args):
+        return cls(*args)
+    return class_wrapper
+</code></pre>
+<p>What will happen is that the class will be passed as the argument of
+<code>Decorate</code>. We will print that we are decorating the class, just to show
+that it is actually working. The <code>Decorate</code> function needs to return
+another callable object, in the example above is a function called
+<code>class_wrapper</code>. This function will be responsible for instantiating the
+class. Remember that when you use decorators, you are actually replacing
+what happens when you do <code>MyClass()</code> by what happens when you do
+<code>class_wrapper()</code>. Therefore, if you decorate the class, you will see
+that its type changed:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; type(MyClass)
+&lt;class 'function'&gt;
+</code></pre>
+<p>The main point here is that the function will return an object. This
+allows you to instantiate the class as always, regardless of it having
+or not the decorator:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; my_class = MyClass()
+My Class
+</code></pre>
+<p>Decorating classes is a bit of a corner situation. To be honest, I don't
+imagine a lot of scenarios where you would like to decorate a class, but
+still, I will give you an example. Imagine that you want to add a new
+method to every decorated class. A method that will calculate the
+average between two numbers. What you have to do is to alter the <code>cls</code>
+variable within the <code>class_wrapper</code>:</p>
+<pre><code class="language-python">def Decorate(cls):
+    def class_wrapper(*args):
+        def average(cls, x, y):
+            return (x + y) / 2
+        setattr(cls, 'average', average)
+        return cls(*args)
+return class_wrapper
+</code></pre>
+<p>We have defined the function <code>average</code> that takes three arguments: a
+class and two numbers. And then we use <code>setattr</code> to add the method to
+<code>cls</code> and we call it <code>'average'</code>. Now, <code>MyClass</code> will be able to
+calculate the average of numbers even if the method was not defined in
+it:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; my_class = MyClass()
+&gt;&gt;&gt; res = my_class.average(1, 2)
+&gt;&gt;&gt; print(res)
+1.5
+</code></pre>
+<h2>Conclusions</h2>
+<p>In this tutorial, we have covered a lot of different options when
+working with decorators. Depending on the kind of projects you are
+working on, you may not find yourself in the situation of needing to
+develop decorators, however, it is always useful to be aware of one
+extra possibility. Decorators are very useful tools when a library is
+going to be used by other developers.</p>
+<p>Two libraries that make heavy use of decorators are
+<a href="http://flask.pocoo.org/">Flask</a> and
+<a href="https://github.com/lantzproject/">Lantz</a>. Therefore, even if you don't
+develop your own decorators, it is always important to understand how
+they work.</p>
+<p>You can find the <a href="https://github.com/PFTL/website/tree/master/example_code/04_how_to_use_decorators_2">example code for this
+tutorial</a>
+on Github, as well as the
+<a href="https://github.com/PFTL/website/blob/master/content/blog/04_how_to_use_decorators_2.rst.md">text</a>.
+If you find any mistakes, don't hesitate to submit a pull request or
+open an Issue.</p>
+<p>Header photo by <a href="https://unsplash.com/photos/tOZ-f5kl9BA?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Michael
+Browning</a>
+on Unsplash</p>
+            </main>
+            <div class="info-list">
+              <span class="item author">Article written by Aquiles Carattino</span>
+            </div>
+              <div class="similar-posts">
+                <h3>Related Articles:</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/how-to-use-decorators-to-validate-input" class="item">
+                        <img src="/images/cartoon_decorators.png" alt="">
+                        <span class="date">2018-03-12</span>
+                        <span class="name">How to Use Decorators to Validate Input</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/mutable-and-immutable-objects" class="item">
+                        <img src="/images/rawpixel-274862-unsplash_linkedin.width-800.jpg" alt="">
+                        <span class="date">2018-08-23</span>
+                        <span class="name">Mutable and Immutable Objects</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/mutable-and-immutable-attributes-of-classes" class="item">
+                        <img src="/images/dan-gold-382057-unsplash_linkedin.width-800.jpg" alt="">
+                        <span class="date">2018-08-24</span>
+                        <span class="name">Mutable and Immutable Attributes of Classes</span>
+                      </a>
+                    </li>
+                </ul>
+              </div>
+            <div class="bottom-section">
+              <h4>Share your thoughts with us!</h4>
+              <div class="comments">
+                <!-- Comment -->
+                <script src="https://utteranc.es/client.js"
+                        repo="PFTL/pftl_discussions"
+                        issue-term="pathname"
+                        label="Comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+              </div>
+            </div>
+          </div>
+          <div class="rightside">
+            <div class="support-box">
+              <h3>Support Us</h3>
+              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
+                Lab</strong></p>
+              <a href="http://localhost:8000/books" class="button">Check out the book</a>
+            </div>
+            <div class="latest-posts">
+
+                <h3>Latest Articles</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
+                      <span>by Aquiles Carattino, 2021-03-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
+                      <span>by Aquiles Carattino, 2021-03-21</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
+                      <span>by Aquiles Carattino, 2021-02-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
+                      <span>by Aquiles Carattino, 2021-01-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
+                      <span>by Aquiles Carattino, 2020-06-13</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
+                      <span>by Aquiles Carattino, 2020-05-25</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
+                      <span>by Aquiles Carattino, 2020-05-18</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
+                      <span>by Aquiles Carattino, 2020-05-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tips-using-sets">Python Tips: Using Sets</a>
+                      <span>by Aquiles Carattino, 2020-05-11</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
+                      <span>by Aquiles Carattino, 2020-04-10</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="subscribe-fixed">
+              <button class="action">Never Stop Learning</button>
+              <div class="cnt">
+                <p>Join over 1000 Python developers and don't miss any updates!</p>
+                <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-sb-form">
+          <div class="sb-form">
+            <h4>Get all the information directly to your inbox</h4>
+            <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Main -->
+
+  </section>
+  <!-- End Wrapper -->
+
+<!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="footer-cnt">
+      <p class="left">
+        &copy; Python For The Lab <span class="current-year">2023</span>
+      </p>
+      <p class="center">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+          <img alt="Creative Commons License"
+               style="border-width:0"
+               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
+      </p>
+      <p class="right">
+        <a href="http://localhost:8000/cookie-policy">Cookie Policy</a>
+        <a href="http://localhost:8000/privacy-policy">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Footer --><script src="http://localhost:8000/theme/js/prism.js"></script>
+<script src="http://localhost:8000/theme/js/stork.js"></script>
+<script>
+    stork.initialize("http://localhost:8000/theme/js/stork.wasm")
+    stork.downloadIndex("sitesearch", "http://localhost:8000/search-index.st")
+    stork.attach("sitesearch")
+</script></body>
+</html>

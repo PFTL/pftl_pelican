@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Virtual Environment is a Must-Have Tool | Python For The Lab</title>
+
+  <meta name="tags" content="Python, Virtual Environment, Development, ">
+  <meta name="description" content="Isolate different development environments from each other to avoid
+overlaps
+">
+  <meta name="author" content="Aquiles Carattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="http://localhost:8000/theme/css/style.css">
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
+</head>
+
+<body>
+  <!-- Wrapper -->
+  <section class="wrapper">
+
+<!-- Intro -->
+<div class="intro blog article">
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <a href="/" class="logo">Python for the Lab</a>
+      <div class="header-dd">
+        <div class="navigation">
+          <ul>
+            <li class="active"><a href="http://localhost:8000/blog" class="nav-item blog"><span>Blog</span></a></li>
+            <li><a href="http://localhost:8000/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                   class="nav-item forum"><span>Forum</span></a></li>
+            <li><a href="http://localhost:8000/books" class="nav-item books"><span>Books</span></a></li>
+            <li><a href="http://localhost:8000/about" class="nav-item about"><span>About</span></a></li>
+          </ul>
+        </div>
+        <div class="search field-wp">
+          <form action="#">
+            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+            <input type="submit" class="search-btn">
+          </form>
+          <div data-stork="sitesearch-output"></div>
+        </div>
+      </div>
+      <button class="menu-btn"><span>Menu</span></button>
+    </div>
+    <!-- End Header -->
+
+    <!-- Intro Cnt -->
+    <div class="intro-cnt v-article">
+      <div class="side-text">
+      </div>
+      <div class="side-form small-sb-form">
+        <div class="sb-form" id="mc_embed_signup">
+          <h4>Get all the information directly to your inbox</h4>
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+              target="_self"
+              novalidate="">
+            <div class="field-wp" id="mc_embed_signup_scroll">
+              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
+                     value="">
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk form bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
+                   id="mc-embedded-subscribe">
+            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Intro Cnt -->
+
+  </div>
+</div>
+<!-- End Intro -->
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+
+        <div class="article-cnt">
+          <div class="leftside">
+            <div class="article-image">
+              <img src="http://localhost:8000//images/virtual_environments_python.png" alt="" width="800">
+            </div>
+            <h1>Virtual Environment is a Must-Have Tool</h1>
+            <h3>Isolate different development environments from each other to avoid
+overlaps
+</h3>
+            <div class="info">
+              <span class="item-1 author">by Aquiles Carattino</span>
+              <span class="item-1 date">2018-03-09</span>
+                <span class="item-tag first">Python</span>
+                <span class="item-tag ">Virtual Environment</span>
+                <span class="item-tag ">Development</span>
+            </div>
+            <main>
+              <p>When you start developing software, it is of utmost importance to have
+an isolated programming environment in which you can control precisely
+the packages installed. This will allow you, for example, to use
+experimental libraries without overwriting software that other programs
+use on your computer. Isolated environments allow you, for example, to
+update a package only within that specific environment, without altering
+the dependencies in every other development you are doing.</p>
+<p>Python provides a very convenient tool called <code>Virtual Environment</code> that
+allows you to do exactly what was described. The instructions are
+slightly different depending on the operating system that you use, but
+they are easy to adapt from one to the other. To install
+<code>Virtual Environment</code> you can do it with <code>pip</code>, the package manager of
+Python. Remember that sometimes you may have more than one version of
+pip in your computer, in the same way, you may have more than one
+version of Python. For example, if you are using Python 3, you would
+type in the command line:</p>
+<pre><code class="language-bash">pip3 install virtualenv
+</code></pre>
+<p>If you are on Linux, you may need to add <code>sudo</code> to the command:
+<code>sudo pip3 install virtualenv</code>, depending on how you have installed
+Python. This is the last installation that you do system-wide. From now
+on, everything else will happen within a Virtual Environment. It is a
+common practice to encapsulate projects in folders that also contain the
+virtual environment. You have to be sure, however, that you don't add
+your virtual environment folder to version control, or you will end up
+having <strong>huge</strong> repositories.</p>
+<pre><code class="language-bash">mkdir myproject
+cd myproject
+virtualenv venv -p python3
+</code></pre>
+<p>The first line creates the folder for the project and then we move into
+it. In the last line, we create the virtual environment within a folder
+called <code>venv</code> and using a specific version of Python, in this case it is
+<code>python3</code>. Now it is time to activate the virtual environment. On Linux
+you would do:</p>
+<pre><code class="language-bash">source venv/bin/activate
+</code></pre>
+<p>while on Windows the command would be (pay attention to the <code>.\</code> at the
+beginning):</p>
+<pre><code class="language-powershell">.\venv\Scripts\activate
+</code></pre>
+<p>If everything went well, you will see that a <code>(venv)</code> appears at the
+beginning of the command line. Now you are working inside the Virtual
+Environment called <code>venv</code> and all the packages you install are going to
+be stored within it. Let's install a package to see how it works.</p>
+<pre><code class="language-bash">pip install Flask==1.0
+</code></pre>
+<p>The command will install a very specific version of Flask, which is not
+the most recent one. One of the useful aspects of virtual environments
+is that they allow you to keep track of all the packages that you have
+installed, including their versions. If you execute this command:</p>
+<pre><code class="language-bash">pip freeze
+</code></pre>
+<p>You will see all the installed packages. You should see that you have
+installed not only Flask, but all of its dependencies, each one with a
+specific version. It is wise to output the results to a file that you
+can use later on for automatically installing all the requirements of
+your project:</p>
+<pre><code class="language-bash">pip freeze &gt; requirements.txt
+</code></pre>
+<p>If you open the file <code>requirements.txt</code> you will notice that it contains
+a list with all the packages from <code>venv</code>. To see the full potential of
+Virtual Environment, let's create a second one. First, we need to
+deactivate the one we are working on now by running:</p>
+<pre><code class="language-bash">deactivate
+</code></pre>
+<p>And now we repeat the step above to create a new environment, but with a
+different name:</p>
+<pre><code class="language-bash">virtualenv test -p python3
+</code></pre>
+<p>And we activate it:</p>
+<pre><code class="language-bash">source test/bin/activate
+</code></pre>
+<p>or for Windows:</p>
+<pre><code class="language-powershell">.\venv\Scripts\activate
+</code></pre>
+<p>If we run again <code>pip freeze</code> you will notice that your environment is
+empty. We can install all the packages contained in the
+<code>requirements.txt</code> file by simply running:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+<p>If you check again with <code>pip freeze</code> you will notice that you have
+exactly the same packages than in the <code>venv</code> environment. You can
+upgrade Flask, for example:</p>
+<pre><code class="language-bash">pip install --upgrade Flask
+</code></pre>
+<p>And if you run again <code>pip freeze</code> you will notice that the version of
+Flask has changed. Repeat the steps mentioned above in order to
+deactivate <code>test</code> and activate <code>venv</code>. You will see that the version of
+Flask stayed at <code>1.0</code> and was not upgraded.</p>
+<p>Of course, you can run the <code>freeze</code> command outside of any virtual
+environment to see all the packages installed in your computer. It is a
+very useful way of keeping track of the packages that may need an
+upgrade or that you no longer use.</p>
+<h2>How does the Virtual Environment Work</h2>
+<p>When you run programs from the command line, your operating system needs
+to know where to find them. The location of the programs in Windows and
+Linux is radically different, but they both are able to understand that
+when you type <code>python</code> in the command line, you want to start the Python
+interpreter. In order to achieve this, operating systems know where to
+look for programs thanks to the so-called environmental variables. The
+<code>PATH</code> is one of those variables that stores a list of folders where to
+look for programs.</p>
+<p>When you work in a virtual environment, all that you do is to replace
+the relevant variables. In this way, when you run <code>python</code> in the
+command line, it will first find the one that corresponds to the virtual
+environment. For example, imagine that you have two different versions
+of Python, let's say <code>python</code> (for Python 2) and <code>python3</code> (for Python
+3). When you create a virtual environment, you can specify which version
+of python to use by adding the option <code>-p</code> at the end. In the examples
+above, we have used <code>python3</code>, and therefore every time we type <code>python</code>
+in the virtual environment, we will be actually triggering <code>python3</code>.</p>
+<p>But that is not all. If you navigate to the folder of the virtual
+environment, you will see a folder called <strong>bin</strong>, where actually the
+executables for Python and Pip are located. In this way, you are
+isolated from the computer. If the OS decides to upgrade from Python 3.4
+to Python 3.6, for example, you will still have the proper version in
+your virtual environment. If you navigate to the <strong>lib</strong> folder and go
+inside the python folder, you will find the <strong>site-packages</strong>, which are
+all the packages installed by pip.</p>
+<p>If you have compiled programs that you want to use, in principle you can
+put them into the <strong>bin</strong> folder. If you have Python packages that are
+not installed through pip (such as PyQt4), you can install them
+system-wide and then just copy the appropriate folder into your virtual
+environment.</p>
+<h3>Be careful with name clashes</h3>
+<p>It is common that some python packages also generate <em>entry points</em>,
+i.e. commands that can be triggered directly from the command line. For
+example, if you are inside your virtual environment, you can run <code>flask</code>
+directly from the command line. This behavior is very useful, but it can
+easily collide with packages installed system-wide.</p>
+<p>Imagine you installed Flask in your system, and then you start working
+in a virtual environment that doesn't have Flask installed. If you run
+<code>flask</code> it will work, but it will be using the version from your OS.
+This is something very easy to miss when dealing with more complicated
+packages such as the Jupyter notebook or sphinx for building
+documentation.</p>
+<p>There is no one solution that fits all. It is important for you to be
+aware of the different problems that may arise when you run programs
+directly from the command line. Especially Linux/Mac users should be
+aware that when using the package manager and installing, for instance,
+Jupyter, you will also create the proper links in the <strong>bin</strong> directory,
+allowing you to run <code>jupyter notebook</code> directly. However, if you install
+it through pip, there are no entry points. Therefore, if you just type
+<code>jupyter notebook</code>, you will use the system one. To overcome this, you
+can use the following command:</p>
+<pre><code class="language-bash">python -m jupyter notebook
+</code></pre>
+<p>This will guarantee that you are going to use the package installed
+through Pip and not the one installed by your system.</p>
+<h2>Conclusions</h2>
+<p>It is almost impossible to overestimate how useful the <em>Virtual
+Environment</em> is. It will help you stay organized and out of conflicts
+when you develop software, and it will also avoid problems when you are
+installing different libraries that you want to test. It doesn't matter
+if it is for the lab computer or for analyzing data, if you keep your
+programs compartmentalized, you can be sure that they will all run
+properly, regardless of their specific needs.</p>
+<p>Remember, every time you are about to start a new project, regardless of
+what it is, you should start by creating an appropriate Virtual
+Environment for it. In this way, you can be certain of the long-term
+prosperity of the code you write, regardless of where it will bring you.</p>
+            </main>
+            <div class="info-list">
+              <span class="item author">Article written by Aquiles Carattino</span>
+            </div>
+              <div class="similar-posts">
+                <h3>Related Articles:</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/how-to-use-decorators-to-validate-input" class="item">
+                        <img src="/images/cartoon_decorators.png" alt="">
+                        <span class="date">2018-03-12</span>
+                        <span class="name">How to Use Decorators to Validate Input</span>
+                      </a>
+                    </li>
+                </ul>
+              </div>
+            <div class="bottom-section">
+              <h4>Share your thoughts with us!</h4>
+              <div class="comments">
+                <!-- Comment -->
+                <script src="https://utteranc.es/client.js"
+                        repo="PFTL/pftl_discussions"
+                        issue-term="pathname"
+                        label="Comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+              </div>
+            </div>
+          </div>
+          <div class="rightside">
+            <div class="support-box">
+              <h3>Support Us</h3>
+              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
+                Lab</strong></p>
+              <a href="http://localhost:8000/books" class="button">Check out the book</a>
+            </div>
+            <div class="latest-posts">
+
+                <h3>Latest Articles</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
+                      <span>by Aquiles Carattino, 2021-03-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
+                      <span>by Aquiles Carattino, 2021-03-21</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
+                      <span>by Aquiles Carattino, 2021-02-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
+                      <span>by Aquiles Carattino, 2021-01-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
+                      <span>by Aquiles Carattino, 2020-06-13</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
+                      <span>by Aquiles Carattino, 2020-05-25</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
+                      <span>by Aquiles Carattino, 2020-05-18</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
+                      <span>by Aquiles Carattino, 2020-05-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tips-using-sets">Python Tips: Using Sets</a>
+                      <span>by Aquiles Carattino, 2020-05-11</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
+                      <span>by Aquiles Carattino, 2020-04-10</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="subscribe-fixed">
+              <button class="action">Never Stop Learning</button>
+              <div class="cnt">
+                <p>Join over 1000 Python developers and don't miss any updates!</p>
+                <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-sb-form">
+          <div class="sb-form">
+            <h4>Get all the information directly to your inbox</h4>
+            <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Main -->
+
+  </section>
+  <!-- End Wrapper -->
+
+<!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="footer-cnt">
+      <p class="left">
+        &copy; Python For The Lab <span class="current-year">2023</span>
+      </p>
+      <p class="center">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+          <img alt="Creative Commons License"
+               style="border-width:0"
+               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
+      </p>
+      <p class="right">
+        <a href="http://localhost:8000/cookie-policy">Cookie Policy</a>
+        <a href="http://localhost:8000/privacy-policy">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Footer --><script src="http://localhost:8000/theme/js/prism.js"></script>
+<script src="http://localhost:8000/theme/js/stork.js"></script>
+<script>
+    stork.initialize("http://localhost:8000/theme/js/stork.wasm")
+    stork.downloadIndex("sitesearch", "http://localhost:8000/search-index.st")
+    stork.attach("sitesearch")
+</script></body>
+</html>

@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Python For The Lab - tips</title><link href="http://localhost:8000/" rel="alternate"></link><link href="https://www.pythonforthelab.com/feeds/tips.atom.xml" rel="self"></link><id>http://localhost:8000/</id><updated>2020-06-13T00:00:00+02:00</updated><entry><title>Differences of Multiprocessing on Windows and Linux</title><link href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux" rel="alternate"></link><published>2020-06-13T00:00:00+02:00</published><updated>2020-06-13T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-06-13:/blog/differences-between-multiprocessing-windows-and-linux</id><summary type="html">&lt;p&gt;Multiprocessing is an excellent package if you ever want to speed up your code without leaving Python. When I started working with multiprocessing, I was unaware of the differences between Windows and Linux, which set me back several weeks of development time on a relatively big project. Let's quickly see …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Multiprocessing is an excellent package if you ever want to speed up your code without leaving Python. When I started working with multiprocessing, I was unaware of the differences between Windows and Linux, which set me back several weeks of development time on a relatively big project. Let's quickly see how multiprocessing works and where Windows and Linux diverge. &lt;/p&gt;
+&lt;p&gt;The quickest way of showing how to use multiprocessing is to run a simple function without blocking the main program:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;import multiprocessing as mp
+from time import sleep
+
+
+def simple_func():
+    print('Starting simple func')
+    sleep(1)
+    print('Finishing simple func')
+
+
+if __name__ == '__main__':
+    p = mp.Process(target=simple_func)
+    p.start()
+    print('Waiting for simple func to end')
+    p.join()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which outputs the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;Waiting for simple func to end
+Starting simple func
+Finishing simple func
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output is what we were expecting. Let's go to the core of the problem at hand by studying how this code behaves: &lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;import multiprocessing as mp
+from time import sleep
+
+
+print('Before defining simple_func')
+
+def simple_func():
+    print('Starting simple func')
+    sleep(1)
+    print('Finishing simple func')
+
+
+if __name__ == '__main__':
+    p = mp.Process(target=simple_func)
+    p.start()
+    print('Waiting for simple func to end')
+    p.join()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we run this code on Windows, we get the following output:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;Before defining simple_func
+Waiting for simple func to end
+Before defining simple_func
+Starting simple func
+Finishing simple func
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;While on Linux we get the following output:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;Before defining simple_func
+Waiting for simple func to end
+Starting simple func
+Finishing simple func
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It does not look like much, except for the second &lt;code&gt;Before defining simple_func&lt;/code&gt;, and this difference is crucial. On &lt;strong&gt;Linux&lt;/strong&gt;, when you start a child process, it is &lt;em&gt;Forked&lt;/em&gt;. It means that the child process inherits the memory state of the parent process. On Windows (and by default on Mac), however, processes are &lt;em&gt;Spawned&lt;/em&gt;. It means that a new interpreter starts and the code reruns. &lt;/p&gt;
+&lt;p&gt;It explains why, if we run the code on Windows, we get twice the line &lt;code&gt;Before defining simple_func&lt;/code&gt;. As you may have noticed, this could have been much worse if we wouldn't include the &lt;code&gt;if __main__&lt;/code&gt; at the end of the file, let's check it out. On Windows, it produces a very long error, that finishes with:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;RuntimeError: 
+        An attempt has been made to start a new process before the
+        current process has finished its bootstrapping phase.
+
+        This probably means that you are not using fork to start your
+        child processes and you have forgotten to use the proper idiom
+        in the main module:
+
+            if __name__ == '__main__':
+                freeze_support()
+                ...
+
+        The &amp;quot;freeze_support()&amp;quot; line can be omitted if the program
+        is not going to be frozen to produce an executable.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;While on Linux, it works just fine. It may not look like much, but imagine you have some computationally expensive initialization task. Perhaps you do some system checks when the program runs. Probably you don't want to run all those checks for every process you start. It can get even more interesting if you have values that change at runtime:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;import multiprocessing as mp
+import random
+
+val = random.random()
+
+def simple_func():
+    print(val)
+
+
+if __name__ == '__main__':
+    print('Before multiprocessing: ')
+    simple_func()
+    print('After multiprocessing:')
+    p = mp.Process(target=simple_func)
+    p.start()
+    p.join()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On Windows, it would give an output like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;Before multiprocessing:
+0.16042209710776734
+After multiprocessing:
+0.9180213870647225
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;While on Linux, it gives an output like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;Before multiprocessing:
+0.28832424513226507
+After multiprocessing:
+0.28832424513226507
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And this brings us to the last topic and the reason why I lost so much time when I had to port code written in Linux to work on Windows. A typical situation in which values change at runtime is when you are working with classes. Objects are meant to hold values; they are not static. So, what happens if you try to run a method of a class on a separate process? Let's start with a straightforward task:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;import multiprocessing as mp
+
+
+class MyClass:
+    def __init__(self, i):
+        self.i = i
+
+    def simple_method(self):
+        print('This is a simple method')
+        print(f'The stored value is: {self.i}')
+
+    def mp_simple_method(self):
+        self.p = mp.Process(target=self.simple_method)
+        self.p.start()
+
+    def wait(self):
+        self.p.join()
+
+
+if __name__ == '__main__':
+    my_class = MyClass(1)
+    my_class.mp_simple_method()
+    my_class.wait()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code works fine both on Linux and Windows. And this may happen for a lot of different scenarios, until one day you try to do something slightly more complicated, like writing or reading from a file:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;import multiprocessing as mp
+
+
+class MyClass:
+    def __init__(self, i):
+        self.i = i
+        self.file = open(f'{i}.txt', 'w')
+
+    def simple_method(self):
+        print('This is a simple method')
+        print(f'The stored value is: {self.i}')
+
+    def mp_simple_method(self):
+        self.p = mp.Process(target=self.simple_method)
+        self.p.start()
+
+    def wait(self):
+        self.p.join()
+        self.file.close()
+
+
+if __name__ == '__main__':
+    my_class = MyClass(1)
+    my_class.mp_simple_method()
+    my_class.wait()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;On Linux, the code above works fine. On Windows (and Mac), however, there'll be a very nasty error:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-bash"&gt;[...]
+    ForkingPickler(file, protocol).dump(obj)
+TypeError: cannot serialize '_io.TextIOWrapper' object
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Pay attention to the fact that we don't do anything with the file. We just open and store it as an attribute in the class. However, the error already points to an interesting feature. The way Spawning works is by pickling the entire object. Therefore, if we have a class or an attribute that is not &lt;em&gt;pickable&lt;/em&gt;, we will not be able to start a child process with it. &lt;/p&gt;
+&lt;p&gt;And, for people working with hardware, most likely the communication with the device, in pretty much the same way that a file is non-pickable. It does not matter how much you try to make it multiprocessing safe by implementing locks or whatnot. The root problem is at a lower level. &lt;/p&gt;
+&lt;h2&gt;Is there a way of solving it?&lt;/h2&gt;
+&lt;p&gt;Sadly, there is no way of changing how processes start on Windows. You can, on the other hand, change how processes start on Linux. It would allow you to be sure your program also runs on Windows and Mac. We just need to add the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;if __name__ == '__main__':
+    mp.set_start_method('spawn')
+    my_class = MyClass(1)
+    my_class.mp_simple_method()
+    my_class.wait()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;By using &lt;code&gt;set_start_method&lt;/code&gt;, the program will give the same error on Windows and Linux. Whether you need to add this line or not depends on what do you want to achieve. &lt;/p&gt;
+&lt;p&gt;So, if you ever encounter these discrepancies, you will have to re-think the design of your program. I had objects with non-pickable attributes, especially drivers for devices and ZMQ sockets. &lt;/p&gt;
+&lt;h2&gt;Speed is another factor&lt;/h2&gt;
+&lt;p&gt;Even though processes usually speed up the speed of a program by leveraging multiple cores on a computer, starting each process can be time-consuming. The fact that on Windows and Mac Python needs to &lt;em&gt;pickle&lt;/em&gt; the objects to create child processes adds an overhead that may offset the benefits of running on separated processes. It is especially relevant when you have many small tasks to perform, instead of a couple of long-running ones. &lt;/p&gt;
+&lt;p&gt;Therefore, when using processes, improving the speed of the program is not a granted outcome. You should always benchmark your application to understand where and how different components can affect its behavior. &lt;/p&gt;</content><category term="tips"></category><category term="multiprocessing"></category><category term="windows"></category><category term="linux"></category><category term="tips"></category></entry><entry><title>Python Tip: Using Else with Loops</title><link href="http://localhost:8000/blog/python-tip-using-else-loops" rel="alternate"></link><published>2020-05-25T00:00:00+02:00</published><updated>2020-05-25T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-05-25:/blog/python-tip-using-else-loops</id><summary type="html">&lt;p&gt;Most likely, you are aware of how to use the &lt;code&gt;else&lt;/code&gt; statement with an &lt;code&gt;if&lt;/code&gt; clause. However, Python also allows us to use them with loops. They are straightforward to understand and open some exciting possibilities. Before continuing, remember that &lt;code&gt;else&lt;/code&gt; in this context should be called &lt;code&gt;no-break&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;Let's quickly …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Most likely, you are aware of how to use the &lt;code&gt;else&lt;/code&gt; statement with an &lt;code&gt;if&lt;/code&gt; clause. However, Python also allows us to use them with loops. They are straightforward to understand and open some exciting possibilities. Before continuing, remember that &lt;code&gt;else&lt;/code&gt; in this context should be called &lt;code&gt;no-break&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;Let's quickly see how a for-loop works:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;start = 0
+end = 10
+
+for i in range(start, end):
+    print(i)
+else:
+    print('End')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code above will print the numbers from &lt;code&gt;0&lt;/code&gt; to &lt;code&gt;9&lt;/code&gt; and the &lt;code&gt;End&lt;/code&gt; string. So far, nothing impressive, but check this out:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;start = 0  
+end = 10  
+break_point = 5  
+
+for i in range(start, end):  
+    print(i)  
+    if i == break_point:  
+        break  
+else:  
+    print('Nothing')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The output will be all the numbers from &lt;code&gt;0&lt;/code&gt; to &lt;code&gt;5&lt;/code&gt;, but no string at the end. Now you can understand why it was called &lt;code&gt;no-break&lt;/code&gt;. The same approach also works for &lt;code&gt;while&lt;/code&gt; loops:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;start = 0  
+end = 10  
+break_point = 5  
+
+i = start  
+
+while i &amp;lt; end:  
+    print(i)  
+    i += 1  
+  if i == break_point:  
+        break  
+else:  
+    print('Nothing')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The fair question is, when would you use this pattern. A clear situation is when you are looking for an element. For example, you may be looking for a specific line in a file, and want to raise an exception if not found:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;key_line = 'Key Line'
+f = open('file.dat', 'r')
+for line in f:
+    if line == key_line:
+        break
+else:
+    raise Exception('Line not Found')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Perhaps raising an exception is a bit extreme, but you see the pattern. It saves you from checking whether we found the line in the file or not using some extra variable to verify it. &lt;/p&gt;
+&lt;p&gt;If you have used this pattern and have any helpful examples, you can always share it in the discussion below.&lt;/p&gt;</content><category term="tips"></category><category term="loops"></category><category term="for"></category><category term="while"></category><category term="else"></category><category term="tips"></category></entry><entry><title>Python Tip: Ready to Publish Matplotlib Figures</title><link href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures" rel="alternate"></link><published>2020-05-18T00:00:00+02:00</published><updated>2020-05-18T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-05-18:/blog/python-tip-ready-publish-matplotlib-figures</id><summary type="html">&lt;p&gt;Saving figures for publications, presentations, books, or websites can be a cumbersome task but doesn't need to be. In this &lt;strong&gt;Python Tip&lt;/strong&gt;, we will see how to create images using Matplotlib that are ready to be embedded. We will take care of the most important aspects: shape, font sizes, and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Saving figures for publications, presentations, books, or websites can be a cumbersome task but doesn't need to be. In this &lt;strong&gt;Python Tip&lt;/strong&gt;, we will see how to create images using Matplotlib that are ready to be embedded. We will take care of the most important aspects: shape, font sizes, and resolution. You won't have to tinker ever again with random parameters until the result is right. &lt;/p&gt;
+&lt;p&gt;Once you understand the options that Matplotlib offers, and what they mean, you will realize that generating publication-ready figures can be a breeze. We will focus mostly on plots for papers, but once you get the gist, you can extrapolate to other formats such as posters, books, or websites.  &lt;/p&gt;
+&lt;h2&gt;Size&lt;/h2&gt;
+&lt;p&gt;First, we need to discuss size and resolution, two independent, but related magnitudes. Size is the physical dimensions of an image. If we were preparing a plot for a paper, for example, we should first check the column width. &lt;a href="https://www.sciencemag.org/sites/default/files/Figure_prep_guide.pdf"&gt;Science uses a width&lt;/a&gt; of 9cm, or 3.54 inches. The height of the image will depend on the content we are displaying. For simplicity, I will assume a square image, so we have 3.54x3.54 inches. &lt;/p&gt;
+&lt;p&gt;With matplotlib, defining the size of a figure is straightforward:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;fig = plt.figure(figsize=(3.54,3.54))
+plt.plot(x, y)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;However, knowing the size is only half the problem. We can make a plot of the same size, but with different &lt;em&gt;resolution&lt;/em&gt;, which is the second parameter we need to discuss. &lt;/p&gt;
+&lt;h2&gt;DPI&lt;/h2&gt;
+&lt;p&gt;The resolution of an image can be calculated, counting the total number of pixels it contains or defining the dots per inch: &lt;strong&gt;DPI&lt;/strong&gt;. We can calculate the dots per inch if we know the total number of pixels and the physical size we expect for the image. The other way around, if we know the final size of an image and the &lt;strong&gt;dpi&lt;/strong&gt;, we can calculate the number of pixels we need. The terminology comes from the printer process of making &lt;em&gt;dots&lt;/em&gt; of ink. If we are looking at the image on a screen instead of printing, the &lt;em&gt;dots&lt;/em&gt; become &lt;em&gt;pixels&lt;/em&gt;. &lt;/p&gt;
+&lt;p&gt;If we are preparing a paper, the &lt;em&gt;dpi&lt;/em&gt; is fixed by the printer. Therefore, we must match that value when we prepare our images, or they would look terrible. A typical &lt;em&gt;dpi&lt;/em&gt; value for printing is &lt;strong&gt;600dpi&lt;/strong&gt;. We can specify this directly on matplotlib:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;fig = plt.figure(figsize=(3.54,3.54), dpi=600)
+plt.plot(x, y)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we make the math, this means the final figure has 2124 pixels on each axis. &lt;/p&gt;
+&lt;h2&gt;Font Size&lt;/h2&gt;
+&lt;p&gt;At some point, you must wonder why we are specifying both the figure size and the &lt;em&gt;dpi&lt;/em&gt;. If we used bigger image sizes, we would get more pixels. However, font size and thickness is related to the size of the figure, not to the number of pixels. Therefore, if we do the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;fig = plt.figure(figsize=(3.54,3.54), dpi=300)
+plt.plot(x, y, linewidth=2)
+plt.xlabel('X label (s)', fontsize=20)
+plt.ylabel('Y label (V)', fontsize=10)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We will get a figure that, when set to the proper size of 3.54inx3.54in will have axes with fonts of 20pt and 10pt. Matplotlib allows us to set the font size to the exact value we want. For example, if our main text uses a font size of 12pt, we can make the labels slightly larger than the text, and the ticks slightly smaller:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;import matplotlib 
+matplotlib.rc('xtick', labelsize=10) 
+matplotlib.rc('ytick', labelsize=10) 
+
+fig = plt.figure(figsize=(3.54,3.54), dpi=300)
+plt.plot(x, y, linewidth=2)
+plt.xlabel('X label (s)', fontsize=15)
+plt.ylabel('Y label (V)', fontsize=15)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Remember, setting the font size implies knowing the final size of the figure. We can try to change the &lt;em&gt;dpi&lt;/em&gt; parameter. We will see that even if the figure shrinks on the screen (because of fewer pixels), the relative size of the fonts to the total image area is always the same. If you stretch the images to occupy the same space on the screen, the axes labels will have the same size.  &lt;/p&gt;
+&lt;p&gt;You can download [this document]https://www.pythonforthelab.com/documents/1/image_sizes.pdf) to see how the dpi affects the overall image quality. There are figures at 72dpi, 150dpi, 300dpi, and 600dpi. I've also included one figure with double-column width but keeping all the other parameters the same, including the data.&lt;/p&gt;
+&lt;p&gt;If you are preparing figures for a poster, for example, you would likely have a larger figure size, bigger font sizes, but keeping a &lt;em&gt;dpi&lt;/em&gt; of 600 for printing. &lt;/p&gt;
+&lt;h2&gt;Saving&lt;/h2&gt;
+&lt;p&gt;Once we have the figures we want, the last step is to save them. We must decide the format we want to use to save them. I tend to default to &lt;em&gt;png&lt;/em&gt; because it is a lossless compression format. It means that the quality is as good as what I've defined it. In Matplotlib, it becomes:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;plt.savefig('figure.png', bbox_inches='tight')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The extra argument, &lt;code&gt;bbox_inches&lt;/code&gt; is needed to be sure Matplotlib figures out the entire canvas before saving. If we don't add it, the axes will likely be cropped out of the picture. PNG images can be embedded in documents, websites, and presentations. Almost all paper journals also accept them if you provide them with the proper resolution. &lt;/p&gt;
+&lt;p&gt;Other alternatives are saving as vector formats. You can choose to save as &lt;em&gt;SVG&lt;/em&gt; if you plan to further edit the images in programs such as Inkscape or Adobe Illustrator. If you are writing in TeX, prefer vector over raster, you can save the figures as &lt;em&gt;pdf&lt;/em&gt;. My note: avoid &lt;em&gt;eps&lt;/em&gt; (encapsulated postscript), unless you have a legitimate reason to do it. They are just harder to share, and they don't provide a real gain.  &lt;/p&gt;
+&lt;h2&gt;For Presentations&lt;/h2&gt;
+&lt;p&gt;If we are preparing figures for a presentation, we must consider two things. People will be looking at the slides from afar, and we don't want to have PowerPoint files of hundreds of megabytes. Generally speaking, font sizes in presentations are larger than in a paper, or people won't be able to see the axes. The other aspect is that figures should have a reasonable amount of pixels. Higher resolutions would generate heavy figures without any gain. &lt;/p&gt;
+&lt;p&gt;PowerPoint specifies some default slide dimensions. For a wide-screen presentation, they are 13.33inx7.5in. Let's assume we will use a Full-HD projector, which has a width of 1920px and a height of 1080px. It gives a &lt;em&gt;dpi&lt;/em&gt; of 144. However, PowerPoint works with a &lt;a href="https://docs.microsoft.com/en-us/office/troubleshoot/powerpoint/change-export-slide-resolution"&gt;default resolution&lt;/a&gt; of &lt;strong&gt;96dpi&lt;/strong&gt;. &lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: other programs may use different default resolutions, or newer versions of PowerPoint may default to higher resolutions. In any case, the only thing you have to do is changing the &lt;em&gt;dpi&lt;/em&gt; parameter of the figure. &lt;/p&gt;
+&lt;p&gt;With the information we have, we can create the figures: &lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;import matplotlib 
+matplotlib.rc('xtick', labelsize=16) 
+matplotlib.rc('ytick', labelsize=16) 
+
+fig = plt.figure(figsize=(13.33,7.5), dpi=96)
+plt.plot(x, y, linewidth=2)
+plt.xlabel('X label (s)', fontsize=18)
+plt.ylabel('Y label (V)', fontsize=18)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have selected font sizes of &lt;strong&gt;16&lt;/strong&gt; and &lt;strong&gt;18&lt;/strong&gt;. These are reasonable values, but you may prefer to make them larger if you are presenting to large auditoriums.  In most presentations, however, we won't show figures at full-screen. If we use two images side-by-side, we can have something like this:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;fig = plt.figure(figsize=(5,3), dpi=96)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If we don't scale the image after we embed it into PowerPoint, we will have consistent figures. Perhaps they are full-screen, maybe they are displayed side-by-side, but all the axes and line thicknesses will be precisely the same. &lt;/p&gt;
+&lt;h2&gt;Figures for the Web&lt;/h2&gt;
+&lt;p&gt;If you are preparing figures for the web, then the discussion becomes much more complicated. Screens change in shape and resolution. Someone behind an iPad with a retina display will have as many pixels as someone behind a desktop screen. Still, the physical size of the figure is dramatically different. There is no blanket advice on how to prepare images for the web that work across all possible situations. Most websites make separate images for different situations, at various resolutions, and with different content. &lt;/p&gt;
+&lt;p&gt;However, the best you can do when preparing images for the web is to save them as &lt;strong&gt;SVG&lt;/strong&gt;, which is a vector format. These images can be scaled without losing resolution. In Matplotlib, it is trivial:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;plt.savefig('my_figure.svg', bbox_inches='tight')
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can go ahead and try changing the &lt;em&gt;dpi&lt;/em&gt; of the image before saving, and try to notice if there are any differences. &lt;/p&gt;
+&lt;h2&gt;Conclusions&lt;/h2&gt;
+&lt;p&gt;If you are preparing figures for a publication, the best you can do is finding out the size figures should have. Most journals give you the dimensions of the columns. If you can't find them, you can always default to the size of &lt;a href="https://www.sciencemag.org/sites/default/files/Figure_prep_guide.pdf"&gt;Science&lt;/a&gt;. Once you know the size of your figures, fix the &lt;em&gt;dpi&lt;/em&gt;. If it is for a paper, a thesis, or a poster, &lt;strong&gt;600dpi&lt;/strong&gt; should be good enough. Then, set the font size of the labels and the axes to match the font size of the text around them. You can make labels and ticks slightly bigger or smaller than the text, depending on your style preferences. &lt;/p&gt;
+&lt;p&gt;In &lt;a href="https://www.pythonforthelab.com/documents/1/image_sizes.pdf"&gt;this PDF&lt;/a&gt;, I have included figures generated at different &lt;em&gt;dpi&lt;/em&gt; but scaled to the sizes recommended by Science.&lt;/p&gt;</content><category term="tips"></category><category term="matplotlib"></category><category term="resolution"></category><category term="figure"></category><category term="plot"></category><category term="saving"></category></entry><entry><title>Python Tips: Using Sets</title><link href="http://localhost:8000/blog/python-tips-using-sets" rel="alternate"></link><published>2020-05-11T00:00:00+02:00</published><updated>2020-05-11T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-05-11:/blog/python-tips-using-sets</id><summary type="html">&lt;p&gt;Most people are familiar with lists, tuples, and dictionaries as the basic data types for grouping information. However, there is another convenient option: &lt;strong&gt;sets&lt;/strong&gt;. They are directly linked to the mathematical idea of a &lt;em&gt;set&lt;/em&gt;. To define them, we can use the following syntax:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var = {1, 2, 3, 4}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Most people are familiar with lists, tuples, and dictionaries as the basic data types for grouping information. However, there is another convenient option: &lt;strong&gt;sets&lt;/strong&gt;. They are directly linked to the mathematical idea of a &lt;em&gt;set&lt;/em&gt;. To define them, we can use the following syntax:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var = {1, 2, 3, 4}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can also use this alternative:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var1 = set([1, 2, 3, 4])
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Where the argument of &lt;code&gt;set&lt;/code&gt; is an iterable (see &lt;a href="https://www.pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where/"&gt;this article&lt;/a&gt; if you want to learn about iterables). &lt;/p&gt;
+&lt;p&gt;Sets &lt;strong&gt;can't have repeated elements&lt;/strong&gt;. Therefore, they can be used to clean up the repeated elements from iterables. For example, &lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;mis = &amp;quot;mississippi&amp;quot;
+
+var = set(mis)
+for i in var:
+    print(i)
+# p
+# i
+# m
+# s
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The code only outputs different letters. See that the &lt;strong&gt;order is not respected&lt;/strong&gt;. By definition, sets are unordered. Sets also define operations. &lt;/p&gt;
+&lt;h3&gt;Operations Between Sets&lt;/h3&gt;
+&lt;h4&gt;Union&lt;/h4&gt;
+&lt;p&gt;To calculate the union between two sets:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;mis = &amp;quot;mississippi&amp;quot;
+ama = &amp;quot;amazon&amp;quot;
+var1 = set(mis)
+var2 = set(ama)
+
+letters = var1 | var2
+
+for i in letters:
+    print(i)
+
+# n
+# i
+# s
+# a
+# m
+# z
+# p
+# o
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Intersection&lt;/h4&gt;
+&lt;p&gt;The intersection between two sets can also be calculated with an operator:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;mis = &amp;quot;mississippi&amp;quot;
+ama = &amp;quot;amazon&amp;quot;
+var1 = set(mis)
+var2 = set(ama)
+
+letters = var1 &amp;amp; var2
+
+for i in letters:
+    print(i)
+
+# m
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Subsets or Supersets&lt;/h4&gt;
+&lt;p&gt;If you want to know whether a set is contained in another (or the other way around), you can use the comparison operator:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var1 = set('asia')
+var2 = set('australia')
+
+print(var1 &amp;lt; var2)
+
+# True
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h4&gt;Difference between sets&lt;/h4&gt;
+&lt;p&gt;The difference between sets can be defined in different ways. For example, if we want to remove the elements of one set from another, we can do the following:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var1 = set('america')
+var2 = set('australia')
+
+var3 = var2 - var1
+
+for i in var3:
+    print(i)
+
+# t
+# s
+# l
+# u
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It removed the elements of &lt;code&gt;var1&lt;/code&gt; from &lt;code&gt;var2&lt;/code&gt;. There is no need for &lt;code&gt;var1&lt;/code&gt; to be a subset of &lt;code&gt;var2&lt;/code&gt;, it just removes the elements that are present and disregards the ones that are not. &lt;/p&gt;
+&lt;p&gt;But there is another option, which is the &lt;strong&gt;symmetric difference&lt;/strong&gt;, meaning the elements that are present in only one of the two sets, but not in both:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var1 = set('america')
+var2 = set('australia')
+
+var3 = var1 ^ var2
+
+print(var3)
+
+# {'c', 'u', 's', 'm', 'e', 't', 'l'}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Accessing Elements&lt;/h3&gt;
+&lt;p&gt;Since sets are unordered, we can't access the elements using an index. However, sets are iterables, which allowed us to do things like&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;for i in var1:
+    print(i)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Sets also allow us to pop elements:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var = set('mississippi')
+
+print(var)
+print(var.pop())
+print(var)
+
+# {'s', 'i', 'm', 'p'}
+# s
+# {'i', 'm', 'p'}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can also verify if an element is contained within a set:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var = set('mississippi')
+print('i' in var)
+
+# True
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3&gt;Frozen Sets&lt;/h3&gt;
+&lt;p&gt;Sets are &lt;a href="https://www.pythonforthelab.com/blog/mutable-and-immutable-objects/"&gt;mutable&lt;/a&gt;, which means that we can change their contents while the variable will be pointing to the same object. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var1 = set('mississipi')
+var2 = var1
+var3 = set('amazon')
+
+print(var2)
+# {'s', 'p', 'i', 'm'}
+var1 |= var3
+
+print(var2)
+# {'p', 'i', 'n', 'm', 'o', 'z', 's', 'a'}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In the example above, we change &lt;code&gt;var1&lt;/code&gt; but the changes get propagated to &lt;code&gt;var2&lt;/code&gt;, as expected for mutable objects. Sets define another data type that prevents that behavior, called &lt;code&gt;frozenset&lt;/code&gt;, see the example below:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var1 = frozenset('mississipi')
+var2 = var1
+var3 = set('amazon')
+
+print(var2)
+# frozenset({'p', 'm', 's', 'i'})
+var1 |= var3
+
+print(var2)
+# frozenset({'p', 'm', 's', 'i'})
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can also check the &lt;code&gt;id&lt;/code&gt; of the variables to see that they are effectively changing:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="language-python"&gt;var1 = frozenset('mississipi')
+print(id(var1))
+# 139836399804936
+var1 |= var3
+print(id(var1))
+# 139836371992136
+&lt;/code&gt;&lt;/pre&gt;</content><category term="tips"></category><category term="data types"></category><category term="tips"></category><category term="iterables"></category></entry></feed>

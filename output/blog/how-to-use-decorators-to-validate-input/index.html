@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>How to Use Decorators to Validate Input | Python For The Lab</title>
+
+  <meta name="tags" content="Decorators, Python, Tricks, Validation, Data, ">
+  <meta name="description" content="Learn how to use decorators to validate user input before communicating
+with a device
+">
+  <meta name="author" content="Aquiles Carattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="http://localhost:8000/theme/css/style.css">
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
+</head>
+
+<body>
+  <!-- Wrapper -->
+  <section class="wrapper">
+
+<!-- Intro -->
+<div class="intro blog article">
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <a href="/" class="logo">Python for the Lab</a>
+      <div class="header-dd">
+        <div class="navigation">
+          <ul>
+            <li class="active"><a href="http://localhost:8000/blog" class="nav-item blog"><span>Blog</span></a></li>
+            <li><a href="http://localhost:8000/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                   class="nav-item forum"><span>Forum</span></a></li>
+            <li><a href="http://localhost:8000/books" class="nav-item books"><span>Books</span></a></li>
+            <li><a href="http://localhost:8000/about" class="nav-item about"><span>About</span></a></li>
+          </ul>
+        </div>
+        <div class="search field-wp">
+          <form action="#">
+            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+            <input type="submit" class="search-btn">
+          </form>
+          <div data-stork="sitesearch-output"></div>
+        </div>
+      </div>
+      <button class="menu-btn"><span>Menu</span></button>
+    </div>
+    <!-- End Header -->
+
+    <!-- Intro Cnt -->
+    <div class="intro-cnt v-article">
+      <div class="side-text">
+      </div>
+      <div class="side-form small-sb-form">
+        <div class="sb-form" id="mc_embed_signup">
+          <h4>Get all the information directly to your inbox</h4>
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+              target="_self"
+              novalidate="">
+            <div class="field-wp" id="mc_embed_signup_scroll">
+              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
+                     value="">
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk form bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
+                   id="mc-embedded-subscribe">
+            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Intro Cnt -->
+
+  </div>
+</div>
+<!-- End Intro -->
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+
+        <div class="article-cnt">
+          <div class="leftside">
+            <div class="article-image">
+              <img src="http://localhost:8000//images/cartoon_decorators.png" alt="" width="800">
+            </div>
+            <h1>How to Use Decorators to Validate Input</h1>
+            <h3>Learn how to use decorators to validate user input before communicating
+with a device
+</h3>
+            <div class="info">
+              <span class="item-1 author">by Aquiles Carattino</span>
+              <span class="item-1 date">2018-03-12</span>
+                <span class="item-tag first">Decorators</span>
+                <span class="item-tag ">Python</span>
+                <span class="item-tag ">Tricks</span>
+                <span class="item-tag ">Validation</span>
+                <span class="item-tag ">Data</span>
+            </div>
+            <main>
+              <p>Python is rich in resources that can shorten the time it takes to
+develop new programs and simplify repetitive tasks. Decorators are one
+of such elements but more often than not they are not considered by less
+experienced developers. Adding decorators to the syntactic toolbox can
+be of great use in different contexts, and in this article, we are going
+to discuss how can they help you when communicating with a device. The
+example code can be found in our <a href="https://github.com/PFTL/website_example_code/tree/master/pftl_code/code/01_Decorators">Github
+repository</a>.</p>
+<p>Decorators in Python are nothing more than functions that take as
+arguments other functions. They appear with an <code>@</code> in front of them
+right above a function (or a method within a class). Let's quickly recap
+how functions work in Python and how to use them. Imagine you want to
+compute the average of two values. We can develop a function for it:</p>
+<pre><code class="language-python">def average(x, y):
+   avg = (x+y)/2
+   return avg
+</code></pre>
+<p>We can use the function directly in our code by writing:</p>
+<pre><code class="language-python">a = 1
+b = 3
+result = average(1, 3)
+print(result)
+</code></pre>
+<p>What you should see happening is that when you call the function
+<code>average</code> it adds both numbers and returns their mean value. Imagine
+that, for some reason, you want to allow only positive numbers as
+arguments of your function. You can expand the <code>average</code> function to
+check whether it is true or not.</p>
+<pre><code class="language-python">def average(x, y):
+   if x&lt;0 or y&lt;0:
+      raise Exception(&quot;Both x and y have to be positive&quot;)
+
+   avg = (x + y)/2
+   return avg
+</code></pre>
+<p>Every time someone wants to use the function with a negative argument,
+an error will be raised. Later, we are asked to develop a new function
+to compute the geometric average of two numbers, and we need them both
+to be positive. Our function will look like this:</p>
+<pre><code class="language-python">import math
+
+def geom_average(x, y):
+   if x&lt;0 or y&lt;0:
+      raise Exception(&quot;Both x and y have to be positive&quot;)
+
+   avg = math.sqrt(x*y)
+   return avg
+</code></pre>
+<p>There is a general rule of thumb that says that code shouldn't be copied
+more than twice. If you are going to copy-paste code for the third time
+there is probably a better way of doing it. In the examples above, you
+can see that the verification of the input is exactly the same in both
+functions. If we were to write a third function, we would meet the
+three-copies rule. It would be useful to have an external way of
+checking that both inputs are positive, and this is exactly what
+decorators are meant to do.</p>
+<h2>Functions as arguments and as outputs of other functions</h2>
+<p>Before we can go into the details of how to use <code>decorators</code> in Python,
+it is important to show how functions work with inputs and outputs that
+are other functions. For example, we could define a function that
+transforms the output of the averages defined above into integers. It is
+a very simplistic example but already shows the pattern that you can
+follow to achieve more complex behaviors.</p>
+<pre><code class="language-python">def integer_output(func, x, y):
+   res = func(x, y)
+   return int(res)
+</code></pre>
+<p>In the code above, you can see that <code>integer_output</code> takes three
+arguments, a function <code>func</code> and two numbers, <code>x</code> and <code>y</code> . We use the
+function, regardless of what it is, with arguments <code>x</code> and <code>y</code>. It then
+returns the result of <code>func</code> converted to an integer value.
+<code>integer_output</code> can be used like this:</p>
+<pre><code class="language-python">rounded = integer_output(average, 1, 2)
+print(rounded)
+geom_rounded = integer_output(geom_average, 4, 5)
+print(geom_rounded)
+</code></pre>
+<p>It is important to note that the first argument is a function and it
+doesn't matter which one. You could use <code>average</code> or <code>geom_average</code>. The
+next two arguments are going to be passed directly to <code>func</code> . This is
+already quite powerful and most likely you can think a lot of ways in
+which you can use it, but Python allows you to do even more interesting
+things.</p>
+<p>Functions can also be defined within functions and you can use them
+based on your input arguments. For example, let's assume you want to use
+<code>average</code> only if the sum of x and y is even and the <code>geom_average</code> if
+the sum is odd:</p>
+<pre><code class="language-python">def even_odd_average(x, y):
+   def average(a, b):
+      return (a+b)/2
+   def geom_average(a, b):
+      return math.sqrt(a*b)
+
+   if (x+y) % 2 == 0:
+      return average(x, y)
+   else:
+      return geom_average(x, y)
+</code></pre>
+<p>The function <code>even_odd_average</code> takes only two arguments on which it is
+going to perform the average. Inside we define two functions, exactly as
+we did earlier, <code>average</code> and <code>geom_average</code>, but this time they are
+available only within the <code>even_odd_average</code> function. Based on the
+input from the user, we either calculate the average or the geometric
+average as requested earlier and we return the value. We can use this
+function as:</p>
+<pre><code class="language-python">print(even_odd_average(4, 6))
+print(even_odd_average(4, 9))
+</code></pre>
+<p>So far, we have seen how to use functions as arguments in other
+functions and how to define functions within functions. The only missing
+part is to be able to return a function instead of a value. Let's assume
+you want to print the time it takes to calculate the average between two
+numbers, but you don't want to re-write your original function. We have
+to write a function wrapper.</p>
+<pre><code class="language-python">import time
+
+def timing_average(func):
+   def wrapper(x, y):
+      t0 = time.time()
+      res = func(x, y)
+      t1 = time.time()
+      print(&quot;It took {} seconds to calculate the average&quot;.format(t1-t0))
+      return res
+
+   return wrapper
+</code></pre>
+<p>We start by defining a function that takes as an argument another
+function. We also define a new function called <code>wrapper</code> as we explained
+earlier. So far, both steps were done in the previous examples, but now
+we are going to use <code>func</code> within the <code>wrapper</code>. We start by storing the
+current time at the variable <code>t0</code>. We execute the function <code>func</code> with
+the arguments <code>x</code> and <code>y</code> and store the new time at <code>t1</code>. We print the
+total time it took to run the function and return the output of <code>func</code>.
+The important part here is the very last line. As you can see, we are
+not returning the value that <code>func</code> returns, but we are actually
+returning the <code>wrapper</code>, which is in itself a function. To see this in
+action, we can do the following:</p>
+<pre><code class="language-python">new = timing_average(average)
+new(2, 4)
+</code></pre>
+<p>What you see in the above code is that we create a function called <code>new</code>
+by using <code>timing_average</code> with only one argument, the function
+<code>average</code>. <code>New</code> will take the same inputs that the <code>wrapper</code> function
+takes. If we use <code>new</code> as a function, with arguments <code>2</code> and <code>4</code> , you
+will see that it prints to screen the total time it took to calculate
+the average. <code>new</code> is nothing more than the function <code>wrapper</code>, defined
+using <code>average</code>. We could do the same using <code>geom_average</code>:</p>
+<pre><code class="language-python">new_geom = timing_average(geom_average)
+new_geom(4,5)
+</code></pre>
+<p>The syntax above can be hard to understand and forces you to define new
+functions to add timing capabilities. When you see that you are
+assigning the output of <code>timing_average</code> to a variable called <code>new</code> you
+don't expect it to actually be a function. If you already have working
+code, you need to do a lot of refactoring in order to define and use the
+new functions.</p>
+<p>Fortunately, Python offers a very clear and simple way of achieving the
+same functionality, without the downsides just said. If you managed to
+follow the above examples, you are ready to improve the way the code
+looks like by using <em>Python syntactic sugar</em>.</p>
+<h2>Syntactic Sugar for Decorators</h2>
+<p>You already know almost everything there is to know regarding how to use
+decorators, you are just missing the syntactic sugar of Python. With
+what you have already done, you can improve the style of your code quite
+easily. Assuming you want to add timing capabilities to your average or
+geometrical average function, you can simply do:</p>
+<pre><code class="language-python">@timing_average
+def average(x, y):
+   return (x+y)/2
+</code></pre>
+<p>By simply adding <code>@timing_average</code> before your function, you are now
+able to use <code>average</code> as always, but printing the time it takes to
+calculate it. The obvious advantage of this syntax is that it allows you
+to add an interesting new functionality without altering your downstream
+code. You don't need to define a new function, you only need to add one
+line of code before the definition of your <code>average</code>. It runs as always:</p>
+<pre><code class="language-python">avg = average(4, 6)
+print('The average between 4 and 6 is {}'.format(avg))
+</code></pre>
+<p>Coming back to the examples of the averages that take only positive
+arguments, and building on the example of <code>timing_average</code>, we can
+develop a wrapper function that would check whether the input of our
+function is positive or not.</p>
+<pre><code class="language-python">def check_positive(func):
+   def func_wrapper(x, y):
+      if x&lt;0 or y&lt;0:
+         raise Exception(&quot;Both x and y have to be positive for function {} to work&quot;.format(func.__name__))
+      res = func(x,y)
+      return res
+   return func_wrapper
+</code></pre>
+<p>The structure of <code>check_positive</code> is very similar to what we have done
+for the timing. The only difference is that we check the input arguments
+and we raise an <code>Exception</code> if they are not both positive. Since we are
+raising an exception for an unknown function, it becomes handy to
+display which function actually gave the error. We achieve that by using
+<code>func.__name__</code>, which will tell us the name of the function. The rest
+is exactly the same as with the timing example. We can write our average
+functions as follows:</p>
+<pre><code class="language-python">@check_positive
+def average(x, y):
+   return (x + y)/2
+
+@check_positive
+def geom_average(x, y):
+   return math.sqrt(x*y)
+</code></pre>
+<p>Both functions, <code>average</code> and <code>geom_average</code> don't change their names,
+therefore you can use them as always, but they will check for positive
+input before computing the average:</p>
+<pre><code class="language-python">average(2, 4)
+average(-2, 4)
+geom_average(4, 9)
+geom_average(-4, 10)
+</code></pre>
+<p>Decorators can also be combined, you can time a function AND request the
+inputs to be positive:</p>
+<pre><code class="language-python">@timing_average
+@check_positive
+def average(x, y):
+   return (x + y)/2
+</code></pre>
+<p>You can play around and see what happens if you change the order of the
+decorators. Importantly, if you use <code>func.__name__</code> to print the name of
+the function that raised the <code>Exception</code> within a decorator, you can see
+that the name can change and become the name of the wrapper. In most
+cases this is not a desired situation because you won't be able to debug
+what is the real function giving troubles, you will just get the name of
+the decorator. However, this is a more subtle topic that will be covered
+in the future.</p>
+<p>Decorators are very powerful and can help you develop very clean and
+useful code. The obvious application of decorators is to validate the
+input provided by the user. Decorators are also very useful when you are
+writing a library that other developers are going to use. Or when you
+want to alter the behavior of a method or function in a systematic way.
+For example, you could use some cache in order to avoid running the same
+function with the same arguments over and over again.</p>
+<p>One of the advantages of decorators is that even if a developer doesn't
+fully understand what it is happening under the hood, it will for sure
+understand how to use them and what to expect. If you provide good
+examples in your code it will become apparent where and when to include
+specific decorators. Now that you have a basic understanding of what the
+<code>@</code> means in Python you can start thinking about many more interesting
+applications.</p>
+<p>In this article, we have shown a couple of very basic examples that can
+be greatly improved. If you have ever encountered decorators and didn't
+understand how to use them, or you are looking for more specific
+information, leave your message in the comment section below, and we will
+use your feedback to write a follow-up article specifically designed to
+answer your questions.</p>
+            </main>
+            <div class="info-list">
+              <span class="item author">Article written by Aquiles Carattino</span>
+            </div>
+              <div class="similar-posts">
+                <h3>Related Articles:</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/how-to-use-decorators-part-2" class="item">
+                        <img src="/images/michael-browning-227688-unsplash_linkedin.width-800.jpg" alt="">
+                        <span class="date">2018-05-18</span>
+                        <span class="name">How to use decorators Part 2</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/virtual-environment-is-a-must-have-tool" class="item">
+                        <img src="/images/virtual_environments_python.png" alt="">
+                        <span class="date">2018-03-09</span>
+                        <span class="name">Virtual Environment is a Must-Have Tool</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/mutable-and-immutable-objects" class="item">
+                        <img src="/images/rawpixel-274862-unsplash_linkedin.width-800.jpg" alt="">
+                        <span class="date">2018-08-23</span>
+                        <span class="name">Mutable and Immutable Objects</span>
+                      </a>
+                    </li>
+                </ul>
+              </div>
+            <div class="bottom-section">
+              <h4>Share your thoughts with us!</h4>
+              <div class="comments">
+                <!-- Comment -->
+                <script src="https://utteranc.es/client.js"
+                        repo="PFTL/pftl_discussions"
+                        issue-term="pathname"
+                        label="Comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+              </div>
+            </div>
+          </div>
+          <div class="rightside">
+            <div class="support-box">
+              <h3>Support Us</h3>
+              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
+                Lab</strong></p>
+              <a href="http://localhost:8000/books" class="button">Check out the book</a>
+            </div>
+            <div class="latest-posts">
+
+                <h3>Latest Articles</h3>
+                <ul>
+                    <li>
+                      <a href="http://localhost:8000/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
+                      <span>by Aquiles Carattino, 2021-03-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
+                      <span>by Aquiles Carattino, 2021-03-21</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
+                      <span>by Aquiles Carattino, 2021-02-27</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
+                      <span>by Aquiles Carattino, 2021-01-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
+                      <span>by Aquiles Carattino, 2020-06-13</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
+                      <span>by Aquiles Carattino, 2020-05-25</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
+                      <span>by Aquiles Carattino, 2020-05-18</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
+                      <span>by Aquiles Carattino, 2020-05-16</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/python-tips-using-sets">Python Tips: Using Sets</a>
+                      <span>by Aquiles Carattino, 2020-05-11</span>
+                    </li>
+                    <li>
+                      <a href="http://localhost:8000/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
+                      <span>by Aquiles Carattino, 2020-04-10</span>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="subscribe-fixed">
+              <button class="action">Never Stop Learning</button>
+              <div class="cnt">
+                <p>Join over 1000 Python developers and don't miss any updates!</p>
+                <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-sb-form">
+          <div class="sb-form">
+            <h4>Get all the information directly to your inbox</h4>
+            <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Main -->
+
+  </section>
+  <!-- End Wrapper -->
+
+<!-- Footer -->
+<div class="footer">
+  <div class="container">
+    <div class="footer-cnt">
+      <p class="left">
+        &copy; Python For The Lab <span class="current-year">2023</span>
+      </p>
+      <p class="center">
+        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+          <img alt="Creative Commons License"
+               style="border-width:0"
+               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
+      </p>
+      <p class="right">
+        <a href="http://localhost:8000/cookie-policy">Cookie Policy</a>
+        <a href="http://localhost:8000/privacy-policy">Privacy Policy</a>
+      </p>
+    </div>
+  </div>
+</div>
+<!-- End Footer --><script src="http://localhost:8000/theme/js/prism.js"></script>
+<script src="http://localhost:8000/theme/js/stork.js"></script>
+<script>
+    stork.initialize("http://localhost:8000/theme/js/stork.wasm")
+    stork.downloadIndex("sitesearch", "http://localhost:8000/search-index.st")
+    stork.attach("sitesearch")
+</script></body>
+</html>
