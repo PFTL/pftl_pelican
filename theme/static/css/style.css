@@ -140,7 +140,7 @@ code, kbd, pre, samp {
 	.header .header-dd .navigation ul li .nav-item:after { display: none; }
 	.header .header-dd .navigation ul li .nav-item:before { content: ''; width: 35px; height: 35px; background-repeat: no-repeat; background-position: center; background-size: contain; position: absolute; top: 50%; left: 10px; display: block; transform: translateY(-50%); transition: all .3s; }
 	.header .header-dd .navigation ul li .nav-item.blog:before { width: 28px; height: 28px; background-image: url(images/blog.svg); }
-	.header .header-dd .navigation ul li .nav-item.courses:before { background-image: url(images/courses.svg); left: 5px; }
+	.header .header-dd .navigation ul li .nav-item.hire-me:before { background-image: url(images/hire-me.svg); left: 5px; }
 	.header .header-dd .navigation ul li .nav-item.forum:before { background-image: url(images/forum.svg); }
 	.header .header-dd .navigation ul li .nav-item.books:before { background-image: url(images/books.svg); }
 	.header .header-dd .navigation ul li .nav-item.about:before { width: 30px; height: 30px; background-image: url(images/about.svg); }
@@ -182,8 +182,8 @@ code, kbd, pre, samp {
 .navigation-wp ul li .nav-item:after { opacity: 0; visibility: hidden; }
 .navigation-wp ul li .nav-item.blog:before { width: 28px; height: 28px; background-image: url(images/blog.svg); }
 .navigation-wp ul li .nav-item.blog:after { width: 28px; height: 28px; background-image: url(images/blog-white.svg); }
-.navigation-wp ul li .nav-item.courses:before { background-image: url(images/courses.svg); }
-.navigation-wp ul li .nav-item.courses:after { background-image: url(images/courses-white.svg); }
+.navigation-wp ul li .nav-item.hire-me:before { background-image: url(images/hire-me.svg); }
+.navigation-wp ul li .nav-item.hire-me:after { background-image: url(images/hire-me-white.svg); }
 .navigation-wp ul li .nav-item.forum:before { background-image: url(images/forum.svg); }
 .navigation-wp ul li .nav-item.forum:after { background-image: url(images/forum-white.svg); }
 .navigation-wp ul li .nav-item.books:before { background-image: url(images/books.svg); }

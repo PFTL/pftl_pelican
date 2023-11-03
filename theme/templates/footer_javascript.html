@@ -1,7 +1,5 @@
 <script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/prism.js"></script>
-<script src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/stork.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
 <script>
-    stork.initialize("{{ SITEURL }}/{{ THEME_STATIC_DIR }}/js/stork.wasm")
-    stork.downloadIndex("sitesearch", "{{ SITEURL }}/search-index.st")
-    stork.attach("sitesearch")
+    stork.register("sitesearch", "{{ SITEURL }}/search-index.st");
 </script>

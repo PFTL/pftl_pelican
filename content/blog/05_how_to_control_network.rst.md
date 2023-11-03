@@ -299,7 +299,7 @@ don't hesitate to [contact us](https://www.pythonforthelab.com/about). We can
 custom build a solution to your problem. If you would like to learn
 about network communication and much more, you can also consider our
 [Advanced Python For The Lab
-Course](https://www.pythonforthelab.com/courses).
+Course](https://www.pythonforthelab.com/hire-me).
 
 Header photo by [John
 Carlisle](https://unsplash.com/photos/l090uFWoPaI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

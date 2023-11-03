@@ -13,7 +13,7 @@
             <div class="navigation">
               <ul>
                 <li><a href="{{ SITEURL }}/blog" class="nav-item blog"><span>Blog</span></a></li>
-                <li><a href="{{ SITEURL }}/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+                <li><a href="{{ SITEURL }}/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
                 <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank" class="nav-item forum"><span>Forum</span></a></li>
                 <li><a href="{{ SITEURL }}/books" class="nav-item books"><span>Books</span></a></li>
                 <li><a href="{{ SITEURL }}/about" class="nav-item about"><span>About</span></a></li>
@@ -77,7 +77,7 @@
       <div class="container">
         <ul>
           <li><a href="{{ SITEURL }}/blog" class="nav-item blog"><span>Blog</span></a></li>
-          <li><a href="{{ SITEURL }}/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+          <li><a href="{{ SITEURL }}/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
           <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank" class="nav-item forum"><span>Forum</span></a></li>
           <li><a href="{{ SITEURL }}/books" class="nav-item books"><span>Books</span></a></li>
           <li><a href="{{ SITEURL }}/about" class="nav-item about"><span>About</span></a></li>
@@ -91,13 +91,13 @@
       <div class="container">
         <h2>Our Latest Articles</h2>
         <div class="articles-cnt">
-          {% for article in articles %}
+          {% for article in articles[:3] %}
             <!-- Article -->
             <div class="article{% if loop.first %} big{% endif %}">
               <span class="image"><img src="{{ article.featured_image }}" alt=""></span>
               <span class="date">{{ article.date.strftime('%Y-%m-%d') }}</span>
               <a href="{{ SITEURL }}/{{ article.url }}" class="title">{{ article.title }}</a>
-              <span class="text">{{ article.summary }}</span>
+              <span class="text">{{ article.summary|striptags }}</span>
               <span class="more-btn"><span>Read Article</span></span>
             </div>
             <!-- End Article -->
