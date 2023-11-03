@@ -1,199 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Storing Binary Data and Serializing | Python For The Lab</title>
-
-  <meta name="tags" content="Data, Storing, SQLite, HDF5, ascii, json, Data Storage, ">
-  <meta name="description" content="Learn different ways of storing data in your projects">
-  <meta name="author" content="Aquiles Carattino">
-
-  <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet">
-
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/style.css">
-  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
-
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
-</head>
-
-
-
-<body>
-  <!-- Wrapper -->
-  <section class="wrapper">
-
-<!-- Intro -->
-<div class="intro blog article">
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <a href="/" class="logo">Python for the Lab</a>
-      <div class="header-dd">
-        <div class="navigation">
-          <ul>
-            <li class="active"><a href="https://pythonforthelab.com/blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="https://pythonforthelab.com/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
-                   class="nav-item forum"><span>Forum</span></a></li>
-            <li><a href="https://pythonforthelab.com/books" class="nav-item books"><span>Books</span></a></li>
-            <li><a href="https://pythonforthelab.com/about" class="nav-item about"><span>About</span></a></li>
-          </ul>
-        </div>
-        <div class="search field-wp">
-          <form action="#">
-            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
-            <input type="submit" class="search-btn">
-          </form>
-          <div data-stork="sitesearch-output"></div>
-        </div>
-      </div>
-      <button class="menu-btn"><span>Menu</span></button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Intro Cnt -->
-    <div class="intro-cnt v-article">
-      <div class="side-text">
-      </div>
-      <div class="side-form small-sb-form">
-        <div class="sb-form" id="mc_embed_signup">
-          <h4>Get all the information directly to your inbox</h4>
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-              target="_self"
-              novalidate="">
-            <div class="field-wp" id="mc_embed_signup_scroll">
-              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
-                     value="">
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk form bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
-                   id="mc-embedded-subscribe">
-            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Intro Cnt -->
-
-  </div>
-</div>
-<!-- End Intro -->
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-
-        <div class="article-cnt">
-          <div class="leftside">
-            <div class="article-image">
-              <img src="https://pythonforthelab.com//images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg" alt="" width="800">
-            </div>
-            <h1>Storing Binary Data and Serializing</h1>
-            <h3>Learn different ways of storing data in your projects</h3>
-            <div class="info">
-              <span class="item-1 author">by Aquiles Carattino</span>
-              <span class="item-1 date">2018-08-11</span>
-                <span class="item-tag first">Data</span>
-                <span class="item-tag ">Storing</span>
-                <span class="item-tag ">SQLite</span>
-                <span class="item-tag ">HDF5</span>
-                <span class="item-tag ">ascii</span>
-                <span class="item-tag ">json</span>
-                <span class="item-tag ">Data Storage</span>
-            </div>
-            <main>
-              <p>Last week we have seen how to store data into plain text files that can
-be read by any editor or by other programs. We have also seen that if
-you separate your data with commas your file will follow a standard and
-it will be automatically compatible with other applications, such as
-spreadsheets. One of the main limitations of this strategy is that if
-the data itself contains a comma, your file will not be readable
-anymore.</p>
-<p>In this article, we are going to discuss the encoding of data. This will
-allow us to understand how come that what you save with Python can be
-read by a normal text editor or your web browser. We will also see that
-you can save space on your disk if you encode your data in the proper
-way. In the end what you will have is a clear picture of the difference
-between saving plain text files and binary data.</p>
-<h2>What does it really mean to save text files</h2>
-<p>Last week you have seen different ways of saving text files. One of the
-most noticeable attributes is that those files can be opened with any
-basic text editor, you don't need Python to read them. This already
-should indicate that there is an underlying property that allows
-programs to share files with each other.</p>
-<p>As you have probably heard already, computers don't understand about
-letters or colors, they only understand about 1's and 0's. This means
-that there should be a way of translating that kind of information into
-a letter (or a number, or a color). The way of converting from one to
-another type of representation is called an encoding. Probably you have
-already heard about ascii or Unicode. Those are standards that specify
-how to translate from a stream of bytes (i.e. 1's and 0's) to the
-letters you are seeing now on the screen.</p>
-<p>ASCII stands for American Standard Code for Information Interchange. It
-is a specification on how to translate bytes to characters and
-vice-versa. If you look at the <a href="https://www.asciitable.com/">ASCII
-table</a>, you see that it specifies how to
-translate numbers from 0 to 127 to characters. 128 options is not a
-random choice, it is 7-bit or all the combinations that a sequence of 7
-1's and 0's can generate. You can see also the extended ascii table,
-which adds all the characters up to a number of 255 (i.e. 8-bit).</p>
-<p>Let's do a quick test. We can create an array of integers between 0 and
-255 (8-bit) and store it to a file, and then compare the size of that
-file with the size of the array. The code will look like this:</p>
-<pre><code class="language-python">import sys
+<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Storing Binary Data and Serializing | Python For The Lab</title><meta content="Data, Storing, SQLite, HDF5, ascii, json, Data Storage, " name=tags><meta content="Storing data in binary format with Python" name=description><meta content="Aquiles Carattino" name=author><link href=blog/storing-binary-data-and-serializing rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/storing-binary-data-and-serializing property=og:url><meta content="Storing Binary Data and Serializing" property=og:title><meta content="Storing data in binary format with Python" property=og:description><meta content=/images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/storing-binary-data-and-serializing property=twitter:url><meta content="Storing Binary Data and Serializing" property=twitter:title><meta content="Storing data in binary format with Python" property=twitter:description><meta content=/images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg width=800></div><h1>Storing Binary Data and Serializing</h1><h3>Storing data in binary format with Python</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2018-08-11</span><span class="item-tag first">Data</span><span class=item-tag>Storing</span><span class=item-tag>SQLite</span><span class=item-tag>HDF5</span><span class=item-tag>ascii</span><span class=item-tag>json</span><span class=item-tag>Data Storage</span></div><main><p>Last week we have seen how to store data into plain text files that can be read by any editor or by other programs. We have also seen that if you separate your data with commas your file will follow a standard and it will be automatically compatible with other applications, such as spreadsheets. One of the main limitations of this strategy is that if the data itself contains a comma, your file will not be readable anymore.<p>In this article, we are going to discuss the encoding of data. This will allow us to understand how come that what you save with Python can be read by a normal text editor or your web browser. We will also see that you can save space on your disk if you encode your data in the proper way. In the end what you will have is a clear picture of the difference between saving plain text files and binary data.<h2>What does it really mean to save text files</h2><p>Last week you have seen different ways of saving text files. One of the most noticeable attributes is that those files can be opened with any basic text editor, you don't need Python to read them. This already should indicate that there is an underlying property that allows programs to share files with each other.<p>As you have probably heard already, computers don't understand about letters or colors, they only understand about 1's and 0's. This means that there should be a way of translating that kind of information into a letter (or a number, or a color). The way of converting from one to another type of representation is called an encoding. Probably you have already heard about ascii or Unicode. Those are standards that specify how to translate from a stream of bytes (i.e. 1's and 0's) to the letters you are seeing now on the screen.<p>ASCII stands for American Standard Code for Information Interchange. It is a specification on how to translate bytes to characters and vice-versa. If you look at the <a href=https://www.asciitable.com/>ASCII table</a>, you see that it specifies how to translate numbers from 0 to 127 to characters. 128 options is not a random choice, it is 7-bit or all the combinations that a sequence of 7 1's and 0's can generate. You can see also the extended ascii table, which adds all the characters up to a number of 255 (i.e. 8-bit).<p>Let's do a quick test. We can create an array of integers between 0 and 255 (8-bit) and store it to a file, and then compare the size of that file with the size of the array. The code will look like this:<pre><code class=language-python>import sys
 import numpy as np
 
 x = np.linspace(0, 255, 256, dtype=np.uint8)
@@ -201,78 +6,12 @@ x = np.linspace(0, 255, 256, dtype=np.uint8)
 with open('AA_data.dat', 'w') as f:
     for data in x:
         f.write(str(data)+'\n')
-</code></pre>
-<p>Each element of the array is 8-bits long (or 1 byte). We are storing 256
-elements, and therefore we expect the file to be 256 bytes in size.
-However, if you check it, you will see that it is bigger than that:
-around 914 bytes. This difference is not negligible, so where is it
-coming from?</p>
-<p>We have stored 256 elements, but there more numbers in the file. 10
-elements are 1-digit long, 90 are 2-digits and 156 are 3-digits long. In
-total, there are 658 digits, plus 256 newline characters. If you add
-them up you get exactly 914. This means that each character is taking
-exactly 1 byte or 8 bits. If you are on Windows, there is an extra
-consideration, because the new line character gets replaced by two
-characters and therefore you need to add 512 characters instead of 256.</p>
-<p>When you want to write a <code>1</code>, it takes 1 byte. However, when you store a
-<code>10</code> it will take 2 bytes. You have to remember that, in the space of
-integer numbers of 8 bits, they both take the same amount of memory.
-With this simple example, you start seeing that there are a lot of small
-details that you have to take into account when saving data.</p>
-<h2>Different encodings for text data</h2>
-<p>You may have realized in the previous section that ASCII is limited to a
-special set of characters. If you want to write characters of other
-languages, for example, such as the Spanish ñ, you will need to resort
-to other standards. This gave rise to a myriad of different encodings,
-with a small degree of compatibility between them. If you are
-<a href="https://notepad-plus-plus.org/">Notpad++</a> user you can see on the menu
-that you can select the <em>encoding</em> for the file.</p>
-<p>When you open a text file, the program needs to translate from bytes to
-characters, basically by looking up on a table. If you change that
-table, you change the output. If you use text editors such as
-<a href="https://notepad-plus-plus.org/">Notpad++</a> you will see that you can
-specify the encoding of the file. Select <em>encoding</em> on the menu and then
-<em>character sets</em> and you will find tons of options. If you play with it,
-you will see that the output may change, especially if there are special
-characters from other languages.</p>
-<p>The problem got worst with websites having users from different
-countries expecting to use different character sets. That is why a
-superseding standard appeared, called
-<a href="https://en.wikipedia.org/wiki/Unicode">Unicode</a>. Unicode includes and
-expands the ascii table with up to 32-bit characters, which is billions
-of different choices. Unicode includes thousands of symbols from modern
-and ancient languages, plus all the emojis you are already familiar
-with.</p>
-<p>If you want to specify the encoding used while saving a file, you can do
-the following:</p>
-<pre><code class="language-python">import codecs
+</code></pre><p>Each element of the array is 8-bits long (or 1 byte). We are storing 256 elements, and therefore we expect the file to be 256 bytes in size. However, if you check it, you will see that it is bigger than that: around 914 bytes. This difference is not negligible, so where is it coming from?<p>We have stored 256 elements, but there more numbers in the file. 10 elements are 1-digit long, 90 are 2-digits and 156 are 3-digits long. In total, there are 658 digits, plus 256 newline characters. If you add them up you get exactly 914. This means that each character is taking exactly 1 byte or 8 bits. If you are on Windows, there is an extra consideration, because the new line character gets replaced by two characters and therefore you need to add 512 characters instead of 256.<p>When you want to write a <code>1</code>, it takes 1 byte. However, when you store a <code>10</code> it will take 2 bytes. You have to remember that, in the space of integer numbers of 8 bits, they both take the same amount of memory. With this simple example, you start seeing that there are a lot of small details that you have to take into account when saving data.<h2>Different encodings for text data</h2><p>You may have realized in the previous section that ASCII is limited to a special set of characters. If you want to write characters of other languages, for example, such as the Spanish ñ, you will need to resort to other standards. This gave rise to a myriad of different encodings, with a small degree of compatibility between them. If you are <a href=https://notepad-plus-plus.org/>Notpad++</a> user you can see on the menu that you can select the <em>encoding</em> for the file.<p>When you open a text file, the program needs to translate from bytes to characters, basically by looking up on a table. If you change that table, you change the output. If you use text editors such as <a href=https://notepad-plus-plus.org/>Notpad++</a> you will see that you can specify the encoding of the file. Select <em>encoding</em> on the menu and then <em>character sets</em> and you will find tons of options. If you play with it, you will see that the output may change, especially if there are special characters from other languages.<p>The problem got worst with websites having users from different countries expecting to use different character sets. That is why a superseding standard appeared, called <a href=https://en.wikipedia.org/wiki/Unicode>Unicode</a>. Unicode includes and expands the ascii table with up to 32-bit characters, which is billions of different choices. Unicode includes thousands of symbols from modern and ancient languages, plus all the emojis you are already familiar with.<p>If you want to specify the encoding used while saving a file, you can do the following:<pre><code class=language-python>import codecs
 
 data_to_save = 'Data to Save'
 with codecs.open('AB_unicode.dat', 'w', 'utf-8') as f:
     f.write(data_to_save)
-</code></pre>
-<p>In the code above, the important part is the line that says <code>utf-8</code>.
-Unicode has different implementations, and each one uses a different
-amount of bits per character. You can choose between 8, 16 and 32. You
-can also change the encoding to <code>ascii</code>. As an exercise, compare how
-much space it takes every time you save the data. Open the file being
-saved with a text editor and check if you can see the message.</p>
-<h2>Saving Numpy Arrays</h2>
-<p>Last week we have seen that it is possible to save numpy arrays into
-text files that can be read by any editor. This means that the
-information will be converted to ascii (or Unicode) and then written to
-a file. It is very easy to calculate how much space it will take, based
-on the number of digits that you are storing. Numpy also offers another
-way of storing data, in binary format.</p>
-<p>What we have done in the past was transforming a number to its
-representation as characters, which will allow us to read it back on the
-screen. However, sometimes we don't want to read back, we just want our
-programs to be able to load the information back. Therefore, we could
-store directly the bytes to disk and not their representation as
-strings.</p>
-<p>Let's start by creating an array and then we save it both as numpy
-binary and as ascii to compare between them:</p>
-<pre><code class="language-python">import numpy as np
+</code></pre><p>In the code above, the important part is the line that says <code>utf-8</code>. Unicode has different implementations, and each one uses a different amount of bits per character. You can choose between 8, 16 and 32. You can also change the encoding to <code>ascii</code>. As an exercise, compare how much space it takes every time you save the data. Open the file being saved with a text editor and check if you can see the message.<h2>Saving Numpy Arrays</h2><p>Last week we have seen that it is possible to save numpy arrays into text files that can be read by any editor. This means that the information will be converted to ascii (or Unicode) and then written to a file. It is very easy to calculate how much space it will take, based on the number of digits that you are storing. Numpy also offers another way of storing data, in binary format.<p>What we have done in the past was transforming a number to its representation as characters, which will allow us to read it back on the screen. However, sometimes we don't want to read back, we just want our programs to be able to load the information back. Therefore, we could store directly the bytes to disk and not their representation as strings.<p>Let's start by creating an array and then we save it both as numpy binary and as ascii to compare between them:<pre><code class=language-python>import numpy as np
 
 a = np.linspace(0, 1000, 1024, dtype=np.uint8)
 
@@ -281,26 +20,7 @@ np.save('AC_binay', a)
 with open('AC_ascii.dat', 'w') as f:
     for i in a:
         f.write(str(i)+'\n')
-</code></pre>
-<p>You will end up with two different files, one called 'AC_binary.npy'
-and the other called 'AC_ascii.dat'. The latter can be opened with any
-text editor, while the first one will give you a very weird looking
-file. If you compare the size, you will notice that the binary file is
-using less memory than the ascii file.</p>
-<p>First, you have to note something strange about the code above. We are
-specifying the type of our array to <code>np.uint8</code>, which means that we are
-using 8-bit integers. With 8-bits you can go up to <code>2^8-1</code>, or <code>255</code>.
-Moreover, since we are generating a linear space between 0 and 1000 with
-1024 elements, each one is going to be rounded off. Anyways, this
-discussion is for you to start thinking about different data types and
-what do they mean. If you inspect the ascii file, you will notice that
-the numbers increase up to 255 and then they start again from 0.</p>
-<p>So, we have 1024 numbers, each one taking 8-bits, or equivalently 1
-byte. The array, therefore, will take 1KB (1 kilobyte), but the file we
-are saving is larger than that (around 1.12KB). You can do the math for
-the ascii file and see that you can predict its size. Let's create,
-instead, a file with an array of ones:</p>
-<pre><code class="language-python">import numpy as np
+</code></pre><p>You will end up with two different files, one called 'AC_binary.npy' and the other called 'AC_ascii.dat'. The latter can be opened with any text editor, while the first one will give you a very weird looking file. If you compare the size, you will notice that the binary file is using less memory than the ascii file.<p>First, you have to note something strange about the code above. We are specifying the type of our array to <code>np.uint8</code>, which means that we are using 8-bit integers. With 8-bits you can go up to <code>2^8-1</code>, or <code>255</code>. Moreover, since we are generating a linear space between 0 and 1000 with 1024 elements, each one is going to be rounded off. Anyways, this discussion is for you to start thinking about different data types and what do they mean. If you inspect the ascii file, you will notice that the numbers increase up to 255 and then they start again from 0.<p>So, we have 1024 numbers, each one taking 8-bits, or equivalently 1 byte. The array, therefore, will take 1KB (1 kilobyte), but the file we are saving is larger than that (around 1.12KB). You can do the math for the ascii file and see that you can predict its size. Let's create, instead, a file with an array of ones:<pre><code class=language-python>import numpy as np
 
 a = np.ones((1024), dtype=np.uint8)
 
@@ -309,87 +29,24 @@ np.save('AD_binay', a)
 with open('AD_ascii.dat', 'w') as f:
     for i in a:
         f.write(str(i)+'\n')
-</code></pre>
-<p>The first thing to notice is that the ascii file is now smaller than in
-the example above. You are saving two characters per element (the 1 and
-the newline character), while before you could have up to 4 characters
-per line. However, the numpy binary file has exactly the same size. What
-happens if you run the code above, but specifying the type of the array
-as <code>np.uint16</code>?</p>
-<p>You will see that the ascii file is still taking the same space, exactly
-2KB (or 3KB on Windows). However, the numpy binary format is taking more
-space, exactly 1KB more. The array itself takes 2KB of memory, and there
-is an extra 0.12KB, exactly as before. This already gives us a hint of
-what is going on, but you can keep testing. Change the type to
-<code>np.uint32</code> and you will see that the ascii files are still the same
-size, but the binary file is taking 2KB more than before. Again, you are
-saving 4KB to a file that takes 4.12KB.</p>
-<p>Those extra .12KB that numpy is saving are equivalent to the header we
-were generating in the previous article. Binary files also need to store
-context information in order to be interpreted. You also have to notice
-that what you are storing is not 'just' a number, you are storing also
-its data type. Next time you read that file, you will have an 8, 16 or
-32-bit variable. The ascii file, on the other hand, doesn't have that
-information.</p>
-<p>With these examples, it may even look like that saving ascii files is
-more efficient than saving binary files. Let's see what happens if you
-have more than just 1's in your array:</p>
-<pre><code class="language-python">import numpy as np
+</code></pre><p>The first thing to notice is that the ascii file is now smaller than in the example above. You are saving two characters per element (the 1 and the newline character), while before you could have up to 4 characters per line. However, the numpy binary file has exactly the same size. What happens if you run the code above, but specifying the type of the array as <code>np.uint16</code>?<p>You will see that the ascii file is still taking the same space, exactly 2KB (or 3KB on Windows). However, the numpy binary format is taking more space, exactly 1KB more. The array itself takes 2KB of memory, and there is an extra 0.12KB, exactly as before. This already gives us a hint of what is going on, but you can keep testing. Change the type to <code>np.uint32</code> and you will see that the ascii files are still the same size, but the binary file is taking 2KB more than before. Again, you are saving 4KB to a file that takes 4.12KB.<p>Those extra .12KB that numpy is saving are equivalent to the header we were generating in the previous article. Binary files also need to store context information in order to be interpreted. You also have to notice that what you are storing is not 'just' a number, you are storing also its data type. Next time you read that file, you will have an 8, 16 or 32-bit variable. The ascii file, on the other hand, doesn't have that information.<p>With these examples, it may even look like that saving ascii files is more efficient than saving binary files. Let's see what happens if you have more than just 1's in your array:<pre><code class=language-python>import numpy as np
 
 a = np.linspace(0,65535,65536, dtype=np.uint16)
 np.save('AE_binay', a)
 with open('AE_ascii.dat', 'w') as f:
     for i in a:
         f.write(str(i)+'\n')
-</code></pre>
-<p>Compare the size of the two files and try to understand why are they so
-different.</p>
-<h2>Intro to Pickle</h2>
-<p>So far we have discussed how to save strings or numpy arrays to a file.
-However, Python allows you to define several types of data structures,
-such as lists, dictionaries, custom objects, etc. You can think about
-how to transform a list into a series of strings and use the opposite
-operation to recover the variable. This is what we have done when
-writing arrays to plain text files.</p>
-<p>However, this is very cumbersome, because is very susceptible to small
-changes. For example, it is not the same saving a list of numbers than a
-list that mixes numbers and strings. Fortunately, Python comes with a
-package that allows us to save almost everything we want, called
-<strong>Pickle</strong>. Let's first see it in action and then discuss how it works.</p>
-<p>Imagine you have a list that mixes some numbers and some strings and you
-want to save them to a file, you can do the following:</p>
-<pre><code class="language-python">import pickle
+</code></pre><p>Compare the size of the two files and try to understand why are they so different.<h2>Intro to Pickle</h2><p>So far we have discussed how to save strings or numpy arrays to a file. However, Python allows you to define several types of data structures, such as lists, dictionaries, custom objects, etc. You can think about how to transform a list into a series of strings and use the opposite operation to recover the variable. This is what we have done when writing arrays to plain text files.<p>However, this is very cumbersome, because is very susceptible to small changes. For example, it is not the same saving a list of numbers than a list that mixes numbers and strings. Fortunately, Python comes with a package that allows us to save almost everything we want, called <strong>Pickle</strong>. Let's first see it in action and then discuss how it works.<p>Imagine you have a list that mixes some numbers and some strings and you want to save them to a file, you can do the following:<pre><code class=language-python>import pickle
 
 data = [1, 1.2, 'a', 'b']
 
 with open('AF_custom.dat', 'wb') as f:
     pickle.dump(data, f)
-</code></pre>
-<p>If you try to open the file <em>AF_custom.dat</em> with a text editor you will
-see a collection of strange characters. It is important to note that we
-have opened the file as <code>wb</code>, meaning that we are writing just as
-before, but that the file is opened in binary format. This is what
-allows Python to write a stream of bytes to a file.</p>
-<p>If you want to load the data back into Python, you can do the following:</p>
-<pre><code class="language-python">with open('AF_custom.dat', 'rb') as f:
+</code></pre><p>If you try to open the file <em>AF_custom.dat</em> with a text editor you will see a collection of strange characters. It is important to note that we have opened the file as <code>wb</code>, meaning that we are writing just as before, but that the file is opened in binary format. This is what allows Python to write a stream of bytes to a file.<p>If you want to load the data back into Python, you can do the following:<pre><code class=language-python>with open('AF_custom.dat', 'rb') as f:
     new_data = pickle.load(f)
 
 print(new_data)
-</code></pre>
-<p>Again, check that we have used <code>rb</code> instead of just <code>r</code> for opening the
-file. Then you just load the contents of <code>f</code> into a variable called
-<code>new_data</code>.</p>
-<p>Pickle is transforming an object, in the example above a list, into a
-series of bytes. That procedure is called serialization. The algorithm
-responsible for serializing the information is particular to Python and
-therefore it is not compatible out of the box with other programming
-languages. In the context of Python, serializing an object is called
-<em>pickling</em> and when you deserialize it is called <em>unpickling</em>.</p>
-<h2>Pickling numpy arrays</h2>
-<p>You can use Pickle to save other kinds of variables. For example, you
-can use it to store a numpy array. Let's compare what happens when you
-use the default numpy <code>save</code> method and Pickle:</p>
-<pre><code class="language-python">import numpy as np
+</code></pre><p>Again, check that we have used <code>rb</code> instead of just <code>r</code> for opening the file. Then you just load the contents of <code>f</code> into a variable called <code>new_data</code>.<p>Pickle is transforming an object, in the example above a list, into a series of bytes. That procedure is called serialization. The algorithm responsible for serializing the information is particular to Python and therefore it is not compatible out of the box with other programming languages. In the context of Python, serializing an object is called <em>pickling</em> and when you deserialize it is called <em>unpickling</em>.<h2>Pickling numpy arrays</h2><p>You can use Pickle to save other kinds of variables. For example, you can use it to store a numpy array. Let's compare what happens when you use the default numpy <code>save</code> method and Pickle:<pre><code class=language-python>import numpy as np
 import pickle
 
 data = np.linspace(0, 1023, 1000, dtype=np.uint8)
@@ -398,78 +55,36 @@ np.save('AG_numpy', data)
 
 with open('AG_pickle.dat', 'wb') as f:
     pickle.dump(data, f)
-</code></pre>
-<p>As in the examples earlier, the numpy file will take exactly 1128 bytes.
-1000 are for the data itself and 128 are for the extra information. The
-pickle file will take 1159 bytes, which is not bad at all, considering
-that it is a general procedure and not specific to numpy.</p>
-<p>To read the file, you do exactly the same as before:</p>
-<pre><code class="language-python">with open('AG_pickle.dat', 'rb') as f:
+</code></pre><p>As in the examples earlier, the numpy file will take exactly 1128 bytes. 1000 are for the data itself and 128 are for the extra information. The pickle file will take 1159 bytes, which is not bad at all, considering that it is a general procedure and not specific to numpy.<p>To read the file, you do exactly the same as before:<pre><code class=language-python>with open('AG_pickle.dat', 'rb') as f:
     new_data = pickle.load(f)
 
 print(new_data)
-</code></pre>
-<p>If you check the data you will see that it is actually a numpy array. If
-you run the code in an environment in which numpy is not installed, you
-will see the following error:</p>
-<pre><code class="language-bash">Traceback (most recent call last):
-  File &quot;AG_pickle_numpy.py&quot;, line 14, in &lt;module&gt;
+</code></pre><p>If you check the data you will see that it is actually a numpy array. If you run the code in an environment in which numpy is not installed, you will see the following error:<pre><code class=language-bash>Traceback (most recent call last):
+  File "AG_pickle_numpy.py", line 14, in &LTmodule>
     new_data = pickle.load(f)
 ModuleNotFoundError: No module named 'numpy'
-</code></pre>
-<p>So, you already see that pickle is doing a lot of things under the hood,
-like trying to import numpy.</p>
-<h2>Pickling Functions</h2>
-<p>To show you that Pickle is very flexible, you will see how you can store
-functions. Probably you already heard that everything in Python is an
-object, and Pickle is, in fact, a way of serializing objects. Therefore
-it doesn't really matter what it actually is that you are storing. For a
-function, you would have something like this:</p>
-<pre><code class="language-python">def my_function(var):
+</code></pre><p>So, you already see that pickle is doing a lot of things under the hood, like trying to import numpy.<h2>Pickling Functions</h2><p>To show you that Pickle is very flexible, you will see how you can store functions. Probably you already heard that everything in Python is an object, and Pickle is, in fact, a way of serializing objects. Therefore it doesn't really matter what it actually is that you are storing. For a function, you would have something like this:<pre><code class=language-python>def my_function(var):
     new_str = '='*len(var)
     print(new_str+'\n'+var+'\n'+new_str)
 
 my_function('Testing')
-</code></pre>
-<p>Which is a simple example of a function. It surrounds the text with <code>=</code>
-signs. Storing this function is exactly the same as storing any other
-object:</p>
-<pre><code class="language-python">import pickle
+</code></pre><p>Which is a simple example of a function. It surrounds the text with <code>=</code> signs. Storing this function is exactly the same as storing any other object:<pre><code class=language-python>import pickle
 
 with open('AH_pickle_function.dat', 'wb') as f:
     pickle.dump(my_function, f)
-</code></pre>
-<p>And to load it and use it you would do:</p>
-<pre><code class="language-python">with open('AH_pickle_function.dat', 'rb') as f:
+</code></pre><p>And to load it and use it you would do:<pre><code class=language-python>with open('AH_pickle_function.dat', 'rb') as f:
     new_function = pickle.load(f)
 
 new_function('New Test')
-</code></pre>
-<h2>Limitations of Pickle</h2>
-<p>In order for Pickle to work, you need to have available the definition
-of the object you are pickling. In the examples above, you have seen
-that you need to have numpy installed in order to unpickle an array.
-However, if you try to unpickle your function from a different file than
-the one you used to create it, you will get the following error:</p>
-<pre><code class="language-bash">Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 2, in &lt;module&gt;
-AttributeError: Can't get attribute 'my_function' on &lt;module '__main__' (built-in)&gt;
-</code></pre>
-<p>If you want to unpickle a function in a different file (as most likely
-is going to be the case), you can do the following:</p>
-<pre><code class="language-python">import pickle
+</code></pre><h2>Limitations of Pickle</h2><p>In order for Pickle to work, you need to have available the definition of the object you are pickling. In the examples above, you have seen that you need to have numpy installed in order to unpickle an array. However, if you try to unpickle your function from a different file than the one you used to create it, you will get the following error:<pre><code class=language-bash>Traceback (most recent call last):
+  File "&LTstdin>", line 2, in &LTmodule>
+AttributeError: Can't get attribute 'my_function' on &LTmodule '__main__' (built-in)>
+</code></pre><p>If you want to unpickle a function in a different file (as most likely is going to be the case), you can do the following:<pre><code class=language-python>import pickle
 from AH_pickle_function import my_function
 
 with open('AH_pickle_function.dat', 'rb') as f:
     new_function = pickle.load(f)
-</code></pre>
-<p>Now, of course, you can wonder what is the use of this. If you imported
-<code>my_function</code>, you don't need to load the pickled file. And this is
-true. Storing a function or a class doesn't make a lot of sense, because
-in any case, you have it defined. The biggest difference is when you
-want to store an instance of a class. Let's define a class that stores
-the time at which it is instantiated:</p>
-<pre><code class="language-python">import pickle
+</code></pre><p>Now, of course, you can wonder what is the use of this. If you imported <code>my_function</code>, you don't need to load the pickled file. And this is true. Storing a function or a class doesn't make a lot of sense, because in any case, you have it defined. The biggest difference is when you want to store an instance of a class. Let's define a class that stores the time at which it is instantiated:<pre><code class=language-python>import pickle
 from time import time
 from datetime import datetime
 
@@ -487,17 +102,7 @@ print(my_class)
 
 with open('AI_pickle_object.dat', 'wb') as f:
     pickle.dump(my_class, f)
-</code></pre>
-<p>If you do this, you will have an object that stores the time at which it
-was created and if you <code>print</code> that object, you will see the date nicely
-formatted. Pay attention also to the fact that that you are saving
-<code>my_class</code> and not <code>MyClass</code> to the pickled file. This means that you
-are saving an instance of your class, with the attributes that you have
-defined.</p>
-<p>From a second file, you would like to load what you have saved. You need
-to import the <code>MyClass</code> class, but the instance itself will be what you
-saved:</p>
-<pre><code class="language-python">import pickle
+</code></pre><p>If you do this, you will have an object that stores the time at which it was created and if you <code>print</code> that object, you will see the date nicely formatted. Pay attention also to the fact that that you are saving <code>my_class</code> and not <code>MyClass</code> to the pickled file. This means that you are saving an instance of your class, with the attributes that you have defined.<p>From a second file, you would like to load what you have saved. You need to import the <code>MyClass</code> class, but the instance itself will be what you saved:<pre><code class=language-python>import pickle
 from AI_pickle_object import MyClass
 
 
@@ -505,25 +110,7 @@ with open('AI_pickle_object.dat', 'rb') as f:
     new_class = pickle.load(f)
 
 print(new_class)
-</code></pre>
-<p>Notice that we are not importing <code>time</code> nor <code>datetime</code>, just <code>pickle</code>
-for loading the object and the class itself. Pickle is a great tool when
-you want to save the specific state of an object in order to keep up
-with the work later.</p>
-<h2>Risks of Pickle</h2>
-<p>If you look around, you will definitely find a lot of people warning the
-Pickle is not safe to use. The main reason is that when you unpickle,
-arbitrary code could be executed on the machine. If you are the only one
-using the files, or you definitely trust the one who gave you the file,
-there will be no problems. If you are building an online service,
-however, unpickling data that was sent by a random user may have
-consequences.</p>
-<p>When Pickle runs, it will look for a special method on the class called
-<code>__reduce__</code> that specifies how an object is pickled and unpickled.
-Without entering too much into detail, you can specify a callable that
-will be executed while unpickling. In the example above, you can add the
-extra method to <code>MyClass</code>:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>Notice that we are not importing <code>time</code> nor <code>datetime</code>, just <code>pickle</code> for loading the object and the class itself. Pickle is a great tool when you want to save the specific state of an object in order to keep up with the work later.<h2>Risks of Pickle</h2><p>If you look around, you will definitely find a lot of people warning the Pickle is not safe to use. The main reason is that when you unpickle, arbitrary code could be executed on the machine. If you are the only one using the files, or you definitely trust the one who gave you the file, there will be no problems. If you are building an online service, however, unpickling data that was sent by a random user may have consequences.<p>When Pickle runs, it will look for a special method on the class called <code>__reduce__</code> that specifies how an object is pickled and unpickled. Without entering too much into detail, you can specify a callable that will be executed while unpickling. In the example above, you can add the extra method to <code>MyClass</code>:<pre><code class=language-python>class MyClass:
     def __init__(self):
         self.init_time = time()
 
@@ -534,50 +121,7 @@ extra method to <code>MyClass</code>:</p>
 
     def __reduce__(self):
         return (os.system, ('ls',))
-</code></pre>
-<p>Run the code again to save the pickled file. If you run the file to load
-the pickled object you will see that all the contents of the folder in
-which you executed the script are shown. <strong>Windows</strong> users may not see
-it happening because depending on whether you use Power Shell or CMD,
-the command <code>ls</code> is not defined.</p>
-<p>This is a very naïve example. Instead of <code>ls</code> you could erase a file,
-open a connection to an external attacker, send all the files to a
-server, etc. You can see that if you open the door to others to execute
-commands in your computer, eventually something very bad is going to
-happen.</p>
-<p>The scenario of a security risk with Pickle is extremely low for the
-vast majority of end users. The most important thing is to trust the
-source of your pickled files. If it is yourself, a colleague, etc. then
-you should fine. If the source of your pickled files is not trustworthy,
-you should be aware of the risks.</p>
-<p>You may wonder why Python opens this security risk. The answer is that
-by being able to define how to unpickle an object, you can become much
-more efficient at storing data. The idea is that you can define how to
-reconstruct an object and not necessarily all the information that it
-contains. In the case of the numpy arrays, imagine you define a matrix
-of 1024X1024 elements, all ones (or zeroes). You can store each value,
-which will take a lot of memory, or you can just instruct Python to run
-numpy and create the matrix, which doesn't take that much space (is only
-one line of code).</p>
-<p>Having control is always better. If you want to be sure that nothing bad
-is going to happen, you have to find other ways of serializing data.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you are using Pickle as in the examples above, you should consider
-changing <code>pickle</code> for <code>cPickle</code> which is the same algorithm but written
-directly in C and runs much faster.</p>
-</div>
-<h2>Serializing with JSON</h2>
-<p>The main idea behind serialization is that you transform an object into
-something else, that can be 'easily' stored or transmitted. Pickle is a
-very convenient way but with some limitations regarding security.
-Moreover, the results of Pickle are not human readable, so it makes it
-harder to explore the contents of a file.</p>
-<p>JavaScript Object Notation, or JSON for short, became a popular standard
-for exchanging information with web services. It is a definition on how
-to structure strings that can be later converted to variables. Let's
-first see a simple example with a dictionary:</p>
-<pre><code class="language-python">import json
+</code></pre><p>Run the code again to save the pickled file. If you run the file to load the pickled object you will see that all the contents of the folder in which you executed the script are shown. <strong>Windows</strong> users may not see it happening because depending on whether you use Power Shell or CMD, the command <code>ls</code> is not defined.<p>This is a very naïve example. Instead of <code>ls</code> you could erase a file, open a connection to an external attacker, send all the files to a server, etc. You can see that if you open the door to others to execute commands in your computer, eventually something very bad is going to happen.<p>The scenario of a security risk with Pickle is extremely low for the vast majority of end users. The most important thing is to trust the source of your pickled files. If it is yourself, a colleague, etc. then you should fine. If the source of your pickled files is not trustworthy, you should be aware of the risks.<p>You may wonder why Python opens this security risk. The answer is that by being able to define how to unpickle an object, you can become much more efficient at storing data. The idea is that you can define how to reconstruct an object and not necessarily all the information that it contains. In the case of the numpy arrays, imagine you define a matrix of 1024X1024 elements, all ones (or zeroes). You can store each value, which will take a lot of memory, or you can just instruct Python to run numpy and create the matrix, which doesn't take that much space (is only one line of code).<p>Having control is always better. If you want to be sure that nothing bad is going to happen, you have to find other ways of serializing data.<div class="admonition note"><p class=admonition-title>Note<p>If you are using Pickle as in the examples above, you should consider changing <code>pickle</code> for <code>cPickle</code> which is the same algorithm but written directly in C and runs much faster.</div><h2>Serializing with JSON</h2><p>The main idea behind serialization is that you transform an object into something else, that can be 'easily' stored or transmitted. Pickle is a very convenient way but with some limitations regarding security. Moreover, the results of Pickle are not human readable, so it makes it harder to explore the contents of a file.<p>JavaScript Object Notation, or JSON for short, became a popular standard for exchanging information with web services. It is a definition on how to structure strings that can be later converted to variables. Let's first see a simple example with a dictionary:<pre><code class=language-python>import json
 
 data = {
     'first': [0, 1, 2, 3],
@@ -586,43 +130,10 @@ data = {
 
 with open('AK_json.dat', 'w') as f:
     json.dump(data, f)
-</code></pre>
-<p>If you open the file you will notice that the result is a text file that
-can be easily read with a text editor. Moreover, you can quickly
-understand what the data is just by looking at the contents of the file.
-You can also define more complex data structures, such as a combination
-of lists and dictionaries, etc. To read back a json file, you can do the
-following:</p>
-<pre><code class="language-python">with open('AK_json.dat', 'r') as f:
+</code></pre><p>If you open the file you will notice that the result is a text file that can be easily read with a text editor. Moreover, you can quickly understand what the data is just by looking at the contents of the file. You can also define more complex data structures, such as a combination of lists and dictionaries, etc. To read back a json file, you can do the following:<pre><code class=language-python>with open('AK_json.dat', 'r') as f:
     new_data = json.load(f)
-</code></pre>
-<p>Json is very handy because it can structure the information in such a
-way that can be shared with other programming languages, transmitted
-over the network and easily explored if saved to a file. However, if you
-try to save an instance of a class, you will get an error like this:</p>
-<pre><code class="language-bash">TypeError: Object of type 'MyClass' is not JSON serializable
-</code></pre>
-<p>JSON will not work with numpy arrays out of the box either.</p>
-<h2>Combining JSON and Pickle</h2>
-<p>As you have seen, JSON is a way of writing text to a file, structured in
-a way that makes it easy to load back the information and transform it
-to a list, a dictionary, etc. On the other hand, Pickle transforms
-objects into bytes. It would be great to combine both, to write the
-bytes to a text file. Combining plain text and bytes can be a good idea
-if you would like to explore parts of the file by eye while keeping the
-possibility of saving complex structures.</p>
-<p>What we are after is not that complex. We need a way of transforming
-bytes into an ASCII string. If you remember the discussion at the
-beginning of this article, there is a standard called ASCII that
-transforms bytes into characters that you can read. When the internet
-started to catch up, people needed to transfer more than just plain
-words. Therefore, a new standard appeared, in which you can translate
-bytes into characters. This is called <code>Base64</code> and is supported by most
-programming languages, not just Python.</p>
-<p>As an example, we will generate a numpy array, we will pickle it and
-then we are going to create a dictionary that holds that array and the
-current time. The code looks like this:</p>
-<pre><code class="language-python">import pickle
+</code></pre><p>Json is very handy because it can structure the information in such a way that can be shared with other programming languages, transmitted over the network and easily explored if saved to a file. However, if you try to save an instance of a class, you will get an error like this:<pre><code class=language-bash>TypeError: Object of type 'MyClass' is not JSON serializable
+</code></pre><p>JSON will not work with numpy arrays out of the box either.<h2>Combining JSON and Pickle</h2><p>As you have seen, JSON is a way of writing text to a file, structured in a way that makes it easy to load back the information and transform it to a list, a dictionary, etc. On the other hand, Pickle transforms objects into bytes. It would be great to combine both, to write the bytes to a text file. Combining plain text and bytes can be a good idea if you would like to explore parts of the file by eye while keeping the possibility of saving complex structures.<p>What we are after is not that complex. We need a way of transforming bytes into an ASCII string. If you remember the discussion at the beginning of this article, there is a standard called ASCII that transforms bytes into characters that you can read. When the internet started to catch up, people needed to transfer more than just plain words. Therefore, a new standard appeared, in which you can translate bytes into characters. This is called <code>Base64</code> and is supported by most programming languages, not just Python.<p>As an example, we will generate a numpy array, we will pickle it and then we are going to create a dictionary that holds that array and the current time. The code looks like this:<pre><code class=language-python>import pickle
 import json
 import numpy as np
 import time
@@ -637,19 +148,7 @@ data = {
 
 with open('AL_json_numpy.dat', 'w') as f:
     json.dump(data, f)
-</code></pre>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>In the example above, we are using <code>pickle.dumps</code> instead of
-<code>pickle.dump</code>, which returns the information instead of writing it to a
-file.</p>
-</div>
-<p>You can go ahead and look at the file. You will see that you can read
-some parts of it, like the words 'array' and the time at which it was
-created. However, the array itself is a sequence of characters that
-don't make much sense. If you want to load the data back, you need to
-repeat the steps in the opposite order:</p>
-<pre><code class="language-python">import pickle
+</code></pre><div class="admonition note"><p class=admonition-title>Note<p>In the example above, we are using <code>pickle.dumps</code> instead of <code>pickle.dump</code>, which returns the information instead of writing it to a file.</div><p>You can go ahead and look at the file. You will see that you can read some parts of it, like the words 'array' and the time at which it was created. However, the array itself is a sequence of characters that don't make much sense. If you want to load the data back, you need to repeat the steps in the opposite order:<pre><code class=language-python>import pickle
 import base64
 import json
 
@@ -663,68 +162,17 @@ np_array = pickle.loads(array_bytes)
 print(data['time'])
 print(np_array)
 print(type(np_array))
-</code></pre>
-<p>The first step is to open the file and read it. Then, you grab the
-base64 encoded pickle and decode it. The output is directly the pickled
-array, which you proceed to unpickle. You can print the values and see
-that effectively you have recovered the numpy array.</p>
-<p>At this point, there are two questions that you may be asking yourself.
-Why going through the trouble of pickling, encoding and serializing
-through json instead of just pickling the <code>data</code> dictionary. And why
-have we pickled first the array and then encoded in base 64 instead of
-writing the output of pickle.</p>
-<p>First, going to the trouble is justified if you look at your data with
-other programs. Having files which store extra information that can be
-easily read is very handy to quickly decide if it is the file you want
-to read or not. For example, you can open the file with a text editor,
-see that the date is not the one you were interested in and move
-forward.</p>
-<p>The second question is a bit deeper. Remember that when you are writing
-to a plain text file, you are assuming a certain encoding. The most
-common one nowadays being utf-8. This limits a lot the way in which you
-can write bytes to disk because you have only a finite set of characters
-you can use. Base64 takes care of using just the allowed characters.</p>
-<p>However, you have to remember that base64 was developed to transmit data
-over the network a long time ago. That makes base64 slower and less
-memory efficient than what it could be. Nowadays you don't need to be
-limited by the ascii specification thanks to Unicode. However, sticking
-to standards is a good practice if you want compatibility of your code
-in different systems.</p>
-<h2>Other Serialization Options</h2>
-<p>We have seen how to serialize objects with Pickle and JSON, however,
-they are not the only two options. There are no doubts that they are the
-most popular ones, but you may face the challenge of opening files
-generated by other programs. For instance, LabView normally uses XML
-instead of JSON to store data.</p>
-<p>While JSON translates very easily to python variables, XML is a bit more
-complicated. Normally, XML files come from an external source, such as a
-website or another program. To load the data on those files, you need to
-rely on
-<a href="https://docs.python.org/3/library/xml.etree.elementtree.html">ElementTree</a>.
-Check the link to see the official documentation to see how it works.</p>
-<p>Another option is YAML. It is a simple markup language that, such as
-Python, uses spaces to delimit blocks of content. The advantage of YAML
-is that it is easy to type. For instance, imagine that you are using
-text files as input for your program. While you respect the tabbing, the
-file will be easily parsed. A YAML file looks like this:</p>
-<pre><code class="language-yaml">data:
+</code></pre><p>The first step is to open the file and read it. Then, you grab the base64 encoded pickle and decode it. The output is directly the pickled array, which you proceed to unpickle. You can print the values and see that effectively you have recovered the numpy array.<p>At this point, there are two questions that you may be asking yourself. Why going through the trouble of pickling, encoding and serializing through json instead of just pickling the <code>data</code> dictionary. And why have we pickled first the array and then encoded in base 64 instead of writing the output of pickle.<p>First, going to the trouble is justified if you look at your data with other programs. Having files which store extra information that can be easily read is very handy to quickly decide if it is the file you want to read or not. For example, you can open the file with a text editor, see that the date is not the one you were interested in and move forward.<p>The second question is a bit deeper. Remember that when you are writing to a plain text file, you are assuming a certain encoding. The most common one nowadays being utf-8. This limits a lot the way in which you can write bytes to disk because you have only a finite set of characters you can use. Base64 takes care of using just the allowed characters.<p>However, you have to remember that base64 was developed to transmit data over the network a long time ago. That makes base64 slower and less memory efficient than what it could be. Nowadays you don't need to be limited by the ascii specification thanks to Unicode. However, sticking to standards is a good practice if you want compatibility of your code in different systems.<h2>Other Serialization Options</h2><p>We have seen how to serialize objects with Pickle and JSON, however, they are not the only two options. There are no doubts that they are the most popular ones, but you may face the challenge of opening files generated by other programs. For instance, LabView normally uses XML instead of JSON to store data.<p>While JSON translates very easily to python variables, XML is a bit more complicated. Normally, XML files come from an external source, such as a website or another program. To load the data on those files, you need to rely on <a href=https://docs.python.org/3/library/xml.etree.elementtree.html>ElementTree</a>. Check the link to see the official documentation to see how it works.<p>Another option is YAML. It is a simple markup language that, such as Python, uses spaces to delimit blocks of content. The advantage of YAML is that it is easy to type. For instance, imagine that you are using text files as input for your program. While you respect the tabbing, the file will be easily parsed. A YAML file looks like this:<pre><code class=language-yaml>data:
   creation_date: 2018-08-08
   values: [1, 2, 3, 4]
-</code></pre>
-<p>To read the file, you need to install a package called PyYAML, simply
-with <code>pip</code>:</p>
-<pre><code class="language-bash">pip install pyyaml
-</code></pre>
-<p>And the script to read looks like this:</p>
-<pre><code class="language-python">import yaml
+</code></pre><p>To read the file, you need to install a package called PyYAML, simply with <code>pip</code>:<pre><code class=language-bash>pip install pyyaml
+</code></pre><p>And the script to read looks like this:<pre><code class=language-python>import yaml
 
 with open('AM_example.yml', 'r') as f:
     data = yaml.load(f)
 
 print(data)
-</code></pre>
-<p>You can also write a yaml file:</p>
-<pre><code class="language-python">import yaml
+</code></pre><p>You can also write a yaml file:<pre><code class=language-python>import yaml
 from time import time
 
 data = {
@@ -734,188 +182,4 @@ data = {
 
 with open('AM_data.yml', 'w') as f:
     yaml.dump(data, f)
-</code></pre>
-<p>It is beyond the scope of this article to discuss YAML, but you can find
-a lot of information online. YAML is still not a standard, but it is
-gaining traction. Writing configuration files in YAML feels very
-natural. There is much less typing involved than with XML and it looks
-more organized, at least to me than JSON.</p>
-<h2>Conclusions</h2>
-<p>In this article, we have discussed serialization of objects and how to
-store them on the hard drive. We have started discussing what an
-encoding is, and started to think about converting from and to bytes.
-This opened the door to understand what Pickle does and how to save the
-data to disk.</p>
-<p>Remember that Pickle is not perfect and you have to be aware of its
-limitations, especially if you are going to deal with user submitted
-files, such as what happens on a web server. On the other hand, if you
-are using it for storing data for yourself, it is a very efficient way.</p>
-<p>We have also discussed how to use JSON, a very popular tool for web
-technologies. The limit of JSON is, however, that you have to store data
-as text files, thus limiting its native capabilities. Fortunately,
-combining <code>Pickle</code> and <code>base64</code>, you can transform bytes to an ascii
-string and save it next to easy to read metadata.</p>
-<p>This article has gone much more in depth regarding how to store data in
-different formats, but the topic is far from complete. Keep tuned to
-find more articles regarding how to save data with Python.</p>
-<p>Header photo by <a href="https://unsplash.com/photos/LqKhnDzSF-8?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Joshua
-Sortino</a>
-on Unsplash</p>
-            </main>
-            <div class="info-list">
-              <span class="item author">Article written by Aquiles Carattino</span>
-            </div>
-              <div class="similar-posts">
-                <h3>Related Articles:</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/storing-data-with-sqlite" class="item">
-                        <img src="/images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2018-08-12</span>
-                        <span class="name">Storing Data with SQLite</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/introduction-to-storing-data-in-files" class="item">
-                        <img src="/images/pietro-jeng-266017-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2018-08-10</span>
-                        <span class="name">Introduction to Storing Data in Files</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python" class="item">
-                        <img src="images/storing_data_hdf.png" alt="">
-                        <span class="date">2018-03-19</span>
-                        <span class="name">How to use HDF5 files in Python</span>
-                      </a>
-                    </li>
-                </ul>
-              </div>
-            <div class="bottom-section">
-              <h4>Share your thoughts with us!</h4>
-              <div class="comments">
-                <!-- Comment -->
-                <script src="https://utteranc.es/client.js"
-                        repo="PFTL/pftl_discussions"
-                        issue-term="pathname"
-                        label="Comment"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-              </div>
-            </div>
-          </div>
-          <div class="rightside">
-            <div class="support-box">
-              <h3>Support Us</h3>
-              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
-                Lab</strong></p>
-              <a href="https://pythonforthelab.com/books" class="button">Check out the book</a>
-            </div>
-            <div class="latest-posts">
-
-                <h3>Saving Data series</h3>
-                <ol class="parts">
-                    <li >
-                      <a href='https://pythonforthelab.com/blog/introduction-to-storing-data-in-files'>Introduction to Storing Data in Files</a>
-                    </li>
-                    <li class="active">
-                      <a href='https://pythonforthelab.com/blog/storing-binary-data-and-serializing'>Storing Binary Data and Serializing</a>
-                    </li>
-                    <li >
-                      <a href='https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python'>How to use HDF5 files in Python</a>
-                    </li>
-                    <li >
-                      <a href='https://pythonforthelab.com/blog/storing-data-with-sqlite'>Storing Data with SQLite</a>
-                    </li>
-                </ol>
-
-            </div>
-            <div class="subscribe-fixed">
-              <button class="action">Never Stop Learning</button>
-              <div class="cnt">
-                <p>Join over 1000 Python developers and don't miss any updates!</p>
-                <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mobile-sb-form">
-          <div class="sb-form">
-            <h4>Get all the information directly to your inbox</h4>
-            <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- End Main -->
-
-  </section>
-  <!-- End Wrapper -->
-
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="https://pythonforthelab.com/cookie-policy">Cookie Policy</a>
-        <a href="https://pythonforthelab.com/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Footer --><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
-<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-<script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
-</script></body>
-</html>
+</code></pre><p>It is beyond the scope of this article to discuss YAML, but you can find a lot of information online. YAML is still not a standard, but it is gaining traction. Writing configuration files in YAML feels very natural. There is much less typing involved than with XML and it looks more organized, at least to me than JSON.<h2>Conclusions</h2><p>In this article, we have discussed serialization of objects and how to store them on the hard drive. We have started discussing what an encoding is, and started to think about converting from and to bytes. This opened the door to understand what Pickle does and how to save the data to disk.<p>Remember that Pickle is not perfect and you have to be aware of its limitations, especially if you are going to deal with user submitted files, such as what happens on a web server. On the other hand, if you are using it for storing data for yourself, it is a very efficient way.<p>We have also discussed how to use JSON, a very popular tool for web technologies. The limit of JSON is, however, that you have to store data as text files, thus limiting its native capabilities. Fortunately, combining <code>Pickle</code> and <code>base64</code>, you can transform bytes to an ascii string and save it next to easy to read metadata.<p>This article has gone much more in depth regarding how to store data in different formats, but the topic is far from complete. Keep tuned to find more articles regarding how to save data with Python.<p>Header photo by <a href=https://unsplash.com/photos/LqKhnDzSF-8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText>Joshua Sortino</a> on Unsplash</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/storing-data-with-sqlite> <img alt src=/images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg> <span class=date>2018-08-12</span> <span class=name>Storing Data with SQLite</span> </a><li><a class=item href=https://pythonforthelab.com/blog/introduction-to-storing-data-in-files> <img alt src=/images/pietro-jeng-266017-unsplash_linkedin.width-800.jpg> <span class=date>2018-08-10</span> <span class=name>Introduction to Storing Data in Files</span> </a><li><a class=item href=https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python> <img alt src=/images/storing_data_hdf.png> <span class=date>2018-03-19</span> <span class=name>How to use HDF5 files in Python</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Saving Data series</h3><ol class=parts><li><a href=https://pythonforthelab.com/blog/introduction-to-storing-data-in-files>Introduction to Storing Data in Files</a><li class=active><a href=https://pythonforthelab.com/blog/storing-binary-data-and-serializing>Storing Binary Data and Serializing</a><li><a href=https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python>How to use HDF5 files in Python</a><li><a href=https://pythonforthelab.com/blog/storing-data-with-sqlite>Storing Data with SQLite</a></ol></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>

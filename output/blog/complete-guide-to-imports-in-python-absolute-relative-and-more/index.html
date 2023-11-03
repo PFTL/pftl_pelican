@@ -1,239 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Complete Guide to Imports in Python: Absolute, Relative, and More | Python For The Lab</title>
-
-  <meta name="tags" content="importing, import, relative, absolute, package, ">
-  <meta name="description" content="How to plan your code so imports are clear and clean">
-  <meta name="author" content="Aquiles Carattino">
-
-  <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet">
-
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/style.css">
-  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
-
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
-</head>
-
-
-
-<body>
-  <!-- Wrapper -->
-  <section class="wrapper">
-
-<!-- Intro -->
-<div class="intro blog article">
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <a href="/" class="logo">Python for the Lab</a>
-      <div class="header-dd">
-        <div class="navigation">
-          <ul>
-            <li class="active"><a href="https://pythonforthelab.com/blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="https://pythonforthelab.com/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
-                   class="nav-item forum"><span>Forum</span></a></li>
-            <li><a href="https://pythonforthelab.com/books" class="nav-item books"><span>Books</span></a></li>
-            <li><a href="https://pythonforthelab.com/about" class="nav-item about"><span>About</span></a></li>
-          </ul>
-        </div>
-        <div class="search field-wp">
-          <form action="#">
-            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
-            <input type="submit" class="search-btn">
-          </form>
-          <div data-stork="sitesearch-output"></div>
-        </div>
-      </div>
-      <button class="menu-btn"><span>Menu</span></button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Intro Cnt -->
-    <div class="intro-cnt v-article">
-      <div class="side-text">
-      </div>
-      <div class="side-form small-sb-form">
-        <div class="sb-form" id="mc_embed_signup">
-          <h4>Get all the information directly to your inbox</h4>
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-              target="_self"
-              novalidate="">
-            <div class="field-wp" id="mc_embed_signup_scroll">
-              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
-                     value="">
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk form bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
-                   id="mc-embedded-subscribe">
-            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Intro Cnt -->
-
-  </div>
-</div>
-<!-- End Intro -->
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-
-        <div class="article-cnt">
-          <div class="leftside">
-            <div class="article-image">
-              <img src="https://pythonforthelab.com//images/imports-blog-illustration.png" alt="" width="800">
-            </div>
-            <h1>Complete Guide to Imports in Python: Absolute, Relative, and More</h1>
-            <h3>How to plan your code so imports are clear and clean</h3>
-            <div class="info">
-              <span class="item-1 author">by Aquiles Carattino</span>
-              <span class="item-1 date">2019-10-04</span>
-                <span class="item-tag first">importing</span>
-                <span class="item-tag ">import</span>
-                <span class="item-tag ">relative</span>
-                <span class="item-tag ">absolute</span>
-                <span class="item-tag ">package</span>
-            </div>
-            <main>
-              <p>Importing is not only a matter of using external libraries, it also allows you to keep your code clean and organized. In
-this tutorial, we are going to discuss from the very basics of importing to complex topics such as lazy loading of
-modules in packages.</p>
-<h2>Introduction to importing</h2>
-<p>In Python it is important to distinguish between modules and packages in order to have a clear communication. Modules
-are, in essence, files with a <em>.py</em> extension. They can define variables, functions, classes, and they can also run
-code. Packages are collections of modules in a hierarchical structure, which in the end means organizing the module
-files in folders.</p>
-<p>If we have a file called <strong>module.py</strong>, we can simply use the following syntax to import it:</p>
-<pre><code class="language-python">import module
-</code></pre>
-<p>We can also use modules that are bundled with Python, such as <code>sys</code>:</p>
-<pre><code class="language-python">import sys
-</code></pre>
-<p>In this case, <code>sys</code> is a module that belongs to the <code>Python Standard Library</code>. It provides functions to interact with
-the interpreter itself. For example, we can use it to find out if any arguments where passed while executing a script.
-We can create a file, <strong>test_argv.py</strong>, with the following code:</p>
-<pre><code class="language-python">import sys
+<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Complete Guide to Imports in Python: Absolute, Relative, and More | Python For The Lab</title><meta content="importing, import, relative, absolute, package, " name=tags><meta content="How to plan your code so imports are clear and clean" name=description><meta content="Aquiles Carattino" name=author><link href=blog/complete-guide-to-imports-in-python-absolute-relative-and-more rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/complete-guide-to-imports-in-python-absolute-relative-and-more property=og:url><meta content="Complete Guide to Imports in Python: Absolute, Relative, and More" property=og:title><meta content="How to plan your code so imports are clear and clean" property=og:description><meta content=/images/imports-blog-illustration.png property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/complete-guide-to-imports-in-python-absolute-relative-and-more property=twitter:url><meta content="Complete Guide to Imports in Python: Absolute, Relative, and More" property=twitter:title><meta content="How to plan your code so imports are clear and clean" property=twitter:description><meta content=/images/imports-blog-illustration.png property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/imports-blog-illustration.png width=800></div><h1>Complete Guide to Imports in Python: Absolute, Relative, and More</h1><h3>How to plan your code so imports are clear and clean</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2019-10-04</span><span class="item-tag first">importing</span><span class=item-tag>import</span><span class=item-tag>relative</span><span class=item-tag>absolute</span><span class=item-tag>package</span></div><main><p>Importing is not only a matter of using external libraries, it also allows you to keep your code clean and organized. In this tutorial, we are going to discuss from the very basics of importing to complex topics such as lazy loading of modules in packages.<h2>Introduction to importing</h2><p>In Python it is important to distinguish between modules and packages in order to have a clear communication. Modules are, in essence, files with a <em>.py</em> extension. They can define variables, functions, classes, and they can also run code. Packages are collections of modules in a hierarchical structure, which in the end means organizing the module files in folders.<p>If we have a file called <strong>module.py</strong>, we can simply use the following syntax to import it:<pre><code class=language-python>import module
+</code></pre><p>We can also use modules that are bundled with Python, such as <code>sys</code>:<pre><code class=language-python>import sys
+</code></pre><p>In this case, <code>sys</code> is a module that belongs to the <code>Python Standard Library</code>. It provides functions to interact with the interpreter itself. For example, we can use it to find out if any arguments where passed while executing a script. We can create a file, <strong>test_argv.py</strong>, with the following code:<pre><code class=language-python>import sys
 
 print(sys.argv)
-</code></pre>
-<p>And we run it to see its output:</p>
-<pre><code class="language-bash">python test_argv.py -b 1
+</code></pre><p>And we run it to see its output:<pre><code class=language-bash>python test_argv.py -b 1
 ['test_argv.py', '-b', '1']
-</code></pre>
-<p>Python comes bundled with plenty of libraries for different tasks. You can find them
-all <a href="https://docs.python.org/3/library/index.html">here</a>.</p>
-<p>Importing the entire <code>sys</code> module may not be what we want since we are only using one of its elements. In this case,
-we can also be selective with the importing procedure while keeping the same output:</p>
-<pre><code class="language-python">from sys import argv
+</code></pre><p>Python comes bundled with plenty of libraries for different tasks. You can find them all <a href=https://docs.python.org/3/library/index.html>here</a>.<p>Importing the entire <code>sys</code> module may not be what we want since we are only using one of its elements. In this case, we can also be selective with the importing procedure while keeping the same output:<pre><code class=language-python>from sys import argv
 
 print(argv)
-</code></pre>
-<p>Using the full import or just a selection of what we need depends to a great extent on personal preferences, and on how
-different packages where designed.</p>
-<h2>Importing *</h2>
-<p>In the examples above, we have either imported one entire module or just one element from <code>sys</code>. To import more
-elements from the same module, we can specify them on the same line:</p>
-<pre><code class="language-python">from sys import argv, exit
+</code></pre><p>Using the full import or just a selection of what we need depends to a great extent on personal preferences, and on how different packages where designed.<h2>Importing *</h2><p>In the examples above, we have either imported one entire module or just one element from <code>sys</code>. To import more elements from the same module, we can specify them on the same line:<pre><code class=language-python>from sys import argv, exit
 
 print(argv)
 exit()
-</code></pre>
-<p>We can import as many things as we need from the same module. To avoid lines becoming too long and hard to read, it is
-possible to stack the items vertically. For example:</p>
-<pre><code class="language-python">from sys import (api_version,
+</code></pre><p>We can import as many things as we need from the same module. To avoid lines becoming too long and hard to read, it is possible to stack the items vertically. For example:<pre><code class=language-python>from sys import (api_version,
                  argv,
                  base_exec_prefix,
                  exit,
                  )
-</code></pre>
-<p>Note that in this case we must use a set of <code>(</code> and <code>)</code> to make a clear list of imports. It is also possible to import
-all the elements from a module by using a <code>*</code> in the statement, for example:</p>
-<pre><code class="language-python">from sys import *
+</code></pre><p>Note that in this case we must use a set of <code>(</code> and <code>)</code> to make a clear list of imports. It is also possible to import all the elements from a module by using a <code>*</code> in the statement, for example:<pre><code class=language-python>from sys import *
 
 print(api_version)
 print(argv)
 exit()
-</code></pre>
-<p>However, this is a <strong>highly discouraged practice</strong>. When we import things without control, some functions may get
-overwritten without even realizing. The code becomes harder to read and understand. Let's see it with the following
-example:</p>
-<pre><code class="language-python">from time import *
+</code></pre><p>However, this is a <strong>highly discouraged practice</strong>. When we import things without control, some functions may get overwritten without even realizing. The code becomes harder to read and understand. Let's see it with the following example:<pre><code class=language-python>from time import *
 from asyncio import *
 
 print('Here')
 sleep(1)
 print('After')
-</code></pre>
-<p>Most programmers will be familiar with the <code>sleep</code> function from the <code>time</code> module, which halts the execution of a
-program for a given number of seconds. If we run the script, however, we will notice that there is no delay between the
-lines <code>'Here'</code> and <code>'After'</code>. This can be puzzling at first, and for larger projects can indeed become daunting. In this
-case, both <code>time</code> and <code>asyncio</code> define a function <code>sleep</code> which behaves in very different ways. If in such a simple and
-compact example the risks of the <code>*</code> imports become evident, it is easy to understand why almost all developers avoid
-using the <code>*</code> in their programs.</p>
-<p>The case of <code>time</code> and <code>asyncio</code> is special, because both of them belong to the Python Standard Library and are very
-well documented. However, not all programs are as organized and clean. Therefore, it becomes harder and harder to
-remember all the modules and functions defined in packages. Moreover, some names are so handy (like <code>sleep</code>), that it
-is easy to find them defined in different packages and for many purposes.</p>
-<p>The script above becomes much clearer with the following syntax:</p>
-<pre><code class="language-python">import time
+</code></pre><p>Most programmers will be familiar with the <code>sleep</code> function from the <code>time</code> module, which halts the execution of a program for a given number of seconds. If we run the script, however, we will notice that there is no delay between the lines <code>'Here'</code> and <code>'After'</code>. This can be puzzling at first, and for larger projects can indeed become daunting. In this case, both <code>time</code> and <code>asyncio</code> define a function <code>sleep</code> which behaves in very different ways. If in such a simple and compact example the risks of the <code>*</code> imports become evident, it is easy to understand why almost all developers avoid using the <code>*</code> in their programs.<p>The case of <code>time</code> and <code>asyncio</code> is special, because both of them belong to the Python Standard Library and are very well documented. However, not all programs are as organized and clean. Therefore, it becomes harder and harder to remember all the modules and functions defined in packages. Moreover, some names are so handy (like <code>sleep</code>), that it is easy to find them defined in different packages and for many purposes.<p>The script above becomes much clearer with the following syntax:<pre><code class=language-python>import time
 import asyncio
 
 print('Here')
@@ -241,15 +36,7 @@ asyncio.sleep(1)
 print('After')
 time.sleep(1)
 print('Finally')
-</code></pre>
-<p>There are no doubts of what is going on, and where problems may be arising, even if we haven't used the <em>asyncio</em>
-library before.</p>
-<h2>Importing As</h2>
-<p>Sometimes we face the situation in which we want to import specific functions from different modules but their names are
-the same. For example, both <code>time</code> and <code>asyncio</code> define
-<code>sleep</code> and we are interested in using them. To avoid a name clash when importing, Python allows us to change the name
-of what we are importing by doing the following:</p>
-<pre><code class="language-python">from asyncio import sleep as async_sleep
+</code></pre><p>There are no doubts of what is going on, and where problems may be arising, even if we haven't used the <em>asyncio</em> library before.<h2>Importing As</h2><p>Sometimes we face the situation in which we want to import specific functions from different modules but their names are the same. For example, both <code>time</code> and <code>asyncio</code> define <code>sleep</code> and we are interested in using them. To avoid a name clash when importing, Python allows us to change the name of what we are importing by doing the following:<pre><code class=language-python>from asyncio import sleep as async_sleep
 from time import sleep as time_sleep
 
 print('Here')
@@ -257,117 +44,53 @@ async_sleep(1)
 print('After')
 time_sleep(1)
 print('Finally')
-</code></pre>
-<p>In this way, we can use either <code>sleep</code> from <code>asyncio</code> or from <code>time</code>avoiding name clashes. Of course this
-flexibility must be taken seriously because it can also generate unreadable code. The following code would become very
-hard to udnerstand for anybody reading it:</p>
-<pre><code class="language-python">from time import sleep as exit
+</code></pre><p>In this way, we can use either <code>sleep</code> from <code>asyncio</code> or from <code>time</code>avoiding name clashes. Of course this flexibility must be taken seriously because it can also generate unreadable code. The following code would become very hard to udnerstand for anybody reading it:<pre><code class=language-python>from time import sleep as exit
 
 exit(1)
-</code></pre>
-<p>The use of the <code>import as</code> is not only practical, in some cases it is the de-facto way of working. For
-example, <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code> are almost always imported in the same way:</p>
-<pre><code class="language-python">import matplotlib.pyplot as plt
+</code></pre><p>The use of the <code>import as</code> is not only practical, in some cases it is the de-facto way of working. For example, <code>numpy</code>, <code>pandas</code>, <code>matplotlib</code> are almost always imported in the same way:<pre><code class=language-python>import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-</code></pre>
-<p>The three lines above are ubiquitous in many scientific programs. They are so common that code editors such as Pycharm
-can suggest you to import numpy if they see a line that includes something like <code>np.</code>. Changing the name of the import
-can be useful not only to prevent name clashes, but also to shorten the notation. Instead of doing:</p>
-<pre><code class="language-python">matplotlib.pyplot.plot(x, y)
-</code></pre>
-<p>We simply have:</p>
-<pre><code class="language-python">plt.plot(x, y)
-</code></pre>
-<p>Different packages have different shortcuts. For example <code>PyQtGraph</code> is normally shortened as <code>pg</code>, and for sure
-different fields use different abbreviations. Importing Numpy as <code>np</code> or Pandas as <code>pd</code> is not mandatory. However,
-since it is what the community does, it will make the code much more readable.</p>
-<blockquote>
-<p>The use of this notation is so widespread that, for example, even in StackOverflow numpy is used as <code>np</code> without
-even showing the import statement.</p>
-</blockquote>
-<h2>Importing your code</h2>
-<p>So far, we have seen how to import packages and modules developed by other people. Importing, however, is a great tool
-to structure different parts of the code. It makes it easier to maintan and collaborate. Therefore, sooner or later we
-are going to find ourselves importing our code. We can start simple and slowly build the complexity.</p>
-<p>We can create a file <strong>first.py</strong>, with following code:</p>
-<pre><code class="language-python">def first_function():
+</code></pre><p>The three lines above are ubiquitous in many scientific programs. They are so common that code editors such as Pycharm can suggest you to import numpy if they see a line that includes something like <code>np.</code>. Changing the name of the import can be useful not only to prevent name clashes, but also to shorten the notation. Instead of doing:<pre><code class=language-python>matplotlib.pyplot.plot(x, y)
+</code></pre><p>We simply have:<pre><code class=language-python>plt.plot(x, y)
+</code></pre><p>Different packages have different shortcuts. For example <code>PyQtGraph</code> is normally shortened as <code>pg</code>, and for sure different fields use different abbreviations. Importing Numpy as <code>np</code> or Pandas as <code>pd</code> is not mandatory. However, since it is what the community does, it will make the code much more readable.<blockquote><p>The use of this notation is so widespread that, for example, even in StackOverflow numpy is used as <code>np</code> without even showing the import statement.</blockquote><h2>Importing your code</h2><p>So far, we have seen how to import packages and modules developed by other people. Importing, however, is a great tool to structure different parts of the code. It makes it easier to maintan and collaborate. Therefore, sooner or later we are going to find ourselves importing our code. We can start simple and slowly build the complexity.<p>We can create a file <strong>first.py</strong>, with following code:<pre><code class=language-python>def first_function():
     print('This is the first function')
-</code></pre>
-<p>In a file called <strong>second.py</strong>, we can add the following code:</p>
-<pre><code class="language-python">from first import first_function
+</code></pre><p>In a file called <strong>second.py</strong>, we can add the following code:<pre><code class=language-python>from first import first_function
 
 first_function()
-</code></pre>
-<p>And we run it:</p>
-<pre><code class="language-bash">$ python second.py
+</code></pre><p>And we run it:<pre><code class=language-bash>$ python second.py
 This is the first function
-</code></pre>
-<p>That is as easy as it gets. We define a function in a file, but we use it in another file. Once we have many files, it
-becomes handier to start creating some structure to organize the program. We can create a folder called <strong>package_a</strong>,
-and we add a new file, called <strong>third.py</strong>. The folder structure is like this:</p>
-<pre><code class="language-bash">$ tree
+</code></pre><p>That is as easy as it gets. We define a function in a file, but we use it in another file. Once we have many files, it becomes handier to start creating some structure to organize the program. We can create a folder called <strong>package_a</strong>, and we add a new file, called <strong>third.py</strong>. The folder structure is like this:<pre><code class=language-bash>$ tree
 .
 ├── first.py
 ├── package_a
 │   └── third.py
 └── second.py
-</code></pre>
-<p>In <strong>third</strong> we create a new function, appropriately called <code>third_function</code>:</p>
-<pre><code class="language-python">def third_function():
+</code></pre><p>In <strong>third</strong> we create a new function, appropriately called <code>third_function</code>:<pre><code class=language-python>def third_function():
     print('This is the third function')
-</code></pre>
-<p>The examples are very basic, but they already start to show some patterns and caveats in the importing procedures. If we
-want to use the new function from the <strong>second.py</strong>, we need to import it:</p>
-<pre><code class="language-python">from first import first_function
+</code></pre><p>The examples are very basic, but they already start to show some patterns and caveats in the importing procedures. If we want to use the new function from the <strong>second.py</strong>, we need to import it:<pre><code class=language-python>from first import first_function
 from package_a.third import third_function
 
 first_function()
 third_function()
-</code></pre>
-<p>If we run the code, we'll get the following output:</p>
-<pre><code class="language-bash">This is the first function
+</code></pre><p>If we run the code, we'll get the following output:<pre><code class=language-bash>This is the first function
 This is the third function
-</code></pre>
-<p>Pay attention to the notation we used to import the <code>third_function</code>. We specified the folder, in this case, <code>package_a</code>
-and then we referred to the file with a dot: <code>.</code>. This is the way in which the hyerarchy of folders and files is
-transformed into packages and modules in Python. In this case, replacing the folder separators by a <code>.</code> we end up
-having <code>package_a.third</code>, and we stripped the <code>.py</code> extension.</p>
-<h2>The use of the __init__ file</h2>
-<p>Most likely our code will not be isolated from other projects. When we install packages, they will have dependencies,
-and very quickly we lose track of what is actually installed. We can understand where the problem arises wtih a very
-simple example. We can assume that we have <strong>numpy</strong> already installed but we are not aware of that. If we create a new
-folder, called <strong>numpy</strong>, with a file
-called <strong>sleep.py</strong>, the folder structure will end up looking like this:</p>
-<pre><code class="language-bash">.
+</code></pre><p>Pay attention to the notation we used to import the <code>third_function</code>. We specified the folder, in this case, <code>package_a</code> and then we referred to the file with a dot: <code>.</code>. This is the way in which the hyerarchy of folders and files is transformed into packages and modules in Python. In this case, replacing the folder separators by a <code>.</code> we end up having <code>package_a.third</code>, and we stripped the <code>.py</code> extension.<h2>The use of the __init__ file</h2><p>Most likely our code will not be isolated from other projects. When we install packages, they will have dependencies, and very quickly we lose track of what is actually installed. We can understand where the problem arises wtih a very simple example. We can assume that we have <strong>numpy</strong> already installed but we are not aware of that. If we create a new folder, called <strong>numpy</strong>, with a file called <strong>sleep.py</strong>, the folder structure will end up looking like this:<pre><code class=language-bash>.
 ├── first.py
 ├── package_a
 │   └── third.py
 ├── numpy
 │   └── sleep.py
 └── second.py
-</code></pre>
-<p>And in the file <strong>sleep.py</strong>, we can add the following function:</p>
-<pre><code class="language-python">def sleep():
+</code></pre><p>And in the file <strong>sleep.py</strong>, we can add the following function:<pre><code class=language-python>def sleep():
     print('Sleep')
-</code></pre>
-<p>In the same way we did before, we can update <strong>second.py</strong> to use the new function <code>sleep</code>:</p>
-<pre><code class="language-python">from numpy.sleep import sleep
+</code></pre><p>In the same way we did before, we can update <strong>second.py</strong> to use the new function <code>sleep</code>:<pre><code class=language-python>from numpy.sleep import sleep
 
 sleep()
-</code></pre>
-<p>Of course the code above will raise many alarms, but the best is to run it to see what happens:</p>
-<pre><code class="language-bash">Traceback (most recent call last):
-  File &quot;second.py&quot;, line 3, in &lt;module&gt;
+</code></pre><p>Of course the code above will raise many alarms, but the best is to run it to see what happens:<pre><code class=language-bash>Traceback (most recent call last):
+  File "second.py", line 3, in &LTmodule>
     from numpy.sleep import sleep
 ModuleNotFoundError: No module named 'numpy.sleep'
-</code></pre>
-<p>The biggest challenge in this case is that the exception is utterly hard to understand. It is telling us that Python
-tried to look for a module called <code>sleep</code> in the <em>numpy</em> package. If we open the folder <em>numpy</em> we find the module
-<em>sleep</em>. Therefore, there must be something else going on. In this example it is clear that Python is looking for the
-module <em>sleep</em> within the official <em>numpy</em> package and not in our folder.</p>
-<p>The quick solution to this problem is to create an empty file called <strong>__init__.py</strong> in our numpy folder:</p>
-<pre><code class="language-bash">.
+</code></pre><p>The biggest challenge in this case is that the exception is utterly hard to understand. It is telling us that Python tried to look for a module called <code>sleep</code> in the <em>numpy</em> package. If we open the folder <em>numpy</em> we find the module <em>sleep</em>. Therefore, there must be something else going on. In this example it is clear that Python is looking for the module <em>sleep</em> within the official <em>numpy</em> package and not in our folder.<p>The quick solution to this problem is to create an empty file called <strong>__init__.py</strong> in our numpy folder:<pre><code class=language-bash>.
 ├── first.py
 ├── package_a
 │   └── third.py
@@ -375,43 +98,13 @@ module <em>sleep</em> within the official <em>numpy</em> package and not in our 
 │   ├── __init__.py
 │   └── sleep.py
 └── second.py
-</code></pre>
-<p>We can run the code without problems this time:</p>
-<pre><code class="language-bash">$ python second.py
+</code></pre><p>We can run the code without problems this time:<pre><code class=language-bash>$ python second.py
 Sleep
-</code></pre>
-<p>It is important to understand what is going on and not just through quick solutions to see whether they work to voercome
-the immediate problems. The quid is to know how Python looks for packages on the computer. The topic is complex, and
-Python allows a great deal of customization.
-The <a href="https://docs.python.org/3/reference/import.html">official documentation</a> shines some light into the matter once we
-have experience.</p>
-<p>In short, Python will first look at whether we are trying to import, and check if it belongs to the standard library. If
-the folder was <code>time</code> instead of <code>numpy</code>, the behavior would have been different. Adding the <strong>__init__.py</strong> file
-wouldn't make a difference. Once Python knows the module is not in the standard library, it will check for external
-modules. First, it starts searching the current directory. Then, it moves to the directories where packages are
-installed, for example, where numpy ends up after doing <code>pip install numpy</code>.</p>
-<p>This raises a very interesting question: why did our code fail in the first attempt and it started working only after
-adding the <strong>__init__.py</strong> file. In order for Python to consider that a folder is a package, it must contain an *
-<em>__init__.py</em>* file. This is by design, exactly to prevent unintended name clashes unless we explicitly want them.</p>
-<p>If Python does not find the package within the local or default installation directories, it moves to look into the
-folders. That is why <code>package_a</code> works even if we never defined the <strong>__init__.py</strong> file.</p>
-<p>Bear in mind that once Python finds the package, it won't keep searching. Once it finds <em>numpy</em> in our local folder, it
-won't look for another numpy elsewhere. Therefore, we can't mix modules from different packages with the same name.</p>
-<h3>The PATH list of directories</h3>
-<p>A useful thing to do is to check the directories Python uses to look for modules and packages. We can see it by running
-the following code:</p>
-<pre><code class="language-python">import sys
+</code></pre><p>It is important to understand what is going on and not just through quick solutions to see whether they work to voercome the immediate problems. The quid is to know how Python looks for packages on the computer. The topic is complex, and Python allows a great deal of customization. The <a href=https://docs.python.org/3/reference/import.html>official documentation</a> shines some light into the matter once we have experience.<p>In short, Python will first look at whether we are trying to import, and check if it belongs to the standard library. If the folder was <code>time</code> instead of <code>numpy</code>, the behavior would have been different. Adding the <strong>__init__.py</strong> file wouldn't make a difference. Once Python knows the module is not in the standard library, it will check for external modules. First, it starts searching the current directory. Then, it moves to the directories where packages are installed, for example, where numpy ends up after doing <code>pip install numpy</code>.<p>This raises a very interesting question: why did our code fail in the first attempt and it started working only after adding the <strong>__init__.py</strong> file. In order for Python to consider that a folder is a package, it must contain an * <em>__init__.py</em>* file. This is by design, exactly to prevent unintended name clashes unless we explicitly want them.<p>If Python does not find the package within the local or default installation directories, it moves to look into the folders. That is why <code>package_a</code> works even if we never defined the <strong>__init__.py</strong> file.<p>Bear in mind that once Python finds the package, it won't keep searching. Once it finds <em>numpy</em> in our local folder, it won't look for another numpy elsewhere. Therefore, we can't mix modules from different packages with the same name.<h3>The PATH list of directories</h3><p>A useful thing to do is to check the directories Python uses to look for modules and packages. We can see it by running the following code:<pre><code class=language-python>import sys
 
 for path in sys.path:
     print(path)
-</code></pre>
-<p>That will list something between 4 and 6 different folders. Most of them are quite logical: where Python is installed,
-the virtual environment folders, etc.</p>
-<h3>Adding Folder to the Path</h3>
-<p>An easy way of extending the capabilities of Python is to add folders to the list where it looks for packages. The first
-option is to do it at runtime. We can easily append a directory to the
-variable <code>sys.path</code>. To add the current directory to the list, we can do the following:</p>
-<pre><code class="language-python">import os
+</code></pre><p>That will list something between 4 and 6 different folders. Most of them are quite logical: where Python is installed, the virtual environment folders, etc.<h3>Adding Folder to the Path</h3><p>An easy way of extending the capabilities of Python is to add folders to the list where it looks for packages. The first option is to do it at runtime. We can easily append a directory to the variable <code>sys.path</code>. To add the current directory to the list, we can do the following:<pre><code class=language-python>import os
 import sys
 
 CURR_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -419,82 +112,22 @@ print(CURR_DIR)
 sys.path.append(CURR_DIR)
 for path in sys.path:
     print(path)
-</code></pre>
-<p>We can add any directory, not only the current one. In this approach, we modify the system path only while the program
-runs. If we run two different programs, each will have its own path.</p>
-<p>Another option is to modify a variable in the operating system itself. This has the advantage that it can be made
-permament and all programs will share the same information. For our application, we have to modify the <strong>PYTHONPATH</strong>
-environment variable. Environment variables are available on every
-operating system, how to set and modify them varies.</p>
-<p>On <strong>Linux</strong> or <strong>Mac</strong>, the command to set these variables is <code>export</code>. We can do the following:</p>
-<pre><code class="language-bash">export PYTHONPATH=$PYTHONPATH':/home/user/'
+</code></pre><p>We can add any directory, not only the current one. In this approach, we modify the system path only while the program runs. If we run two different programs, each will have its own path.<p>Another option is to modify a variable in the operating system itself. This has the advantage that it can be made permament and all programs will share the same information. For our application, we have to modify the <strong>PYTHONPATH</strong> environment variable. Environment variables are available on every operating system, how to set and modify them varies.<p>On <strong>Linux</strong> or <strong>Mac</strong>, the command to set these variables is <code>export</code>. We can do the following:<pre><code class=language-bash>export PYTHONPATH=$PYTHONPATH':/home/user/'
 echo $PYTHONPATH
-</code></pre>
-<p>The first line appends the folder <code>/home/user</code> to the variable <code>PYTHONPATH</code>. Note that we have used <code>:</code> as a
-directory separator.</p>
-<p>On <strong>Windows</strong>, we need to right-click on "Computer", select "Properties". In the "Advanced System Settings" there is
-the option "Environment variables". If <code>PYTHONPATH</code> exists, we can modify it, if it does not exist, we can create it by
-clicking on "New". Bear in mind that on Windows, you have to use <code>;</code> to separate directories, since <code>:</code> is part of the
-folder path (e.g.: <code>C:\Users\Test\...</code>).</p>
-<p>We can check whether the modifications to the system environment variables worked by running the same code:</p>
-<pre><code class="language-python">import sys
+</code></pre><p>The first line appends the folder <code>/home/user</code> to the variable <code>PYTHONPATH</code>. Note that we have used <code>:</code> as a directory separator.<p>On <strong>Windows</strong>, we need to right-click on "Computer", select "Properties". In the "Advanced System Settings" there is the option "Environment variables". If <code>PYTHONPATH</code> exists, we can modify it, if it does not exist, we can create it by clicking on "New". Bear in mind that on Windows, you have to use <code>;</code> to separate directories, since <code>:</code> is part of the folder path (e.g.: <code>C:\Users\Test\...</code>).<p>We can check whether the modifications to the system environment variables worked by running the same code:<pre><code class=language-python>import sys
 
 for path in sys.path:
     print(path)
-</code></pre>
-<p>Adding information to the Python Path is a great way of developing a structure on your own computer, with code in
-different folders, etc. However, it is also important to note that it also makes harder to maintain. The environmental
-variables in one computer are not the same in another, Python may be loading legacy code from an abscure place on the
-computer. On the other hand, environmental variables are very useful in contexts like a web server, where the
-definitions can be loaded before running a program.</p>
-<p>As a quick side-note, it is worth mentioning that Python allows to read environment variables at runtime:</p>
-<pre><code class="language-python">import os
+</code></pre><p>Adding information to the Python Path is a great way of developing a structure on your own computer, with code in different folders, etc. However, it is also important to note that it also makes harder to maintain. The environmental variables in one computer are not the same in another, Python may be loading legacy code from an abscure place on the computer. On the other hand, environmental variables are very useful in contexts like a web server, where the definitions can be loaded before running a program.<p>As a quick side-note, it is worth mentioning that Python allows to read environment variables at runtime:<pre><code class=language-python>import os
 
 print(os.environ.get('PYTHONPATH'))
-</code></pre>
-<p>Note that on Windows, the changes to environment variables are permanent, but on Linux and Mac we need to
-follow <a href="https://stackoverflow.com/questions/3402168/permanently-add-a-directory-to-pythonpath">extra steps</a> if we want
-them to stay.</p>
-<h3>PYTHONPATH and Virtual Environments</h3>
-<p>When we work with virtual environments, we can modify environment variables when we activate or deactivate them. This
-works seamlessly on Linux and Mac, but Windows users may require some tinkering to adapt the examples below.</p>
-<p>If we inspect the <strong>activate</strong> script (located in the folder <em>venv/bin</em>), we can get inspiration about what is done with
-the <code>PATH</code>variable, for example. The first step is to store the old variable, before modifying it, then we append
-whatever we want. When we deactivate the virtual environment, we set the old variable back.</p>
-<p>Virtual environments have three hooks to achieve this behavior. Next to the <strong>activate</strong> script, we can also see three
-files called <em>postactivate</em>, <em>postdeactivate</em> and <em>predeactivate</em>. We can modify
-<em>postactivate</em>, which should be empty, and add the following:</p>
-<pre><code class="language-bash">PYTHONPATH_OLD=&quot;$PYTHONPATH&quot;
-PYTHONPATH=$PYTHONPATH&quot;:/home/user&quot;
+</code></pre><p>Note that on Windows, the changes to environment variables are permanent, but on Linux and Mac we need to follow <a href=https://stackoverflow.com/questions/3402168/permanently-add-a-directory-to-pythonpath>extra steps</a> if we want them to stay.<h3>PYTHONPATH and Virtual Environments</h3><p>When we work with virtual environments, we can modify environment variables when we activate or deactivate them. This works seamlessly on Linux and Mac, but Windows users may require some tinkering to adapt the examples below.<p>If we inspect the <strong>activate</strong> script (located in the folder <em>venv/bin</em>), we can get inspiration about what is done with the <code>PATH</code>variable, for example. The first step is to store the old variable, before modifying it, then we append whatever we want. When we deactivate the virtual environment, we set the old variable back.<p>Virtual environments have three hooks to achieve this behavior. Next to the <strong>activate</strong> script, we can also see three files called <em>postactivate</em>, <em>postdeactivate</em> and <em>predeactivate</em>. We can modify <em>postactivate</em>, which should be empty, and add the following:<pre><code class=language-bash>PYTHONPATH_OLD="$PYTHONPATH"
+PYTHONPATH=$PYTHONPATH":/home/user"
 export PYTHONPATH
 export PYTHONPATH_OLD
-</code></pre>
-<p>Next time we activate the virtual environment, we will have the directory <code>/home/user</code> added to the <code>PYTHONPATH</code>. It
-is a good practice to go back to the original version of the python path once we deactivate tne environment. We can do
-it directly in the <strong>predeactivate</strong> file:</p>
-<pre><code class="language-bash">PYTHONPATH=&quot;$PYTHONPATH_OLD&quot;
+</code></pre><p>Next time we activate the virtual environment, we will have the directory <code>/home/user</code> added to the <code>PYTHONPATH</code>. It is a good practice to go back to the original version of the python path once we deactivate tne environment. We can do it directly in the <strong>predeactivate</strong> file:<pre><code class=language-bash>PYTHONPATH="$PYTHONPATH_OLD"
 unset $PYTHONPATH_OLD
-</code></pre>
-<p>We set the variable to the status it had before activating, and we remove the extra variable we created. Note that in
-case we don't deactivate the environment, but simply close the terminal, the changes to the <code>PYTHONPATH</code> won't be saved.
-The <em>predeactivate</em> script is important if you switch from one environment to another and keep using the same terminal.</p>
-<h3>PYTHONPATH and PyCharm</h3>
-<p>Users of <a href="https://www.jetbrains.com/pycharm/">PyCharm</a>, and probably most other IDE's around will be
-similar, can change the environment variables directly from within the program. If we open the
-<strong>Run</strong> menu, and select <strong>Edit Configurations</strong> we will be presented with the following menu:</p>
-<p>&lt;:image:PyCharm_config.png&gt;</p>
-<p>In between the options we can see "Add content roots to PYTHONPATH". This is what makes the imports work out of the box
-when we are in Pycharm but if we run the same code directly from the terminal may give you some issues. We can also edit
-the environment variables if we click on the small icon to the right of where it says "environment variables".</p>
-<p>Keeping an eye on the environment variables can avoid problems in the long run. Especially if, for example, two
-developers share the computer. Although strange in many settings, lab computers are normally shared between people, and
-the software can be edited by multiple users. Perhaps one sets environment variables pointing to specific paths which
-are not what the second person is expecting.</p>
-<h2>Absolute Imports</h2>
-<p>In the examples of the previous sections, we imported a function <em>downstream</em> in the file system. This means, that the
-function was inside a folder next to the main script file. However, we should also study what happens if we want to
-import from a sibling package. Imagine we have the following situation:</p>
-<pre><code class="language-bash">├── __init__.py
+</code></pre><p>We set the variable to the status it had before activating, and we remove the extra variable we created. Note that in case we don't deactivate the environment, but simply close the terminal, the changes to the <code>PYTHONPATH</code> won't be saved. The <em>predeactivate</em> script is important if you switch from one environment to another and keep using the same terminal.<h3>PYTHONPATH and PyCharm</h3><p>Users of <a href=https://www.jetbrains.com/pycharm/>PyCharm</a>, and probably most other IDE's around will be similar, can change the environment variables directly from within the program. If we open the <strong>Run</strong> menu, and select <strong>Edit Configurations</strong> we will be presented with the following menu:<p>&LT:image:PyCharm_config.png><p>In between the options we can see "Add content roots to PYTHONPATH". This is what makes the imports work out of the box when we are in Pycharm but if we run the same code directly from the terminal may give you some issues. We can also edit the environment variables if we click on the small icon to the right of where it says "environment variables".<p>Keeping an eye on the environment variables can avoid problems in the long run. Especially if, for example, two developers share the computer. Although strange in many settings, lab computers are normally shared between people, and the software can be edited by multiple users. Perhaps one sets environment variables pointing to specific paths which are not what the second person is expecting.<h2>Absolute Imports</h2><p>In the examples of the previous sections, we imported a function <em>downstream</em> in the file system. This means, that the function was inside a folder next to the main script file. However, we should also study what happens if we want to import from a sibling package. Imagine we have the following situation:<pre><code class=language-bash>├── __init__.py
 ├── pkg_a
 │   ├──  mod_a.py
 │   └── __init__.py
@@ -502,84 +135,40 @@ import from a sibling package. Imagine we have the following situation:</p>
 │   ├── mod_b.py
 │   └── __init__.py
 └── start.py
-</code></pre>
-<p>We have a <strong>start</strong> file in the top-level directory and two packages, <strong>pkg_a</strong> and <strong>pkg_b</strong>. Each one has its own *
-<em>__init__</em><em> file. The question is how can we have access to the contents of </em><em>mod_a</em><em> from withing </em><em>mod_b</em><em>. From
-the </em><em>start</em>* file, the import procedure is easy:</p>
-<pre><code class="language-python">from pkg_a import mod_a
+</code></pre><p>We have a <strong>start</strong> file in the top-level directory and two packages, <strong>pkg_a</strong> and <strong>pkg_b</strong>. Each one has its own * <em>__init__</em><em> file. The question is how can we have access to the contents of </em><em>mod_a</em><em> from withing </em><em>mod_b</em><em>. From the </em><em>start</em>* file, the import procedure is easy:<pre><code class=language-python>from pkg_a import mod_a
 from pkg_b import mod_b
-</code></pre>
-<p>We can create some dummy code in order to have a concrete example. First, in the file <strong>mod_a</strong>, we can create a
-function:</p>
-<pre><code class="language-python">def simple():
+</code></pre><p>We can create some dummy code in order to have a concrete example. First, in the file <strong>mod_a</strong>, we can create a function:<pre><code class=language-python>def simple():
     print('This is simple A')
-</code></pre>
-<p>Which, from the <strong>start</strong> file we can use as follows:</p>
-<pre><code class="language-python">from pkg_a.mod_a import simple
+</code></pre><p>Which, from the <strong>start</strong> file we can use as follows:<pre><code class=language-python>from pkg_a.mod_a import simple
 
 simple()
-</code></pre>
-<p>If we want to use the same function within the <strong>mod_b</strong>, the first thing we can try is to simply copy the same line.
-Thus, in <strong>mod_b</strong> we can try:</p>
-<pre><code class="language-python">from pkg_a.mod_a import simple
+</code></pre><p>If we want to use the same function within the <strong>mod_b</strong>, the first thing we can try is to simply copy the same line. Thus, in <strong>mod_b</strong> we can try:<pre><code class=language-python>from pkg_a.mod_a import simple
 
 
 def bsimple():
     print('This is simple B')
     simple()
-</code></pre>
-<p>To make it complete, we can trigger it directly from withing the <strong>start</strong> file:</p>
-<pre><code class="language-python">from pkg_b import mod_b
+</code></pre><p>To make it complete, we can trigger it directly from withing the <strong>start</strong> file:<pre><code class=language-python>from pkg_b import mod_b
 
 mod_b.bsimple()
-</code></pre>
-<p>If we run it, we will get the output we were expecting:</p>
-<pre><code class="language-bash">$ python start.py
+</code></pre><p>If we run it, we will get the output we were expecting:<pre><code class=language-bash>$ python start.py
 This is simple B
 This is simple
-</code></pre>
-<p>However, and this is very big, <strong>HOWEVER</strong>, sometimes we don't want to run<strong>start</strong>. Instead, we want to run directly *
-<em>mod_b</em>*. If we try to run it, the following happens:</p>
-<pre><code class="language-bash">$ python mod_b.py
+</code></pre><p>However, and this is very big, <strong>HOWEVER</strong>, sometimes we don't want to run<strong>start</strong>. Instead, we want to run directly * <em>mod_b</em>*. If we try to run it, the following happens:<pre><code class=language-bash>$ python mod_b.py
 Traceback (most recent call last):
-  File &quot;mod_b.py&quot;, line 1, in &lt;module&gt;
+  File "mod_b.py", line 1, in &LTmodule>
     from pkg_a.mod_a import simple
 ModuleNotFoundError: No module named 'pkg_a'
-</code></pre>
-<p>And here we start to realize the headaches that the importing in Python can generate as soon as the program gets a bit
-more sophisticated. In the end, the error was expected. When we run <code>python mod\_b.py</code>, Python will try to
-find <code>pkg\_a</code> in the same folder, and not one level up. When we trigger <code>start</code> there is no problem, because from
-that directory both <code>pkg\_a</code> and <code>pkg\_b</code> are visible.</p>
-<p>The same problem will appear if we trigger python from any other location in the computer:</p>
-<pre><code class="language-bash">$ python /path/to/project/start.py
-</code></pre>
-<p>What we did in the examples above is called <strong>absolute imports</strong>. It means that we specify the full path to the module
-we want to import. What we have to remember is that the folder from which you trigger Python is the first place where
-the program looks for modules. Then it goes to the paths stored in <code>sys.path</code>. If we want the code to work, we need to
-be sure that Python knows where <strong>pkg_a</strong> and <strong>pkg_b</strong> are stored.</p>
-<p>The proper way would be to include the folder in the <strong>PYTHONPATH</strong> environment variable, as we explained earlier. A
-<em>dirtier</em> way would be to append the folder at runtime, we can add the following lines to <strong>mod_b.py</strong>:</p>
-<pre><code class="language-python">import os
+</code></pre><p>And here we start to realize the headaches that the importing in Python can generate as soon as the program gets a bit more sophisticated. In the end, the error was expected. When we run <code>python mod\_b.py</code>, Python will try to find <code>pkg\_a</code> in the same folder, and not one level up. When we trigger <code>start</code> there is no problem, because from that directory both <code>pkg\_a</code> and <code>pkg\_b</code> are visible.<p>The same problem will appear if we trigger python from any other location in the computer:<pre><code class=language-bash>$ python /path/to/project/start.py
+</code></pre><p>What we did in the examples above is called <strong>absolute imports</strong>. It means that we specify the full path to the module we want to import. What we have to remember is that the folder from which you trigger Python is the first place where the program looks for modules. Then it goes to the paths stored in <code>sys.path</code>. If we want the code to work, we need to be sure that Python knows where <strong>pkg_a</strong> and <strong>pkg_b</strong> are stored.<p>The proper way would be to include the folder in the <strong>PYTHONPATH</strong> environment variable, as we explained earlier. A <em>dirtier</em> way would be to append the folder at runtime, we can add the following lines to <strong>mod_b.py</strong>:<pre><code class=language-python>import os
 import sys
 
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(BASE_PATH)
 
 from pkg_a.mod_a import simple
-</code></pre>
-<p>This is very similar to what we have done earlier. It is important to highlight that the definition of <code>BASE_PATH</code> is
-the full path to the folder one level above where the current file (<strong>mod_b.py</strong>) is. Note also that we need to append
-to the <code>sys.path</code> before we try to import <code>pkg_a</code>, or it will fail in the same way it did before.</p>
-<p>If we think for a second about this approach, we can quickly notice that it has several drawbacks. The most obvious one
-is that we should add those lines to every single file you are working with. Another problem is that we are adding a
-folder that contains many packages, which can give some collisions. Imagine we are a theoretical physicists working on
-string theory and we develop a module called <code>string</code>. The code would look like this:</p>
-<pre><code class="language-python">from string import m_theory
-</code></pre>
-<p>And it will give us problems because <code>string</code> belongs to Python's standard library.</p>
-<p>Therefore, it is always better to develop projects in their own folder, even if that forces a bit of a name repetition.
-In the very simple case we are dealing with here, the structure would be like this:</p>
-<pre><code class="language-bash">code
+</code></pre><p>This is very similar to what we have done earlier. It is important to highlight that the definition of <code>BASE_PATH</code> is the full path to the folder one level above where the current file (<strong>mod_b.py</strong>) is. Note also that we need to append to the <code>sys.path</code> before we try to import <code>pkg_a</code>, or it will fail in the same way it did before.<p>If we think for a second about this approach, we can quickly notice that it has several drawbacks. The most obvious one is that we should add those lines to every single file you are working with. Another problem is that we are adding a folder that contains many packages, which can give some collisions. Imagine we are a theoretical physicists working on string theory and we develop a module called <code>string</code>. The code would look like this:<pre><code class=language-python>from string import m_theory
+</code></pre><p>And it will give us problems because <code>string</code> belongs to Python's standard library.<p>Therefore, it is always better to develop projects in their own folder, even if that forces a bit of a name repetition. In the very simple case we are dealing with here, the structure would be like this:<pre><code class=language-bash>code
 ├── pkg_a
 │   ├── docs
 │   └── pkg_a
@@ -590,18 +179,7 @@ In the very simple case we are dealing with here, the structure would be like th
     └── pkg_b
         ├── __init__.py
         └── mod_b.py
-</code></pre>
-<p>In the folder tree above we have a base folder <strong>code</strong>. Inside there are two packages, <em>a</em> and <em>b</em>. Although the name
-of the folders repeat (we have twice <strong>pkg_a</strong>, twice <strong>pkg_b</strong>, for example), there are several advantages to working
-in this way. The most important one is the granularity. We can add <code>code/pkg_a</code> or <code>code/pkg_b</code> to
-the <code>PYTHONPATH</code>. Having control is always better than getting blanket results.</p>
-<p>The most important thing to remember is that in Python, absolute is <em>relative</em>. While importing, we are not specifying a
-path in the file system, but rather an import path. Therefore, the imports are always <em>relative</em> to the PYTHONPATH, even
-if called <em>absolute</em>.</p>
-<h2>Relative Imports</h2>
-<p>Another option for importing modules is to define the <em>relative</em> path. We can continue building on the example from the
-previous section. Imagine We have a folder structure like this:</p>
-<pre><code class="language-bash">code
+</code></pre><p>In the folder tree above we have a base folder <strong>code</strong>. Inside there are two packages, <em>a</em> and <em>b</em>. Although the name of the folders repeat (we have twice <strong>pkg_a</strong>, twice <strong>pkg_b</strong>, for example), there are several advantages to working in this way. The most important one is the granularity. We can add <code>code/pkg_a</code> or <code>code/pkg_b</code> to the <code>PYTHONPATH</code>. Having control is always better than getting blanket results.<p>The most important thing to remember is that in Python, absolute is <em>relative</em>. While importing, we are not specifying a path in the file system, but rather an import path. Therefore, the imports are always <em>relative</em> to the PYTHONPATH, even if called <em>absolute</em>.<h2>Relative Imports</h2><p>Another option for importing modules is to define the <em>relative</em> path. We can continue building on the example from the previous section. Imagine We have a folder structure like this:<pre><code class=language-bash>code
 ├── pkg_a
 │   ├── mod_a.py
 │   └── __init__.py
@@ -612,35 +190,18 @@ previous section. Imagine We have a folder structure like this:</p>
 │       ├──  mod_c.py
 │       └── __init__.py
 └── start.py
-</code></pre>
-<p>Let's assume that each <code>mod_X.py</code> defines a function called <code>function_X</code> (where X is the letter of the file). The
-function simply prints the name of the function. It should be clear that if we want to import <code>function_c</code>
-from <code>file_c</code>, the <code>start.py</code> file should look like:</p>
-<pre><code class="language-python">from pkg_b.pkg_a.mod_c import function_c
-</code></pre>
-<p>The situation becomes more interesting when we want to import <code>function_a</code> in <code>mod_b</code>. It is important to pay
-attention because there are two different <code>pkg_a</code> defined in our program. If we add
-the following to <code>mod_b</code>:</p>
-<pre><code class="language-python">from pkg_a.mod_c import function_c
-</code></pre>
-<p>It would work, regardless of how we run the script:</p>
-<pre><code class="language-bash">$ python pkg_b/mod_b.py
+</code></pre><p>Let's assume that each <code>mod_X.py</code> defines a function called <code>function_X</code> (where X is the letter of the file). The function simply prints the name of the function. It should be clear that if we want to import <code>function_c</code> from <code>file_c</code>, the <code>start.py</code> file should look like:<pre><code class=language-python>from pkg_b.pkg_a.mod_c import function_c
+</code></pre><p>The situation becomes more interesting when we want to import <code>function_a</code> in <code>mod_b</code>. It is important to pay attention because there are two different <code>pkg_a</code> defined in our program. If we add the following to <code>mod_b</code>:<pre><code class=language-python>from pkg_a.mod_c import function_c
+</code></pre><p>It would work, regardless of how we run the script:<pre><code class=language-bash>$ python pkg_b/mod_b.py
 $ cd pkg_b
 $ python mod_b.py
-</code></pre>
-<p>But this is not what we wanted! We want <code>function_a</code> from <code>mod_a</code>. If we, however, add the following to <code>mod_b</code>:</p>
-<pre><code class="language-python">from pkg_a.mod_a import function_a
-</code></pre>
-<p>We would get the following error:</p>
-<pre><code class="language-bash">$ python pkg_b/mod_b.py
+</code></pre><p>But this is not what we wanted! We want <code>function_a</code> from <code>mod_a</code>. If we, however, add the following to <code>mod_b</code>:<pre><code class=language-python>from pkg_a.mod_a import function_a
+</code></pre><p>We would get the following error:<pre><code class=language-bash>$ python pkg_b/mod_b.py
 Traceback (most recent call last):
-  File &quot;pkg_b/mod_b.py&quot;, line 1, in &lt;module&gt;
+  File "pkg_b/mod_b.py", line 1, in &LTmodule>
     from pkg_a.mod_a import function_a
 ImportError: No module named pkg_a
-</code></pre>
-<p>In this case is where relative imports become very handy. From <strong>mod_b</strong>, the module we want to import is one folder up.
-To indicate that, we can use the <code>..</code> notation in Python:</p>
-<pre><code class="language-python">from ..pkg_a.mod_a import function_a
+</code></pre><p>In this case is where relative imports become very handy. From <strong>mod_b</strong>, the module we want to import is one folder up. To indicate that, we can use the <code>..</code> notation in Python:<pre><code class=language-python>from ..pkg_a.mod_a import function_a
 
 
 def function_b():
@@ -649,36 +210,20 @@ def function_b():
 
 
 function_b()
-</code></pre>
-<p>Generally speaking, the first <code>.</code> means <em>in this directory</em>, while the second means going one
-level up, etc. However, if we run the file, there will be problems. If we run the file, we get the following error:</p>
-<pre><code class="language-bash">$ python3 mod_b.py
+</code></pre><p>Generally speaking, the first <code>.</code> means <em>in this directory</em>, while the second means going one level up, etc. However, if we run the file, there will be problems. If we run the file, we get the following error:<pre><code class=language-bash>$ python3 mod_b.py
 Traceback (most recent call last):
-  File &quot;mod_b.py&quot;, line 1, in &lt;module&gt;
+  File "mod_b.py", line 1, in &LTmodule>
     from ..pkg_a.mod_a import function_a
 ValueError: attempted relative import beyond top-level package
-</code></pre>
-<p>It doesn't matter if we change folders, if we move one level up, we will get the same problem:</p>
-<pre><code class="language-bash">$ python3 pkg_b/mod_b.py
+</code></pre><p>It doesn't matter if we change folders, if we move one level up, we will get the same problem:<pre><code class=language-bash>$ python3 pkg_b/mod_b.py
 Traceback (most recent call last):
-  File &quot;mod_b.py&quot;, line 1, in &lt;module&gt;
+  File "mod_b.py", line 1, in &LTmodule>
     from ..pkg_a.mod_a import function_a
 ValueError: attempted relative import beyond top-level package
-</code></pre>
-<p>At some point, this becomes nerve-wracking. It doesn't matter if we add folders to the PATH, create <strong>__init__.py</strong>
-files, etc. It all boils down to the fact that we are not treating our files as a module when we run it. To instruct
-Python to run the file as part of a package, we would do:</p>
-<pre><code class="language-bash">$ python3 -m code.pkg_b.mod_b
+</code></pre><p>At some point, this becomes nerve-wracking. It doesn't matter if we add folders to the PATH, create <strong>__init__.py</strong> files, etc. It all boils down to the fact that we are not treating our files as a module when we run it. To instruct Python to run the file as part of a package, we would do:<pre><code class=language-bash>$ python3 -m code.pkg_b.mod_b
 This is function_b
 This is function_a
-</code></pre>
-<p>Bear in mind that the only way of running the code like this is if python knows where to find the folder <code>code</code>. And
-this brings us back to the discussion of the PYTHONPATH variables. If we are in the folder that contains <code>code</code> and run
-Python from there, we won't see any problems. If we, however, are in any other folder, Python will follow to usual rules
-to try to understand where <code>code</code> is.</p>
-<p>There is one more important detail to discuss with relative imports. We can imagine that <strong>mod_c</strong> has the following
-code:</p>
-<pre><code class="language-python">from ..mod_b import function_b
+</code></pre><p>Bear in mind that the only way of running the code like this is if python knows where to find the folder <code>code</code>. And this brings us back to the discussion of the PYTHONPATH variables. If we are in the folder that contains <code>code</code> and run Python from there, we won't see any problems. If we, however, are in any other folder, Python will follow to usual rules to try to understand where <code>code</code> is.<p>There is one more important detail to discuss with relative imports. We can imagine that <strong>mod_c</strong> has the following code:<pre><code class=language-python>from ..mod_b import function_b
 
 
 def function_c():
@@ -687,16 +232,9 @@ def function_c():
 
 
 function_c()
-</code></pre>
-<p>Since <strong>mod_c</strong> is deeper in the tree, we can try to run it in different ways:</p>
-<pre><code class="language-bash">$ python -m code.pkg_b.pkg_a.mod_c
+</code></pre><p>Since <strong>mod_c</strong> is deeper in the tree, we can try to run it in different ways:<pre><code class=language-bash>$ python -m code.pkg_b.pkg_a.mod_c
 $ python -m pkg_b.pkg_a.mod_c
-</code></pre>
-<p>However, the second option is going to fail. <strong>mod_c</strong> is importing <strong>mod_b</strong> which in turn is importing <strong>mod_a</strong>.
-Therefore, Python needs to be able to go all the way to the root folder <strong>code</strong>. Therefore, when we plan our code, we
-should be mindful not only on how to write it, but on how the program is meant to be used.</p>
-<p>The last detail to cover is that we can't mix relative and absolute imports. For example, the following won't work:</p>
-<pre><code class="language-python">from ..pkg_a.mod_a import function_a
+</code></pre><p>However, the second option is going to fail. <strong>mod_c</strong> is importing <strong>mod_b</strong> which in turn is importing <strong>mod_a</strong>. Therefore, Python needs to be able to go all the way to the root folder <strong>code</strong>. Therefore, when we plan our code, we should be mindful not only on how to write it, but on how the program is meant to be used.<p>The last detail to cover is that we can't mix relative and absolute imports. For example, the following won't work:<pre><code class=language-python>from ..pkg_a.mod_a import function_a
 from pkg_a.mod_c import function_c
 
 
@@ -706,22 +244,12 @@ def function_b():
 
 
 function_b()
-</code></pre>
-<p>We will get the following error:</p>
-<pre><code class="language-bash">$ python -m code.pkg_b.mod_b
+</code></pre><p>We will get the following error:<pre><code class=language-bash>$ python -m code.pkg_b.mod_b
 Traceback (most recent call last):
 [...]
 ModuleNotFoundError: No module named 'pkg_a'
-</code></pre>
-<p>When we decide to run your code as a module (using the <code>-m</code>), then all the imports relative. One way
-of solving the problem would be to change the following:</p>
-<pre><code class="language-python">from .pkg_a.mod_c import function_c
-</code></pre>
-<p>In this way it becomes clear that we want are importing from <code>pkg_a</code> which is in the same folder as <strong>mod_b</strong>.</p>
-<h2>Mixing Absolute and Relative</h2>
-<p>It is possible mixing relative and absolute imports without any secrets to it. We can change
-<strong>mod_b.py</strong> like this:</p>
-<pre><code class="language-python">from ..pkg_a.mod_a import function_a
+</code></pre><p>When we decide to run your code as a module (using the <code>-m</code>), then all the imports relative. One way of solving the problem would be to change the following:<pre><code class=language-python>from .pkg_a.mod_c import function_c
+</code></pre><p>In this way it becomes clear that we want are importing from <code>pkg_a</code> which is in the same folder as <strong>mod_b</strong>.<h2>Mixing Absolute and Relative</h2><p>It is possible mixing relative and absolute imports without any secrets to it. We can change <strong>mod_b.py</strong> like this:<pre><code class=language-python>from ..pkg_a.mod_a import function_a
 from code.pkg_b.pkg_a.mod_c import function_c
 
 
@@ -731,195 +259,6 @@ def function_b():
 
 
 function_b()
-</code></pre>
-<p>Mixing relative and absolute is definitely a possibility. The question, as almost always, is why would we do it. The
-fact that we can does not mean we should.</p>
-<h2>Absolute or Relative: Conclusions</h2>
-<p>Deciding whether we want to use absolute imports or relative imports is basically up to the taste of the developer or
-the rules established by the group. If we are developing a package that has a lot of sub-packages and modules with
-several layers of nesting, using absolute imports can make the code clearer. For example, this is how the same import
-would look like in the two different cases:</p>
-<pre><code class="language-python">from program.pkg_1.pkg_2.pkg_3.module import my_function
+</code></pre><p>Mixing relative and absolute is definitely a possibility. The question, as almost always, is why would we do it. The fact that we can does not mean we should.<h2>Absolute or Relative: Conclusions</h2><p>Deciding whether we want to use absolute imports or relative imports is basically up to the taste of the developer or the rules established by the group. If we are developing a package that has a lot of sub-packages and modules with several layers of nesting, using absolute imports can make the code clearer. For example, this is how the same import would look like in the two different cases:<pre><code class=language-python>from program.pkg_1.pkg_2.pkg_3.module import my_function
 from .module import my_function
-</code></pre>
-<p>For some people the first line is much clearer, there are no doubts about what are we importing. But it can get tiresome
-to type the entire path all the time. However, it is important to consider that typing less is not the only factor at
-play here.</p>
-<p>If we are planning on allowing some files to run directly we should be mindful about the requirements for the relative
-imports. If we have many modules with similar names, sometimes the explicit path makes the code much clearer. It is
-really up to the developer to have enough sensitivity to decide
-whether the absolute import or the relative import makes the code clearer and the execution easier.</p>
-<p>The example code for this article can be
-found <a href="https://github.com/PFTL/website_example_code/tree/master/pftl_code/code/37_imports">on Github</a></p>
-            </main>
-            <div class="info-list">
-              <span class="item author">Article written by Aquiles Carattino</span>
-            </div>
-              <div class="similar-posts">
-                <h3>Related Articles:</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/how-create-setup-file-your-project" class="item">
-                        <img src="/images/Python-setup.width-800.jpg" alt="">
-                        <span class="date">2020-01-20</span>
-                        <span class="name">How to create a setup file for your project</span>
-                      </a>
-                    </li>
-                </ul>
-              </div>
-            <div class="bottom-section">
-              <h4>Share your thoughts with us!</h4>
-              <div class="comments">
-                <!-- Comment -->
-                <script src="https://utteranc.es/client.js"
-                        repo="PFTL/pftl_discussions"
-                        issue-term="pathname"
-                        label="Comment"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-              </div>
-            </div>
-          </div>
-          <div class="rightside">
-            <div class="support-box">
-              <h3>Support Us</h3>
-              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
-                Lab</strong></p>
-              <a href="https://pythonforthelab.com/books" class="button">Check out the book</a>
-            </div>
-            <div class="latest-posts">
-
-                <h3>Latest Articles</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
-                      <span>by Aquiles Carattino, 2021-03-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
-                      <span>by Aquiles Carattino, 2021-03-21</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
-                      <span>by Aquiles Carattino, 2021-02-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
-                      <span>by Aquiles Carattino, 2021-01-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
-                      <span>by Aquiles Carattino, 2020-06-13</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
-                      <span>by Aquiles Carattino, 2020-05-25</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
-                      <span>by Aquiles Carattino, 2020-05-18</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
-                      <span>by Aquiles Carattino, 2020-05-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tips-using-sets">Python Tips: Using Sets</a>
-                      <span>by Aquiles Carattino, 2020-05-11</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
-                      <span>by Aquiles Carattino, 2020-04-10</span>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="subscribe-fixed">
-              <button class="action">Never Stop Learning</button>
-              <div class="cnt">
-                <p>Join over 1000 Python developers and don't miss any updates!</p>
-                <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mobile-sb-form">
-          <div class="sb-form">
-            <h4>Get all the information directly to your inbox</h4>
-            <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- End Main -->
-
-  </section>
-  <!-- End Wrapper -->
-
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="https://pythonforthelab.com/cookie-policy">Cookie Policy</a>
-        <a href="https://pythonforthelab.com/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Footer --><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
-<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-<script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
-</script></body>
-</html>
+</code></pre><p>For some people the first line is much clearer, there are no doubts about what are we importing. But it can get tiresome to type the entire path all the time. However, it is important to consider that typing less is not the only factor at play here.<p>If we are planning on allowing some files to run directly we should be mindful about the requirements for the relative imports. If we have many modules with similar names, sometimes the explicit path makes the code much clearer. It is really up to the developer to have enough sensitivity to decide whether the absolute import or the relative import makes the code clearer and the execution easier.<p>The example code for this article can be found <a href=https://github.com/PFTL/website_example_code/tree/master/pftl_code/code/37_imports>on Github</a></main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/how-create-setup-file-your-project> <img alt src=/images/Python-setup.width-800.jpg> <span class=date>2020-01-20</span> <span class=name>How to create a setup file for your project</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>

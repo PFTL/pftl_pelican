@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Python For The Lab</title><link href="https://pythonforthelab.com/" rel="alternate"></link><link href="https://www.pythonforthelab.com/feeds/all.atom.xml" rel="self"></link><id>https://pythonforthelab.com/</id><updated>2021-03-27T00:00:00+01:00</updated><entry><title>Instructions to build the Python for the Lab DAQ</title><link href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" rel="alternate"></link><published>2021-03-27T00:00:00+01:00</published><updated>2021-03-27T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2021-03-27:/blog/instructions-to-build-the-python-for-the-lab-daq/</id><summary type="html">&lt;p&gt;The PFTL DAQ is the ideal companion to follow the book &lt;a href="https://www.pythonforthelab.com/books/"&gt;Python for the Lab&lt;/a&gt;. Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The PFTL DAQ is the ideal companion to follow the book &lt;a href="https://www.pythonforthelab.com/books/"&gt;Python for the Lab&lt;/a&gt;. Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to follow the book to its fullest. &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Python For The Lab</title><link href="https://pythonforthelab.com/" rel="alternate"></link><link href="https://www.pythonforthelab.com/feeds/all.atom.xml" rel="self"></link><id>https://pythonforthelab.com/</id><updated>2021-03-27T00:00:00+01:00</updated><entry><title>Instructions to build the Python for the Lab DAQ.</title><link href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" rel="alternate"></link><published>2021-03-27T00:00:00+01:00</published><updated>2021-03-27T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2021-03-27:/blog/instructions-to-build-the-python-for-the-lab-daq/</id><summary type="html">&lt;p&gt;The PFTL DAQ is the ideal companion to follow the book &lt;a href="https://pythonforthelab.com/books/"&gt;Python for the Lab&lt;/a&gt;. Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The PFTL DAQ is the ideal companion to follow the book &lt;a href="https://pythonforthelab.com/books/"&gt;Python for the Lab&lt;/a&gt;. Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to follow the book to its fullest. &lt;/p&gt;
 &lt;h2&gt;Materials&lt;/h2&gt;
 &lt;p&gt;The device is built on an &lt;strong&gt;Arduino DUE&lt;/strong&gt;, which can be purchased directly from &lt;a href="https://store.arduino.cc/arduino-due"&gt;Arduino's webstore&lt;/a&gt; or any other supplier. The DUE choice was driven because it is the only board that provides analog outputs (also known as DAC). However, boards evolve over time, and there may be others available with the same options. &lt;/p&gt;
 &lt;p&gt;Arduino also provides a program called &lt;a href="https://www.arduino.cc/en/software"&gt;Arduino IDE&lt;/a&gt;, which we need to load programs to the boards. However, the DUE is not available by default. To add the DUE to the list of compatible boards, we'll need to open the board manager. &lt;/p&gt;
 &lt;p&gt;The board manager is under the menu Tools/Boards:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Arduino Board Manager menu" src="attachments/arduino_boards.png"&gt;]&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Arduino Board Manager menu" src="/images/46_pftl_daq/arduino_boards.png"&gt;&lt;/p&gt;
 &lt;p&gt;And the board manager will allow us to install the DUE:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Installing the Due board on the arduino IDE" src="attachments/arduino_board_manager.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Installing the Due board on the arduino IDE" class="center-image" src="/images/46_pftl_daq/arduino_board_manager.png"&gt;&lt;/p&gt;
 &lt;p&gt;To work with the board, we must load a special code to make it behave as we want. The code is &lt;a href="https://github.com/PFTL/pythonforthelab/blob/458cd588e7d593dca15b58db1ab189e68d718c6b/extras/arduino_firmware/arduino_firmware.ino"&gt;hosted here&lt;/a&gt;. Saving it to a file on the computer is enough. &lt;/p&gt;
 &lt;p&gt;Open the code with the Arduino IDE, connect the board to the computer using the programming port (the USB port closest to the power jack). Select the board under Tools/Boards and the port on which it is connected. The last step is to click the &lt;em&gt;Upload&lt;/em&gt; button, and you are ready to go. &lt;/p&gt;
 &lt;h3&gt;Extra materials&lt;/h3&gt;
 &lt;p&gt;Besides the DUE, there are some &lt;strong&gt;small electronics required&lt;/strong&gt;. We need a small breadboard. Something like this is enough, but anything will work:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Small electronics breadboard" src="attachments/PC01771-40.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Small electronics breadboard" src="/images/46_pftl_daq/PC01771-40.jpg"&gt;&lt;/p&gt;
 &lt;p&gt;We also need one LED. The color does not matter, 3 jumper cables that make it easy to connect the Arduino and the breadboard, and one resistance of 220 Ohm. Overall, what we want to build looks like the following:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Schematics of the circuit for Python for the Lab" src="attachments/PFTL_DAQ_Schematic_bb.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Schematics of the circuit for Python for the Lab" src="/images/46_pftl_daq/PFTL_DAQ_Schematic_bb.png"&gt;&lt;/p&gt;
 &lt;p&gt;Sourcing the electronics components will depend on the country. There are some suppliers like Farnell and RS Electronics that may be available. Still, in general, any electronics do-it-yourself shop will be able to provide the elements. &lt;/p&gt;
 &lt;h2&gt;Understanding the Arduino code&lt;/h2&gt;
-&lt;p&gt;Although not part of the book, it can be useful to look at the code loaded to the Arduino. The approach is very similar to what was discussed in &lt;a href="https://www.pythonforthelab.com/blog/how-control-arduino-computer-using-python/"&gt;this article&lt;/a&gt;. Besides some boilerplate initialization of variables, we encounter the &lt;code&gt;setup&lt;/code&gt; function. This function is called only once when the Arduino is boot up, which makes it the ideal place to initialize the communication with the computer or set the initial value of some outputs:&lt;/p&gt;
+&lt;p&gt;Although not part of the book, it can be useful to look at the code loaded to the Arduino. The approach is very similar to what is discussed on &lt;a href="https://pythonforthelab.com/blog/how-control-arduino-computer-using-python"&gt;how to control an Arduino from Python&lt;/a&gt;. Besides some boilerplate initialization of variables, we encounter the &lt;code&gt;setup&lt;/code&gt; function. This function is called only once when the Arduino is boot up, which makes it the ideal place to initialize the communication with the computer or set the initial value of some outputs:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-c"&gt;void setup() {
   Serial.begin(9600);
   while (!Serial);
@@ -346,7 +346,7 @@ camera.Close()
 &lt;p&gt;The syntax is pretty clear. If we want to change &lt;code&gt;ExposureTime&lt;/code&gt;, we can use a method called &lt;code&gt;SetValue&lt;/code&gt; and provide the value in microseconds (see below for more discussion on units). If we check the Pylon manual, this is the pattern we will find for the camera's parameters. However, since we are using &lt;strong&gt;PyPylon&lt;/strong&gt;, we can also make use of an alternative syntax:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;camera.ExposureTime = 50000
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Both examples generate the same effect and show the difference between &lt;a href="https://www.aquiles.me/functional_or_imperative_programming/"&gt;functional or imperative programming&lt;/a&gt;. I, personally, believe the first one is clearer since it will always raise an error if, for example, we use &lt;code&gt;Exposure&lt;/code&gt; instead of &lt;code&gt;ExposureTime&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Both examples generate the same effect and show the difference between &lt;a href="https://notes.aquiles.me/functional_or_imperative_programming/"&gt;functional or imperative programming&lt;/a&gt;. I, personally, believe the first one is clearer since it will always raise an error if, for example, we use &lt;code&gt;Exposure&lt;/code&gt; instead of &lt;code&gt;ExposureTime&lt;/code&gt;.&lt;/p&gt;
 &lt;h3&gt;Getting node information&lt;/h3&gt;
 &lt;p&gt;One of the reasons for favoring the imperative setting of the exposure time (i.e., using &lt;code&gt;SetValue&lt;/code&gt;) is that &lt;code&gt;ExposureTime&lt;/code&gt; is more complex than a simple number attribute of the camera. When setting values to a device, one common concern is knowing the limits and the units of each parameter. Pylon, in that regard, is very transparent and consistent. &lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;camera.Open()
@@ -363,13 +363,13 @@ camera.Close()
 &lt;p&gt;It is possible to get the units of the &lt;code&gt;ExposureTime&lt;/code&gt;and the current value, the minimum, and the maximum. The code above shows the two ways of getting the information, using &lt;code&gt;GetUnit&lt;/code&gt; or attributes like &lt;code&gt;Unit&lt;/code&gt;. Again, this is a matter of personal preference and consistency through more extensive projects. &lt;/p&gt;
 &lt;h2&gt;PylonViewer as the documentation entry point&lt;/h2&gt;
 &lt;p&gt;The examples above are a great starting point, but the main problem is that they are limited. As soon as we want to do something slightly more complex, we will need to use a different approach. For example, we know the minimum and maximum value of the exposure time, but how do we know the minimum difference between possible values? Fortunately, Basler bundles the PylonViewer with their software package. Let's see what information it provides when we select the exposure time:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./_basler/pylon_viewer_01.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Detail of the Pylon Viewer" src="/images/44_basler/pylon_viewer_01.png"&gt;&lt;/p&gt;
 &lt;p&gt;For every parameter that we can change in the camera, PylonViewer tells us what method should be used to change and retrieve the value. But this is not the only information that it provides. If we open the Feature Properties panel (must be selected under the Window menu), we can also see a table with more information for that specific property:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./_basler/pylon_viewer_02.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Changing properties on the Pylon Viewer" src="/images/44_basler/pylon_viewer_02.png"&gt;&lt;/p&gt;
 &lt;p&gt;The PylonViewer does not allow us to see how to retrieve that information. Still, if it is on the table, it means it can be programmatically accessed. The PylonViewer gives us access to the Programmer's Guide if we click on the &lt;em&gt;Help menu&lt;/em&gt;. Normally, the C++ guide is the easiest to translate into Python code. If we search for &lt;code&gt;ExposureTime&lt;/code&gt; we will get several matches, but any &lt;code&gt;Member List&lt;/code&gt; would be a good starting point. The information on &lt;code&gt;ExposureTime&lt;/code&gt; may be a bit vague:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./_basler/pylon_manual_exposure_01.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Finding the reference to changing the exposure in Pylon Viewer" src="/images/44_basler/pylon_manual_exposure_01.png"&gt;&lt;/p&gt;
 &lt;p&gt;But it provides a significant hint (highlighted in red above). The Exposure time is not an ordinary number, but a &lt;code&gt;Pylon::IFloatEx&lt;/code&gt;. Without entering too much into details, if we click on it, we get the information we were looking for:&lt;/p&gt;
-&lt;p&gt;&lt;img alt="" src="./_basler/pylong_manual_exposure_02.png"&gt; &lt;/p&gt;
+&lt;p&gt;&lt;img alt="Documentation of the exposure property in Pylon" src="/images/_basler/pylong_manual_exposure_02.png"&gt; &lt;/p&gt;
 &lt;p&gt;Every parameter that belongs to this class will have plenty of available information. The exposure time is only one of them. For basic applications, it may be slightly far-fetched. Still, it is important to learn how to navigate the documentation to get the relevant information and translate it to Python. &lt;/p&gt;
 &lt;h2&gt;Acquiring in free-run mode&lt;/h2&gt;
 &lt;p&gt;With cameras, often we want to acquire images continuously, not just one frame. Free-run means that the camera will acquire frames one after the other until we tell it to stop. With &lt;code&gt;InstantCamera&lt;/code&gt;, this can be achieved by using the method &lt;code&gt;StartGrabbing&lt;/code&gt; without specifying a maximum number of frames:&lt;/p&gt;
@@ -2189,7 +2189,7 @@ void loop() {
 &lt;p&gt;At the bottom of the serial monitor window, be sure you select the proper baud rate, or the messages are going to be nonsense.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Of course, you are probably also seeing that the messages get printed one after the other. This is because in serial communication there is no specific way of saying &lt;em&gt;this message has ended&lt;/em&gt;. Something that is sort of a standard is using special characters to mark the end of a message, such as the newline character. Such as with Python, newline is represented by &lt;code&gt;\n&lt;/code&gt;, so you can update the code to include it, for example:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Serial.write(&amp;quot;Switching ON\n&amp;quot;);
+&lt;pre&gt;&lt;code class="language-python"&gt;Serial.write(&amp;quot;Switching ON\n&amp;quot;);
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This discussion is important because we are not forced to use the new line character, we could have used anything we wanted. If you pay attention to the serial monitor window, you see there are some options regarding the line ending. We are going to keep the &lt;code&gt;\n&lt;/code&gt; but be aware that other programs and other hardware may use a different character.  &lt;/p&gt;
 &lt;h2&gt;Controlling the LED&lt;/h2&gt;
@@ -5138,10 +5138,6 @@ functioning), you can design your own classes in such a way that they
 behave as a specific data type. Our example was a class that mimics how
 dictionaries work, and which we used as an argument in a different
 object, which had no idea of our custom data type.&lt;/p&gt;
-&lt;p&gt;Example code for this article can be found &lt;a href="https://github.com/PFTL/website/tree/master/example_code/33_duck_typing"&gt;on
-Github&lt;/a&gt;.
-You can also find the &lt;a href="https://github.com/PFTL/website/blob/master/content/blog/33_duck_typing.rst.md"&gt;source code for this
-article&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Header image by &lt;a href="https://unsplash.com/@joshstyle?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;JOSHUA
 COLEMAN&lt;/a&gt;
 on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="functions"></category><category term="methods"></category><category term="dynamic language"></category><category term="typing"></category><category term="types"></category></entry><entry><title>Introduction to Python Lambda Functions</title><link href="https://pythonforthelab.com/blog/intro-to-python-lambda-functions" rel="alternate"></link><published>2019-03-17T00:00:00+01:00</published><updated>2019-03-17T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-03-17:/blog/intro-to-python-lambda-functions</id><summary type="html">&lt;p&gt;Some time ago, Python introduced in its syntax the possibility to define
@@ -5678,10 +5674,6 @@ very simple example would be what happens when you import data using
 would like to directly pass to a function. Unpacking arguments is very
 useful, especially when you are not in control of the functions that you
 are using.&lt;/p&gt;
-&lt;p&gt;The source version of this article is available &lt;a href="https://github.com/PFTL/website/blob/master/content/blog/29_args_kwargs.rst.md"&gt;on
-Github&lt;/a&gt;.
-The code examples are &lt;a href="https://github.com/PFTL/website/tree/master/example_code/29_args_kwargs"&gt;available
-here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/XJXWbfSo2f0?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Luca
 Bravo&lt;/a&gt;
 on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="functions"></category><category term="methods"></category><category term="arguments"></category><category term="packing"></category><category term="unpacking"></category><category term="args"></category><category term="kwargs"></category></entry><entry><title>Using pyZMQ for inter-process communication: Part 2</title><link href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-2" rel="alternate"></link><published>2019-03-05T00:00:00+01:00</published><updated>2019-03-05T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-03-05:/blog/using-pyzmq-for-inter-process-communication-part-2</id><summary type="html">&lt;p&gt;In this article, we are going to cover how you can leverage the
@@ -5693,7 +5685,7 @@ possibilities of ZMQ to exchange data between different processes in
 Python. We have covered the &lt;a href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-1"&gt;basics of pyZMQ&lt;/a&gt;
 in part 1. This is a fairly advanced tutorial, in which we are not only
 going to use pyZMQ, but also the multiprocessing library,
-&lt;a href="{filename}02_HDF5_python.rst.md"&gt;HDF5&lt;/a&gt;, and
+&lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;HDF5&lt;/a&gt;, and
 &lt;a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui"&gt;openCV&lt;/a&gt;. We are going to acquire
 images from the webcam as fast as possible, we are going to save the
 data to disk during the acquisition, and we are going to perform some
@@ -6318,15 +6310,9 @@ its documentation &amp;lt;http://zeromq.org/&amp;gt; is very important. There
 are a wealth of patterns that can be implemented to make the program
 more robust, faster, etc. Remember that premature optimization may be a
 liability more than a feature.&lt;/p&gt;
-&lt;p&gt;The code for this tutorial can be found on
-&lt;a href="https://github.com/PFTL/website/tree/master/example_code/26_ZMQ"&gt;Github&lt;/a&gt;,
-as well as &lt;a href="https://github.com/PFTL/website/blob/master/content/blog/26_ZMQ.rst.md"&gt;the article
-itself&lt;/a&gt;.
-If you have any comments or suggestions, you are welcome to create them
-&lt;a href="https://github.com/PFTL/website/issues"&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/ISG-rUel0Uw?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Thomas
 Jensen&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="ZMQ"></category><category term="Socket"></category><category term="Communication"></category><category term="Parallel"></category><category term="Data"></category></entry><entry><title>Building a CRM with Jupyter Notebooks</title><link href="https://pythonforthelab.com/blog/building-a-crm-with-jupyter-notebooks" rel="alternate"></link><published>2019-02-12T00:00:00+01:00</published><updated>2019-02-12T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-02-12:/blog/building-a-crm-with-jupyter-notebooks</id><summary type="html">&lt;p&gt;This tutorial is going to be off-topic compared to the others on the
+on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="ZeroMQ"></category><category term="ZMQ"></category><category term="Socket"></category><category term="Communication"></category><category term="Parallel"></category><category term="Data"></category></entry><entry><title>Building a CRM with Jupyter Notebooks</title><link href="https://pythonforthelab.com/blog/building-a-crm-with-jupyter-notebooks" rel="alternate"></link><published>2019-02-12T00:00:00+01:00</published><updated>2019-02-12T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-02-12:/blog/building-a-crm-with-jupyter-notebooks</id><summary type="html">&lt;p&gt;This tutorial is going to be off-topic compared to the others on the
 website. It was born out of a question regarding how to send
 personalized e-mails to several people on a list, and I thought it could
 be useful to post a tutorial online. This will help people interested …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This tutorial is going to be off-topic compared to the others on the
@@ -6410,7 +6396,7 @@ something more descriptive than Untitled. For example,
 should go. Let's try a simple print statement, like what you see in the
 image below. To run the code, you can either press Shift+Enter or click
 the play button that says run, while the cursor is still in the cell.&lt;/p&gt;
-&lt;p&gt;&lt;img alt="First Cell" class="center-img" src="/images/27_images/02_jupyter.jpg"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="First Cell" class="center-img" src="/images/27_images/02_jupyter.png"&gt;&lt;/p&gt;
 &lt;p&gt;The advantage of Jupyter notebooks is that they also keep the output
 when you share them. You can see &lt;a href="https://github.com/PFTL/website/blob/master/example_code/27_CRM/Test_Notebook.ipynb"&gt;this example
 notebook&lt;/a&gt;
@@ -7190,10 +7176,7 @@ can be improved, made more efficient, etc. The reality is that if you
 need to handle communication with some hundreds of customers, you don't
 need much more than what we did. Perhaps you can make it more
 functional, prettier, etc. But that is more customization than core
-development.&lt;/p&gt;
-&lt;p&gt;Header Photo by
-&lt;a href="https://unsplash.com/photos/7uGUFCyH3GY?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;rawpixel&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="CRM"></category><category term="Jupyter"></category><category term="Databases"></category><category term="Relational"></category><category term="SQLAlchemy"></category><category term="SQLite"></category><category term="Customers"></category><category term="email"></category></entry><entry><title>Deep and Shallow Copies of Objects</title><link href="https://pythonforthelab.com/blog/deep-and-shallow-copies-of-objects" rel="alternate"></link><published>2019-02-04T00:00:00+01:00</published><updated>2019-02-04T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-02-04:/blog/deep-and-shallow-copies-of-objects</id><summary type="html">&lt;p&gt;Copying objects in Python seems like a trivial task, but it can have
+development.&lt;/p&gt;</content><category term="blog"></category><category term="CRM"></category><category term="Jupyter"></category><category term="Databases"></category><category term="Relational"></category><category term="SQLAlchemy"></category><category term="SQLite"></category><category term="Customers"></category><category term="email"></category></entry><entry><title>Deep and Shallow Copies of Objects</title><link href="https://pythonforthelab.com/blog/deep-and-shallow-copies-of-objects" rel="alternate"></link><published>2019-02-04T00:00:00+01:00</published><updated>2019-02-04T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-02-04:/blog/deep-and-shallow-copies-of-objects</id><summary type="html">&lt;p&gt;Copying objects in Python seems like a trivial task, but it can have
 unexpected implications in your programs. Copying data may be achieved
 by either duplicating the data or by storing references to the objects,
 having a much lower impact on the memory. In this article, we are going
@@ -8173,7 +8156,7 @@ different datasets.&lt;/p&gt;
 pattern. What we want to achieve is to have 3 processes. One that
 continuously acquires from a camera and publishes the frames. Two more
 processes independent from each other, one that calculates the Fourier
-Transform, as we did before and another one that saves the images &lt;a href="{filename}02_HDF5_python.rst.md"&gt;to an
+Transform, as we did before and another one that saves the images &lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;to an
 HDF5 file&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Let's start by developing the publisher. It is going to be an infinite
 loop that sends images one after the other. It will look like this:&lt;/p&gt;
@@ -8242,7 +8225,7 @@ right into the subscriber. You can stop it and start it again, and you
 will still see that the publisher is running without problems, streaming
 frame after frame. You can see what happens if you start two subscribers
 (or more). You will notice that they all get the same information. Let's
-see a quick example of how to save data to the hard drive, &lt;a href="{filename}02_HDF5_python.rst.md"&gt;using
+see a quick example of how to save data to the hard drive, &lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;using
 hdf5&lt;/a&gt;. Let's create a new subscriber,
 &lt;strong&gt;subscriber_2.py&lt;/strong&gt;, with the following:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;from datetime import datetime
@@ -8286,7 +8269,7 @@ with h5py.File('camera_data.hdf5', 'a') as file:
 The only difference now is that the loop is encapsulated together with
 the opening of the HDF file in order to save data to &lt;code&gt;camera_data&lt;/code&gt;. If
 you are not familiar with how hdf5 works, I recommend you to check out
-&lt;a href="{filename}02_HDF5_python.rst.md"&gt;this article&lt;/a&gt;. Remember that frames
+&lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;this article&lt;/a&gt;. Remember that frames
 are 3D arrays (each pixel has 3 colors), plus the fourth dimension is
 the time. In these cases is where the power of &lt;code&gt;h5py&lt;/code&gt; becomes evident
 and why it is worth controlling data saving at a lower level than what
@@ -9346,7 +9329,7 @@ the movie&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Finally, the model is accumulating all the data into an attribute. It
 could be nice to have the option to save the movie or the picture
 somewhere. You can add an extra button to achieve it, and if you are
-willing, you can use &lt;a href="{filename}02_HDF5_python.rst.md"&gt;HDF5 files&lt;/a&gt; to
+willing, you can use &lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;HDF5 files&lt;/a&gt; to
 store the data.&lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;In this article, you have seen everything that it takes to start
@@ -9784,10 +9767,6 @@ can be of great use when properties change at runtime. Even if not an
 extremely common scenario for short-lived scripts, it is very common
 when dealing with user interaction on programs that run for hours or
 days.&lt;/p&gt;
-&lt;p&gt;As always, &lt;a href="https://github.com/PFTL/website/tree/master/example_code/21_Classes_Mutables"&gt;example code can be found
-here&lt;/a&gt;
-and &lt;a href="https://github.com/PFTL/website/blob/master/content/blog/21_Default_Attributes_Classes.rst.md"&gt;the source of this page
-here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/mgaS4FlsYxQ?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Dan
 Gold&lt;/a&gt;
 on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="Data"></category><category term="Types"></category><category term="Mutable"></category><category term="Immutable"></category><category term="Tuples"></category></entry><entry><title>Mutable or Immutable Tuples</title><link href="https://pythonforthelab.com/blog/mutable-or-immutable-tuples" rel="alternate"></link><published>2018-08-24T00:00:00+02:00</published><updated>2018-08-24T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-08-24:/blog/mutable-or-immutable-tuples</id><summary type="html">&lt;p&gt;Broadly speaking, Python variables belong to one of two types:
@@ -9948,11 +9927,6 @@ give rise to obscure bugs, very hard to find and correct. In this
 article, we are going to discuss about the differences between lists and
 tuples, or more generally about mutable and immutable data types and how
 they can be used in your programs.&lt;/p&gt;
-&lt;p&gt;As always, &lt;a href="https://github.com/PFTL/website/tree/master/example_code/17_mutable_immutable"&gt;example
-code&lt;/a&gt;
-is available and the &lt;a href="https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst.md"&gt;source
-code&lt;/a&gt;
-for this page also.&lt;/p&gt;
 &lt;h2&gt;Lists and Tuples&lt;/h2&gt;
 &lt;p&gt;In Python, when you want to define a list, you can simply do the
 following:&lt;/p&gt;
@@ -10357,11 +10331,6 @@ be of any use. However, it is important to keep in the back of your mind
 that &lt;code&gt;==&lt;/code&gt; can give very unexpected results, that variables can change in
 unexpected ways if you are not careful. When projects start to grow,
 small mistakes can pile up to disastrous problems.&lt;/p&gt;
-&lt;p&gt;As always, &lt;a href="https://github.com/PFTL/website/tree/master/example_code/17_mutable_immutable"&gt;example
-code&lt;/a&gt;
-is available and the &lt;a href="https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst.md"&gt;source
-code&lt;/a&gt;
-for this page also.&lt;/p&gt;
 &lt;p&gt;If you want to keep learning, you can read more about
 why tuples may seem to change &amp;lt;{filename}18_mutable_tuples.rst&amp;gt;_
 and what happens when you use &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-attributes-of-classes"&gt;mutable or immutable variables as class
@@ -12681,13 +12650,7 @@ Django&lt;/a&gt;,
 a much more complex package.&lt;/p&gt;
 &lt;p&gt;Photo by &lt;a href="https://unsplash.com/photos/5E5N49RWtbA?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Cody
 Davis&lt;/a&gt;
-on Unsplash&lt;/p&gt;
-&lt;p&gt;Remember, that both &lt;a href="https://github.com/PFTL/website/tree/master/example_code/12_exceptions"&gt;the
-code&lt;/a&gt;
-and &lt;a href="https://github.com/PFTL/website/blob/master/content/blog/12_handling_exceptions.rst.md"&gt;the
-text&lt;/a&gt;
-of the article is available, in case you have any comments or
-suggestions to improve it.&lt;/p&gt;</content><category term="blog"></category><category term="Exceptions"></category><category term="Errors"></category><category term="Try"></category><category term="Except"></category><category term="Catch"></category><category term="Handling"></category></entry><entry><title>Documenting with Sphinx and Readthedocs</title><link href="https://pythonforthelab.com/blog/documenting-with-sphinx-and-readthedocs" rel="alternate"></link><published>2018-05-31T00:00:00+02:00</published><updated>2018-05-31T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-05-31:/blog/documenting-with-sphinx-and-readthedocs</id><summary type="html">&lt;p&gt;If you have ever followed a guide on how to start programming, most
+on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="Exceptions"></category><category term="Errors"></category><category term="Try"></category><category term="Except"></category><category term="Catch"></category><category term="Handling"></category></entry><entry><title>Documenting with Sphinx and Readthedocs</title><link href="https://pythonforthelab.com/blog/documenting-with-sphinx-and-readthedocs" rel="alternate"></link><published>2018-05-31T00:00:00+02:00</published><updated>2018-05-31T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-05-31:/blog/documenting-with-sphinx-and-readthedocs</id><summary type="html">&lt;p&gt;If you have ever followed a guide on how to start programming, most
 likely you have encounter reflections about the importance of adding
 comments to your code. Comments allow you to understand what the
 developer was thinking when programming, maybe left some traces of what
@@ -13939,12 +13902,6 @@ there is a new library called
 running code asynchronously. It looks like the future for this kind of
 programming, but I found the syntax much harder to understand in order
 to propose solutions.&lt;/p&gt;
-&lt;p&gt;As always, &lt;a href="https://github.com/PFTL/website/tree/master/example_code/10_threads_processes"&gt;the example code can be found
-here&lt;/a&gt;,
-as well as &lt;a href="https://github.com/PFTL/website/blob/master/content/blog/10_threads_or_processes.rst.md"&gt;the source code for this
-article&lt;/a&gt;.
-If you find any mistakes or improvements, you are more than welcome to
-submit them as pull requests on Github.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/TYhEoWbbayQ?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;frank
 mckenna&lt;/a&gt;
 on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="Threads"></category><category term="Processes"></category><category term="Parallel"></category><category term="Speed"></category><category term="Async"></category><category term="Advanced"></category></entry><entry><title>A Primer on Classes in Python</title><link href="https://pythonforthelab.com/blog/a-primer-on-classes-in-python" rel="alternate"></link><published>2018-05-22T00:00:00+02:00</published><updated>2018-05-22T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-05-22:/blog/a-primer-on-classes-in-python</id><summary type="html">&lt;p&gt;Python is an object-oriented programming (OOP) language. Object-oriented
@@ -14334,8 +14291,7 @@ developers code and understand what they are doing.&lt;/p&gt;
 &lt;p&gt;The series of primer articles are thought as a go-to destination when
 you need to refresh a specific concept. If you find anything missing,
 you can always leave a comment below and we will expand the article
-according to your needs. You can find the text of this article on
-&lt;a href="https://github.com/PFTL/website/blob/master/content/blog/08_intro_to_classes.rst.md"&gt;Github&lt;/a&gt;.&lt;/p&gt;
+according to your needs. &lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/ZqqlOZyGG7g?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Daniel
 Cheung&lt;/a&gt;
 on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="Classes"></category><category term="Object oriented"></category><category term="beginner"></category></entry><entry><title>How to use decorators Part 2</title><link href="https://pythonforthelab.com/blog/how-to-use-decorators-part-2" rel="alternate"></link><published>2018-05-18T00:00:00+02:00</published><updated>2018-05-18T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-05-18:/blog/how-to-use-decorators-part-2</id><summary type="html">&lt;p&gt;Decorators are a very useful programming pattern that allows changing
@@ -14763,16 +14719,7 @@ going to be used by other developers.&lt;/p&gt;
 &lt;a href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; and
 &lt;a href="https://github.com/lantzproject/"&gt;Lantz&lt;/a&gt;. Therefore, even if you don't
 develop your own decorators, it is always important to understand how
-they work.&lt;/p&gt;
-&lt;p&gt;You can find the &lt;a href="https://github.com/PFTL/website/tree/master/example_code/04_how_to_use_decorators_2"&gt;example code for this
-tutorial&lt;/a&gt;
-on Github, as well as the
-&lt;a href="https://github.com/PFTL/website/blob/master/content/blog/04_how_to_use_decorators_2.rst.md"&gt;text&lt;/a&gt;.
-If you find any mistakes, don't hesitate to submit a pull request or
-open an Issue.&lt;/p&gt;
-&lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/tOZ-f5kl9BA?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Michael
-Browning&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="Decorators"></category><category term="Tricks"></category><category term="Validation"></category><category term="Data"></category><category term="Intermediate"></category></entry><entry><title>How to use HDF5 files in Python</title><link href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python" rel="alternate"></link><published>2018-03-19T00:00:00+01:00</published><updated>2018-03-19T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-03-19:/blog/how-to-use-hdf5-files-in-python</id><summary type="html">&lt;p&gt;When dealing with large amounts of data, either experimental or simulated, saving it to several text files is not very efficient. Sometimes you need to access a specific subset of the dataset, and you don't want to load it all to memory. If you are looking for a solution that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When dealing with large amounts of data, either experimental or simulated, saving it to several text files is not very efficient. Sometimes you need to access a specific subset of the dataset, and you don't want to load it all to memory. If you are looking for a solution that integrates nicely with numpy and pandas, then the HDF5 format may be the solution you were seeking. &lt;/p&gt;
+they work.&lt;/p&gt;</content><category term="blog"></category><category term="Decorators"></category><category term="Tricks"></category><category term="Validation"></category><category term="Data"></category><category term="Intermediate"></category></entry><entry><title>How to use HDF5 files in Python</title><link href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python" rel="alternate"></link><published>2018-03-19T00:00:00+01:00</published><updated>2018-03-19T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-03-19:/blog/how-to-use-hdf5-files-in-python</id><summary type="html">&lt;p&gt;When dealing with large amounts of data, either experimental or simulated, saving it to several text files is not very efficient. Sometimes you need to access a specific subset of the dataset, and you don't want to load it all to memory. If you are looking for a solution that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When dealing with large amounts of data, either experimental or simulated, saving it to several text files is not very efficient. Sometimes you need to access a specific subset of the dataset, and you don't want to load it all to memory. If you are looking for a solution that integrates nicely with numpy and pandas, then the HDF5 format may be the solution you were seeking. &lt;/p&gt;
 &lt;p&gt;Each HDF5 file has an internal structure that allows you to search for a specific dataset. You can think of it as a single file with its hierarchical structure, just like a collection of folders and subfolders. By default, the data is stored in binary format, and the library is compatible with different data types. One essential option of the HDF5 format is that it allows attaching metadata to every element in the structure, making it ideal for generating self-explanatory files.&lt;/p&gt;
 &lt;p&gt;In Python, there are two libraries that can interface with the HDF5 format: &lt;a href="https://www.pytables.org/index.html"&gt;PyTables&lt;/a&gt; and &lt;a href="https://h5py.readthedocs.io/en/stable/index.html"&gt;h5py&lt;/a&gt;. The first one is the one employed by Pandas under-the-hood, while the second is the one that maps the features of the HDF5 specification to numpy arrays. While PyTables can be thought of as implementing database-like features on top of the HDF5 specification, &lt;strong&gt;h5py&lt;/strong&gt; is the natural choice when dealing with N-dimensional numpy arrays (not just tables). Some of the features are the same with both libraries, but we will focus on &lt;strong&gt;h5py&lt;/strong&gt;. &lt;/p&gt;
 &lt;p&gt;One of the most exciting features of the HDF5 format is that data is read from the hard drive only when it is needed. Imagine you have a large array that doesn't fit in the available RAM. A clear example would be a movie, which is a series of 2D arrays. Maybe you would like to look only at a smaller region and not the full-frame. Instead of loading each frame to memory, you could directly access the required data. H5py allows you to work with data on the hard drive just as you would with an array. &lt;/p&gt;

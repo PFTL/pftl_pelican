@@ -1,210 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Storing Data with SQLite | Python For The Lab</title>
-
-  <meta name="tags" content="Data, Storing, SQLite, HDF5, ascii, json, Data Storage, ">
-  <meta name="description" content="Learn different ways of storing data in your projects">
-  <meta name="author" content="Aquiles Carattino">
-
-  <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet">
-
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/style.css">
-  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
-
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
-</head>
-
-
-
-<body>
-  <!-- Wrapper -->
-  <section class="wrapper">
-
-<!-- Intro -->
-<div class="intro blog article">
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <a href="/" class="logo">Python for the Lab</a>
-      <div class="header-dd">
-        <div class="navigation">
-          <ul>
-            <li class="active"><a href="https://pythonforthelab.com/blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="https://pythonforthelab.com/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
-                   class="nav-item forum"><span>Forum</span></a></li>
-            <li><a href="https://pythonforthelab.com/books" class="nav-item books"><span>Books</span></a></li>
-            <li><a href="https://pythonforthelab.com/about" class="nav-item about"><span>About</span></a></li>
-          </ul>
-        </div>
-        <div class="search field-wp">
-          <form action="#">
-            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
-            <input type="submit" class="search-btn">
-          </form>
-          <div data-stork="sitesearch-output"></div>
-        </div>
-      </div>
-      <button class="menu-btn"><span>Menu</span></button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Intro Cnt -->
-    <div class="intro-cnt v-article">
-      <div class="side-text">
-      </div>
-      <div class="side-form small-sb-form">
-        <div class="sb-form" id="mc_embed_signup">
-          <h4>Get all the information directly to your inbox</h4>
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-              target="_self"
-              novalidate="">
-            <div class="field-wp" id="mc_embed_signup_scroll">
-              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
-                     value="">
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk form bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
-                   id="mc-embedded-subscribe">
-            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Intro Cnt -->
-
-  </div>
-</div>
-<!-- End Intro -->
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-
-        <div class="article-cnt">
-          <div class="leftside">
-            <div class="article-image">
-              <img src="https://pythonforthelab.com//images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg" alt="" width="800">
-            </div>
-            <h1>Storing Data with SQLite</h1>
-            <h3>Learn different ways of storing data in your projects</h3>
-            <div class="info">
-              <span class="item-1 author">by Aquiles Carattino</span>
-              <span class="item-1 date">2018-08-12</span>
-                <span class="item-tag first">Data</span>
-                <span class="item-tag ">Storing</span>
-                <span class="item-tag ">SQLite</span>
-                <span class="item-tag ">HDF5</span>
-                <span class="item-tag ">ascii</span>
-                <span class="item-tag ">json</span>
-                <span class="item-tag ">Data Storage</span>
-            </div>
-            <main>
-              <p>Using databases for storing data may sound much more complicated than
-what it actually is. In this article, we are going to cover how to use
-databases to store different types of data. We will quickly review how
-you can search for specific parameters and how to get exactly what you
-want.</p>
-<p>In the previous articles, we have seen how to store data into plain text
-files, which is nothing more than a particular way of serializing our
-objects. On the second release, we have seen how to serialize complex
-objects using Python's built-in tools to save them as binary files. In
-this article, we are going to explore another very useful module called
-<strong>SQLite</strong> which will allow us to store data in databases.</p>
-<h2>Databases</h2>
-<p>Most likely you have heard about databases in the context of websites.
-It is where your username, email, and password are stored. It is where
-the government saves all the information it has about you. However,
-databases can also be used for smaller scale projects, such as a
-software for controlling devices in the laboratory or for data analysis.</p>
-<p>The simplest form of a database can be thought as a table with columns
-and rows. If you have ever used a spreadsheet, it looks exactly like
-that. Pandas' Data Frames have the same format. Tables with a header for
-each column and a different entry on each row. This really forces you to
-be systematic in the way in which you store your information.</p>
-<p>Interacting with databases is a complex subject because it normally
-involves learning a new scripting language in order to store and
-retrieve information. In this tutorial, you are going to learn the
-basics of one of these languages called SQL. Just with the basics, there
-is a lot that you can achieve.</p>
-<p>Something important to point out is that normally you need to install
-more software in order to use a database. If you have ever heard of
-MySQL or Postgres, you are probably aware that those are big libraries
-that need an entire course on themselves. However, Python bundles
-SQLite, a very simple, single-file database. No extra software needed to
-run the examples here.</p>
-<h2>Creating a Table</h2>
-<p>Let's start quickly with SQLite. The first thing you need to do to work
-with databases is to create the database itself. In the case of SQLite,
-this is going to be a file. It is as easy as this:</p>
-<pre><code class="language-python">import sqlite3
+<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Storing Data with SQLite | Python For The Lab</title><meta content="Data, Storing, SQLite, HDF5, ascii, json, Data Storage, " name=tags><meta content="How to use SQLite to store data with Python" name=description><meta content="Aquiles Carattino" name=author><link href=blog/storing-data-with-sqlite rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/storing-data-with-sqlite property=og:url><meta content="Storing Data with SQLite" property=og:title><meta content="How to use SQLite to store data with Python" property=og:description><meta content=/images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/storing-data-with-sqlite property=twitter:url><meta content="Storing Data with SQLite" property=twitter:title><meta content="How to use SQLite to store data with Python" property=twitter:description><meta content=/images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg width=800></div><h1>Storing Data with SQLite</h1><h3>How to use SQLite to store data with Python</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2018-08-12</span><span class="item-tag first">Data</span><span class=item-tag>Storing</span><span class=item-tag>SQLite</span><span class=item-tag>HDF5</span><span class=item-tag>ascii</span><span class=item-tag>json</span><span class=item-tag>Data Storage</span></div><main><p>Using databases for storing data may sound much more complicated than what it actually is. In this article, we are going to cover how to use databases to store different types of data. We will quickly review how you can search for specific parameters and how to get exactly what you want.<p>In the previous articles, we have seen how to store data into plain text files, which is nothing more than a particular way of serializing our objects. On the second release, we have seen how to serialize complex objects using Python's built-in tools to save them as binary files. In this article, we are going to explore another very useful module called <strong>SQLite</strong> which will allow us to store data in databases.<h2>Databases</h2><p>Most likely you have heard about databases in the context of websites. It is where your username, email, and password are stored. It is where the government saves all the information it has about you. However, databases can also be used for smaller scale projects, such as a software for controlling devices in the laboratory or for data analysis.<p>The simplest form of a database can be thought as a table with columns and rows. If you have ever used a spreadsheet, it looks exactly like that. Pandas' Data Frames have the same format. Tables with a header for each column and a different entry on each row. This really forces you to be systematic in the way in which you store your information.<p>Interacting with databases is a complex subject because it normally involves learning a new scripting language in order to store and retrieve information. In this tutorial, you are going to learn the basics of one of these languages called SQL. Just with the basics, there is a lot that you can achieve.<p>Something important to point out is that normally you need to install more software in order to use a database. If you have ever heard of MySQL or Postgres, you are probably aware that those are big libraries that need an entire course on themselves. However, Python bundles SQLite, a very simple, single-file database. No extra software needed to run the examples here.<h2>Creating a Table</h2><p>Let's start quickly with SQLite. The first thing you need to do to work with databases is to create the database itself. In the case of SQLite, this is going to be a file. It is as easy as this:<pre><code class=language-python>import sqlite3
 
 conn = sqlite3.connect('AA_db.sqlite')
 conn.close()
-</code></pre>
-<p>When you use <code>connect</code>, SQLite will try to open the file that you are
-specifying and if it doesn't exist, it will create a new one. Once you
-have the database, you need to create a table in it. This is where the
-SQL language that I mentioned before comes into play. Let's assume you
-want to create a table that stores two variables, the description of an
-experiment and the name of the person who performed it. You would do the
-following:</p>
-<pre><code class="language-python">import sqlite3
+</code></pre><p>When you use <code>connect</code>, SQLite will try to open the file that you are specifying and if it doesn't exist, it will create a new one. Once you have the database, you need to create a table in it. This is where the SQL language that I mentioned before comes into play. Let's assume you want to create a table that stores two variables, the description of an experiment and the name of the person who performed it. You would do the following:<pre><code class=language-python>import sqlite3
 
 conn = sqlite3.connect('AA_db.sqlite')
 cur = conn.cursor()
@@ -212,235 +10,46 @@ cur.execute('CREATE TABLE experiments (name VARCHAR, description VARCHAR)')
 conn.commit()
 
 conn.close()
-</code></pre>
-<p>After opening (or creating) the database, we have to create a cursor.
-The cursor is going to allow you to execute the SQL code. To create a
-table, we need to use the following command:</p>
-<pre><code class="language-sql">CREATE TABLE experiments (name VARCHAR, description VARCHAR)
-</code></pre>
-<p>It is quite descriptive: you are creating a table called experiments
-with two columns: <code>name</code> and <code>description</code>. Each one of those columns
-will be of type <code>VARCHAR</code>. Don't worry too much about it right now. The
-<code>commit</code> command saves the changes to the database and then you close
-the connection. Congratulations, you have created your first table!</p>
-<p>The problem right now is that there is no feedback on what you have
-done. If you are using PyCharm, for example, it comes with a built-in
-SQLite implementation. Therefore, you can just click on the file and you
-will be able to navigate through the contents of the database. You can
-also try an application like <a href="https://sqlitebrowser.org/">SQLite
-browser</a> to visualize the files. There is
-also a <a href="https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src">Firefox
-Add-On</a>.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The extension .sqlite is not mandatory. If you use it, many higher level
-programs will identify it as a database and will be able to open it with
-a double-click. You can also use the .db extension, which is more common
-if following Flask or Django tutorials.</p>
-</div>
-<h2>Adding Data to a Database</h2>
-<p>Now that you have a database, is time to store some data into it. All
-the examples always start by creating a connection and a cursor, which
-we are going to skip from now on, but you should include in your code.
-Adding information to a database also involves the use of SQL. You will
-need to do the following:</p>
-<pre><code class="language-python">cur.execute('INSERT INTO experiments (name, description) values (&quot;Aquiles&quot;, &quot;My experiment description&quot;)')
+</code></pre><p>After opening (or creating) the database, we have to create a cursor. The cursor is going to allow you to execute the SQL code. To create a table, we need to use the following command:<pre><code class=language-sql>CREATE TABLE experiments (name VARCHAR, description VARCHAR)
+</code></pre><p>It is quite descriptive: you are creating a table called experiments with two columns: <code>name</code> and <code>description</code>. Each one of those columns will be of type <code>VARCHAR</code>. Don't worry too much about it right now. The <code>commit</code> command saves the changes to the database and then you close the connection. Congratulations, you have created your first table!<p>The problem right now is that there is no feedback on what you have done. If you are using PyCharm, for example, it comes with a built-in SQLite implementation. Therefore, you can just click on the file and you will be able to navigate through the contents of the database. You can also try an application like <a href=https://sqlitebrowser.org/>SQLite browser</a> to visualize the files. There is also a <a href=https://addons.mozilla.org/en-US/firefox/addon/sqlite-manager/?src>Firefox Add-On</a>.<div class="admonition note"><p class=admonition-title>Note<p>The extension .sqlite is not mandatory. If you use it, many higher level programs will identify it as a database and will be able to open it with a double-click. You can also use the .db extension, which is more common if following Flask or Django tutorials.</div><h2>Adding Data to a Database</h2><p>Now that you have a database, is time to store some data into it. All the examples always start by creating a connection and a cursor, which we are going to skip from now on, but you should include in your code. Adding information to a database also involves the use of SQL. You will need to do the following:<pre><code class=language-python>cur.execute('INSERT INTO experiments (name, description) values ("Aquiles", "My experiment description")')
 conn.commit()
-</code></pre>
-<p>You can run this command as many times as you want, and if you are
-checking your database with an external tool, you will see that you keep
-adding rows to the table. As you see above, the SQL code can give rise
-to problems if you are using variables instead of plain text.</p>
-<p>Imagine that you try to save a string that includes the character <code>"</code>.
-SQL will think that the <code>"</code> from your variable is actually closing the
-argument and it will give an error. Even worse, if it is a variable
-submitted by someone else, this can give rise to something called SQL
-injection. In the same way, in which Pickle can be used to run arbitrary
-code, SQL can be tricked to perform unwanted operations. Soon enough you
-will be able to understand the <a href="https://xkcd.com/327/">XKCD SQL injection
-joke</a>.</p>
-<p>A proper way of adding new values to a table is:</p>
-<pre><code class="language-python">cur.execute('INSERT INTO experiments (name, description) VALUES (?, ?)',
-            ('Another User', 'Another Experiment, even using &quot; other characters&quot;'))
+</code></pre><p>You can run this command as many times as you want, and if you are checking your database with an external tool, you will see that you keep adding rows to the table. As you see above, the SQL code can give rise to problems if you are using variables instead of plain text.<p>Imagine that you try to save a string that includes the character <code>"</code>. SQL will think that the <code>"</code> from your variable is actually closing the argument and it will give an error. Even worse, if it is a variable submitted by someone else, this can give rise to something called SQL injection. In the same way, in which Pickle can be used to run arbitrary code, SQL can be tricked to perform unwanted operations. Soon enough you will be able to understand the <a href=https://xkcd.com/327/>XKCD SQL injection joke</a>.<p>A proper way of adding new values to a table is:<pre><code class=language-python>cur.execute('INSERT INTO experiments (name, description) VALUES (?, ?)',
+            ('Another User', 'Another Experiment, even using " other characters"'))
 conn.commit()
-</code></pre>
-<p>Assuming that the access to the database is only yours, i.e. you are not
-going to take variables from the public, you shouldn't worry too much
-about safety. In any case, it is important to be aware.</p>
-<h2>Retrieving Data</h2>
-<p>Now that you have some data stored in the database, we need to be able
-to retrieve it. You can do the following:</p>
-<pre><code class="language-python">cur.execute('SELECT * FROM experiments')
+</code></pre><p>Assuming that the access to the database is only yours, i.e. you are not going to take variables from the public, you shouldn't worry too much about safety. In any case, it is important to be aware.<h2>Retrieving Data</h2><p>Now that you have some data stored in the database, we need to be able to retrieve it. You can do the following:<pre><code class=language-python>cur.execute('SELECT * FROM experiments')
 data = cur.fetchall()
-</code></pre>
-<p>The first line is asking for all the columns from experiments. That is
-what the <code>*</code> means. The second line is actually getting the values. We
-have used <code>fetchall()</code>, but you could have also used <code>fetchone()</code> to get
-just one element.</p>
-<p>So far, nothing particularly special. Imagine that you want to get only
-the entries where a particular user was involved. You can do the
-following:</p>
-<pre><code class="language-python">cur.execute('SELECT * FROM experiments WHERE name=&quot;Aquiles&quot;')
+</code></pre><p>The first line is asking for all the columns from experiments. That is what the <code>*</code> means. The second line is actually getting the values. We have used <code>fetchall()</code>, but you could have also used <code>fetchone()</code> to get just one element.<p>So far, nothing particularly special. Imagine that you want to get only the entries where a particular user was involved. You can do the following:<pre><code class=language-python>cur.execute('SELECT * FROM experiments WHERE name="Aquiles"')
 data_3 = cur.fetchall()
-</code></pre>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>SQL is not case sensitive for its commands. SELECT or select or Select
-mean the same. However, if you change Aquiles for aquiles, the results
-are going to be different.</p>
-</div>
-<p>Of course, it can also happen that there are no entries matching your
-criteria and therefore the result is going to be an empty list. Again,
-remember that what we are looking for, <code>Aquiles</code> may be a variable, and
-again you are exposed to SQL errors if you have special characters.</p>
-<p>At this point, there are two concerns that may have come up to your
-mind. On one hand, there is no way to refer to specific entries in the
-database. Two different entries, with the same content, are
-indistinguishable from each other.</p>
-<p>The other is more of a feature request. Imagine that you would like to
-store more information about the user, not just the name. It doesn't
-make sense to add extra columns to the experiments database, because we
-would be duplicating a lot of information. Ideally, we would start a new
-table, just to register users and their information.</p>
-<h2>Adding a Primary Key</h2>
-<p>If you have ever seen any spreadsheet program or even a Pandas Data
-Frame, you have probably noticed that every row is identified with a
-number. This is very handy because once you learn that the important
-information is on line N, you just remember that number and retrieve the
-data specifically.</p>
-<p>The table that we have created does not include this numbering, also
-known as a primary key. Adding a new column is normally not a problem,
-but since we are dealing with a primary key, SQLite does not allow us to
-do it in a single step. We should create a new table, copy the contents
-of the old one, etc. Since we only have toy data, we can start from
-scratch.</p>
-<p>First, we will remove the table from the database, losing all its
-contents. Then we will create a new table, with its primary key and we
-will add some content to it. We can do everything with a very long SQL
-command instead of running multiple <code>cur.execute()</code>. For that, we use
-the triple-quote notation of Python:</p>
-<pre><code class="language-python">sql_command = &quot;&quot;&quot;
+</code></pre><div class="admonition note"><p class=admonition-title>Note<p>SQL is not case sensitive for its commands. SELECT or select or Select mean the same. However, if you change Aquiles for aquiles, the results are going to be different.</div><p>Of course, it can also happen that there are no entries matching your criteria and therefore the result is going to be an empty list. Again, remember that what we are looking for, <code>Aquiles</code> may be a variable, and again you are exposed to SQL errors if you have special characters.<p>At this point, there are two concerns that may have come up to your mind. On one hand, there is no way to refer to specific entries in the database. Two different entries, with the same content, are indistinguishable from each other.<p>The other is more of a feature request. Imagine that you would like to store more information about the user, not just the name. It doesn't make sense to add extra columns to the experiments database, because we would be duplicating a lot of information. Ideally, we would start a new table, just to register users and their information.<h2>Adding a Primary Key</h2><p>If you have ever seen any spreadsheet program or even a Pandas Data Frame, you have probably noticed that every row is identified with a number. This is very handy because once you learn that the important information is on line N, you just remember that number and retrieve the data specifically.<p>The table that we have created does not include this numbering, also known as a primary key. Adding a new column is normally not a problem, but since we are dealing with a primary key, SQLite does not allow us to do it in a single step. We should create a new table, copy the contents of the old one, etc. Since we only have toy data, we can start from scratch.<p>First, we will remove the table from the database, losing all its contents. Then we will create a new table, with its primary key and we will add some content to it. We can do everything with a very long SQL command instead of running multiple <code>cur.execute()</code>. For that, we use the triple-quote notation of Python:<pre><code class=language-python>sql_command = """
 DROP TABLE IF EXISTS experiments;
 CREATE TABLE experiments (
     id INTEGER,
     name VARCHAR,
     description VARCHAR,
     PRIMARY KEY (id));
-INSERT INTO experiments (name, description) values (&quot;Aquiles&quot;, &quot;My experiment description&quot;);
-INSERT INTO experiments (name, description) values (&quot;Aquiles 2&quot;, &quot;My experiment description 2&quot;);
-&quot;&quot;&quot;
+INSERT INTO experiments (name, description) values ("Aquiles", "My experiment description");
+INSERT INTO experiments (name, description) values ("Aquiles 2", "My experiment description 2");
+"""
 cur.executescript(sql_command)
 conn.commit()
-</code></pre>
-<p>The important part here is the SQL command. First, we drop the table if
-it exists. If it doesn't exist, it will throw an error and the rest of
-the code will not be executed. Then, we create a new table, with one new
-column called <code>id</code>, of type integer. At the end of the statement, we
-defined that <code>id</code> as the primary key of the table. Finally, we add two
-elements to the table.</p>
-<p>If you run the retrieval code again, you will notice that each element
-has a unique number that identifies it. If we want to fetch the first
-(or the second, etc.) element, we can simply do the following:</p>
-<pre><code class="language-python">cur.execute('SELECT * FROM experiments WHERE id=1')
+</code></pre><p>The important part here is the SQL command. First, we drop the table if it exists. If it doesn't exist, it will throw an error and the rest of the code will not be executed. Then, we create a new table, with one new column called <code>id</code>, of type integer. At the end of the statement, we defined that <code>id</code> as the primary key of the table. Finally, we add two elements to the table.<p>If you run the retrieval code again, you will notice that each element has a unique number that identifies it. If we want to fetch the first (or the second, etc.) element, we can simply do the following:<pre><code class=language-python>cur.execute('SELECT * FROM experiments WHERE id=1')
 data = cur.fetchone()
-</code></pre>
-<p>Notice that we are using <code>fetchone</code> instead of <code>fetchall</code> because we
-know that the output should be only one element. Check what is the
-difference if you use one or the other command in the data that you get
-from the database.</p>
-<p>Adding a primary key is fundamental to decrease the time it takes to
-fetch the data that you are looking for. Not only because it allows you
-to refer to specific entries, but also because of how databases work, it
-is much faster addressing data by their key.</p>
-<h2>Default Values for Fields</h2>
-<p>So far we have used only two types of variables: <code>VARCHAR</code> and
-<code>INTEGER</code>. The varchar has been used for the name of the person doing
-the experiment and its description, while the integer is used only for
-the <code>id</code> number. However, we can develop much more complex tables. For
-example, we can specify not only the type but also limits to the length.
-We can also specify default values, simplifying the operations when
-storing new entries to a table. One of the advantages of doing this is
-that our data is going to be very consistent.</p>
-<p>Imagine that you want to store also the date at which the experiment is
-run, you could add an extra field and every time you create a new
-experiment, you also add a field with the date, or you instruct the
-database to automatically add the date. At the moment of creating the
-table, you should do the following:</p>
-<pre><code class="language-sql">DROP TABLE IF EXISTS experiments;
+</code></pre><p>Notice that we are using <code>fetchone</code> instead of <code>fetchall</code> because we know that the output should be only one element. Check what is the difference if you use one or the other command in the data that you get from the database.<p>Adding a primary key is fundamental to decrease the time it takes to fetch the data that you are looking for. Not only because it allows you to refer to specific entries, but also because of how databases work, it is much faster addressing data by their key.<h2>Default Values for Fields</h2><p>So far we have used only two types of variables: <code>VARCHAR</code> and <code>INTEGER</code>. The varchar has been used for the name of the person doing the experiment and its description, while the integer is used only for the <code>id</code> number. However, we can develop much more complex tables. For example, we can specify not only the type but also limits to the length. We can also specify default values, simplifying the operations when storing new entries to a table. One of the advantages of doing this is that our data is going to be very consistent.<p>Imagine that you want to store also the date at which the experiment is run, you could add an extra field and every time you create a new experiment, you also add a field with the date, or you instruct the database to automatically add the date. At the moment of creating the table, you should do the following:<pre><code class=language-sql>DROP TABLE IF EXISTS experiments;
 CREATE TABLE experiments (
     id INTEGER,
     name VARCHAR,
     description VARCHAR,
     perfomed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id));
-INSERT INTO experiments (name, description) values (&quot;Aquiles&quot;, &quot;My experiment description&quot;);
-INSERT INTO experiments (name, description) values (&quot;Aquiles 2&quot;, &quot;My experiment description 2&quot;);
-</code></pre>
-<p>Note the new field called <code>performed_at</code>, which uses <code>TIMESTAMP</code> as its
-type, and it also specifies a <code>DEFAULT</code> value. If you check the two
-inserted experiments (you can use the code of the previous example) you
-will see that there is a new field with the current date and time. You
-can also add default values for other fields, for example:</p>
-<pre><code class="language-sql">CREATE TABLE experiments (
+INSERT INTO experiments (name, description) values ("Aquiles", "My experiment description");
+INSERT INTO experiments (name, description) values ("Aquiles 2", "My experiment description 2");
+</code></pre><p>Note the new field called <code>performed_at</code>, which uses <code>TIMESTAMP</code> as its type, and it also specifies a <code>DEFAULT</code> value. If you check the two inserted experiments (you can use the code of the previous example) you will see that there is a new field with the current date and time. You can also add default values for other fields, for example:<pre><code class=language-sql>CREATE TABLE experiments (
     id INTEGER,
-    name VARCHAR DEFAULT &quot;Aquiles&quot;,
+    name VARCHAR DEFAULT "Aquiles",
     description VARCHAR ,
     perfomed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id));
-</code></pre>
-<p>Next time you add a new experiment, if you don't specify the user who
-performed it, it will default to <code>Aquiles</code> (my name). Specifying
-defaults is a very useful way of avoiding missing information. For
-example, the <code>performed_at</code> will always be added. This ensures that even
-if someone forgets to explicitly declare the time of an experiment, at
-least a very reasonable assumption has been made.</p>
-<h2>SQLite Data Types</h2>
-<p>SQLite is different from other database managers, such as MySQL or
-Postgres because of its flexibility regarding data types and lengths.
-SQLite defines only <a href="https://www.sqlite.org/datatype3.html">4 types of
-fields</a>:</p>
-<ul>
-<li>NULL. The value is a NULL value.</li>
-<li>INTEGER. The value is a signed integer, stored in 1, 2, 3, 4, 6, or
-    8 bytes depending on the magnitude of the value.</li>
-<li>REAL. The value is a floating point value, stored as an 8-byte IEEE
-    floating point number.</li>
-<li>TEXT. The value is a text string, stored using the database encoding
-    (UTF-8, UTF-16BE or UTF-16LE).</li>
-<li>BLOB. The value is a blob of data, stored exactly as it was input.</li>
-</ul>
-<p>And then it defines something called affinities, which specifies the
-preferred type of data to be stored in a column. This is very useful to
-maintain compatibility with other database sources and can generate some
-headaches if you are following tutorials designed for other types of
-databases. The type we have used, <code>VARCHAR</code> is not one of the specified
-datatypes, but it is supported through the affinities. It will be
-treated as a <code>TEXT</code> field.</p>
-<p>The way SQLite manages data types, if you are new to databases, is not
-important. If you are not new to databases, you should definitely look
-at the
-official documentation &lt;https://www.sqlite.org/datatype3.html&gt;_
-in order to understand the differences and make the best out of the
-capabilities.</p>
-<h2>Relational Databases</h2>
-<p>Perhaps you have already heard about relational databases. So far, in
-the way we have used SQLite, it is hard to see advantages compared to
-plain CSV files, for example. If you are just storing a table, then you
-could perfectly do the same with a spreadsheet or a Pandas Data Frame.
-The power of databases is much more noticeable when you start making
-relationships between fields.</p>
-<p>In the examples that we have discussed earlier, you have seen that when
-you run an experiment you would like to store who was to the user
-performing the measurement. The number of users is most likely going to
-be limited and perhaps you would like to keep track of some information,
-such as the name, email and phone number.</p>
-<p>The way to organize all of this information is by creating a table in
-which you store the users. Each entry will have a primary key. From the
-table experiments, instead of storing the name of the user, you store
-the key of the user. Moreover, you can specify that, when creating a new
-experiment, the user associated with the experiment already exists. All
-this is achieved through the use of foreign keys, like this:</p>
-<pre><code class="language-sql">DROP TABLE IF EXISTS experiments;
+</code></pre><p>Next time you add a new experiment, if you don't specify the user who performed it, it will default to <code>Aquiles</code> (my name). Specifying defaults is a very useful way of avoiding missing information. For example, the <code>performed_at</code> will always be added. This ensures that even if someone forgets to explicitly declare the time of an experiment, at least a very reasonable assumption has been made.<h2>SQLite Data Types</h2><p>SQLite is different from other database managers, such as MySQL or Postgres because of its flexibility regarding data types and lengths. SQLite defines only <a href=https://www.sqlite.org/datatype3.html>4 types of fields</a>:<ul><li>NULL. The value is a NULL value.<li>INTEGER. The value is a signed integer, stored in 1, 2, 3, 4, 6, or 8 bytes depending on the magnitude of the value.<li>REAL. The value is a floating point value, stored as an 8-byte IEEE floating point number.<li>TEXT. The value is a text string, stored using the database encoding (UTF-8, UTF-16BE or UTF-16LE).<li>BLOB. The value is a blob of data, stored exactly as it was input.</ul><p>And then it defines something called affinities, which specifies the preferred type of data to be stored in a column. This is very useful to maintain compatibility with other database sources and can generate some headaches if you are following tutorials designed for other types of databases. The type we have used, <code>VARCHAR</code> is not one of the specified datatypes, but it is supported through the affinities. It will be treated as a <code>TEXT</code> field.<p>The way SQLite manages data types, if you are new to databases, is not important. If you are not new to databases, you should definitely look at the official documentation &LThttps://www.sqlite.org/datatype3.html>_ in order to understand the differences and make the best out of the capabilities.<h2>Relational Databases</h2><p>Perhaps you have already heard about relational databases. So far, in the way we have used SQLite, it is hard to see advantages compared to plain CSV files, for example. If you are just storing a table, then you could perfectly do the same with a spreadsheet or a Pandas Data Frame. The power of databases is much more noticeable when you start making relationships between fields.<p>In the examples that we have discussed earlier, you have seen that when you run an experiment you would like to store who was to the user performing the measurement. The number of users is most likely going to be limited and perhaps you would like to keep track of some information, such as the name, email and phone number.<p>The way to organize all of this information is by creating a table in which you store the users. Each entry will have a primary key. From the table experiments, instead of storing the name of the user, you store the key of the user. Moreover, you can specify that, when creating a new experiment, the user associated with the experiment already exists. All this is achieved through the use of foreign keys, like this:<pre><code class=language-sql>DROP TABLE IF EXISTS experiments;
 DROP TABLE IF EXISTS users;
 CREATE TABLE  users(
     id INTEGER,
@@ -456,66 +65,20 @@ CREATE TABLE experiments (
     perfomed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
     FOREIGN KEY (user_id) REFERENCES users(id));
-</code></pre>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>depending on your installation of SQLite, you may need to add support
-for foreign keys. Run the following command when creating the database
-to be sure: <code>cur.execute("PRAGMA foreign_keys = ON;")</code></p>
-</div>
-<p>First, you need to create a new user, for example:</p>
-<pre><code class="language-sql">INSERT INTO users (name, email, phone) values (&quot;Aquiles&quot;, &quot;example@example.com&quot;, &quot;123456789&quot;);
-</code></pre>
-<p>And then you can create a new experiment:</p>
-<pre><code class="language-sql">INSERT INTO experiments (user_id, description) values (1, &quot;My experiment description&quot;);
-</code></pre>
-<p>Note that if you try to add an experiment with a user_id that does not
-exist, you will get an error:</p>
-<pre><code class="language-sql">INSERT INTO experiments (user_id, description) values (2, &quot;My experiment description&quot;);
-</code></pre>
-<p>When you run the code above using Python, you will get the following
-message:</p>
-<pre><code class="language-bash">sqlite3.IntegrityError: FOREIGN KEY constraint failed
-</code></pre>
-<p>Which is exactly what we were expecting. Note, however, that if you
-leave the <code>user_id</code> out, i.e., if you don't specify a value, it will
-default to <code>Null</code>, which is valid (an experiment without a user). If you
-would like to prevent this behavior, you will need to specify it
-explicitly:</p>
-<pre><code class="language-sql">CREATE TABLE experiments (
+</code></pre><div class="admonition warning"><p class=admonition-title>Warning<p>depending on your installation of SQLite, you may need to add support for foreign keys. Run the following command when creating the database to be sure: <code>cur.execute("PRAGMA foreign_keys = ON;")</code></div><p>First, you need to create a new user, for example:<pre><code class=language-sql>INSERT INTO users (name, email, phone) values ("Aquiles", "example@example.com", "123456789");
+</code></pre><p>And then you can create a new experiment:<pre><code class=language-sql>INSERT INTO experiments (user_id, description) values (1, "My experiment description");
+</code></pre><p>Note that if you try to add an experiment with a user_id that does not exist, you will get an error:<pre><code class=language-sql>INSERT INTO experiments (user_id, description) values (2, "My experiment description");
+</code></pre><p>When you run the code above using Python, you will get the following message:<pre><code class=language-bash>sqlite3.IntegrityError: FOREIGN KEY constraint failed
+</code></pre><p>Which is exactly what we were expecting. Note, however, that if you leave the <code>user_id</code> out, i.e., if you don't specify a value, it will default to <code>Null</code>, which is valid (an experiment without a user). If you would like to prevent this behavior, you will need to specify it explicitly:<pre><code class=language-sql>CREATE TABLE experiments (
     id INTEGER,
     user_id INTEGER NOT NULL ,
     description VARCHAR ,
     perfomed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id)
     FOREIGN KEY (user_id) REFERENCES users(id));
-</code></pre>
-<p>Now we have specified that the <code>user_id</code> is <code>NOT NULL</code>. If we try to run
-the following code:</p>
-<pre><code class="language-sql">INSERT INTO experiments (description) values (&quot;My experiment description 2&quot;);
-</code></pre>
-<p>It will raise the following error:</p>
-<pre><code class="language-bash">sqlite3.IntegrityError: NOT NULL constraint failed: experiments.user_id
-</code></pre>
-<h2>Storing Numpy Arrays into Databases</h2>
-<p>Storing complex data into databases is not a trivial task. Databases
-specify only some data types and numpy arrays are not between them. This
-means that we have to convert the arrays into something that can be
-stored in a database. Since SQLite specifies only 4 major data types, we
-should stick to one of them. In the <a href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing">previous
-article</a> we have discussed a lot
-about serialization. The same ideas can be used to store an array in a
-database.</p>
-<p>For example, you can use Pickle in order to transform your data into
-bytes and store them using base64 as a <code>TEXT</code> field. You could also
-store the Pickle object directly into a <code>BLOB</code>field. You can convert
-your array into a list and separate its values with <code>,</code> or use a
-specific notation to separate rows and columns, etc. However, SQLite
-offers also the possibility of registering new data types. As explained
-in <a href="https://stackoverflow.com/a/18622264/4467480">this answer on Stack
-Overflow</a> we need to
-create an adapter and a converter:</p>
-<pre><code class="language-python">import sqlite3
+</code></pre><p>Now we have specified that the <code>user_id</code> is <code>NOT NULL</code>. If we try to run the following code:<pre><code class=language-sql>INSERT INTO experiments (description) values ("My experiment description 2");
+</code></pre><p>It will raise the following error:<pre><code class=language-bash>sqlite3.IntegrityError: NOT NULL constraint failed: experiments.user_id
+</code></pre><h2>Storing Numpy Arrays into Databases</h2><p>Storing complex data into databases is not a trivial task. Databases specify only some data types and numpy arrays are not between them. This means that we have to convert the arrays into something that can be stored in a database. Since SQLite specifies only 4 major data types, we should stick to one of them. In the <a href=https://pythonforthelab.com/blog/storing-binary-data-and-serializing>previous article</a> we have discussed a lot about serialization. The same ideas can be used to store an array in a database.<p>For example, you can use Pickle in order to transform your data into bytes and store them using base64 as a <code>TEXT</code> field. You could also store the Pickle object directly into a <code>BLOB</code>field. You can convert your array into a list and separate its values with <code>,</code> or use a specific notation to separate rows and columns, etc. However, SQLite offers also the possibility of registering new data types. As explained in <a href=https://stackoverflow.com/a/18622264/4467480>this answer on Stack Overflow</a> we need to create an adapter and a converter:<pre><code class=language-python>import sqlite3
 import numpy as np
 import io
 
@@ -531,296 +94,35 @@ def convert_array(text):
     return np.load(out)
 
 sqlite3.register_adapter(np.ndarray, adapt_array)
-sqlite3.register_converter(&quot;array&quot;, convert_array)
-</code></pre>
-<p>What we are doing in the code above is to tell SQLite what to do when a
-field of type <code>array</code> is declared. When we are storing the field, it
-will be transformed into bytes, that can be stored as a BLOB in the
-database. When retrieving the data, we are going to read the bytes and
-transform them into a numpy array. Note that this is possible because
-the methods <code>save</code> and <code>load</code> know how to deal with bytes when
-saving/loading.</p>
-<p>It is important to note that it is not necessary to register both
-adapter and converter. The first one is responsible for transforming a
-specific data type into an SQLite-compatible object. You could do this
-to automatically serialize your own classes, etc. The converter is
-responsible for converting back into your object. You can play around
-and see what happens when you don't register one of the two.</p>
-<p>When you define your table, you can use your newly created 'array' data
-type:</p>
-<pre><code class="language-sql">DROP TABLE IF EXISTS measurements;
+sqlite3.register_converter("array", convert_array)
+</code></pre><p>What we are doing in the code above is to tell SQLite what to do when a field of type <code>array</code> is declared. When we are storing the field, it will be transformed into bytes, that can be stored as a BLOB in the database. When retrieving the data, we are going to read the bytes and transform them into a numpy array. Note that this is possible because the methods <code>save</code> and <code>load</code> know how to deal with bytes when saving/loading.<p>It is important to note that it is not necessary to register both adapter and converter. The first one is responsible for transforming a specific data type into an SQLite-compatible object. You could do this to automatically serialize your own classes, etc. The converter is responsible for converting back into your object. You can play around and see what happens when you don't register one of the two.<p>When you define your table, you can use your newly created 'array' data type:<pre><code class=language-sql>DROP TABLE IF EXISTS measurements;
 CREATE TABLE measurements (
     id INTEGER PRIMARY KEY,
     description VARCHAR ,
     arr array);
-</code></pre>
-<p>It is important to note that for the above code to work when you start
-the connection with the database, you should add the following:</p>
-<pre><code class="language-python">conn = sqlite3.connect('AI_db.sqlite', detect_types=sqlite3.PARSE_DECLTYPES)
-</code></pre>
-<p>The option <code>PARSE_DECLTYPES</code> is telling SQLite to use the registered
-adapters and converters. If you don't include that option, it will not
-use what you have registered and will default to the standard data
-types.</p>
-<p>To store the array, you can do the following:</p>
-<pre><code class="language-python">x = np.random.rand(10,2)
+</code></pre><p>It is important to note that for the above code to work when you start the connection with the database, you should add the following:<pre><code class=language-python>conn = sqlite3.connect('AI_db.sqlite', detect_types=sqlite3.PARSE_DECLTYPES)
+</code></pre><p>The option <code>PARSE_DECLTYPES</code> is telling SQLite to use the registered adapters and converters. If you don't include that option, it will not use what you have registered and will default to the standard data types.<p>To store the array, you can do the following:<pre><code class=language-python>x = np.random.rand(10,2)
 cur.execute('INSERT INTO measurements (arr) values (?)', (x,))
 cur.execute('SELECT arr FROM measurements')
 data = cur.fetchone()
 print(data)
-</code></pre>
-<p>This will transform your array into bytes, and it will store it in the
-database. When you read it back, it will transform the Bytes back into
-an array.</p>
-<p>What you have to keep in mind is that when you store numpy arrays (or
-any non-standard object) into a database, you lose the intrinsic
-advantages of databases, i.e. the capabilities to operate on the
-elements. What I mean is that with SQL it is very easy to replace a
-field in all the entries that match a criterion, for example, but you
-won't be able to do that for a numpy array, at least with SQL commands.</p>
-<h2>Combining Information</h2>
-<p>So far, we have seen how to create some tables with values, and how to
-relate them through the use of primary and foreign keys. However, SQL is
-much more powerful than that, especially when retrieving information.
-One of the things that you can do is to join the information from
-different tables into a single table. Let's see quickly what can be
-done. First, we are going to re-create the tables with the experiments
-and the users, as we have seen before. You can check the <a href="https://github.com/PFTL/website/blob/master/example_code/15_databases/AH_foreign_key.py">code in
-here</a>.
-You should have two entries for users and two entries for the
-experiments.</p>
-<p>You can run the following code:</p>
-<pre><code class="language-python">import sqlite3
+</code></pre><p>This will transform your array into bytes, and it will store it in the database. When you read it back, it will transform the Bytes back into an array.<p>What you have to keep in mind is that when you store numpy arrays (or any non-standard object) into a database, you lose the intrinsic advantages of databases, i.e. the capabilities to operate on the elements. What I mean is that with SQL it is very easy to replace a field in all the entries that match a criterion, for example, but you won't be able to do that for a numpy array, at least with SQL commands.<h2>Combining Information</h2><p>So far, we have seen how to create some tables with values, and how to relate them through the use of primary and foreign keys. However, SQL is much more powerful than that, especially when retrieving information. One of the things that you can do is to join the information from different tables into a single table. Let's see quickly what can be done. First, we are going to re-create the tables with the experiments and the users, as we have seen before. You can check the <a href=https://github.com/PFTL/website/blob/master/example_code/15_databases/AH_foreign_key.py>code in here</a>. You should have two entries for users and two entries for the experiments.<p>You can run the following code:<pre><code class=language-python>import sqlite3
 
 conn = sqlite3.connect('AH_db.sqlite')
 cur = conn.cursor()
 
-sql_command = &quot;&quot;&quot;
+sql_command = """
 SELECT users.id, users.name, experiments.description
 FROM experiments
 INNER JOIN users ON experiments.user_id=users.id;
-&quot;&quot;&quot;
+"""
 cur.execute(sql_command)
 data = cur.fetchall()
 
 for d in data:
     print(d)
-</code></pre>
-<p>What you will see printed is the id of the user, the name and the
-description of the experiment. This is much handier than just seeing the
-id of the user because you immediately see the information that you
-need. Moreover, you can filter the results based on the properties of
-either of the tables. Imagine you want to get the experiments performed
-by <code>'Aquiles'</code>, but you don't know its user id. You can change the
-command above to the following:</p>
-<pre><code class="language-sql">SELECT users.id, users.name, experiments.description
+</code></pre><p>What you will see printed is the id of the user, the name and the description of the experiment. This is much handier than just seeing the id of the user because you immediately see the information that you need. Moreover, you can filter the results based on the properties of either of the tables. Imagine you want to get the experiments performed by <code>'Aquiles'</code>, but you don't know its user id. You can change the command above to the following:<pre><code class=language-sql>SELECT users.id, users.name, experiments.description
     FROM experiments
     INNER JOIN users ON experiments.user_id=users.id
-    WHERE users.name=&quot;Aquiles&quot;;
-</code></pre>
-<p>And you will see that only the data related to that user is retrieved.</p>
-<p>Join statements are complex and very flexible. You probably noticed that
-we have used the <code>INNER JOIN</code> option, but it is not the only
-possibility. If you want to combine tables that are not related through
-a foreign key, for example, you would like to combine data from
-different sources that belong to the same day, you can use other types
-of joins. The diagram in <a href="https://www.w3schools.com/sql/sql_join.asp">this
-website</a> is very explicit,
-but going through the details exceeds the capabilities of an
-introductory tutorial.</p>
-<h2>How to Use Databases in Scientific Projects</h2>
-<p>Leveraging the power of databases is not obvious for first-time
-developers, especially if you don't belong to the web-development realm.
-One of the main advantages of databases is that you don't need to keep
-in memory the entire structure. For example, Imagine that you would have
-a very large project, with millions of measurements of thousands of
-experiments with hundreds of users. Most likely you can't load all the
-information as in memory variables.</p>
-<p>By using databases, you will be able to filter the measurements done by
-a specific user in a given time frame, or that match a specific
-description without actually loading everything into memory. Even if
-simple, this example already shows you a very clear use case where Data
-Frames or numpy arrays would fail.</p>
-<p>Databases are used in many large-scale scientific projects, such as
-astronomical observations, simulations, etc. By using databases,
-different groups are able to give users access to filtering and joining
-capabilities, getting the desired data and not the entire collection. Of
-course, for small groups, it may look like an overshoot. But imagine
-that you could filter through your data, acquired during years, to find
-a specific measurement.</p>
-<h2>Conclusions</h2>
-<p>One of the main challenges of using databases is that they require
-learning a new language called SQL. In this article we have tried to
-point to the most basic concepts, that would allow anyone to get started
-and build his/her way up through clever Google searches.</p>
-<p>Python has built-in support for SQLite, a file-based database that is
-ideal for getting started. There is no further setting up involved,
-everything works out of the box, and many of the tutorials that can be
-found online relating to SQL will also work with SQLite.</p>
-<p>Using databases for one-off projects may be an overkill, but for
-long-running programs, such as software for controlling setups or custom
-data analysis it may open the door to very creative solutions. Combining
-databases for metadata and files for data has the added advantage of a
-high portability (sharing data is sharing just a file) and an easy way
-to search through the collection of metadata stored onto a database.</p>
-<p>Header photo by <a href="https://unsplash.com/photos/PkbZahEG2Ng?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Tobias
-Fischer</a>
-on Unsplash</p>
-            </main>
-            <div class="info-list">
-              <span class="item author">Article written by Aquiles Carattino</span>
-            </div>
-              <div class="similar-posts">
-                <h3>Related Articles:</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing" class="item">
-                        <img src="/images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2018-08-11</span>
-                        <span class="name">Storing Binary Data and Serializing</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/introduction-to-storing-data-in-files" class="item">
-                        <img src="/images/pietro-jeng-266017-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2018-08-10</span>
-                        <span class="name">Introduction to Storing Data in Files</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python" class="item">
-                        <img src="images/storing_data_hdf.png" alt="">
-                        <span class="date">2018-03-19</span>
-                        <span class="name">How to use HDF5 files in Python</span>
-                      </a>
-                    </li>
-                </ul>
-              </div>
-            <div class="bottom-section">
-              <h4>Share your thoughts with us!</h4>
-              <div class="comments">
-                <!-- Comment -->
-                <script src="https://utteranc.es/client.js"
-                        repo="PFTL/pftl_discussions"
-                        issue-term="pathname"
-                        label="Comment"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-              </div>
-            </div>
-          </div>
-          <div class="rightside">
-            <div class="support-box">
-              <h3>Support Us</h3>
-              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
-                Lab</strong></p>
-              <a href="https://pythonforthelab.com/books" class="button">Check out the book</a>
-            </div>
-            <div class="latest-posts">
-
-                <h3>Saving Data series</h3>
-                <ol class="parts">
-                    <li >
-                      <a href='https://pythonforthelab.com/blog/introduction-to-storing-data-in-files'>Introduction to Storing Data in Files</a>
-                    </li>
-                    <li >
-                      <a href='https://pythonforthelab.com/blog/storing-binary-data-and-serializing'>Storing Binary Data and Serializing</a>
-                    </li>
-                    <li >
-                      <a href='https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python'>How to use HDF5 files in Python</a>
-                    </li>
-                    <li class="active">
-                      <a href='https://pythonforthelab.com/blog/storing-data-with-sqlite'>Storing Data with SQLite</a>
-                    </li>
-                </ol>
-
-            </div>
-            <div class="subscribe-fixed">
-              <button class="action">Never Stop Learning</button>
-              <div class="cnt">
-                <p>Join over 1000 Python developers and don't miss any updates!</p>
-                <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mobile-sb-form">
-          <div class="sb-form">
-            <h4>Get all the information directly to your inbox</h4>
-            <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- End Main -->
-
-  </section>
-  <!-- End Wrapper -->
-
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="https://pythonforthelab.com/cookie-policy">Cookie Policy</a>
-        <a href="https://pythonforthelab.com/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Footer --><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
-<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-<script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
-</script></body>
-</html>
+    WHERE users.name="Aquiles";
+</code></pre><p>And you will see that only the data related to that user is retrieved.<p>Join statements are complex and very flexible. You probably noticed that we have used the <code>INNER JOIN</code> option, but it is not the only possibility. If you want to combine tables that are not related through a foreign key, for example, you would like to combine data from different sources that belong to the same day, you can use other types of joins. The diagram in <a href=https://www.w3schools.com/sql/sql_join.asp>this website</a> is very explicit, but going through the details exceeds the capabilities of an introductory tutorial.<h2>How to Use Databases in Scientific Projects</h2><p>Leveraging the power of databases is not obvious for first-time developers, especially if you don't belong to the web-development realm. One of the main advantages of databases is that you don't need to keep in memory the entire structure. For example, Imagine that you would have a very large project, with millions of measurements of thousands of experiments with hundreds of users. Most likely you can't load all the information as in memory variables.<p>By using databases, you will be able to filter the measurements done by a specific user in a given time frame, or that match a specific description without actually loading everything into memory. Even if simple, this example already shows you a very clear use case where Data Frames or numpy arrays would fail.<p>Databases are used in many large-scale scientific projects, such as astronomical observations, simulations, etc. By using databases, different groups are able to give users access to filtering and joining capabilities, getting the desired data and not the entire collection. Of course, for small groups, it may look like an overshoot. But imagine that you could filter through your data, acquired during years, to find a specific measurement.<h2>Conclusions</h2><p>One of the main challenges of using databases is that they require learning a new language called SQL. In this article we have tried to point to the most basic concepts, that would allow anyone to get started and build his/her way up through clever Google searches.<p>Python has built-in support for SQLite, a file-based database that is ideal for getting started. There is no further setting up involved, everything works out of the box, and many of the tutorials that can be found online relating to SQL will also work with SQLite.<p>Using databases for one-off projects may be an overkill, but for long-running programs, such as software for controlling setups or custom data analysis it may open the door to very creative solutions. Combining databases for metadata and files for data has the added advantage of a high portability (sharing data is sharing just a file) and an easy way to search through the collection of metadata stored onto a database.<p>Header photo by <a href=https://unsplash.com/photos/PkbZahEG2Ng?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText>Tobias Fischer</a> on Unsplash</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/storing-binary-data-and-serializing> <img alt src=/images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg> <span class=date>2018-08-11</span> <span class=name>Storing Binary Data and Serializing</span> </a><li><a class=item href=https://pythonforthelab.com/blog/introduction-to-storing-data-in-files> <img alt src=/images/pietro-jeng-266017-unsplash_linkedin.width-800.jpg> <span class=date>2018-08-10</span> <span class=name>Introduction to Storing Data in Files</span> </a><li><a class=item href=https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python> <img alt src=/images/storing_data_hdf.png> <span class=date>2018-03-19</span> <span class=name>How to use HDF5 files in Python</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Saving Data series</h3><ol class=parts><li><a href=https://pythonforthelab.com/blog/introduction-to-storing-data-in-files>Introduction to Storing Data in Files</a><li><a href=https://pythonforthelab.com/blog/storing-binary-data-and-serializing>Storing Binary Data and Serializing</a><li><a href=https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python>How to use HDF5 files in Python</a><li class=active><a href=https://pythonforthelab.com/blog/storing-data-with-sqlite>Storing Data with SQLite</a></ol></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>

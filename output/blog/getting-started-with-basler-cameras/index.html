@@ -1,231 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Acquiring images from Basler Cameras | Python For The Lab</title>
-
-  <meta name="tags" content="microscopy, video, pypylon, camera, basler, ">
-  <meta name="description" content="Learn how to use pypylon to control the acquisition of images from cameras">
-  <meta name="author" content="Aquiles Carattino">
-
-  <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet">
-
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/style.css">
-  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
-
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
-</head>
-
-
-
-<body>
-  <!-- Wrapper -->
-  <section class="wrapper">
-
-<!-- Intro -->
-<div class="intro blog article">
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <a href="/" class="logo">Python for the Lab</a>
-      <div class="header-dd">
-        <div class="navigation">
-          <ul>
-            <li class="active"><a href="https://pythonforthelab.com/blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="https://pythonforthelab.com/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
-                   class="nav-item forum"><span>Forum</span></a></li>
-            <li><a href="https://pythonforthelab.com/books" class="nav-item books"><span>Books</span></a></li>
-            <li><a href="https://pythonforthelab.com/about" class="nav-item about"><span>About</span></a></li>
-          </ul>
-        </div>
-        <div class="search field-wp">
-          <form action="#">
-            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
-            <input type="submit" class="search-btn">
-          </form>
-          <div data-stork="sitesearch-output"></div>
-        </div>
-      </div>
-      <button class="menu-btn"><span>Menu</span></button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Intro Cnt -->
-    <div class="intro-cnt v-article">
-      <div class="side-text">
-      </div>
-      <div class="side-form small-sb-form">
-        <div class="sb-form" id="mc_embed_signup">
-          <h4>Get all the information directly to your inbox</h4>
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-              target="_self"
-              novalidate="">
-            <div class="field-wp" id="mc_embed_signup_scroll">
-              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
-                     value="">
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk form bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
-                   id="mc-embedded-subscribe">
-            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Intro Cnt -->
-
-  </div>
-</div>
-<!-- End Intro -->
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-
-        <div class="article-cnt">
-          <div class="leftside">
-            <div class="article-image">
-              <img src="https://pythonforthelab.com//images/python-basler.width-800.jpg" alt="" width="800">
-            </div>
-            <h1>Acquiring images from Basler Cameras</h1>
-            <h3>Learn how to use pypylon to control the acquisition of images from cameras</h3>
-            <div class="info">
-              <span class="item-1 author">by Aquiles Carattino</span>
-              <span class="item-1 date">2021-02-27</span>
-                <span class="item-tag first">microscopy</span>
-                <span class="item-tag ">video</span>
-                <span class="item-tag ">pypylon</span>
-                <span class="item-tag ">camera</span>
-                <span class="item-tag ">basler</span>
-            </div>
-            <main>
-              <p>Basler offers a wide range of cameras that can be used for microscopy, computer vision, or even as security cameras. One of the cameras' advantages is that they come with a software development kit that makes them easy to integrate into our projects. Basler puts continuous effort into maintaining PyPylon, the Python bindings for their drivers. This tutorial will focus on learning how to get started with the cameras and how to leverage the existing Pylon Viewer to speed up our development. </p>
-<h2>Installing</h2>
-<p>To work with Basler cameras using Python, we must install the PyPylon package, which is the Python wrapper for the Pylon SDK. Basler's team improved the installation scripts of the package in the last few months, and it is now possible to install like any other package:</p>
-<pre><code class="language-bash">pip install pypylon
-</code></pre>
-<p>Older releases of the code required to install other dependencies first and then getting a release of pypylon from the <a href="https://github.com/Basler/pypylon/releases">Github repository</a>. This is still possible if we need to work with specific versions, for example, when maintaining legacy code. </p>
-<p>Although only PyPylon is required to work with the cameras, we will also use the <a href="https://www.baslerweb.com/en/sales-support/downloads/software-downloads/#type=pylonsoftware;language=all;version=all">Pylon software suite</a>, which includes Pylon Viewer, a program to quickly acquire images from the cameras. On the download page, be sure to select the package for your operating system and architecture. </p>
-<p>Pylon Viewer allows us to test the camera, acquire images, and configure it. Trying whether we can acquire images is important to rule out other problems. For example, on Linux systems accessing USB ports may require additional permissions. Pylon Viewer is also a great starting point for finding out the names of the functions and parameters we may need to change in our programs. </p>
-<h3>Problems with PyPylon installation</h3>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>PyPylon is evolving quickly, and some of the issues I highlight here may disappear on later releases. In any case, I have decided to keep them since they may provide valuable insight to some programmers.  </p>
-</div>
-<p>I have found that sometimes there is a mismatch between the latest Pylon version and the released PyPylon wheel available to download. Even if this does not raise problems during installation, we may face an error like the following when running the examples of this tutorial:</p>
-<pre><code class="language-bash">ImportError: cannot import name '_pylon' 
-</code></pre>
-<p>The best solution is to <a href="https://github.com/basler/pypylon">download the PyPylon code</a>, and install it locally by running:</p>
-<pre><code class="language-bash">$ python setup.py install
-</code></pre>
-<p>Depending on your operating system, there may be another error associated with it. In Linux, Pylon is expected in the folder <code>/opt/pylon5</code>, but newer versions of Pylon are installed on <code>/opt/pylon</code>. The simplest solution is to create a system variable to point the installer to the right folder:</p>
-<pre><code class="language-bash">$ export PYLON_ROOT=/opt/pylon
+<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Acquiring images from Basler Cameras | Python For The Lab</title><meta content="microscopy, video, pypylon, camera, basler, " name=tags><meta content="Learn how to use pypylon to control the acquisition of images from cameras" name=description><meta content="Aquiles Carattino" name=author><link href=blog/getting-started-with-basler-cameras rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/getting-started-with-basler-cameras property=og:url><meta content="Acquiring images from Basler Cameras" property=og:title><meta content="Learn how to use pypylon to control the acquisition of images from cameras" property=og:description><meta content=/images/python-basler.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/getting-started-with-basler-cameras property=twitter:url><meta content="Acquiring images from Basler Cameras" property=twitter:title><meta content="Learn how to use pypylon to control the acquisition of images from cameras" property=twitter:description><meta content=/images/python-basler.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/python-basler.width-800.jpg width=800></div><h1>Acquiring images from Basler Cameras</h1><h3>Learn how to use pypylon to control the acquisition of images from cameras</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2021-02-27</span><span class="item-tag first">microscopy</span><span class=item-tag>video</span><span class=item-tag>pypylon</span><span class=item-tag>camera</span><span class=item-tag>basler</span></div><main><p>Basler offers a wide range of cameras that can be used for microscopy, computer vision, or even as security cameras. One of the cameras' advantages is that they come with a software development kit that makes them easy to integrate into our projects. Basler puts continuous effort into maintaining PyPylon, the Python bindings for their drivers. This tutorial will focus on learning how to get started with the cameras and how to leverage the existing Pylon Viewer to speed up our development.<h2>Installing</h2><p>To work with Basler cameras using Python, we must install the PyPylon package, which is the Python wrapper for the Pylon SDK. Basler's team improved the installation scripts of the package in the last few months, and it is now possible to install like any other package:<pre><code class=language-bash>pip install pypylon
+</code></pre><p>Older releases of the code required to install other dependencies first and then getting a release of pypylon from the <a href=https://github.com/Basler/pypylon/releases>Github repository</a>. This is still possible if we need to work with specific versions, for example, when maintaining legacy code.<p>Although only PyPylon is required to work with the cameras, we will also use the <a href=https://www.baslerweb.com/en/sales-support/downloads/software-downloads/#type=pylonsoftware;language=all;version=all>Pylon software suite</a>, which includes Pylon Viewer, a program to quickly acquire images from the cameras. On the download page, be sure to select the package for your operating system and architecture.<p>Pylon Viewer allows us to test the camera, acquire images, and configure it. Trying whether we can acquire images is important to rule out other problems. For example, on Linux systems accessing USB ports may require additional permissions. Pylon Viewer is also a great starting point for finding out the names of the functions and parameters we may need to change in our programs.<h3>Problems with PyPylon installation</h3><div class="admonition note"><p class=admonition-title>Note<p>PyPylon is evolving quickly, and some of the issues I highlight here may disappear on later releases. In any case, I have decided to keep them since they may provide valuable insight to some programmers.</div><p>I have found that sometimes there is a mismatch between the latest Pylon version and the released PyPylon wheel available to download. Even if this does not raise problems during installation, we may face an error like the following when running the examples of this tutorial:<pre><code class=language-bash>ImportError: cannot import name '_pylon' 
+</code></pre><p>The best solution is to <a href=https://github.com/basler/pypylon>download the PyPylon code</a>, and install it locally by running:<pre><code class=language-bash>$ python setup.py install
+</code></pre><p>Depending on your operating system, there may be another error associated with it. In Linux, Pylon is expected in the folder <code>/opt/pylon5</code>, but newer versions of Pylon are installed on <code>/opt/pylon</code>. The simplest solution is to create a system variable to point the installer to the right folder:<pre><code class=language-bash>$ export PYLON_ROOT=/opt/pylon
 $ python setup.py install
-</code></pre>
-<h2>Getting Started</h2>
-<p>When getting started, we must make sure to identify the camera we want to work with. This is not only useful for practical matters, but it is also the first step to start understanding the patterns that drivers impose. We can run the following code:</p>
-<pre><code class="language-python">from pypylon import pylon
+</code></pre><h2>Getting Started</h2><p>When getting started, we must make sure to identify the camera we want to work with. This is not only useful for practical matters, but it is also the first step to start understanding the patterns that drivers impose. We can run the following code:<pre><code class=language-python>from pypylon import pylon
 
 
 tl_factory = pylon.TlFactory.GetInstance()
 devices = tl_factory.EnumerateDevices()
 for device in devices:
     print(device.GetFriendlyName())
-</code></pre>
-<p>It generates a list of the cameras connected to our computer, like what we see with the PylonViewer program. The output will depend on what camera is connected to the computer, but it will look like the following:</p>
-<pre><code class="language-bash">Basler a2A1920-160umBAS (40063823)
-</code></pre>
-<p>Let's start by understanding the code that generated the output. It begins by creating a <em>transport layer</em> instance and enumerating the devices to which it has access. According to the manual, the transport layer is an abstraction of the physical connection between the camera and the computer (i.e., USB, Camera Link, etc.). Its primary purpose is to find and manage the life cycle of the cameras. The method <code>EnumerateDevices</code> returns a tuple containing information of each connected camera. </p>
-<p>Bear in mind that PyPylon is built using Swig, a library that automatically wraps C code into Python. If we printed <code>device</code> instead of its friendly name, we would get an output like this:</p>
-<pre><code class="language-python">&quot;&lt;pypylon.pylon.DeviceInfo; proxy of &lt;Swig Object of type 'Pylon::CDeviceInfo *' at 0x7fb7c3cd53f0&gt; &gt;&quot;
-</code></pre>
-<p>Which is not particularly useful. Each object returned by the enumeration of the transport layer allows for the unique identification of the camera. This means that the information contained within it is all we need to start communicating with a camera. Other methods that may be useful to identify a camera are: <code>GetFullName()</code> which returns a unique code like <code>2676:ba05:3:2:10</code>, or <code>GetSerialNumber()</code> which returns a number like <code>40063823</code>. </p>
-<p>In many cases, we have only one camera, and the rest of the article will proceed on that assumption. If it is not the case, we can address the camera we want by using its unique properties. </p>
-<h2>Acquiring an Image</h2>
-<p>If we are working with a camera, the first thing we may want to do is to acquire an image. We can create an <code>InstantCamera</code> object by running the following:</p>
-<pre><code class="language-python">tl_factory = pylon.TlFactory.GetInstance()
+</code></pre><p>It generates a list of the cameras connected to our computer, like what we see with the PylonViewer program. The output will depend on what camera is connected to the computer, but it will look like the following:<pre><code class=language-bash>Basler a2A1920-160umBAS (40063823)
+</code></pre><p>Let's start by understanding the code that generated the output. It begins by creating a <em>transport layer</em> instance and enumerating the devices to which it has access. According to the manual, the transport layer is an abstraction of the physical connection between the camera and the computer (i.e., USB, Camera Link, etc.). Its primary purpose is to find and manage the life cycle of the cameras. The method <code>EnumerateDevices</code> returns a tuple containing information of each connected camera.<p>Bear in mind that PyPylon is built using Swig, a library that automatically wraps C code into Python. If we printed <code>device</code> instead of its friendly name, we would get an output like this:<pre><code class=language-python>"&LTpypylon.pylon.DeviceInfo; proxy of &LTSwig Object of type 'Pylon::CDeviceInfo *' at 0x7fb7c3cd53f0> >"
+</code></pre><p>Which is not particularly useful. Each object returned by the enumeration of the transport layer allows for the unique identification of the camera. This means that the information contained within it is all we need to start communicating with a camera. Other methods that may be useful to identify a camera are: <code>GetFullName()</code> which returns a unique code like <code>2676:ba05:3:2:10</code>, or <code>GetSerialNumber()</code> which returns a number like <code>40063823</code>.<p>In many cases, we have only one camera, and the rest of the article will proceed on that assumption. If it is not the case, we can address the camera we want by using its unique properties.<h2>Acquiring an Image</h2><p>If we are working with a camera, the first thing we may want to do is to acquire an image. We can create an <code>InstantCamera</code> object by running the following:<pre><code class=language-python>tl_factory = pylon.TlFactory.GetInstance()
 camera = pylon.InstantCamera()
 camera.Attach(tl_factory.CreateFirstDevice())
-</code></pre>
-<p>Which consists of two steps. After getting the instance of the transport layer, we create an <code>InstantCamera</code> object. Basler provides these objects as a way of simplifying our work with their cameras, including handling the device life cycle, making event callbacks, and physical device removal. Suppose we are developing a highly specialized application. In that case, we may want to dive into Pylon's <em>Device objects</em>, which are beyond this article's scope. </p>
-<p>Once the <code>InstantCamera</code> is instantiated, we proceed to attach the first available camera to it. Note that the code above is transparent to the underlying data transport layer. We can use USB or GigE cameras with the same pattern. It is also important to point out that the transport layer is responsible for creating the actual device while <code>camera</code> is a convenient interface. The connection between the wrapper object <code>InstantCamera</code> and the actual device happens when we <code>Attach</code> it. </p>
-<p>To acquire an image, we must follow few steps that are self-explanatory:</p>
-<pre><code class="language-python">camera.Open()
+</code></pre><p>Which consists of two steps. After getting the instance of the transport layer, we create an <code>InstantCamera</code> object. Basler provides these objects as a way of simplifying our work with their cameras, including handling the device life cycle, making event callbacks, and physical device removal. Suppose we are developing a highly specialized application. In that case, we may want to dive into Pylon's <em>Device objects</em>, which are beyond this article's scope.<p>Once the <code>InstantCamera</code> is instantiated, we proceed to attach the first available camera to it. Note that the code above is transparent to the underlying data transport layer. We can use USB or GigE cameras with the same pattern. It is also important to point out that the transport layer is responsible for creating the actual device while <code>camera</code> is a convenient interface. The connection between the wrapper object <code>InstantCamera</code> and the actual device happens when we <code>Attach</code> it.<p>To acquire an image, we must follow few steps that are self-explanatory:<pre><code class=language-python>camera.Open()
 camera.StartGrabbing(1)
 grab = camera.RetrieveResult(2000, pylon.TimeoutHandling_Return)
 if grab.GrabSucceeded():
     img = grab.GetArray()
     print(f'Size of image: {img.shape}')
 camera.Close()
-</code></pre>
-<p>We start by opening the camera. At this stage, we establish the communication with the device, and Pylon takes care of applying some basic configuration. When we <code>StartGrabbing</code> with a single integer argument, we tell Pylon the number of frames we want to acquire. When the camera reaches that number of frames, it will stop acquiring new ones. This method is one of the convenience methods provided by the <code>InstantCamera</code> objects. </p>
-<p>In the code above, we grab only one frame. We retrieve the result using a timeout of 2000 milliseconds. We specify that if 2 seconds pass and there is no result, it would simply return. Another option would have been using <code>TimeoutHandling_ThrowException</code>. </p>
-<p>We check that the grab actually worked by using the <code>GrabSucceeded</code> method. Then we get the actual data using the <code>GetArray</code> method. The resulting <code>img</code> is a numpy array. We print the shape of the image and close the camera. This is a minimal example to get started, but nothing limits us to show the image, save it, etc. In any case, the most essential step is to get data from the camera. </p>
-<h2>Changing Parameters</h2>
-<p>Once we can read from a device, the second most important step is to change the acquisition parameters. In the case of a camera, the exposure time is probably, one of the most important ones. The <code>InstantCamera</code> interface allows us to change it with the following syntax:</p>
-<pre><code class="language-python">camera.ExposureTime.SetValue(50000)
-</code></pre>
-<p>The syntax is pretty clear. If we want to change <code>ExposureTime</code>, we can use a method called <code>SetValue</code> and provide the value in microseconds (see below for more discussion on units). If we check the Pylon manual, this is the pattern we will find for the camera's parameters. However, since we are using <strong>PyPylon</strong>, we can also make use of an alternative syntax:</p>
-<pre><code class="language-python">camera.ExposureTime = 50000
-</code></pre>
-<p>Both examples generate the same effect and show the difference between <a href="https://www.aquiles.me/functional_or_imperative_programming/">functional or imperative programming</a>. I, personally, believe the first one is clearer since it will always raise an error if, for example, we use <code>Exposure</code> instead of <code>ExposureTime</code>.</p>
-<h3>Getting node information</h3>
-<p>One of the reasons for favoring the imperative setting of the exposure time (i.e., using <code>SetValue</code>) is that <code>ExposureTime</code> is more complex than a simple number attribute of the camera. When setting values to a device, one common concern is knowing the limits and the units of each parameter. Pylon, in that regard, is very transparent and consistent. </p>
-<pre><code class="language-python">camera.Open()
+</code></pre><p>We start by opening the camera. At this stage, we establish the communication with the device, and Pylon takes care of applying some basic configuration. When we <code>StartGrabbing</code> with a single integer argument, we tell Pylon the number of frames we want to acquire. When the camera reaches that number of frames, it will stop acquiring new ones. This method is one of the convenience methods provided by the <code>InstantCamera</code> objects.<p>In the code above, we grab only one frame. We retrieve the result using a timeout of 2000 milliseconds. We specify that if 2 seconds pass and there is no result, it would simply return. Another option would have been using <code>TimeoutHandling_ThrowException</code>.<p>We check that the grab actually worked by using the <code>GrabSucceeded</code> method. Then we get the actual data using the <code>GetArray</code> method. The resulting <code>img</code> is a numpy array. We print the shape of the image and close the camera. This is a minimal example to get started, but nothing limits us to show the image, save it, etc. In any case, the most essential step is to get data from the camera.<h2>Changing Parameters</h2><p>Once we can read from a device, the second most important step is to change the acquisition parameters. In the case of a camera, the exposure time is probably, one of the most important ones. The <code>InstantCamera</code> interface allows us to change it with the following syntax:<pre><code class=language-python>camera.ExposureTime.SetValue(50000)
+</code></pre><p>The syntax is pretty clear. If we want to change <code>ExposureTime</code>, we can use a method called <code>SetValue</code> and provide the value in microseconds (see below for more discussion on units). If we check the Pylon manual, this is the pattern we will find for the camera's parameters. However, since we are using <strong>PyPylon</strong>, we can also make use of an alternative syntax:<pre><code class=language-python>camera.ExposureTime = 50000
+</code></pre><p>Both examples generate the same effect and show the difference between <a href=https://notes.aquiles.me/functional_or_imperative_programming/>functional or imperative programming</a>. I, personally, believe the first one is clearer since it will always raise an error if, for example, we use <code>Exposure</code> instead of <code>ExposureTime</code>.<h3>Getting node information</h3><p>One of the reasons for favoring the imperative setting of the exposure time (i.e., using <code>SetValue</code>) is that <code>ExposureTime</code> is more complex than a simple number attribute of the camera. When setting values to a device, one common concern is knowing the limits and the units of each parameter. Pylon, in that regard, is very transparent and consistent.<pre><code class=language-python>camera.Open()
 print(camera.ExposureTime.GetUnit())
 print(camera.ExposureTime.GetValue())
 print(camera.ExposureTime.GetMin())
@@ -235,21 +34,7 @@ print(camera.ExposureTime.Value)
 print(camera.ExposureTime.Min)
 print(camera.ExposureTime.Max)
 camera.Close()
-</code></pre>
-<p>It is possible to get the units of the <code>ExposureTime</code>and the current value, the minimum, and the maximum. The code above shows the two ways of getting the information, using <code>GetUnit</code> or attributes like <code>Unit</code>. Again, this is a matter of personal preference and consistency through more extensive projects. </p>
-<h2>PylonViewer as the documentation entry point</h2>
-<p>The examples above are a great starting point, but the main problem is that they are limited. As soon as we want to do something slightly more complex, we will need to use a different approach. For example, we know the minimum and maximum value of the exposure time, but how do we know the minimum difference between possible values? Fortunately, Basler bundles the PylonViewer with their software package. Let's see what information it provides when we select the exposure time:</p>
-<p><img alt="" src="./_basler/pylon_viewer_01.png"></p>
-<p>For every parameter that we can change in the camera, PylonViewer tells us what method should be used to change and retrieve the value. But this is not the only information that it provides. If we open the Feature Properties panel (must be selected under the Window menu), we can also see a table with more information for that specific property:</p>
-<p><img alt="" src="./_basler/pylon_viewer_02.png"></p>
-<p>The PylonViewer does not allow us to see how to retrieve that information. Still, if it is on the table, it means it can be programmatically accessed. The PylonViewer gives us access to the Programmer's Guide if we click on the <em>Help menu</em>. Normally, the C++ guide is the easiest to translate into Python code. If we search for <code>ExposureTime</code> we will get several matches, but any <code>Member List</code> would be a good starting point. The information on <code>ExposureTime</code> may be a bit vague:</p>
-<p><img alt="" src="./_basler/pylon_manual_exposure_01.png"></p>
-<p>But it provides a significant hint (highlighted in red above). The Exposure time is not an ordinary number, but a <code>Pylon::IFloatEx</code>. Without entering too much into details, if we click on it, we get the information we were looking for:</p>
-<p><img alt="" src="./_basler/pylong_manual_exposure_02.png"> </p>
-<p>Every parameter that belongs to this class will have plenty of available information. The exposure time is only one of them. For basic applications, it may be slightly far-fetched. Still, it is important to learn how to navigate the documentation to get the relevant information and translate it to Python. </p>
-<h2>Acquiring in free-run mode</h2>
-<p>With cameras, often we want to acquire images continuously, not just one frame. Free-run means that the camera will acquire frames one after the other until we tell it to stop. With <code>InstantCamera</code>, this can be achieved by using the method <code>StartGrabbing</code> without specifying a maximum number of frames:</p>
-<pre><code class="language-python">camera.Open()
+</code></pre><p>It is possible to get the units of the <code>ExposureTime</code>and the current value, the minimum, and the maximum. The code above shows the two ways of getting the information, using <code>GetUnit</code> or attributes like <code>Unit</code>. Again, this is a matter of personal preference and consistency through more extensive projects.<h2>PylonViewer as the documentation entry point</h2><p>The examples above are a great starting point, but the main problem is that they are limited. As soon as we want to do something slightly more complex, we will need to use a different approach. For example, we know the minimum and maximum value of the exposure time, but how do we know the minimum difference between possible values? Fortunately, Basler bundles the PylonViewer with their software package. Let's see what information it provides when we select the exposure time:<p><img alt="Detail of the Pylon Viewer" src=/images/44_basler/pylon_viewer_01.png><p>For every parameter that we can change in the camera, PylonViewer tells us what method should be used to change and retrieve the value. But this is not the only information that it provides. If we open the Feature Properties panel (must be selected under the Window menu), we can also see a table with more information for that specific property:<p><img alt="Changing properties on the Pylon Viewer" src=/images/44_basler/pylon_viewer_02.png><p>The PylonViewer does not allow us to see how to retrieve that information. Still, if it is on the table, it means it can be programmatically accessed. The PylonViewer gives us access to the Programmer's Guide if we click on the <em>Help menu</em>. Normally, the C++ guide is the easiest to translate into Python code. If we search for <code>ExposureTime</code> we will get several matches, but any <code>Member List</code> would be a good starting point. The information on <code>ExposureTime</code> may be a bit vague:<p><img alt="Finding the reference to changing the exposure in Pylon Viewer" src=/images/44_basler/pylon_manual_exposure_01.png><p>But it provides a significant hint (highlighted in red above). The Exposure time is not an ordinary number, but a <code>Pylon::IFloatEx</code>. Without entering too much into details, if we click on it, we get the information we were looking for:<p><img alt="Documentation of the exposure property in Pylon" src=/images/_basler/pylong_manual_exposure_02.png><p>Every parameter that belongs to this class will have plenty of available information. The exposure time is only one of them. For basic applications, it may be slightly far-fetched. Still, it is important to learn how to navigate the documentation to get the relevant information and translate it to Python.<h2>Acquiring in free-run mode</h2><p>With cameras, often we want to acquire images continuously, not just one frame. Free-run means that the camera will acquire frames one after the other until we tell it to stop. With <code>InstantCamera</code>, this can be achieved by using the method <code>StartGrabbing</code> without specifying a maximum number of frames:<pre><code class=language-python>camera.Open()
 camera.StartGrabbing(pylon.GrabStrategy_OneByOne)
 i = 0
 print('Starting to acquire')
@@ -263,10 +48,7 @@ while camera.IsGrabbing():
 
 print(f'Acquired {i} frames in {time.time()-t0:.0f} seconds')
 camera.Close()
-</code></pre>
-<p>In this example, <code>StartGrabbing</code> receives a strategy of <code>OneByOne</code>, which is equivalent to first-in, first-out. Frames are acquired in order and retrieved in order. We use the method <code>IsGrabbing</code> to check that the camera is actually acquiring data. Note that we are using only 100 milliseconds of timeout when retrieving the result. If the exposure time is longer than that, Pylon will raise an error. We can check it by combining this example with the previous one. </p>
-<p>If grabbing data was successful, we increase a counter. We stop the loop if we reach 100 frames, but any other approach to stop the program at a given point is valid. It is important to note that we stop the loop, but not the grabbing itself. The grabbing stops when the camera is closed, courtesy of the <code>InstantCamera</code> object. We can also use <code>StopGrabbing</code> to stop the camera acquisition:</p>
-<pre><code class="language-python">camera.Open()
+</code></pre><p>In this example, <code>StartGrabbing</code> receives a strategy of <code>OneByOne</code>, which is equivalent to first-in, first-out. Frames are acquired in order and retrieved in order. We use the method <code>IsGrabbing</code> to check that the camera is actually acquiring data. Note that we are using only 100 milliseconds of timeout when retrieving the result. If the exposure time is longer than that, Pylon will raise an error. We can check it by combining this example with the previous one.<p>If grabbing data was successful, we increase a counter. We stop the loop if we reach 100 frames, but any other approach to stop the program at a given point is valid. It is important to note that we stop the loop, but not the grabbing itself. The grabbing stops when the camera is closed, courtesy of the <code>InstantCamera</code> object. We can also use <code>StopGrabbing</code> to stop the camera acquisition:<pre><code class=language-python>camera.Open()
 camera.StartGrabbing(pylon.GrabStrategy_OneByOne)
 i = 0
 print('Starting to acquire')
@@ -281,10 +63,7 @@ while camera.IsGrabbing():
 
 print(f'Acquired {i} frames in {time.time()-t0:.0f} seconds')
 camera.Close()
-</code></pre>
-<h2>Timeout when retrieving the result</h2>
-<p>In the examples we've seen so far, we have set everything to avoid problems. However, we are one step away from getting into trouble. We are using an exposure time of 50ms and a timeout of 100ms when retrieving the result. It is worth exploring what would happen if the timeout is shorter than the exposure time. </p>
-<pre><code class="language-python">camera.Open()
+</code></pre><h2>Timeout when retrieving the result</h2><p>In the examples we've seen so far, we have set everything to avoid problems. However, we are one step away from getting into trouble. We are using an exposure time of 50ms and a timeout of 100ms when retrieving the result. It is worth exploring what would happen if the timeout is shorter than the exposure time.<pre><code class=language-python>camera.Open()
 camera.ExposureTime = 105000  # in us
 camera.StartGrabbing(pylon.GrabStrategy_OneByOne)
 grab = camera.RetrieveResult(100, pylon.TimeoutHandling_ThrowException)
@@ -292,9 +71,7 @@ if grab.GrabSucceeded():
     print('Grab succeded')
 
 camera.Close()
-</code></pre>
-<p>If we run the code above, we see that many times it runs fine. Note that the difference between exposure time and timeout is only 5ms. If there's a slight delay between starting and retrieving results, it is enough to pass through. If we try to acquire a couple of frames in a row, we'll see the problem:</p>
-<pre><code class="language-python">camera.Open()
+</code></pre><p>If we run the code above, we see that many times it runs fine. Note that the difference between exposure time and timeout is only 5ms. If there's a slight delay between starting and retrieving results, it is enough to pass through. If we try to acquire a couple of frames in a row, we'll see the problem:<pre><code class=language-python>camera.Open()
 camera.ExposureTime = 105000
 camera.StartGrabbing(pylon.GrabStrategy_OneByOne)
 for i in range(10):
@@ -303,44 +80,29 @@ for i in range(10):
         print('Grab succeded')
 
 camera.Close()
-</code></pre>
-<p>The code above will generate an output like this:</p>
-<pre><code class="language-bash">Traceback (most recent call last):
-  File &quot;ac.py&quot;, line 17, in &lt;module&gt;
+</code></pre><p>The code above will generate an output like this:<pre><code class=language-bash>Traceback (most recent call last):
+  File "ac.py", line 17, in &LTmodule>
     grab = camera.RetrieveResult(100, pylon.TimeoutHandling_ThrowException)
-  File &quot;C:\Users\aquic\.conda\envs\disper\lib\site-packages\pypylon\pylon.py&quot;, line 3458, in RetrieveResult
+  File "C:\Users\aquic\.conda\envs\disper\lib\site-packages\pypylon\pylon.py", line 3458, in RetrieveResult
     return _pylon.InstantCamera_RetrieveResult(self, *args)
 _genicam.TimeoutException: Grab timed out. : TimeoutException thrown (file 'instantcameraimpl.h', line 1064)
-</code></pre>
-<p>This is expected since we are using the option <code>pylon.TimeoutHandling_ThrowException</code>. We can also try to use the other option, <code>TimeoutHandling_Return</code>, in which case we would get this output:</p>
-<pre><code class="language-python">Traceback (most recent call last):
-  File &quot;ac.py&quot;, line 18, in &lt;module&gt;
+</code></pre><p>This is expected since we are using the option <code>pylon.TimeoutHandling_ThrowException</code>. We can also try to use the other option, <code>TimeoutHandling_Return</code>, in which case we would get this output:<pre><code class=language-python>Traceback (most recent call last):
+  File "ac.py", line 18, in &LTmodule>
     if grab.GrabSucceeded():
-  File &quot;C:\Users\aquic\.conda\envs\disper\lib\site-packages\pypylon\pylon.py&quot;, line 2229, in GrabSucceeded
+  File "C:\Users\aquic\.conda\envs\disper\lib\site-packages\pypylon\pylon.py", line 2229, in GrabSucceeded
     return _pylon.GrabResult_GrabSucceeded(self)
 _genicam.RuntimeException: No grab result data is referenced. Cannot access NULL pointer. : RuntimeException thrown (file 'grabresultptr.cpp', line 84)
-</code></pre>
-<p>Both snippets result in exceptions, but they have a very different origin. On the first one, it is the <code>RetrieveResult</code> method that raises the exception, while in the second is the <code>GrabSucceeded</code>. For the first pattern, we can use a <code>try... except</code> block to catch the exception. For the second example, note that the error message states <code>Cannot access NULL pointer</code>. This means that grab is actually NULL. We can therefore use another approach to deal with it:</p>
-<pre><code class="language-python">if grab and grab.GrabSucceeded():
+</code></pre><p>Both snippets result in exceptions, but they have a very different origin. On the first one, it is the <code>RetrieveResult</code> method that raises the exception, while in the second is the <code>GrabSucceeded</code>. For the first pattern, we can use a <code>try... except</code> block to catch the exception. For the second example, note that the error message states <code>Cannot access NULL pointer</code>. This means that grab is actually NULL. We can therefore use another approach to deal with it:<pre><code class=language-python>if grab and grab.GrabSucceeded():
     print('Grab succeded')
-</code></pre>
-<p>It must be clear that <code>if grab</code> is <code>True</code> only when the RetrieveResult didn't timeout. On the other hand, Python tests if-statements sequentially. It will first check <code>if grab</code> and <em>only</em> if it passes, it checks for <code>GrabSucceeded()</code>. In this way, we can quickly prevent the error without try-excepts. </p>
-<h2>Using callbacks</h2>
-<p>Python programmers often do not use callbacks, but they can be a useful pattern and worth discussing them for the options they offer. The idea of a callback is that we can specify what function gets executed when an action finishes. For cameras, we can think of when a frame is acquired or after the camera is initialized. Pylon implements these ideas through event handlers, a specific type of class that defines some specific methods. Let's develop a basic one so we can start exploring the options:</p>
-<pre><code class="language-python">class EventPrinter(pylon.ConfigurationEventHandler):
+</code></pre><p>It must be clear that <code>if grab</code> is <code>True</code> only when the RetrieveResult didn't timeout. On the other hand, Python tests if-statements sequentially. It will first check <code>if grab</code> and <em>only</em> if it passes, it checks for <code>GrabSucceeded()</code>. In this way, we can quickly prevent the error without try-excepts.<h2>Using callbacks</h2><p>Python programmers often do not use callbacks, but they can be a useful pattern and worth discussing them for the options they offer. The idea of a callback is that we can specify what function gets executed when an action finishes. For cameras, we can think of when a frame is acquired or after the camera is initialized. Pylon implements these ideas through event handlers, a specific type of class that defines some specific methods. Let's develop a basic one so we can start exploring the options:<pre><code class=language-python>class EventPrinter(pylon.ConfigurationEventHandler):
     def OnAttach(self, camera):
         print(f'Before attaching the camera {camera}')
-</code></pre>
-<p>The name, <code>EventPrinter</code> is arbitrary, but the method <code>OnAttach</code> is defined in the Pylon manual. As the name suggests, this method will be executed after a camera is attached, and it takes one argument: <code>camera</code>. In order to use this event handler, we must register it:</p>
-<pre><code class="language-python">tl_factory = pylon.TlFactory.GetInstance()
+</code></pre><p>The name, <code>EventPrinter</code> is arbitrary, but the method <code>OnAttach</code> is defined in the Pylon manual. As the name suggests, this method will be executed after a camera is attached, and it takes one argument: <code>camera</code>. In order to use this event handler, we must register it:<pre><code class=language-python>tl_factory = pylon.TlFactory.GetInstance()
 camera = pylon.InstantCamera()
 camera.RegisterConfiguration(EventPrinter(), pylon.RegistrationMode_Append, pylon.Cleanup_Delete)
 
 camera.Attach(tl_factory.CreateFirstDevice())
-</code></pre>
-<p>The code above is enough to start understanding how to use callbacks. Note that we used an instance of the <code>EventPrinter</code> which defines a method <code>OnAttach</code>. We used the <code>RegistrionMode_Append</code> that determines where the event handler will be placed related to other handlers present. In this case, it will be added <em>after</em>. Finally, we delete the configuration when we are done, and the camera is cleaned up. </p>
-<p>The event handler is not limited to the moment in which we attach the camera. There are many other possibilities:</p>
-<pre><code class="language-python">class EventPrinter(pylon.ConfigurationEventHandler):
+</code></pre><p>The code above is enough to start understanding how to use callbacks. Note that we used an instance of the <code>EventPrinter</code> which defines a method <code>OnAttach</code>. We used the <code>RegistrionMode_Append</code> that determines where the event handler will be placed related to other handlers present. In this case, it will be added <em>after</em>. Finally, we delete the configuration when we are done, and the camera is cleaned up.<p>The event handler is not limited to the moment in which we attach the camera. There are many other possibilities:<pre><code class=language-python>class EventPrinter(pylon.ConfigurationEventHandler):
     def OnAttach(self, camera):
         print(f'Before attaching the camera {camera}')
 
@@ -368,213 +130,28 @@ camera.Attach(tl_factory.CreateFirstDevice())
     def OnGrabStarted(self, camera):
         print('Grab started')
         time.sleep(2)
-</code></pre>
-<p>We can see a great level of control at every stage of the camera lifecycle, and we have access to the camera itself. The names of the methods refer to the moment right before or right after an action happens. For example, <code>OnOpen</code> is executed right before the camera is opened and <code>OnOpened</code> right after. With this pattern, we can, for example, define initial parameters for the camera, such as the exposure time or gain, so that it always starts the same way. We can use this approach to let other parts of our program know when a camera is attached, starts grabbing, or is destroyed. </p>
-<p>We can think about callbacks in the same way we think about <a href="https://www.pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui/#signals-and-slots-in-qt">signals and slots in Qt</a>. They offer similar possibilities and allow us to connect different parts of a program in a very flexible way. </p>
-<p>Another option that Pylon has is to use the image handler. This simple example makes it clear how it can be used:</p>
-<pre><code class="language-python">class ImageEventPrinter(pylon.ImageEventHandler):
+</code></pre><p>We can see a great level of control at every stage of the camera lifecycle, and we have access to the camera itself. The names of the methods refer to the moment right before or right after an action happens. For example, <code>OnOpen</code> is executed right before the camera is opened and <code>OnOpened</code> right after. With this pattern, we can, for example, define initial parameters for the camera, such as the exposure time or gain, so that it always starts the same way. We can use this approach to let other parts of our program know when a camera is attached, starts grabbing, or is destroyed.<p>We can think about callbacks in the same way we think about <a href=https://www.pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui/#signals-and-slots-in-qt>signals and slots in Qt</a>. They offer similar possibilities and allow us to connect different parts of a program in a very flexible way.<p>Another option that Pylon has is to use the image handler. This simple example makes it clear how it can be used:<pre><code class=language-python>class ImageEventPrinter(pylon.ImageEventHandler):
     def OnImagesSkipped(self, camera, countOfSkippedImages):
-        print(&quot;OnImagesSkipped event for device &quot;, camera.GetDeviceInfo().GetModelName())
-        print(countOfSkippedImages, &quot; images have been skipped.&quot;)
+        print("OnImagesSkipped event for device ", camera.GetDeviceInfo().GetModelName())
+        print(countOfSkippedImages, " images have been skipped.")
         print()
 
     def OnImageGrabbed(self, camera, grabResult):
-        print(&quot;OnImageGrabbed event for device &quot;, camera.GetDeviceInfo().GetModelName())
+        print("OnImageGrabbed event for device ", camera.GetDeviceInfo().GetModelName())
 
         # Image grabbed successfully?
         if grabResult.GrabSucceeded():
-            print(&quot;SizeX: &quot;, grabResult.GetWidth())
-            print(&quot;SizeY: &quot;, grabResult.GetHeight())
+            print("SizeX: ", grabResult.GetWidth())
+            print("SizeY: ", grabResult.GetHeight())
             img = grabResult.GetArray()
-            print(&quot;Gray values of first row: &quot;, img[0])
+            print("Gray values of first row: ", img[0])
             print()
         else:
-            print(&quot;Error: &quot;, grabResult.GetErrorCode(), grabResult.GetErrorDescription())
-</code></pre>
-<p>And we register it in the camera with the following:</p>
-<pre><code class="language-python">camera.RegisterImageEventHandler(ImageEventPrinter(), pylon.RegistrationMode_Append, pylon.Cleanup_Delete)
-</code></pre>
-<p>Since we have access to the data itself, we can use callbacks to save every image to the hard drive, or do some analysis, compression, etc. It is important to note that while we can trigger actions when an image is acquired or skipped, the methods have access to the camera. This is very useful if, for example, we are controlling more than one camera because we may need to know which one triggered the callback. It is also possible to think about other possibilities. We could stop acquiring images after one has been skipped. We could change the exposure time if too many pixels are dark, or if the camera is saturating, etc. </p>
-<p>The advantage of callbacks, as presented by Pylon, is that we can achieve complex functionality with very little overhead and boilerplate code. If we would like to perform pattern recognition on every image, we can create a handler that takes care of it. </p>
-<h2>Understanding the work of buffers</h2>
-<p>We have used the <code>InstantCamera</code> without digging into what happens with the camera and the computer. Working with buffers may give us the best overview of the data flow between the camera and our program. So far, we have always dealt with data coming from the camera using the method <code>RetrieveResult</code> and its resulting <code>grab</code> object. We should look a bit more into the details to understand memory allocation and how to make the best out of the camera. </p>
-<p>Basler's manual divides the process of acquiring an image into three steps: <em>image acquisition</em> which happens in the camera when the sensor gets exposed, and each pixel is read. <em>Data transfer</em>, when the computer receives the collected information. Finally, <em>image grabbing</em> when our application accesses the underlying data. Setting up the image acquisition was what we did at the beginning of the tutorial, for example, when we changed the exposure time. There's little control over the data transfer since this is what Pylon takes care to do as efficiently as possible. But we do have control over what happens when we <em>grab</em> the images.</p>
-<p>Each image is transferred from the camera to the computer and stored in a buffer. We are doing with the <code>grab</code> object is actually not communicating with the camera, but just accessing an already stored element in the computer. Pylon automatically sets up a buffer in which frames are received. And this is where things get interesting. Each buffer can be accessed through a <em>smart pointer</em> and Pylon takes care of reusing the buffer once it's no longer being accessed. With PyPylon, this flow becomes clearer with the following snippet:</p>
-<pre><code class="language-python">grab = camera.RetrieveResult(100, pylon.TimeoutHandling_Return)
+            print("Error: ", grabResult.GetErrorCode(), grabResult.GetErrorDescription())
+</code></pre><p>And we register it in the camera with the following:<pre><code class=language-python>camera.RegisterImageEventHandler(ImageEventPrinter(), pylon.RegistrationMode_Append, pylon.Cleanup_Delete)
+</code></pre><p>Since we have access to the data itself, we can use callbacks to save every image to the hard drive, or do some analysis, compression, etc. It is important to note that while we can trigger actions when an image is acquired or skipped, the methods have access to the camera. This is very useful if, for example, we are controlling more than one camera because we may need to know which one triggered the callback. It is also possible to think about other possibilities. We could stop acquiring images after one has been skipped. We could change the exposure time if too many pixels are dark, or if the camera is saturating, etc.<p>The advantage of callbacks, as presented by Pylon, is that we can achieve complex functionality with very little overhead and boilerplate code. If we would like to perform pattern recognition on every image, we can create a handler that takes care of it.<h2>Understanding the work of buffers</h2><p>We have used the <code>InstantCamera</code> without digging into what happens with the camera and the computer. Working with buffers may give us the best overview of the data flow between the camera and our program. So far, we have always dealt with data coming from the camera using the method <code>RetrieveResult</code> and its resulting <code>grab</code> object. We should look a bit more into the details to understand memory allocation and how to make the best out of the camera.<p>Basler's manual divides the process of acquiring an image into three steps: <em>image acquisition</em> which happens in the camera when the sensor gets exposed, and each pixel is read. <em>Data transfer</em>, when the computer receives the collected information. Finally, <em>image grabbing</em> when our application accesses the underlying data. Setting up the image acquisition was what we did at the beginning of the tutorial, for example, when we changed the exposure time. There's little control over the data transfer since this is what Pylon takes care to do as efficiently as possible. But we do have control over what happens when we <em>grab</em> the images.<p>Each image is transferred from the camera to the computer and stored in a buffer. We are doing with the <code>grab</code> object is actually not communicating with the camera, but just accessing an already stored element in the computer. Pylon automatically sets up a buffer in which frames are received. And this is where things get interesting. Each buffer can be accessed through a <em>smart pointer</em> and Pylon takes care of reusing the buffer once it's no longer being accessed. With PyPylon, this flow becomes clearer with the following snippet:<pre><code class=language-python>grab = camera.RetrieveResult(100, pylon.TimeoutHandling_Return)
 if grab and grab.GrabSucceeded():
     img = grab.GetArray()
     grab.Release()
-</code></pre>
-<p>Note that we have added the <code>grab.Release()</code> line to let Pylon know that particular buffer can be reused. Pylon automatically creates a ring buffer in which it stores the images. We must clear it periodically by retrieving the grab results and releasing them. Bear in mind that the behavior of the buffer depends on the acquisition strategy we select. We can choose <em>one by one</em>, which respects the arrival order. We could also select <em>latest images only</em> if we care about always getting the more recent picture, even if we sacrifice timing accuracy. </p>
-<p>In any case, there is always a chance that our program runs slower than the pace at which we generate images, and being able to control the size of the buffer is important. We can achieve this by using <code>MaxNumBuffer</code>:</p>
-<pre><code class="language-python">camera.MaxNumBuffer = 20
-</code></pre>
-<p>By default, Pylon creates 10 buffers, which may not be enough if we have cameras able to go as fast a 1000 frames per second. Each buffer's size is equal to the size of an image. When using the entire sensor of a camera, it may be impossible to hold 1000 frames in memory. Still, when using a cropped region of the sensor, it can be feasible. </p>
-<p>I, personally, like allocating buffers not by numbers but by the total memory they would take. This gives me reasonable control when I switch from computers with enough RAM to lower-spec hardware such as a Raspberry Pi. </p>
-<p>It is important to note that the <code>InstantCamera</code> objects create two queues. One is a queue of buffers that the low-level API can use to store data. The other is a queue of the data waiting to be read. Each time a new grab element is available, the <code>RetrieveResult</code> thread gets notified, and the loop keeps going. Releasing the grab results is important, or we risk running out of available buffers where Pylon can store the incoming frames. </p>
-<h2>Moving Further</h2>
-<p>Basler cameras offer many more possibilities than the ones covered in this tutorial. For example, we haven't discussed triggers, which can be both software or hardware-based. Many models have input-output pins that can be used in combination with other electronics to better control the acquisition cycle. And we haven't covered advanced topics, such as working with multiple cameras, receiving events, or the access to <em>chunk features</em>. </p>
-<p>All these topics are covered in detail in the documentation that can be accessed from the Pylon viewer's help menu. Once the essential topics are understood, it is easier to start implementing other features. </p>
-<h2>Conclusions</h2>
-<p>Basler did a great job by open-sourcing its wrapper for Python. I've seen swift replies on <a href="https://github.com/basler/pypylon">the repository</a> where the code is hosted. I have been using PyPylon for some years already. It is nice to see a company that invests time and effort in adding Python support to its hardware. It takes a while to grasp the flow behind Pylon to build efficient solutions, but overall it is a very well-designed tool. It clearly shows that it was thought through and polished over the years. </p>
-<p>In my opinion, the jewel of the crown is the PylonViewer. Having a program that exposes all the parameters of the hardware as well as their documentation is priceless. Leveraging the viewer to understand the effect the parameters have, their limits, etc., was a significant game-changer for me. Instead of starting from the manual seeking out terms, I always start with the viewer and only go to the manual if I have doubts or need extra contextual information. </p>
-            </main>
-            <div class="info-list">
-              <span class="item author">Article written by Aquiles Carattino</span>
-            </div>
-            <div class="bottom-section">
-              <h4>Share your thoughts with us!</h4>
-              <div class="comments">
-                <!-- Comment -->
-                <script src="https://utteranc.es/client.js"
-                        repo="PFTL/pftl_discussions"
-                        issue-term="pathname"
-                        label="Comment"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-              </div>
-            </div>
-          </div>
-          <div class="rightside">
-            <div class="support-box">
-              <h3>Support Us</h3>
-              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
-                Lab</strong></p>
-              <a href="https://pythonforthelab.com/books" class="button">Check out the book</a>
-            </div>
-            <div class="latest-posts">
-
-                <h3>Latest Articles</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
-                      <span>by Aquiles Carattino, 2021-03-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
-                      <span>by Aquiles Carattino, 2021-03-21</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
-                      <span>by Aquiles Carattino, 2021-02-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
-                      <span>by Aquiles Carattino, 2021-01-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
-                      <span>by Aquiles Carattino, 2020-06-13</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
-                      <span>by Aquiles Carattino, 2020-05-25</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
-                      <span>by Aquiles Carattino, 2020-05-18</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
-                      <span>by Aquiles Carattino, 2020-05-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tips-using-sets">Python Tips: Using Sets</a>
-                      <span>by Aquiles Carattino, 2020-05-11</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
-                      <span>by Aquiles Carattino, 2020-04-10</span>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="subscribe-fixed">
-              <button class="action">Never Stop Learning</button>
-              <div class="cnt">
-                <p>Join over 1000 Python developers and don't miss any updates!</p>
-                <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mobile-sb-form">
-          <div class="sb-form">
-            <h4>Get all the information directly to your inbox</h4>
-            <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- End Main -->
-
-  </section>
-  <!-- End Wrapper -->
-
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="https://pythonforthelab.com/cookie-policy">Cookie Policy</a>
-        <a href="https://pythonforthelab.com/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Footer --><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
-<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-<script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
-</script></body>
-</html>
+</code></pre><p>Note that we have added the <code>grab.Release()</code> line to let Pylon know that particular buffer can be reused. Pylon automatically creates a ring buffer in which it stores the images. We must clear it periodically by retrieving the grab results and releasing them. Bear in mind that the behavior of the buffer depends on the acquisition strategy we select. We can choose <em>one by one</em>, which respects the arrival order. We could also select <em>latest images only</em> if we care about always getting the more recent picture, even if we sacrifice timing accuracy.<p>In any case, there is always a chance that our program runs slower than the pace at which we generate images, and being able to control the size of the buffer is important. We can achieve this by using <code>MaxNumBuffer</code>:<pre><code class=language-python>camera.MaxNumBuffer = 20
+</code></pre><p>By default, Pylon creates 10 buffers, which may not be enough if we have cameras able to go as fast a 1000 frames per second. Each buffer's size is equal to the size of an image. When using the entire sensor of a camera, it may be impossible to hold 1000 frames in memory. Still, when using a cropped region of the sensor, it can be feasible.<p>I, personally, like allocating buffers not by numbers but by the total memory they would take. This gives me reasonable control when I switch from computers with enough RAM to lower-spec hardware such as a Raspberry Pi.<p>It is important to note that the <code>InstantCamera</code> objects create two queues. One is a queue of buffers that the low-level API can use to store data. The other is a queue of the data waiting to be read. Each time a new grab element is available, the <code>RetrieveResult</code> thread gets notified, and the loop keeps going. Releasing the grab results is important, or we risk running out of available buffers where Pylon can store the incoming frames.<h2>Moving Further</h2><p>Basler cameras offer many more possibilities than the ones covered in this tutorial. For example, we haven't discussed triggers, which can be both software or hardware-based. Many models have input-output pins that can be used in combination with other electronics to better control the acquisition cycle. And we haven't covered advanced topics, such as working with multiple cameras, receiving events, or the access to <em>chunk features</em>.<p>All these topics are covered in detail in the documentation that can be accessed from the Pylon viewer's help menu. Once the essential topics are understood, it is easier to start implementing other features.<h2>Conclusions</h2><p>Basler did a great job by open-sourcing its wrapper for Python. I've seen swift replies on <a href=https://github.com/basler/pypylon>the repository</a> where the code is hosted. I have been using PyPylon for some years already. It is nice to see a company that invests time and effort in adding Python support to its hardware. It takes a while to grasp the flow behind Pylon to build efficient solutions, but overall it is a very well-designed tool. It clearly shows that it was thought through and polished over the years.<p>In my opinion, the jewel of the crown is the PylonViewer. Having a program that exposes all the parameters of the hardware as well as their documentation is priceless. Leveraging the viewer to understand the effect the parameters have, their limits, etc., was a significant game-changer for me. Instead of starting from the manual seeking out terms, I always start with the viewer and only go to the manual if I have doubts or need extra contextual information.</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>

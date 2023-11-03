@@ -1,383 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Mutable and Immutable Objects | Python For The Lab</title>
-
-  <meta name="tags" content="Data, Types, Mutable, Immutable, Objects, ">
-  <meta name="description" content="Understanding the differences in data types to make better programs">
-  <meta name="author" content="Aquiles Carattino">
-
-  <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet">
-
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/style.css">
-  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
-
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
-</head>
-
-
-
-<body>
-  <!-- Wrapper -->
-  <section class="wrapper">
-
-<!-- Intro -->
-<div class="intro blog article">
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <a href="/" class="logo">Python for the Lab</a>
-      <div class="header-dd">
-        <div class="navigation">
-          <ul>
-            <li class="active"><a href="https://pythonforthelab.com/blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="https://pythonforthelab.com/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
-                   class="nav-item forum"><span>Forum</span></a></li>
-            <li><a href="https://pythonforthelab.com/books" class="nav-item books"><span>Books</span></a></li>
-            <li><a href="https://pythonforthelab.com/about" class="nav-item about"><span>About</span></a></li>
-          </ul>
-        </div>
-        <div class="search field-wp">
-          <form action="#">
-            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
-            <input type="submit" class="search-btn">
-          </form>
-          <div data-stork="sitesearch-output"></div>
-        </div>
-      </div>
-      <button class="menu-btn"><span>Menu</span></button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Intro Cnt -->
-    <div class="intro-cnt v-article">
-      <div class="side-text">
-      </div>
-      <div class="side-form small-sb-form">
-        <div class="sb-form" id="mc_embed_signup">
-          <h4>Get all the information directly to your inbox</h4>
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-              target="_self"
-              novalidate="">
-            <div class="field-wp" id="mc_embed_signup_scroll">
-              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
-                     value="">
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk form bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
-                   id="mc-embedded-subscribe">
-            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Intro Cnt -->
-
-  </div>
-</div>
-<!-- End Intro -->
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-
-        <div class="article-cnt">
-          <div class="leftside">
-            <div class="article-image">
-              <img src="https://pythonforthelab.com//images/rawpixel-274862-unsplash_linkedin.width-800.jpg" alt="" width="800">
-            </div>
-            <h1>Mutable and Immutable Objects</h1>
-            <h3>Understanding the differences in data types to make better programs</h3>
-            <div class="info">
-              <span class="item-1 author">by Aquiles Carattino</span>
-              <span class="item-1 date">2018-08-23</span>
-                <span class="item-tag first">Data</span>
-                <span class="item-tag ">Types</span>
-                <span class="item-tag ">Mutable</span>
-                <span class="item-tag ">Immutable</span>
-                <span class="item-tag ">Objects</span>
-            </div>
-            <main>
-              <p>People who start programming in Python quickly stumble upon the
-existence of lists and tuples. They are defined in a similar way, they
-look the same. Sometimes they are even used interchangeably. The obvious
-question is, therefore, why do you have two different types of elements
-for the same goal? The answer lays in understanding the differences
-between <strong>mutable</strong> and <strong>immutable</strong> data types in Python.</p>
-<p>Even after programming Python applications for a while, being conscious
-about choosing lists or tuples is hard, and sometimes the implications
-give rise to obscure bugs, very hard to find and correct. In this
-article, we are going to discuss about the differences between lists and
-tuples, or more generally about mutable and immutable data types and how
-they can be used in your programs.</p>
-<p>As always, <a href="https://github.com/PFTL/website/tree/master/example_code/17_mutable_immutable">example
-code</a>
-is available and the <a href="https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst.md">source
-code</a>
-for this page also.</p>
-<h2>Lists and Tuples</h2>
-<p>In Python, when you want to define a list, you can simply do the
-following:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [1, 2, 3]
-</code></pre>
-<p>And you can address its elements by the position:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1[0]
+<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Mutable and Immutable Objects | Python For The Lab</title><meta content="Data, Types, Mutable, Immutable, Objects, " name=tags><meta content="Understanding the differences in data types to make better programs" name=description><meta content="Aquiles Carattino" name=author><link href=blog/mutable-and-immutable-objects rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/mutable-and-immutable-objects property=og:url><meta content="Mutable and Immutable Objects" property=og:title><meta content="Understanding the differences in data types to make better programs" property=og:description><meta content=/images/rawpixel-274862-unsplash_linkedin.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/mutable-and-immutable-objects property=twitter:url><meta content="Mutable and Immutable Objects" property=twitter:title><meta content="Understanding the differences in data types to make better programs" property=twitter:description><meta content=/images/rawpixel-274862-unsplash_linkedin.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/rawpixel-274862-unsplash_linkedin.width-800.jpg width=800></div><h1>Mutable and Immutable Objects</h1><h3>Understanding the differences in data types to make better programs</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2018-08-23</span><span class="item-tag first">Data</span><span class=item-tag>Types</span><span class=item-tag>Mutable</span><span class=item-tag>Immutable</span><span class=item-tag>Objects</span></div><main><p>People who start programming in Python quickly stumble upon the existence of lists and tuples. They are defined in a similar way, they look the same. Sometimes they are even used interchangeably. The obvious question is, therefore, why do you have two different types of elements for the same goal? The answer lays in understanding the differences between <strong>mutable</strong> and <strong>immutable</strong> data types in Python.<p>Even after programming Python applications for a while, being conscious about choosing lists or tuples is hard, and sometimes the implications give rise to obscure bugs, very hard to find and correct. In this article, we are going to discuss about the differences between lists and tuples, or more generally about mutable and immutable data types and how they can be used in your programs.<h2>Lists and Tuples</h2><p>In Python, when you want to define a list, you can simply do the following:<pre><code class=language-pycon>>>> var1 = [1, 2, 3]
+</code></pre><p>And you can address its elements by the position:<pre><code class=language-pycon>>>> var1[0]
 1
-&gt;&gt;&gt; var[1]
+>>> var[1]
 2
-</code></pre>
-<p>If you want to replace the value of an element, you can do the
-following:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1[0] = 0
-&gt;&gt;&gt; var1[0]
+</code></pre><p>If you want to replace the value of an element, you can do the following:<pre><code class=language-pycon>>>> var1[0] = 0
+>>> var1[0]
 0
-</code></pre>
-<p>You can do the same with a tuple, which uses <code>()</code> instead of <code>[]</code> in its
-definition:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var2 = (1, 2, 3)
-&gt;&gt;&gt; var2[0]
+</code></pre><p>You can do the same with a tuple, which uses <code>()</code> instead of <code>[]</code> in its definition:<pre><code class=language-pycon>>>> var2 = (1, 2, 3)
+>>> var2[0]
 1
-</code></pre>
-<p>However, if you try to change the value of an element you will get an
-error:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var2[0] = 0
+</code></pre><p>However, if you try to change the value of an element you will get an error:<pre><code class=language-pycon>>>> var2[0] = 0
 Traceback (most recent call last):
-  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File "&LTstdin>", line 1, in &LTmodule>
 TypeError: 'tuple' object does not support item assignment
-</code></pre>
-<p>This is the first, crucial difference between a list and a tuple. Once
-defined, tuples cannot change their values. So, when would you use one
-or the other depends on the application. The main difference between
-them is that tuples are very fast when you need to access their values,
-but lists are much more memory efficient if you would like to expand
-them.</p>
-<p>When you have a variable that cannot be changed after it has been
-created it is called <strong>immutable</strong>, while in the opposite case, that
-variable is called <strong>mutable</strong>. Let's explore what that means.</p>
-<h2>Mutable and Immutable Data Types</h2>
-<p>There is an <a href="https://standupdev.com/wiki/doku.php?id=python_tuples_are_immutable_but_may_change">excellent article written by Luciano
-Ramalho</a>
-in which he explains how to understand variables in Python. I am not
-going to copy his article, but I think it is a great inspiration on how
-to explain things. What he suggests is to think about labels and not
-about boxes when referring to variables. A variable is a label that we
-assign to an object, it is the way we, as humans, have to identify it.
-However, what is important about the underlying object is its value and
-its type.</p>
-<p>A great tool in Python to understand this concept is the <code>id</code> function.
-We can apply it to any variable and it will return its identity. If we
-want to be sure about dealing with the same object, we can check whether
-the value returned by <code>id</code> is the same. It is possible to think about
-the integer that is being returned as the address in memory that is
-assigned to the object. So, for example, we can do the following:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [1, 2, 3]
-&gt;&gt;&gt; var2 = (1, 2, 3)
-&gt;&gt;&gt; id(var1)
+</code></pre><p>This is the first, crucial difference between a list and a tuple. Once defined, tuples cannot change their values. So, when would you use one or the other depends on the application. The main difference between them is that tuples are very fast when you need to access their values, but lists are much more memory efficient if you would like to expand them.<p>When you have a variable that cannot be changed after it has been created it is called <strong>immutable</strong>, while in the opposite case, that variable is called <strong>mutable</strong>. Let's explore what that means.<h2>Mutable and Immutable Data Types</h2><p>There is an <a href=https://standupdev.com/wiki/doku.php?id=python_tuples_are_immutable_but_may_change>excellent article written by Luciano Ramalho</a> in which he explains how to understand variables in Python. I am not going to copy his article, but I think it is a great inspiration on how to explain things. What he suggests is to think about labels and not about boxes when referring to variables. A variable is a label that we assign to an object, it is the way we, as humans, have to identify it. However, what is important about the underlying object is its value and its type.<p>A great tool in Python to understand this concept is the <code>id</code> function. We can apply it to any variable and it will return its identity. If we want to be sure about dealing with the same object, we can check whether the value returned by <code>id</code> is the same. It is possible to think about the integer that is being returned as the address in memory that is assigned to the object. So, for example, we can do the following:<pre><code class=language-pycon>>>> var1 = [1, 2, 3]
+>>> var2 = (1, 2, 3)
+>>> id(var1)
 44045192
-&gt;&gt;&gt; id(var2)
+>>> id(var2)
 43989032
-</code></pre>
-<p>It is easy to see that both variables have different identities. Now we
-can expand both the list and the tuple with some new values and check
-whether their identities are the same:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 += [4, 5]
-&gt;&gt;&gt; var2 += (4, 5)
-&gt;&gt;&gt; print(var1)
+</code></pre><p>It is easy to see that both variables have different identities. Now we can expand both the list and the tuple with some new values and check whether their identities are the same:<pre><code class=language-pycon>>>> var1 += [4, 5]
+>>> var2 += (4, 5)
+>>> print(var1)
 [1, 2, 3, 4, 5]
-&gt;&gt;&gt; print(var2)
+>>> print(var2)
 (1, 2, 3, 4, 5)
-&gt;&gt;&gt; id(var1)
+>>> id(var1)
 44045192
-&gt;&gt;&gt; id(var2)
+>>> id(var2)
 30323024
-</code></pre>
-<p>What you see in the code above is that we have appended the same values
-to both the list (<code>var1</code>) and the tuple (<code>var2</code>). If we ask for the id
-of them, you will notice that <code>var1</code> has the same identity as before,
-while <code>var2</code> has a new identity. This means that we have expanded the
-list, but created a completely new tuple. This is why memory management
-is more efficient for lists than for tuples.</p>
-<p>Tuples are not the only immutable data type in Python, but they are a
-great tool to learn because they can be directly compared to lists,
-which are mutable. Other immutable data types are:</p>
-<ol>
-<li>int</li>
-<li>float</li>
-<li>decimal</li>
-<li>complex</li>
-<li>bool</li>
-<li>string</li>
-<li>tuple</li>
-<li>range</li>
-<li>frozenset</li>
-<li>bytes</li>
-</ol>
-<p>Most likely you haven't thought about it before, but when you assign an
-integer, float, etc. to a variable, it can't be replaced. So for
-example, you will get an output like this if you check the identity of
-an integer assigned to a variable:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = 1
-&gt;&gt;&gt; id(var1)
+</code></pre><p>What you see in the code above is that we have appended the same values to both the list (<code>var1</code>) and the tuple (<code>var2</code>). If we ask for the id of them, you will notice that <code>var1</code> has the same identity as before, while <code>var2</code> has a new identity. This means that we have expanded the list, but created a completely new tuple. This is why memory management is more efficient for lists than for tuples.<p>Tuples are not the only immutable data type in Python, but they are a great tool to learn because they can be directly compared to lists, which are mutable. Other immutable data types are:<ol><li>int<li>float<li>decimal<li>complex<li>bool<li>string<li>tuple<li>range<li>frozenset<li>bytes</ol><p>Most likely you haven't thought about it before, but when you assign an integer, float, etc. to a variable, it can't be replaced. So for example, you will get an output like this if you check the identity of an integer assigned to a variable:<pre><code class=language-pycon>>>> var1 = 1
+>>> id(var1)
 1644063776
-&gt;&gt;&gt; var1 += 1
-&gt;&gt;&gt; id(var1)
+>>> var1 += 1
+>>> id(var1)
 1644063808
-</code></pre>
-<p>You see that a completely new <code>var1</code> is created when you add a value to
-itself, therefore its identity changes. The same would happen with all
-the other data types listed above. <strong>Mutable</strong> objects, on the other
-hand, are the following:</p>
-<ol>
-<li>list</li>
-<li>dictionary</li>
-<li>set</li>
-<li>bytearray</li>
-<li>user defined classes</li>
-</ol>
-<p>Those are the kind of objects that can be changed in-place, without
-creating a new one to store the updated values. An interesting case
-happens when you give two names to the same variable, for example:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [0, 1, 2]
-&gt;&gt;&gt; var2 = var1
-&gt;&gt;&gt; id(var1)
+</code></pre><p>You see that a completely new <code>var1</code> is created when you add a value to itself, therefore its identity changes. The same would happen with all the other data types listed above. <strong>Mutable</strong> objects, on the other hand, are the following:<ol><li>list<li>dictionary<li>set<li>bytearray<li>user defined classes</ol><p>Those are the kind of objects that can be changed in-place, without creating a new one to store the updated values. An interesting case happens when you give two names to the same variable, for example:<pre><code class=language-pycon>>>> var1 = [0, 1, 2]
+>>> var2 = var1
+>>> id(var1)
 44372872
-&gt;&gt;&gt; id(var2)
+>>> id(var2)
 44372872
-</code></pre>
-<p>Both <code>var1</code> and <code>var2</code> have the same identity, this means that they are
-labels to the same object. You can check it by using <code>is</code>:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 is var2
+</code></pre><p>Both <code>var1</code> and <code>var2</code> have the same identity, this means that they are labels to the same object. You can check it by using <code>is</code>:<pre><code class=language-pycon>>>> var1 is var2
 True
-</code></pre>
-<p>And if you update one of the values of <code>var1</code>:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 += [3, 4, 5]
-&gt;&gt;&gt; print(var2)
+</code></pre><p>And if you update one of the values of <code>var1</code>:<pre><code class=language-pycon>>>> var1 += [3, 4, 5]
+>>> print(var2)
 [0, 1, 2, 3, 4, 5]
-&gt;&gt;&gt; var1 is var2
+>>> var1 is var2
 True
-</code></pre>
-<p>You see that you updated the value of <code>var1</code> and the value of <code>var2</code>
-also changed. This happens only with mutable types. With immutable
-objects, since a new object is created in order to update a value, then
-each name will be pointing to a different object. For example, with
-strings:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = 'abc'
-&gt;&gt;&gt; var2 = var1
-&gt;&gt;&gt; var1 is var2
+</code></pre><p>You see that you updated the value of <code>var1</code> and the value of <code>var2</code> also changed. This happens only with mutable types. With immutable objects, since a new object is created in order to update a value, then each name will be pointing to a different object. For example, with strings:<pre><code class=language-pycon>>>> var1 = 'abc'
+>>> var2 = var1
+>>> var1 is var2
 True
-&gt;&gt;&gt; var1 += 'def'
-&gt;&gt;&gt; var1 is var2
+>>> var1 += 'def'
+>>> var1 is var2
 False
-</code></pre>
-<p>Sometimes you would like to compare whether two variables have the same
-values, and not if they point to the same object. For this, you can use
-the <code>==</code> operator. Let's define two lists (or two tuples) with the same
-values:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [1, 2, 3]
-&gt;&gt;&gt; var2 = [1, 2, 3]
-</code></pre>
-<p>If you check whether <code>var1</code> and <code>var2</code> are the same object, you will get
-a negative answer:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 is var2
+</code></pre><p>Sometimes you would like to compare whether two variables have the same values, and not if they point to the same object. For this, you can use the <code>==</code> operator. Let's define two lists (or two tuples) with the same values:<pre><code class=language-pycon>>>> var1 = [1, 2, 3]
+>>> var2 = [1, 2, 3]
+</code></pre><p>If you check whether <code>var1</code> and <code>var2</code> are the same object, you will get a negative answer:<pre><code class=language-pycon>>>> var1 is var2
 False
-</code></pre>
-<p>Which is logical, because they have the same values, but they are two
-distinct objects. If you want to compare their values instead, you can
-do the following:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 == var2
+</code></pre><p>Which is logical, because they have the same values, but they are two distinct objects. If you want to compare their values instead, you can do the following:<pre><code class=language-pycon>>>> var1 == var2
 True
-</code></pre>
-<p>An interesting thing happens when you use the so-called singletons.
-Let's quickly see an example:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; a = 1
-&gt;&gt;&gt; b = 1
-&gt;&gt;&gt; a is 1
+</code></pre><p>An interesting thing happens when you use the so-called singletons. Let's quickly see an example:<pre><code class=language-pycon>>>> a = 1
+>>> b = 1
+>>> a is 1
 True
-&gt;&gt;&gt; a is b
+>>> a is b
 True
-&gt;&gt;&gt; a == b
+>>> a == b
 True
-</code></pre>
-<p>Here, it is clear that any variable pointing to the same number will be
-exactly the same object. The same happens for booleans, <code>None</code>, etc. You
-can do things like:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; a = True
-&gt;&gt;&gt; a is True
+</code></pre><p>Here, it is clear that any variable pointing to the same number will be exactly the same object. The same happens for booleans, <code>None</code>, etc. You can do things like:<pre><code class=language-pycon>>>> a = True
+>>> a is True
 True
-&gt;&gt;&gt; b = None
-&gt;&gt;&gt; b is None
+>>> b = None
+>>> b is None
 True
-&gt;&gt;&gt; b == None
+>>> b == None
 True
-</code></pre>
-<p>Using <code>is</code> instead of <code>==</code> has different advantages. The first is speed.
-You can run the following in your command line:</p>
-<pre><code class="language-bash">python -m timeit &quot;1 == 1&quot;
-</code></pre>
-<p>And then:</p>
-<pre><code class="language-bash">python -m timeit &quot;1 is 1&quot;
-</code></pre>
-<p>In my case, I got that the first expression took on average 0.0207
-microseconds to run, while the second took 0.0171 microseconds. Speed is
-an obvious factor. The other is that when working with custom classes,
-you can specify what happens when you compare them to other objects.
-This is a very silly example but would prove the point:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>Using <code>is</code> instead of <code>==</code> has different advantages. The first is speed. You can run the following in your command line:<pre><code class=language-bash>python -m timeit "1 == 1"
+</code></pre><p>And then:<pre><code class=language-bash>python -m timeit "1 is 1"
+</code></pre><p>In my case, I got that the first expression took on average 0.0207 microseconds to run, while the second took 0.0171 microseconds. Speed is an obvious factor. The other is that when working with custom classes, you can specify what happens when you compare them to other objects. This is a very silly example but would prove the point:<pre><code class=language-python>class MyClass:
     def __eq__(self, other):
         return True
 
@@ -388,151 +90,59 @@ if my_obj == None:
 
 if my_obj is None:
     print('My Object is None')
-</code></pre>
-<p>If you run the code above, the output would me <code>My Object == None</code>.
-Better be safe than sorry, and being aware of what the <code>==</code> operator
-means and when to use it or when to use <code>is</code> can be very important.</p>
-<h2>Mutable Objects in Functions</h2>
-<p>We have just seen that if you have two mutable objects with the same id
-it means that they are the same object. If you change one, you will
-change the other. This also applies when working with functions that
-take mutable objects as arguments. Imagine that you develop a function
-that takes as input a list, divides all of its arguments by 2 and then
-returns the average. The function would look like this:</p>
-<pre><code class="language-python">def divide_and_average(var):
+</code></pre><p>If you run the code above, the output would me <code>My Object == None</code>. Better be safe than sorry, and being aware of what the <code>==</code> operator means and when to use it or when to use <code>is</code> can be very important.<h2>Mutable Objects in Functions</h2><p>We have just seen that if you have two mutable objects with the same id it means that they are the same object. If you change one, you will change the other. This also applies when working with functions that take mutable objects as arguments. Imagine that you develop a function that takes as input a list, divides all of its arguments by 2 and then returns the average. The function would look like this:<pre><code class=language-python>def divide_and_average(var):
     for i in range(len(var)):
         var[i] /= 2
     avg = sum(var)/len(var)
     return avg
-</code></pre>
-<p>It is very interesting to see what happens when you use this function:</p>
-<pre><code class="language-python">my_list = [1, 2, 3]
+</code></pre><p>It is very interesting to see what happens when you use this function:<pre><code class=language-python>my_list = [1, 2, 3]
 print(divide_and_average(my_list))
 print(my_list)
-</code></pre>
-<p>The output will be:</p>
-<pre><code class="language-bash">1.0
+</code></pre><p>The output will be:<pre><code class=language-bash>1.0
 [0.5, 1.0, 1.5]
-</code></pre>
-<p>When you execute the function, you are actually changing the values of
-the variable <code>my_list</code>. This is very powerful because it allows you to
-change the elements of a list <em>in-place</em> while you are returning a
-different element. Sometimes, however, you don't want to do this and
-want to preserve the value of the original list. It may seem like a good
-idea to create a new variable within the function and use that instead.
-For example:</p>
-<pre><code class="language-python">def divide_and_average(var1):
+</code></pre><p>When you execute the function, you are actually changing the values of the variable <code>my_list</code>. This is very powerful because it allows you to change the elements of a list <em>in-place</em> while you are returning a different element. Sometimes, however, you don't want to do this and want to preserve the value of the original list. It may seem like a good idea to create a new variable within the function and use that instead. For example:<pre><code class=language-python>def divide_and_average(var1):
     var = var1
     [...]
-</code></pre>
-<p>However, you will see that this doesn't change the output. As we saw
-earlier, the identity of <code>var</code> and of <code>var1</code> would be the same. You can
-make a copy of your object using the <code>copy</code> module:</p>
-<pre><code class="language-python">import copy
+</code></pre><p>However, you will see that this doesn't change the output. As we saw earlier, the identity of <code>var</code> and of <code>var1</code> would be the same. You can make a copy of your object using the <code>copy</code> module:<pre><code class=language-python>import copy
 
 def divide_and_average(var1):
     var = copy.copy(var1)
 [...]
-</code></pre>
-<p>And now you will see that the original <code>my_list</code> variable is not
-altered. What we have just done is called a <em>shallow copy</em> of an object.
-It is also possible to perform a <em>deep</em> copy, but its implications are
-left for a different article.</p>
-<h2>Default Arguments in Functions</h2>
-<p>A common practice when you are defining a function is to assign default
-values to its arguments. On the one hand, this allows you to include new
-parameters without changing the downstream code, but it also allows you
-to call the function with fewer arguments and thus making it easier to
-use. Let's see, for example, a function that increases the value of the
-elements of a list. The code would look like:</p>
-<pre><code class="language-python">def increase_values(var1=[1, 1], value=0):
+</code></pre><p>And now you will see that the original <code>my_list</code> variable is not altered. What we have just done is called a <em>shallow copy</em> of an object. It is also possible to perform a <em>deep</em> copy, but its implications are left for a different article.<h2>Default Arguments in Functions</h2><p>A common practice when you are defining a function is to assign default values to its arguments. On the one hand, this allows you to include new parameters without changing the downstream code, but it also allows you to call the function with fewer arguments and thus making it easier to use. Let's see, for example, a function that increases the value of the elements of a list. The code would look like:<pre><code class=language-python>def increase_values(var1=[1, 1], value=0):
     value += 1
     var1[0] += value
     var1[1] += value
     return var1
-</code></pre>
-<p>If you call this function without arguments, it will use the default
-value <code>[1, 1]</code> for the list and the default increase value of <code>0</code>. What
-happens if you use this function twice, without any arguments?</p>
-<pre><code class="language-python">print(increase_values())
+</code></pre><p>If you call this function without arguments, it will use the default value <code>[1, 1]</code> for the list and the default increase value of <code>0</code>. What happens if you use this function twice, without any arguments?<pre><code class=language-python>print(increase_values())
 print(increase_values())
-</code></pre>
-<p>The first time it will print <code>[2, 2]</code> as expected, but the second time
-it is going to print <code>[3, 3]</code>. Where you actually expecting this
-outcome? This basically means that the default argument of the function
-is changing every time we run it. When we run the script, Python
-evaluates the function definition only once and creates the default list
-and the default value. Because lists are mutable, every time you call
-the function you will be changing its own values for all the successive
-calls. However, the <code>value</code> is immutable, and therefore it will be
-preserved over time.</p>
-<p>The next logical question is how can you prevent this from happening.
-And the short answer is to use immutable types as default arguments for
-functions. You could have used <code>None</code>, for instance:</p>
-<pre><code class="language-python">def increase_values(var1=None, value=0):
+</code></pre><p>The first time it will print <code>[2, 2]</code> as expected, but the second time it is going to print <code>[3, 3]</code>. Where you actually expecting this outcome? This basically means that the default argument of the function is changing every time we run it. When we run the script, Python evaluates the function definition only once and creates the default list and the default value. Because lists are mutable, every time you call the function you will be changing its own values for all the successive calls. However, the <code>value</code> is immutable, and therefore it will be preserved over time.<p>The next logical question is how can you prevent this from happening. And the short answer is to use immutable types as default arguments for functions. You could have used <code>None</code>, for instance:<pre><code class=language-python>def increase_values(var1=None, value=0):
     if var1 is None:
         var1 = [1, 1]
     ...
-</code></pre>
-<p>Of course, the decision is always yours. Perhaps you would like to
-update the default value from one call to another. Imagine the case
-where you would like to perform a computationally expensive calculation,
-but you don't want to run twice the function with the same input and use
-a cache of values instead. You could do the following:</p>
-<pre><code class="language-python">def calculate(var1, var2, cache={}):
+</code></pre><p>Of course, the decision is always yours. Perhaps you would like to update the default value from one call to another. Imagine the case where you would like to perform a computationally expensive calculation, but you don't want to run twice the function with the same input and use a cache of values instead. You could do the following:<pre><code class=language-python>def calculate(var1, var2, cache={}):
     try:
         value = cache[var1, var2]
     except KeyError:
         value = expensive_computation(var1, var2)
         cache[var1, var2] = value
     return value
-</code></pre>
-<p>When we run <code>calculate</code> for the first time, there will be nothing stored
-in the <code>cache</code> dictionary, but if we execute the function more than
-once, <code>cache</code> will start changing, appending the new values to it. If we
-run calculate again with the same arguments, they are going to be
-present and their known value will be returned. Notice that we are
-leveraging the <a href="https://pythonforthelab.com/blog/learning-not-to-handle-exceptions">exception
-handling</a> in order to avoid
-checking explicitly whether the combination of values already exists in
-memory.</p>
-<h2>Your Own Immutable Objects</h2>
-<p>Python is very flexible and it gives you a lot of control over how to
-customize its behavior. As you can see from the list at the beginning of
-this article, custom created classes belong to the mutable types. But
-what happens if you want to define your own immutable objects? The
-answer is to modify how the class behaves when assigning attributes.
-This means reimplementing the <code>__setattr__</code> method.</p>
-<pre><code class="language-python">class MyImmutable:
+</code></pre><p>When we run <code>calculate</code> for the first time, there will be nothing stored in the <code>cache</code> dictionary, but if we execute the function more than once, <code>cache</code> will start changing, appending the new values to it. If we run calculate again with the same arguments, they are going to be present and their known value will be returned. Notice that we are leveraging the <a href=https://pythonforthelab.com/blog/learning-not-to-handle-exceptions>exception handling</a> in order to avoid checking explicitly whether the combination of values already exists in memory.<h2>Your Own Immutable Objects</h2><p>Python is very flexible and it gives you a lot of control over how to customize its behavior. As you can see from the list at the beginning of this article, custom created classes belong to the mutable types. But what happens if you want to define your own immutable objects? The answer is to modify how the class behaves when assigning attributes. This means reimplementing the <code>__setattr__</code> method.<pre><code class=language-python>class MyImmutable:
     def __setattr__(self, key, value):
         raise TypeError('MyImmutable cannot be modified after instantiation')
-</code></pre>
-<p>If you instantiate the class and try to assign a value to an attribute
-of it, an error will appear:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_immutable = MyImmutable()
-&gt;&gt;&gt; my_immutable.var1 = 2
+</code></pre><p>If you instantiate the class and try to assign a value to an attribute of it, an error will appear:<pre><code class=language-pycon>>>> my_immutable = MyImmutable()
+>>> my_immutable.var1 = 2
 Traceback (most recent call last):
-  File &quot;.\AE_custom_objects.py&quot;, line 14, in &lt;module&gt;
+  File ".\AE_custom_objects.py", line 14, in &LTmodule>
     my_immutable.var1 = 2
-  File &quot;.\AE_custom_objects.py&quot;, line 7, in __setattr__
+  File ".\AE_custom_objects.py", line 7, in __setattr__
     raise TypeError('MyImmutable cannot be modified after instantiation')
 TypeError: MyImmutable cannot be modified after instantiation
-</code></pre>
-<p>Great, you have an object that you can't modify after instantiation. But
-that also means there is no much you can do with it. Imagine you would
-like to store some initial values if you create a standard <code>__init__</code>
-method, it will fail:</p>
-<pre><code class="language-python">class MyImmutable:
+</code></pre><p>Great, you have an object that you can't modify after instantiation. But that also means there is no much you can do with it. Imagine you would like to store some initial values if you create a standard <code>__init__</code> method, it will fail:<pre><code class=language-python>class MyImmutable:
     def __init__(self, var1, var2):
         self.var1 = var1
         self.var2 = var2
     [...]
-</code></pre>
-<p>As soon as you try to instantiate this class, the <code>TypeError</code> will be
-raised. Even within the class itself, assigning values to attributes is
-achieved through the <code>__setattr__</code> method. To bypass it, you need to use
-the <code>super()</code> object:</p>
-<pre><code class="language-python">class MyImmutable:
+</code></pre><p>As soon as you try to instantiate this class, the <code>TypeError</code> will be raised. Even within the class itself, assigning values to attributes is achieved through the <code>__setattr__</code> method. To bypass it, you need to use the <code>super()</code> object:<pre><code class=language-python>class MyImmutable:
     def __init__(self, var1, var2):
         super().__setattr__('var1', var1)
         super().__setattr__('var2', var2)
@@ -542,233 +152,10 @@ the <code>super()</code> object:</p>
 
     def __str__(self):
         return 'MyImmutable var1: {}, var2: {}'.format(self.var1, self.var2)
-</code></pre>
-<p>Which now you can use as follows:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_immutable = MyImmutable(1, 2)
-&gt;&gt;&gt; print(my_immutable)
+</code></pre><p>Which now you can use as follows:<pre><code class=language-pycon>>>> my_immutable = MyImmutable(1, 2)
+>>> print(my_immutable)
 MyImmutable var1: 1, var2: 2
-&gt;&gt;&gt; my_immutable.var1 = 2
+>>> my_immutable.var1 = 2
 [...]
 TypeError: MyImmutable cannot be modified after instantiation
-</code></pre>
-<p>It is a bit of a workaround, but maybe you can find a use for this kind
-of pattern.</p>
-<h2>Conclusions</h2>
-<p>Understanding the differences between mutable and immutable types in
-Python does not arise as an important topic until it is too late. In
-most cases, you can develop complex applications exchanging tuples for
-lists, or you may even be altering the value of a variable inside a
-function without realizing it and without great consequences. But it
-will eventually happen that you find a bug very hard to track down that
-may be related to the use (or misuse) of mutable types.</p>
-<p>As a personal note, I found out such a bug performing a complex
-experiment with a microscope. I wanted to be able to refocus
-automatically on certain bright spots after an image was acquired. The
-first time the algorithm was working fine. The second time it was pretty
-much OK, but the third and onwards was not even close to reaching the
-desired values. The root of the problem was defining the initial range
-that the microscope would scan as a list, which was being divided by a
-factor after every iteration.</p>
-<p>Some of the patterns you find in this article, probably are not going to
-be of any use. However, it is important to keep in the back of your mind
-that <code>==</code> can give very unexpected results, that variables can change in
-unexpected ways if you are not careful. When projects start to grow,
-small mistakes can pile up to disastrous problems.</p>
-<p>As always, <a href="https://github.com/PFTL/website/tree/master/example_code/17_mutable_immutable">example
-code</a>
-is available and the <a href="https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst.md">source
-code</a>
-for this page also.</p>
-<p>If you want to keep learning, you can read more about
-why tuples may seem to change &lt;{filename}18_mutable_tuples.rst&gt;_
-and what happens when you use <a href="https://pythonforthelab.com/blog/mutable-and-immutable-attributes-of-classes">mutable or immutable variables as class
-attributes</a>.</p>
-<p>Header Photo by
-<a href="https://unsplash.com/photos/EF8Jr-uPS2Y?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">rawpixel</a>
-on Unsplash</p>
-            </main>
-            <div class="info-list">
-              <span class="item author">Article written by Aquiles Carattino</span>
-            </div>
-              <div class="similar-posts">
-                <h3>Related Articles:</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/mutable-and-immutable-attributes-of-classes" class="item">
-                        <img src="/images/dan-gold-382057-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2018-08-24</span>
-                        <span class="name">Mutable and Immutable Attributes of Classes</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/mutable-or-immutable-tuples" class="item">
-                        <img src="/images/michal-pechardo-502908-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2018-08-24</span>
-                        <span class="name">Mutable or Immutable Tuples</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/deep-and-shallow-copies-of-objects" class="item">
-                        <img src="/images/rebecca-georgia-269933-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2019-02-04</span>
-                        <span class="name">Deep and Shallow Copies of Objects</span>
-                      </a>
-                    </li>
-                </ul>
-              </div>
-            <div class="bottom-section">
-              <h4>Share your thoughts with us!</h4>
-              <div class="comments">
-                <!-- Comment -->
-                <script src="https://utteranc.es/client.js"
-                        repo="PFTL/pftl_discussions"
-                        issue-term="pathname"
-                        label="Comment"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-              </div>
-            </div>
-          </div>
-          <div class="rightside">
-            <div class="support-box">
-              <h3>Support Us</h3>
-              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
-                Lab</strong></p>
-              <a href="https://pythonforthelab.com/books" class="button">Check out the book</a>
-            </div>
-            <div class="latest-posts">
-
-                <h3>Latest Articles</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
-                      <span>by Aquiles Carattino, 2021-03-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
-                      <span>by Aquiles Carattino, 2021-03-21</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
-                      <span>by Aquiles Carattino, 2021-02-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
-                      <span>by Aquiles Carattino, 2021-01-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
-                      <span>by Aquiles Carattino, 2020-06-13</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
-                      <span>by Aquiles Carattino, 2020-05-25</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
-                      <span>by Aquiles Carattino, 2020-05-18</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
-                      <span>by Aquiles Carattino, 2020-05-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tips-using-sets">Python Tips: Using Sets</a>
-                      <span>by Aquiles Carattino, 2020-05-11</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
-                      <span>by Aquiles Carattino, 2020-04-10</span>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="subscribe-fixed">
-              <button class="action">Never Stop Learning</button>
-              <div class="cnt">
-                <p>Join over 1000 Python developers and don't miss any updates!</p>
-                <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mobile-sb-form">
-          <div class="sb-form">
-            <h4>Get all the information directly to your inbox</h4>
-            <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- End Main -->
-
-  </section>
-  <!-- End Wrapper -->
-
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="https://pythonforthelab.com/cookie-policy">Cookie Policy</a>
-        <a href="https://pythonforthelab.com/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Footer --><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
-<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-<script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
-</script></body>
-</html>
+</code></pre><p>It is a bit of a workaround, but maybe you can find a use for this kind of pattern.<h2>Conclusions</h2><p>Understanding the differences between mutable and immutable types in Python does not arise as an important topic until it is too late. In most cases, you can develop complex applications exchanging tuples for lists, or you may even be altering the value of a variable inside a function without realizing it and without great consequences. But it will eventually happen that you find a bug very hard to track down that may be related to the use (or misuse) of mutable types.<p>As a personal note, I found out such a bug performing a complex experiment with a microscope. I wanted to be able to refocus automatically on certain bright spots after an image was acquired. The first time the algorithm was working fine. The second time it was pretty much OK, but the third and onwards was not even close to reaching the desired values. The root of the problem was defining the initial range that the microscope would scan as a list, which was being divided by a factor after every iteration.<p>Some of the patterns you find in this article, probably are not going to be of any use. However, it is important to keep in the back of your mind that <code>==</code> can give very unexpected results, that variables can change in unexpected ways if you are not careful. When projects start to grow, small mistakes can pile up to disastrous problems.<p>If you want to keep learning, you can read more about why tuples may seem to change <{filename}18_mutable_tuples.rst>_ and what happens when you use <a href=https://pythonforthelab.com/blog/mutable-and-immutable-attributes-of-classes>mutable or immutable variables as class attributes</a>.<p>Header Photo by <a href=https://unsplash.com/photos/EF8Jr-uPS2Y?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText>rawpixel</a> on Unsplash</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/mutable-and-immutable-attributes-of-classes> <img alt src=/images/dan-gold-382057-unsplash_linkedin.width-800.jpg> <span class=date>2018-08-24</span> <span class=name>Mutable and Immutable Attributes of Classes</span> </a><li><a class=item href=https://pythonforthelab.com/blog/mutable-or-immutable-tuples> <img alt src=/images/michal-pechardo-502908-unsplash_linkedin.width-800.jpg> <span class=date>2018-08-24</span> <span class=name>Mutable or Immutable Tuples</span> </a><li><a class=item href=https://pythonforthelab.com/blog/deep-and-shallow-copies-of-objects> <img alt src=/images/rebecca-georgia-269933-unsplash_linkedin.width-800.jpg> <span class=date>2019-02-04</span> <span class=name>Deep and Shallow Copies of Objects</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>

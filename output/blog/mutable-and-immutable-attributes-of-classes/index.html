@@ -1,168 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Mutable and Immutable Attributes of Classes | Python For The Lab</title>
-
-  <meta name="tags" content="Data, Types, Mutable, Immutable, Tuples, ">
-  <meta name="description" content="Understanding how tuples which are immutable, may seem to change.">
-  <meta name="author" content="Aquiles Carattino">
-
-  <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet">
-
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/style.css">
-  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
-
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
-</head>
-
-
-
-<body>
-  <!-- Wrapper -->
-  <section class="wrapper">
-
-<!-- Intro -->
-<div class="intro blog article">
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <a href="/" class="logo">Python for the Lab</a>
-      <div class="header-dd">
-        <div class="navigation">
-          <ul>
-            <li class="active"><a href="https://pythonforthelab.com/blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="https://pythonforthelab.com/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
-                   class="nav-item forum"><span>Forum</span></a></li>
-            <li><a href="https://pythonforthelab.com/books" class="nav-item books"><span>Books</span></a></li>
-            <li><a href="https://pythonforthelab.com/about" class="nav-item about"><span>About</span></a></li>
-          </ul>
-        </div>
-        <div class="search field-wp">
-          <form action="#">
-            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
-            <input type="submit" class="search-btn">
-          </form>
-          <div data-stork="sitesearch-output"></div>
-        </div>
-      </div>
-      <button class="menu-btn"><span>Menu</span></button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Intro Cnt -->
-    <div class="intro-cnt v-article">
-      <div class="side-text">
-      </div>
-      <div class="side-form small-sb-form">
-        <div class="sb-form" id="mc_embed_signup">
-          <h4>Get all the information directly to your inbox</h4>
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-              target="_self"
-              novalidate="">
-            <div class="field-wp" id="mc_embed_signup_scroll">
-              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
-                     value="">
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk form bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
-                   id="mc-embedded-subscribe">
-            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Intro Cnt -->
-
-  </div>
-</div>
-<!-- End Intro -->
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-
-        <div class="article-cnt">
-          <div class="leftside">
-            <div class="article-image">
-              <img src="https://pythonforthelab.com//images/dan-gold-382057-unsplash_linkedin.width-800.jpg" alt="" width="800">
-            </div>
-            <h1>Mutable and Immutable Attributes of Classes</h1>
-            <h3>Understanding how tuples which are immutable, may seem to change.</h3>
-            <div class="info">
-              <span class="item-1 author">by Aquiles Carattino</span>
-              <span class="item-1 date">2018-08-24</span>
-                <span class="item-tag first">Data</span>
-                <span class="item-tag ">Types</span>
-                <span class="item-tag ">Mutable</span>
-                <span class="item-tag ">Immutable</span>
-                <span class="item-tag ">Tuples</span>
-            </div>
-            <main>
-              <p>We have seen how to leverage the differences between <a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects">mutable and
-immutable objects</a> and what
-happens when you use mutable types as default function arguments.
-However, we haven't discussed what happens when you use mutable types as
-default attributes of classes.</p>
-<p>Default values for attributes can be defined in different ways in your
-classes. Let's start by looking at what happens if you define them in
-the <code>__init__</code> method. Let's start with a simple class that takes one
-list as the argument when instantiating:</p>
-<pre><code class="language-python">class MyClass:
+<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Mutable and Immutable Attributes of Classes | Python For The Lab</title><meta content="Data, Types, Mutable, Immutable, Tuples, " name=tags><meta content="Understanding how tuples which are immutable, may seem to change." name=description><meta content="Aquiles Carattino" name=author><link href=blog/mutable-and-immutable-attributes-of-classes rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/mutable-and-immutable-attributes-of-classes property=og:url><meta content="Mutable and Immutable Attributes of Classes" property=og:title><meta content="Understanding how tuples which are immutable, may seem to change." property=og:description><meta content=/images/dan-gold-382057-unsplash_linkedin.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/mutable-and-immutable-attributes-of-classes property=twitter:url><meta content="Mutable and Immutable Attributes of Classes" property=twitter:title><meta content="Understanding how tuples which are immutable, may seem to change." property=twitter:description><meta content=/images/dan-gold-382057-unsplash_linkedin.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/dan-gold-382057-unsplash_linkedin.width-800.jpg width=800></div><h1>Mutable and Immutable Attributes of Classes</h1><h3>Understanding how tuples which are immutable, may seem to change.</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2018-08-24</span><span class="item-tag first">Data</span><span class=item-tag>Types</span><span class=item-tag>Mutable</span><span class=item-tag>Immutable</span><span class=item-tag>Tuples</span></div><main><p>We have seen how to leverage the differences between <a href=https://pythonforthelab.com/blog/mutable-and-immutable-objects>mutable and immutable objects</a> and what happens when you use mutable types as default function arguments. However, we haven't discussed what happens when you use mutable types as default attributes of classes.<p>Default values for attributes can be defined in different ways in your classes. Let's start by looking at what happens if you define them in the <code>__init__</code> method. Let's start with a simple class that takes one list as the argument when instantiating:<pre><code class=language-python>class MyClass:
     def __init__(self, var=[]):
         self.var = var
 
@@ -171,66 +7,32 @@ list as the argument when instantiating:</p>
 
     def __str__(self):
         return str(self.var)
-</code></pre>
-<p>This is a very simple example that already will show a very peculiar
-behavior. The <code>__init__</code> takes one list as the argument, and if it is
-not provided it will use an empty list as default. We have also added a
-method for appending values to the list. The <code>__str__</code> method was
-defined for convenience to explore the contents of the <code>var</code> attribute.
-We can instantiate the class and use it as always:</p>
-<pre><code class="language-python">my_class = MyClass()
+</code></pre><p>This is a very simple example that already will show a very peculiar behavior. The <code>__init__</code> takes one list as the argument, and if it is not provided it will use an empty list as default. We have also added a method for appending values to the list. The <code>__str__</code> method was defined for convenience to explore the contents of the <code>var</code> attribute. We can instantiate the class and use it as always:<pre><code class=language-python>my_class = MyClass()
 print(my_class)
 # []
 my_class.append(1)
 print(my_class)
 # [1]
-</code></pre>
-<p>So far so good, but let's see what happens when we instantiate the
-second class:</p>
-<pre><code class="language-python">my_class_2 = MyClass()
+</code></pre><p>So far so good, but let's see what happens when we instantiate the second class:<pre><code class=language-python>my_class_2 = MyClass()
 print(my_class_2)
 # [1]
-</code></pre>
-<p>The second time you instantiate a class, it will use a different default
-value! It is actually using the updated value from the first instance.
-Moreover, if you change the value of the second instance, the value of
-the first instance will also change:</p>
-<pre><code class="language-python">my_class_2.append(2)
+</code></pre><p>The second time you instantiate a class, it will use a different default value! It is actually using the updated value from the first instance. Moreover, if you change the value of the second instance, the value of the first instance will also change:<pre><code class=language-python>my_class_2.append(2)
 print(my_class)
 # [1, 2]
-</code></pre>
-<p>Whatever changes you do to the attribute <code>var</code> of one of the objects,
-will be reflected into the other. Both attributes are actually the same
-object, as you can verify by looking at their ids:</p>
-<pre><code class="language-python">print(id(my_class.var))
+</code></pre><p>Whatever changes you do to the attribute <code>var</code> of one of the objects, will be reflected into the other. Both attributes are actually the same object, as you can verify by looking at their ids:<pre><code class=language-python>print(id(my_class.var))
 # 140228152031752
 print(id(my_class_2.var))
 # 140228152031752
-</code></pre>
-<p>But the two instances are different</p>
-<pre><code class="language-python">print(id(my_class))
+</code></pre><p>But the two instances are different<pre><code class=language-python>print(id(my_class))
 # 140228175513360
 print(id(my_class_2))
 # 140228175513304
-</code></pre>
-<p>The same pattern that appeared while using mutable variables as defaults
-with functions will appear when using mutable default arguments of
-methods in custom classes. If you want to avoid this from happening, you
-can always check what <a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects">we have done when working with
-functions</a>.</p>
-<p>Of course, the same pattern will appear if you use a mutable variable
-defined outside of the class, for example:</p>
-<pre><code class="language-python">my_list = [1, 2, 3]
+</code></pre><p>The same pattern that appeared while using mutable variables as defaults with functions will appear when using mutable default arguments of methods in custom classes. If you want to avoid this from happening, you can always check what <a href=https://pythonforthelab.com/blog/mutable-and-immutable-objects>we have done when working with functions</a>.<p>Of course, the same pattern will appear if you use a mutable variable defined outside of the class, for example:<pre><code class=language-python>my_list = [1, 2, 3]
 my_class = MyClass(my_list)
 my_class.append(4)
 print(my_list)
 # [1, 2, 3, 4]
-</code></pre>
-<p>Classes provide another pattern which is the use of <strong>class attributes</strong>
-instead of <strong>instance attributes</strong>. Class attributes are those values
-that are defined directly in the class, outside of any methods. Let's
-update our example to use a class attribute called <code>var</code>:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>Classes provide another pattern which is the use of <strong>class attributes</strong> instead of <strong>instance attributes</strong>. Class attributes are those values that are defined directly in the class, outside of any methods. Let's update our example to use a class attribute called <code>var</code>:<pre><code class=language-python>class MyClass:
     var = []
 
     def append(self, value):
@@ -238,42 +40,24 @@ update our example to use a class attribute called <code>var</code>:</p>
 
     def __str__(self):
         return str(self.var)
-</code></pre>
-<p>And we use it as before:</p>
-<pre><code class="language-python">my_class = MyClass()
+</code></pre><p>And we use it as before:<pre><code class=language-python>my_class = MyClass()
 my_class.append(1)
 print(my_class)
 # [1]
-</code></pre>
-<p>If we instantiate the class again, we will have the same as before:</p>
-<pre><code class="language-python">my_class_2 = MyClass()
+</code></pre><p>If we instantiate the class again, we will have the same as before:<pre><code class=language-python>my_class_2 = MyClass()
 print(my_class_2)
 # [1]
-</code></pre>
-<p>The main difference with what we have done before is that we can address
-directly the <code>var</code> attribute of the class:</p>
-<pre><code class="language-python">MyClass.var.append(2)
+</code></pre><p>The main difference with what we have done before is that we can address directly the <code>var</code> attribute of the class:<pre><code class=language-python>MyClass.var.append(2)
 print(my_class)
 # [1, 2]
 print(my_class_2)
 # [1, 2]
-</code></pre>
-<p>You can also address the attribute of an instance directly, without the
-need of the <code>append</code> method:</p>
-<pre><code class="language-python">my_class_2.var += [3]
+</code></pre><p>You can also address the attribute of an instance directly, without the need of the <code>append</code> method:<pre><code class=language-python>my_class_2.var += [3]
 print(my_class)
 # [1, 2, 3]
 print(my_class_2)
 # [1, 2, 3]
-</code></pre>
-<p>You can see in the examples above, is that the changes you apply to one
-of the attributes will be reflected in the attributes of all the other
-instances and even in the class itself. There is a big difference,
-however, between class attributes and default inputs in methods. Class
-attributes are shared between instances by default even if they are
-immutable. Let's see, for example, what happens if we use a <code>var</code> that
-is an integer, and therefore immutable:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>You can see in the examples above, is that the changes you apply to one of the attributes will be reflected in the attributes of all the other instances and even in the class itself. There is a big difference, however, between class attributes and default inputs in methods. Class attributes are shared between instances by default even if they are immutable. Let's see, for example, what happens if we use a <code>var</code> that is an integer, and therefore immutable:<pre><code class=language-python>class MyClass:
     var = 1
 
     def increase(self):
@@ -281,10 +65,7 @@ is an integer, and therefore immutable:</p>
 
     def __str__(self):
         return str(self.var)
-</code></pre>
-<p>Just as we have done before, we will instantiate twice the class and see
-what happens:</p>
-<pre><code class="language-python">my_class = MyClass()
+</code></pre><p>Just as we have done before, we will instantiate twice the class and see what happens:<pre><code class=language-python>my_class = MyClass()
 print(my_class)
 # 1
 my_class_2 = MyClass()
@@ -295,25 +76,14 @@ print(my_class)
 # 2
 print(my_class_2)
 # 1
-</code></pre>
-<p>What you see here is already a big difference. Both instances of
-<code>MyClass</code> have the same attribute <code>var</code>. However, when you increase the
-value in one of the instances this change is not propagated to the other
-instance nor to new instances of the class.</p>
-<p>This is very different from what you would see if you change the value
-of <code>var</code> in the class itself:</p>
-<pre><code class="language-python">my_class = MyClass()
+</code></pre><p>What you see here is already a big difference. Both instances of <code>MyClass</code> have the same attribute <code>var</code>. However, when you increase the value in one of the instances this change is not propagated to the other instance nor to new instances of the class.<p>This is very different from what you would see if you change the value of <code>var</code> in the class itself:<pre><code class=language-python>my_class = MyClass()
 my_class_2 = MyClass()
 MyClass.var += 1
 print(my_class)
 # 2
 print(my_class_2)
 # 2
-</code></pre>
-<p>You see that class attributes are still linked to the instances. It is
-very interesting to see the id of the <code>var</code> attribute before and after
-changing its value:</p>
-<pre><code class="language-python">my_class = MyClass()
+</code></pre><p>You see that class attributes are still linked to the instances. It is very interesting to see the id of the <code>var</code> attribute before and after changing its value:<pre><code class=language-python>my_class = MyClass()
 my_class_2 = MyClass()
 print(id(my_class_2.var))
 # 10935488
@@ -328,221 +98,11 @@ print(id(my_class.var))
 # 10935520
 print(id(MyClass.var))
 # 10935520
-</code></pre>
-<p>You see that all the attributes are the same object. When the value is
-replaced, since integers are immutable, a new object is created and is
-propagated to all the instances of the class. However, if you change the
-value of <code>var</code> in one of the instances, this will not hold anymore:</p>
-<pre><code class="language-python">my_class.var += 1
+</code></pre><p>You see that all the attributes are the same object. When the value is replaced, since integers are immutable, a new object is created and is propagated to all the instances of the class. However, if you change the value of <code>var</code> in one of the instances, this will not hold anymore:<pre><code class=language-python>my_class.var += 1
 print(id(my_class.var))
 # 10935552
 print(id(my_class_2.var))
 # 10935520
 print(id(MyClass.var))
 # 10935520
-</code></pre>
-<p>You can see that both the attributes in <code>MyClass</code> and in <code>my_class_2</code>
-are still the same object, while the identity of <code>var</code> in <code>my_class</code>
-changed. From now on, any changes that you do to <code>MyClass.var</code> are
-decoupled from the changes in <code>my_class</code>, but will still be reflected on
-<code>my_class_2</code>.</p>
-<p>Keeping in mind the differences between methods' default values and
-class attributes open a lot of possibilities when designing a program.
-The fact that you can alter all objects from within a specific instance
-can be of great use when properties change at runtime. Even if not an
-extremely common scenario for short-lived scripts, it is very common
-when dealing with user interaction on programs that run for hours or
-days.</p>
-<p>As always, <a href="https://github.com/PFTL/website/tree/master/example_code/21_Classes_Mutables">example code can be found
-here</a>
-and <a href="https://github.com/PFTL/website/blob/master/content/blog/21_Default_Attributes_Classes.rst.md">the source of this page
-here</a>.</p>
-<p>Header photo by <a href="https://unsplash.com/photos/mgaS4FlsYxQ?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Dan
-Gold</a>
-on Unsplash</p>
-            </main>
-            <div class="info-list">
-              <span class="item author">Article written by Aquiles Carattino</span>
-            </div>
-              <div class="similar-posts">
-                <h3>Related Articles:</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/mutable-or-immutable-tuples" class="item">
-                        <img src="/images/michal-pechardo-502908-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2018-08-24</span>
-                        <span class="name">Mutable or Immutable Tuples</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects" class="item">
-                        <img src="/images/rawpixel-274862-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2018-08-23</span>
-                        <span class="name">Mutable and Immutable Objects</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/deep-and-shallow-copies-of-objects" class="item">
-                        <img src="/images/rebecca-georgia-269933-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2019-02-04</span>
-                        <span class="name">Deep and Shallow Copies of Objects</span>
-                      </a>
-                    </li>
-                </ul>
-              </div>
-            <div class="bottom-section">
-              <h4>Share your thoughts with us!</h4>
-              <div class="comments">
-                <!-- Comment -->
-                <script src="https://utteranc.es/client.js"
-                        repo="PFTL/pftl_discussions"
-                        issue-term="pathname"
-                        label="Comment"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-              </div>
-            </div>
-          </div>
-          <div class="rightside">
-            <div class="support-box">
-              <h3>Support Us</h3>
-              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
-                Lab</strong></p>
-              <a href="https://pythonforthelab.com/books" class="button">Check out the book</a>
-            </div>
-            <div class="latest-posts">
-
-                <h3>Latest Articles</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
-                      <span>by Aquiles Carattino, 2021-03-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
-                      <span>by Aquiles Carattino, 2021-03-21</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
-                      <span>by Aquiles Carattino, 2021-02-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
-                      <span>by Aquiles Carattino, 2021-01-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
-                      <span>by Aquiles Carattino, 2020-06-13</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
-                      <span>by Aquiles Carattino, 2020-05-25</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
-                      <span>by Aquiles Carattino, 2020-05-18</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
-                      <span>by Aquiles Carattino, 2020-05-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tips-using-sets">Python Tips: Using Sets</a>
-                      <span>by Aquiles Carattino, 2020-05-11</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
-                      <span>by Aquiles Carattino, 2020-04-10</span>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="subscribe-fixed">
-              <button class="action">Never Stop Learning</button>
-              <div class="cnt">
-                <p>Join over 1000 Python developers and don't miss any updates!</p>
-                <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mobile-sb-form">
-          <div class="sb-form">
-            <h4>Get all the information directly to your inbox</h4>
-            <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- End Main -->
-
-  </section>
-  <!-- End Wrapper -->
-
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="https://pythonforthelab.com/cookie-policy">Cookie Policy</a>
-        <a href="https://pythonforthelab.com/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Footer --><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
-<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-<script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
-</script></body>
-</html>
+</code></pre><p>You can see that both the attributes in <code>MyClass</code> and in <code>my_class_2</code> are still the same object, while the identity of <code>var</code> in <code>my_class</code> changed. From now on, any changes that you do to <code>MyClass.var</code> are decoupled from the changes in <code>my_class</code>, but will still be reflected on <code>my_class_2</code>.<p>Keeping in mind the differences between methods' default values and class attributes open a lot of possibilities when designing a program. The fact that you can alter all objects from within a specific instance can be of great use when properties change at runtime. Even if not an extremely common scenario for short-lived scripts, it is very common when dealing with user interaction on programs that run for hours or days.<p>Header photo by <a href=https://unsplash.com/photos/mgaS4FlsYxQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText>Dan Gold</a> on Unsplash</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/mutable-or-immutable-tuples> <img alt src=/images/michal-pechardo-502908-unsplash_linkedin.width-800.jpg> <span class=date>2018-08-24</span> <span class=name>Mutable or Immutable Tuples</span> </a><li><a class=item href=https://pythonforthelab.com/blog/mutable-and-immutable-objects> <img alt src=/images/rawpixel-274862-unsplash_linkedin.width-800.jpg> <span class=date>2018-08-23</span> <span class=name>Mutable and Immutable Objects</span> </a><li><a class=item href=https://pythonforthelab.com/blog/deep-and-shallow-copies-of-objects> <img alt src=/images/rebecca-georgia-269933-unsplash_linkedin.width-800.jpg> <span class=date>2019-02-04</span> <span class=name>Deep and Shallow Copies of Objects</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>

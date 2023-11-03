@@ -15,7 +15,7 @@ title = "Privacy Policy"
 [[input.files]]
 path = "blog/instructions-to-build-the-python-for-the-lab-daq//index.html"
 url = "/blog/instructions-to-build-the-python-for-the-lab-daq/"
-title = "Instructions to build the Python for the Lab DAQ"
+title = "Instructions to build the Python for the Lab DAQ."
 
 [[input.files]]
 path = "blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed/index.html"

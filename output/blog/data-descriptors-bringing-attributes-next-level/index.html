@@ -1,183 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Data Descriptors: Bringing Attributes to the Next level | Python For The Lab</title>
-
-  <meta name="tags" content="data, decorator, pattern, description, property, ">
-  <meta name="description" content="Deep dive into how properties work, to learn how we can develop our own solution">
-  <meta name="author" content="Aquiles Carattino">
-
-  <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet">
-
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/style.css">
-  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
-
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
-</head>
-
-
-
-<body>
-  <!-- Wrapper -->
-  <section class="wrapper">
-
-<!-- Intro -->
-<div class="intro blog article">
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <a href="/" class="logo">Python for the Lab</a>
-      <div class="header-dd">
-        <div class="navigation">
-          <ul>
-            <li class="active"><a href="https://pythonforthelab.com/blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="https://pythonforthelab.com/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
-                   class="nav-item forum"><span>Forum</span></a></li>
-            <li><a href="https://pythonforthelab.com/books" class="nav-item books"><span>Books</span></a></li>
-            <li><a href="https://pythonforthelab.com/about" class="nav-item about"><span>About</span></a></li>
-          </ul>
-        </div>
-        <div class="search field-wp">
-          <form action="#">
-            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
-            <input type="submit" class="search-btn">
-          </form>
-          <div data-stork="sitesearch-output"></div>
-        </div>
-      </div>
-      <button class="menu-btn"><span>Menu</span></button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Intro Cnt -->
-    <div class="intro-cnt v-article">
-      <div class="side-text">
-      </div>
-      <div class="side-form small-sb-form">
-        <div class="sb-form" id="mc_embed_signup">
-          <h4>Get all the information directly to your inbox</h4>
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-              target="_self"
-              novalidate="">
-            <div class="field-wp" id="mc_embed_signup_scroll">
-              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
-                     value="">
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk form bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
-                   id="mc-embedded-subscribe">
-            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Intro Cnt -->
-
-  </div>
-</div>
-<!-- End Intro -->
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-
-        <div class="article-cnt">
-          <div class="leftside">
-            <div class="article-image">
-              <img src="https://pythonforthelab.com//images/42_decorators.width-800.png" alt="" width="800">
-            </div>
-            <h1>Data Descriptors: Bringing Attributes to the Next level</h1>
-            <h3>Deep dive into how properties work, to learn how we can develop our own solution</h3>
-            <div class="info">
-              <span class="item-1 author">by Aquiles Carattino</span>
-              <span class="item-1 date">2020-05-16</span>
-                <span class="item-tag first">data</span>
-                <span class="item-tag ">decorator</span>
-                <span class="item-tag ">pattern</span>
-                <span class="item-tag ">description</span>
-                <span class="item-tag ">property</span>
-            </div>
-            <main>
-              <p>Descriptors in Python allow us to control how attributes of classes are accessed or modified. A pattern often encountered is defining properties to use setter and getter methods encapsulated as if they were a single attribute. In this article, we will dig into how the property decorator works, to understand how to implement our solutions. </p>
-<p>The descriptor interface also allows attributes to access the class where they are defined. For example, this is useful in registering all the attributes of a specific type in the parent class. With this tool, we can have a clear interface to update all the settings of a class. We will cover not only how to define this type of attributes, but also how to deal with inheritance. </p>
-<h2>Properties are Descriptors</h2>
-<p>Once you fully embrace the object-oriented nature of Python, there is a high chance that you cross interesting tools, such as the @propery decorator. Let's quickly see an example of how it works and what it can do for us:</p>
-<pre><code class="language-python">class MyClass:
+<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Data Descriptors: Bringing Attributes to the Next level | Python For The Lab</title><meta content="data, decorator, pattern, description, property, " name=tags><meta content="Deep dive into how properties work, to learn how we can develop our own solution" name=description><meta content="Aquiles Carattino" name=author><link href=blog/data-descriptors-bringing-attributes-next-level rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/data-descriptors-bringing-attributes-next-level property=og:url><meta content="Data Descriptors: Bringing Attributes to the Next level" property=og:title><meta content="Deep dive into how properties work, to learn how we can develop our own solution" property=og:description><meta content=/images/42_decorators.width-800.png property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/data-descriptors-bringing-attributes-next-level property=twitter:url><meta content="Data Descriptors: Bringing Attributes to the Next level" property=twitter:title><meta content="Deep dive into how properties work, to learn how we can develop our own solution" property=twitter:description><meta content=/images/42_decorators.width-800.png property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/42_decorators.width-800.png width=800></div><h1>Data Descriptors: Bringing Attributes to the Next level</h1><h3>Deep dive into how properties work, to learn how we can develop our own solution</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2020-05-16</span><span class="item-tag first">data</span><span class=item-tag>decorator</span><span class=item-tag>pattern</span><span class=item-tag>description</span><span class=item-tag>property</span></div><main><p>Descriptors in Python allow us to control how attributes of classes are accessed or modified. A pattern often encountered is defining properties to use setter and getter methods encapsulated as if they were a single attribute. In this article, we will dig into how the property decorator works, to understand how to implement our solutions.<p>The descriptor interface also allows attributes to access the class where they are defined. For example, this is useful in registering all the attributes of a specific type in the parent class. With this tool, we can have a clear interface to update all the settings of a class. We will cover not only how to define this type of attributes, but also how to deal with inheritance.<h2>Properties are Descriptors</h2><p>Once you fully embrace the object-oriented nature of Python, there is a high chance that you cross interesting tools, such as the @propery decorator. Let's quickly see an example of how it works and what it can do for us:<pre><code class=language-python>class MyClass:
     _var = 0
 
     @property
     def var(self):
         print('Getting Var')
         return self._var
-</code></pre>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_class = MyClass()
-&gt;&gt;&gt; print(my_class.var)
+</code></pre><pre><code class=language-pycon>>>> my_class = MyClass()
+>>> print(my_class.var)
 Getting Var
 0
-</code></pre>
-<p>We can see that by using the <code>@property</code> decorator, we have changed the behavior of a method, <code>var</code> to look like an attribute of the class <code>MyClass</code>. We went one step further, and we added some extra functionality. Whenever we read the value of <code>var</code>, we print a line to the screen informing us about it. This pattern has exciting possibilities that we discuss in the rest of the article. </p>
-<p>As a side note, Python does not have <em>private</em> attributes. It means that whatever we define in a class can be accessed and modified from outside of it. Using the underscore for <code>_var</code> is just a way of signaling other developers that they should not change <code>_var</code> directly, but that it should be changed only within the class itself. IDE's such as PyCharm warn us if we ever try to alter one such variable, but there is nothing more that we can do. </p>
-<p>Before we move to more complicated topics, there is something worth mentioning. In the enthusiasm of learning a new topic, sometimes important considerations are overlooked. Whenever we encounter a code that looks like this:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_class.var
-</code></pre>
-<p>We expect execution to be close to instantaneous. If, for example, the method <code>var</code> includes connecting to a remote server and fetching information, the program's behavior would become tougher to anticipate. It is hard to draw a line between clarity and usefulness. Always keep in mind that there is nothing that descriptors can do that can't be achieved with plain methods. </p>
-<p>Getting a value is less than half what properties can do. The other half is setting a value. The syntax is  straightforward:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>We can see that by using the <code>@property</code> decorator, we have changed the behavior of a method, <code>var</code> to look like an attribute of the class <code>MyClass</code>. We went one step further, and we added some extra functionality. Whenever we read the value of <code>var</code>, we print a line to the screen informing us about it. This pattern has exciting possibilities that we discuss in the rest of the article.<p>As a side note, Python does not have <em>private</em> attributes. It means that whatever we define in a class can be accessed and modified from outside of it. Using the underscore for <code>_var</code> is just a way of signaling other developers that they should not change <code>_var</code> directly, but that it should be changed only within the class itself. IDE's such as PyCharm warn us if we ever try to alter one such variable, but there is nothing more that we can do.<p>Before we move to more complicated topics, there is something worth mentioning. In the enthusiasm of learning a new topic, sometimes important considerations are overlooked. Whenever we encounter a code that looks like this:<pre><code class=language-pycon>>>> my_class.var
+</code></pre><p>We expect execution to be close to instantaneous. If, for example, the method <code>var</code> includes connecting to a remote server and fetching information, the program's behavior would become tougher to anticipate. It is hard to draw a line between clarity and usefulness. Always keep in mind that there is nothing that descriptors can do that can't be achieved with plain methods.<p>Getting a value is less than half what properties can do. The other half is setting a value. The syntax is straightforward:<pre><code class=language-python>class MyClass:
     _var = 0
 
     @property
@@ -189,44 +22,31 @@ Getting Var
     def var(self, value):
         print('Setting var')
         self._var = value
-</code></pre>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_class = MyClass()
-&gt;&gt;&gt; print(my_class.var)
+</code></pre><pre><code class=language-pycon>>>> my_class = MyClass()
+>>> print(my_class.var)
 Getting var
 0
-&gt;&gt;&gt; my_class.var = 2
+>>> my_class.var = 2
 Setting var
-&gt;&gt;&gt; print(my_class.var)
+>>> print(my_class.var)
 Getting var
 2
-</code></pre>
-<p>When we used the decorator <code>@property</code>, it altered the method <code>var</code> in such a way that we could use itself as a decorator. A fair question at this stage is what do we gain by using properties instead of methods. In my opinion, it is only a matter of simplifying how the code looks at this stage. Compare this code:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_class.get_var()
+</code></pre><p>When we used the decorator <code>@property</code>, it altered the method <code>var</code> in such a way that we could use itself as a decorator. A fair question at this stage is what do we gain by using properties instead of methods. In my opinion, it is only a matter of simplifying how the code looks at this stage. Compare this code:<pre><code class=language-pycon>>>> my_class.get_var()
 0
-&gt;&gt;&gt; my_class.set_var(2)
-</code></pre>
-<p>to this one:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; print(my_class.var)
+>>> my_class.set_var(2)
+</code></pre><p>to this one:<pre><code class=language-pycon>>>> print(my_class.var)
 0
-&gt;&gt;&gt; my_class.var = 2
-</code></pre>
-<p>We could argue that the second is easier to read. Properties are convenient when we have many methods for getting and setting values because they can simplify the interface quite often. When we control devices, for example, and each setting has a different method for reading and changing its value. </p>
-<p>We can see an example of how to go one step further. We can use the pattern to verify that the value we assign to <code>var</code> is an integer:</p>
-<pre><code class="language-python">@var.setter
+>>> my_class.var = 2
+</code></pre><p>We could argue that the second is easier to read. Properties are convenient when we have many methods for getting and setting values because they can simplify the interface quite often. When we control devices, for example, and each setting has a different method for reading and changing its value.<p>We can see an example of how to go one step further. We can use the pattern to verify that the value we assign to <code>var</code> is an integer:<pre><code class=language-python>@var.setter
 def var(self, value):
     print('Setting var')
     if not isinstance(value, int):
         raise TypeError('Value must be integer')
     self._var = value
-</code></pre>
-<p>And we can test it:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_class.var = 2.0
+</code></pre><p>And we can test it:<pre><code class=language-pycon>>>> my_class.var = 2.0
 [...]
 TypeError: Value must be integer
-</code></pre>
-<h2>Develop your own Descriptors</h2>
-<p>Using <code>@property</code> can extend our options when planning classes in Python, but at some point, we need to go beyond the built-in tools. When we defined descriptors, we said that they are objects that define how they are <code>get</code> and <code>set</code> from the object that contains them. However, <code>var</code> does not implement anything like that. The real descriptor is <code>@property</code>. So, let's start by developing our object that can work similarly. </p>
-<pre><code class="language-python">class MyDescriptor:
+</code></pre><h2>Develop your own Descriptors</h2><p>Using <code>@property</code> can extend our options when planning classes in Python, but at some point, we need to go beyond the built-in tools. When we defined descriptors, we said that they are objects that define how they are <code>get</code> and <code>set</code> from the object that contains them. However, <code>var</code> does not implement anything like that. The real descriptor is <code>@property</code>. So, let's start by developing our object that can work similarly.<pre><code class=language-python>class MyDescriptor:
     _val = 0
 
     def __get__(self, instance, owner):
@@ -240,36 +60,27 @@ TypeError: Value must be integer
 
 class MyClass:
     var = MyDescriptor()
-</code></pre>
-<p><code>MyDescriptor</code> is a class that defines two methods: <code>__get__</code> and <code>__set__</code>. Perhaps you can already notice that the methods are very similar to how we defined <code>var</code> in the previous section. We can use the class like this:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_class = MyClass()
-&gt;&gt;&gt; my_class.var
+</code></pre><p><code>MyDescriptor</code> is a class that defines two methods: <code>__get__</code> and <code>__set__</code>. Perhaps you can already notice that the methods are very similar to how we defined <code>var</code> in the previous section. We can use the class like this:<pre><code class=language-pycon>>>> my_class = MyClass()
+>>> my_class.var
 Getting Descriptor
 0
-&gt;&gt;&gt; my_class.var = 2
+>>> my_class.var = 2
 Setting Value
-&gt;&gt;&gt; my_class.var
+>>> my_class.var
 Getting Descriptor
 2
-</code></pre>
-<p>We are not limited to having only one <code>MyDescriptor</code> in the class, we can define as many as we need:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>We are not limited to having only one <code>MyDescriptor</code> in the class, we can define as many as we need:<pre><code class=language-python>class MyClass:
     var = MyDescriptor()
     var1 = MyDescriptor()
     var2 = MyDescriptor()
-</code></pre>
-<p>In this way, we can define as many attributes as we want, all with the same behavior. Every time we read them, a message is printed; every time we set them, another message is printed. However useful, this is also pushing us away from how properties work. We are storing <code>_var</code> directly in the descriptor and not in the class itself. </p>
-<p>What we would like to achieve is the following behavior:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>In this way, we can define as many attributes as we want, all with the same behavior. Every time we read them, a message is printed; every time we set them, another message is printed. However useful, this is also pushing us away from how properties work. We are storing <code>_var</code> directly in the descriptor and not in the class itself.<p>What we would like to achieve is the following behavior:<pre><code class=language-python>class MyClass:
     _var = 0
 
     @MyDescriptor
     def var(self):
         print('Getting var')
         return self._var
-</code></pre>
-<p>We need to change <code>MyDescriptor</code> so we can use it as a decorator. We should also change its <code>__get__</code> method, so it uses the method defined in the class and not just a standard method defined in the descriptor. </p>
-<pre><code class="language-python">class MyDescriptor:
+</code></pre><p>We need to change <code>MyDescriptor</code> so we can use it as a decorator. We should also change its <code>__get__</code> method, so it uses the method defined in the class and not just a standard method defined in the descriptor.<pre><code class=language-python>class MyDescriptor:
     def __init__(self, fget):
         print('Instantiating descriptor')
         self.fget = fget
@@ -277,35 +88,25 @@ Getting Descriptor
     def __get__(self, instance, owner):
         print('Getting Descriptor')
         return self.fget(instance)
-</code></pre>
-<p>Notice that we have included an <code>__init__</code> method that takes one argument: fget. When we develop decorators, the method being decorated is the first argument. You can check <a href="https://www.pythonforthelab.com/blog/how-to-use-decorators-part-2/">our article on decorators</a> to learn more. We also had to adapt the <code>__get__</code> method to use the <code>fget</code> function. Notice that the first argument of <code>fget</code> should be <code>self</code>, and that is why we pass <code>instance</code> as the first argument. </p>
-<p>When we use it, we can have a clear look at the order in which things happen:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; from descriptors import *
+</code></pre><p>Notice that we have included an <code>__init__</code> method that takes one argument: fget. When we develop decorators, the method being decorated is the first argument. You can check <a href=https://www.pythonforthelab.com/blog/how-to-use-decorators-part-2/>our article on decorators</a> to learn more. We also had to adapt the <code>__get__</code> method to use the <code>fget</code> function. Notice that the first argument of <code>fget</code> should be <code>self</code>, and that is why we pass <code>instance</code> as the first argument.<p>When we use it, we can have a clear look at the order in which things happen:<pre><code class=language-pycon>>>> from descriptors import *
 Instantiating descriptor
-&gt;&gt;&gt; my_class = MyClass()
+>>> my_class = MyClass()
 print(my_class.var)
-&gt;&gt;&gt; my_class = MyClass()
-&gt;&gt;&gt; my_class.var
+>>> my_class = MyClass()
+>>> my_class.var
 Getting Descriptor
 Getting var
 0
-</code></pre>
-<p>The instantiation of the descriptor happens at import time. Whenever the python interpreter goes through those lines of code, even if we never instantiate the class, the Descriptor is instantiated. The rest of the code proceeds as usual, but note that we first get the descriptor, then we run the method for returning <code>var</code>. </p>
-<p>As we saw earlier, this is only half the problem. Once we know how to get a value, we should also see how to set it. Before we do anything, we can just try:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_class = MyClass()
-&gt;&gt;&gt; print(my_class.var)
+</code></pre><p>The instantiation of the descriptor happens at import time. Whenever the python interpreter goes through those lines of code, even if we never instantiate the class, the Descriptor is instantiated. The rest of the code proceeds as usual, but note that we first get the descriptor, then we run the method for returning <code>var</code>.<p>As we saw earlier, this is only half the problem. Once we know how to get a value, we should also see how to set it. Before we do anything, we can just try:<pre><code class=language-pycon>>>> my_class = MyClass()
+>>> print(my_class.var)
 Getting Descriptor
 0
-&gt;&gt;&gt; my_class.var = 2
-&gt;&gt;&gt; print(my_class.var)
+>>> my_class.var = 2
+>>> print(my_class.var)
 2
-</code></pre>
-<p>The first time we access <code>var</code>, we get the two lines printed on the screen, telling us that both the method and the descriptor worked as expected. However, after we set <code>var = 2</code>, they stop working. It is fascinating because what happened is that we overwrote the <code>var</code>, which is a descriptor, by a plain integer. To prevent this, we can add an explicit <code>__set__</code> method that raises an exception:</p>
-<pre><code class="language-python">def __set__(self, instance, value):
+</code></pre><p>The first time we access <code>var</code>, we get the two lines printed on the screen, telling us that both the method and the descriptor worked as expected. However, after we set <code>var = 2</code>, they stop working. It is fascinating because what happened is that we overwrote the <code>var</code>, which is a descriptor, by a plain integer. To prevent this, we can add an explicit <code>__set__</code> method that raises an exception:<pre><code class=language-python>def __set__(self, instance, value):
     raise Exception('This is a read-only descriptor')
-</code></pre>
-<p>And with this, the problem of overwriting <code>var</code> goes away. But, we are still far from done. What happens if we want to define a setter? Things slowly get more interesting. We would like to use the following syntax:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>And with this, the problem of overwriting <code>var</code> goes away. But, we are still far from done. What happens if we want to define a setter? Things slowly get more interesting. We would like to use the following syntax:<pre><code class=language-python>class MyClass:
     _var = 0
 
     @MyDescriptor
@@ -315,9 +116,7 @@ Getting Descriptor
     @var.setter
     def var(self, value):
         self._var = value
-</code></pre>
-<p>Right now, <code>var</code> is passed as the first argument of <code>MyDescriptor</code>. The only way in which <code>setter</code> can exist is if it is a method of <code>MyDescriptor</code>. Moreover, we should also store not only <code>fget</code> but also <code>fset</code> as attributes. We can start by improving the <code>__init__</code> and <code>__set__</code> methods:</p>
-<pre><code class="language-python">class MyDescriptor:
+</code></pre><p>Right now, <code>var</code> is passed as the first argument of <code>MyDescriptor</code>. The only way in which <code>setter</code> can exist is if it is a method of <code>MyDescriptor</code>. Moreover, we should also store not only <code>fget</code> but also <code>fset</code> as attributes. We can start by improving the <code>__init__</code> and <code>__set__</code> methods:<pre><code class=language-python>class MyDescriptor:
     def __init__(self, fget=None, fset=None):
         print('Instantiating descriptor')
         self.fget = fget
@@ -326,9 +125,7 @@ Getting Descriptor
     def __set__(self, instance, value):
         print('Setting Descriptor')
         self.fset(instance, value)
-</code></pre>
-<p>To quickly use the solution as is, we could define <code>var</code> with a more explicit syntax:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>To quickly use the solution as is, we could define <code>var</code> with a more explicit syntax:<pre><code class=language-python>class MyClass:
     _var = 0
 
     def get_var(self):
@@ -338,14 +135,9 @@ Getting Descriptor
         self._var = value
 
     var = MyDescriptor(get_var, set_var)
-</code></pre>
-<p>You can go ahead and test it to see that it works, even if it is not what we were after. By the way, the same syntax also works for <code>property</code>. The <code>setter</code> method looks a bit more magical, but if we break it in smaller parts we can understand it:</p>
-<pre><code class="language-python">    def setter(self, fset):
+</code></pre><p>You can go ahead and test it to see that it works, even if it is not what we were after. By the way, the same syntax also works for <code>property</code>. The <code>setter</code> method looks a bit more magical, but if we break it in smaller parts we can understand it:<pre><code class=language-python>    def setter(self, fset):
         return type(self)(self.fget, fset)
-</code></pre>
-<p><code>setter</code> takes one argument, <code>fset</code>, which is the decorated method. Now, we need to instantiate the <code>MyDecorator</code>, using the <code>fget</code> that we already know and passing the <code>fset</code>, which is new. Here is where the magic of <code>type(self)</code> comes into place. It returns the class to which the instance (<code>self</code>) belongs, and we can use it in the same way as we would use the <code>MyDecorator</code>. </p>
-<p>That was the only missing part; now we can use the full syntax:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p><code>setter</code> takes one argument, <code>fset</code>, which is the decorated method. Now, we need to instantiate the <code>MyDecorator</code>, using the <code>fget</code> that we already know and passing the <code>fset</code>, which is new. Here is where the magic of <code>type(self)</code> comes into place. It returns the class to which the instance (<code>self</code>) belongs, and we can use it in the same way as we would use the <code>MyDecorator</code>.<p>That was the only missing part; now we can use the full syntax:<pre><code class=language-python>class MyClass:
     _var = 0
 
     @MyDescriptor
@@ -361,10 +153,7 @@ my_class = MyClass()
 print(my_class.var)
 my_class.var = 2
 print(my_class.var)
-</code></pre>
-<p>Of course, there are a lot of different options that can be implemented. For example, we could raise an exception of <code>fset</code> does not exist, such as we did earlier. It would mean that <code>var</code> is "read-only". We could also define "set-only" properties, but there is something important to discuss before going forward. </p>
-<p>We are using <code>MyDescriptor</code> as a decorator, and we managed to use <code>setter</code> without too much effort. Note that we used the name <code>var</code> for both the get and set methods. It is because Python binds those names to the class. If we use a different name for the setter, for example:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>Of course, there are a lot of different options that can be implemented. For example, we could raise an exception of <code>fset</code> does not exist, such as we did earlier. It would mean that <code>var</code> is "read-only". We could also define "set-only" properties, but there is something important to discuss before going forward.<p>We are using <code>MyDescriptor</code> as a decorator, and we managed to use <code>setter</code> without too much effort. Note that we used the name <code>var</code> for both the get and set methods. It is because Python binds those names to the class. If we use a different name for the setter, for example:<pre><code class=language-python>class MyClass:
     _var = 0
 
     @MyDescriptor
@@ -374,17 +163,12 @@ print(my_class.var)
     @var.setter
     def var_setter(self, value):
         self._var = value
-</code></pre>
-<p>We would end up with two different attributes, <code>var</code> is read-only, and <code>var_setter</code> which can be read and set. However, the underlying value, <code>_var</code> is the same:</p>
-<pre><code class="language-python">my_class = MyClass()
+</code></pre><p>We would end up with two different attributes, <code>var</code> is read-only, and <code>var_setter</code> which can be read and set. However, the underlying value, <code>_var</code> is the same:<pre><code class=language-python>my_class = MyClass()
 print(my_class.var)
 my_class.var_setter = 2
 print(my_class.var_setter)
 print(my_class.var)
-</code></pre>
-<p>The last two lines would print the same value to the screen. Therefore, we must be careful because using different names is not wrong in itself. Still, it defeats the purpose of having a clear interface. Before we move on, there is something else that we can implement with what we already know. </p>
-<p>We could use <code>MyDescriptor</code> to specify some boundaries. If the value we try to set is beyond them, we raise an exception. We would like to be able to have a class that looks like this:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>The last two lines would print the same value to the screen. Therefore, we must be careful because using different names is not wrong in itself. Still, it defeats the purpose of having a clear interface. Before we move on, there is something else that we can implement with what we already know.<p>We could use <code>MyDescriptor</code> to specify some boundaries. If the value we try to set is beyond them, we raise an exception. We would like to be able to have a class that looks like this:<pre><code class=language-python>class MyClass:
     _var = 0
 
     @MyDescriptor(val_min=0, val_max=3)
@@ -394,9 +178,7 @@ print(my_class.var)
     @var.setter
     def var(self, value):
         self._var = value
-</code></pre>
-<p>To keep going, you must be familiar with decorators. If you are not, we recommend you to check <a href="https://www.pythonforthelab.com/blog/how-to-use-decorators-part-2/">this article</a>. Not that we instantiate <code>MyDescriptor</code> and then we use it as a decorator. The only way in which that can work is if we define the <code>__call__</code> method. We also need to change the <code>__init__</code>to accommodate for the limits. The full class would look like this:</p>
-<pre><code class="language-python">class MyDescriptor:
+</code></pre><p>To keep going, you must be familiar with decorators. If you are not, we recommend you to check <a href=https://www.pythonforthelab.com/blog/how-to-use-decorators-part-2/>this article</a>. Not that we instantiate <code>MyDescriptor</code> and then we use it as a decorator. The only way in which that can work is if we define the <code>__call__</code> method. We also need to change the <code>__init__</code>to accommodate for the limits. The full class would look like this:<pre><code class=language-python>class MyDescriptor:
     def __init__(self, fget=None, fset=None, val_min=None, val_max=None):
         print('Instantiating descriptor')
         self.val_min = val_min
@@ -413,49 +195,37 @@ print(my_class.var)
 
     def __set__(self, instance, value):
         print('Setting Descriptor')
-        if not self.val_min &lt;= value &lt;= self.val_max:
+        if not self.val_min <= value <= self.val_max:
             raise ValueError(f'Value must be between {self.val_min} and {self.val_max}')
         self.fset(instance, value)
 
     def setter(self, fset):
         return type(self)(self.fget, fset, self.val_min, self.val_max)
-</code></pre>
-<p>Most of the code is the same, but the flow is very different. The <code>__call__</code> method allows us to specify how a class can be used after it was instantiated. To understand it a bit better, let's simplify the code:</p>
-<pre><code class="language-python">class MyDescriptor:
+</code></pre><p>Most of the code is the same, but the flow is very different. The <code>__call__</code> method allows us to specify how a class can be used after it was instantiated. To understand it a bit better, let's simplify the code:<pre><code class=language-python>class MyDescriptor:
     def __init__(self, val):
         self.val = val
 
     def __call__(self):
         print(self.val)
-</code></pre>
-<p>And we can use it like this:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_descriptor = MyDescriptor(1)
-&gt;&gt;&gt; my_descriptor()
+</code></pre><p>And we can use it like this:<pre><code class=language-pycon>>>> my_descriptor = MyDescriptor(1)
+>>> my_descriptor()
 1
-</code></pre>
-<p>With the example above, we can see that <code>__call__</code> is the method that allows us to use <code>MyDescriptor</code> as a decorator, even after we have instantiated it. The pattern is the same we used for the <code>setter</code> method. We just assume that the argument that follows is the <em>getter</em> method. </p>
-<p>Back to the full example, the decorator will take care of checking if the value is between the specified range:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_class = MyClass()
-&gt;&gt;&gt; my_class.var
+</code></pre><p>With the example above, we can see that <code>__call__</code> is the method that allows us to use <code>MyDescriptor</code> as a decorator, even after we have instantiated it. The pattern is the same we used for the <code>setter</code> method. We just assume that the argument that follows is the <em>getter</em> method.<p>Back to the full example, the decorator will take care of checking if the value is between the specified range:<pre><code class=language-pycon>>>> my_class = MyClass()
+>>> my_class.var
 Getting Descriptor
 0
-&gt;&gt;&gt; my_class.var = 5
+>>> my_class.var = 5
 Setting Descriptor
 [...]
 ValueError: Value must be between 0 and 3
-</code></pre>
-<h3>Only Setters</h3>
-<p>We have assumed that the getter was always defined, both with properties and with our custom descriptor. However, it is also possible to have descriptors that can only be set, but not retrieved. It is hard to come up with situations in which this could be useful. With a property, it would look like this:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><h3>Only Setters</h3><p>We have assumed that the getter was always defined, both with properties and with our custom descriptor. However, it is also possible to have descriptors that can only be set, but not retrieved. It is hard to come up with situations in which this could be useful. With a property, it would look like this:<pre><code class=language-python>class MyClass:
     _var = 0
 
     def var_setter(self, value):
         self._var = value
 
     var = property(None, var_setter)
-</code></pre>
-<p>And with our descriptor it would look like this:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>And with our descriptor it would look like this:<pre><code class=language-python>class MyClass:
     _var = 0
 
     var = MyDescriptor(val_min=0, val_max=3)
@@ -463,13 +233,7 @@ ValueError: Value must be between 0 and 3
     @var.setter
     def var(self, value):
         self._var = value
-</code></pre>
-<p>You should study the code above to understand why we can use <code>MyDescriptor</code> both as a decorator and as a class. </p>
-<p>The sections above cover the classic approach to descriptors. However, since <strong>Python 3.6</strong>, objects include another method, <code>__set_name__</code>. This method allows them to manipulate the owner of the descriptor easily. This behavior is where real new opportunities appear in a much more straightforward way of thinking. </p>
-<h2>Accessing the Owner Class with <code>set_name</code></h2>
-<p>Something that will happen at some point is that you would like to know where an attribute is defined. A possible pattern would be to register certain types of attributes in the class that holds them. For example, imagine you have a device in which you define settings and that you would like to know all the settings contained within that device. To achieve that, you should have attributes that can register themselves in the owner class. </p>
-<p>First, let's develop a solution to show what <code>__set_name__</code> can do, and then we can see the details. The descriptor is very similar to the one we developed earlier: </p>
-<pre><code class="language-python">class MyDescriptor:
+</code></pre><p>You should study the code above to understand why we can use <code>MyDescriptor</code> both as a decorator and as a class.<p>The sections above cover the classic approach to descriptors. However, since <strong>Python 3.6</strong>, objects include another method, <code>__set_name__</code>. This method allows them to manipulate the owner of the descriptor easily. This behavior is where real new opportunities appear in a much more straightforward way of thinking.<h2>Accessing the Owner Class with <code>set_name</code></h2><p>Something that will happen at some point is that you would like to know where an attribute is defined. A possible pattern would be to register certain types of attributes in the class that holds them. For example, imagine you have a device in which you define settings and that you would like to know all the settings contained within that device. To achieve that, you should have attributes that can register themselves in the owner class.<p>First, let's develop a solution to show what <code>__set_name__</code> can do, and then we can see the details. The descriptor is very similar to the one we developed earlier:<pre><code class=language-python>class MyDescriptor:
     def __init__(self, fget=None, fset=None):
         print('Instantiating descriptor')
         self.fget = fget
@@ -492,9 +256,7 @@ ValueError: Value must be between 0 and 3
 
     def setter(self, fset):
         return type(self)(self.fget, fset)
-</code></pre>
-<p>The class to use this descriptor would be the same as before:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>The class to use this descriptor would be the same as before:<pre><code class=language-python>class MyClass:
     _var = 0
 
     @MyDescriptor
@@ -504,22 +266,14 @@ ValueError: Value must be between 0 and 3
     @var.setter
     def var(self, value):
         self._var = value
-</code></pre>
-<p>And when we actually use it, we will see the behavior: </p>
-<pre><code class="language-pycon">&gt;&gt;&gt; from descriptors import MyClass
+</code></pre><p>And when we actually use it, we will see the behavior:<pre><code class=language-pycon>>>> from descriptors import MyClass
 Instantiating descriptor
 Instantiating descriptor
 Setting name to var
-&gt;&gt;&gt; my_class = MyClass()
-&gt;&gt;&gt; print(my_class._descriptors)
+>>> my_class = MyClass()
+>>> print(my_class._descriptors)
 ['var']
-</code></pre>
-<p>Note that the name was assigned before we instantiated the class. The <code>__set_name__</code> method had access to the owner class right at the moment of its definition. Finally, we see that we can store all the instances of <code>MyDescriptor</code> on a list. If we had more than one, they would all appear there. </p>
-<p>We have chosen a list because it is the most straightforward application. Still, we could also use a dictionary, for example, to store not only the name but also the latest updated value, or the time of the update. We could use that as a cache for later retrieval. </p>
-<p>What we show here is one of the most straightforward patterns that can be achieved with <code>__set_name__</code>, but also one of the most useful ones. Being able to register attributes on the owner class is of great help in many applications. </p>
-<h3>Taking care of inheritance</h3>
-<p>The method above has one big problem when dealing with inheritance. Let's quickly see what happens if we have a second class that inherits from <code>MyClass</code>:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>Note that the name was assigned before we instantiated the class. The <code>__set_name__</code> method had access to the owner class right at the moment of its definition. Finally, we see that we can store all the instances of <code>MyDescriptor</code> on a list. If we had more than one, they would all appear there.<p>We have chosen a list because it is the most straightforward application. Still, we could also use a dictionary, for example, to store not only the name but also the latest updated value, or the time of the update. We could use that as a cache for later retrieval.<p>What we show here is one of the most straightforward patterns that can be achieved with <code>__set_name__</code>, but also one of the most useful ones. Being able to register attributes on the owner class is of great help in many applications.<h3>Taking care of inheritance</h3><p>The method above has one big problem when dealing with inheritance. Let's quickly see what happens if we have a second class that inherits from <code>MyClass</code>:<pre><code class=language-python>class MyClass:
     _var = 0
     _var1 = 1
 
@@ -541,45 +295,25 @@ class MyOtherClass(MyClass):
     @MyDescriptor
     def new_var(self):
         return self._new_var
-</code></pre>
-<p>If we look at the list of descriptors, we will see that they are both the same:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_class = MyClass()
-&gt;&gt;&gt; my_other_class = MyOtherClass()
-&gt;&gt;&gt; my_class._descriptors
+</code></pre><p>If we look at the list of descriptors, we will see that they are both the same:<pre><code class=language-pycon>>>> my_class = MyClass()
+>>> my_other_class = MyOtherClass()
+>>> my_class._descriptors
 ['var', 'var1', 'new_var']
-&gt;&gt;&gt; my_other_class._descriptors
+>>> my_other_class._descriptors
 ['var', 'var1', 'new_var']
-</code></pre>
-<p>Now is a great time to check out what <a href="https://www.pythonforthelab.com/blog/mutable-and-immutable-objects/">mutable and immutable</a> data types are in Python. What is happening is that the list of descriptors is mutable, and therefore it is shared. When the child appends a new value, it also appears in the parent class. </p>
-<p>Solving this problem is not trivial, but Hernán Grecco found a <a href="https://github.com/lantzproject/lantz-core/blob/b30a073296fb86fe652bc90893514e15ffbfe840/lantz/core/feat.py#L106">very elegant solution</a> for Lantz, which I explain here.</p>
-<h3>Taking care of inheritance</h3>
-<h4>Subclassing built-in data types</h4>
-<p>First, we need to discuss something that may seem slightly esoteric for most. We are going to create a child object from a standard data-type in Python. As a general rule, if you don't have a good reason to do it, it is probably a good idea to avoid this pattern. However, this time we do have a good reason. It works the same as always, let's assume we want to subclass a list, we do:</p>
-<pre><code class="language-python">class MyList(list):
+</code></pre><p>Now is a great time to check out what <a href=https://www.pythonforthelab.com/blog/mutable-and-immutable-objects/>mutable and immutable</a> data types are in Python. What is happening is that the list of descriptors is mutable, and therefore it is shared. When the child appends a new value, it also appears in the parent class.<p>Solving this problem is not trivial, but Hernán Grecco found a <a href=https://github.com/lantzproject/lantz-core/blob/b30a073296fb86fe652bc90893514e15ffbfe840/lantz/core/feat.py#L106>very elegant solution</a> for Lantz, which I explain here.<h3>Taking care of inheritance</h3><h4>Subclassing built-in data types</h4><p>First, we need to discuss something that may seem slightly esoteric for most. We are going to create a child object from a standard data-type in Python. As a general rule, if you don't have a good reason to do it, it is probably a good idea to avoid this pattern. However, this time we do have a good reason. It works the same as always, let's assume we want to subclass a list, we do:<pre><code class=language-python>class MyList(list):
     pass
 
 
 var = MyList([1, 2, 3])
 print(len(var))
-</code></pre>
-<p><code>var</code> has the same features a normal list has, so we can <code>append</code>, iterate through the objects, etc. But we can now define new attributes to <code>MyList</code>, as we would do with our objects:</p>
-<pre><code class="language-python">var.my_info = 'This is my info'
-</code></pre>
-<p>It would not have been possible to achieve the same with a plain list. When following this pattern, you should be extra careful not to overwrite methods from the list. For example, the following could lead to errors even though it is not incorrect in itself:</p>
-<pre><code class="language-python">var.append = 'Update'
-</code></pre>
-<p>Before we continue, it is also important to refresh how we can set and get attributes to an object: </p>
-<pre><code class="language-python">setattr(var, 'my_info', 'Updated Info')
+</code></pre><p><code>var</code> has the same features a normal list has, so we can <code>append</code>, iterate through the objects, etc. But we can now define new attributes to <code>MyList</code>, as we would do with our objects:<pre><code class=language-python>var.my_info = 'This is my info'
+</code></pre><p>It would not have been possible to achieve the same with a plain list. When following this pattern, you should be extra careful not to overwrite methods from the list. For example, the following could lead to errors even though it is not incorrect in itself:<pre><code class=language-python>var.append = 'Update'
+</code></pre><p>Before we continue, it is also important to refresh how we can set and get attributes to an object:<pre><code class=language-python>setattr(var, 'my_info', 'Updated Info')
 getattr(var, 'my_info')
-</code></pre>
-<h4>Checking ownership</h4>
-<p>The general idea to prevent children from propagating information to their parents would be to register the owner class in the list of descriptors itself. New descriptors check whether the list of descriptors and the class that defines it belong to the same owner. If it is the same, then it just appends itself. If it is different, it means it is a child creating a descriptor, and instead of appending, it creates a new list. </p>
-<p>We start by creating a custom list:</p>
-<pre><code class="language-python">class MyList(list):
+</code></pre><h4>Checking ownership</h4><p>The general idea to prevent children from propagating information to their parents would be to register the owner class in the list of descriptors itself. New descriptors check whether the list of descriptors and the class that defines it belong to the same owner. If it is the same, then it just appends itself. If it is different, it means it is a child creating a descriptor, and instead of appending, it creates a new list.<p>We start by creating a custom list:<pre><code class=language-python>class MyList(list):
     pass
-</code></pre>
-<p>And the secret now is to use this list to register the descriptors. We can add the following to <code>MyDescriptor</code>:</p>
-<pre><code class="language-python">def __set_name__(self, owner, name):
+</code></pre><p>And the secret now is to use this list to register the descriptors. We can add the following to <code>MyDescriptor</code>:<pre><code class=language-python>def __set_name__(self, owner, name):
     descriptors = getattr(owner, '_descriptors', None)
     if descriptors is not None:
         if getattr(descriptors, 'owner_class', None) != owner.__qualname__:
@@ -590,205 +324,10 @@ getattr(var, 'my_info')
         setattr(owner, '_descriptors', MyList())
         setattr(owner._descriptors, 'owner_class', owner.__qualname__)
         owner._descriptors.append(name)
-</code></pre>
-<p>Let's go line by line. First, we check if the owner has a <code>_descriptors</code> attribute. If it has one, it probably means another descriptor created it, but we should check whether it was another descriptor in the same class or the parent class. We are going to use the attribute <code>owner_class</code> in the custom list. The dunder <code>__qualname__</code> returns the <em>qualified name</em>, which is the full path to the class (including the <code>.</code>) and therefore, should be unique through your program. </p>
-<p>If the registered qualified name is different from the owner's name, we are probably dealing with an inheritance. What we have to do is create a new <code>_descriptors</code> attribute. With this, we unlink the parent from the child attribute. Right after creating the list, we set the attribute <code>owner_class</code> to the qualified name of the owner so that it can be used later on. Once we know we are dealing with the proper <code>_descriptors</code>, we append the name of the current descriptor. </p>
-<p>The last block is taking care of the situation where the owner does not have a <code>_descriptors</code> attribute defined. Depending on what you are building, you may already know that the attribute has to be there. But it has no more complications, it just forces the owner to have a list, with the proper owner class, and then appends the name. </p>
-<p>With the same definition of the classes that we had before, we can check again if we are getting the proper list of descriptors:</p>
-<pre><code class="language-python">my_class = MyClass()
+</code></pre><p>Let's go line by line. First, we check if the owner has a <code>_descriptors</code> attribute. If it has one, it probably means another descriptor created it, but we should check whether it was another descriptor in the same class or the parent class. We are going to use the attribute <code>owner_class</code> in the custom list. The dunder <code>__qualname__</code> returns the <em>qualified name</em>, which is the full path to the class (including the <code>.</code>) and therefore, should be unique through your program.<p>If the registered qualified name is different from the owner's name, we are probably dealing with an inheritance. What we have to do is create a new <code>_descriptors</code> attribute. With this, we unlink the parent from the child attribute. Right after creating the list, we set the attribute <code>owner_class</code> to the qualified name of the owner so that it can be used later on. Once we know we are dealing with the proper <code>_descriptors</code>, we append the name of the current descriptor.<p>The last block is taking care of the situation where the owner does not have a <code>_descriptors</code> attribute defined. Depending on what you are building, you may already know that the attribute has to be there. But it has no more complications, it just forces the owner to have a list, with the proper owner class, and then appends the name.<p>With the same definition of the classes that we had before, we can check again if we are getting the proper list of descriptors:<pre><code class=language-python>my_class = MyClass()
 my_other_class = MyOtherClass()
 print(my_class._descriptors)
 # ['var', 'var1']
 print(my_other_class._descriptors)
 # ['var', 'var1', 'new_var']
-</code></pre>
-<p>So now you see that inheritance is working only from parent to children, as expected. </p>
-<h2>Conclusions</h2>
-<p>We have focused this article on using descriptors as decorators, similar to how @property works. We do believe this is one of the most common patterns for descriptors, but it is by no means the only one. First, you don't need to use them as decorators for methods; they could be attributes directly defined in classes. If you check the <a href="https://docs.python.org/3/howto/descriptor.html#static-methods-and-class-methods">official documentation</a> you can see examples that drill deeper into manipulating the <code>__dict__</code> of the objects. This degree of complexity is, however, seldom required, but please let us know in the comments if it can be useful for you. </p>
-<p>The <em>descriptor protocol</em> is an incredibly useful tool when you need to manipulate the class where attributes are defined. A very common situation is what we showed in the last section: registering specific attributes in a list. We could go one step further and define a cache, timeouts, and more. It is not something everyone needs every time. Still, when you wonder how to have access to the owner class when you are defining an attribute, descriptors are the solution. </p>
-            </main>
-            <div class="info-list">
-              <span class="item author">Article written by Aquiles Carattino</span>
-            </div>
-              <div class="similar-posts">
-                <h3>Related Articles:</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="item">
-                        <img src="/images/mirrors.width-800.jpg" alt="">
-                        <span class="date">2021-01-16</span>
-                        <span class="name">Singletons: Instantiate objects only once</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python" class="item">
-                        <img src="images/storing_data_hdf.png" alt="">
-                        <span class="date">2018-03-19</span>
-                        <span class="name">How to use HDF5 files in Python</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/handling-and-sharing-data-between-threads" class="item">
-                        <img src="/images/python1-01.width-800.png" alt="">
-                        <span class="date">2019-08-06</span>
-                        <span class="name">Handling and Sharing Data Between Threads</span>
-                      </a>
-                    </li>
-                </ul>
-              </div>
-            <div class="bottom-section">
-              <h4>Share your thoughts with us!</h4>
-              <div class="comments">
-                <!-- Comment -->
-                <script src="https://utteranc.es/client.js"
-                        repo="PFTL/pftl_discussions"
-                        issue-term="pathname"
-                        label="Comment"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-              </div>
-            </div>
-          </div>
-          <div class="rightside">
-            <div class="support-box">
-              <h3>Support Us</h3>
-              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
-                Lab</strong></p>
-              <a href="https://pythonforthelab.com/books" class="button">Check out the book</a>
-            </div>
-            <div class="latest-posts">
-
-                <h3>Latest Articles</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
-                      <span>by Aquiles Carattino, 2021-03-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
-                      <span>by Aquiles Carattino, 2021-03-21</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
-                      <span>by Aquiles Carattino, 2021-02-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
-                      <span>by Aquiles Carattino, 2021-01-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
-                      <span>by Aquiles Carattino, 2020-06-13</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
-                      <span>by Aquiles Carattino, 2020-05-25</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
-                      <span>by Aquiles Carattino, 2020-05-18</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
-                      <span>by Aquiles Carattino, 2020-05-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tips-using-sets">Python Tips: Using Sets</a>
-                      <span>by Aquiles Carattino, 2020-05-11</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
-                      <span>by Aquiles Carattino, 2020-04-10</span>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="subscribe-fixed">
-              <button class="action">Never Stop Learning</button>
-              <div class="cnt">
-                <p>Join over 1000 Python developers and don't miss any updates!</p>
-                <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mobile-sb-form">
-          <div class="sb-form">
-            <h4>Get all the information directly to your inbox</h4>
-            <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- End Main -->
-
-  </section>
-  <!-- End Wrapper -->
-
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="https://pythonforthelab.com/cookie-policy">Cookie Policy</a>
-        <a href="https://pythonforthelab.com/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Footer --><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
-<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-<script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
-</script></body>
-</html>
+</code></pre><p>So now you see that inheritance is working only from parent to children, as expected.<h2>Conclusions</h2><p>We have focused this article on using descriptors as decorators, similar to how @property works. We do believe this is one of the most common patterns for descriptors, but it is by no means the only one. First, you don't need to use them as decorators for methods; they could be attributes directly defined in classes. If you check the <a href=https://docs.python.org/3/howto/descriptor.html#static-methods-and-class-methods>official documentation</a> you can see examples that drill deeper into manipulating the <code>__dict__</code> of the objects. This degree of complexity is, however, seldom required, but please let us know in the comments if it can be useful for you.<p>The <em>descriptor protocol</em> is an incredibly useful tool when you need to manipulate the class where attributes are defined. A very common situation is what we showed in the last section: registering specific attributes in a list. We could go one step further and define a cache, timeouts, and more. It is not something everyone needs every time. Still, when you wonder how to have access to the owner class when you are defining an attribute, descriptors are the solution.</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once> <img alt src=/images/mirrors.width-800.jpg> <span class=date>2021-01-16</span> <span class=name>Singletons: Instantiate objects only once</span> </a><li><a class=item href=https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python> <img alt src=/images/storing_data_hdf.png> <span class=date>2018-03-19</span> <span class=name>How to use HDF5 files in Python</span> </a><li><a class=item href=https://pythonforthelab.com/blog/handling-and-sharing-data-between-threads> <img alt src=/images/python1-01.width-800.png> <span class=date>2019-08-06</span> <span class=name>Handling and Sharing Data Between Threads</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>

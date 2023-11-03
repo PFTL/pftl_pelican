@@ -1,266 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>What are Hashable Objects | Python For The Lab</title>
-
-  <meta name="tags" content="Hashable, Objects, Dictionaries, Hash, ">
-  <meta name="description" content="Hashable objects are at the root of Python dictionaries, understand how
+<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>What are Hashable Objects | Python For The Lab</title><meta content="Hashable, Objects, Dictionaries, Hash, " name=tags><meta content="Hashable objects are at the root of Python dictionaries, understand how
 they work.
-">
-  <meta name="author" content="Aquiles Carattino">
-
-  <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet">
-
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/style.css">
-  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
-
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
-</head>
-
-
-
-<body>
-  <!-- Wrapper -->
-  <section class="wrapper">
-
-<!-- Intro -->
-<div class="intro blog article">
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <a href="/" class="logo">Python for the Lab</a>
-      <div class="header-dd">
-        <div class="navigation">
-          <ul>
-            <li class="active"><a href="https://pythonforthelab.com/blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="https://pythonforthelab.com/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
-                   class="nav-item forum"><span>Forum</span></a></li>
-            <li><a href="https://pythonforthelab.com/books" class="nav-item books"><span>Books</span></a></li>
-            <li><a href="https://pythonforthelab.com/about" class="nav-item about"><span>About</span></a></li>
-          </ul>
-        </div>
-        <div class="search field-wp">
-          <form action="#">
-            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
-            <input type="submit" class="search-btn">
-          </form>
-          <div data-stork="sitesearch-output"></div>
-        </div>
-      </div>
-      <button class="menu-btn"><span>Menu</span></button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Intro Cnt -->
-    <div class="intro-cnt v-article">
-      <div class="side-text">
-      </div>
-      <div class="side-form small-sb-form">
-        <div class="sb-form" id="mc_embed_signup">
-          <h4>Get all the information directly to your inbox</h4>
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-              target="_self"
-              novalidate="">
-            <div class="field-wp" id="mc_embed_signup_scroll">
-              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
-                     value="">
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk form bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
-                   id="mc-embedded-subscribe">
-            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Intro Cnt -->
-
-  </div>
-</div>
-<!-- End Intro -->
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-
-        <div class="article-cnt">
-          <div class="leftside">
-            <div class="article-image">
-              <img src="https://pythonforthelab.com//images/yeo-khee-793533-unsplash_linkedin.width-800.jpg" alt="" width="800">
-            </div>
-            <h1>What are Hashable Objects</h1>
-            <h3>Hashable objects are at the root of Python dictionaries, understand how
+" name=description><meta content="Aquiles Carattino" name=author><link href=blog/what-are-hashable-objects rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/what-are-hashable-objects property=og:url><meta content="What are Hashable Objects" property=og:title><meta content="Hashable objects are at the root of Python dictionaries, understand how
 they work.
-</h3>
-            <div class="info">
-              <span class="item-1 author">by Aquiles Carattino</span>
-              <span class="item-1 date">2018-08-27</span>
-                <span class="item-tag first">Hashable</span>
-                <span class="item-tag ">Objects</span>
-                <span class="item-tag ">Dictionaries</span>
-                <span class="item-tag ">Hash</span>
-            </div>
-            <main>
-              <p>To understand hashable objects in Python, it is important to review what
-a hash table is. Following <a href="https://en.wikipedia.org/wiki/Hash_table">the article on
-Wikipedia</a>, a hash table is a
-data structure that can map keys to values and that implements a hash
-function to compute the index to an array of buckets or slots. Heavy
-words, I know.</p>
-<p>The idea behind a hash table is that, in the end, you can reduce a
-complex object to an index in an array. The analogy with a mail
-directory may be appropriate. Imagine you have a collection of names of
-people and their addresses. You store each address as soon as you meet a
-new person, one under the other. A hash table in such case will be
-responsible for transforming a name to a number that corresponds to the
-row in which their information is written.</p>
-<p>If you have enough experience with Python, the first thing that probably
-came to mind is a dictionary. That would be the easiest way of storing
-addresses for people that you meet. You can easily retrieve their
-information by looking up their names. Even if dictionaries are a
-general concept in which keys are associated to values, Python, in fact,
-implements a hash table by default (which doesn't mean this cannot
-change in the future without affecting how dictionaries work).</p>
-<p>One of the complications of hash tables is how to implement the hash
-function in a reliable way. Immutable data types in Python come with a
-built-in method for computing their hash value, which is called
-<code>__hash__</code>. Let's see for example what happens with strings or tuples:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; a = '123'
-&gt;&gt;&gt; a.__hash__()
+" property=og:description><meta content=/images/yeo-khee-793533-unsplash_linkedin.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/what-are-hashable-objects property=twitter:url><meta content="What are Hashable Objects" property=twitter:title><meta content="Hashable objects are at the root of Python dictionaries, understand how
+they work.
+" property=twitter:description><meta content=/images/yeo-khee-793533-unsplash_linkedin.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/yeo-khee-793533-unsplash_linkedin.width-800.jpg width=800></div><h1>What are Hashable Objects</h1><h3>Hashable objects are at the root of Python dictionaries, understand how they work.</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2018-08-27</span><span class="item-tag first">Hashable</span><span class=item-tag>Objects</span><span class=item-tag>Dictionaries</span><span class=item-tag>Hash</span></div><main><p>To understand hashable objects in Python, it is important to review what a hash table is. Following <a href=https://en.wikipedia.org/wiki/Hash_table>the article on Wikipedia</a>, a hash table is a data structure that can map keys to values and that implements a hash function to compute the index to an array of buckets or slots. Heavy words, I know.<p>The idea behind a hash table is that, in the end, you can reduce a complex object to an index in an array. The analogy with a mail directory may be appropriate. Imagine you have a collection of names of people and their addresses. You store each address as soon as you meet a new person, one under the other. A hash table in such case will be responsible for transforming a name to a number that corresponds to the row in which their information is written.<p>If you have enough experience with Python, the first thing that probably came to mind is a dictionary. That would be the easiest way of storing addresses for people that you meet. You can easily retrieve their information by looking up their names. Even if dictionaries are a general concept in which keys are associated to values, Python, in fact, implements a hash table by default (which doesn't mean this cannot change in the future without affecting how dictionaries work).<p>One of the complications of hash tables is how to implement the hash function in a reliable way. Immutable data types in Python come with a built-in method for computing their hash value, which is called <code>__hash__</code>. Let's see for example what happens with strings or tuples:<pre><code class=language-pycon>>>> a = '123'
+>>> a.__hash__()
 4031090051524460767
-&gt;&gt;&gt; b = (1, 2, 3)
-&gt;&gt;&gt; b.__hash__()
+>>> b = (1, 2, 3)
+>>> b.__hash__()
 2528502973977326415
-</code></pre>
-<p>You see that strings and lists are reduced to integers. If you would use
-numbers instead:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; c = 1
-&gt;&gt;&gt; c.__hash__()
+</code></pre><p>You see that strings and lists are reduced to integers. If you would use numbers instead:<pre><code class=language-pycon>>>> c = 1
+>>> c.__hash__()
 1
-&gt;&gt;&gt; d = 1.1
-&gt;&gt;&gt; d.__hash__()
+>>> d = 1.1
+>>> d.__hash__()
 230584300921369601
-</code></pre>
-<p>However, mutable objects such as lists and dictionaries do not have a
-hash method. That is one of the reasons why you cannot use that kind of
-objects as keys for dictionaries. What is important to note is that for
-immutable types, the hash value depends only on the data stored and not
-on the identity of the object itself. For instance, you can create two
-tuples with the same values, and see the differences:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = (1, 2, 3)
-&gt;&gt;&gt; var2 = (1, 2, 3)
-&gt;&gt;&gt; id(var1)
+</code></pre><p>However, mutable objects such as lists and dictionaries do not have a hash method. That is one of the reasons why you cannot use that kind of objects as keys for dictionaries. What is important to note is that for immutable types, the hash value depends only on the data stored and not on the identity of the object itself. For instance, you can create two tuples with the same values, and see the differences:<pre><code class=language-pycon>>>> var1 = (1, 2, 3)
+>>> var2 = (1, 2, 3)
+>>> id(var1)
 140697473296656
-&gt;&gt;&gt; id(var2)
+>>> id(var2)
 140697473295216
-</code></pre>
-<p>They are indeed different objects, however:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1.__hash__()
+</code></pre><p>They are indeed different objects, however:<pre><code class=language-pycon>>>> var1.__hash__()
 2528502973977326415
-&gt;&gt;&gt; var2.__hash__()
+>>> var2.__hash__()
 2528502973977326415
-</code></pre>
-<p>This means that if you use them as dictionary keys, they are going to be
-indistinguishable from each other, for instance:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var3 = {var1:'var1'}
-&gt;&gt;&gt; var3[var2]
+</code></pre><p>This means that if you use them as dictionary keys, they are going to be indistinguishable from each other, for instance:<pre><code class=language-pycon>>>> var3 = {var1:'var1'}
+>>> var3[var2]
 'var1'
-</code></pre>
-<p>In the same way, you could have used the tuple itself:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var3[(1, 2, 3)]
+</code></pre><p>In the same way, you could have used the tuple itself:<pre><code class=language-pycon>>>> var3[(1, 2, 3)]
 'var1'
-&gt;&gt;&gt; var3[1, 2, 3]
+>>> var3[1, 2, 3]
 'var1'
-</code></pre>
-<p>Based on what we saw, hashing an object can be thought as converting it
-to an integer based on its content, but not on the identity of the
-object itself. Of course, this may give problems, because you are
-reducing a very large space of possibilities into a finite set of
-integers. This reduction may give rise to something known as hash
-collisions, i.e., two objects which are reduced to the same integer even
-if their values are different.</p>
-<p>A very simple example of hash collisions is what happens between a
-simple string and an integer:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = 'a'
-&gt;&gt;&gt; var1.__hash__()
+</code></pre><p>Based on what we saw, hashing an object can be thought as converting it to an integer based on its content, but not on the identity of the object itself. Of course, this may give problems, because you are reducing a very large space of possibilities into a finite set of integers. This reduction may give rise to something known as hash collisions, i.e., two objects which are reduced to the same integer even if their values are different.<p>A very simple example of hash collisions is what happens between a simple string and an integer:<pre><code class=language-pycon>>>> var1 = 'a'
+>>> var1.__hash__()
 12416037344
-&gt;&gt;&gt; var2 = 12416037344
-&gt;&gt;&gt; var1.__hash__() == var2.__hash__()
+>>> var2 = 12416037344
+>>> var1.__hash__() == var2.__hash__()
 True
-</code></pre>
-<p>Both <code>var1</code> and <code>var2</code> have the same hash value. So, we may wonder, what
-happens if we use them in a dictionary, let's try it to find out:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var3 = {var1: 'var1'}
-&gt;&gt;&gt; var3[var2] = 'var2'
-&gt;&gt;&gt; var3
+</code></pre><p>Both <code>var1</code> and <code>var2</code> have the same hash value. So, we may wonder, what happens if we use them in a dictionary, let's try it to find out:<pre><code class=language-pycon>>>> var3 = {var1: 'var1'}
+>>> var3[var2] = 'var2'
+>>> var3
 {'a': 'var1', 12416037344: 'var2'}
-</code></pre>
-<p>As you can see in the snippet above, Python is relying on more than just
-the hash value of an object when using it as keys for a dictionary.</p>
-<h2>Hash Values of Custom Classes</h2>
-<p>We have seen <a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects">before</a> that
-there are differences between mutable and immutable types in Python.
-Built-in immutable types have always a hash method, while mutable types
-don't. However, this leaves outside custom defined classes. By default,
-all instances of custom classes will have a hash value defined at
-creation and it will not change over time. Two instances of the same
-class will have two different hash values. For example:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>As you can see in the snippet above, Python is relying on more than just the hash value of an object when using it as keys for a dictionary.<h2>Hash Values of Custom Classes</h2><p>We have seen <a href=https://pythonforthelab.com/blog/mutable-and-immutable-objects>before</a> that there are differences between mutable and immutable types in Python. Built-in immutable types have always a hash method, while mutable types don't. However, this leaves outside custom defined classes. By default, all instances of custom classes will have a hash value defined at creation and it will not change over time. Two instances of the same class will have two different hash values. For example:<pre><code class=language-python>class MyClass:
     def __init__(self, value):
         self.value = value
 
@@ -268,38 +51,21 @@ my_obj = MyClass(1)
 print(my_obj.__hash__()) # 8757243744113
 my_new_obj = MyClass(1)
 print(my_new_obj.__hash__()) # -9223363279611078919
-</code></pre>
-<p>If you run the code above, you will see that the hash value that you get
-from your objects changes every time. This is because the hash is
-derived from the object's id. Python, as expected, allows you to define
-your own hash value. For example, you can alter <code>MyClass</code> like this:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>If you run the code above, you will see that the hash value that you get from your objects changes every time. This is because the hash is derived from the object's id. Python, as expected, allows you to define your own hash value. For example, you can alter <code>MyClass</code> like this:<pre><code class=language-python>class MyClass:
     def __init__(self, var):
         self.var = var
 
     def __hash__(self):
         return int(self.var)
-</code></pre>
-<p>If you re-run the example, you will see that both objects have the same
-hash value of 1. So, let's see what happens if we use them as the keys
-for a dictionary:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_obj = MyClass(1)
-&gt;&gt;&gt; my_obj_2 = MyClass(1)
-&gt;&gt;&gt; var = {my_obj: 'my_obj'}
-&gt;&gt;&gt; var[my_obj_2] = 'my_obj_2'
-&gt;&gt;&gt; print(var)
+</code></pre><p>If you re-run the example, you will see that both objects have the same hash value of 1. So, let's see what happens if we use them as the keys for a dictionary:<pre><code class=language-pycon>>>> my_obj = MyClass(1)
+>>> my_obj_2 = MyClass(1)
+>>> var = {my_obj: 'my_obj'}
+>>> var[my_obj_2] = 'my_obj_2'
+>>> print(var)
 {My Class: 'my_obj', My Class: 'my_obj_2'}
-</code></pre>
-<p>What you can see is that, even if the hash value is the same, they end
-up as different keys in the dictionary. There is still something else
-missing. Even if their hash values are the same, they are different
-objects:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_obj == my_obj_2
+</code></pre><p>What you can see is that, even if the hash value is the same, they end up as different keys in the dictionary. There is still something else missing. Even if their hash values are the same, they are different objects:<pre><code class=language-pycon>>>> my_obj == my_obj_2
 False
-</code></pre>
-<p>We can tweak the <code>MyClass</code> class in order to output <code>True</code> when
-comparing it:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>We can tweak the <code>MyClass</code> class in order to output <code>True</code> when comparing it:<pre><code class=language-python>class MyClass:
     def __init__(self, var):
         self.var = var
 
@@ -308,38 +74,21 @@ comparing it:</p>
 
     def __eq__(self, other):
         return other.var == self.var
-</code></pre>
-<p>The method <code>__eq__</code> is used to determine whether one object is equal to
-another. Because <code>MyClass</code> takes only one argument when instantiating,
-we just compare that value. For example, we would get:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = MyClass(1)
-&gt;&gt;&gt; var2 = MyClass(1)
-&gt;&gt;&gt; var3 = MyClass(2)
-&gt;&gt;&gt; var1 == var2
+</code></pre><p>The method <code>__eq__</code> is used to determine whether one object is equal to another. Because <code>MyClass</code> takes only one argument when instantiating, we just compare that value. For example, we would get:<pre><code class=language-pycon>>>> var1 = MyClass(1)
+>>> var2 = MyClass(1)
+>>> var3 = MyClass(2)
+>>> var1 == var2
 True
-&gt;&gt;&gt; var1 == var3
+>>> var1 == var3
 False
-</code></pre>
-<p>It works as we would expect it to. If we try again with a dictionary:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var4 = {var1: 'var1'}
-&gt;&gt;&gt; var4[var2] = 'var2'
-&gt;&gt;&gt; var4
+</code></pre><p>It works as we would expect it to. If we try again with a dictionary:<pre><code class=language-pycon>>>> var4 = {var1: 'var1'}
+>>> var4[var2] = 'var2'
+>>> var4
 {My Class: 'var2'}
-&gt;&gt;&gt; var4[var3] = 'var3'
-&gt;&gt;&gt; var4
+>>> var4[var3] = 'var3'
+>>> var4
 {My Class: 'var2', My Class: 'var3'}
-</code></pre>
-<p>Finally, we see what is that dictionaries in Python are using for
-defining their keys. They do not only look at the hash value, they also
-look whether the keys are the same or not. If they are not, they will be
-assigned to a new element instead of the same one. You can try and see
-what happens if two elements are equal, but have different hash values.</p>
-<p>Now you are starting to go through risky waters. If you would compare
-your object to something other than the <code>MyClass</code> instance (or better
-said, any object without a <code>var</code> attribute), an exception would be
-raised. You can also force the equality to be true regardless of the
-object you are comparing it to. So, for example:</p>
-<pre><code class="language-python">class MyClass:
+</code></pre><p>Finally, we see what is that dictionaries in Python are using for defining their keys. They do not only look at the hash value, they also look whether the keys are the same or not. If they are not, they will be assigned to a new element instead of the same one. You can try and see what happens if two elements are equal, but have different hash values.<p>Now you are starting to go through risky waters. If you would compare your object to something other than the <code>MyClass</code> instance (or better said, any object without a <code>var</code> attribute), an exception would be raised. You can also force the equality to be true regardless of the object you are comparing it to. So, for example:<pre><code class=language-python>class MyClass:
     def __init__(self, var):
         self.var = var
 
@@ -348,203 +97,12 @@ object you are comparing it to. So, for example:</p>
 
     def __eq__(self, other):
         return True
-</code></pre>
-<p>And now, we would find a strange behavior:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; my_obj = MyClass(1)
-&gt;&gt;&gt; var = 1
-&gt;&gt;&gt; my_obj == var
+</code></pre><p>And now, we would find a strange behavior:<pre><code class=language-pycon>>>> my_obj = MyClass(1)
+>>> var = 1
+>>> my_obj == var
 True
-&gt;&gt;&gt; var2 = {my_obj: 'my_obj'}
-&gt;&gt;&gt; var2[var] = 'var'
-&gt;&gt;&gt; print(var2)
+>>> var2 = {my_obj: 'my_obj'}
+>>> var2[var] = 'var'
+>>> print(var2)
 {MyClass: 'var'}
-</code></pre>
-<p>So now you see that dictionaries test two things: the hash value and the
-equality, if one of them doesn't match, then it is going to be assigned
-as a new key.</p>
-<p>Of course, there are many details missing regarding how hash tables
-work, but this is a pretty good introduction into how some of the
-under-the-hood things work in Python. They may also give you a hint into
-why things work or stop working at apparently random places.</p>
-<p>Header photo by <a href="https://unsplash.com/photos/BkqUJQiucKY?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Yeo
-Khee</a>
-on Unsplash</p>
-            </main>
-            <div class="info-list">
-              <span class="item author">Article written by Aquiles Carattino</span>
-            </div>
-              <div class="similar-posts">
-                <h3>Related Articles:</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects" class="item">
-                        <img src="/images/rawpixel-274862-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2018-08-23</span>
-                        <span class="name">Mutable and Immutable Objects</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/deep-and-shallow-copies-of-objects" class="item">
-                        <img src="/images/rebecca-georgia-269933-unsplash_linkedin.width-800.jpg" alt="">
-                        <span class="date">2019-02-04</span>
-                        <span class="name">Deep and Shallow Copies of Objects</span>
-                      </a>
-                    </li>
-                </ul>
-              </div>
-            <div class="bottom-section">
-              <h4>Share your thoughts with us!</h4>
-              <div class="comments">
-                <!-- Comment -->
-                <script src="https://utteranc.es/client.js"
-                        repo="PFTL/pftl_discussions"
-                        issue-term="pathname"
-                        label="Comment"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-              </div>
-            </div>
-          </div>
-          <div class="rightside">
-            <div class="support-box">
-              <h3>Support Us</h3>
-              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
-                Lab</strong></p>
-              <a href="https://pythonforthelab.com/books" class="button">Check out the book</a>
-            </div>
-            <div class="latest-posts">
-
-                <h3>Latest Articles</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
-                      <span>by Aquiles Carattino, 2021-03-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
-                      <span>by Aquiles Carattino, 2021-03-21</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
-                      <span>by Aquiles Carattino, 2021-02-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
-                      <span>by Aquiles Carattino, 2021-01-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
-                      <span>by Aquiles Carattino, 2020-06-13</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
-                      <span>by Aquiles Carattino, 2020-05-25</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
-                      <span>by Aquiles Carattino, 2020-05-18</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
-                      <span>by Aquiles Carattino, 2020-05-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tips-using-sets">Python Tips: Using Sets</a>
-                      <span>by Aquiles Carattino, 2020-05-11</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
-                      <span>by Aquiles Carattino, 2020-04-10</span>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="subscribe-fixed">
-              <button class="action">Never Stop Learning</button>
-              <div class="cnt">
-                <p>Join over 1000 Python developers and don't miss any updates!</p>
-                <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mobile-sb-form">
-          <div class="sb-form">
-            <h4>Get all the information directly to your inbox</h4>
-            <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- End Main -->
-
-  </section>
-  <!-- End Wrapper -->
-
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="https://pythonforthelab.com/cookie-policy">Cookie Policy</a>
-        <a href="https://pythonforthelab.com/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Footer --><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
-<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-<script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
-</script></body>
-</html>
+</code></pre><p>So now you see that dictionaries test two things: the hash value and the equality, if one of them doesn't match, then it is going to be assigned as a new key.<p>Of course, there are many details missing regarding how hash tables work, but this is a pretty good introduction into how some of the under-the-hood things work in Python. They may also give you a hint into why things work or stop working at apparently random places.<p>Header photo by <a href=https://unsplash.com/photos/BkqUJQiucKY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText>Yeo Khee</a> on Unsplash</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/mutable-and-immutable-objects> <img alt src=/images/rawpixel-274862-unsplash_linkedin.width-800.jpg> <span class=date>2018-08-23</span> <span class=name>Mutable and Immutable Objects</span> </a><li><a class=item href=https://pythonforthelab.com/blog/deep-and-shallow-copies-of-objects> <img alt src=/images/rebecca-georgia-269933-unsplash_linkedin.width-800.jpg> <span class=date>2019-02-04</span> <span class=name>Deep and Shallow Copies of Objects</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>

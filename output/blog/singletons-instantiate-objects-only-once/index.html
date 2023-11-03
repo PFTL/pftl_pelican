@@ -1,239 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-
-  <title>Singletons: Instantiate objects only once | Python For The Lab</title>
-
-  <meta name="tags" content="instance, objects, pattern, object oriented, singleton, ">
-  <meta name="description" content="Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code">
-  <meta name="author" content="Aquiles Carattino">
-
-  <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
-  <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
-  <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
-  <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
-  <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
-  <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
-  <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
-  <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
-  <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
-  <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
-  <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
-  <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
-  <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
-  <meta name="theme-color" content="#ffffff">
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link
-      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
-      rel="stylesheet">
-
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/style.css">
-  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
-
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
-</head>
-
-
-
-<body>
-  <!-- Wrapper -->
-  <section class="wrapper">
-
-<!-- Intro -->
-<div class="intro blog article">
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <a href="/" class="logo">Python for the Lab</a>
-      <div class="header-dd">
-        <div class="navigation">
-          <ul>
-            <li class="active"><a href="https://pythonforthelab.com/blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="https://pythonforthelab.com/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
-                   class="nav-item forum"><span>Forum</span></a></li>
-            <li><a href="https://pythonforthelab.com/books" class="nav-item books"><span>Books</span></a></li>
-            <li><a href="https://pythonforthelab.com/about" class="nav-item about"><span>About</span></a></li>
-          </ul>
-        </div>
-        <div class="search field-wp">
-          <form action="#">
-            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
-            <input type="submit" class="search-btn">
-          </form>
-          <div data-stork="sitesearch-output"></div>
-        </div>
-      </div>
-      <button class="menu-btn"><span>Menu</span></button>
-    </div>
-    <!-- End Header -->
-
-    <!-- Intro Cnt -->
-    <div class="intro-cnt v-article">
-      <div class="side-text">
-      </div>
-      <div class="side-form small-sb-form">
-        <div class="sb-form" id="mc_embed_signup">
-          <h4>Get all the information directly to your inbox</h4>
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-              target="_self"
-              novalidate="">
-            <div class="field-wp" id="mc_embed_signup_scroll">
-              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
-                     value="">
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk form bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
-                   id="mc-embedded-subscribe">
-            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- End Intro Cnt -->
-
-  </div>
-</div>
-<!-- End Intro -->
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-
-        <div class="article-cnt">
-          <div class="leftside">
-            <div class="article-image">
-              <img src="https://pythonforthelab.com//images/mirrors.width-800.jpg" alt="" width="800">
-            </div>
-            <h1>Singletons: Instantiate objects only once</h1>
-            <h3>Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code</h3>
-            <div class="info">
-              <span class="item-1 author">by Aquiles Carattino</span>
-              <span class="item-1 date">2021-01-16</span>
-                <span class="item-tag first">instance</span>
-                <span class="item-tag ">objects</span>
-                <span class="item-tag ">pattern</span>
-                <span class="item-tag ">object oriented</span>
-                <span class="item-tag ">singleton</span>
-            </div>
-            <main>
-              <p>When developing more extensive programs, being aware of different patterns can significantly help us solve problems even before they arise. One of those patterns is the creation of singletons, which are nothing else but objects that can be instantiated only once. In Python, we are exposed to singletons since the beginning, even if we are not aware of them. This article will discuss how singletons permeate our everyday programming and how we can bring them a step further. </p>
-<h2>Every Day Singletons</h2>
-<p>Before we dive into singletons, it is important to remember how Python behaves when it comes to mutable and immutable data types. A list, for example, is mutable, which means we can change its contents without creating a new object. For example:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [1, 2, 3]
-&gt;&gt;&gt; var2 = var1
-&gt;&gt;&gt; var1[0] = 0
-&gt;&gt;&gt; print(var2)
+<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Singletons: Instantiate objects only once | Python For The Lab</title><meta content="instance, objects, pattern, object oriented, singleton, " name=tags><meta content="Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code" name=description><meta content="Aquiles Carattino" name=author><link href=blog/singletons-instantiate-objects-only-once rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/singletons-instantiate-objects-only-once property=og:url><meta content="Singletons: Instantiate objects only once" property=og:title><meta content="Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code" property=og:description><meta content=/images/mirrors.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/singletons-instantiate-objects-only-once property=twitter:url><meta content="Singletons: Instantiate objects only once" property=twitter:title><meta content="Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code" property=twitter:description><meta content=/images/mirrors.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/mirrors.width-800.jpg width=800></div><h1>Singletons: Instantiate objects only once</h1><h3>Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2021-01-16</span><span class="item-tag first">instance</span><span class=item-tag>objects</span><span class=item-tag>pattern</span><span class=item-tag>object oriented</span><span class=item-tag>singleton</span></div><main><p>When developing more extensive programs, being aware of different patterns can significantly help us solve problems even before they arise. One of those patterns is the creation of singletons, which are nothing else but objects that can be instantiated only once. In Python, we are exposed to singletons since the beginning, even if we are not aware of them. This article will discuss how singletons permeate our everyday programming and how we can bring them a step further.<h2>Every Day Singletons</h2><p>Before we dive into singletons, it is important to remember how Python behaves when it comes to mutable and immutable data types. A list, for example, is mutable, which means we can change its contents without creating a new object. For example:<pre><code class=language-pycon>>>> var1 = [1, 2, 3]
+>>> var2 = var1
+>>> var1[0] = 0
+>>> print(var2)
 [0, 2, 3]
-</code></pre>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If the output of the code above puzzles you, I strongly advise you to check out the article on mutable and immutable data types. </p>
-</div>
-<p>When we have two lists like <code>var1</code> and <code>var2</code>, we can see whether they have the same content:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 == var2 
+</code></pre><div class="admonition note"><p class=admonition-title>Note<p>If the output of the code above puzzles you, I strongly advise you to check out the article on mutable and immutable data types.</div><p>When we have two lists like <code>var1</code> and <code>var2</code>, we can see whether they have the same content:<pre><code class=language-pycon>>>> var1 == var2 
 True
-</code></pre>
-<p>But we can also see if they are the same object:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 is var2
+</code></pre><p>But we can also see if they are the same object:<pre><code class=language-pycon>>>> var1 is var2
 True
-</code></pre>
-<p>However, we can also do the following: </p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [1, 2, 3]
-&gt;&gt;&gt; var2 = [1, 2, 3]
-&gt;&gt;&gt; var1 == var2
+</code></pre><p>However, we can also do the following:<pre><code class=language-pycon>>>> var1 = [1, 2, 3]
+>>> var2 = [1, 2, 3]
+>>> var1 == var2
 True
-&gt;&gt;&gt; var1 is var2
+>>> var1 is var2
 False
-</code></pre>
-<p>In this case, both <code>var1</code> and <code>var2</code> have the same values <code>[1, 2, 3]</code> but they are not the same object. That is why <code>var1 is var2</code> returns <code>False</code>. </p>
-<p>However, Python programmers are likely exposed to the following syntax very early on:</p>
-<pre><code class="language-python">if var is None:
+</code></pre><p>In this case, both <code>var1</code> and <code>var2</code> have the same values <code>[1, 2, 3]</code> but they are not the same object. That is why <code>var1 is var2</code> returns <code>False</code>.<p>However, Python programmers are likely exposed to the following syntax very early on:<pre><code class=language-python>if var is None:
     print('Var is none')
-</code></pre>
-<p>At first sight the question that could pop anyone's mind is why can we use <code>ìs</code> in the example above. And the answer is that <code>None</code> is a special type of object, one that can be instantiated only once. Let's see some examples:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = None
-&gt;&gt;&gt; var2 = None
-&gt;&gt;&gt; var1 == var2
+</code></pre><p>At first sight the question that could pop anyone's mind is why can we use <code>ìs</code> in the example above. And the answer is that <code>None</code> is a special type of object, one that can be instantiated only once. Let's see some examples:<pre><code class=language-pycon>>>> var1 = None
+>>> var2 = None
+>>> var1 == var2
 True
-&gt;&gt;&gt; var1 is var2
+>>> var1 is var2
 True
-&gt;&gt;&gt; var3 = var2
-&gt;&gt;&gt; var3 is var1
+>>> var3 = var2
+>>> var3 is var1
 True
-&gt;&gt;&gt; var3 is None
+>>> var3 is None
 True
-</code></pre>
-<p>It means that through our code, there can be only one <code>None</code>, and any variable that references it will reference the same object, unlike what happened when we created two lists that had the same values. Together with <code>None</code>, the other two common singletons are <code>True</code> and <code>False</code>:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; [1, 2, 3] is [1, 2, 3]
+</code></pre><p>It means that through our code, there can be only one <code>None</code>, and any variable that references it will reference the same object, unlike what happened when we created two lists that had the same values. Together with <code>None</code>, the other two common singletons are <code>True</code> and <code>False</code>:<pre><code class=language-pycon>>>> [1, 2, 3] is [1, 2, 3]
 False
-&gt;&gt;&gt; None is None
+>>> None is None
 True
-&gt;&gt;&gt; False is False
+>>> False is False
 True
-&gt;&gt;&gt; True is true
+>>> True is true
 True
-</code></pre>
-<p>That completes the triad of singletons that Python programmers encounter daily. It explains why we can use the <code>is</code> syntax when checking if a variable is <code>None</code>, <code>True</code> or <code>False</code>. The examples above are only the beginning regarding singletons.</p>
-<h2>Small integer singletons</h2>
-<p>Python defines other singletons that are not that obvious and are mostly there because of memory and speed efficiency. Such is the case of small integers in the range -5 to 256. Therefore, we can do something like this:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = 1
-&gt;&gt;&gt; var2 = 1
-&gt;&gt;&gt; var1 is var2
+</code></pre><p>That completes the triad of singletons that Python programmers encounter daily. It explains why we can use the <code>is</code> syntax when checking if a variable is <code>None</code>, <code>True</code> or <code>False</code>. The examples above are only the beginning regarding singletons.<h2>Small integer singletons</h2><p>Python defines other singletons that are not that obvious and are mostly there because of memory and speed efficiency. Such is the case of small integers in the range -5 to 256. Therefore, we can do something like this:<pre><code class=language-pycon>>>> var1 = 1
+>>> var2 = 1
+>>> var1 is var2
 True
-</code></pre>
-<p>Or, more interestingly:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [1, 2, 3]
-&gt;&gt;&gt; var2 = [1, 2, 3]
-&gt;&gt;&gt; var1 is var2
+</code></pre><p>Or, more interestingly:<pre><code class=language-pycon>>>> var1 = [1, 2, 3]
+>>> var2 = [1, 2, 3]
+>>> var1 is var2
 False
-&gt;&gt;&gt; for i, j in zip(var1, var2):
+>>> for i, j in zip(var1, var2):
 ...     i is j
 ... 
 True
 True
 True
-</code></pre>
-<p>In the example above, you see two lists with the same elements. They are not the same list as we saw earlier, but each element is the same. If we want to get fancier with Python's syntax (just because we can), we can also run the following:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [i for i in range(250, 260)]
-&gt;&gt;&gt; var2 = [i for i in range(250, 260)]
-&gt;&gt;&gt; for i, j in zip(var1, var2):
+</code></pre><p>In the example above, you see two lists with the same elements. They are not the same list as we saw earlier, but each element is the same. If we want to get fancier with Python's syntax (just because we can), we can also run the following:<pre><code class=language-pycon>>>> var1 = [i for i in range(250, 260)]
+>>> var2 = [i for i in range(250, 260)]
+>>> for i, j in zip(var1, var2):
 ...     print(i, i is j)
 ... 
 250 True
@@ -246,53 +63,33 @@ True
 257 False
 258 False
 259 False
-</code></pre>
-<p>And we see that up to 256 integers are the same, but from 257 onwards, they are not. </p>
-<h2>Short strings singletons</h2>
-<p>Small integers are not the only unexpected singletons in Python. Short strings are, sometimes, also singletons. We can try something like the following:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = 'abc'
-&gt;&gt;&gt; var2 = 'abc'
-&gt;&gt;&gt; var1 is var2
+</code></pre><p>And we see that up to 256 integers are the same, but from 257 onwards, they are not.<h2>Short strings singletons</h2><p>Small integers are not the only unexpected singletons in Python. Short strings are, sometimes, also singletons. We can try something like the following:<pre><code class=language-pycon>>>> var1 = 'abc'
+>>> var2 = 'abc'
+>>> var1 is var2
 True
-</code></pre>
-<p>However, with strings, the reality is somewhat different. The process is called <strong>string interning</strong> and is described on <a href="https://en.wikipedia.org/wiki/String_interning">Wikipedia</a>. Python decides whether to allocate memory for strings as singletons based on some rules. First, strings must be defined at <em>compile-time</em>. It means that they should not be the output of a formatting task or a function. In the example above, <code>var1 = 'abc'</code> qualifies. </p>
-<p>Python tries its best at being efficient, and it will intern other strings that it considers will help save memory (and/or time). For example, function names are interned by default:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; def test_func():
+</code></pre><p>However, with strings, the reality is somewhat different. The process is called <strong>string interning</strong> and is described on <a href=https://en.wikipedia.org/wiki/String_interning>Wikipedia</a>. Python decides whether to allocate memory for strings as singletons based on some rules. First, strings must be defined at <em>compile-time</em>. It means that they should not be the output of a formatting task or a function. In the example above, <code>var1 = 'abc'</code> qualifies.<p>Python tries its best at being efficient, and it will intern other strings that it considers will help save memory (and/or time). For example, function names are interned by default:<pre><code class=language-pycon>>>> def test_func():
 ...     print('test func')
 ... 
-&gt;&gt;&gt; var1 = 'test_func'
-&gt;&gt;&gt; test_func.__name__ is var1
+>>> var1 = 'test_func'
+>>> test_func.__name__ is var1
 True
-</code></pre>
-<p>Empty strings and some single-character strings are interned by default, as is the case with small integers:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = chr(255)
-&gt;&gt;&gt; var2 = chr(255)
-&gt;&gt;&gt; var3 = chr(256)
-&gt;&gt;&gt; var4 = chr(256)
-&gt;&gt;&gt; var1 is var2
+</code></pre><p>Empty strings and some single-character strings are interned by default, as is the case with small integers:<pre><code class=language-pycon>>>> var1 = chr(255)
+>>> var2 = chr(255)
+>>> var3 = chr(256)
+>>> var4 = chr(256)
+>>> var1 is var2
 True
-&gt;&gt;&gt; var3 is var4
+>>> var3 is var4
 False
-</code></pre>
-<p>The fact that some strings are interned, does not mean we can get too confident about it. For example:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; var1 = 'Test String'
-&gt;&gt;&gt; var2 = 'Test String'
-&gt;&gt;&gt; var1 is var2
+</code></pre><p>The fact that some strings are interned, does not mean we can get too confident about it. For example:<pre><code class=language-pycon>>>> var1 = 'Test String'
+>>> var2 = 'Test String'
+>>> var1 is var2
 False
-&gt;&gt;&gt; var2 = 'TestString'
-&gt;&gt;&gt; var1 = 'TestString'
-&gt;&gt;&gt; var1 is var2
+>>> var2 = 'TestString'
+>>> var1 = 'TestString'
+>>> var1 is var2
 True
-</code></pre>
-<p>As we can see in the example above, being a short string is not the only requirement. The string must also be made of a limited set of characters, and spaces are not part of it. </p>
-<p>Therefore, the fact that Python is interning strings does not mean we should use the <code>is</code> syntax instead of the <code>==</code>. It just means that Python is running some optimizations under the hood. Perhaps one day, those optimizations become relevant for our code, but likely they will go completely unnoticed (but enjoyed). </p>
-<h2>Why singletons</h2>
-<p>What we have seen up to now is interesting, but it does not answer why going through the trouble of defining singletons. One clear answer is that by having singletons, we can save memory. In Python, what we usually call variables, can also be considered labels, pointing to the underlying data. If we have several labels pointing to the same data, it would be very memory efficient. There's no duplication of the information. </p>
-<p>However, if we ask ourselves when to add a singleton to our code, most likely, we won't find good examples. A singleton is a class that is instantiated only once. All other instances refer to the first, and therefore <em>are</em> the same. If you think about it, singletons and global variables are easy to mistake one for the other. However, a global variable does not imply anything about how it is instantiated. We could have a global variable pointing to an instance of a class and a local variable pointing to a different instance of the same class. </p>
-<p>Singletons are a programming pattern, and as such, they can be useful, but there's nothing we can do with them that can't be done without them. A standard example of singletons is a <strong>logger</strong>. Several parts of the program share information with the logger. The handler then decides whether to print to the terminal, save to a file, or don't do anything.</p>
-<h2>Defining a singleton</h2>
-<p>The crucial point of singletons is preventing multiple instantiations. Let's start by checking what happens when we instantiate a class twice:</p>
-<pre><code class="language-python">class MySingleton:
+</code></pre><p>As we can see in the example above, being a short string is not the only requirement. The string must also be made of a limited set of characters, and spaces are not part of it.<p>Therefore, the fact that Python is interning strings does not mean we should use the <code>is</code> syntax instead of the <code>==</code>. It just means that Python is running some optimizations under the hood. Perhaps one day, those optimizations become relevant for our code, but likely they will go completely unnoticed (but enjoyed).<h2>Why singletons</h2><p>What we have seen up to now is interesting, but it does not answer why going through the trouble of defining singletons. One clear answer is that by having singletons, we can save memory. In Python, what we usually call variables, can also be considered labels, pointing to the underlying data. If we have several labels pointing to the same data, it would be very memory efficient. There's no duplication of the information.<p>However, if we ask ourselves when to add a singleton to our code, most likely, we won't find good examples. A singleton is a class that is instantiated only once. All other instances refer to the first, and therefore <em>are</em> the same. If you think about it, singletons and global variables are easy to mistake one for the other. However, a global variable does not imply anything about how it is instantiated. We could have a global variable pointing to an instance of a class and a local variable pointing to a different instance of the same class.<p>Singletons are a programming pattern, and as such, they can be useful, but there's nothing we can do with them that can't be done without them. A standard example of singletons is a <strong>logger</strong>. Several parts of the program share information with the logger. The handler then decides whether to print to the terminal, save to a file, or don't do anything.<h2>Defining a singleton</h2><p>The crucial point of singletons is preventing multiple instantiations. Let's start by checking what happens when we instantiate a class twice:<pre><code class=language-python>class MySingleton:
     pass
 
 
@@ -300,25 +97,18 @@ ms1 = MySingleton()
 ms2 = MySingleton()
 print(ms1 is ms2)
 # False
-</code></pre>
-<p>As expected, both instances are different objects. To prevent the second instantiation, we must keep track of whether a class was instantiated. We can use a variable in the class itself to do it and return the same object. A possibility is to use the <code>__new__</code> method of the class:</p>
-<pre><code class="language-python">class MySingleton:
+</code></pre><p>As expected, both instances are different objects. To prevent the second instantiation, we must keep track of whether a class was instantiated. We can use a variable in the class itself to do it and return the same object. A possibility is to use the <code>__new__</code> method of the class:<pre><code class=language-python>class MySingleton:
     instance = None
 
     def __new__(cls, *args, **kwargs):
         if not isinstance(cls.instance, cls):
             cls.instance = object.__new__(cls)
         return cls.instance
-</code></pre>
-<p>And we can test it:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; ms1 = MySingleton()
-&gt;&gt;&gt; ms2 = MySingleton()
-&gt;&gt;&gt; ms1 is ms2
+</code></pre><p>And we can test it:<pre><code class=language-pycon>>>> ms1 = MySingleton()
+>>> ms2 = MySingleton()
+>>> ms1 is ms2
 True
-</code></pre>
-<p>This approach is relatively straightforward. We only need to check whether the <code>instance</code> was defined and create it if it does not exist. Sure, we could use <code>__instance</code>, or fancier ways of checking if the variable exists. The result would be the same. </p>
-<p>Singletons are a pattern which, in the end, is hard to justify. So we can see one example on which we open a file more than once. Our singleton class would look like this:</p>
-<pre><code class="language-python">class MyFile:
+</code></pre><p>This approach is relatively straightforward. We only need to check whether the <code>instance</code> was defined and create it if it does not exist. Sure, we could use <code>__instance</code>, or fancier ways of checking if the variable exists. The result would be the same.<p>Singletons are a pattern which, in the end, is hard to justify. So we can see one example on which we open a file more than once. Our singleton class would look like this:<pre><code class=language-python>class MyFile:
     _instance = None
     file = None
 
@@ -334,38 +124,26 @@ True
             cls._instance = object.__new__(cls)
 
         return cls._instance
-</code></pre>
-<p>Note a couple of things. First, we have defined <code>file</code> as a class attribute. We do this because the <code>__init__</code> method will be executed as often as the class is instantiated. Therefore, we open the file only once. We can achieve the same behavior directly in the <code>__new__</code> method after checking the <code>_instance</code> attribute. Note that we open the file in <code>w</code> mode, which means that we will overwrite the file's content each time. </p>
-<p>We can use the singleton like this:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; f = MyFile('test.txt')
-&gt;&gt;&gt; f.write('test1')
-&gt;&gt;&gt; f.write('test2')
+</code></pre><p>Note a couple of things. First, we have defined <code>file</code> as a class attribute. We do this because the <code>__init__</code> method will be executed as often as the class is instantiated. Therefore, we open the file only once. We can achieve the same behavior directly in the <code>__new__</code> method after checking the <code>_instance</code> attribute. Note that we open the file in <code>w</code> mode, which means that we will overwrite the file's content each time.<p>We can use the singleton like this:<pre><code class=language-pycon>>>> f = MyFile('test.txt')
+>>> f.write('test1')
+>>> f.write('test2')
 
-&gt;&gt;&gt; f2 = MyFile('test.txt')
-&gt;&gt;&gt; f2.write('test3')
-&gt;&gt;&gt; f2.write('test4')
-</code></pre>
-<p>And the contents of the file would be:</p>
-<pre><code>test1
+>>> f2 = MyFile('test.txt')
+>>> f2.write('test3')
+>>> f2.write('test4')
+</code></pre><p>And the contents of the file would be:<pre><code>test1
 test2
 test3
 test4
-</code></pre>
-<p>It is clear from the example above that it does not matter if we first define <code>f</code> or <code>f2</code>. The file to which we are going to write is opened only once. The contents get erased only once, and every time we write to it through the program, we will append lines. </p>
-<p>We can also check if it is a singleton:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; f is f2
+</code></pre><p>It is clear from the example above that it does not matter if we first define <code>f</code> or <code>f2</code>. The file to which we are going to write is opened only once. The contents get erased only once, and every time we write to it through the program, we will append lines.<p>We can also check if it is a singleton:<pre><code class=language-pycon>>>> f is f2
 True
-</code></pre>
-<p>However, in the way we defined our class above, there is one huge problem. What would be the output of the following?</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; f = MyFile('test.txt')
-&gt;&gt;&gt; f.write('test1')
-&gt;&gt;&gt; f.write('test2')
-&gt;&gt;&gt; f2 = MyFile('test2.txt')
-&gt;&gt;&gt; f2.write('test3')
-&gt;&gt;&gt; f2.write('test4')
-</code></pre>
-<p>The code is valid, but the program will create only the first file (<code>test.txt</code>) and ignore the second instantiation argument. Another fascinating point is what happens if we removed completely the <code>__new__</code> method:</p>
-<pre><code class="language-python">class MyFile:
+</code></pre><p>However, in the way we defined our class above, there is one huge problem. What would be the output of the following?<pre><code class=language-pycon>>>> f = MyFile('test.txt')
+>>> f.write('test1')
+>>> f.write('test2')
+>>> f2 = MyFile('test2.txt')
+>>> f2.write('test3')
+>>> f2.write('test4')
+</code></pre><p>The code is valid, but the program will create only the first file (<code>test.txt</code>) and ignore the second instantiation argument. Another fascinating point is what happens if we removed completely the <code>__new__</code> method:<pre><code class=language-python>class MyFile:
     file = []
 
     def __init__(self, filename):
@@ -374,200 +152,12 @@ True
 
     def write(self, line):
         self.file[0].write(line + '\n')
-</code></pre>
-<p>By definition this class is not a singleton, since each time we instantiate it we will get a different object:</p>
-<pre><code class="language-pycon">&gt;&gt;&gt; f = MyFile('test.txt')
-&gt;&gt;&gt; f2 = MyFile('test.txt')
-&gt;&gt;&gt; f is f2
+</code></pre><p>By definition this class is not a singleton, since each time we instantiate it we will get a different object:<pre><code class=language-pycon>>>> f = MyFile('test.txt')
+>>> f2 = MyFile('test.txt')
+>>> f is f2
 False
-&gt;&gt;&gt; f.write('test1')
-&gt;&gt;&gt; f.write('test2')
-&gt;&gt;&gt; f2.write('test3')
-&gt;&gt;&gt; f2.write('test4')
-</code></pre>
-<p>We are slightly cheating now because we changed the <code>file</code> attribute from <code>None</code> to an empty list. We do this because lists are mutable. When we append the opened file, the list is still the same and therefore shared among the other instances. In any case, the end effect is the same. The file is opened only once, and the lines get written in the same fashion as before. </p>
-<p>The idea of this quick example is that opening the file only once is not a feature exclusive of singletons. Just by smartly using mutability, we can achieve the same effect in even fewer lines of code. </p>
-<h2>Conclusions</h2>
-<p>The singleton pattern can be of great help when designing lower-level applications or frameworks. Python uses singletons to speed up its execution and to be more memory efficient. If we compare the time it takes to resolve <code>f == f2</code> and <code>f is f2</code> in the singleton and not-singleton cases, we can see some time improvements in the first. Whether the modifications impact the costs and limitations of the implementation will depend on how often we check equality. </p>
-<p>For higher-level solutions, however, the singleton pattern is harder to come by. I have tried to dig examples in other projects, but the only answer that comes back is the <em>logger</em> implementation. If anyone has an excellent example of using singletons in higher-level programs, I would be very grateful to hear it. </p>
-<h3>Singletons can break unit tests</h3>
-<p>A side note that is worth mentioning is that the singleton pattern can easily break unit tests' idea. In the singleton example above, we could have modified the <code>MyFile</code> object by doing something like <code>f.new_file = open('another_file')</code>. This change would have been persistent and can potentially alter other tests. The spirit behind unit tests is that each one is responsible for one thing and one thing only. If tests can impact each other, they are no longer <em>unit</em> tests. </p>
-            </main>
-            <div class="info-list">
-              <span class="item author">Article written by Aquiles Carattino</span>
-            </div>
-              <div class="similar-posts">
-                <h3>Related Articles:</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="item">
-                        <img src="/images/42_decorators.width-800.png" alt="">
-                        <span class="date">2020-05-16</span>
-                        <span class="name">Data Descriptors: Bringing Attributes to the Next level</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="item">
-                        <img src="/images/python1-01_gq7Qcbn.width-800.png" alt="">
-                        <span class="date">2021-03-21</span>
-                        <span class="name">Using slots in Python: limit dynamic attribute creation and improve speed</span>
-                      </a>
-                    </li>
-                </ul>
-              </div>
-            <div class="bottom-section">
-              <h4>Share your thoughts with us!</h4>
-              <div class="comments">
-                <!-- Comment -->
-                <script src="https://utteranc.es/client.js"
-                        repo="PFTL/pftl_discussions"
-                        issue-term="pathname"
-                        label="Comment"
-                        theme="github-light"
-                        crossorigin="anonymous"
-                        async>
-                </script>
-              </div>
-            </div>
-          </div>
-          <div class="rightside">
-            <div class="support-box">
-              <h3>Support Us</h3>
-              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
-                Lab</strong></p>
-              <a href="https://pythonforthelab.com/books" class="button">Check out the book</a>
-            </div>
-            <div class="latest-posts">
-
-                <h3>Latest Articles</h3>
-                <ul>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/">Instructions to build the Python for the Lab DAQ</a>
-                      <span>by Aquiles Carattino, 2021-03-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">Using slots in Python: limit dynamic attribute creation and improve speed</a>
-                      <span>by Aquiles Carattino, 2021-03-21</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras">Acquiring images from Basler Cameras</a>
-                      <span>by Aquiles Carattino, 2021-02-27</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">Singletons: Instantiate objects only once</a>
-                      <span>by Aquiles Carattino, 2021-01-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux">Differences of Multiprocessing on Windows and Linux</a>
-                      <span>by Aquiles Carattino, 2020-06-13</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops">Python Tip: Using Else with Loops</a>
-                      <span>by Aquiles Carattino, 2020-05-25</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures">Python Tip: Ready to Publish Matplotlib Figures</a>
-                      <span>by Aquiles Carattino, 2020-05-18</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level">Data Descriptors: Bringing Attributes to the Next level</a>
-                      <span>by Aquiles Carattino, 2020-05-16</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/python-tips-using-sets">Python Tips: Using Sets</a>
-                      <span>by Aquiles Carattino, 2020-05-11</span>
-                    </li>
-                    <li>
-                      <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where">Generators, Iterables, Iterators in Python: When and Where</a>
-                      <span>by Aquiles Carattino, 2020-04-10</span>
-                    </li>
-                </ul>
-
-            </div>
-            <div class="subscribe-fixed">
-              <button class="action">Never Stop Learning</button>
-              <div class="cnt">
-                <p>Join over 1000 Python developers and don't miss any updates!</p>
-                <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="mobile-sb-form">
-          <div class="sb-form">
-            <h4>Get all the information directly to your inbox</h4>
-            <form
-                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-                    target="_self" novalidate=""
-                >
-                  <div id="mc_embed_signup" class="field-wp">
-                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
-                  </div>
-                  <div id="mce-responses" class="clear foot">
-                  <div class="response" id="mce-error-response" style="display: none;"></div>
-                  <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
-                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
-                  signups */
-                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-                </div>
-                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
-                </form>
-          </div>
-        </div>
-
-      </div>
-    </div>
-    <!-- End Main -->
-
-  </section>
-  <!-- End Wrapper -->
-
-<!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="https://pythonforthelab.com/cookie-policy">Cookie Policy</a>
-        <a href="https://pythonforthelab.com/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
-  </div>
-</div>
-<!-- End Footer --><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
-<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
-<script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
-</script></body>
-</html>
+>>> f.write('test1')
+>>> f.write('test2')
+>>> f2.write('test3')
+>>> f2.write('test4')
+</code></pre><p>We are slightly cheating now because we changed the <code>file</code> attribute from <code>None</code> to an empty list. We do this because lists are mutable. When we append the opened file, the list is still the same and therefore shared among the other instances. In any case, the end effect is the same. The file is opened only once, and the lines get written in the same fashion as before.<p>The idea of this quick example is that opening the file only once is not a feature exclusive of singletons. Just by smartly using mutability, we can achieve the same effect in even fewer lines of code.<h2>Conclusions</h2><p>The singleton pattern can be of great help when designing lower-level applications or frameworks. Python uses singletons to speed up its execution and to be more memory efficient. If we compare the time it takes to resolve <code>f == f2</code> and <code>f is f2</code> in the singleton and not-singleton cases, we can see some time improvements in the first. Whether the modifications impact the costs and limitations of the implementation will depend on how often we check equality.<p>For higher-level solutions, however, the singleton pattern is harder to come by. I have tried to dig examples in other projects, but the only answer that comes back is the <em>logger</em> implementation. If anyone has an excellent example of using singletons in higher-level programs, I would be very grateful to hear it.<h3>Singletons can break unit tests</h3><p>A side note that is worth mentioning is that the singleton pattern can easily break unit tests' idea. In the singleton example above, we could have modified the <code>MyFile</code> object by doing something like <code>f.new_file = open('another_file')</code>. This change would have been persistent and can potentially alter other tests. The spirit behind unit tests is that each one is responsible for one thing and one thing only. If tests can impact each other, they are no longer <em>unit</em> tests.</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level> <img alt src=/images/42_decorators.width-800.png> <span class=date>2020-05-16</span> <span class=name>Data Descriptors: Bringing Attributes to the Next level</span> </a><li><a class=item href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed> <img alt src=/images/python1-01_gq7Qcbn.width-800.png> <span class=date>2021-03-21</span> <span class=name>Using slots in Python: limit dynamic attribute creation and improve speed</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>
