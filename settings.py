@@ -1,60 +1,60 @@
 # -*- coding: utf-8 -*-
+LOCALE = ('en_US',)
+DEFAULT_DATE_FORMAT = '%-d/%-m/%Y'
 
 AUTHOR = u'Aquiles Carattino'
 SITENAME = u'Python For The Lab'
-SITEURL = u'https://www.pythonforthelab.com'
+SITEURL = u'http://localhost:8000'
 TIMEZONE = 'Europe/Amsterdam'
-GITHUB_URL = 'https://github.com/PFTL'
-PDF_GENERATOR = False
 
-TEMPLATE_PAGES = {'static_index.html': 'index.html',
-                 'search.html': 'search/index.html',
-                  'static_books.html': 'books/index.html',}
+TEMPLATE_PAGES = {
+    'static_index.html': 'index.html',
+    'books.html': 'books/index.html',
+    'about.html': 'about/index.html',
+    }
 
-STATIC_PATHS = ['images', 'static', 'pages']
+STATIC_PATHS = ['images', 'static']
+STATIC_EXCLUDE_SOURCES = False
 
 ARTICLE_URL = 'blog/{slug}'
 ARTICLE_SAVE_AS = 'blog/{slug}/index.html'
 
+PAGE_SAVE_AS = '{slug}/index.html'
 
-
-SITEMAP_SAVE_AS = 'sitemap.xml'
 SITEMAP = {
     'format': 'xml',
     'priorities': {
-        'articles': 1,
+        'articles': 0.9,
         'indexes': 0.5,
         'pages': 0.5
-    },
+        },
     'changefreqs': {
         'articles': 'monthly',
         'indexes': 'weekly',
         'pages': 'monthly'
-    },
+        },
     'exclude': ['tag/', 'category/', 'categories.html', 'tags.html', 'search/'],
-}
-
+    }
 
 FEED_DOMAIN = 'https://www.pythonforthelab.com'
-
 FEED_RSS = 'feed.rss'
 
-MARKUP = ('rst', 'markdown',)
+# MARKUP = ('rst', 'markdown',)
 
-RELATIVE_URLS = True
+RELATIVE_URLS = False
 
 INDEX_SAVE_AS = 'blog/index.html'
 
-PLUGIN_PATHS = ['plugins',]
-PLUGINS = ['new_pigment', 'header_image', 'tipue_search', 'sitemap', 'newsletter_directive']
+DEFAULT_PAGINATION = 10
 
-LOCALE = 'en_US.utf8'
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+        'markdown.extensions.fenced_code': {},
+        'markdown.extensions.admonition': {},
+        },
+    'output_format': 'html5',
+    }
 
-# Where to store the images
-HEADERS_FOLDER = 'static/img'
-# Force to re-generate the images even if they exist
-FORCE_IMG_REBUILD = False
-# Default image header for when one is missing
-DEFAULT_HEADER = 'static/img/compartments.jpg'
-
-DEFAULT_PAGINATION = 12
+SIMILAR_POSTS_MAX_COUNT = 3
