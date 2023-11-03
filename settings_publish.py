@@ -14,6 +14,10 @@ TEMPLATE_PAGES = {
     }
 
 STATIC_PATHS = ['images', 'static']
+EXTRA_PATH_METADATA = {
+    'static/robots.txt': {'path': 'robots.txt'},
+    }
+
 STATIC_EXCLUDE_SOURCES = False
 
 ARTICLE_URL = 'blog/{slug}'
@@ -58,3 +62,8 @@ MARKDOWN = {
     }
 
 SIMILAR_POSTS_MAX_COUNT = 3
+
+CSS_MIN = True
+HTML_MIN = True
+INLINE_CSS_MIN = True
+INLINE_JS_MIN = True
