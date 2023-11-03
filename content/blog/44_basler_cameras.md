@@ -122,7 +122,7 @@ The syntax is pretty clear. If we want to change ``ExposureTime``, we can use a 
 camera.ExposureTime = 50000
 ```
 
-Both examples generate the same effect and show the difference between [functional or imperative programming](https://www.aquiles.me/functional_or_imperative_programming/). I, personally, believe the first one is clearer since it will always raise an error if, for example, we use ``Exposure`` instead of ``ExposureTime``.
+Both examples generate the same effect and show the difference between [functional or imperative programming](https://notes.aquiles.me/functional_or_imperative_programming/). I, personally, believe the first one is clearer since it will always raise an error if, for example, we use ``Exposure`` instead of ``ExposureTime``.
 
 ### Getting node information
 One of the reasons for favoring the imperative setting of the exposure time (i.e., using ``SetValue``) is that ``ExposureTime`` is more complex than a simple number attribute of the camera. When setting values to a device, one common concern is knowing the limits and the units of each parameter. Pylon, in that regard, is very transparent and consistent. 
@@ -145,19 +145,19 @@ It is possible to get the units of the ``ExposureTime``and the current value, th
 ## PylonViewer as the documentation entry point
 The examples above are a great starting point, but the main problem is that they are limited. As soon as we want to do something slightly more complex, we will need to use a different approach. For example, we know the minimum and maximum value of the exposure time, but how do we know the minimum difference between possible values? Fortunately, Basler bundles the PylonViewer with their software package. Let's see what information it provides when we select the exposure time:
 
-![](./_basler/pylon_viewer_01.png)
+![Detail of the Pylon Viewer](/images/44_basler/pylon_viewer_01.png)
 
 For every parameter that we can change in the camera, PylonViewer tells us what method should be used to change and retrieve the value. But this is not the only information that it provides. If we open the Feature Properties panel (must be selected under the Window menu), we can also see a table with more information for that specific property:
 
-![](./_basler/pylon_viewer_02.png)
+![Changing properties on the Pylon Viewer](/images/44_basler/pylon_viewer_02.png)
 
 The PylonViewer does not allow us to see how to retrieve that information. Still, if it is on the table, it means it can be programmatically accessed. The PylonViewer gives us access to the Programmer's Guide if we click on the *Help menu*. Normally, the C++ guide is the easiest to translate into Python code. If we search for ``ExposureTime`` we will get several matches, but any ``Member List`` would be a good starting point. The information on ``ExposureTime`` may be a bit vague:
 
-![](./_basler/pylon_manual_exposure_01.png)
+![Finding the reference to changing the exposure in Pylon Viewer](/images/44_basler/pylon_manual_exposure_01.png)
 
 But it provides a significant hint (highlighted in red above). The Exposure time is not an ordinary number, but a ``Pylon::IFloatEx``. Without entering too much into details, if we click on it, we get the information we were looking for:
 
-![](./_basler/pylong_manual_exposure_02.png) 
+![Documentation of the exposure property in Pylon](/images/_basler/pylong_manual_exposure_02.png) 
 
 Every parameter that belongs to this class will have plenty of available information. The exposure time is only one of them. For basic applications, it may be slightly far-fetched. Still, it is important to learn how to navigate the documentation to get the relevant information and translate it to Python. 
 

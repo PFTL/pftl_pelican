@@ -527,7 +527,7 @@ pattern. What we want to achieve is to have 3 processes. One that
 continuously acquires from a camera and publishes the frames. Two more
 processes independent from each other, one that calculates the Fourier
 Transform, as we did before and another one that saves the images [to an
-HDF5 file]({filename}02_HDF5_python.rst.md).
+HDF5 file]({filename}02_HDF5_python.md).
 
 Let's start by developing the publisher. It is going to be an infinite
 loop that sends images one after the other. It will look like this:
@@ -605,7 +605,7 @@ will still see that the publisher is running without problems, streaming
 frame after frame. You can see what happens if you start two subscribers
 (or more). You will notice that they all get the same information. Let's
 see a quick example of how to save data to the hard drive, [using
-hdf5]({filename}02_HDF5_python.rst.md). Let's create a new subscriber,
+hdf5]({filename}02_HDF5_python.md). Let's create a new subscriber,
 **subscriber\_2.py**, with the following:
 
 ```python
@@ -651,7 +651,7 @@ If you have installed HDF5 on your system, you can run this subscriber.
 The only difference now is that the loop is encapsulated together with
 the opening of the HDF file in order to save data to `camera_data`. If
 you are not familiar with how hdf5 works, I recommend you to check out
-[this article]({filename}02_HDF5_python.rst.md). Remember that frames
+[this article]({filename}02_HDF5_python.md). Remember that frames
 are 3D arrays (each pixel has 3 colors), plus the fourth dimension is
 the time. In these cases is where the power of `h5py` becomes evident
 and why it is worth controlling data saving at a lower level than what

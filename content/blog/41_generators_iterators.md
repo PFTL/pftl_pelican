@@ -2,9 +2,9 @@
 author: Aquiles Carattino
 slug: generators-iterables-iterators-python-when-and-where
 date: '2020-04-10'
-description: Learn how to share data between threads
+description: Learn the difference between different sequences in Python
 image: '/images/python-shelves-i.width-800.jpg'
-subtitle: Learn how to share data between threads
+subtitle: Learn the difference between different sequences in Python
 tags: [driver, arduino, control]
 title: "Generators, Iterables, Iterators in Python: When and Where"
 ---

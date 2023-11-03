@@ -101,7 +101,7 @@ Again, you can upload the program to the board and you will see that the LED sti
 
 Of course, you are probably also seeing that the messages get printed one after the other. This is because in serial communication there is no specific way of saying *this message has ended*. Something that is sort of a standard is using special characters to mark the end of a message, such as the newline character. Such as with Python, newline is represented by ``\n``, so you can update the code to include it, for example:
 
-```
+```python
 Serial.write("Switching ON\n");
 ```
 

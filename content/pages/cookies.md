@@ -1,6 +1,7 @@
 ---
 title: Cookie Policy for Python For The Lab
 slug: cookie-policy
+description: Python for the Lab cookie policy
 ---
 
 Python for the Lab stores only necessary cookies on your computer. We do not use them to track or analyze your behavior. We store one cookie called csrftoken which is necessary to provide security when submitting forms through the internet (for example when you submit a comment, subscribe to a newsletter, etc.). This cookie prevents a type of attack known as cross site request forgery, which would allow another page to submit a form as if it would be you on our website.

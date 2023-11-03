@@ -2,9 +2,9 @@
 author: Aquiles Carattino
 slug: storing-data-with-sqlite
 date: '2018-08-12'
-description: Learn different ways of storing data in your projects
+description: How to use SQLite to store data with Python
 image: '/images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg'
-subtitle: Learn different ways of storing data in your projects
+subtitle: How to use SQLite to store data with Python
 tags: 
   - Data
   - Storing

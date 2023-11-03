@@ -1089,7 +1089,7 @@ the movie**.
 Finally, the model is accumulating all the data into an attribute. It
 could be nice to have the option to save the movie or the picture
 somewhere. You can add an extra button to achieve it, and if you are
-willing, you can use [HDF5 files]({filename}02_HDF5_python.rst.md) to
+willing, you can use [HDF5 files]({filename}02_HDF5_python.md) to
 store the data.
 
 ## Conclusions

@@ -428,11 +428,6 @@ would like to directly pass to a function. Unpacking arguments is very
 useful, especially when you are not in control of the functions that you
 are using.
 
-The source version of this article is available [on
-Github](https://github.com/PFTL/website/blob/master/content/blog/29_args_kwargs.rst.md).
-The code examples are [available
-here](https://github.com/PFTL/website/tree/master/example_code/29_args_kwargs).
-
 Header photo by [Luca
 Bravo](https://unsplash.com/photos/XJXWbfSo2f0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on Unsplash

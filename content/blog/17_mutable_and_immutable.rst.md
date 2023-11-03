@@ -28,12 +28,6 @@ article, we are going to discuss about the differences between lists and
 tuples, or more generally about mutable and immutable data types and how
 they can be used in your programs.
 
-As always, [example
-code](https://github.com/PFTL/website/tree/master/example_code/17_mutable_immutable)
-is available and the [source
-code](https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst.md)
-for this page also.
-
 ## Lists and Tuples
 In Python, when you want to define a list, you can simply do the
 following:
@@ -551,12 +545,6 @@ be of any use. However, it is important to keep in the back of your mind
 that `==` can give very unexpected results, that variables can change in
 unexpected ways if you are not careful. When projects start to grow,
 small mistakes can pile up to disastrous problems.
-
-As always, [example
-code](https://github.com/PFTL/website/tree/master/example_code/17_mutable_immutable)
-is available and the [source
-code](https://github.com/PFTL/website/blob/master/content/blog/17_mutable_and_immutable.rst.md)
-for this page also.
 
 If you want to keep learning, you can read more about
 why tuples may seem to change &lt;{filename}18\_mutable\_tuples.rst&gt;\_

@@ -309,11 +309,6 @@ behave as a specific data type. Our example was a class that mimics how
 dictionaries work, and which we used as an argument in a different
 object, which had no idea of our custom data type.
 
-Example code for this article can be found [on
-Github](https://github.com/PFTL/website/tree/master/example_code/33_duck_typing).
-You can also find the [source code for this
-article](https://github.com/PFTL/website/blob/master/content/blog/33_duck_typing.rst.md).
-
 Header image by [JOSHUA
 COLEMAN](https://unsplash.com/@joshstyle?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on Unsplash

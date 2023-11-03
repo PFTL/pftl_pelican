@@ -2,14 +2,10 @@
 author: Aquiles Carattino
 slug: using-pyzmq-for-inter-process-communication-part-2
 date: '2019-03-05'
-description: |
-    Introduction to using sockets for communication between different
-    processes
+description: ZeroMQ is a powerful library to exchange information between different processes in Python
 image: '/images/thomas-jensen-592813-unsplash_linkedin_elhzvKj.width-800.jpg'
-subtitle: |
-    Introduction to using sockets for communication between different
-    processes
-tags: [ZMQ, Socket, Communication, Parallel, Data]
+subtitle: ZeroMQ is a powerful library to exchange information between different processes in Python
+tags: [ZeroMQ, ZMQ, Socket, Communication, Parallel, Data]
 title: 'Using pyZMQ for inter-process communication: Part 2'
 ---
 
@@ -18,7 +14,7 @@ possibilities of ZMQ to exchange data between different processes in
 Python. We have covered the [basics of pyZMQ]({filename}25_ZMQ.rst.md)
 in part 1. This is a fairly advanced tutorial, in which we are not only
 going to use pyZMQ, but also the multiprocessing library,
-[HDF5]({filename}02_HDF5_python.rst.md), and
+[HDF5]({filename}02_HDF5_python.md), and
 [openCV]({filename}22_Step_by_step_qt.rst.md). We are going to acquire
 images from the webcam as fast as possible, we are going to save the
 data to disk during the acquisition, and we are going to perform some
@@ -740,13 +736,6 @@ its documentation &lt;http://zeromq.org/&gt; is very important. There
 are a wealth of patterns that can be implemented to make the program
 more robust, faster, etc. Remember that premature optimization may be a
 liability more than a feature.
-
-The code for this tutorial can be found on
-[Github](https://github.com/PFTL/website/tree/master/example_code/26_ZMQ),
-as well as [the article
-itself](https://github.com/PFTL/website/blob/master/content/blog/26_ZMQ.rst.md).
-If you have any comments or suggestions, you are welcome to create them
-[here](https://github.com/PFTL/website/issues).
 
 Header photo by [Thomas
 Jensen](https://unsplash.com/photos/ISG-rUel0Uw?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

@@ -816,13 +816,6 @@ running code asynchronously. It looks like the future for this kind of
 programming, but I found the syntax much harder to understand in order
 to propose solutions.
 
-As always, [the example code can be found
-here](https://github.com/PFTL/website/tree/master/example_code/10_threads_processes),
-as well as [the source code for this
-article](https://github.com/PFTL/website/blob/master/content/blog/10_threads_or_processes.rst.md).
-If you find any mistakes or improvements, you are more than welcome to
-submit them as pull requests on Github.
-
 Header photo by [frank
 mckenna](https://unsplash.com/photos/TYhEoWbbayQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on Unsplash

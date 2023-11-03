@@ -2,9 +2,9 @@
 author: Aquiles Carattino
 slug: deep-and-shallow-copies-of-objects
 date: '2019-02-04'
-description: 'Understanding how tuples which are immutable, may seem to change.'
+description: Learn the difference between deep and shallow copies of objects in Python
 image: '/images/rebecca-georgia-269933-unsplash_linkedin.width-800.jpg'
-subtitle: 'Understanding how tuples which are immutable, may seem to change.'
+subtitle: Learn the difference between deep and shallow copies of objects in Python
 tags: [Data, Types, Mutable, Immutable, Objects, Copy, Memory]
 title: Deep and Shallow Copies of Objects
 ---

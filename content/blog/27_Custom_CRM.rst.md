@@ -109,7 +109,7 @@ should go. Let's try a simple print statement, like what you see in the
 image below. To run the code, you can either press Shift+Enter or click
 the play button that says run, while the cursor is still in the cell.
 
-![First Cell](/images/27_images/02_jupyter.jpg){.center-img}
+![First Cell](/images/27_images/02_jupyter.png){.center-img}
 
 The advantage of Jupyter notebooks is that they also keep the output
 when you share them. You can see [this example
@@ -1119,7 +1119,3 @@ need to handle communication with some hundreds of customers, you don't
 need much more than what we did. Perhaps you can make it more
 functional, prettier, etc. But that is more customization than core
 development.
-
-Header Photo by
-[rawpixel](https://unsplash.com/photos/7uGUFCyH3GY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-on Unsplash

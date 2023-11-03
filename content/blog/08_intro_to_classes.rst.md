@@ -513,8 +513,7 @@ developers code and understand what they are doing.
 The series of primer articles are thought as a go-to destination when
 you need to refresh a specific concept. If you find anything missing,
 you can always leave a comment below and we will expand the article
-according to your needs. You can find the text of this article on
-[Github](https://github.com/PFTL/website/blob/master/content/blog/08_intro_to_classes.rst.md).
+according to your needs. 
 
 Header photo by [Daniel
 Cheung](https://unsplash.com/photos/ZqqlOZyGG7g?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)

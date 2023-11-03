@@ -2,9 +2,9 @@
 author: Aquiles Carattino
 slug: introduction-to-storing-data-in-files
 date: '2018-08-10'
-description: Learn different ways of storing data in your projects
+description: Storing data in plain files with Python
 image: '/images/pietro-jeng-266017-unsplash_linkedin.width-800.jpg'
-subtitle: Learn different ways of storing data in your projects
+subtitle: Storing data in plain files with Python
 tags: 
   - Data
   - Storing

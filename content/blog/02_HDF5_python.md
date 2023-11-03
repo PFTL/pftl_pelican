@@ -2,8 +2,7 @@
 title: "How to use HDF5 files in Python"
 subtitle: "HDF5 allows you to store large amounts of data efficiently"
 slug: how-to-use-hdf5-files-in-python
-image: 'images/storing_data_hdf.png'
-
+image: '/images/storing_data_hdf.png'
 date: 2018-03-19
 author: Aquiles Carattino
 description: Complete tutorial on using HDF5 files with Python

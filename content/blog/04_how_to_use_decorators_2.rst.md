@@ -553,14 +553,3 @@ Two libraries that make heavy use of decorators are
 [Lantz](https://github.com/lantzproject/). Therefore, even if you don't
 develop your own decorators, it is always important to understand how
 they work.
-
-You can find the [example code for this
-tutorial](https://github.com/PFTL/website/tree/master/example_code/04_how_to_use_decorators_2)
-on Github, as well as the
-[text](https://github.com/PFTL/website/blob/master/content/blog/04_how_to_use_decorators_2.rst.md).
-If you find any mistakes, don't hesitate to submit a pull request or
-open an Issue.
-
-Header photo by [Michael
-Browning](https://unsplash.com/photos/tOZ-f5kl9BA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-on Unsplash

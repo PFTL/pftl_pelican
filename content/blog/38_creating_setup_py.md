@@ -2,9 +2,9 @@
 author: Aquiles Carattino
 slug: how-create-setup-file-your-project
 date: '2020-01-20'
-description: Learn how to share data between threads
+description: Create a setup file to ease the use of your libraries
 image: '/images/Python-setup.width-800.jpg'
-subtitle: Learn how to share data between threads
+subtitle: Create a setup file to ease the use of your libraries
 tags: [environment, path, setup, install, package]
 title: How to create a setup file for your project
 ---

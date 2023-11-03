@@ -816,10 +816,3 @@ a much more complex package.
 Photo by [Cody
 Davis](https://unsplash.com/photos/5E5N49RWtbA?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on Unsplash
-
-Remember, that both [the
-code](https://github.com/PFTL/website/tree/master/example_code/12_exceptions)
-and [the
-text](https://github.com/PFTL/website/blob/master/content/blog/12_handling_exceptions.rst.md)
-of the article is available, in case you have any comments or
-suggestions to improve it.

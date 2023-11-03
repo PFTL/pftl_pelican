@@ -265,11 +265,6 @@ extremely common scenario for short-lived scripts, it is very common
 when dealing with user interaction on programs that run for hours or
 days.
 
-As always, [example code can be found
-here](https://github.com/PFTL/website/tree/master/example_code/21_Classes_Mutables)
-and [the source of this page
-here](https://github.com/PFTL/website/blob/master/content/blog/21_Default_Attributes_Classes.rst.md).
-
 Header photo by [Dan
 Gold](https://unsplash.com/photos/mgaS4FlsYxQ?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 on Unsplash

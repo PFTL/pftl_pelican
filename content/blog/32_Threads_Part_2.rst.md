@@ -2,7 +2,7 @@
 author: Aquiles Carattino
 slug: handling-and-sharing-data-between-threads
 date: '2019-08-06'
-description: Learn how to share data between threads
+description: Sharing data between threads in Python, race conditions, and the limits of the global interpreter lock
 image: '/images/python1-01.width-800.png'
 subtitle: Learn how to share data between threads
 tags: [threading, data, queue, sharing, threads, async, multithreading]

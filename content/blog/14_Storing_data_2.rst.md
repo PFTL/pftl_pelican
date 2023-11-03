@@ -2,9 +2,9 @@
 author: Aquiles Carattino
 slug: storing-binary-data-and-serializing
 date: '2018-08-11'
-description: Learn different ways of storing data in your projects
+description: Storing data in binary format with Python
 image: '/images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg'
-subtitle: Learn different ways of storing data in your projects
+subtitle: Storing data in binary format with Python
 tags: 
   - Data
   - Storing
