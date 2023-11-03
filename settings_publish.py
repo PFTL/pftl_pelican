@@ -4,7 +4,7 @@ DEFAULT_DATE_FORMAT = '%-d/%-m/%Y'
 
 AUTHOR = u'Aquiles Carattino'
 SITENAME = u'Python For The Lab'
-SITEURL = u'http://localhost:8000'
+SITEURL = u'https://www.pythonforthelab.com'
 TIMEZONE = 'Europe/Amsterdam'
 
 TEMPLATE_PAGES = {
