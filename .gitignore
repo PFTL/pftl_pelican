@@ -1,6 +1,6 @@
 .idea/
 __pycache__/
-output
+#output
 *.npy
 *.hdf5
 *.db
