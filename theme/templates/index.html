@@ -1,20 +1,141 @@
-{% import 'macros/article_thumbnail.html' as art_thum %}
 {% extends 'base.html' %}
-{% block title %}List of Articles{% endblock %}
-{% block content %}
-<div class="container">
-    <div class="row justify-content-center my-3">
-    <h1>Our Latest Articles</h1>
-    </div>
-    <div class="row">
-    {% for article in articles_page.object_list %}
-        <div class="col-sm-4">
-            {{ art_thum.article_thumb(article) }}
+{% block title %}All the articles{% endblock %}
+{% block body %}
+  <!-- Wrapper -->
+  <section class="wrapper">
+  <!-- Intro -->
+<div class="intro blog article">
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <a href="/" class="logo">Python for the Lab</a>
+      <div class="header-dd">
+        <div class="navigation">
+          <ul>
+            <li class="active"><a href="{{ SITEURL }}/blog" class="nav-item blog"><span>Blog</span></a></li>
+            <li><a href="{{ SITEURL }}/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+            <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                   class="nav-item forum"><span>Forum</span></a></li>
+            <li><a href="{{ SITEURL }}/books" class="nav-item books"><span>Books</span></a></li>
+            <li><a href="{{ SITEURL }}/about" class="nav-item about"><span>About</span></a></li>
+          </ul>
         </div>
-    {% endfor %}
+        <div class="search field-wp">
+          <form action="#">
+            <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+            <input type="submit" class="search-btn">
+          </form>
+          <div data-stork="sitesearch-output"></div>
+        </div>
+      </div>
+      <button class="menu-btn"><span>Menu</span></button>
     </div>
-    {% if articles_page.has_other_pages() %}
-        {% include 'pagination.html' %}
-    {% endif %}
-    {% endblock %}
+    <!-- End Header -->
+
+    <!-- Intro Cnt -->
+    <div class="intro-cnt v-article">
+      <div class="side-text">
+        <h1>All the articles of Python for the Lab</h1>
+        <p>Get access to all the articles we've ever written. Are you missing something? Then <a
+            href="https://us21.list-manage.com/contact-form?u=f0d9bfa6188cdcc67890a07f6&form_id=23280542e88944b2a32bed276c724d1e">
+          let us know!</a></p>
+      </div>
+      <div class="side-form small-sb-form">
+        <div class="sb-form" id="mc_embed_signup">
+          <h4>Get all the information directly to your inbox</h4>
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+              target="_self"
+              novalidate="">
+            <div class="field-wp" id="mc_embed_signup_scroll">
+              <input type="email" name="EMAIL" id="mce-EMAIL" class="field" placeholder="Your E-Mail" required=""
+                     value="">
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk form bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe"
+                   id="mc-embedded-subscribe">
+            <span class="small-text">Get relevant information, unsubscribe at any time.</span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- End Intro Cnt -->
+
+  </div>
 </div>
+<!-- End Intro -->
+
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+
+        <!-- Articles List -->
+        <div class="articles-list">
+          {% for article in articles_page.object_list %}
+            <div class="item">
+              <span class="image"><img src="{{ article.featured_image }}" alt=""></span>
+              <span class="date">{{ article.date.strftime('%Y-%m-%d') }}</span>
+              <a href="{{ SITEURL }}/{{ article.url }}" class="title">{{ article.title }}</a>
+              <span class="text">{{ article.summary }}</span>
+              <span class="more-btn"><span>Read Article</span></span>
+            </div>
+          {% endfor %}
+          <!-- End Articles List -->
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <div class="text">
+              {{ articles_page.number }} / {{ articles_paginator.num_pages }}
+            </div>
+            <div class="pag-list">
+              <ul>
+                {% if articles_page.has_previous() %}
+                  <li>
+                    <a href="{{ SITEURL }}/{{ articles_previous_page.url }}" class="prev-btn">&larr; Previous</a>
+                  </li>
+                {% else %}
+                  <li>
+                    <a href="#" class="prev-btn disabled">&larr; Previous</a>
+                  </li>
+                {% endif %}
+                {% for num in range( 1, 1 + articles_paginator.num_pages ) %}
+                  <li>
+                    <a href="{{ SITEURL }}/{{ page_name }}{{ num if num > 1 else '' }}.html"
+                       class="number {{ 'active' if num == articles_page.number else '' }}">{{ num }}</a>
+                  </li>
+                {% endfor %}
+              {% if articles_page.has_next() %}
+                  <li>
+                    <a href="{{ SITEURL }}/{{ articles_next_page.url }}" class="next-btn">&raquo;</a>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+          <!-- End Pagination -->
+
+          <div class="mobile-sb-form">
+            <div class="sb-form">
+              <h4>Get all the information directly to your inbox</h4>
+              <form action="">
+                <div class="field-wp">
+                  <input type="text" class="field" placeholder="Your E-Mail">
+                </div>
+                <input type="submit" class="send-btn" value="Subscribe to the Newsletter">
+                <span class="small-text">Get relevant information, unsubscribe at any time.</span>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!-- End Main -->
+
+  </section>
+  <!-- End Wrapper -->
+{% endblock %}

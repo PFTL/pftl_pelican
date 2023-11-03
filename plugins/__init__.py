@@ -1,1 +1,0 @@
-from .newsletter_directive import *

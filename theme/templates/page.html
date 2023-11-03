@@ -1,13 +1,26 @@
 {% extends "base.html" %}
 
 {% block meta_header %}{% if page.meta %}
-<meta name="description" content="{{ page.meta }}">
+<meta name="description" content="{{ page.description }}">
 <link rel="canonical" href="{{ SITEURL }}/{{ page.slug }}" />
 {% endif %}{% endblock %}
 
 {% block title %}{{ page.title }}{% endblock %}
 
-{% block content %}
+{% block body %}
+    <section class="wrapper">
+    {% include 'intro.html' %}
+
+
+    <div class="main">
+      <div class="container">
+        <main>
+        <h1>{{ page.title }}</h1>
+          {{ page.content }}
+          </main>
+      </div>
+    </div>
+    </section>
 <div class="container my-5">
   <div class="row">
     <h1>{{ page.title }}</h1>

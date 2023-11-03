@@ -1,54 +1,117 @@
-{% import 'macros/article_thumbnail.html' as art_thum %}
 {% extends 'base.html' %}
-{% block title %}Learn Python Programming{% endblock %}
-{% block meta_header %}
-    <meta name="description" content="Learn how to develop Python Applications that work in your lab.">
-    <link rel="canonical" href="https://www.pythonforthelab.com/"/>
-{% endblock %}
-{% block content %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <h1 class="text-center my-5">Learn how to use Python for your Lab</h1>
-                <p>Python For The Lab is a collection of resources to help you start using Python
-                    for developing solutions in your lab. <br/>
-                    From analyzing data collected with your experiments to writing software to control your setup.
-                </p>
+{% block title %}Python for scientific instrument control{% endblock %}
+{% block body %}
+  <!-- Wrapper -->
+  <section class="wrapper home">
+
+    <!-- Intro -->
+    <div class="intro home">
+      <div class="container">
+        <div class="header">
+          <a href="{{ SITEURL }}" class="logo">Python for the Lab</a>
+          <div class="header-dd">
+            <div class="navigation">
+              <ul>
+                <li><a href="{{ SITEURL }}/blog" class="nav-item blog"><span>Blog</span></a></li>
+                <li><a href="{{ SITEURL }}/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+                <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank" class="nav-item forum"><span>Forum</span></a></li>
+                <li><a href="{{ SITEURL }}/books" class="nav-item books"><span>Books</span></a></li>
+                <li><a href="{{ SITEURL }}/about" class="nav-item about"><span>About</span></a></li>
+              </ul>
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <h1 class="text-center my-5">Where to start</h1>
-                <ul style="list-style-type: none;">
-                    <li><h3><a href="https://forum.pythonforthelab.com">Check out the forum to learn from others</a>
-                    </h3></li>
-                    <li><h3><a href="/blog">Read our articles</a></h3></li>
-                    <li><h3><a href="https://www.uetke.com/courses">Follow one of our courses</a></h3></li>
-                    <li><h3><a href="/books">Read our books</a></h3></li>
-                </ul>
+            <div class="search field-wp">
+              <form action="#">
+                <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+                <input type="submit" class="search-btn">
+              </form>
+              <div data-stork="sitesearch-output"></div>
             </div>
+          </div>
+          <div class="search field-wp">
+            <form action="#">
+              <input data-stork="sitesearch" type="text" class="field" placeholder="Type to Search">
+              <input type="submit" class="search-btn">
+            </form>
+            <div data-stork="sitesearch-output"></div>
+          </div>
+          <button class="menu-btn"><span>Menu</span></button>
         </div>
-        <div class="row justify-content-center my-3">
-            <div class="col-sm-8">
-                {% include 'newsletter_card.html' %}
+        <div class="home-cnt">
+          <h1>Python for scientists who need lab instrument control.</h1>
+          <div class="intro-img"></div>
+          <p>Python For The Lab is a collection of resources to help you start using Python for developing solutions in
+            your lab. <br>From analyzing data collected with your experiments to writing software to control your setup.
+          </p>
+          <div class="subscribe-form">
+            <div class="text"><strong>Get all the information directly to your inbox.</strong> Unsubscribe any time.
             </div>
-        </div>
-        <div class="row justify-content-center my-3">
-            <h1>Our Latest Articles</h1>
-        </div>
-        <div id="latest_articles">
-            <div class="row">
-                {% for article in articles[:6] %}
-                    <div class="col-sm-4">
-                        {{ art_thum.article_thumb(article) }}
-                    </div>
-                {% endfor %}
+            <div id="mc_embed_signup" class="form-cnt">
+              <form
+                  action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                  method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                  target="_self" novalidate="">
+                <div class="field-wp">
+                  <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                </div>
+                <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                <input type="submit" class="subscribe-btn" value="Subscribe" name="subscribe"
+                       id="mc-embedded-subscribe">
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     </div>
+    <!-- End Intro -->
 
-{% endblock %}
+    <!-- Navigation Wp -->
+    <div class="navigation-wp">
+      <div class="container">
+        <ul>
+          <li><a href="{{ SITEURL }}/blog" class="nav-item blog"><span>Blog</span></a></li>
+          <li><a href="{{ SITEURL }}/hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+          <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank" class="nav-item forum"><span>Forum</span></a></li>
+          <li><a href="{{ SITEURL }}/books" class="nav-item books"><span>Books</span></a></li>
+          <li><a href="{{ SITEURL }}/about" class="nav-item about"><span>About</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- End Navigation Wp -->
 
-{% block footer_scripts %}
-    <script src="{{ SITEURL }}/theme/js/newsletter_subscribe.js"></script>
+    <!-- Home Articles -->
+    <div class="home-articles">
+      <div class="container">
+        <h2>Our Latest Articles</h2>
+        <div class="articles-cnt">
+          {% for article in articles %}
+            <!-- Article -->
+            <div class="article{% if loop.first %} big{% endif %}">
+              <span class="image"><img src="{{ article.featured_image }}" alt=""></span>
+              <span class="date">{{ article.date.strftime('%Y-%m-%d') }}</span>
+              <a href="{{ SITEURL }}/{{ article.url }}" class="title">{{ article.title }}</a>
+              <span class="text">{{ article.summary }}</span>
+              <span class="more-btn"><span>Read Article</span></span>
+            </div>
+            <!-- End Article -->
+          {% endfor %}
+
+          <div class="bottom">
+            <p>Want to read more? Here’s the list of all of our posts!</p>
+            <a href="{{ SITEURL }}/blog" class="button"><span>All Articles</span></a>
+          </div>
+        </div>
+      </div>
+      <!-- End Home Articles -->
+
+  </section>
+  <!-- End Wrapper -->
+
 {% endblock %}
