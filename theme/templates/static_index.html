@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 {% block title %}Python for scientific instrument control{% endblock %}
+{% block meta_header %}
+  <meta name="description"
+        content="We are experts at controlling scientific instruments with Python. From labs to companies that want to bring their software to the next level.">
+  <link rel="canonical" href="{{ SITEURL }}" >
+    <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ SITEURL }}">
+  <meta property="og:title" content="Python for the Lab">
+  <meta property="og:description" content="Helping labs and companies control scientific instruments with Python">
+  <meta property="og:image" content="{{ SITEURL }}/static/img/pftl_OG.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ SITEURL }}">
+  <meta property="twitter:title" content="Python for the Lab">
+  <meta property="twitter:description" content="Helping labs and companies control scientific instruments with Python">
+  <meta property="twitter:image" content="{{ SITEURL }}/static/img/pftl_OG.png">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+{% endblock %}
 {% block body %}
   <!-- Wrapper -->
   <section class="wrapper home">
@@ -14,7 +35,8 @@
               <ul>
                 <li><a href="{{ SITEURL }}/blog" class="nav-item blog"><span>Blog</span></a></li>
                 <li><a href="{{ SITEURL }}/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-                <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank" class="nav-item forum"><span>Forum</span></a></li>
+                <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                       class="nav-item forum"><span>Forum</span></a></li>
                 <li><a href="{{ SITEURL }}/books" class="nav-item books"><span>Books</span></a></li>
                 <li><a href="{{ SITEURL }}/about" class="nav-item about"><span>About</span></a></li>
               </ul>
@@ -51,7 +73,8 @@
                   method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
                   target="_self" novalidate="">
                 <div class="field-wp">
-                  <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL"
+                         required="" value="">
                 </div>
                 <div id="mce-responses" class="clear foot">
                   <div class="response" id="mce-error-response" style="display: none;"></div>
@@ -78,7 +101,8 @@
         <ul>
           <li><a href="{{ SITEURL }}/blog" class="nav-item blog"><span>Blog</span></a></li>
           <li><a href="{{ SITEURL }}/hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
-          <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank" class="nav-item forum"><span>Forum</span></a></li>
+          <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
+                 class="nav-item forum"><span>Forum</span></a></li>
           <li><a href="{{ SITEURL }}/books" class="nav-item books"><span>Books</span></a></li>
           <li><a href="{{ SITEURL }}/about" class="nav-item about"><span>About</span></a></li>
         </ul>

@@ -614,6 +614,9 @@ main  > p a:hover { text-decoration: underline; }
 .article-cnt .contents > ul > li ul { padding: 0 0 0 15px; }
 .article-cnt .contents > ul > li ul li { margin: 15px 0 0 0; }
 
+.article-cnt main img {max-width: 90%;}
+.article-cnt main .center-image {display: block; max-width: 50%; margin-left: auto; margin-right: auto; margin-bottom: 10px; margin-top: 10px; }
+
 .article-cnt .code-box { margin: 0 0 25px 0; box-shadow: 0 1px 10px rgba(0,0,0,0.1); }
 .article-cnt .code-box:before { content: attr(data-title); display: block; font-size: 18px; line-height: 22px; font-weight: bold; padding: 20px; border-radius: 2px 2px 0 0; margin-bottom: -1px; position: relative; z-index: 20; }
 .article-cnt .code-box.python:before { color: #ffffff; background: #93acec; }
@@ -773,6 +776,7 @@ main  > p a:hover { text-decoration: underline; }
 	.article-cnt .bottom-section .comment-add { margin-left: 10px; padding-left: 60px; padding-right: 20px; }
 	.article-cnt .bottom-section .comment-add .comment-form .field-wp { flex-basis: 100%; }
 	.article-cnt .bottom-section .comment-add .comment-form .connect-wp { flex-basis: 100%; margin-bottom: 8px; justify-content: flex-start; }
+	.article-cnt main .center-image {display: block; max-width: 90%; margin-left: auto; margin-right: auto; margin-bottom: 10px; margin-top: 10px; }
 }
 
 @media screen and (max-width: 480px) {

@@ -1,5 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}Improve your programming skills with our books!{% endblock %}
+{% block meta_header %}
+  <meta name="description"
+        content="Support Python for the Lab buying its books. Thanks to the community we can keep writing the best tutorials for scientists.">
+  <link rel="canonical" href="{{ SITEURL }}/books" >
+{% endblock %}
 {% block head_scripts %}<script src="https://gumroad.com/js/gumroad.js"> </script><{% endblock %}
 {% block body %}
   <section class="wrapper">

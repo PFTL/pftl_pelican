@@ -4,6 +4,23 @@
   <meta name="tags" content="{% for tag in article.tags %}{{ tag }}, {% endfor %}">
   <meta name="description" content="{{ article.description }}">
   <meta name="author" content="{{ article.author }}">
+  <link rel="canonical" href="{{ article.url }}" >
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Python for the Lab">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ article.url }}">
+    <meta property="og:title" content="{{ article.title }}">
+    <meta property="og:description" content="{{ article.description }}">
+    <meta property="og:image" content="{{ article.image }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ article.url }}">
+    <meta property="twitter:title" content="{{ article.title }}">
+    <meta property="twitter:description" content="{{ article.description }}">
+    <meta property="twitter:image" content="{{ article.image }}">
+    <meta name="twitter:creator" content="@aquicarattino">
 
 {% endblock %}
 {% block head_scripts %}

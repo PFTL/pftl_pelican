@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
-{% block title %}All the articles{% endblock %}
+{% block title %}Improve your programming skills with these amazing articles{% endblock %}
+{% block meta_header %}
+  <meta name="description"
+        content="All our articles in a single place. From introductory topics to advanced concepts. All in an approachable style.">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ SITEURL }}">
+  <meta property="og:title" content="Python for the Lab">
+  <meta property="og:description" content="Helping labs and companies control scientific instruments with Python">
+  <meta property="og:image" content="{{ SITEURL }}/static/img/pftl_OG.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ SITEURL }}">
+  <meta property="twitter:title" content="Python for the Lab">
+  <meta property="twitter:description" content="Helping labs and companies control scientific instruments with Python">
+  <meta property="twitter:image" content="{{ SITEURL }}/static/img/pftl_OG.png">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+{% endblock %}
 {% block body %}
   <!-- Wrapper -->
   <section class="wrapper">
