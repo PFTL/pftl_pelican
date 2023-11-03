@@ -70,7 +70,7 @@ overlaps
         <div class="navigation">
           <ul>
             <li class="active"><a href="../../blog" class="nav-item blog"><span>Blog</span></a></li>
-            <li><a href="../../hire-me/" class="nav-item courses"><span>Courses</span></a></li>
+            <li><a href="../../hire-me/" class="nav-item hire-me"><span>Hire Me</span></a></li>
             <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank"
                    class="nav-item forum"><span>Forum</span></a></li>
             <li><a href="../../books" class="nav-item books"><span>Books</span></a></li>
@@ -472,10 +472,8 @@ prosperity of the code you write, regardless of where it will bring you.</p>
   </div>
 </div>
 <!-- End Footer --><script src="../../theme/js/prism.js"></script>
-<script src="../../theme/js/stork.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
 <script>
-    stork.initialize("../../theme/js/stork.wasm")
-    stork.downloadIndex("sitesearch", "../../search-index.st")
-    stork.attach("sitesearch")
+    stork.register("sitesearch", "../../search-index.st");
 </script></body>
 </html>

@@ -61,7 +61,7 @@
             <div class="navigation">
               <ul>
                 <li><a href="../blog" class="nav-item blog"><span>Blog</span></a></li>
-                <li><a href="../hire-me/" target="_blank" class="nav-item courses"><span>Courses</span></a></li>
+                <li><a href="../hire-me/" target="_blank" class="nav-item hire-me"><span>Hire Me</span></a></li>
                 <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank" class="nav-item forum"><span>Forum</span></a></li>
                 <li><a href="../books" class="nav-item books"><span>Books</span></a></li>
                 <li class="active"><a href="../about" class="nav-item about"><span>About</span></a></li>
@@ -78,7 +78,7 @@
         </div>
         <div class="about-cnt ab">
           <h2>About Us</h2>
-          <p><strong>Python for the Lab</strong> was born as a companion for <a href="../courses">the
+          <p><strong>Python for the Lab</strong> was born as a companion for <a href="../hire-me/">the
             courses</a> given in several universities around Europe.
             The idea is to provide a series of articles that can boost the readers in their Python endeavors. If you
             have any doubts, or are facing a problem to which there is no obvious solution, or are looking for an
@@ -136,10 +136,8 @@
   </div>
 </div>
 <!-- End Footer --><script src="../theme/js/prism.js"></script>
-<script src="../theme/js/stork.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
 <script>
-    stork.initialize("../theme/js/stork.wasm")
-    stork.downloadIndex("sitesearch", "../search-index.st")
-    stork.attach("sitesearch")
+    stork.register("sitesearch", "../search-index.st");
 </script></body>
 </html>

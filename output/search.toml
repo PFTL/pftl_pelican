@@ -3,11 +3,6 @@ html_selector = "main"
 base_directory = "output"
 
 [[input.files]]
-path = "about-2/index.html"
-url = "/pages/about-us.html"
-title = "About Us"
-
-[[input.files]]
 path = "cookie-policy/index.html"
 url = "/pages/cookie-policy.html"
 title = "Cookie Policy for Python For The Lab"
