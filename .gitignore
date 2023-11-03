@@ -6,3 +6,4 @@ __pycache__/
 *.db
 config.yml
 .ipynb_checkpoints/
+.DS_Store
