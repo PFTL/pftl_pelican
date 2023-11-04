@@ -14,5 +14,6 @@ RELATIVE_URLS = False
 
 CSS_MIN = True
 HTML_MIN = True
+JS_MIN = False  # Somehow minifying JS brakes the custom JS
 INLINE_CSS_MIN = True
 INLINE_JS_MIN = True

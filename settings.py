@@ -63,5 +63,6 @@ SIMILAR_POSTS_MAX_COUNT = 3
 
 CSS_MIN = False
 HTML_MIN = False
+JS_MIN = False
 INLINE_CSS_MIN = False
 INLINE_JS_MIN = False
