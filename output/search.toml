@@ -248,6 +248,11 @@ url = "about/index.html"
 title = ""
 
 [[input.files]]
+path = "hire-me/index.html"
+url = "hire-me/index.html"
+title = ""
+
+[[input.files]]
 path = "404.html"
 url = "404.html"
 title = ""
