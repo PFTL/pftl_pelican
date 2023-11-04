@@ -11,6 +11,7 @@ TEMPLATE_PAGES = {
     'static_index.html': 'index.html',
     'books.html': 'books/index.html',
     'about.html': 'about/index.html',
+    'hire_me.html': 'hire-me/index.html',
     '404.html': '404.html',
     }
 
