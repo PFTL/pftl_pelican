@@ -2,6 +2,8 @@ import sys
 sys.path.append('.')
 from settings import *
 
+SITEURL = u'https://pythonforthelab.com'
+
 EXTRA_PATH_METADATA = {
     'static/robots.txt': {'path': 'robots.txt'},
     }
