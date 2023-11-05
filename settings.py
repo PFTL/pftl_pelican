@@ -13,6 +13,7 @@ TEMPLATE_PAGES = {
     'about.html': 'about/index.html',
     'hire_me.html': 'hire-me/index.html',
     'courses.html': 'courses/index.html',
+    'new_index.html': 'new_index/index.html',
     '404.html': '404.html',
     }
 

@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+
+.nav-item {
+    @apply py-2 before:content-coursesIcon before:inline-block before:h-6 before:w-6;
+}
+
+.nav-item a:hover{
+    color: inherit;
+}
+
+@tailwind utilities;
