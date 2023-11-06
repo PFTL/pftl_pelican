@@ -14,6 +14,7 @@ TEMPLATE_PAGES = {
     'hire_me.html': 'hire-me/index.html',
     'courses.html': 'courses/index.html',
     'new_index.html': 'new_index/index.html',
+    # 'new_blog.html': 'new_blog/index.html',
     '404.html': '404.html',
     }
 
@@ -45,7 +46,7 @@ FEED_RSS = 'feed.rss'
 
 # MARKUP = ('rst', 'markdown',)
 
-RELATIVE_URLS = True
+RELATIVE_URLS = False
 
 INDEX_SAVE_AS = 'blog/index.html'
 
