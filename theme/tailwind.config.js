@@ -4,7 +4,7 @@ module.exports = {
     theme: {
         fontFamily: {
             'sans': ['Poppins', 'sans-serif'],
-            'serif': ['Markazy Text', 'serif'],
+            'serif': ['Playfair Display', 'serif'],
         },
         listStyleType: {
             none: 'none',
@@ -28,6 +28,10 @@ module.exports = {
                 'booksIcon': 'url("images/books.svg")',
                 'booksWhiteIcon': 'url("images/books-white.svg")',
                 'arrowBlue': 'url("images/arrow-blue.svg")',
+                'profile': 'url("images/profile.svg")',
+                'calendar': 'url("images/calendar.svg")',
+                'tag': 'url("images/tag.svg")',
+                'article': 'url("images/article.svg")',
             },
             backgroundImage: {
                 'arrow': 'url("images/arrow-blue.svg")',

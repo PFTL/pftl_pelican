@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% block title %}{{ article.title }}{% endblock %}
+{% block meta_header %}
+  <meta name="tags" content="{% for tag in article.tags %}{{ tag }}, {% endfor %}">
+  <meta name="description" content="{{ article.description }}">
+  <meta name="author" content="{{ article.author }}">
+  <link rel="canonical" href="{{ article.url }}" >
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:site_name" content="Python for the Lab">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{ article.url }}">
+    <meta property="og:title" content="{{ article.title }}">
+    <meta property="og:description" content="{{ article.description }}">
+    <meta property="og:image" content="{{ article.image }}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ article.url }}">
+    <meta property="twitter:title" content="{{ article.title }}">
+    <meta property="twitter:description" content="{{ article.description }}">
+    <meta property="twitter:image" content="{{ article.image }}">
+    <meta name="twitter:creator" content="@aquicarattino">
+
+{% endblock %}
+{% block head_scripts %}
+  <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/prism.css"/>
+{% endblock %}
+{% block body %}
+  <!-- Wrapper -->
+  <section class="wrapper">
+
+    {% include 'intro.html' %}
+
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+
+        <div class="article-cnt">
+          <div class="leftside">
+            <div class="article-image">
+              <img src="{{ SITEURL }}/{{ article.featured_image }}" alt="" width="800">
+            </div>
+            <h1>{{ article.title }}</h1>
+            <h3>{{ article.description }}</h3>
+            <div class="info">
+              <span class="item-1 author">by {{ article.author }}</span>
+              <span class="item-1 date">{{ article.date.strftime('%Y-%m-%d') }}</span>
+              {% for tag in article.tags %}
+                <span class="item-tag {% if loop.first %}first{% endif %}">{{ tag }}</span>
+              {% endfor %}
+            </div>
+            <main>
+              {{ article.content }}
+            </main>
+            <div class="info-list">
+              <span class="item author">Article written by {{ article.author }}</span>
+            </div>
+            {% if article.similar_posts %}
+              <div class="similar-posts">
+                <h3>Related Articles:</h3>
+                <ul>
+                  {% for similar in article.similar_posts %}
+                    <li>
+                      <a href="{{ SITEURL }}/{{ similar.url }}" class="item">
+                        <img src="{{ similar.featured_image }}" alt="">
+                        <span class="date">{{ similar.date.strftime('%Y-%m-%d') }}</span>
+                        <span class="name">{{ similar.title }}</span>
+                      </a>
+                    </li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+            <div class="bottom-section">
+              <h4>Share your thoughts with us!</h4>
+              <div class="comments">
+                <!-- Comment -->
+                <script src="https://utteranc.es/client.js"
+                        repo="PFTL/pftl_discussions"
+                        issue-term="pathname"
+                        label="Comment"
+                        theme="github-light"
+                        crossorigin="anonymous"
+                        async>
+                </script>
+              </div>
+            </div>
+          </div>
+          <div class="rightside">
+            <div class="support-box">
+              <h3>Support Us</h3>
+              <p>If you like the content of this website, consider buying a copy of the book <strong>Python For The
+                Lab</strong></p>
+              <a href="{{ SITEURL }}/books" class="button">Check out the book</a>
+            </div>
+            <div class="latest-posts">
+
+              {% if article.series %}
+                <h3>{{ article.series.name }} series</h3>
+                <ol class="parts">
+                  {% for part_article in article.series.all %}
+                    <li {% if part_article == article %}class="active"{% endif %}>
+                      <a href='{{ SITEURL }}/{{ part_article.url }}'>{{ part_article.title }}</a>
+                    </li>
+                  {% endfor %}
+                </ol>
+              {% else %}
+                <h3>Latest Articles</h3>
+                <ul>
+                  {% for art in articles[:10] %}
+                    <li>
+                      <a href="{{ SITEURL }}/{{ art.url }}">{{ art.title }}</a>
+                      <span>by {{ art.author }}, {{ art.date.strftime('%Y-%m-%d') }}</span>
+                    </li>
+                  {% endfor %}
+                </ul>
+              {% endif %}
+
+            </div>
+            <div class="subscribe-fixed">
+              <button class="action">Never Stop Learning</button>
+              <div class="cnt">
+                <p>Join over 1000 Python developers and don't miss any updates!</p>
+                <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+                <p>Or check out our <a href="/books">books</a>! <br> <a href="#">Privacy Policy</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mobile-sb-form">
+          <div class="sb-form">
+            <h4>Get all the information directly to your inbox</h4>
+            <form
+                    action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+                    method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+                    target="_self" novalidate=""
+                >
+                  <div id="mc_embed_signup" class="field-wp">
+                    <input type="email" name="EMAIL" class="field required email" placeholder="Your E-Mail" id="mce-EMAIL" required="" value="">
+                  </div>
+                  <div id="mce-responses" class="clear foot">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                  /* real people should not fill this in and expect good things - do not remove this or risk form bot
+                  signups */
+                  <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+                </div>
+                  <input type="submit" class="send-btn" value="Subscribe to the Newsletter" name="subscribe" id="mc-embedded-subscribe">
+                </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- End Main -->
+
+  </section>
+  <!-- End Wrapper -->
+
+{% endblock %}
+
