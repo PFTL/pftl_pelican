@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block title %}Aquiles Carattino{% endblock %}
+{% block meta_header %}
+    <meta name="description"
+        content="Python for the Lab is a personal project of Aquiles Carattino. I want to help people and organizations elevate their programming skills">
+  <link rel="canonical" href="{{ SITEURL }}/about" >
+{% endblock %}
+{% block body %}
+  <section class="wrapper">
+
+    <!-- Intro -->
+    <div class="intro about">
+      <div class="container">
+        <div class="header">
+          <a href="index_bkp.html" class="logo">Python for the Lab</a>
+          <div class="header-dd">
+            <div class="navigation">
+              <ul>
+                <li><a href="{{ SITEURL }}/blog" class="nav-item blog"><span>Blog</span></a></li>
+                <li><a href="{{ SITEURL }}/courses/" class="nav-item courses"><span>Courses</span></a></li>
+                <li><a href="{{ SITEURL }}/hire-me/" target="_blank" class="nav-item hire-me"><span>Hire Me</span></a></li>
+                <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank" class="nav-item forum"><span>Forum</span></a></li>
+                <li><a href="{{ SITEURL }}/books" class="nav-item books"><span>Books</span></a></li>
+                <li><a href="{{ SITEURL }}/about" class="nav-item about"><span>About</span></a></li>
+              </ul>
+            </div>
+            <div class="search field-wp">
+              <form action="">
+                <input type="text" class="field" placeholder="Type to Search">
+                <input type="submit" class="search-btn">
+              </form>
+            </div>
+          </div>
+          <button class="menu-btn"><span>Menu</span></button>
+        </div>
+        <div class="about-cnt ab">
+          <h2>NOT FOUND</h2>
+          <p>We couldn't find the page you were looking for. But we have great articles to get you started!</p>
+          <div class="image-item">
+            <img src="{{ SITEURL }}/images/404.png" alt="Illustration of two scientists programming in Python">
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Intro -->
+
+    <!-- Main -->
+    <div class="main">
+      <div class="container">
+        <div class="main-cnt ab">
+          <div class="articles-list">
+          {% for article in articles[:10] %}
+            <div class="item">
+              <span class="image"><img src="{{ article.featured_image }}" alt=""></span>
+              <span class="date">{{ article.date.strftime('%Y-%m-%d') }}</span>
+              <a href="{{ SITEURL }}/{{ article.url }}" class="title">{{ article.title }}</a>
+              <span class="text">{{ article.summary }}</span>
+              <span class="more-btn"><span>Read Article</span></span>
+            </div>
+          {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Main -->
+  </section>
+{% endblock %}

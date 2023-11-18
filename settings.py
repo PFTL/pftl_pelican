@@ -8,18 +8,18 @@ SITEURL = u'http://localhost:8000'
 TIMEZONE = 'Europe/Amsterdam'
 
 TEMPLATE_PAGES = {
-    'static_index.html': 'old_index.html',
     'books.html': 'books/index.html',
     'about.html': 'about/index.html',
     'hire_me.html': 'hire-me/index.html',
     'courses.html': 'courses/index.html',
-    'new_index.html': 'index.html',
-    # 'new_blog.html': 'new_blog/index.html',
+    'static_index.html': 'index.html',
     '404.html': '404.html',
     }
 
+THEME = 'theme'
+
 STATIC_PATHS = ['images', 'static']
-STATIC_EXCLUDE_SOURCES = False
+# STATIC_EXCLUDE_SOURCES = False
 
 ARTICLE_URL = 'blog/{slug}'
 ARTICLE_SAVE_AS = 'blog/{slug}/index.html'

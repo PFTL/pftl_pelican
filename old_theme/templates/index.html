@@ -1,7 +1,5 @@
 {% extends 'base.html' %}
-
-{% block title %}Python for experimental scientists{% endblock %}
-
+{% block title %}Python for scientific instrument control{% endblock %}
 {% block meta_header %}
 <meta name="description"
       content="We are experts at controlling scientific instruments with Python. From labs to companies that want to bring their software to the next level.">
@@ -26,8 +24,8 @@
 
 {% block body %}
 <header class="relative bg-gray-800 lg:flex ">
-    <div class="lg:flex-col lg:max-w-5xl lg:ml-16">
-        <nav class="lg:pr-8 w-full lg:pt-4">
+    <div class="lg:flex-col max-w-7xl ml-8">
+        <nav class="lg:pl-16 lg:pr-8 w-full lg:pt-4">
             <div class="flex p-3 items-center justify-between">
                 <a class="flex-none" href="{{ SITEURL }}">
                     <img id="site-logo" class="h-12"
@@ -49,7 +47,7 @@
                 {% include "index_wide_menu.html" %}
             </div>
         </nav>
-        <div class="md:flex text-gray-200 lg:pt-4 pb-8">
+        <div class="md:flex lg:pl-12 text-gray-200 lg:pt-4 pb-8">
             <div class="h-full px-5 lg:px-0 md:w-10/12">
                 <h1 class="text-4xl font-semibold lg:text-6xl font-serif text-gray-200 pb-2 lg:pt-16">All the articles
                     of
@@ -63,7 +61,7 @@
             </div>
         </div>
     </div>
-    <div class="hidden lg:block ml-1 pl-2 mr-2 pt-4 w-72">
+    <div class="hidden lg:block ml-1 pl-2 mr-2 pt-4 w-64">
         <div class="mb-8 shadow-2xl">
             <form action="#" class="w-full pr-8 pt-4 text-xs">
                 <label for="search" class="relative block">
@@ -111,24 +109,24 @@
     </div>
 </header>
 
-<div class="p-2 max-w-7xl lg:mx-auto md:mt-16">
+<div class="p-2 max-w-7xl mx-auto md:mt-16">
     <div id="sticky_menu" class="sticky top-0 pt-4 bg-white hidden border-b border-b-gray-500">
         {% include "index_wide_menu.html" %}
     </div>
-    <h2 class="mx-auto text-center p-6 font-serif text-2xl md:text-4xl sm:mb-6 md:mb-12 font-bold">Our Latest Articles</h2>
+    <h2 class="mx-auto text-center p-6 font-serif text-2xl md:text-4xl sm:mb-6 md:mb-12">Our Latest Articles</h2>
     <div class="md:content-stretch md:gap-x-2 md:gap-y-2 lg:grid-cols-3 lg:gap-x-4 lg:gap-y-4 ">
         {% for article in articles_page.object_list %}
-        <div class="group border-b border-b-gray-400 mb-4 lg:py-8">
+        <div class="group border-b border-b-gray-400 mb-4">
             <a href="{{ article.url }}" class="text-gray-700 hover:text-gray-900">
                 <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
-                        <img class="px-2 pb-4 lg:pr-4" src="{{ article.image }}"
+                        <img class="px-2 pb-4" src="{{ article.image }}"
                              alt="Illustration of {{ article.title }}">
                     </div>
                     <div class="px-4 sm:flex-auto">
-                        <div class="text-gray-600 text-sm font-light p-0.5">{{ article.date.strftime('%Y-%m-%d') }}</div>
-                        <h3 class="font-serif leading-6 text-2xl font-bold pb-2">{{ article.title }}</h3>
-                        <div class="font-sans  font-light">{{ article.summary|striptags }}</div>
+                        <div class="text-gray-600 text-xs p-0.5">{{ article.date.strftime('%Y-%m-%d') }}</div>
+                        <h3 class="font-serif leading-tight text-lg font-semibold pb-2">{{ article.title }}</h3>
+                        <div class="font-sans ">{{ article.summary|striptags }}</div>
                         <div class="p-2 inline-block font-sm"><span
                                 class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
                         </div>
