@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Python for scientific instrument control{% endblock %}
+{% block title %}{{ article.title }}{% endblock %}
 {% block meta_header %}
   <meta name="tags" content="{% for tag in article.tags %}{{ tag }}, {% endfor %}">
   <meta name="description" content="{{ article.description }}">
@@ -37,7 +37,7 @@
                  src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/logo-red.svg"/>
           </a>
           <div id="menu_sm"
-               class="pr-0 pl-4 z-50 grow hidden lg:block">
+               class="pr-0 pl-4 grow hidden lg:block">
             {% include "nav_menu.html" %}
           </div>
           <div class="">
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div id="menu"
-             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-50 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
           {% include "index_wide_menu.html" %}
         </div>
       </nav>
@@ -104,8 +104,9 @@
   </header>
 
   <div class="lg:mx-auto lg:flex lg:ml-16">
+
     <div id="col-left" class="md:content-stretch lg:w-[880px]">
-      <div class="relative text-gray-800 mx-2 z-50">
+      <div class="relative text-gray-800 mx-2 z-40">
         <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
           <img src="{{ article.image }}" alt="{{ article.title }}" class="shadow-md lg:shadow-lg"/>
         </div>
@@ -133,7 +134,39 @@
       <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
         <div
             class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
-        <div class="pl-8">Article written by {{ article.author }}</div>
+        <div class="pl-8 text-gray-600 font-light">Article written by {{ article.author }}</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
       </div>
 
       {% if article.similar_posts %}
@@ -197,9 +230,13 @@
         {% if article.series %}
           <h3 class="bg-gray-300 font-serif text-2xl text-center py-4">{{ article.series.name }} series</h3>
           <ol class="mt-4">
-            {% for part_article in article.series.all %}
-              <li class="p-3 {% if part_article== article %}border-b-2 border-b-emerald-400 {% endif %}">
-                <a href='{{ SITEURL }}/{{ part_article.url }}'>{{ part_article.title }}</a>
+            {% for art in article.series.all %}
+              <li class="mx-4 p-3 border-b border-b-gray-400 {% if art == article %}border-b-2 border-b-emerald-400 {% endif %}">
+                <a href="{{ SITEURL }}/{{ art.url }}" class="font-lg leading-tight hover:font-bold">
+                  <div>{{ art.title }}</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by {{ art.author }}, {{ art.date.strftime('%Y-%m-%d') }}</div>
+                </a>
               </li>
             {% endfor %}
           </ol>
@@ -210,79 +247,16 @@
               <li class="mx-4 p-3 border-b border-b-gray-400">
                 <a href="{{ SITEURL }}/{{ art.url }}" class="font-lg leading-tight hover:font-bold">
                   <div>{{ art.title }}</div>
-                  <div class="text-gray-600 text-sm">by {{ art.author }}, {{ art.date.strftime('%Y-%m-%d') }}</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by {{ art.author }}, {{ art.date.strftime('%Y-%m-%d') }}</div>
                 </a>
               </li>
             {% endfor %}
           </ul>
         {% endif %}
       </div>
-
-      <div class="pt-4 md:pt-32 md:px-4">
-        <div class="text"><span class="font-semibold">Get all the information directly to your inbox.</span>
-          Unsubscribe any time.
-        </div>
-        <div id="mc_embed_signup" class="">
-          <form
-              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
-              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
-              class="validate my-3 md:flex md:max-w-lg"
-              target="_self" novalidate="">
-            <div class="field-wp">
-              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
-                     value=""
-                     class="required email bg-white ring-red-500 p-4 w-full md:max-w-2/3">
-            </div>
-            <div id="mce-responses" class="clear foot">
-              <div class="response" id="mce-error-response" style="display: none;"></div>
-              <div class="response" id="mce-success-response" style="display: none;"></div>
-            </div>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              /* real people should not fill this in and expect good things - do not remove this or risk
-              form
-              bot
-              signups */
-              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
-            </div>
-            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
-                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
-          </form>
-        </div>
-      </div>
     </div>
   </div>
-{% endblock %}
 
-{% block footer_scripts %}
-  <script>
-    $(document).ready(function () {
-        responsive_menu = $('#menu');
-        nav = $('nav');
-        $('#menu-button').on('click', function (e) {
-            e.preventDefault();
-            if (responsive_menu.is(':hidden')) {
-                responsive_menu.slideToggle();
-                nav.addClass('bg-white');
-                $("#site-logo").attr("src", "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/logo-classic.svg");
-                $('hamburger').slideToggle();
-                $('#hamburger').attr('src', '{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/cross.svg');
-            } else {
-                responsive_menu.slideToggle();
-                nav.removeClass('bg-white');
-                $("#site-logo").attr("src", "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/logo-red.svg");
-                $('#hamburger').attr('src', '{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/hamburger.svg');
-            }
-        });
-        position = $(window).height();
-        $(window).scroll(function () {
-            var currentScroll = $(window).scrollTop();
-            if (currentScroll >= position) {
-                $('#sticky_menu').addClass('lg:block');
-            } else {
-                $('#sticky_menu').removeClass('lg:block');
-            }
-        });
-    });
 
-  </script>
 {% endblock %}

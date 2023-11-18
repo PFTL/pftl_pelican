@@ -1,21 +1,44 @@
 <!-- Footer -->
-<div class="footer">
-  <div class="container">
-    <div class="footer-cnt">
-      <p class="left">
-        &copy; Python For The Lab <span class="current-year">2023</span>
-      </p>
-      <p class="center">
-        <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-          <img alt="Creative Commons License"
-               style="border-width:0"
-               src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png"/></a>.
-      </p>
-      <p class="right">
-        <a href="{{ SITEURL }}/cookie-policy">Cookie Policy</a>
-        <a href="{{ SITEURL }}/privacy-policy">Privacy Policy</a>
-      </p>
-    </div>
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="{{ SITEURL }}/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="{{ SITEURL }}/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="{{ SITEURL }}/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="{{ SITEURL }}/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
   </div>
-</div>
-<!-- End Footer -->
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer>

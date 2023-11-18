@@ -123,25 +123,3 @@
     </a>
 </div>
 {% endblock %}
-
-{% block footer_scripts %}
-<script>
-    $(document).ready(function () {
-        responsive_menu = $('#menu');
-        nav = $('nav');
-        $('#menu-button').on('click', function (e) {
-            e.preventDefault();
-            if (responsive_menu.is(':hidden')) {
-                responsive_menu.slideToggle();
-                nav.addClass('bg-white');
-                $('hamburger').slideToggle();
-                $('#hamburger').attr('src', '{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/cross.svg');
-            } else {
-                responsive_menu.slideToggle();
-                nav.removeClass('bg-white');
-                $('#hamburger').attr('src', '{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/hamburger.svg');
-            }
-        });
-    });
-</script>
-{% endblock %}

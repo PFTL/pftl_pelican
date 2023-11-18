@@ -35,6 +35,7 @@ module.exports = {
             },
             backgroundImage: {
                 'arrow': 'url("images/arrow-blue.svg")',
+                'book': 'url("images/book.png")',
             },
         },
     },

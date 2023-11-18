@@ -1,75 +1,76 @@
 {% extends 'base.html' %}
-{% block title %}Aquiles Carattino{% endblock %}
+{% block title %}About Aquiles Carattino from Python for the Lab{% endblock %}
 {% block meta_header %}
-    <meta name="description"
-        content="Python for the Lab is a personal project of Aquiles Carattino. I want to help people and organizations elevate their programming skills">
-  <link rel="canonical" href="{{ SITEURL }}/about" >
+<meta name="description"
+      content="Aquiles Carattino is the founder and responsible person behind Python for the Lab. All you want to know is here">
+<link rel="canonical" href="{{ SITEURL }}/about">
 {% endblock %}
+
 {% block body %}
-  <section class="wrapper">
-
-    <!-- Intro -->
-    <div class="intro about">
-      <div class="container">
-        <div class="header">
-          <a href="index_bkp.html" class="logo">Python for the Lab</a>
-          <div class="header-dd">
-            <div class="navigation">
-              <ul>
-                <li><a href="{{ SITEURL }}/blog" class="nav-item blog"><span>Blog</span></a></li>
-                <li><a href="{{ SITEURL }}/courses/" class="nav-item courses"><span>Courses</span></a></li>
-                <li><a href="{{ SITEURL }}/hire-me/" target="_blank" class="nav-item hire-me"><span>Hire Me</span></a></li>
-                <li><a href="https://github.com/PFTL/pftl_discussions/discussions" target="_blank" class="nav-item forum"><span>Forum</span></a></li>
-                <li><a href="{{ SITEURL }}/books" class="nav-item books"><span>Books</span></a></li>
-                <li class="active"><a href="{{ SITEURL }}/about" class="nav-item about"><span>About</span></a></li>
-              </ul>
-            </div>
-            <div class="search field-wp">
-              <form action="">
-                <input type="text" class="field" placeholder="Type to Search">
-                <input type="submit" class="search-btn">
-              </form>
-            </div>
-          </div>
-          <button class="menu-btn"><span>Menu</span></button>
+<header class="relative bg-red-500 md:h-32 lg:flex h-16">
+  <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+    <nav class="lg:pr-8 w-full lg:pt-4">
+      <div class="flex p-3 items-center justify-between">
+        <a class="flex-none" href="{{ SITEURL }}">
+          <img id="site-logo" class="h-12"
+               src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/logo-dark.svg"/>
+        </a>
+        <div id="menu_sm"
+             class="pr-0 pl-4 z-50 grow hidden lg:block">
+          {% include "nav_menu.html" %}
         </div>
-        <div class="about-cnt ab">
-          <h2>About Us</h2>
-          <p><strong>Python for the Lab</strong> was born as a companion for <a href="{{ SITEURL }}/hire-me/">the
-            courses</a> given in several universities around Europe.
-            The idea is to provide a series of articles that can boost the readers in their Python endeavors. If you
-            have any doubts, or are facing a problem to which there is no obvious solution, or are looking for an
-            opinion, the best is to join the forum, where you will meet a lot of like-minded people.</p>
-          <div class="image-item">
-            <img src="{{ SITEURL }}/images/new_picture.jpg" alt="Photo of Aquiles Carattino in South Africa">
-          </div>
+        <div class="">
+          <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+            <img id="hamburger" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/hamburger.svg"
+                 class="h-8 w-8"/>
+          </button>
         </div>
       </div>
-    </div>
-    <!-- End Intro -->
-
-    <!-- Main -->
-    <div class="main">
-      <div class="container">
-        <div class="main-cnt ab">
-          <p>
-            My name is Aquiles and I am the guy behind Python for the Lab (or PFTL). If you would like to get in contact
-            with me or check my projects, you can follow me on <a href="https://www.twitter.com/aquicarattino">Twitter</a> or just drop me a line at
-            aquiles@pythonforthelab.com. .
-          </p>
-          <p>
-            I am always on the lookout for great ideas and inspiration!
-          </p>
-          <div class="button">
-            <a href="{{ SITEURL }}/books" class="button-book"><span>Check out my book</span></a>
-          </div>
-          <div class="button">
-            <a href="https://us21.list-manage.com/contact-form?u=f0d9bfa6188cdcc67890a07f6&form_id=23280542e88944b2a32bed276c724d1e
-" class="button-contact"><span>Contact me directly!</span></a>
-          </div>
-        </div>
+      <div id="menu"
+           class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-50 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+        {% include "index_wide_menu.html" %}
       </div>
+    </nav>
+    <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
     </div>
-    <!-- End Main -->
-  </section>
+  </div>
+  <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+    <div class="mb-8 shadow-2xl">
+      <form action="#" class="w-full pr-8 pt-4 text-xs">
+        <label for="search" class="relative block">
+          <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+               src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/search.svg">
+          <input id="search" data-stork="sitesearch" type="text"
+                 class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                 placeholder="Type to Search">
+        </label>
+      </form>
+      <div data-stork="sitesearch-output"></div>
+    </div>
+  </div>
+</header>
+
+<div class="mt-4 md:mt-16 max-w-6xl mx-auto md:min-h-screen">
+  <div class="md:grid md:grid-cols-2">
+      <div class="">
+        <h1 class="text-gray-800 font-bold pb-12  text-2xl lg:text-6xl font-serif">Aquiles Carattino</h1>
+        <p class="text-gray-800 leading-relaxed mb-1 lg:mb-2 lg:text-xl font-sans">
+          I am a physicist, an entrepreneur, and a Python developer.
+        </p>
+        <p class="text-gray-800 leading-relaxed mb-1 lg:mb-2 lg:text-xl font-sans">
+          I built this website to help scientists in their path to fully control scientific instrumentation.
+          From microscopes to test benches, I have helped lots of people through my <a class="text-teal-700 hover:text-teal-600 underline underline-offset-1" href="/courses">courses</a> and
+          through <a class="text-teal-700 hover:text-teal-600 underline underline-offset-1" href="/hire-me">consultancy projects</a>.
+        </p>
+        <p class="text-gray-800 leading-relaxed lg:text-xl font-sans">
+          I started developing Python programs while doing my PhD. I quickly learned that automation was
+        </p>
+      </div>
+    <div class="flex w-full justify-center items-center p-8">
+      <img class="shadow-lg"
+           src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/aquiles_carattino.jpeg"
+           alt="Aquiles Carattino sailing in Portugal">
+    </div>
+  </div>
+</div>
 {% endblock %}

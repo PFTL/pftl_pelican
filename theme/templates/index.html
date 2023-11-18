@@ -190,36 +190,3 @@
 </div>
 <!-- End Pagination -->
 {% endblock %}
-
-{% block footer_scripts %}
-<script>
-    $(document).ready(function () {
-        responsive_menu = $('#menu');
-        nav = $('nav');
-        $('#menu-button').on('click', function (e) {
-            e.preventDefault();
-            if (responsive_menu.is(':hidden')) {
-                responsive_menu.slideToggle();
-                nav.addClass('bg-white');
-                $("#site-logo").attr("src", "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/logo-classic.svg");
-                $('hamburger').slideToggle();
-                $('#hamburger').attr('src', '{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/cross.svg');
-            } else {
-                responsive_menu.slideToggle();
-                nav.removeClass('bg-white');
-                $("#site-logo").attr("src", "{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/logo-red.svg");
-                $('#hamburger').attr('src', '{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/hamburger.svg');
-            }
-        });
-        position = $(window).height();
-        $(window).scroll(function () {
-            var currentScroll = $(window).scrollTop();
-            if (currentScroll >= position) {
-                $('#sticky_menu').addClass('lg:block');
-            } else {
-                $('#sticky_menu').removeClass('lg:block');
-            }
-        });
-    });
-</script>
-{% endblock %}
