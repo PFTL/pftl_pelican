@@ -22,7 +22,7 @@ module.exports = {
                 'hireIcon': 'url("images/hire-me.svg")',
                 'hireWhiteIcon': 'url("images/hire-me-white.svg")',
                 'aboutIcon': 'url("images/about.svg")',
-                'aboutWhiteIcon': 'url("images/aboutWhite.svg")',
+                'aboutWhiteIcon': 'url("images/about-white.svg")',
                 'blogIcon': 'url("images/blog.svg")',
                 'blogWhiteIcon': 'url("images/blog-white.svg")',
                 'booksIcon': 'url("images/books.svg")',
