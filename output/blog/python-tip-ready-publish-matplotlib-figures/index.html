@@ -1,12 +1,326 @@
-<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Python Tip: Ready to Publish Matplotlib Figures | Python For The Lab</title><meta content="matplotlib, resolution, figure, plot, saving, " name=tags><meta content="Learn how to make figures with proper font size and resolution, ready to be published" name=description><meta content="Aquiles Carattino" name=author><link href=blog/python-tip-ready-publish-matplotlib-figures rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/python-tip-ready-publish-matplotlib-figures property=og:url><meta content="Python Tip: Ready to Publish Matplotlib Figures" property=og:title><meta content="Learn how to make figures with proper font size and resolution, ready to be published" property=og:description><meta content=/images/Tips_02_Python-Tips-Matplotlib-Saving.width-800.png property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/python-tip-ready-publish-matplotlib-figures property=twitter:url><meta content="Python Tip: Ready to Publish Matplotlib Figures" property=twitter:title><meta content="Learn how to make figures with proper font size and resolution, ready to be published" property=twitter:description><meta content=/images/Tips_02_Python-Tips-Matplotlib-Saving.width-800.png property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item courses" href=https://pythonforthelab.com/courses/><span>Courses</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/Tips_02_Python-Tips-Matplotlib-Saving.width-800.png width=800></div><h1>Python Tip: Ready to Publish Matplotlib Figures</h1><h3>Learn how to make figures with proper font size and resolution, ready to be published</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2020-05-18</span><span class="item-tag first">matplotlib</span><span class=item-tag>resolution</span><span class=item-tag>figure</span><span class=item-tag>plot</span><span class=item-tag>saving</span></div><main><p>Saving figures for publications, presentations, books, or websites can be a cumbersome task but doesn't need to be. In this <strong>Python Tip</strong>, we will see how to create images using Matplotlib that are ready to be embedded. We will take care of the most important aspects: shape, font sizes, and resolution. You won't have to tinker ever again with random parameters until the result is right.<p>Once you understand the options that Matplotlib offers, and what they mean, you will realize that generating publication-ready figures can be a breeze. We will focus mostly on plots for papers, but once you get the gist, you can extrapolate to other formats such as posters, books, or websites.<h2>Size</h2><p>First, we need to discuss size and resolution, two independent, but related magnitudes. Size is the physical dimensions of an image. If we were preparing a plot for a paper, for example, we should first check the column width. <a href=https://www.sciencemag.org/sites/default/files/Figure_prep_guide.pdf>Science uses a width</a> of 9cm, or 3.54 inches. The height of the image will depend on the content we are displaying. For simplicity, I will assume a square image, so we have 3.54x3.54 inches.<p>With matplotlib, defining the size of a figure is straightforward:<pre><code class=language-python>fig = plt.figure(figsize=(3.54,3.54))
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Python Tip: Ready to Publish Matplotlib Figures | Python For The Lab</title>
+
+  <meta name="tags" content="matplotlib, resolution, figure, plot, saving, ">
+  <meta name="description" content="Learn how to make figures with proper font size and resolution, ready to be published">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="blog/python-tip-ready-publish-matplotlib-figures">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="blog/python-tip-ready-publish-matplotlib-figures">
+  <meta property="og:title" content="Python Tip: Ready to Publish Matplotlib Figures">
+  <meta property="og:description" content="Learn how to make figures with proper font size and resolution, ready to be published">
+  <meta property="og:image" content="/images/Tips_02_Python-Tips-Matplotlib-Saving.width-800.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="blog/python-tip-ready-publish-matplotlib-figures">
+  <meta property="twitter:title" content="Python Tip: Ready to Publish Matplotlib Figures">
+  <meta property="twitter:description" content="Learn how to make figures with proper font size and resolution, ready to be published">
+  <meta property="twitter:image" content="/images/Tips_02_Python-Tips-Matplotlib-Saving.width-800.png">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/Tips_02_Python-Tips-Matplotlib-Saving.width-800.png" alt="Python Tip: Ready to Publish Matplotlib Figures" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">Python Tip: Ready to Publish Matplotlib Figures</h1>
+        <div class="font-sans font-bold text-xl">Learn how to make figures with proper font size and resolution, ready to be published</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2020-05-18</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">matplotlib</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">resolution</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">figure</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">plot</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">saving</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>Saving figures for publications, presentations, books, or websites can be a cumbersome task but doesn't need to be. In this <strong>Python Tip</strong>, we will see how to create images using Matplotlib that are ready to be embedded. We will take care of the most important aspects: shape, font sizes, and resolution. You won't have to tinker ever again with random parameters until the result is right. </p>
+<p>Once you understand the options that Matplotlib offers, and what they mean, you will realize that generating publication-ready figures can be a breeze. We will focus mostly on plots for papers, but once you get the gist, you can extrapolate to other formats such as posters, books, or websites.  </p>
+<h2>Size</h2>
+<p>First, we need to discuss size and resolution, two independent, but related magnitudes. Size is the physical dimensions of an image. If we were preparing a plot for a paper, for example, we should first check the column width. <a href="https://www.sciencemag.org/sites/default/files/Figure_prep_guide.pdf">Science uses a width</a> of 9cm, or 3.54 inches. The height of the image will depend on the content we are displaying. For simplicity, I will assume a square image, so we have 3.54x3.54 inches. </p>
+<p>With matplotlib, defining the size of a figure is straightforward:</p>
+<pre><code class="language-python">fig = plt.figure(figsize=(3.54,3.54))
 plt.plot(x, y)
-</code></pre><p>However, knowing the size is only half the problem. We can make a plot of the same size, but with different <em>resolution</em>, which is the second parameter we need to discuss.<h2>DPI</h2><p>The resolution of an image can be calculated, counting the total number of pixels it contains or defining the dots per inch: <strong>DPI</strong>. We can calculate the dots per inch if we know the total number of pixels and the physical size we expect for the image. The other way around, if we know the final size of an image and the <strong>dpi</strong>, we can calculate the number of pixels we need. The terminology comes from the printer process of making <em>dots</em> of ink. If we are looking at the image on a screen instead of printing, the <em>dots</em> become <em>pixels</em>.<p>If we are preparing a paper, the <em>dpi</em> is fixed by the printer. Therefore, we must match that value when we prepare our images, or they would look terrible. A typical <em>dpi</em> value for printing is <strong>600dpi</strong>. We can specify this directly on matplotlib:<pre><code class=language-python>fig = plt.figure(figsize=(3.54,3.54), dpi=600)
+</code></pre>
+<p>However, knowing the size is only half the problem. We can make a plot of the same size, but with different <em>resolution</em>, which is the second parameter we need to discuss. </p>
+<h2>DPI</h2>
+<p>The resolution of an image can be calculated, counting the total number of pixels it contains or defining the dots per inch: <strong>DPI</strong>. We can calculate the dots per inch if we know the total number of pixels and the physical size we expect for the image. The other way around, if we know the final size of an image and the <strong>dpi</strong>, we can calculate the number of pixels we need. The terminology comes from the printer process of making <em>dots</em> of ink. If we are looking at the image on a screen instead of printing, the <em>dots</em> become <em>pixels</em>. </p>
+<p>If we are preparing a paper, the <em>dpi</em> is fixed by the printer. Therefore, we must match that value when we prepare our images, or they would look terrible. A typical <em>dpi</em> value for printing is <strong>600dpi</strong>. We can specify this directly on matplotlib:</p>
+<pre><code class="language-python">fig = plt.figure(figsize=(3.54,3.54), dpi=600)
 plt.plot(x, y)
-</code></pre><p>If we make the math, this means the final figure has 2124 pixels on each axis.<h2>Font Size</h2><p>At some point, you must wonder why we are specifying both the figure size and the <em>dpi</em>. If we used bigger image sizes, we would get more pixels. However, font size and thickness is related to the size of the figure, not to the number of pixels. Therefore, if we do the following:<pre><code class=language-python>fig = plt.figure(figsize=(3.54,3.54), dpi=300)
+</code></pre>
+<p>If we make the math, this means the final figure has 2124 pixels on each axis. </p>
+<h2>Font Size</h2>
+<p>At some point, you must wonder why we are specifying both the figure size and the <em>dpi</em>. If we used bigger image sizes, we would get more pixels. However, font size and thickness is related to the size of the figure, not to the number of pixels. Therefore, if we do the following:</p>
+<pre><code class="language-python">fig = plt.figure(figsize=(3.54,3.54), dpi=300)
 plt.plot(x, y, linewidth=2)
 plt.xlabel('X label (s)', fontsize=20)
 plt.ylabel('Y label (V)', fontsize=10)
-</code></pre><p>We will get a figure that, when set to the proper size of 3.54inx3.54in will have axes with fonts of 20pt and 10pt. Matplotlib allows us to set the font size to the exact value we want. For example, if our main text uses a font size of 12pt, we can make the labels slightly larger than the text, and the ticks slightly smaller:<pre><code class=language-python>import matplotlib 
+</code></pre>
+<p>We will get a figure that, when set to the proper size of 3.54inx3.54in will have axes with fonts of 20pt and 10pt. Matplotlib allows us to set the font size to the exact value we want. For example, if our main text uses a font size of 12pt, we can make the labels slightly larger than the text, and the ticks slightly smaller:</p>
+<pre><code class="language-python">import matplotlib 
 matplotlib.rc('xtick', labelsize=10) 
 matplotlib.rc('ytick', labelsize=10) 
 
@@ -14,8 +328,22 @@ fig = plt.figure(figsize=(3.54,3.54), dpi=300)
 plt.plot(x, y, linewidth=2)
 plt.xlabel('X label (s)', fontsize=15)
 plt.ylabel('Y label (V)', fontsize=15)
-</code></pre><p>Remember, setting the font size implies knowing the final size of the figure. We can try to change the <em>dpi</em> parameter. We will see that even if the figure shrinks on the screen (because of fewer pixels), the relative size of the fonts to the total image area is always the same. If you stretch the images to occupy the same space on the screen, the axes labels will have the same size.<p>You can download [this document]https://www.pythonforthelab.com/documents/1/image_sizes.pdf) to see how the dpi affects the overall image quality. There are figures at 72dpi, 150dpi, 300dpi, and 600dpi. I've also included one figure with double-column width but keeping all the other parameters the same, including the data.<p>If you are preparing figures for a poster, for example, you would likely have a larger figure size, bigger font sizes, but keeping a <em>dpi</em> of 600 for printing.<h2>Saving</h2><p>Once we have the figures we want, the last step is to save them. We must decide the format we want to use to save them. I tend to default to <em>png</em> because it is a lossless compression format. It means that the quality is as good as what I've defined it. In Matplotlib, it becomes:<pre><code class=language-python>plt.savefig('figure.png', bbox_inches='tight')
-</code></pre><p>The extra argument, <code>bbox_inches</code> is needed to be sure Matplotlib figures out the entire canvas before saving. If we don't add it, the axes will likely be cropped out of the picture. PNG images can be embedded in documents, websites, and presentations. Almost all paper journals also accept them if you provide them with the proper resolution.<p>Other alternatives are saving as vector formats. You can choose to save as <em>SVG</em> if you plan to further edit the images in programs such as Inkscape or Adobe Illustrator. If you are writing in TeX, prefer vector over raster, you can save the figures as <em>pdf</em>. My note: avoid <em>eps</em> (encapsulated postscript), unless you have a legitimate reason to do it. They are just harder to share, and they don't provide a real gain.<h2>For Presentations</h2><p>If we are preparing figures for a presentation, we must consider two things. People will be looking at the slides from afar, and we don't want to have PowerPoint files of hundreds of megabytes. Generally speaking, font sizes in presentations are larger than in a paper, or people won't be able to see the axes. The other aspect is that figures should have a reasonable amount of pixels. Higher resolutions would generate heavy figures without any gain.<p>PowerPoint specifies some default slide dimensions. For a wide-screen presentation, they are 13.33inx7.5in. Let's assume we will use a Full-HD projector, which has a width of 1920px and a height of 1080px. It gives a <em>dpi</em> of 144. However, PowerPoint works with a <a href=https://docs.microsoft.com/en-us/office/troubleshoot/powerpoint/change-export-slide-resolution>default resolution</a> of <strong>96dpi</strong>.<p><strong>Note</strong>: other programs may use different default resolutions, or newer versions of PowerPoint may default to higher resolutions. In any case, the only thing you have to do is changing the <em>dpi</em> parameter of the figure.<p>With the information we have, we can create the figures:<pre><code class=language-python>import matplotlib 
+</code></pre>
+<p>Remember, setting the font size implies knowing the final size of the figure. We can try to change the <em>dpi</em> parameter. We will see that even if the figure shrinks on the screen (because of fewer pixels), the relative size of the fonts to the total image area is always the same. If you stretch the images to occupy the same space on the screen, the axes labels will have the same size.  </p>
+<p>You can download [this document]https://www.pythonforthelab.com/documents/1/image_sizes.pdf) to see how the dpi affects the overall image quality. There are figures at 72dpi, 150dpi, 300dpi, and 600dpi. I've also included one figure with double-column width but keeping all the other parameters the same, including the data.</p>
+<p>If you are preparing figures for a poster, for example, you would likely have a larger figure size, bigger font sizes, but keeping a <em>dpi</em> of 600 for printing. </p>
+<h2>Saving</h2>
+<p>Once we have the figures we want, the last step is to save them. We must decide the format we want to use to save them. I tend to default to <em>png</em> because it is a lossless compression format. It means that the quality is as good as what I've defined it. In Matplotlib, it becomes:</p>
+<pre><code class="language-python">plt.savefig('figure.png', bbox_inches='tight')
+</code></pre>
+<p>The extra argument, <code>bbox_inches</code> is needed to be sure Matplotlib figures out the entire canvas before saving. If we don't add it, the axes will likely be cropped out of the picture. PNG images can be embedded in documents, websites, and presentations. Almost all paper journals also accept them if you provide them with the proper resolution. </p>
+<p>Other alternatives are saving as vector formats. You can choose to save as <em>SVG</em> if you plan to further edit the images in programs such as Inkscape or Adobe Illustrator. If you are writing in TeX, prefer vector over raster, you can save the figures as <em>pdf</em>. My note: avoid <em>eps</em> (encapsulated postscript), unless you have a legitimate reason to do it. They are just harder to share, and they don't provide a real gain.  </p>
+<h2>For Presentations</h2>
+<p>If we are preparing figures for a presentation, we must consider two things. People will be looking at the slides from afar, and we don't want to have PowerPoint files of hundreds of megabytes. Generally speaking, font sizes in presentations are larger than in a paper, or people won't be able to see the axes. The other aspect is that figures should have a reasonable amount of pixels. Higher resolutions would generate heavy figures without any gain. </p>
+<p>PowerPoint specifies some default slide dimensions. For a wide-screen presentation, they are 13.33inx7.5in. Let's assume we will use a Full-HD projector, which has a width of 1920px and a height of 1080px. It gives a <em>dpi</em> of 144. However, PowerPoint works with a <a href="https://docs.microsoft.com/en-us/office/troubleshoot/powerpoint/change-export-slide-resolution">default resolution</a> of <strong>96dpi</strong>. </p>
+<p><strong>Note</strong>: other programs may use different default resolutions, or newer versions of PowerPoint may default to higher resolutions. In any case, the only thing you have to do is changing the <em>dpi</em> parameter of the figure. </p>
+<p>With the information we have, we can create the figures: </p>
+<pre><code class="language-python">import matplotlib 
 matplotlib.rc('xtick', labelsize=16) 
 matplotlib.rc('ytick', labelsize=16) 
 
@@ -23,6 +351,246 @@ fig = plt.figure(figsize=(13.33,7.5), dpi=96)
 plt.plot(x, y, linewidth=2)
 plt.xlabel('X label (s)', fontsize=18)
 plt.ylabel('Y label (V)', fontsize=18)
-</code></pre><p>We have selected font sizes of <strong>16</strong> and <strong>18</strong>. These are reasonable values, but you may prefer to make them larger if you are presenting to large auditoriums. In most presentations, however, we won't show figures at full-screen. If we use two images side-by-side, we can have something like this:<pre><code class=language-python>fig = plt.figure(figsize=(5,3), dpi=96)
-</code></pre><p>If we don't scale the image after we embed it into PowerPoint, we will have consistent figures. Perhaps they are full-screen, maybe they are displayed side-by-side, but all the axes and line thicknesses will be precisely the same.<h2>Figures for the Web</h2><p>If you are preparing figures for the web, then the discussion becomes much more complicated. Screens change in shape and resolution. Someone behind an iPad with a retina display will have as many pixels as someone behind a desktop screen. Still, the physical size of the figure is dramatically different. There is no blanket advice on how to prepare images for the web that work across all possible situations. Most websites make separate images for different situations, at various resolutions, and with different content.<p>However, the best you can do when preparing images for the web is to save them as <strong>SVG</strong>, which is a vector format. These images can be scaled without losing resolution. In Matplotlib, it is trivial:<pre><code class=language-python>plt.savefig('my_figure.svg', bbox_inches='tight')
-</code></pre><p>You can go ahead and try changing the <em>dpi</em> of the image before saving, and try to notice if there are any differences.<h2>Conclusions</h2><p>If you are preparing figures for a publication, the best you can do is finding out the size figures should have. Most journals give you the dimensions of the columns. If you can't find them, you can always default to the size of <a href=https://www.sciencemag.org/sites/default/files/Figure_prep_guide.pdf>Science</a>. Once you know the size of your figures, fix the <em>dpi</em>. If it is for a paper, a thesis, or a poster, <strong>600dpi</strong> should be good enough. Then, set the font size of the labels and the axes to match the font size of the text around them. You can make labels and ticks slightly bigger or smaller than the text, depending on your style preferences.<p>In <a href=https://www.pythonforthelab.com/documents/1/image_sizes.pdf>this PDF</a>, I have included figures generated at different <em>dpi</em> but scaled to the sizes recommended by Science.</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>
+</code></pre>
+<p>We have selected font sizes of <strong>16</strong> and <strong>18</strong>. These are reasonable values, but you may prefer to make them larger if you are presenting to large auditoriums.  In most presentations, however, we won't show figures at full-screen. If we use two images side-by-side, we can have something like this:</p>
+<pre><code class="language-python">fig = plt.figure(figsize=(5,3), dpi=96)
+</code></pre>
+<p>If we don't scale the image after we embed it into PowerPoint, we will have consistent figures. Perhaps they are full-screen, maybe they are displayed side-by-side, but all the axes and line thicknesses will be precisely the same. </p>
+<h2>Figures for the Web</h2>
+<p>If you are preparing figures for the web, then the discussion becomes much more complicated. Screens change in shape and resolution. Someone behind an iPad with a retina display will have as many pixels as someone behind a desktop screen. Still, the physical size of the figure is dramatically different. There is no blanket advice on how to prepare images for the web that work across all possible situations. Most websites make separate images for different situations, at various resolutions, and with different content. </p>
+<p>However, the best you can do when preparing images for the web is to save them as <strong>SVG</strong>, which is a vector format. These images can be scaled without losing resolution. In Matplotlib, it is trivial:</p>
+<pre><code class="language-python">plt.savefig('my_figure.svg', bbox_inches='tight')
+</code></pre>
+<p>You can go ahead and try changing the <em>dpi</em> of the image before saving, and try to notice if there are any differences. </p>
+<h2>Conclusions</h2>
+<p>If you are preparing figures for a publication, the best you can do is finding out the size figures should have. Most journals give you the dimensions of the columns. If you can't find them, you can always default to the size of <a href="https://www.sciencemag.org/sites/default/files/Figure_prep_guide.pdf">Science</a>. Once you know the size of your figures, fix the <em>dpi</em>. If it is for a paper, a thesis, or a poster, <strong>600dpi</strong> should be good enough. Then, set the font size of the labels and the axes to match the font size of the text around them. You can make labels and ticks slightly bigger or smaller than the text, depending on your style preferences. </p>
+<p>In <a href="https://www.pythonforthelab.com/documents/1/image_sizes.pdf">this PDF</a>, I have included figures generated at different <em>dpi</em> but scaled to the sizes recommended by Science.</p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

@@ -1,56 +1,381 @@
-<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Using slots in Python: limit dynamic attribute creation and improve speed | Python For The Lab</title><meta content="classes, object oriented, dictionary, memory, slots, " name=tags><meta content="Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make" name=description><meta content="Aquiles Carattino" name=author><link href=blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed property=og:url><meta content="Using slots in Python: limit dynamic attribute creation and improve speed" property=og:title><meta content="Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make" property=og:description><meta content=/images/python1-01_gq7Qcbn.width-800.png property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed property=twitter:url><meta content="Using slots in Python: limit dynamic attribute creation and improve speed" property=twitter:title><meta content="Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make" property=twitter:description><meta content=/images/python1-01_gq7Qcbn.width-800.png property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item courses" href=https://pythonforthelab.com/courses/><span>Courses</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/python1-01_gq7Qcbn.width-800.png width=800></div><h1>Using slots in Python: limit dynamic attribute creation and improve speed</h1><h3>Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2021-03-21</span><span class="item-tag first">classes</span><span class=item-tag>object oriented</span><span class=item-tag>dictionary</span><span class=item-tag>memory</span><span class=item-tag>slots</span></div><main><p>When we create classes, one of the biggest challenges is understanding how to handle dynamic attribute creation. Slots have the benefit of limiting attribute creation at runtime. In this article, we will explore how slots work, including a quick overview of how classes store attributes internally.<h2>Dynamic attribute creation</h2><p>One of the advantages of objects in Python is that they can store any number of attributes. Moreover, these attributes can be created dynamically when the program runs and not only when the class is defined. Let's start with a simple example to get the gist of it:<pre><code class=language-python>class Person:
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Using slots in Python: limit dynamic attribute creation and improve speed | Python For The Lab</title>
+
+  <meta name="tags" content="classes, object oriented, dictionary, memory, slots, ">
+  <meta name="description" content="Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">
+  <meta property="og:title" content="Using slots in Python: limit dynamic attribute creation and improve speed">
+  <meta property="og:description" content="Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make">
+  <meta property="og:image" content="/images/python1-01_gq7Qcbn.width-800.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed">
+  <meta property="twitter:title" content="Using slots in Python: limit dynamic attribute creation and improve speed">
+  <meta property="twitter:description" content="Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make">
+  <meta property="twitter:image" content="/images/python1-01_gq7Qcbn.width-800.png">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/python1-01_gq7Qcbn.width-800.png" alt="Using slots in Python: limit dynamic attribute creation and improve speed" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">Using slots in Python: limit dynamic attribute creation and improve speed</h1>
+        <div class="font-sans font-bold text-xl">Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2021-03-21</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">classes</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">object oriented</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">dictionary</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">memory</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">slots</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>When we create classes, one of the biggest challenges is understanding how to handle dynamic attribute creation. Slots have the benefit of limiting attribute creation at runtime. In this article, we will explore how slots work, including a quick overview of how classes store attributes internally. </p>
+<h2>Dynamic attribute creation</h2>
+<p>One of the advantages of objects in Python is that they can store any number of attributes. Moreover, these attributes can be created dynamically when the program runs and not only when the class is defined. Let's start with a simple example to get the gist of it:</p>
+<pre><code class="language-python">class Person:
     def __init__(self, name):
         self.name = name
-</code></pre><p>The class <code>Person</code> can be used like this:<pre><code class=language-pycon>>>> me = Person('Aquiles')
->>> print(me.name)
+</code></pre>
+<p>The class <code>Person</code> can be used like this:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; me = Person('Aquiles')
+&gt;&gt;&gt; print(me.name)
 'Aquiles'
-</code></pre><p>The class <code>Person</code> creates an attribute <code>name</code> when we instantiate it, and we assign any value we want. In the example above, we used <code>'Aquiles'</code>. We print the attribute <code>name</code> of the object <code>me</code> to show that it is behaving as expected. Python objects allow us to modify the attribute or to create new attributes:<pre><code class=language-pycon>>>> me.name = 'John'
->>> me.last_name = 'Doe'
->>> print(me.name)
+</code></pre>
+<p>The class <code>Person</code> creates an attribute <code>name</code> when we instantiate it, and we assign any value we want. In the example above, we used <code>'Aquiles'</code>. We print the attribute <code>name</code> of the object <code>me</code> to show that it is behaving as expected. Python objects allow us to modify the attribute or to create new attributes:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; me.name = 'John'
+&gt;&gt;&gt; me.last_name = 'Doe'
+&gt;&gt;&gt; print(me.name)
 'John'
->>> print(me.last_name)
+&gt;&gt;&gt; print(me.last_name)
 'Doe'
-</code></pre><p>First, we replace the value of <code>name</code> at runtime. Later, we create a new attribute, <code>last_name</code> that is not part of the original design of <code>Person</code>. This pattern can be both handy and dangerous. Imagine we have a complex object, for example, to control a camera. We define an attribute <code>exposure_time</code> when we develop the <code>Camera</code> class. If later on we make a mistake and use <code>exp_time</code> instead, there will be no warning, and the error can go unnoticed until it is too late:<pre><code class=language-pycon>>>> camera = Camera()
->>> camera.exposure_time = '5ms'
->>> camera.exp_time = '10ms'
-</code></pre><h2>Quick intro to slots</h2><p>Limiting the creation of attributes at runtime can be a great advantage, and Python offers a straightforward syntax to achieving it:<pre><code class=language-python>class Person:
+</code></pre>
+<p>First, we replace the value of <code>name</code> at runtime. Later, we create a new attribute, <code>last_name</code> that is not part of the original design of <code>Person</code>. This pattern can be both handy and dangerous. Imagine we have a complex object, for example, to control a camera. We define an attribute <code>exposure_time</code> when we develop the <code>Camera</code> class. If later on we make a mistake and use <code>exp_time</code> instead, there will be no warning, and the error can go unnoticed until it is too late:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; camera = Camera()
+&gt;&gt;&gt; camera.exposure_time = '5ms'
+&gt;&gt;&gt; camera.exp_time = '10ms'
+</code></pre>
+<h2>Quick intro to slots</h2>
+<p>Limiting the creation of attributes at runtime can be a great advantage, and Python offers a straightforward syntax to achieving it:</p>
+<pre><code class="language-python">class Person:
     __slots__ = 'name'
     def __init__(self, name):
         self.name = name
-</code></pre><p>And this time, if we run the same coda we ran earlier, we will get a different outcome:<pre><code class=language-pycon>>>> me = Person('Aquiles')  
->>> print(me.name)  
+</code></pre>
+<p>And this time, if we run the same coda we ran earlier, we will get a different outcome:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; me = Person('Aquiles')  
+&gt;&gt;&gt; print(me.name)  
 'Aquiles'
->>> me.name = 'John'  
->>> print(me.name)  
+&gt;&gt;&gt; me.name = 'John'  
+&gt;&gt;&gt; print(me.name)  
 'John'
->>> me.last_name = 'Doe'
+&gt;&gt;&gt; me.last_name = 'Doe'
 Traceback (most recent call last):
-  File "/Users/aquiles/Documents/Web/pftl_code/code/_slots/aa.py", line 11, in &LTmodule>
+  File &quot;/Users/aquiles/Documents/Web/pftl_code/code/_slots/aa.py&quot;, line 11, in &lt;module&gt;
     me.last_name = 'Doe'
 AttributeError: 'Person' object has no attribute 'last_name'
-</code></pre><p>We could alter the <code>name</code> attribute at runtime, but <code>last_name</code> gave and <code>AttributeError</code>. If we modify the slots to include <code>last_name</code>, then the output would be different:<pre><code class=language-python>class Person:
+</code></pre>
+<p>We could alter the <code>name</code> attribute at runtime, but <code>last_name</code> gave and <code>AttributeError</code>. If we modify the slots to include <code>last_name</code>, then the output would be different:</p>
+<pre><code class="language-python">class Person:
     __slots__ = 'name', 'last_name'
     def __init__(self, name):
         self.name = name
-</code></pre><p>And this time there will be no <code>AttributeError</code>:<pre><code class=language-pycon>>>> me = Person('Aquiles')
->>>me.last_name = 'Doe'
->>> print(me.last_name)
+</code></pre>
+<p>And this time there will be no <code>AttributeError</code>:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; me = Person('Aquiles')
+&gt;&gt;&gt;me.last_name = 'Doe'
+&gt;&gt;&gt; print(me.last_name)
 'Doe'
-</code></pre><p>In the examples above, it is clear that we can limit the dynamic creation of attributes by using slots. However, it is essential to note that classes tend to get much more sophisticated and store many different attributes. Keeping <code>__slots__</code> up to date can quickly become a hassle.<p>Two things are worth noting. One is that class attributes (i.e., attributes defined at a class level) automatically become read-only:<pre><code class=language-python>class Person:
+</code></pre>
+<p>In the examples above, it is clear that we can limit the dynamic creation of attributes by using slots. However, it is essential to note that classes tend to get much more sophisticated and store many different attributes. Keeping <code>__slots__</code> up to date can quickly become a hassle. </p>
+<p>Two things are worth noting. One is that class attributes (i.e., attributes defined at a class level) automatically become read-only:</p>
+<pre><code class="language-python">class Person:
     __slots__ = 'name', 'last_name'
     age = 35
 
     def __init__(self, name):
         self.name = name
-</code></pre><p>And if we try to change the age after instantiating the class we get the following error:<pre><code class=language-pycon>>>> me = Person('Aquiles')
->>> print(me.age)
+</code></pre>
+<p>And if we try to change the age after instantiating the class we get the following error:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; me = Person('Aquiles')
+&gt;&gt;&gt; print(me.age)
 35
->>> me.age = 50
+&gt;&gt;&gt; me.age = 50
 Traceback (most recent call last):
-  File "/Users/aquiles/Documents/Web/pftl_code/code/_slots/aa.py", line 16, in &LTmodule>
+  File &quot;/Users/aquiles/Documents/Web/pftl_code/code/_slots/aa.py&quot;, line 16, in &lt;module&gt;
     me.age = 50
 AttributeError: 'Person' object attribute 'age' is read-only
-</code></pre><p>We'll dive more into the reasons behind this behavior in the following section.<h2>Where are attributes stored, the <strong>dict</strong></h2><p>Objects must remember the attributes to which they have access to retrieve them or give an error if they can't be found. In Python, this is done through a dictionary called <code>__dict__</code>. We can see how it works with the same example we used earlier:<pre><code class=language-python>class Person:
+</code></pre>
+<p>We'll dive more into the reasons behind this behavior in the following section. </p>
+<h2>Where are attributes stored, the <strong>dict</strong></h2>
+<p>Objects must remember the attributes to which they have access to retrieve them or give an error if they can't be found. In Python, this is done through a dictionary called <code>__dict__</code>. We can see how it works with the same example we used earlier:</p>
+<pre><code class="language-python">class Person:
     birth_year = 1986
     def __init__(self, age, name):
         self.age = age
@@ -58,13 +383,20 @@ AttributeError: 'Person' object attribute 'age' is read-only
 
     def print_name(self):
         print(self.name)
-</code></pre><p>We can inspect the dictionary of both the Person class and of one of its instances:<pre><code class=language-pycon>>>> print(Person.__dict__)
-{'__module__': '__main__', 'birth_year': 1986, '__init__': &LTfunction Person.__init__ at 0x7fd890028ee0>, 'print_name': &LTfunction Person.print_name at 0x7fd89046ca60>, '__dict__': &LTattribute '__dict__' of 'Person' objects>, '__weakref__': &LTattribute '__weakref__' of 'Person' objects>, '__doc__': None}
->>> me = Person(35, 'Aquiles')
->>> print(me.__dict__)
+</code></pre>
+<p>We can inspect the dictionary of both the Person class and of one of its instances:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; print(Person.__dict__)
+{'__module__': '__main__', 'birth_year': 1986, '__init__': &lt;function Person.__init__ at 0x7fd890028ee0&gt;, 'print_name': &lt;function Person.print_name at 0x7fd89046ca60&gt;, '__dict__': &lt;attribute '__dict__' of 'Person' objects&gt;, '__weakref__': &lt;attribute '__weakref__' of 'Person' objects&gt;, '__doc__': None}
+&gt;&gt;&gt; me = Person(35, 'Aquiles')
+&gt;&gt;&gt; print(me.__dict__)
 {'age': 35, 'name': 'Aquiles'}
-</code></pre><p>Note, first, that we are not using slots; it is a plain class. The dictionary of the class stores references to its attributes <code>birth_year</code> and the methods <code>__init__</code> and <code>print_name</code>. It has no information about <code>age</code> or <code>name</code> because these attributes get created only <em>after</em> the class is instantiated.<p>On the other hand, the dictionary of the object <code>me</code> has both <code>name</code> and <code>age</code> but nothing else. If we would like to access the value stored in the dictionary, we can do the following:<pre><code class=language-python>me.__dict__['name']
-</code></pre><p>If we add slots, however, things will change. Let's what happens to the dictionary in the following example:<pre><code class=language-python>class Person:
+</code></pre>
+<p>Note, first, that we are not using slots; it is a plain class. The dictionary of the class stores references to its attributes <code>birth_year</code> and the methods <code>__init__</code> and <code>print_name</code>. It has no information about <code>age</code> or <code>name</code> because these attributes get created only <em>after</em> the class is instantiated. </p>
+<p>On the other hand, the dictionary of the object <code>me</code> has both <code>name</code> and <code>age</code> but nothing else. If we would like to access the value stored in the dictionary, we can do the following:</p>
+<pre><code class="language-python">me.__dict__['name']
+</code></pre>
+<p>If we add slots, however, things will change. Let's what happens to the dictionary in the following example:</p>
+<pre><code class="language-python">class Person:
     __slots__ = 'age', 'name'
     birth_year = 1986
 
@@ -74,33 +406,50 @@ AttributeError: 'Person' object attribute 'age' is read-only
 
     def print_name(self):
         print(self.name)
-</code></pre><p>We kept the <code>birth_year</code> class attribute, but we added the slots for <code>age</code> and <code>name</code>. If we repeat what we did earlier:<pre><code class=language-pycon>>>> print(Person.__dict__)
-{'__module__': '__main__', '__slots__': ('age', 'name'), 'birth_year': 1986, '__init__': &LTfunction Person.__init__ at 0x7ffdf0118ee0>, 'print_name': &LTfunction Person.print_name at 0x7ffde032ba60>, 'age': &LTmember 'age' of 'Person' objects>, 'name': &LTmember 'name' of 'Person' objects>, '__doc__': None}
->>> me = Person(35, 'Aquiles')
->>> print(me.__dict__)
+</code></pre>
+<p>We kept the <code>birth_year</code> class attribute, but we added the slots for <code>age</code> and <code>name</code>. If we repeat what we did earlier:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; print(Person.__dict__)
+{'__module__': '__main__', '__slots__': ('age', 'name'), 'birth_year': 1986, '__init__': &lt;function Person.__init__ at 0x7ffdf0118ee0&gt;, 'print_name': &lt;function Person.print_name at 0x7ffde032ba60&gt;, 'age': &lt;member 'age' of 'Person' objects&gt;, 'name': &lt;member 'name' of 'Person' objects&gt;, '__doc__': None}
+&gt;&gt;&gt; me = Person(35, 'Aquiles')
+&gt;&gt;&gt; print(me.__dict__)
 Traceback (most recent call last):
 [...]
 AttributeError: 'Person' object has no attribute '__dict__'
-</code></pre><p>The only difference between the earlier code and this one is that we added the <code>__slots__</code> class attribute. We can notice that the class dictionary is different. Now there are both <code>age': &LTmember 'age' of 'Person' objects></code> and <code>'name': &LTmember 'name' of 'Person' objects></code>. Moreover, if we explore the object <code>me</code>, we see that it has no <code>__dict__</code>. It is fair, therefore, to ask where are these attributes stored, and the answer is close by:<pre><code class=language-pycon>>>> print(me.__slots__)
+</code></pre>
+<p>The only difference between the earlier code and this one is that we added the <code>__slots__</code> class attribute. We can notice that the class dictionary is different. Now there are both <code>age': &lt;member 'age' of 'Person' objects&gt;</code> and <code>'name': &lt;member 'name' of 'Person' objects&gt;</code>. Moreover, if we explore the object <code>me</code>, we see that it has no  <code>__dict__</code>. It is fair, therefore, to ask where are these attributes stored, and the answer is close by:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; print(me.__slots__)
 ('age', 'name')
-</code></pre><p>To wrap up what we have just seen, when we use slots, we create objects with no <code>__dict__</code> associated with them, but rather a <code>__slots__</code> tuple. It is a significant distinction since tuples are immutable in Python. Moreover, the attributes that we defined in the slots show directly on the class dictionary, and this was not the case before.<p>We can explore a bit more this additions by looking at what their types are. For example, we can do the following:<pre><code class=language-pycon>>>> print(type(Person.__dict__['birth_year']))
-&LTclass 'int'>
->>> print(type(Person.__dict__['age']))
-&LTclass 'member_descriptor'>
-</code></pre><p>And this is the quid of the question regarding slots. When we define them in a class, they are automatically created as descriptors. We have written a <a href=https://www.pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level/>complete article about descriptors</a> that may be worth checking out to go deeper with the understanding. It is the reason why we get the read-only attributes if we don't specify them in the slots.<h3>Adding the dictionary to the slots</h3><p>We saw that when we define slots for a class, its objects do not have a <code>__dict__</code> to store their attributes. Therefore, we could ask ourselves what would happen if we add the dictionary to the list of slots. Let's try it out:<pre><code class=language-python>class Person:
+</code></pre>
+<p>To wrap up what we have just seen, when we use slots, we create objects with no <code>__dict__</code> associated with them, but rather a <code>__slots__</code> tuple. It is a significant distinction since tuples are immutable in Python. Moreover, the attributes that we defined in the slots show directly on the class dictionary, and this was not the case before. </p>
+<p>We can explore a bit more this additions by looking at what their types are. For example, we can do the following:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; print(type(Person.__dict__['birth_year']))
+&lt;class 'int'&gt;
+&gt;&gt;&gt; print(type(Person.__dict__['age']))
+&lt;class 'member_descriptor'&gt;
+</code></pre>
+<p>And this is the quid of the question regarding slots. When we define them in a class, they are automatically created as descriptors. We have written a <a href="https://www.pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level/">complete article about descriptors</a> that may be worth checking out to go deeper with the understanding. It is the reason why we get the read-only attributes if we don't specify them in the slots. </p>
+<h3>Adding the dictionary to the slots</h3>
+<p>We saw that when we define slots for a class, its objects do not have a <code>__dict__</code> to store their attributes. Therefore, we could ask ourselves what would happen if we add the dictionary to the list of slots. Let's try it out:</p>
+<pre><code class="language-python">class Person:
 __slots__ = 'age', 'name', '__dict__'
 
 def __init__(self, age, name):
     self.age = age
     self.name = name
     self.birth_year = 1986
-</code></pre><p>And we can now use it as we have always done:<pre><code class=language-pycon>>>> me = Person(35, 'Aquiles')
->>> print(me.__dict__)
+</code></pre>
+<p>And we can now use it as we have always done:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; me = Person(35, 'Aquiles')
+&gt;&gt;&gt; print(me.__dict__)
 {'birth_year': 1986}
->>> me.new_var = 10
->>> print(me.__dict__)
+&gt;&gt;&gt; me.new_var = 10
+&gt;&gt;&gt; print(me.__dict__)
 {'birth_year': 1986, 'new_var': 10}
-</code></pre><p>We have created a hybrid class in which some attributes are slots, and therefore they do not appear in the dictionary. However, since the class itself has a dictionary, we can dynamically create new attributes. Whether this pattern is useful (or even correct) can be subject to discussion. We are not going to engage with it right now.<h2>Slots and inheritance</h2><p>The final important topic to cover about slots is how they behave with inheritance. Let's start creating a new class that inherits from <code>Person</code> and see what happens:<pre><code class=language-python>class Person:
+</code></pre>
+<p>We have created a hybrid class in which some attributes are slots, and therefore they do not appear in the dictionary. However, since the class itself has a dictionary, we can dynamically create new attributes. Whether this pattern is useful (or even correct) can be subject to discussion. We are not going to engage with it right now. </p>
+<h2>Slots and inheritance</h2>
+<p>The final important topic to cover about slots is how they behave with inheritance. Let's start creating a new class that inherits from <code>Person</code> and see what happens:</p>
+<pre><code class="language-python">class Person:
 __slots__ = 'age', 'name'
 def __init__(self, age, name):
     self.age = age
@@ -110,15 +459,20 @@ class Student(Person):
     def __init__(self, age, name, course):
         super(Student, self).__init__(age, name)
         self.course = course
-</code></pre><p>In the example above, <code>Studen</code> inherits from <code>Person</code> but it does not define new slots. Therefore, it will behave like any other class:<pre><code class=language-pycon>>>> me = Student(35, 'Aquiles', 'Physics')    
->>> print(me.__dict__)
+</code></pre>
+<p>In the example above, <code>Studen</code> inherits from <code>Person</code> but it does not define new slots. Therefore, it will behave like any other class:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; me = Student(35, 'Aquiles', 'Physics')    
+&gt;&gt;&gt; print(me.__dict__)
 {'course': 'Physics'}
->>> me.new_var = 10
->>> print(me.__dict__)
+&gt;&gt;&gt; me.new_var = 10
+&gt;&gt;&gt; print(me.__dict__)
 {'course': 'Physics', 'new_var': 10}
->>> print(me.__slots__)
+&gt;&gt;&gt; print(me.__slots__)
 ('age', 'name')
-</code></pre><p><code>Student</code> handles dynamic attribute creation, and we still have access to the slots defined in the parent class <code>age</code> and <code>name</code>. This means that if we inherit from a class, we should not worry whether it defined slots or not. The child class will behave precisely as we design it to behave.<p>The other possibility is to define slots in the child class but not in the parent class, like this:<pre><code class=language-python>class Person:
+</code></pre>
+<p><code>Student</code> handles dynamic attribute creation, and we still have access to the slots defined in the parent class <code>age</code> and <code>name</code>. This means that if we inherit from a class, we should not worry whether it defined slots or not. The child class will behave precisely as we design it to behave. </p>
+<p>The other possibility is to define slots in the child class but not in the parent class, like this:</p>
+<pre><code class="language-python">class Person:
 def __init__(self, age, name):
     self.age = age
     self.name = name
@@ -128,15 +482,19 @@ class Student(Person):
     def __init__(self, age, name, course):
         super(Student, self).__init__(age, name)
         self.course = course
-</code></pre><p>And, surprisingly, the code above still works:<pre><code class=language-pycon>>>> me = Student(35, 'Aquiles', 'Physics')
->>> print(me.__dict__)
+</code></pre>
+<p>And, surprisingly, the code above still works:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; me = Student(35, 'Aquiles', 'Physics')
+&gt;&gt;&gt; print(me.__dict__)
 {'age': 35, 'name': 'Aquiles'}
->>> me.new_var = 10
->>> print(me.__dict__)
+&gt;&gt;&gt; me.new_var = 10
+&gt;&gt;&gt; print(me.__dict__)
 {'age': 35, 'name': 'Aquiles', 'new_var': 10}
->>> print(me.__slots__)
+&gt;&gt;&gt; print(me.__slots__)
 course
-</code></pre><p>Therefore, if either the parent or the child defines the <code>__dict__</code>, then the objects will also have a dict and will be able to accept dynamically created attributes. The only way in which can leverage slots is if both parent and child define them:<pre><code class=language-python>class Person:
+</code></pre>
+<p>Therefore,  if either the parent or the child defines the <code>__dict__</code>, then the objects will also have a dict and will be able to accept dynamically created attributes. The only way in which can leverage slots is if both parent and child define them:</p>
+<pre><code class="language-python">class Person:
     __slots__ = 'age', 'name'
     def __init__(self, age, name):
         self.age = age
@@ -147,11 +505,272 @@ class Student(Person):
     def __init__(self, age, name, course):
         super(Student, self).__init__(age, name)
         self.course = course
-</code></pre><p>And then we'll see the behavior that would be expected from having slots:<pre><code class=language-pycon>>>> me = Student(35, 'Aquiles', 'Physics')
->>> print(me.__slots__)
+</code></pre>
+<p>And then we'll see the behavior that would be expected from having slots:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; me = Student(35, 'Aquiles', 'Physics')
+&gt;&gt;&gt; print(me.__slots__)
 course
->>> me.new_var = 10
+&gt;&gt;&gt; me.new_var = 10
 Traceback (most recent call last):
 [...]
 AttributeError: 'Student' object has no attribute 'new_var'
-</code></pre><h2>Impact of slots on size and speed of code</h2><p>One of the reasons behind adding slots to Python was to have faster attribute access. This was discussed in <a href=https://python-history.blogspot.com/2010/06/inside-story-on-new-style-classes.html>this blog post</a> from 2010, summarizing all the improvements done to classes. Essentially, slots were added to overcome potential impacts in performance. By defining slots, the programs can have a faster lookup of the data stored. Whether an increase of lookup times of around 15% impacts the overall code will depend on how often we perform the task.<p>The other impact of slots is lower memory usage. Since slots prevent creating a dictionary and a <em>weakref</em> (which didn't discuss in this article), each object created will require less memory. For code creating few hundreds of objects, the impact may be negligible. Still, if we are creating millions of objects, the effect can be tremendous. For example, <a href=https://docs.sqlalchemy.org/en/14/changelog/migration_10.html#significant-improvements-in-structural-memory-use>SQLAlchemy has a measurable effect on the use of slots</a>.<h2>Conclusions: Deciding when is worth using slots</h2><p>Slots are a feature worth keeping in mind when developing code and, more importantly, when studying other's code. Using them for speed and memory improvements is likely to be far-fetched for most programs. It is essential to keep in mind that if a program was optimized using slots, we could easily ruin those optimizations by careless inheritance.<p>On the other hand, limiting the attribute creation at runtime can have a broad set of application contexts, even if it was not the original motivation for implementing slots in Python. For example, when developing code to control hardware, such as a camera, users may make mistakes such as using <code>exposure</code> instead of <code>exposure_time</code> to change a parameter. Due to dynamic attribute creation, there won't be any error shown on the screen.<p>Slots are not the only way of solving these issues, but they are straightforward to implement.</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once> <img alt src=/images/mirrors.width-800.jpg> <span class=date>2021-01-16</span> <span class=name>Singletons: Instantiate objects only once</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>
+</code></pre>
+<h2>Impact of slots on size and speed of code</h2>
+<p>One of the reasons behind adding slots to Python was to have faster attribute access. This was discussed in <a href="https://python-history.blogspot.com/2010/06/inside-story-on-new-style-classes.html">this blog post</a> from 2010, summarizing all the improvements done to classes. Essentially, slots were added to overcome potential impacts in performance. By defining slots, the programs can have a faster lookup of the data stored. Whether an increase of lookup times of around 15% impacts the overall code will depend on how often we perform the task. </p>
+<p>The other impact of slots is lower memory usage. Since slots prevent creating a dictionary and a <em>weakref</em> (which didn't discuss in this article), each object created will require less memory. For code creating few hundreds of objects, the impact may be negligible. Still, if we are creating millions of objects, the effect can be tremendous. For example, <a href="https://docs.sqlalchemy.org/en/14/changelog/migration_10.html#significant-improvements-in-structural-memory-use">SQLAlchemy has a measurable effect on the use of slots</a>.</p>
+<h2>Conclusions: Deciding when is worth using slots</h2>
+<p>Slots are a feature worth keeping in mind when developing code and, more importantly, when studying other's code. Using them for speed and memory improvements is likely to be far-fetched for most programs. It is essential to keep in mind that if a program was optimized using slots, we could easily ruin those optimizations by careless inheritance. </p>
+<p>On the other hand, limiting the attribute creation at runtime can have a broad set of application contexts, even if it was not the original motivation for implementing slots in Python. For example, when developing code to control hardware, such as a camera, users may make mistakes such as using <code>exposure</code> instead of <code>exposure_time</code> to change a parameter. Due to dynamic attribute creation, there won't be any error shown on the screen. </p>
+<p>Slots are not the only way of solving these issues, but they are straightforward to implement. </p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+        <div class="lg:mt-6">
+          <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
+          <div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/singletons-instantiate-objects-only-once" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/mirrors.width-800.jpg"
+                           alt="Illustration of Singletons: Instantiate objects only once">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2021-01-16</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Singletons: Instantiate objects only once</h3>
+                      <div class="font-sans ">When developing more extensive programs, being aware of different patterns can significantly help us solve problems even before they arise. One of those patterns is the creation of singletons, which are nothing else but objects that can be instantiated only once. In Python, we are exposed to singletons since the …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

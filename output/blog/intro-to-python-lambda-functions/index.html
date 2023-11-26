@@ -1,21 +1,390 @@
-<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Introduction to Python Lambda Functions | Python For The Lab</title><meta content="functions, methods, arguments, packing, unpacking, args, kwargs, " name=tags><meta content="Anonymous functions are powerful, but they are hard to understand" name=description><meta content="Aquiles Carattino" name=author><link href=blog/intro-to-python-lambda-functions rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/intro-to-python-lambda-functions property=og:url><meta content="Introduction to Python Lambda Functions" property=og:title><meta content="Anonymous functions are powerful, but they are hard to understand" property=og:description><meta content=/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/intro-to-python-lambda-functions property=twitter:url><meta content="Introduction to Python Lambda Functions" property=twitter:title><meta content="Anonymous functions are powerful, but they are hard to understand" property=twitter:description><meta content=/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item courses" href=https://pythonforthelab.com/courses/><span>Courses</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg width=800></div><h1>Introduction to Python Lambda Functions</h1><h3>Anonymous functions are powerful, but they are hard to understand</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2019-03-17</span><span class="item-tag first">functions</span><span class=item-tag>methods</span><span class=item-tag>arguments</span><span class=item-tag>packing</span><span class=item-tag>unpacking</span><span class=item-tag>args</span><span class=item-tag>kwargs</span></div><main><p>Some time ago, Python introduced in its syntax the possibility to define functions using <code>lambda</code> instead of <code>def</code>. These functions are called anonymous and are very common in other languages such as Javascript. However, in Python, they seem a bit obscure and are often either overlooked or misused. In this article, we are going to introduce the lambda functions and discuss where and how to use it.<p>To define a function, you can use the following syntax:<pre><code class=language-python>def average(x, y):
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Introduction to Python Lambda Functions | Python For The Lab</title>
+
+  <meta name="tags" content="functions, methods, arguments, packing, unpacking, args, kwargs, ">
+  <meta name="description" content="Anonymous functions are powerful, but they are hard to understand">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="blog/intro-to-python-lambda-functions">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="blog/intro-to-python-lambda-functions">
+  <meta property="og:title" content="Introduction to Python Lambda Functions">
+  <meta property="og:description" content="Anonymous functions are powerful, but they are hard to understand">
+  <meta property="og:image" content="/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="blog/intro-to-python-lambda-functions">
+  <meta property="twitter:title" content="Introduction to Python Lambda Functions">
+  <meta property="twitter:description" content="Anonymous functions are powerful, but they are hard to understand">
+  <meta property="twitter:image" content="/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg" alt="Introduction to Python Lambda Functions" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">Introduction to Python Lambda Functions</h1>
+        <div class="font-sans font-bold text-xl">Anonymous functions are powerful, but they are hard to understand</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2019-03-17</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">functions</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">methods</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">arguments</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">packing</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">unpacking</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">args</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">kwargs</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>Some time ago, Python introduced in its syntax the possibility to define
+functions using <code>lambda</code> instead of <code>def</code>. These functions are called
+anonymous and are very common in other languages such as Javascript.
+However, in Python, they seem a bit obscure and are often either
+overlooked or misused. In this article, we are going to introduce the
+lambda functions and discuss where and how to use it.</p>
+<p>To define a function, you can use the following syntax:</p>
+<pre><code class="language-python">def average(x, y):
     return (x+y)/2
-</code></pre><p>Then, if you would like to calculate the average of two numbers, you can simply do:<pre><code class=language-python>avg = average(2, 5)
-</code></pre><p>In such case, <code>avg</code> would have a value of <code>3.5</code>. We could also define <code>average</code> like this:<pre><code class=language-python>average = lambda x, y: (x+y)/2
-</code></pre><p>If you test this function, you will see that the output is exactly the same. It is important to point out that the syntax is very different between <code>def</code> and <code>lambda</code>. First, we define the arguments <code>x</code> and <code>y</code> without any parenthesis. Then, we define the operation that we want to apply. Note that the <code>return</code> is implicit when you use a lambda function.<p>There are, however, more fundamental differences. Lambda functions must be expressed on only one line, and they have no docstring. If you try <code>help(average)</code> on each definition above, you will see that the output is very different. Moreover, there is no way of documenting what the second version of <code>average</code> is actually doing.<p>Functionally speaking, both ways of defining <code>average</code> give the same result. So far, the difference between them is very subtle. The main advantage of <em>lambda</em> (or anonymous) functions is that they don't need a name. Moreover, assigning a name like what we did above is considered bad practice, as we will discuss later on. Let's now see in what context you would like to use a lambda function instead of a normal function.<p>Most tutorials focus on lambda functions for sorting a list. We can do the same before going to other topics. Imagine that you have the following list:<pre><code class=language-python>var = [1, 5, -2, 3, -7, 4]
-</code></pre><p>Imagine you would like to sort the values, you can do:<pre><code class=language-python>sorted_var = sorted(var)
+</code></pre>
+<p>Then, if you would like to calculate the average of two numbers, you can
+simply do:</p>
+<pre><code class="language-python">avg = average(2, 5)
+</code></pre>
+<p>In such case, <code>avg</code> would have a value of <code>3.5</code>. We could also define
+<code>average</code> like this:</p>
+<pre><code class="language-python">average = lambda x, y: (x+y)/2
+</code></pre>
+<p>If you test this function, you will see that the output is exactly the
+same. It is important to point out that the syntax is very different
+between <code>def</code> and <code>lambda</code>. First, we define the arguments <code>x</code> and <code>y</code>
+without any parenthesis. Then, we define the operation that we want to
+apply. Note that the <code>return</code> is implicit when you use a lambda
+function.</p>
+<p>There are, however, more fundamental differences. Lambda functions must
+be expressed on only one line, and they have no docstring. If you try
+<code>help(average)</code> on each definition above, you will see that the output
+is very different. Moreover, there is no way of documenting what the
+second version of <code>average</code> is actually doing.</p>
+<p>Functionally speaking, both ways of defining <code>average</code> give the same
+result. So far, the difference between them is very subtle. The main
+advantage of <em>lambda</em> (or anonymous) functions is that they don't need a
+name. Moreover, assigning a name like what we did above is considered
+bad practice, as we will discuss later on. Let's now see in what context
+you would like to use a lambda function instead of a normal function.</p>
+<p>Most tutorials focus on lambda functions for sorting a list. We can do
+the same before going to other topics. Imagine that you have the
+following list:</p>
+<pre><code class="language-python">var = [1, 5, -2, 3, -7, 4]
+</code></pre>
+<p>Imagine you would like to sort the values, you can do:</p>
+<pre><code class="language-python">sorted_var = sorted(var)
 # [-7, -2, 1, 3, 4, 5]
-</code></pre><p>That is easy enough. But what would happen if you would like to sort the values based on the distance to a given number? You need to apply a function to each number, such as <code>abs(x-1)</code> if you are computing the distance to 1, and sort the values based on the output. Fortunately <code>sorted</code> allows you to do that using the keyword argument <code>key=</code>. We could do:<pre><code class=language-python>def distance(x):
+</code></pre>
+<p>That is easy enough. But what would happen if you would like to sort the
+values based on the distance to a given number? You need to apply a
+function to each number, such as <code>abs(x-1)</code> if you are computing the
+distance to 1, and sort the values based on the output. Fortunately
+<code>sorted</code> allows you to do that using the keyword argument <code>key=</code>. We
+could do:</p>
+<pre><code class="language-python">def distance(x):
     return abs(x-1)
 
 sorted_var = sorted(var, key=distance)
 # [1, 3, -2, 4, 5, -7]
-</code></pre><p>Another option would be to use a lambda function:<pre><code class=language-python>sorted_var = sorted(var, key=lambda x: abs(x-1))
-</code></pre><p>Both examples are going to produce the exact same output. There is no functional difference between defining a function using <code>def</code> or using <code>lambda</code>. I can argue that the second example is slightly shorter than the first one. Also, it makes the code more readable, since you can immediately see what are you doing to each element (<code>abs(x-1)</code>) instead of digging through your code to see where <code>distance</code> was defined.<p>Another possibility is to use it in combination with <code>map</code>. Map is a way of applying a function to every element on a list. For example, based on the example above, we can do:<pre><code class=language-python>list(map(distance, var))
+</code></pre>
+<p>Another option would be to use a lambda function:</p>
+<pre><code class="language-python">sorted_var = sorted(var, key=lambda x: abs(x-1))
+</code></pre>
+<p>Both examples are going to produce the exact same output. There is no
+functional difference between defining a function using <code>def</code> or using
+<code>lambda</code>. I can argue that the second example is slightly shorter than
+the first one. Also, it makes the code more readable, since you can
+immediately see what are you doing to each element (<code>abs(x-1)</code>) instead
+of digging through your code to see where <code>distance</code> was defined.</p>
+<p>Another possibility is to use it in combination with <code>map</code>. Map is a way
+of applying a function to every element on a list. For example, based on
+the example above, we can do:</p>
+<pre><code class="language-python">list(map(distance, var))
 # [0, 4, 3, 2, 8, 3]
-</code></pre><p>Or, using the lambda expressions:<pre><code class=language-python>list(map(lambda x: abs(x-1), var))
+</code></pre>
+<p>Or, using the lambda expressions:</p>
+<pre><code class="language-python">list(map(lambda x: abs(x-1), var))
 # [0, 4, 3, 2, 8, 3]
-</code></pre><p>Which gives the exact same output and, again, one can argue which one is easier to read. The examples above are what you may see in other tutorials. Probably is what you will see if you go through StackOverflow. One of the possibilities is to use lambda functions in combination with Pandas.<h2>Pandas and Lambda Functions</h2><p>The example data was inspired by <a href=https://data36.com/pandas-tutorial-1-basics-reading-data-files-dataframes-data-selection/>this</a> example and can be found <a href=https://github.com/PFTL/website/blob/master/example_code/30_lambdas/example_data.csv>here</a>. Create a file <strong>example_data.csv</strong> with the following content:<pre><code class=language-csv>animal,uniq_id,water_need
+</code></pre>
+<p>Which gives the exact same output and, again, one can argue which one is
+easier to read. The examples above are what you may see in other
+tutorials. Probably is what you will see if you go through
+StackOverflow. One of the possibilities is to use lambda functions in
+combination with Pandas.</p>
+<h2>Pandas and Lambda Functions</h2>
+<p>The example data was inspired by
+<a href="https://data36.com/pandas-tutorial-1-basics-reading-data-files-dataframes-data-selection/">this</a>
+example and can be found
+<a href="https://github.com/PFTL/website/blob/master/example_code/30_lambdas/example_data.csv">here</a>.
+Create a file <strong>example_data.csv</strong> with the following content:</p>
+<pre><code class="language-csv">animal,uniq_id,water_need
 elephant,1001,500
 elephant,1002,600
 elephant,1003,550
@@ -38,12 +407,35 @@ lion,1019,390
 kangaroo,1020,410
 kangaroo,1021,430
 kangaroo,1022,410
-</code></pre><p>To read the data as a DataFrame, we can simply do the following:<pre><code class=language-python>import pandas as pd
+</code></pre>
+<p>To read the data as a DataFrame, we can simply do the following:</p>
+<pre><code class="language-python">import pandas as pd
 
 df = pd.read_csv('example_data.csv', delimiter = ',')
-</code></pre><p>Imagine you would like to capitalize the first letter of each animal's name on the data frame, you can do:<pre><code class=language-python>df['animal'] = df['animal'].apply(lambda x: x.capitalize())
+</code></pre>
+<p>Imagine you would like to capitalize the first letter of each animal's
+name on the data frame, you can do:</p>
+<pre><code class="language-python">df['animal'] = df['animal'].apply(lambda x: x.capitalize())
 print(df.head())
-</code></pre><p>And you will see the results. Of course, lambda functions can become much more complex. You can apply them to an entire series instead of single values, you can combine them with other libraries such as numpy or scipy and perform complex transformations to your data.<p>One of the biggest advantages of lambda functions is that if you are using Jupyter notebooks, you can see the changes right away. You don't need to open another file, run a different, cell, etc. If you go to the <a href=https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.apply.html>Pandas documentation</a> you will see that lambdas are used quite often.<h2>Qt Slots</h2><p>Another common example of using lambdas is in combination with the Qt library. We have written an <a href=https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui>introductory article on Qt</a> in the past. Feel free to browse through it if you are not familiar with how building user interfaces work. A very minimal example, that just shows a button, it looks like this:<pre><code class=language-python>from PyQt5.QtWidgets import QApplication, QPushButton
+</code></pre>
+<p>And you will see the results. Of course, lambda functions can become
+much more complex. You can apply them to an entire series instead of
+single values, you can combine them with other libraries such as numpy
+or scipy and perform complex transformations to your data.</p>
+<p>One of the biggest advantages of lambda functions is that if you are
+using Jupyter notebooks, you can see the changes right away. You don't
+need to open another file, run a different, cell, etc. If you go to the
+<a href="https://pandas.pydata.org/pandas-docs/version/0.22/generated/pandas.DataFrame.apply.html">Pandas
+documentation</a>
+you will see that lambdas are used quite often.</p>
+<h2>Qt Slots</h2>
+<p>Another common example of using lambdas is in combination with the Qt
+library. We have written an <a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui">introductory article on
+Qt</a> in the past. Feel free to
+browse through it if you are not familiar with how building user
+interfaces work. A very minimal example, that just shows a button, it
+looks like this:</p>
+<pre><code class="language-python">from PyQt5.QtWidgets import QApplication, QPushButton
 
 app = QApplication([])
 
@@ -51,10 +443,360 @@ button = QPushButton('Press Me')
 button.show()
 
 app.exit(app.exec())
-</code></pre><p>If you would like to trigger an action when pressing the button, that action has to be defined as a function. If we want to print something to screen when the button gets pressed, we can simply add the following line right before <code>app.exit</code>:<pre><code class=language-python>button.clicked.connect(lambda x: print('Pressed!'))
-</code></pre><p>If you run the program again, every time you press the button you will see the <code>Pressed!</code> appearing on the screen. Again, using lambda functions as slots for signals can speed up your coding and make your programs easier to read. However, lambda functions also need to be considered with caution.<h2>Where to use lambda functions</h2><p>Lambda functions can only have 1 line. This forces developers to use them only in contexts where the behavior can be achieved without a complex syntax. In the examples above, you can see that the lambda functions are very simple. If it would have required to open a socket, exchange some information, process the received data, etc. probably it wouldn't have been possible to do it on a single line.<p>The natural scenario where lambda functions can be used is as arguments for other functions that require callables as arguments. For example, the <code>apply</code> of a Pandas Data Frame requires a function as an argument. Connecting signals in Qt also requires a function. If the function that we are going to apply or execute is simple, and we are not going to re-use it, writing it as an anonymous function may be a very convenient way.<h2>Where not to use lambda functions</h2><p>Lambda functions are anonymous, therefore, if you are assigning a name to them, such as when we did:<pre><code class=language-python>average = lambda x, y: (x+y)/2
-</code></pre><p>It means there is something you are doing wrong. If you need to assign a name to the function, so you can use it in different places of your program, use the standard <code>def</code> syntax. There is a lengthy discussion on the abuse of lambda functions in Python <a href=https://treyhunner.com/2018/09/stop-writing-lambda-expressions/>on this blog</a>. The one that I have seen quite often, especially by people who have just learned about lambdas, is this:<pre><code class=language-python>sorted_var = sorted(var, key=lambda x: abs(x))
-</code></pre><p>This innocent example may be hard to wrap around if it's the first time that you see lambda functions. But what you have is that you are wrapping a function (<code>abs</code>) within another function. It would be like doing:<pre><code class=language-python>def func(x):
+</code></pre>
+<p>If you would like to trigger an action when pressing the button, that
+action has to be defined as a function. If we want to print something to
+screen when the button gets pressed, we can simply add the following
+line right before <code>app.exit</code>:</p>
+<pre><code class="language-python">button.clicked.connect(lambda x: print('Pressed!'))
+</code></pre>
+<p>If you run the program again, every time you press the button you will
+see the <code>Pressed!</code> appearing on the screen. Again, using lambda
+functions as slots for signals can speed up your coding and make your
+programs easier to read. However, lambda functions also need to be
+considered with caution.</p>
+<h2>Where to use lambda functions</h2>
+<p>Lambda functions can only have 1 line. This forces developers to use
+them only in contexts where the behavior can be achieved without a
+complex syntax. In the examples above, you can see that the lambda
+functions are very simple. If it would have required to open a socket,
+exchange some information, process the received data, etc. probably it
+wouldn't have been possible to do it on a single line.</p>
+<p>The natural scenario where lambda functions can be used is as arguments
+for other functions that require callables as arguments. For example,
+the <code>apply</code> of a Pandas Data Frame requires a function as an argument.
+Connecting signals in Qt also requires a function. If the function that
+we are going to apply or execute is simple, and we are not going to
+re-use it, writing it as an anonymous function may be a very convenient
+way.</p>
+<h2>Where not to use lambda functions</h2>
+<p>Lambda functions are anonymous, therefore, if you are assigning a name
+to them, such as when we did:</p>
+<pre><code class="language-python">average = lambda x, y: (x+y)/2
+</code></pre>
+<p>It means there is something you are doing wrong. If you need to assign a
+name to the function, so you can use it in different places of your
+program, use the standard <code>def</code> syntax. There is a lengthy discussion on
+the abuse of lambda functions in Python <a href="https://treyhunner.com/2018/09/stop-writing-lambda-expressions/">on this
+blog</a>.
+The one that I have seen quite often, especially by people who have just
+learned about lambdas, is this:</p>
+<pre><code class="language-python">sorted_var = sorted(var, key=lambda x: abs(x))
+</code></pre>
+<p>This innocent example may be hard to wrap around if it's the first time
+that you see lambda functions. But what you have is that you are
+wrapping a function (<code>abs</code>) within another function. It would be like
+doing:</p>
+<pre><code class="language-python">def func(x):
     return abs(x)
-</code></pre><p>What is the advantage compared to just doing <code>abs(x)</code>? Indeed, no advantage, this means that we can also sort a list like this:<pre><code class=language-python>sorted_var = sorted(var, key=abs)
-</code></pre><p>If you pay attention to the example that we've developed earlier, we used <code>abs(x-1)</code> exactly to avoid this redundancy.<h2>Conclusions</h2><p>Lambda (or anonymous) functions are a tool that is slowly getting more popular in Python programs. That is why it is very important that you can understand what it means. You have to remember that there is nothing that the lambda syntax allows you to do that it wouldn't be possible to do without them. It is more a matter of convenience, syntax economy, and perhaps readability.<p>In other programming languages, such as JavaScript, anonymous functions are used very often and have a much richer syntax than in Python. I don't believe Python will head the same way, but in any case, they are a tool that can help you not only with your current programs but they can also help you understand what is going on if you ever tinker with other languages.<p>Header Photo by <a href=https://unsplash.com/photos/YkYcdn4EbDs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText>Ivana Cajina</a> on Unsplash</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/what-are-args-and-kwargs-and-when-to-use-them> <img alt src=/images/luca-bravo-217276-unsplash_linkedin.width-800.jpg> <span class=date>2019-03-10</span> <span class=name>What are args and kwargs and when to use them</span> </a><li><a class=item href=https://pythonforthelab.com/blog/duck-typing-or-how-to-check-variable-types> <img alt src=/images/joshua-coleman-655076-unsplash_linkedin.width-800.jpg> <span class=date>2019-06-11</span> <span class=name>Duck Typing, or how to check variable types</span> </a><li><a class=item href=https://pythonforthelab.com/blog/monkey-patching-and-its-consequences> <img alt src=/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png> <span class=date>2019-06-18</span> <span class=name>Monkey Patching and its consequences</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>
+</code></pre>
+<p>What is the advantage compared to just doing <code>abs(x)</code>? Indeed, no
+advantage, this means that we can also sort a list like this:</p>
+<pre><code class="language-python">sorted_var = sorted(var, key=abs)
+</code></pre>
+<p>If you pay attention to the example that we've developed earlier, we
+used <code>abs(x-1)</code> exactly to avoid this redundancy.</p>
+<h2>Conclusions</h2>
+<p>Lambda (or anonymous) functions are a tool that is slowly getting more
+popular in Python programs. That is why it is very important that you
+can understand what it means. You have to remember that there is nothing
+that the lambda syntax allows you to do that it wouldn't be possible to
+do without them. It is more a matter of convenience, syntax economy, and
+perhaps readability.</p>
+<p>In other programming languages, such as JavaScript, anonymous functions
+are used very often and have a much richer syntax than in Python. I
+don't believe Python will head the same way, but in any case, they are a
+tool that can help you not only with your current programs but they can
+also help you understand what is going on if you ever tinker with other
+languages.</p>
+<p>Header Photo by <a href="https://unsplash.com/photos/YkYcdn4EbDs?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Ivana
+Cajina</a>
+on Unsplash</p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+        <div class="lg:mt-6">
+          <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
+          <div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/what-are-args-and-kwargs-and-when-to-use-them" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/luca-bravo-217276-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of What are args and kwargs and when to use them">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-03-10</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">What are args and kwargs and when to use them</h3>
+                      <div class="font-sans ">If you have worked with Python for long enough, probably you have encountered code that uses *args and **kwargs as arguments in functions. Even if you haven't, it is a very neat feature that allows you to achieve great flexibility while developing code. In this article, we are going to …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/duck-typing-or-how-to-check-variable-types" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/joshua-coleman-655076-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of Duck Typing, or how to check variable types">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-06-11</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Duck Typing, or how to check variable types</h3>
+                      <div class="font-sans ">The name duck typing has its root in the expression If it walks like a duck and it quacks like a duck, then it must be a duck. Which means that if you want to know whether you are dealing with a duck or not, you only care about how …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/monkey-patching-and-its-consequences" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png"
+                           alt="Illustration of Monkey Patching and its consequences">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-06-18</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Monkey Patching and its consequences</h3>
+                      <div class="font-sans ">Monkey patching is a technique that allows you to alter the behavior of objects at runtime. Even though it can be a very useful feature, it can also make your code much harder to understand and debug, and therefore you have to be careful with how you implement monkey patching …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

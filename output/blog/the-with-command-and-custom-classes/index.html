@@ -1,34 +1,394 @@
-<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>The with command and custom classes | Python For The Lab</title><meta content="Context Manager, With, Custom Classes, Patterns, " name=tags><meta content="Using the with command and developing classes that support it" name=description><meta content="Aquiles Carattino" name=author><link href=blog/the-with-command-and-custom-classes rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/the-with-command-and-custom-classes property=og:url><meta content="The with command and custom classes" property=og:title><meta content="Using the with command and developing classes that support it" property=og:description><meta content=/images/tobias-fischer-185901-unsplash_linkedin_qmTUlG.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/the-with-command-and-custom-classes property=twitter:url><meta content="The with command and custom classes" property=twitter:title><meta content="Using the with command and developing classes that support it" property=twitter:description><meta content=/images/tobias-fischer-185901-unsplash_linkedin_qmTUlG.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item courses" href=https://pythonforthelab.com/courses/><span>Courses</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/tobias-fischer-185901-unsplash_linkedin_qmTUlG.width-800.jpg width=800></div><h1>The with command and custom classes</h1><h3>Using the with command and developing classes that support it</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2019-02-02</span><span class="item-tag first">Context Manager</span><span class=item-tag>With</span><span class=item-tag>Custom Classes</span><span class=item-tag>Patterns</span></div><main><p>There is a common pattern when programming that is opening a resource, doing something with it and closing it. This is what you normally do with a file, a network connection or a device. Python offers you a command to handle this pattern: the 'with' context manager. In this article, we are going to see how you can develop classes that follow the same pattern.<h2>Quick Introduction to the With Command</h2><p>If you would like to write a string to a file, you can do the following:<pre><code class=language-python>f = open('My_File.txt', 'w')
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>The with command and custom classes | Python For The Lab</title>
+
+  <meta name="tags" content="Context Manager, With, Custom Classes, Patterns, ">
+  <meta name="description" content="Using the with command and developing classes that support it">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="blog/the-with-command-and-custom-classes">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="blog/the-with-command-and-custom-classes">
+  <meta property="og:title" content="The with command and custom classes">
+  <meta property="og:description" content="Using the with command and developing classes that support it">
+  <meta property="og:image" content="/images/tobias-fischer-185901-unsplash_linkedin_qmTUlG.width-800.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="blog/the-with-command-and-custom-classes">
+  <meta property="twitter:title" content="The with command and custom classes">
+  <meta property="twitter:description" content="Using the with command and developing classes that support it">
+  <meta property="twitter:image" content="/images/tobias-fischer-185901-unsplash_linkedin_qmTUlG.width-800.jpg">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/tobias-fischer-185901-unsplash_linkedin_qmTUlG.width-800.jpg" alt="The with command and custom classes" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">The with command and custom classes</h1>
+        <div class="font-sans font-bold text-xl">Using the with command and developing classes that support it</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2019-02-02</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Context Manager</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">With</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Custom Classes</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Patterns</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>There is a common pattern when programming that is opening a resource,
+doing something with it and closing it. This is what you normally do
+with a file, a network connection or a device. Python offers you a
+command to handle this pattern: the 'with' context manager. In this
+article, we are going to see how you can develop classes that follow the
+same pattern.</p>
+<h2>Quick Introduction to the With Command</h2>
+<p>If you would like to write a string to a file, you can do the following:</p>
+<pre><code class="language-python">f = open('My_File.txt', 'w')
 f.write('This goes to the file\n')
 f.close()
-</code></pre><p>The lines above will create an empty file every time you run them and will write a line to it. When the program is done, it closes the file. If you would remove the last line, <code>f.close</code>, the program would have worked in the same way. However, errors sometimes arise and you would like to be sure that the file was closed and the data was saved. The lines above can be replaced by the following:<pre><code class=language-python>with open('My_File.txt', 'w') as f:
+</code></pre>
+<p>The lines above will create an empty file every time you run them and
+will write a line to it. When the program is done, it closes the file.
+If you would remove the last line, <code>f.close</code>, the program would have
+worked in the same way. However, errors sometimes arise and you would
+like to be sure that the file was closed and the data was saved. The
+lines above can be replaced by the following:</p>
+<pre><code class="language-python">with open('My_File.txt', 'w') as f:
     f.write('This is within a context manager\n')
-</code></pre><p>The advantage of using the <code>with</code> command is not only that you type one line less to type, but it is also that if something would happen when you try to write, the file will be safely closed and the data will be written. The advantages may not be obvious for simple examples, but long-running programs in which a lot of data is generated will start to show issues if files are not closed correctly. Also, when you use resources other than files, such as network connections or hardware devices, you will also see that properly closing the resources is fundamental.<p>In practice, you can also think about the with command as doing the following:<pre><code class=language-python>f = open('my_file.txt', 'w')
+</code></pre>
+<p>The advantage of using the <code>with</code> command is not only that you type one
+line less to type, but it is also that if something would happen when
+you try to write, the file will be safely closed and the data will be
+written. The advantages may not be obvious for simple examples, but
+long-running programs in which a lot of data is generated will start to
+show issues if files are not closed correctly. Also, when you use
+resources other than files, such as network connections or hardware
+devices, you will also see that properly closing the resources is
+fundamental.</p>
+<p>In practice, you can also think about the with command as doing the
+following:</p>
+<pre><code class="language-python">f = open('my_file.txt', 'w')
 try:
     f.write('This is the first line\n')
 except Exception as e:
     pass
 f.close()
 raise e
-</code></pre><p>You can try to see what happens if you raise an exception after the <code>write</code> command. The data will be in your file and the file would have been correctly closed.<h2>Custom Classes and With</h2><p>Working with files and other resources is interesting, but more interesting would be to develop classes that can be used within a context manager. First, we need to understand the steps that form the creation of a class. First, let's start with the brute force approach, and we create a simple class:<pre><code class=language-python>class SimpleClass:
+</code></pre>
+<p>You can try to see what happens if you raise an exception after the
+<code>write</code> command. The data will be in your file and the file would have
+been correctly closed.</p>
+<h2>Custom Classes and With</h2>
+<p>Working with files and other resources is interesting, but more
+interesting would be to develop classes that can be used within a
+context manager. First, we need to understand the steps that form the
+creation of a class. First, let's start with the brute force approach,
+and we create a simple class:</p>
+<pre><code class="language-python">class SimpleClass:
     def simple_method(self):
         print('Simple Method')
 
     def finalize(self):
         print('Finalizing the Class')
-</code></pre><p>That we can simply use like this:<pre><code class=language-python>sc = SimpleClass()
+</code></pre>
+<p>That we can simply use like this:</p>
+<pre><code class="language-python">sc = SimpleClass()
 sc.simple_method()
 # Simple Method
 sc.finalize(self)
 # Finalizing the Class
-</code></pre><p>This is not very enthusiastic, but it is a starting point. Let's try to use a context manager with our class:<pre><code class=language-python>with SimpleClass() as sc:
+</code></pre>
+<p>This is not very enthusiastic, but it is a starting point. Let's try to
+use a context manager with our class:</p>
+<pre><code class="language-python">with SimpleClass() as sc:
     sc.simple_method()
-</code></pre><p>We will face an issue, the error that appears on the screen should be:<pre><code class=language-python>AttributeError: __enter__
-</code></pre><p>This basically means that the brute force approach doesn't work with context managers, we need to work a bit more. Without going too much in circles, the <code>with</code> requires two methods of the so-called <em>magic</em> type: <code>__enter__</code> and <code>__exit__</code> that will be run at the beginning and at the end of the code block.<p>It is important to note that whatever is returned by <code>__enter__</code> will be linked to the target of <code>with</code>, i.e. whatever variable we put after <code>as</code>. In the simplest of the possibilities, <code>__enter__</code> returns the class itself, like this:<pre><code class=language-python>class SimpleClass:
+</code></pre>
+<p>We will face an issue, the error that appears on the screen should be:</p>
+<pre><code class="language-python">AttributeError: __enter__
+</code></pre>
+<p>This basically means that the brute force approach doesn't work with
+context managers, we need to work a bit more. Without going too much in
+circles, the <code>with</code> requires two methods of the so-called <em>magic</em> type:
+<code>__enter__</code> and <code>__exit__</code> that will be run at the beginning and at the
+end of the code block.</p>
+<p>It is important to note that whatever is returned by <code>__enter__</code> will be
+linked to the target of <code>with</code>, i.e. whatever variable we put after
+<code>as</code>. In the simplest of the possibilities, <code>__enter__</code> returns the
+class itself, like this:</p>
+<pre><code class="language-python">class SimpleClass:
     def __enter__(self):
         return self
-</code></pre><p>We also need to add an <code>__exit__</code> method, which takes several arguments, not only <code>self</code>:<pre><code class=language-python>def __exit__(self, exc_type, exc_val, exc_tb):
-</code></pre><p>What you have to remember is that <code>with</code> takes care of catching any exceptions that may arise and all the information is passed to the exit method so you can decide what to do with them. Right now, the only thing we want to do is to call the finalize method. The complete code would look like this:<pre><code class=language-python>class SimpleClass:
+</code></pre>
+<p>We also need to add an <code>__exit__</code> method, which takes several arguments,
+not only <code>self</code>:</p>
+<pre><code class="language-python">def __exit__(self, exc_type, exc_val, exc_tb):
+</code></pre>
+<p>What you have to remember is that <code>with</code> takes care of catching any
+exceptions that may arise and all the information is passed to the exit
+method so you can decide what to do with them. Right now, the only thing
+we want to do is to call the finalize method. The complete code would
+look like this:</p>
+<pre><code class="language-python">class SimpleClass:
     def simple_method(self):
         print('Simple Method')
 
@@ -40,22 +400,46 @@ sc.finalize(self)
 
     def __enter__(self):
         return self
-</code></pre><p>And you can use it like this:<pre><code class=language-python>with SimpleClass() as sc:
+</code></pre>
+<p>And you can use it like this:</p>
+<pre><code class="language-python">with SimpleClass() as sc:
     sc.simple_method()
-</code></pre><p>Which will produce the following output:<pre><code class=language-python>Simple Method
+</code></pre>
+<p>Which will produce the following output:</p>
+<pre><code class="language-python">Simple Method
 Finalizing the Class
-</code></pre><p>This is exactly what we were expecting. You can go on and try to generate some exception in your code and see how the program handles it. You can also print the arguments passed in order to understand what you can do with them. For example, you can do the following in the exit method:<pre><code class=language-python>def __exit__(self, exc_type, exc_val, exc_tb):
+</code></pre>
+<p>This is exactly what we were expecting. You can go on and try to
+generate some exception in your code and see how the program handles it.
+You can also print the arguments passed in order to understand what you
+can do with them. For example, you can do the following in the exit
+method:</p>
+<pre><code class="language-python">def __exit__(self, exc_type, exc_val, exc_tb):
     self.finalize()
     print(exc_type)
     print(exc_val)
     print(exc_tb)
-</code></pre><p>And then change the code you use to run it:<pre><code class=language-python>with SimpleClass() as sc:
+</code></pre>
+<p>And then change the code you use to run it:</p>
+<pre><code class="language-python">with SimpleClass() as sc:
     sc.simple_method()
     raise Exception('This is an Exception')
-</code></pre><p>Which will generate the following output:<pre><code class=language-python>&LTclass 'Exception'>
+</code></pre>
+<p>Which will generate the following output:</p>
+<pre><code class="language-python">&lt;class 'Exception'&gt;
 This is an Exception
-&LTtraceback object at 0x7fa88e46b588>
-</code></pre><p>This is enough to make decisions based on the kind of information that the exception is providing. You can check the <a href=https://pythonforthelab.com/blog/learning-not-to-handle-exceptions>previous article on exceptions</a> to have an idea of the kind of things you can accomplish.<h2>With and Constructors</h2><p>In the simple class that we have seen earlier, we completely skipped the discussion of what happens when you have a constructor, i.e. the <code>__init__</code> method is defined. So let's quickly try it. Let's make the <code>SimpleClass</code> print at each step:<pre><code class=language-python>class SimpleClass:
+&lt;traceback object at 0x7fa88e46b588&gt;
+</code></pre>
+<p>This is enough to make decisions based on the kind of information that
+the exception is providing. You can check the <a href="https://pythonforthelab.com/blog/learning-not-to-handle-exceptions">previous article on
+exceptions</a> to have an idea of
+the kind of things you can accomplish.</p>
+<h2>With and Constructors</h2>
+<p>In the simple class that we have seen earlier, we completely skipped the
+discussion of what happens when you have a constructor, i.e. the
+<code>__init__</code> method is defined. So let's quickly try it. Let's make the
+<code>SimpleClass</code> print at each step:</p>
+<pre><code class="language-python">class SimpleClass:
     def __init__(self):
         print('Init')
 
@@ -72,15 +456,309 @@ This is an Exception
     def __enter__(self):
         print('enter')
         return self
-</code></pre><p>If you run it with the same code than before, the output that you would get is:<pre><code class=language-python>Init
+</code></pre>
+<p>If you run it with the same code than before, the output that you would
+get is:</p>
+<pre><code class="language-python">Init
 enter
 Simple Method
 Exit
 Finalizing the Class
-</code></pre><p>So, now you can see that first, you instantiate the class (the <code>__init__</code> method is triggered) and only then the <code>__enter__</code> is executed. This experimenting approach is very useful because you can already learn a lot without having to search online and go through endless tutorials.<p>Another important thing to note is that after the <code>with</code> block, the class is still available:<pre><code class=language-python>with SimpleClass() as sc:
+</code></pre>
+<p>So, now you can see that first, you instantiate the class (the
+<code>__init__</code> method is triggered) and only then the <code>__enter__</code> is
+executed. This experimenting approach is very useful because you can
+already learn a lot without having to search online and go through
+endless tutorials.</p>
+<p>Another important thing to note is that after the <code>with</code> block, the
+class is still available:</p>
+<pre><code class="language-python">with SimpleClass() as sc:
     sc.simple_method()
     # raise Exception('This is an Exception')
 
 sc.simple_method()
-</code></pre><p>The command only takes care of executing the <em>exit</em> method but does not force any garbage collection. This means that the object is still available after the <code>with</code> block. You can test that with files or serial communication and you will notice that if you try to use the same file handler it gives you an error:<pre><code class=language-python>ValueError: I/O operation on closed file.
-</code></pre><p>This means that the file handler is still available, but the resource was already closed.<h2>Why Go to the Trouble</h2><p>When we discuss this kind of topics, you always have to consider the two sides of a project. You are either using someone's code or you are developing code someone else will expand. In the first case, using a context manager ensures that you follow the pattern that the original developer intended. All the work for exception handling, resource freeing, etc. was already taken care of and all it takes you is one line of code. Therefore, if you are a <em>user</em>, the <code>with</code> can save you a lot of headaches and can speed your development.<p>If you are a <em>developer</em>, implementing two extra methods doesn't take that long and allows the user to employ a common syntax. If you later improve your code adding better error handling, resources administration, etc. the users of your code will receive those improvements automatically, without changing a single line of their code.<p><strong>Does every class need to support the <code>with</code>?</strong> Let's be realistic. Very few of the operations your program performs require access to resources that need to be closed. Network communication, device control, writing to files are some examples and probably you won't encounter many more. If you are a developer, you have to consider whether implementing the possibility of using context managers helps future users of your code.<h2>Conclusions</h2><p>The problem of focusing on very simple examples is that it makes it very hard to realize the true power of different patterns and why is it worth going through the trouble of implementing new methods, etc. The truth is that until you have a large and complex project in your hands, you won't really realize it.<p>The power of the context manager becomes apparent when your code is used by other people and your class has a clear cycle of opening and closing resources, such as would be the case of working with a file, a network connection or a device in the lab. The main advantage comes from the fact that you can implement complex ways of closing and handling exceptions but at the same time, you give the user a lot of freedom about what to do.<p>In the example above, the only thing that needs to be done is calling the <code>finalize</code> method, but we could make the <code>exit</code> more sophisticated in order to execute some verifications, exception handling, etc. However, if the user would like to have finer control, she can still use the direct methods.<p>Implementing two methods in order to allow the user to use the <code>with</code> and ensure that closing methods are executed, I believe, offsets the work of implementing them. If you want to see a real-world example, you can check how <a href=https://github.com/pyserial/pyserial/blob/a27715f322bb08b1fccffebab776c94df50057e9/serial/serialutil.py#L561>pyserial</a> has implemented the <code>__enter__</code> and <code>__exit__</code> methods.</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>
+</code></pre>
+<p>The command only takes care of executing the <em>exit</em> method but does not
+force any garbage collection. This means that the object is still
+available after the <code>with</code> block. You can test that with files or serial
+communication and you will notice that if you try to use the same file
+handler it gives you an error:</p>
+<pre><code class="language-python">ValueError: I/O operation on closed file.
+</code></pre>
+<p>This means that the file handler is still available, but the resource
+was already closed.</p>
+<h2>Why Go to the Trouble</h2>
+<p>When we discuss this kind of topics, you always have to consider the two
+sides of a project. You are either using someone's code or you are
+developing code someone else will expand. In the first case, using a
+context manager ensures that you follow the pattern that the original
+developer intended. All the work for exception handling, resource
+freeing, etc. was already taken care of and all it takes you is one line
+of code. Therefore, if you are a <em>user</em>, the <code>with</code> can save you a lot
+of headaches and can speed your development.</p>
+<p>If you are a <em>developer</em>, implementing two extra methods doesn't take
+that long and allows the user to employ a common syntax. If you later
+improve your code adding better error handling, resources
+administration, etc. the users of your code will receive those
+improvements automatically, without changing a single line of their
+code.</p>
+<p><strong>Does every class need to support the <code>with</code>?</strong> Let's be realistic.
+Very few of the operations your program performs require access to
+resources that need to be closed. Network communication, device control,
+writing to files are some examples and probably you won't encounter many
+more. If you are a developer, you have to consider whether implementing
+the possibility of using context managers helps future users of your
+code.</p>
+<h2>Conclusions</h2>
+<p>The problem of focusing on very simple examples is that it makes it very
+hard to realize the true power of different patterns and why is it worth
+going through the trouble of implementing new methods, etc. The truth is
+that until you have a large and complex project in your hands, you won't
+really realize it.</p>
+<p>The power of the context manager becomes apparent when your code is used
+by other people and your class has a clear cycle of opening and closing
+resources, such as would be the case of working with a file, a network
+connection or a device in the lab. The main advantage comes from the
+fact that you can implement complex ways of closing and handling
+exceptions but at the same time, you give the user a lot of freedom
+about what to do.</p>
+<p>In the example above, the only thing that needs to be done is calling
+the <code>finalize</code> method, but we could make the <code>exit</code> more sophisticated
+in order to execute some verifications, exception handling, etc.
+However, if the user would like to have finer control, she can still use
+the direct methods.</p>
+<p>Implementing two methods in order to allow the user to use the <code>with</code>
+and ensure that closing methods are executed, I believe, offsets the
+work of implementing them. If you want to see a real-world example, you
+can check how
+<a href="https://github.com/pyserial/pyserial/blob/a27715f322bb08b1fccffebab776c94df50057e9/serial/serialutil.py#L561">pyserial</a>
+has implemented the <code>__enter__</code> and <code>__exit__</code> methods.</p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

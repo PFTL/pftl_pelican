@@ -1,3 +1,662 @@
-<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>PyNTA: Nanoparticle Tracking Analysis | Python For The Lab</title><meta content="Nanoparticle, Tracking, Analysis, Release, Package, Desktop, Experiment, " name=tags><meta content="A Python desktop application for nanoparticle tracking and analysis" name=description><meta content="Aquiles Carattino" name=author><link href=blog/pynta-nanoparticle-tracking-analysis rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/pynta-nanoparticle-tracking-analysis property=og:url><meta content="PyNTA: Nanoparticle Tracking Analysis" property=og:title><meta content="A Python desktop application for nanoparticle tracking and analysis" property=og:description><meta content=/images/pynta_screenshot_linkedin.width-800.png property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/pynta-nanoparticle-tracking-analysis property=twitter:url><meta content="PyNTA: Nanoparticle Tracking Analysis" property=twitter:title><meta content="A Python desktop application for nanoparticle tracking and analysis" property=twitter:description><meta content=/images/pynta_screenshot_linkedin.width-800.png property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item courses" href=https://pythonforthelab.com/courses/><span>Courses</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/pynta_screenshot_linkedin.width-800.png width=800></div><h1>PyNTA: Nanoparticle Tracking Analysis</h1><h3>A Python desktop application for nanoparticle tracking and analysis</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2018-12-14</span><span class="item-tag first">Nanoparticle</span><span class=item-tag>Tracking</span><span class=item-tag>Analysis</span><span class=item-tag>Release</span><span class=item-tag>Package</span><span class=item-tag>Desktop</span><span class=item-tag>Experiment</span></div><main><p><a href=https://pypi.org/project/pynta/>PyNTA</a> is a program that aims at bridging the gap between data acquisition and analysis for experiments of nanoparticle tracking. PyNTA is my first public release of a package on PyPI, the Python repository. It is a desktop application that can be used to record images from a camera, track nanoparticles and build histograms of the distribution of sizes. It is still in beta, but the basic functionality is there.<p>The science behind nanoparticle tracking analysis is relatively simple. Assuming that the movement of particles is related to Brownian diffusion, and knowing the properties of the medium (viscosity, temperature), it is possible to derive the diameter of a particle. Therefore, the only thing we need to do is to identify particles in each frame and then link the locations of subsequent frames in order to build tracks to analyze.<p>Fortunately, Python already counts with a robust package for the data analysis, called <a href=http://soft-matter.github.io/trackpy/v0.4.1/>Trackpy</a>. What trackpy does not do is the acquisition and real-time data analysis. There is where PyNTA comes into play. Pynta was built on top of a previous package, called <a href=https://uutrack.readthedocs.io/en/latest/>UUTrack</a>. However, the real-time data analysis required specific handling, since tasks are computationally intensive, it is imperative to use different cores on the computer.<p>PyNTA follows the <a href=https://www.uetke.com/blog/general/the-mvc-pattern-for-lab-projects/>MVC pattern</a>, making it future-proof and easy to expand. Controllers and the View don't include anything particularly new, but the model is where the majority of the work was focused. First, a base experiment class was developed, seeking at opening the door of developing experiments to a separated framework in the future. The base experiment implements two very interesting patterns: <strong>Publishers</strong> and <strong>Subscribers</strong>.<h2>ZMQ for inter-process communication</h2><p>A requirement for PyNTA was to be able to adjust the number of processes at runtime. This means that, for example, the feed from the camera could be sent to a process that saves the images to disk. It could also be sent to a process to identify particles on every image. However, this decision will be made by the user of the program at any stage of the workflow. In order to achieve this behavior, I have used the publisher/subscriber architecture provided by pyZMQ, which is based on sockets.<p>Therefore, the experiment model sets up a publisher which is continuously reading from a Queue and publishes the messages to whichever subscriber may be listening. Subscribers are independent processes which listen on a specific port and topic. When data is received, they run a specific method on the data received. For instance, they save the data to a hard drive or run trackpy on each frame, etc. This approach seemed like a relatively simple idea for a complex problem. It avoids complicated checks to accumulate queues, etc.<p>The main problem is that all processes start from the same objects, and my objective was to keep them centralized, adding few decorators to make development very simple. However, Windows spawns processes instead of forking them. Meaning that every time you start a new process, the memory status is point blank. In Linux, the behavior is very different, since the memory is copied to the new process. This, in practical matters, means that on windows you can't start a new process for a method, but only for functions.<p>In order to develop PyNTA, careful planning of functions was needed, making the codebase harder to follow. In any case, the end product is a decentralized code that can be independently improved. This modularity makes it ideal to test new algorithms for tracking or saving without breaking the downstream code. It also opens the door for interesting patterns in the future, leveraging the power of modern computers to new extents while doing data acquisition.<h2>Current Limitations</h2><p>pyZMQ implements a convenience method called <code>send_pyobj</code> which serializes objects with cPickle before sending them. There is a correspondent <code>recv_pyobj</code> which does the opposite. Adding objects to a queue follows the same procedure, they get serialized and deserialized. Even if it is convenient not to think about this, in the current status of the program data sent by the publisher gets serialized/deserialized/serialized/deserialized. Which is a big overhead for fast acquisition routines like the one PyNTA tries to tackle.<p>Better control of the data flow can help increase the response time of the program. Also, other messages alternatives can be better suited for inter-process communications, such as pyMPI. The advantage of ZMQ over MPI is that it allows expanding the architecture to a distributed network of computers. For instance, one can acquire data and send it over the network to be stored/analyzed, etc. in a different location. The opposite is also true, it is possible to think in remotely controlling the experiments through the use of sockets.<p>I have tested the program with synthetic images at 100fps, with an average of 50 particles on each frame, and the program was able to keep up the pace. It may slightly depend on the computer specifications, but any dual-core computer should suffice. However, higher resolution images, where each particle occupies more than around 10 pixels become excruciatingly slow. This is due to the algorithm to locate particles and the number of computations increasing with particle size.<p>Right now the program does not include ways of pre-processing data before sending to a tracking algorithm, such as background reduction, reduction of resolution, etc. These, however, are easy to implement in the experiment model as different acquisition routines that can be triggered either from the command line or from a GUI.<h2>Wish list for Pynta</h2><p>PyNTA was released in order to open the door to collaboration. However, there is still a long way for it to become a stable product. The features that PyNTA needs to implement in order to become more complete are:<ul><li>Load saved data and analyze it<li>Produce reports for less technical users<li>Implement extra parameters for linking locations<li>Improve visualization of linking status (i.e. show tracks faster in order to make better decisions)<li>Improve results by adding the Walker algorithm<li>Systematize the publisher/subscriber pattern to make it clearer for later developers<li>Explore pyMPI as a possible message exchanging approach<li>Simplify serialization/deserialization in order to speed up communication<li>Think about a zero-copy numpy exchange of arrays</ul><h2>Possible Roadmap</h2><p>There are different options that can sprout out of PyNTA. For example, developing a framework to perform experiments with a common pattern of subscribers and publishers. With the experience gained in PyNTA, there is a clear path for abstracting common functions. Moreover, pyZMQ opens the door to a very interesting approach that would allow running the experiment completely independent from the GUI. This would prevent problems if the GUI crashes, for example. Moreover one could think about having GUI's for different platforms that run on the same hardware. For example, an app on the phone could control the experiment in the same way that a user sitting on the computer in the lab.<h2>Getting PyNTA</h2><p>If you are intrigued by PyNTA, you can install it by simply running:<pre><code class=language-bash>pip install pynta
-</code></pre><p>And you can start it by running:<pre><code class=language-bash>pynta
-</code></pre><p>The documentation is available <a href=https://nanoepics.github.io/pynta/>on Github</a>. It is still a work in progress, but it is already quite complete. The code is in <a href=https://github.com/nanoepics/pynta>this repository</a>.</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>PyNTA: Nanoparticle Tracking Analysis | Python For The Lab</title>
+
+  <meta name="tags" content="Nanoparticle, Tracking, Analysis, Release, Package, Desktop, Experiment, ">
+  <meta name="description" content="A Python desktop application for nanoparticle tracking and analysis">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="blog/pynta-nanoparticle-tracking-analysis">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="blog/pynta-nanoparticle-tracking-analysis">
+  <meta property="og:title" content="PyNTA: Nanoparticle Tracking Analysis">
+  <meta property="og:description" content="A Python desktop application for nanoparticle tracking and analysis">
+  <meta property="og:image" content="/images/pynta_screenshot_linkedin.width-800.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="blog/pynta-nanoparticle-tracking-analysis">
+  <meta property="twitter:title" content="PyNTA: Nanoparticle Tracking Analysis">
+  <meta property="twitter:description" content="A Python desktop application for nanoparticle tracking and analysis">
+  <meta property="twitter:image" content="/images/pynta_screenshot_linkedin.width-800.png">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/pynta_screenshot_linkedin.width-800.png" alt="PyNTA: Nanoparticle Tracking Analysis" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">PyNTA: Nanoparticle Tracking Analysis</h1>
+        <div class="font-sans font-bold text-xl">A Python desktop application for nanoparticle tracking and analysis</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2018-12-14</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Nanoparticle</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Tracking</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Analysis</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Release</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Package</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Desktop</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Experiment</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p><a href="https://pypi.org/project/pynta/">PyNTA</a> is a program that aims at
+bridging the gap between data acquisition and analysis for experiments
+of nanoparticle tracking. PyNTA is my first public release of a package
+on PyPI, the Python repository. It is a desktop application that can be
+used to record images from a camera, track nanoparticles and build
+histograms of the distribution of sizes. It is still in beta, but the
+basic functionality is there.</p>
+<p>The science behind nanoparticle tracking analysis is relatively simple.
+Assuming that the movement of particles is related to Brownian
+diffusion, and knowing the properties of the medium (viscosity,
+temperature), it is possible to derive the diameter of a particle.
+Therefore, the only thing we need to do is to identify particles in each
+frame and then link the locations of subsequent frames in order to build
+tracks to analyze.</p>
+<p>Fortunately, Python already counts with a robust package for the data
+analysis, called
+<a href="http://soft-matter.github.io/trackpy/v0.4.1/">Trackpy</a>. What trackpy
+does not do is the acquisition and real-time data analysis. There is
+where PyNTA comes into play. Pynta was built on top of a previous
+package, called <a href="https://uutrack.readthedocs.io/en/latest/">UUTrack</a>.
+However, the real-time data analysis required specific handling, since
+tasks are computationally intensive, it is imperative to use different
+cores on the computer.</p>
+<p>PyNTA follows the <a href="https://www.uetke.com/blog/general/the-mvc-pattern-for-lab-projects/">MVC
+pattern</a>,
+making it future-proof and easy to expand. Controllers and the View
+don't include anything particularly new, but the model is where the
+majority of the work was focused. First, a base experiment class was
+developed, seeking at opening the door of developing experiments to a
+separated framework in the future. The base experiment implements two
+very interesting patterns: <strong>Publishers</strong> and <strong>Subscribers</strong>.</p>
+<h2>ZMQ for inter-process communication</h2>
+<p>A requirement for PyNTA was to be able to adjust the number of processes
+at runtime. This means that, for example, the feed from the camera could
+be sent to a process that saves the images to disk. It could also be
+sent to a process to identify particles on every image. However, this
+decision will be made by the user of the program at any stage of the
+workflow. In order to achieve this behavior, I have used the
+publisher/subscriber architecture provided by pyZMQ, which is based on
+sockets.</p>
+<p>Therefore, the experiment model sets up a publisher which is
+continuously reading from a Queue and publishes the messages to
+whichever subscriber may be listening. Subscribers are independent
+processes which listen on a specific port and topic. When data is
+received, they run a specific method on the data received. For instance,
+they save the data to a hard drive or run trackpy on each frame, etc.
+This approach seemed like a relatively simple idea for a complex
+problem. It avoids complicated checks to accumulate queues, etc.</p>
+<p>The main problem is that all processes start from the same objects, and
+my objective was to keep them centralized, adding few decorators to make
+development very simple. However, Windows spawns processes instead of
+forking them. Meaning that every time you start a new process, the
+memory status is point blank. In Linux, the behavior is very different,
+since the memory is copied to the new process. This, in practical
+matters, means that on windows you can't start a new process for a
+method, but only for functions.</p>
+<p>In order to develop PyNTA, careful planning of functions was needed,
+making the codebase harder to follow. In any case, the end product is a
+decentralized code that can be independently improved. This modularity
+makes it ideal to test new algorithms for tracking or saving without
+breaking the downstream code. It also opens the door for interesting
+patterns in the future, leveraging the power of modern computers to new
+extents while doing data acquisition.</p>
+<h2>Current Limitations</h2>
+<p>pyZMQ implements a convenience method called <code>send_pyobj</code> which
+serializes objects with cPickle before sending them. There is a
+correspondent <code>recv_pyobj</code> which does the opposite. Adding objects to a
+queue follows the same procedure, they get serialized and deserialized.
+Even if it is convenient not to think about this, in the current status
+of the program data sent by the publisher gets
+serialized/deserialized/serialized/deserialized. Which is a big overhead
+for fast acquisition routines like the one PyNTA tries to tackle.</p>
+<p>Better control of the data flow can help increase the response time of
+the program. Also, other messages alternatives can be better suited for
+inter-process communications, such as pyMPI. The advantage of ZMQ over
+MPI is that it allows expanding the architecture to a distributed
+network of computers. For instance, one can acquire data and send it
+over the network to be stored/analyzed, etc. in a different location.
+The opposite is also true, it is possible to think in remotely
+controlling the experiments through the use of sockets.</p>
+<p>I have tested the program with synthetic images at 100fps, with an
+average of 50 particles on each frame, and the program was able to keep
+up the pace. It may slightly depend on the computer specifications, but
+any dual-core computer should suffice. However, higher resolution
+images, where each particle occupies more than around 10 pixels become
+excruciatingly slow. This is due to the algorithm to locate particles
+and the number of computations increasing with particle size.</p>
+<p>Right now the program does not include ways of pre-processing data
+before sending to a tracking algorithm, such as background reduction,
+reduction of resolution, etc. These, however, are easy to implement in
+the experiment model as different acquisition routines that can be
+triggered either from the command line or from a GUI.</p>
+<h2>Wish list for Pynta</h2>
+<p>PyNTA was released in order to open the door to collaboration. However,
+there is still a long way for it to become a stable product. The
+features that PyNTA needs to implement in order to become more complete
+are:</p>
+<ul>
+<li>Load saved data and analyze it</li>
+<li>Produce reports for less technical users</li>
+<li>Implement extra parameters for linking locations</li>
+<li>Improve visualization of linking status (i.e. show tracks faster in
+    order to make better decisions)</li>
+<li>Improve results by adding the Walker algorithm</li>
+<li>Systematize the publisher/subscriber pattern to make it clearer for
+    later developers</li>
+<li>Explore pyMPI as a possible message exchanging approach</li>
+<li>Simplify serialization/deserialization in order to speed up
+    communication</li>
+<li>Think about a zero-copy numpy exchange of arrays</li>
+</ul>
+<h2>Possible Roadmap</h2>
+<p>There are different options that can sprout out of PyNTA. For example,
+developing a framework to perform experiments with a common pattern of
+subscribers and publishers. With the experience gained in PyNTA, there
+is a clear path for abstracting common functions. Moreover, pyZMQ opens
+the door to a very interesting approach that would allow running the
+experiment completely independent from the GUI. This would prevent
+problems if the GUI crashes, for example. Moreover one could think about
+having GUI's for different platforms that run on the same hardware. For
+example, an app on the phone could control the experiment in the same
+way that a user sitting on the computer in the lab.</p>
+<h2>Getting PyNTA</h2>
+<p>If you are intrigued by PyNTA, you can install it by simply running:</p>
+<pre><code class="language-bash">pip install pynta
+</code></pre>
+<p>And you can start it by running:</p>
+<pre><code class="language-bash">pynta
+</code></pre>
+<p>The documentation is available <a href="https://nanoepics.github.io/pynta/">on
+Github</a>. It is still a work in
+progress, but it is already quite complete. The code is in <a href="https://github.com/nanoepics/pynta">this
+repository</a>.</p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

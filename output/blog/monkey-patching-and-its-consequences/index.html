@@ -1,7 +1,322 @@
-<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Monkey Patching and its consequences | Python For The Lab</title><meta content="functions, methods, monkey patching, replacing, extending, mutable, immutable, " name=tags><meta content="Replacing methods and attributes at runtime" name=description><meta content="Aquiles Carattino" name=author><link href=blog/monkey-patching-and-its-consequences rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/monkey-patching-and-its-consequences property=og:url><meta content="Monkey Patching and its consequences" property=og:title><meta content="Replacing methods and attributes at runtime" property=og:description><meta content=/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/monkey-patching-and-its-consequences property=twitter:url><meta content="Monkey Patching and its consequences" property=twitter:title><meta content="Replacing methods and attributes at runtime" property=twitter:description><meta content=/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item courses" href=https://pythonforthelab.com/courses/><span>Courses</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png width=800></div><h1>Monkey Patching and its consequences</h1><h3>Replacing methods and attributes at runtime</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2019-06-18</span><span class="item-tag first">functions</span><span class=item-tag>methods</span><span class=item-tag>monkey patching</span><span class=item-tag>replacing</span><span class=item-tag>extending</span><span class=item-tag>mutable</span><span class=item-tag>immutable</span></div><main><p>Monkey patching is a technique that allows you to alter the behavior of objects at runtime. Even though it can be a very useful feature, it can also make your code much harder to understand and debug, and therefore you have to be careful with how you implement monkey patching. In this article, we are going to see some examples of how you can use monkey patching to solve quickly specific problems. We are also going to discuss the consequences of monkey patching in the context of larger projects.<p>Monkey patching is tightly related to the idea of <a href=https://pythonforthelab.com/blog/mutable-and-immutable-objects>mutability in Python</a>. Custom objects are mutable, and therefore their attributes can be replaced without creating a new copy of the object. To quickly recap those ideas, we can do the following:<pre><code class=language-python>class MyClass:
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Monkey Patching and its consequences | Python For The Lab</title>
+
+  <meta name="tags" content="functions, methods, monkey patching, replacing, extending, mutable, immutable, ">
+  <meta name="description" content="Replacing methods and attributes at runtime">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="blog/monkey-patching-and-its-consequences">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="blog/monkey-patching-and-its-consequences">
+  <meta property="og:title" content="Monkey Patching and its consequences">
+  <meta property="og:description" content="Replacing methods and attributes at runtime">
+  <meta property="og:image" content="/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="blog/monkey-patching-and-its-consequences">
+  <meta property="twitter:title" content="Monkey Patching and its consequences">
+  <meta property="twitter:description" content="Replacing methods and attributes at runtime">
+  <meta property="twitter:image" content="/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png" alt="Monkey Patching and its consequences" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">Monkey Patching and its consequences</h1>
+        <div class="font-sans font-bold text-xl">Replacing methods and attributes at runtime</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2019-06-18</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">functions</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">methods</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">monkey patching</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">replacing</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">extending</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">mutable</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">immutable</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>Monkey patching is a technique that allows you to alter the behavior of
+objects at runtime. Even though it can be a very useful feature, it can
+also make your code much harder to understand and debug, and therefore
+you have to be careful with how you implement monkey patching. In this
+article, we are going to see some examples of how you can use monkey
+patching to solve quickly specific problems. We are also going to
+discuss the consequences of monkey patching in the context of larger
+projects.</p>
+<p>Monkey patching is tightly related to the idea of <a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects">mutability in
+Python</a>. Custom objects are
+mutable, and therefore their attributes can be replaced without creating
+a new copy of the object. To quickly recap those ideas, we can do the
+following:</p>
+<pre><code class="language-python">class MyClass:
     a = 1
     b = '2'
-</code></pre><p>And then we can use the code like this:<pre><code class=language-python>var1 = MyClass()
+</code></pre>
+<p>And then we can use the code like this:</p>
+<pre><code class="language-python">var1 = MyClass()
 var2 = var1
 
 var1.a = 2
@@ -11,7 +326,17 @@ print(var2.a)
 # 2
 print(var2.b)
 # '3'
-</code></pre><p>If we go line by line, you see that we create an object using <code>MyClass</code> and we call it <code>var1</code>. We then copy the object to another variable, called <code>var2</code>. We change the values stored in <code>var1</code>, but we observe that the values stored in <code>var2</code> have also changed. This is simply because, in Python, the variable is only a label. In the line <code>var2 = var1</code> we have just copied the label, but both are pointing to the same underlying object.<p>Python also allows you to change attributes in the class itself, not in the instance of the class. We can do the following:<pre><code class=language-python>var1 = MyClass()
+</code></pre>
+<p>If we go line by line, you see that we create an object using <code>MyClass</code>
+and we call it <code>var1</code>. We then copy the object to another variable,
+called <code>var2</code>. We change the values stored in <code>var1</code>, but we observe
+that the values stored in <code>var2</code> have also changed. This is simply
+because, in Python, the variable is only a label. In the line
+<code>var2 = var1</code> we have just copied the label, but both are pointing to
+the same underlying object.</p>
+<p>Python also allows you to change attributes in the class itself, not in
+the instance of the class. We can do the following:</p>
+<pre><code class="language-python">var1 = MyClass()
 var2 = MyClass()
 print(var1.a)
 # 1
@@ -20,7 +345,14 @@ print(var1.a)
 # 2
 print(var2.a)
 # 2
-</code></pre><p>What we see is that if we directly alter the value of any of the attributes of the class, the instances inherit this change. This is both very useful and very dangerous, since you may be altering the value of attributes of objects which you were not intending to modify. There is one last behavior that is important to point out, and refers to mixing the two approaches we have followed before:<pre><code class=language-python>var1 = MyClass()
+</code></pre>
+<p>What we see is that if we directly alter the value of any of the
+attributes of the class, the instances inherit this change. This is both
+very useful and very dangerous, since you may be altering the value of
+attributes of objects which you were not intending to modify. There is
+one last behavior that is important to point out, and refers to mixing
+the two approaches we have followed before:</p>
+<pre><code class="language-python">var1 = MyClass()
 var2 = var1
 
 var1.a = 2
@@ -32,37 +364,94 @@ print(var1.a)
 # 2
 print(var2.a)
 # 2
-</code></pre><p>Even if you change the attribute <code>a</code> to <code>3</code>, you don't see this change appearing on the instances of the class. The root cause of this lays in the ideas behind <a href=https://pythonforthelab.com/blog/mutable-and-immutable-objects>mutable and immutable</a> data types in Python. Since you altered the value of <code>var1.a</code>, now the attribute is pointing to an object different from the object the class attribute points to. If this last line doesn't make sense, go to the articles linked earlier on mutable and immutable data types.<p>Finally, the last case I wanted to point out is what happens if you keep a reference to the attribute <code>a</code> before you modify it:<pre><code class=language-python>var1 = MyClass()
+</code></pre>
+<p>Even if you change the attribute <code>a</code> to <code>3</code>, you don't see this change
+appearing on the instances of the class. The root cause of this lays in
+the ideas behind <a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects">mutable and
+immutable</a> data types in
+Python. Since you altered the value of <code>var1.a</code>, now the attribute is
+pointing to an object different from the object the class attribute
+points to. If this last line doesn't make sense, go to the articles
+linked earlier on mutable and immutable data types.</p>
+<p>Finally, the last case I wanted to point out is what happens if you keep
+a reference to the attribute <code>a</code> before you modify it:</p>
+<pre><code class="language-python">var1 = MyClass()
 var2 = var1
 
 var3 = var1.a
 [...]
 print(var3)
 # 3
-</code></pre><p>I have skipped the code in which you change the value of the attributes. Now you see that if you actually store <code>var1.a</code> in the variable <code>var3</code>, this variable is actually modified when you change the value stored directly in the class. All this behavior actually makes sense, if you think that variables only store references to objects and not the object itself and that when you change an immutable variable, you create a new reference.<p>All the examples above refer to monkey patching in one way or another. You can see that we are changing the values of a class during runtime. We have tried to highlight some of the consequences, expected or not, of changing the value of an attribute later in the execution of the program and not in the definition itself.<p>The examples above can be extended if we consider that methods are attributes which behave exactly like <code>a</code> or <code>b</code> in our examples above:<pre><code class=language-python>class MyClass:
+</code></pre>
+<p>I have skipped the code in which you change the value of the attributes.
+Now you see that if you actually store <code>var1.a</code> in the variable <code>var3</code>,
+this variable is actually modified when you change the value stored
+directly in the class. All this behavior actually makes sense, if you
+think that variables only store references to objects and not the object
+itself and that when you change an immutable variable, you create a new
+reference.</p>
+<p>All the examples above refer to monkey patching in one way or another.
+You can see that we are changing the values of a class during runtime.
+We have tried to highlight some of the consequences, expected or not, of
+changing the value of an attribute later in the execution of the program
+and not in the definition itself.</p>
+<p>The examples above can be extended if we consider that methods are
+attributes which behave exactly like <code>a</code> or <code>b</code> in our examples above:</p>
+<pre><code class="language-python">class MyClass:
     a = 1
     b = '2'
 
     def get_value(self):
         return self.a
-</code></pre><p>We instantiate the class:<pre><code class=language-python>var1 = MyClass()
+</code></pre>
+<p>We instantiate the class:</p>
+<pre><code class="language-python">var1 = MyClass()
 print(var1.get_value())
-</code></pre><p>And we should see that everything is working as expected. We then define a new function that we would like to use to replace <code>get_value</code>:<pre><code class=language-python>def get_new_value(cls):
+</code></pre>
+<p>And we should see that everything is working as expected. We then define
+a new function that we would like to use to replace <code>get_value</code>:</p>
+<pre><code class="language-python">def get_new_value(cls):
     return cls.b
-</code></pre><p>In the function above, I've replaced <code>self</code> by <code>cls</code> just to make it more evident, but you are free to use whatever keyword makes more sense in your context. And we replace the method:<pre><code class=language-python>MyClass.get_value = get_new_value
-</code></pre><p>If you use it, you will get:<pre><code class=language-python>print(var1.get_value())
+</code></pre>
+<p>In the function above, I've replaced <code>self</code> by <code>cls</code> just to make it
+more evident, but you are free to use whatever keyword makes more sense
+in your context. And we replace the method:</p>
+<pre><code class="language-python">MyClass.get_value = get_new_value
+</code></pre>
+<p>If you use it, you will get:</p>
+<pre><code class="language-python">print(var1.get_value())
 # 2
-</code></pre><p>You see that we have replaced the <code>get_value</code> after the <code>var1</code> has been defined. If we would define a new object, it seems reasonable to expect that we would get the same output:<pre><code class=language-python>var2 = MyClass()
+</code></pre>
+<p>You see that we have replaced the <code>get_value</code> after the <code>var1</code> has been
+defined. If we would define a new object, it seems reasonable to expect
+that we would get the same output:</p>
+<pre><code class="language-python">var2 = MyClass()
 print(var2.get_value())
 # 2
-</code></pre><p>If we would have defined the two distinct objects before changing the method, the outcome would have been the same. What you see is that you can overwrite the method of the class:<pre><code class=language-python>var1 = MyClass()
+</code></pre>
+<p>If we would have defined the two distinct objects before changing the
+method, the outcome would have been the same. What you see is that you
+can overwrite the method of the class:</p>
+<pre><code class="language-python">var1 = MyClass()
 var2 = MyClass()
 
 MyClass.get_value = get_new_value
 
 print(var1.get_value())
 print(var2.get_value())
-</code></pre><p>The examples at the beginning of the article, when we were using an integer or a string as attributes are still valid. You can check what happens if you copy the object, you store it as a new variable, and then you overwrite the method. There are no mysteries, methods are attributes such as integers or strings. The main difference is that they take inputs.<p>In the example above, we have replaced the method at the class-level. If we want to replace the method at an instance level, then the approach would be slightly different. Note that if we do it at a class-level, all the instances will get the changes, and this may not be what we want. We can do:<pre><code class=language-python>import types
+</code></pre>
+<p>The examples at the beginning of the article, when we were using an
+integer or a string as attributes are still valid. You can check what
+happens if you copy the object, you store it as a new variable, and then
+you overwrite the method. There are no mysteries, methods are attributes
+such as integers or strings. The main difference is that they take
+inputs.</p>
+<p>In the example above, we have replaced the method at the class-level. If
+we want to replace the method at an instance level, then the approach
+would be slightly different. Note that if we do it at a class-level, all
+the instances will get the changes, and this may not be what we want. We
+can do:</p>
+<pre><code class="language-python">import types
 
 class MyClass:
     a = 1
@@ -81,15 +470,35 @@ print(var1.get_value())
 # 2
 print(var2.get_value())
 # 1
-</code></pre><p>You see in this example that we have altered the behavior of the method of <code>var1</code> but not of <code>var2</code>. Note that we are importing <code>types</code> at the beginning of the script. The rest is the same we have already done, with one exception when we replace the <code>get_value</code> method. Because we are changing a method of an instance, it needs to be of the proper type. We can quickly see the following:<pre><code class=language-pycon>>>> type(get_new_value)
-&LTclass 'function'>
->>> type(MyClass.get_value)
-&LTclass 'function'>
->>> type(var1.get_value)
-&LTclass 'method'>
-</code></pre><p>The main difference between a method and a function is that the first one receives as first argument the instance itself (the <code>self</code>). We have therefore to transform a function into a method before replacing it on an instance. Pay attention that this is not the case when you change the class itself.<h2>Module-level monkey patching</h2><p>The last pattern that I would like to discuss is monkey-patching at the module level. So far, the attributes and methods we have used, they all belonged to a custom class. However, it is not the only possibility. First, in a file called <strong>module.py</strong> we can add the following:<pre><code class=language-python>def print_variable(var):
+</code></pre>
+<p>You see in this example that we have altered the behavior of the method
+of <code>var1</code> but not of <code>var2</code>. Note that we are importing <code>types</code> at the
+beginning of the script. The rest is the same we have already done, with
+one exception when we replace the <code>get_value</code> method. Because we are
+changing a method of an instance, it needs to be of the proper type. We
+can quickly see the following:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; type(get_new_value)
+&lt;class 'function'&gt;
+&gt;&gt;&gt; type(MyClass.get_value)
+&lt;class 'function'&gt;
+&gt;&gt;&gt; type(var1.get_value)
+&lt;class 'method'&gt;
+</code></pre>
+<p>The main difference between a method and a function is that the first
+one receives as first argument the instance itself (the <code>self</code>). We have
+therefore to transform a function into a method before replacing it on
+an instance. Pay attention that this is not the case when you change the
+class itself.</p>
+<h2>Module-level monkey patching</h2>
+<p>The last pattern that I would like to discuss is monkey-patching at the
+module level. So far, the attributes and methods we have used, they all
+belonged to a custom class. However, it is not the only possibility.
+First, in a file called <strong>module.py</strong> we can add the following:</p>
+<pre><code class="language-python">def print_variable(var):
     print(var)
-</code></pre><p>And in a second file called <strong>script.py</strong> we add:<pre><code class=language-python>import module
+</code></pre>
+<p>And in a second file called <strong>script.py</strong> we add:</p>
+<pre><code class="language-python">import module
 
 var1 = 1
 
@@ -101,12 +510,27 @@ def print_plus_one(var):
 AE_module.print_variable = print_plus_one
 AE_module.print_variable(var1)
 # 2
-</code></pre><p>You see that monkey patching works also for modules. When you try to achieve this kind of patching, you have to be careful with the order in which importing happens in Python. If you use the <strong>__init__.py</strong> files to load modules, and there is some dependency between each other, when you monkey patch, it may be that it is too late for the program. Similar to what happens when you alter the value of an attribute of an object and then you change the value at a class-level.<p>If you remember that Python imports modules only once, then the patching can take very interesting forms. You can create a new file, called <strong>module2.py</strong> and add the following:<pre><code class=language-python>import module
+</code></pre>
+<p>You see that monkey patching works also for modules. When you try to
+achieve this kind of patching, you have to be careful with the order in
+which importing happens in Python. If you use the <strong>__init__.py</strong>
+files to load modules, and there is some dependency between each other,
+when you monkey patch, it may be that it is too late for the program.
+Similar to what happens when you alter the value of an attribute of an
+object and then you change the value at a class-level.</p>
+<p>If you remember that Python imports modules only once, then the patching
+can take very interesting forms. You can create a new file, called
+<strong>module2.py</strong> and add the following:</p>
+<pre><code class="language-python">import module
 
 
 def another_print(var):
     module.print_variable(var+1)
-</code></pre><p>You see that we are using the <code>print_variable</code> from the original module. We are just adding <code>+1</code> before printing. We can alter the file <strong>script.py</strong> to include this new module:<pre><code class=language-python>import module
+</code></pre>
+<p>You see that we are using the <code>print_variable</code> from the original module.
+We are just adding <code>+1</code> before printing. We can alter the file
+<strong>script.py</strong> to include this new module:</p>
+<pre><code class="language-python">import module
 import module2
 
 var1 = 1
@@ -123,8 +547,343 @@ module.print_variable(var1)
 # 2
 module2.another_print(var1)
 # 3
-</code></pre><p>You see that by changing the <code>print_variable</code> on our main script, we have also altered what is happening on our second module. There are a lot of things you can start thinking about after seeing these patterns.<h2>When (not) to Monkey Patch</h2><p>Monkey patching is very powerful and it shows how flexible Python is. In the end, everything is derived from the same principles of understanding different data types and what variables mean in Python. However, it may be very hard to understand when would you use these patterns in your own programs.<p>As a general rule, the best is not to monkey patch. If you want to alter the behavior of a program, for example, you can define child classes for the ones you want to alter. The problem with monkey-patching is that the behavior of a program becomes much harder to understand. In the example above, when you call <code>module2.another_print</code> you are seeing an output which is very hard to understand. If you check the module, you won't see why you would get <code>3</code> and not <code>2</code>. Tracing back where the behavior was changed is very complicated. If you inspect the variables, you will see that there is nothing wrong, and <code>var1</code> is still <code>1</code>.<p>However, sometimes there can be a great benefit. For example, calculating Fast Fourier Transforms with numpy can be slower than with other implementations. Imagine you would like to use PyFFTW, but you don't want to re-write all your program. You can monkey-patch your code! See the example below (taken <a href=http://hgomersall.github.io/pyFFTW/sphinx/tutorial.html>from the docs</a>):<pre><code class=language-python>import pyfftw
+</code></pre>
+<p>You see that by changing the <code>print_variable</code> on our main script, we
+have also altered what is happening on our second module. There are a
+lot of things you can start thinking about after seeing these patterns.</p>
+<h2>When (not) to Monkey Patch</h2>
+<p>Monkey patching is very powerful and it shows how flexible Python is. In
+the end, everything is derived from the same principles of understanding
+different data types and what variables mean in Python. However, it may
+be very hard to understand when would you use these patterns in your own
+programs.</p>
+<p>As a general rule, the best is not to monkey patch. If you want to alter
+the behavior of a program, for example, you can define child classes for
+the ones you want to alter. The problem with monkey-patching is that the
+behavior of a program becomes much harder to understand. In the example
+above, when you call <code>module2.another_print</code> you are seeing an output
+which is very hard to understand. If you check the module, you won't see
+why you would get <code>3</code> and not <code>2</code>. Tracing back where the behavior was
+changed is very complicated. If you inspect the variables, you will see
+that there is nothing wrong, and <code>var1</code> is still <code>1</code>.</p>
+<p>However, sometimes there can be a great benefit. For example,
+calculating Fast Fourier Transforms with numpy can be slower than with
+other implementations. Imagine you would like to use PyFFTW, but you
+don't want to re-write all your program. You can monkey-patch your code!
+See the example below (taken <a href="http://hgomersall.github.io/pyFFTW/sphinx/tutorial.html">from the
+docs</a>):</p>
+<pre><code class="language-python">import pyfftw
 import numpy
 
 numpy.fft = pyfftw.interfaces.numpy_fft
-</code></pre><p>Now, whenever you use the FFT routines provided by numpy, they will be automatically replaced by those of PyFFTW. This can have a huge impact on your program, and it only took one line of code! This is a special example but there are other situations in which you may consider monkey patching.<p>A common situation is with testing. Sometimes you want to test your code in an environment which lacks some functionality, or you want to prevent that because of the test you actually modify a live database. In that case, before doing the test you can change the methods that communicate with a database. If you work in a lab, a very common situation is when you want to avoid communicating with a device while you are testing your program.<p>Exactly how to achieve this behavior will depend on your situation, but with the examples above you already have a clear picture of what the strategy could be.<p>Header Photo by <a href=https://unsplash.com/@shashanksahay?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText>Shashank Sahay</a> on Unsplash<p>The code found in this article is <a href=https://github.com/PFTL/website/tree/master/example_code/34_monkey_patching>available on Github</a>. Any comment, improvement, or suggestion can be <a href=https://github.com/PFTL/website/issues/new>submitted here</a></main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/duck-typing-or-how-to-check-variable-types> <img alt src=/images/joshua-coleman-655076-unsplash_linkedin.width-800.jpg> <span class=date>2019-06-11</span> <span class=name>Duck Typing, or how to check variable types</span> </a><li><a class=item href=https://pythonforthelab.com/blog/intro-to-python-lambda-functions> <img alt src=/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg> <span class=date>2019-03-17</span> <span class=name>Introduction to Python Lambda Functions</span> </a><li><a class=item href=https://pythonforthelab.com/blog/what-are-args-and-kwargs-and-when-to-use-them> <img alt src=/images/luca-bravo-217276-unsplash_linkedin.width-800.jpg> <span class=date>2019-03-10</span> <span class=name>What are args and kwargs and when to use them</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>
+</code></pre>
+<p>Now, whenever you use the FFT routines provided by numpy, they will be
+automatically replaced by those of PyFFTW. This can have a huge impact
+on your program, and it only took one line of code! This is a special
+example but there are other situations in which you may consider monkey
+patching.</p>
+<p>A common situation is with testing. Sometimes you want to test your code
+in an environment which lacks some functionality, or you want to prevent
+that because of the test you actually modify a live database. In that
+case, before doing the test you can change the methods that communicate
+with a database. If you work in a lab, a very common situation is when
+you want to avoid communicating with a device while you are testing your
+program.</p>
+<p>Exactly how to achieve this behavior will depend on your situation, but
+with the examples above you already have a clear picture of what the
+strategy could be.</p>
+<p>Header Photo by <a href="https://unsplash.com/@shashanksahay?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Shashank
+Sahay</a>
+on Unsplash</p>
+<p>The code found in this article is <a href="https://github.com/PFTL/website/tree/master/example_code/34_monkey_patching">available on
+Github</a>.
+Any comment, improvement, or suggestion can be <a href="https://github.com/PFTL/website/issues/new">submitted
+here</a></p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+        <div class="lg:mt-6">
+          <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
+          <div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/duck-typing-or-how-to-check-variable-types" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/joshua-coleman-655076-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of Duck Typing, or how to check variable types">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-06-11</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Duck Typing, or how to check variable types</h3>
+                      <div class="font-sans ">The name duck typing has its root in the expression If it walks like a duck and it quacks like a duck, then it must be a duck. Which means that if you want to know whether you are dealing with a duck or not, you only care about how …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/intro-to-python-lambda-functions" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of Introduction to Python Lambda Functions">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-03-17</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Introduction to Python Lambda Functions</h3>
+                      <div class="font-sans ">Some time ago, Python introduced in its syntax the possibility to define functions using lambda instead of def. These functions are called anonymous and are very common in other languages such as Javascript. However, in Python, they seem a bit obscure and are often either overlooked or misused. In this …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/what-are-args-and-kwargs-and-when-to-use-them" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/luca-bravo-217276-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of What are args and kwargs and when to use them">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-03-10</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">What are args and kwargs and when to use them</h3>
+                      <div class="font-sans ">If you have worked with Python for long enough, probably you have encountered code that uses *args and **kwargs as arguments in functions. Even if you haven't, it is a very neat feature that allows you to achieve great flexibility while developing code. In this article, we are going to …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

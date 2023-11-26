@@ -233,11 +233,6 @@ url = "/blog/controlling-a-national-instruments-card-with-python"
 title = "Controlling a National Instruments Card with Python"
 
 [[input.files]]
-path = "index.html"
-url = "index.html"
-title = ""
-
-[[input.files]]
 path = "books/index.html"
 url = "books/index.html"
 title = ""
@@ -255,6 +250,11 @@ title = ""
 [[input.files]]
 path = "courses/index.html"
 url = "courses/index.html"
+title = ""
+
+[[input.files]]
+path = "index.html"
+url = "index.html"
 title = ""
 
 [[input.files]]

@@ -1,23 +1,718 @@
-<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>Virtual Environment is a Must-Have Tool | Python For The Lab</title><meta content="Python, Virtual Environment, Development, " name=tags><meta content="Isolate different development environments from each other to avoid
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Virtual Environment is a Must-Have Tool | Python For The Lab</title>
+
+  <meta name="tags" content="Python, Virtual Environment, Development, ">
+  <meta name="description" content="Isolate different development environments from each other to avoid
 overlaps
-" name=description><meta content="Aquiles Carattino" name=author><link href=blog/virtual-environment-is-a-must-have-tool rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/virtual-environment-is-a-must-have-tool property=og:url><meta content="Virtual Environment is a Must-Have Tool" property=og:title><meta content="Isolate different development environments from each other to avoid
+">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="blog/virtual-environment-is-a-must-have-tool">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="blog/virtual-environment-is-a-must-have-tool">
+  <meta property="og:title" content="Virtual Environment is a Must-Have Tool">
+  <meta property="og:description" content="Isolate different development environments from each other to avoid
 overlaps
-" property=og:description><meta content=/images/virtual_environments_python.png property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/virtual-environment-is-a-must-have-tool property=twitter:url><meta content="Virtual Environment is a Must-Have Tool" property=twitter:title><meta content="Isolate different development environments from each other to avoid
+">
+  <meta property="og:image" content="/images/virtual_environments_python.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="blog/virtual-environment-is-a-must-have-tool">
+  <meta property="twitter:title" content="Virtual Environment is a Must-Have Tool">
+  <meta property="twitter:description" content="Isolate different development environments from each other to avoid
 overlaps
-" property=twitter:description><meta content=/images/virtual_environments_python.png property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item courses" href=https://pythonforthelab.com/courses/><span>Courses</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/virtual_environments_python.png width=800></div><h1>Virtual Environment is a Must-Have Tool</h1><h3>Isolate different development environments from each other to avoid overlaps</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2018-03-09</span><span class="item-tag first">Python</span><span class=item-tag>Virtual Environment</span><span class=item-tag>Development</span></div><main><p>When you start developing software, it is of utmost importance to have an isolated programming environment in which you can control precisely the packages installed. This will allow you, for example, to use experimental libraries without overwriting software that other programs use on your computer. Isolated environments allow you, for example, to update a package only within that specific environment, without altering the dependencies in every other development you are doing.<p>Python provides a very convenient tool called <code>Virtual Environment</code> that allows you to do exactly what was described. The instructions are slightly different depending on the operating system that you use, but they are easy to adapt from one to the other. To install <code>Virtual Environment</code> you can do it with <code>pip</code>, the package manager of Python. Remember that sometimes you may have more than one version of pip in your computer, in the same way, you may have more than one version of Python. For example, if you are using Python 3, you would type in the command line:<pre><code class=language-bash>pip3 install virtualenv
-</code></pre><p>If you are on Linux, you may need to add <code>sudo</code> to the command: <code>sudo pip3 install virtualenv</code>, depending on how you have installed Python. This is the last installation that you do system-wide. From now on, everything else will happen within a Virtual Environment. It is a common practice to encapsulate projects in folders that also contain the virtual environment. You have to be sure, however, that you don't add your virtual environment folder to version control, or you will end up having <strong>huge</strong> repositories.<pre><code class=language-bash>mkdir myproject
+">
+  <meta property="twitter:image" content="/images/virtual_environments_python.png">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/virtual_environments_python.png" alt="Virtual Environment is a Must-Have Tool" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">Virtual Environment is a Must-Have Tool</h1>
+        <div class="font-sans font-bold text-xl">Isolate different development environments from each other to avoid
+overlaps
+</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2018-03-09</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Python</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Virtual Environment</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Development</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>When you start developing software, it is of utmost importance to have
+an isolated programming environment in which you can control precisely
+the packages installed. This will allow you, for example, to use
+experimental libraries without overwriting software that other programs
+use on your computer. Isolated environments allow you, for example, to
+update a package only within that specific environment, without altering
+the dependencies in every other development you are doing.</p>
+<p>Python provides a very convenient tool called <code>Virtual Environment</code> that
+allows you to do exactly what was described. The instructions are
+slightly different depending on the operating system that you use, but
+they are easy to adapt from one to the other. To install
+<code>Virtual Environment</code> you can do it with <code>pip</code>, the package manager of
+Python. Remember that sometimes you may have more than one version of
+pip in your computer, in the same way, you may have more than one
+version of Python. For example, if you are using Python 3, you would
+type in the command line:</p>
+<pre><code class="language-bash">pip3 install virtualenv
+</code></pre>
+<p>If you are on Linux, you may need to add <code>sudo</code> to the command:
+<code>sudo pip3 install virtualenv</code>, depending on how you have installed
+Python. This is the last installation that you do system-wide. From now
+on, everything else will happen within a Virtual Environment. It is a
+common practice to encapsulate projects in folders that also contain the
+virtual environment. You have to be sure, however, that you don't add
+your virtual environment folder to version control, or you will end up
+having <strong>huge</strong> repositories.</p>
+<pre><code class="language-bash">mkdir myproject
 cd myproject
 virtualenv venv -p python3
-</code></pre><p>The first line creates the folder for the project and then we move into it. In the last line, we create the virtual environment within a folder called <code>venv</code> and using a specific version of Python, in this case it is <code>python3</code>. Now it is time to activate the virtual environment. On Linux you would do:<pre><code class=language-bash>source venv/bin/activate
-</code></pre><p>while on Windows the command would be (pay attention to the <code>.\</code> at the beginning):<pre><code class=language-powershell>.\venv\Scripts\activate
-</code></pre><p>If everything went well, you will see that a <code>(venv)</code> appears at the beginning of the command line. Now you are working inside the Virtual Environment called <code>venv</code> and all the packages you install are going to be stored within it. Let's install a package to see how it works.<pre><code class=language-bash>pip install Flask==1.0
-</code></pre><p>The command will install a very specific version of Flask, which is not the most recent one. One of the useful aspects of virtual environments is that they allow you to keep track of all the packages that you have installed, including their versions. If you execute this command:<pre><code class=language-bash>pip freeze
-</code></pre><p>You will see all the installed packages. You should see that you have installed not only Flask, but all of its dependencies, each one with a specific version. It is wise to output the results to a file that you can use later on for automatically installing all the requirements of your project:<pre><code class=language-bash>pip freeze > requirements.txt
-</code></pre><p>If you open the file <code>requirements.txt</code> you will notice that it contains a list with all the packages from <code>venv</code>. To see the full potential of Virtual Environment, let's create a second one. First, we need to deactivate the one we are working on now by running:<pre><code class=language-bash>deactivate
-</code></pre><p>And now we repeat the step above to create a new environment, but with a different name:<pre><code class=language-bash>virtualenv test -p python3
-</code></pre><p>And we activate it:<pre><code class=language-bash>source test/bin/activate
-</code></pre><p>or for Windows:<pre><code class=language-powershell>.\venv\Scripts\activate
-</code></pre><p>If we run again <code>pip freeze</code> you will notice that your environment is empty. We can install all the packages contained in the <code>requirements.txt</code> file by simply running:<pre><code class=language-bash>pip install -r requirements.txt
-</code></pre><p>If you check again with <code>pip freeze</code> you will notice that you have exactly the same packages than in the <code>venv</code> environment. You can upgrade Flask, for example:<pre><code class=language-bash>pip install --upgrade Flask
-</code></pre><p>And if you run again <code>pip freeze</code> you will notice that the version of Flask has changed. Repeat the steps mentioned above in order to deactivate <code>test</code> and activate <code>venv</code>. You will see that the version of Flask stayed at <code>1.0</code> and was not upgraded.<p>Of course, you can run the <code>freeze</code> command outside of any virtual environment to see all the packages installed in your computer. It is a very useful way of keeping track of the packages that may need an upgrade or that you no longer use.<h2>How does the Virtual Environment Work</h2><p>When you run programs from the command line, your operating system needs to know where to find them. The location of the programs in Windows and Linux is radically different, but they both are able to understand that when you type <code>python</code> in the command line, you want to start the Python interpreter. In order to achieve this, operating systems know where to look for programs thanks to the so-called environmental variables. The <code>PATH</code> is one of those variables that stores a list of folders where to look for programs.<p>When you work in a virtual environment, all that you do is to replace the relevant variables. In this way, when you run <code>python</code> in the command line, it will first find the one that corresponds to the virtual environment. For example, imagine that you have two different versions of Python, let's say <code>python</code> (for Python 2) and <code>python3</code> (for Python 3). When you create a virtual environment, you can specify which version of python to use by adding the option <code>-p</code> at the end. In the examples above, we have used <code>python3</code>, and therefore every time we type <code>python</code> in the virtual environment, we will be actually triggering <code>python3</code>.<p>But that is not all. If you navigate to the folder of the virtual environment, you will see a folder called <strong>bin</strong>, where actually the executables for Python and Pip are located. In this way, you are isolated from the computer. If the OS decides to upgrade from Python 3.4 to Python 3.6, for example, you will still have the proper version in your virtual environment. If you navigate to the <strong>lib</strong> folder and go inside the python folder, you will find the <strong>site-packages</strong>, which are all the packages installed by pip.<p>If you have compiled programs that you want to use, in principle you can put them into the <strong>bin</strong> folder. If you have Python packages that are not installed through pip (such as PyQt4), you can install them system-wide and then just copy the appropriate folder into your virtual environment.<h3>Be careful with name clashes</h3><p>It is common that some python packages also generate <em>entry points</em>, i.e. commands that can be triggered directly from the command line. For example, if you are inside your virtual environment, you can run <code>flask</code> directly from the command line. This behavior is very useful, but it can easily collide with packages installed system-wide.<p>Imagine you installed Flask in your system, and then you start working in a virtual environment that doesn't have Flask installed. If you run <code>flask</code> it will work, but it will be using the version from your OS. This is something very easy to miss when dealing with more complicated packages such as the Jupyter notebook or sphinx for building documentation.<p>There is no one solution that fits all. It is important for you to be aware of the different problems that may arise when you run programs directly from the command line. Especially Linux/Mac users should be aware that when using the package manager and installing, for instance, Jupyter, you will also create the proper links in the <strong>bin</strong> directory, allowing you to run <code>jupyter notebook</code> directly. However, if you install it through pip, there are no entry points. Therefore, if you just type <code>jupyter notebook</code>, you will use the system one. To overcome this, you can use the following command:<pre><code class=language-bash>python -m jupyter notebook
-</code></pre><p>This will guarantee that you are going to use the package installed through Pip and not the one installed by your system.<h2>Conclusions</h2><p>It is almost impossible to overestimate how useful the <em>Virtual Environment</em> is. It will help you stay organized and out of conflicts when you develop software, and it will also avoid problems when you are installing different libraries that you want to test. It doesn't matter if it is for the lab computer or for analyzing data, if you keep your programs compartmentalized, you can be sure that they will all run properly, regardless of their specific needs.<p>Remember, every time you are about to start a new project, regardless of what it is, you should start by creating an appropriate Virtual Environment for it. In this way, you can be certain of the long-term prosperity of the code you write, regardless of where it will bring you.</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/how-to-use-decorators-to-validate-input> <img alt src=/images/cartoon_decorators.png> <span class=date>2018-03-12</span> <span class=name>How to Use Decorators to Validate Input</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>
+</code></pre>
+<p>The first line creates the folder for the project and then we move into
+it. In the last line, we create the virtual environment within a folder
+called <code>venv</code> and using a specific version of Python, in this case it is
+<code>python3</code>. Now it is time to activate the virtual environment. On Linux
+you would do:</p>
+<pre><code class="language-bash">source venv/bin/activate
+</code></pre>
+<p>while on Windows the command would be (pay attention to the <code>.\</code> at the
+beginning):</p>
+<pre><code class="language-powershell">.\venv\Scripts\activate
+</code></pre>
+<p>If everything went well, you will see that a <code>(venv)</code> appears at the
+beginning of the command line. Now you are working inside the Virtual
+Environment called <code>venv</code> and all the packages you install are going to
+be stored within it. Let's install a package to see how it works.</p>
+<pre><code class="language-bash">pip install Flask==1.0
+</code></pre>
+<p>The command will install a very specific version of Flask, which is not
+the most recent one. One of the useful aspects of virtual environments
+is that they allow you to keep track of all the packages that you have
+installed, including their versions. If you execute this command:</p>
+<pre><code class="language-bash">pip freeze
+</code></pre>
+<p>You will see all the installed packages. You should see that you have
+installed not only Flask, but all of its dependencies, each one with a
+specific version. It is wise to output the results to a file that you
+can use later on for automatically installing all the requirements of
+your project:</p>
+<pre><code class="language-bash">pip freeze &gt; requirements.txt
+</code></pre>
+<p>If you open the file <code>requirements.txt</code> you will notice that it contains
+a list with all the packages from <code>venv</code>. To see the full potential of
+Virtual Environment, let's create a second one. First, we need to
+deactivate the one we are working on now by running:</p>
+<pre><code class="language-bash">deactivate
+</code></pre>
+<p>And now we repeat the step above to create a new environment, but with a
+different name:</p>
+<pre><code class="language-bash">virtualenv test -p python3
+</code></pre>
+<p>And we activate it:</p>
+<pre><code class="language-bash">source test/bin/activate
+</code></pre>
+<p>or for Windows:</p>
+<pre><code class="language-powershell">.\venv\Scripts\activate
+</code></pre>
+<p>If we run again <code>pip freeze</code> you will notice that your environment is
+empty. We can install all the packages contained in the
+<code>requirements.txt</code> file by simply running:</p>
+<pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+<p>If you check again with <code>pip freeze</code> you will notice that you have
+exactly the same packages than in the <code>venv</code> environment. You can
+upgrade Flask, for example:</p>
+<pre><code class="language-bash">pip install --upgrade Flask
+</code></pre>
+<p>And if you run again <code>pip freeze</code> you will notice that the version of
+Flask has changed. Repeat the steps mentioned above in order to
+deactivate <code>test</code> and activate <code>venv</code>. You will see that the version of
+Flask stayed at <code>1.0</code> and was not upgraded.</p>
+<p>Of course, you can run the <code>freeze</code> command outside of any virtual
+environment to see all the packages installed in your computer. It is a
+very useful way of keeping track of the packages that may need an
+upgrade or that you no longer use.</p>
+<h2>How does the Virtual Environment Work</h2>
+<p>When you run programs from the command line, your operating system needs
+to know where to find them. The location of the programs in Windows and
+Linux is radically different, but they both are able to understand that
+when you type <code>python</code> in the command line, you want to start the Python
+interpreter. In order to achieve this, operating systems know where to
+look for programs thanks to the so-called environmental variables. The
+<code>PATH</code> is one of those variables that stores a list of folders where to
+look for programs.</p>
+<p>When you work in a virtual environment, all that you do is to replace
+the relevant variables. In this way, when you run <code>python</code> in the
+command line, it will first find the one that corresponds to the virtual
+environment. For example, imagine that you have two different versions
+of Python, let's say <code>python</code> (for Python 2) and <code>python3</code> (for Python
+3). When you create a virtual environment, you can specify which version
+of python to use by adding the option <code>-p</code> at the end. In the examples
+above, we have used <code>python3</code>, and therefore every time we type <code>python</code>
+in the virtual environment, we will be actually triggering <code>python3</code>.</p>
+<p>But that is not all. If you navigate to the folder of the virtual
+environment, you will see a folder called <strong>bin</strong>, where actually the
+executables for Python and Pip are located. In this way, you are
+isolated from the computer. If the OS decides to upgrade from Python 3.4
+to Python 3.6, for example, you will still have the proper version in
+your virtual environment. If you navigate to the <strong>lib</strong> folder and go
+inside the python folder, you will find the <strong>site-packages</strong>, which are
+all the packages installed by pip.</p>
+<p>If you have compiled programs that you want to use, in principle you can
+put them into the <strong>bin</strong> folder. If you have Python packages that are
+not installed through pip (such as PyQt4), you can install them
+system-wide and then just copy the appropriate folder into your virtual
+environment.</p>
+<h3>Be careful with name clashes</h3>
+<p>It is common that some python packages also generate <em>entry points</em>,
+i.e. commands that can be triggered directly from the command line. For
+example, if you are inside your virtual environment, you can run <code>flask</code>
+directly from the command line. This behavior is very useful, but it can
+easily collide with packages installed system-wide.</p>
+<p>Imagine you installed Flask in your system, and then you start working
+in a virtual environment that doesn't have Flask installed. If you run
+<code>flask</code> it will work, but it will be using the version from your OS.
+This is something very easy to miss when dealing with more complicated
+packages such as the Jupyter notebook or sphinx for building
+documentation.</p>
+<p>There is no one solution that fits all. It is important for you to be
+aware of the different problems that may arise when you run programs
+directly from the command line. Especially Linux/Mac users should be
+aware that when using the package manager and installing, for instance,
+Jupyter, you will also create the proper links in the <strong>bin</strong> directory,
+allowing you to run <code>jupyter notebook</code> directly. However, if you install
+it through pip, there are no entry points. Therefore, if you just type
+<code>jupyter notebook</code>, you will use the system one. To overcome this, you
+can use the following command:</p>
+<pre><code class="language-bash">python -m jupyter notebook
+</code></pre>
+<p>This will guarantee that you are going to use the package installed
+through Pip and not the one installed by your system.</p>
+<h2>Conclusions</h2>
+<p>It is almost impossible to overestimate how useful the <em>Virtual
+Environment</em> is. It will help you stay organized and out of conflicts
+when you develop software, and it will also avoid problems when you are
+installing different libraries that you want to test. It doesn't matter
+if it is for the lab computer or for analyzing data, if you keep your
+programs compartmentalized, you can be sure that they will all run
+properly, regardless of their specific needs.</p>
+<p>Remember, every time you are about to start a new project, regardless of
+what it is, you should start by creating an appropriate Virtual
+Environment for it. In this way, you can be certain of the long-term
+prosperity of the code you write, regardless of where it will bring you.</p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+        <div class="lg:mt-6">
+          <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
+          <div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/how-to-use-decorators-to-validate-input" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/cartoon_decorators.png"
+                           alt="Illustration of How to Use Decorators to Validate Input">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2018-03-12</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">How to Use Decorators to Validate Input</h3>
+                      <div class="font-sans ">Python is rich in resources that can shorten the time it takes to develop new programs and simplify repetitive tasks. Decorators are one of such elements but more often than not they are not considered by less experienced developers. Adding decorators to the syntactic toolbox can be of great use …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

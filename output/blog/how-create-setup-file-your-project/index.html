@@ -1,21 +1,340 @@
-<!doctype html><html lang=en><script async src=https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-CYPVPEJ4PK')</script><meta charset=utf-8><meta content=width=device-width,initial-scale=1 name=viewport><title>How to create a setup file for your project | Python For The Lab</title><meta content="environment, path, setup, install, package, " name=tags><meta content="Create a setup file to ease the use of your libraries" name=description><meta content="Aquiles Carattino" name=author><link href=blog/how-create-setup-file-your-project rel=canonical><meta content="Python for the Lab" property=og:site_name><meta content=article property=og:type><meta content=blog/how-create-setup-file-your-project property=og:url><meta content="How to create a setup file for your project" property=og:title><meta content="Create a setup file to ease the use of your libraries" property=og:description><meta content=/images/Python-setup.width-800.jpg property=og:image><meta content=summary_large_image property=twitter:card><meta content=blog/how-create-setup-file-your-project property=twitter:url><meta content="How to create a setup file for your project" property=twitter:title><meta content="Create a setup file to ease the use of your libraries" property=twitter:description><meta content=/images/Python-setup.width-800.jpg property=twitter:image><meta content=@aquicarattino name=twitter:creator><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png rel=apple-touch-icon sizes=57x57><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png rel=apple-touch-icon sizes=60x60><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png rel=apple-touch-icon sizes=72x72><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png rel=apple-touch-icon sizes=76x76><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png rel=apple-touch-icon sizes=114x114><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png rel=apple-touch-icon sizes=120x120><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png rel=apple-touch-icon sizes=144x144><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png rel=apple-touch-icon sizes=152x152><link href=https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png rel=apple-touch-icon sizes=180x180><link href=https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png rel=icon sizes=192x192 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png rel=icon sizes=32x32 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png rel=icon sizes=96x96 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png rel=icon sizes=16x16 type=image/png><link href=https://pythonforthelab.com/theme/css/favicon/manifest.json rel=manifest><meta content=#ffffff name=msapplication-TileColor><meta content=https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png name=msapplication-TileImage><meta content=#ffffff name=theme-color><link href=https://fonts.googleapis.com rel=preconnect><link crossorigin href=https://fonts.gstatic.com rel=preconnect><link href=https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap rel=stylesheet><link href=https://pythonforthelab.com/theme/css/style.css rel=stylesheet><link href=https://files.stork-search.net/basic.css rel=stylesheet><link href=https://https://pythonforthelab.com/feed.rss rel=alternate title=RSS type=application/rss+xml><script src=https://code.jquery.com/jquery-3.4.1.min.js></script><script src=https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js></script><script src=https://pythonforthelab.com/theme/js/functions.js></script><link href=https://pythonforthelab.com/theme/css/prism.css rel=stylesheet><body><section class=wrapper><div class="intro blog article"><div class=container><div class=header><a class=logo href=/>Python for the Lab</a><div class=header-dd><div class=navigation><ul><li class=active><a class="nav-item blog" href=https://pythonforthelab.com/blog><span>Blog</span></a><li><a class="nav-item courses" href=https://pythonforthelab.com/courses/><span>Courses</span></a><li><a class="nav-item hire-me" href=https://pythonforthelab.com/hire-me/><span>Hire Me</span></a><li><a class="nav-item forum" href=https://github.com/PFTL/pftl_discussions/discussions target=_blank><span>Forum</span></a><li><a class="nav-item books" href=https://pythonforthelab.com/books><span>Books</span></a><li><a class="nav-item about" href=https://pythonforthelab.com/about><span>About</span></a></ul></div><div class="search field-wp"><form action=#><input placeholder="Type to Search" class=field data-stork=sitesearch><input class=search-btn type=submit></form><div data-stork=sitesearch-output></div></div></div><button class=menu-btn><span>Menu</span></button></div><div class="intro-cnt v-article"><div class=side-text></div><div class="side-form small-sb-form"><div class=sb-form id=mc_embed_signup><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup_scroll><input placeholder="Your E-Mail" class=field id=mce-EMAIL name=EMAIL required type=email></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit><span class=small-text>Get relevant information, unsubscribe at any time.</span></form></div></div></div></div></div><div class=main><div class=container><div class=article-cnt><div class=leftside><div class=article-image><img alt src=https://pythonforthelab.com//images/Python-setup.width-800.jpg width=800></div><h1>How to create a setup file for your project</h1><h3>Create a setup file to ease the use of your libraries</h3><div class=info><span class="item-1 author">by Aquiles Carattino</span><span class="item-1 date">2020-01-20</span><span class="item-tag first">environment</span><span class=item-tag>path</span><span class=item-tag>setup</span><span class=item-tag>install</span><span class=item-tag>package</span></div><main><p>When you develop software, at some point you will want other people to be able to use what you have built. Sometimes it is handy if you can quickly use the code you developed yourself in the past on a new machine or a different virtual environment. We have already seen that &LT:Complete Guide to Imports in Python: Absolute, Relative, and More|for importing> to work properly, it is very important to have well-defined packages, and that Python knows where to find them.<p>With a proper setup file, Python will quickly understand where to find the package, and thus importing from other places becomes trivial. It will also be possible to quickly distribute the code with other people, diminishing the barrier of adoption. Having a <strong>setup.py</strong> file is the first step into being able to switch from scripts to a package on which to rely.<h2>Your first setup file</h2><p>The examples we are going to develop are toy examples, very similar to the ones on &LT:Complete Guide to Imports in Python: Absolute, Relative, and More|the article about importing>. But they will prove the point. You should start on an empty directory, the name doesn't matter, but it is important not to mix it with other things, so you can follow this article without complications.<p>Let's start by creating a file called <strong>first.py</strong>, with the following code inside:<pre><code class=language-python>def first_function():
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>How to create a setup file for your project | Python For The Lab</title>
+
+  <meta name="tags" content="environment, path, setup, install, package, ">
+  <meta name="description" content="Create a setup file to ease the use of your libraries">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="blog/how-create-setup-file-your-project">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="blog/how-create-setup-file-your-project">
+  <meta property="og:title" content="How to create a setup file for your project">
+  <meta property="og:description" content="Create a setup file to ease the use of your libraries">
+  <meta property="og:image" content="/images/Python-setup.width-800.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="blog/how-create-setup-file-your-project">
+  <meta property="twitter:title" content="How to create a setup file for your project">
+  <meta property="twitter:description" content="Create a setup file to ease the use of your libraries">
+  <meta property="twitter:image" content="/images/Python-setup.width-800.jpg">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/Python-setup.width-800.jpg" alt="How to create a setup file for your project" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">How to create a setup file for your project</h1>
+        <div class="font-sans font-bold text-xl">Create a setup file to ease the use of your libraries</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2020-01-20</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">environment</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">path</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">setup</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">install</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">package</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>When you develop software, at some point you will want other people to be able to use what you have built. Sometimes it is handy if you can quickly use the code you developed yourself in the past on a new machine or a different virtual environment. We have already seen that &lt;:Complete Guide to Imports in Python: Absolute, Relative, and More|for importing&gt; to work properly, it is very important to have well-defined packages, and that Python knows where to find them. </p>
+<p>With a proper setup file, Python will quickly understand where to find the package, and thus importing from other places becomes trivial. It will also be possible to quickly distribute the code with other people, diminishing the barrier of adoption. Having a <strong>setup.py</strong> file is the first step into being able to switch from scripts to a package on which to rely. </p>
+<h2>Your first setup file</h2>
+<p>The examples we are going to develop are toy examples, very similar to the ones on &lt;:Complete Guide to Imports in Python: Absolute, Relative, and More|the article about importing&gt;. But they will prove the point. You should start on an empty directory, the name doesn't matter, but it is important not to mix it with other things, so you can follow this article without complications. </p>
+<p>Let's start by creating a file called <strong>first.py</strong>, with the following code inside:</p>
+<pre><code class="language-python">def first_function():
     print('This is the first function')
-</code></pre><p>This file is what we want to be able to use from other packages, etc. What we would like to be able to achieve is to run code like this:<pre><code class=language-python>from first import first_function
+</code></pre>
+<p>This file is what we want to be able to use from other packages, etc. What we would like to be able to achieve is to run code like this:</p>
+<pre><code class="language-python">from first import first_function
 
 first_function()
 # 'This is the first function'
-</code></pre><p>Next to the file, let's create a new file called <strong>setup.py</strong>, with the following code:<pre><code class=language-python>from setuptools import setup
+</code></pre>
+<p>Next to the file, let's create a new file called <strong>setup.py</strong>, with the following code:</p>
+<pre><code class="language-python">from setuptools import setup
 
 setup(
     name='My First Setup File',
     version='1.0',
     scripts=['first.py'],
 )
-</code></pre><div class="admonition warning"><p class=admonition-title>Warning<p>The code we are developing is harmless, nevertheless, it is always wise to create a virtual environment to play around, and eventually discard once you understood and polished the details</div><p>To install your script, you can simply do the following from the console:<pre><code class=language-bash>python setup.py install
-</code></pre><p>You will see some information printed to the screen. More importantly, you can now use your package from anywhere else on your computer. For example, change your directory to anywhere else on your computer, and to the following:<pre><code class=language-python>from first import first_function
+</code></pre>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The code we are developing is harmless, nevertheless, it is always wise to create a virtual environment to play around, and eventually discard once you understood and polished the details</p>
+</div>
+<p>To install your script, you can simply do the following from the console:</p>
+<pre><code class="language-bash">python setup.py install
+</code></pre>
+<p>You will see some information printed to the screen. More importantly, you can now use your package from anywhere else on your computer. For example, change your directory to anywhere else on your computer, and to the following:</p>
+<pre><code class="language-python">from first import first_function
 first_function()
 # This is the first function
-</code></pre><p>This is great, now you have a way of using your program from anywhere else, even from other packages.<h3>Laying out the project</h3><p>In the example above we had only one script available, and thus the structure of the program was straightforward. However, this is rarely the case. As soon as your program starts having multiple files, you will need to structure it in such a way that <code>setup</code> knows what files are needed. Let's evolve the example above. Let's create now a package with tho modules, the folder structure will look like this:<pre><code class=language-txt>.
+</code></pre>
+<p>This is great, now you have a way of using your program from anywhere else, even from other packages. </p>
+<h3>Laying out the project</h3>
+<p>In the example above we had only one script available, and thus the structure of the program was straightforward. However, this is rarely the case. As soon as your program starts having multiple files, you will need to structure it in such a way that <code>setup</code> knows what files are needed. Let's evolve the example above. Let's create now a package with tho modules, the folder structure will look like this:</p>
+<pre><code class="language-txt">.
 ├── my_package
 │   ├── __init__.py
 │   ├── mod_a
@@ -25,62 +344,129 @@ first_function()
 │       ├── file_b.py
 │       └── __init__.py
 └── setup.py
-</code></pre><p>Let's develop two very simple function inside <strong>file_a</strong> and <strong>file_b</strong>, respectively:<pre><code class=language-python>def function_a():
+</code></pre>
+<p>Let's develop two very simple function inside <strong>file_a</strong> and <strong>file_b</strong>, respectively:</p>
+<pre><code class="language-python">def function_a():
     print('This is function_a')
-</code></pre><pre><code class=language-python>def function_b():
+</code></pre>
+<pre><code class="language-python">def function_b():
     print('This is function_b')
-</code></pre><p>We need to update the <strong>setup.py</strong> file to accommodate that the program is more complex than what it was before. Fortunately, the developers at setuptools made our life very easy, we just need to write the following:<pre><code class=language-python>from setuptools import setup, find_packages
+</code></pre>
+<p>We need to update the <strong>setup.py</strong> file to accommodate that the program is more complex than what it was before. Fortunately, the developers at setuptools made our life very easy, we just need to write the following:</p>
+<pre><code class="language-python">from setuptools import setup, find_packages
 
 setup(
     name='My First Setup File',
     version='1.0',
     packages=find_packages()
 )
-</code></pre><p>We have removed the <code>script</code> argument, but have added the <code>packages</code> argument. <code>find_packages</code> will automatically look for packages in a given directory. If we don't provide any arguments, it will look in the current folder. If you want to see it in action, you can do the following within a python interpreter:<pre><code class=language-pycon>>>> from setuptools import find_packages
->>> find_packages()
+</code></pre>
+<p>We have removed the <code>script</code> argument, but have added the <code>packages</code> argument. <code>find_packages</code> will automatically look for packages in a given directory. If we don't provide any arguments, it will look in the current folder. If you want to see it in action, you can do the following within a python interpreter:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; from setuptools import find_packages
+&gt;&gt;&gt; find_packages()
 ['my_package', 'my_package.mod_b', 'my_package.mod_a']
->>> find_packages(where='my_package')
+&gt;&gt;&gt; find_packages(where='my_package')
 ['mod_b', 'mod_a']
-</code></pre><p>So now you see, find packages returns a list with the names of the packages we will include in the setup. If you want to have finer control, you can replace <code>find_packages</code> and type down exactly what you want to include in your install. Also, if your code would be inside of an extra folder, for example <code>src</code>, you would need to specify it: <code>find_packages(where='src')</code>. I, personally, prefer to keep the code directly in a folder next to the setup file, with a name that makes it very clear that it is the entire package inside, just like in the example in this section. Again, if you just install the code,<pre><code class=language-bash>python setup.py install
-</code></pre><p>you will be able to use it:<pre><code class=language-pycon>>>> from my_package.mod_b.file_b import *
->>> function_b()
+</code></pre>
+<p>So now you see, find packages returns a list with the names of the packages we will include in the setup. If you want to have finer control, you can replace <code>find_packages</code> and type down exactly what you want to include in your install. Also, if your code would be inside of an extra folder, for example <code>src</code>, you would need to specify it: <code>find_packages(where='src')</code>. I, personally, prefer to keep the code directly in a folder next to the setup file, with a name that makes it very clear that it is the entire package inside, just like in the example in this section. Again, if you just install the code, </p>
+<pre><code class="language-bash">python setup.py install
+</code></pre>
+<p>you will be able to use it:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; from my_package.mod_b.file_b import *
+&gt;&gt;&gt; function_b()
 This is function_b
-</code></pre><p>With everything you know from importing files in Python, it is now dead easy to use relative, absolute imports, etc. because everything is added to the path by the installation procedure.<h3>Installing in development mode</h3><p>One of the important things to point out is that the setup process can be very helpful also while developing, not only when you are releasing the code. This can be achieved by installing the code in <strong>development mode</strong>. The only thing you need to do is to run the setup script with a different argument:<pre><code class=language-bash>python setup.py develop
-</code></pre><p>Now, if you change any of your files, it will be reflected, in your code. For example, let's edit <em>file_b.py</em>*:<pre><code class=language-python>def function_b():
+</code></pre>
+<p>With everything you know from importing files in Python, it is now dead easy to use relative, absolute imports, etc. because everything is added to the path by the installation procedure. </p>
+<h3>Installing in development mode</h3>
+<p>One of the important things to point out is that the setup process can be very helpful also while developing, not only when you are releasing the code. This can be achieved by installing the code in <strong>development mode</strong>. The only thing you need to do is to run the setup script with a different argument:</p>
+<pre><code class="language-bash">python setup.py develop
+</code></pre>
+<p>Now, if you change any of your files, it will be reflected, in your code. For example, let's edit <em>file_b.py</em>*:</p>
+<pre><code class="language-python">def function_b():
     print('This is New function_b')
-</code></pre><p>If you use the module again, you will see the output was modified:<pre><code class=language-pycon>>>> from my_package.mod_b.file_b import *
->>> function_b()
+</code></pre>
+<p>If you use the module again, you will see the output was modified:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; from my_package.mod_b.file_b import *
+&gt;&gt;&gt; function_b()
 This is New function_b
-</code></pre><div class="admonition note"><p class=admonition-title>Note<p>Remember that if you change a module in Python, you will need to restart the interpreter. Once you import a module, Python will skip any new import statements of the same packages.</div><p>One of the best things about this approach is that if you add a new module to your package, it will still work fine. For example, let's create a new module <strong>C</strong>, which uses what is already available in <strong>a</strong> and <strong>b</strong>, using two different import approaches. Create a folder called <strong>mod_c</strong>, with a file <strong>file_c.py</strong>, and add the following:<pre><code class=language-python>from ..mod_a.file_a import  function_a
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Remember that if you change a module in Python, you will need to restart the interpreter. Once you import a module, Python will skip any new import statements of the same packages.</p>
+</div>
+<p>One of the best things about this approach is that if you add a new module to your package, it will still work fine. For example, let's create a new module <strong>C</strong>, which uses what is already available in <strong>a</strong> and <strong>b</strong>, using two different import approaches. Create a folder called <strong>mod_c</strong>, with a file <strong>file_c.py</strong>, and add the following:</p>
+<pre><code class="language-python">from ..mod_a.file_a import  function_a
 from my_package.mod_b.file_b import function_b
 
 def function_c():
     print('This is function c')
     function_a()
     function_b()
-</code></pre><p>And we can simply use it:<pre><code class=language-pycon>>>> from my_package.mod_c.file_c import function_c
->>> function_c()
+</code></pre>
+<p>And we can simply use it:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; from my_package.mod_c.file_c import function_c
+&gt;&gt;&gt; function_c()
 This is function c
 This is function_a
 This is New function_b
-</code></pre><p>Now you see that by having a setup.py file, using relative and absolute imports became trivial. No more worries about the system path, the python path, etc. everything is taken care of. Having a setup.py even when you are just starting makes your life much easier. You stop worrying about where the code is, how to import it, etc.<h3>But where is the code?</h3><p>At some point, you may be wondering what is happening to your code that makes it work. I will assume you are working within a virtual environment (because that is what you should be doing anyway), and that you know where is your virtual environment located (i.e. the folder where everything is stored). Navigate to the <code>site-packages</code> folder, in my case, it is located in:<pre><code class=language-bash>venv/lib/python3.6/site-packages
-</code></pre><p><strong>venv</strong> is the name of the virtual environment. <strong>python3.6</strong> is the version I am using now, but it can be different for you. Before you install anything else, just after a fresh virtual environment is created, the contents of the folder are very limited. You have pip, setuptools, and not much more. Let's install the package in development mode:<pre><code class=language-bash>python setup.py develop
-</code></pre><p>And if you look at the contents of the <strong>site-packages</strong> folder, you will notice a new file created: <strong>My-First-Setup-File.egg-link</strong>. Pay attention that the name of the file is associated with the <strong>name</strong> argument we used in the <code>setup.py</code> file. You can open the file with any text editor, what do you see? Indeed, you see the full path to the directory that contains the *<em>my_package</em> folder. That file can tell the Python interpreter what should be added to its path to work with our module. You see that it is not a lot of work, but being able to do it from a single command pays off.<p>If you, on the other hand, install the package:<pre><code class=language-bash>python setup.py install
-</code></pre><p>You will see that what gets installed in the <strong>site-packages</strong> folder is radically different, you will find a file called <strong>My_First_Setup_File-1.0-py3.6.egg</strong>. Egg files are just zip files that Python can uncompress and use when required. You can easily open the file with the same program you use to open zip files, and you will find a copy of your code. The folders, the files, etc. plus some metadata of your program, such as the author, license, etc. (which we haven't used yet in your simple setup file). Whenever you change your project files, they won't become available on your other programs, because now Python has its copy of the source code. Whenever you change a file you will need to run the setup script again:<pre><code class=language-bash>python setup.py install
-</code></pre><p>And the code will be refreshed and you can use the new development. You have to be careful, because it is very easy to forget to run again the setup script, and you will be banging your head against the wall trying to find why your bugs are still there if you solved them in your code. If you are developing a solution and trying things out, you should avoid the setup install and keep the <code>setup.py develop</code> approach.<h3>Installing with pip</h3><p>Just for completeness, it is important to show that once you have your <strong>setup.py</strong> file in place, you can also use pip to install it by running:<pre><code class=language-bash>pip install .
-</code></pre><p>Note two things: if you used the <code>python setup.py</code> approach, you should first remove the files created on your <code>site-packages</code> folder, or pip will fail with a cryptic message. Also, note the <code>.</code> after the install, this is important to tell pip you want to install <em>this</em> package. The install always takes the name of the package you would like to install. One of the advantages of using pip for installing is that you also get the uninstall for free. However, to uninstall you need to use the name you gave to your package:<pre><code class=language-bash>pip uninstall My-First-Setup-File
-</code></pre><p>Now you see that the name we gave to our package is independent of how we use it. We had to import <code>my_package</code>, while the actual name is <code>My-First-Setup-File</code>. This, in my opinion, can create a lot of headaches. For example, if you want to communicate with a serial device, you install a package called <code>PySerial</code>, while to use it you have to <code>import serial</code>. It may not seem like a big issue at the beginning until you find two packages with different names which define two different modules with the same name <code>serial</code>. Imagine we change the name of <strong>my_packe</strong> to <strong>serial</strong>. And we do the following:<p><code>bash
+</code></pre>
+<p>Now you see that by having a setup.py file, using relative and absolute imports became trivial. No more worries about the system path, the python path, etc. everything is taken care of. Having a setup.py even when you are just starting makes your life much easier. You stop worrying about where the code is, how to import it, etc.</p>
+<h3>But where is the code?</h3>
+<p>At some point, you may be wondering what is happening to your code that makes it work. I will assume you are working within a virtual environment (because that is what you should be doing anyway), and that you know where is your virtual environment located (i.e. the folder where everything is stored). Navigate to the <code>site-packages</code> folder, in my case, it is located in:</p>
+<pre><code class="language-bash">venv/lib/python3.6/site-packages
+</code></pre>
+<p><strong>venv</strong> is the name of the virtual environment. <strong>python3.6</strong> is the version I am using now, but it can be different for you. Before you install anything else, just after a fresh virtual environment is created, the contents of the folder are very limited. You have pip, setuptools, and not much more. Let's install the package in development mode:</p>
+<pre><code class="language-bash">python setup.py develop
+</code></pre>
+<p>And if you look at the contents of the <strong>site-packages</strong> folder, you will notice a new file created: <strong>My-First-Setup-File.egg-link</strong>. Pay attention that the name of the file is associated with the <strong>name</strong> argument we used in the <code>setup.py</code> file. You can open the file with any text editor, what do you see? Indeed, you see the full path to the directory that contains the *<em>my_package</em> folder. That file can tell the Python interpreter what should be added to its path to work with our module. You see that it is not a lot of work, but being able to do it from a single command pays off. </p>
+<p>If you, on the other hand, install the package:</p>
+<pre><code class="language-bash">python setup.py install
+</code></pre>
+<p>You will see that what gets installed in the <strong>site-packages</strong> folder is radically different, you will find a file called <strong>My_First_Setup_File-1.0-py3.6.egg</strong>. Egg files are just zip files that Python can uncompress and use when required. You can easily open the file with the same program you use to open zip files, and you will find a copy of your code. The folders, the files, etc. plus some metadata of your program, such as the author, license, etc. (which we haven't used yet in your simple setup file). Whenever you change your project files, they won't become available on your other programs, because now Python has its copy of the source code. Whenever you change a file you will need to run the setup script again:</p>
+<pre><code class="language-bash">python setup.py install
+</code></pre>
+<p>And the code will be refreshed and you can use the new development. You have to be careful, because it is very easy to forget to run again the setup script, and you will be banging your head against the wall trying to find why your bugs are still there if you solved them in your code. If you are developing a solution and trying things out, you should avoid the setup install and keep the <code>setup.py develop</code> approach. </p>
+<h3>Installing with pip</h3>
+<p>Just for completeness, it is important to show that once you have your <strong>setup.py</strong> file in place, you can also use pip to install it by running:</p>
+<pre><code class="language-bash">pip install .
+</code></pre>
+<p>Note two things: if you used the <code>python setup.py</code> approach, you should first remove the files created on your <code>site-packages</code> folder, or pip will fail with a cryptic message. Also, note the <code>.</code> after the install, this is important to tell pip you want to install <em>this</em> package. The install always takes the name of the package you would like to install. One of the advantages of using pip for installing is that you also get the uninstall for free. However, to uninstall you need to use the name you gave to your package:</p>
+<pre><code class="language-bash">pip uninstall My-First-Setup-File
+</code></pre>
+<p>Now you see that the name we gave to our package is independent of how we use it. We had to import <code>my_package</code>, while the actual name is <code>My-First-Setup-File</code>. This, in my opinion, can create a lot of headaches. For example, if you want to communicate with a serial device, you install a package called <code>PySerial</code>, while to use it you have to <code>import serial</code>. It may not seem like a big issue at the beginning until you find two packages with different names which define two different modules with the same name <code>serial</code>.  Imagine we change the name of <strong>my_packe</strong> to <strong>serial</strong>. And we do the following:</p>
+<p><code>bash
 pip install .
-pip install pyserial</code><p>If you explore the folder <strong>serial</strong> within your <strong>site-packages</strong> you will see that both your code and <strong>pyserial</strong> are mixed up. There is no warning of this clash, and the results can be an absolute disaster, especially if the top-level <code>__init__.py</code> file is used somehow. The example above may seem a bit far-fetched for some. But you would be surprised to know that there are two packages: <strong>pyserial</strong> and <strong>serial</strong> which are used for some very different tasks and both specify the same module name.<h3>Installing from Github</h3><p>One of the advantages of creating <strong>setup.py</strong> files is that you can directly install packages available on Github (or on any other online repository). For example, if you would like to install the code of this tutorial, which can be <a href=https://github.com/PFTL/website_example_code>found here</a>, you can run:<pre><code class=language-bash>pip install git+https://github.com/PFTL/website_example_code.git#subdirectory=code/38_creating_setup_py
-</code></pre><p>There are several things to note on the code above. First, it will not work on Windows as it is written. You will need to enclose the repository address with <code>"</code> so it understands it is the path to a repository. Note that we have used <code>git+https</code> because it is the simplest way of making it work. If you have configured your ssh keys properly, you can also use <code>pip install git+git</code>, which can give you access to private repositories as well. We have used <code>github.com</code>, but you can use any other version control platform you like, including Gitlab and bitbucket. The path up to <code>website_example_code.git</code> is simply the location of the repository, but in our case, the <strong>setup</strong> file is inside of a subdirectory, that is why we appended the <code>#subdirectory=code/38_creating_setup_py</code> information. But if it is not the case, you can skip that extra information.<div class="admonition note"><p class=admonition-title>Note<p>In most repositories, the <strong>setup.py</strong> is at the top level, and thus you won't need to specify a subdirectory to use it.</div><p>Now you see that it is very easy to share with others, you just need to put the code in a place that can be accessed by others. However, when you start sharing code, there are other things you need to be aware of. Imagine you update your code. In our case, we changed what <strong>function_c</strong> does. If we upload the code to Github, and then you run the same command as above, buried within a lot of information, there will be a line saying:<pre><code class=language-bash>Requirement already satisfied (use --upgrade to upgrade)
-</code></pre><p>This means that the code was not changed, because pip found that the package was already installed. You can run the same code with the extra <code>--upgrade</code> argument, and you will see that indeed it updates the code.<p>Just to close the discussion with pip installations, there is a very nice feature that allows you to install the package in editable mode, meaning that you can make changes and submit them to version control. This is ideal if you are willing to contribute to a package that is part of the requirements of your current project. In that case, you can run pip like this:<pre><code class=language-bash>pip install -e git+git://github.com/PFTL/website_example_code.git#egg=my_test_package-1.0\&subdirectory=code/38_creating_setup_py
-</code></pre><p>And if you explore your virtual environment, you will find a folder called <strong>src</strong> in which the package is available. Not only that, but the package itself is a git repository you can use as any other repository. You will also find a file within <em>site-packages</em> linking to the directory where the code is, including its subdirectory.<h2>Adding an entry point</h2><p>So far everything is working great, and probably you have plenty of ideas in your head about what can be done with a setup file. But what we have seen up to now is only the beginning. In the examples above, we have always installed a package that could be imported from other packages. This is great for a lot of applications, but in a lot of situations, you would like to be able to run your program directly, without the need to import from another script. That is when entry points become your best friends.<p>Let's creat a new file, called <strong>start.py</strong> at the top directory, <strong>my_package</strong>, and let's add the following:<pre><code class=language-python>from .mod_c.file_c import function_c
+pip install pyserial</code></p>
+<p>If you explore the folder <strong>serial</strong> within your <strong>site-packages</strong> you will see that both your code and <strong>pyserial</strong> are mixed up. There is no warning of this clash, and the results can be an absolute disaster, especially if the top-level <code>__init__.py</code> file is used somehow. The example above may seem a bit far-fetched for some. But you would be surprised to know that there are two packages: <strong>pyserial</strong> and <strong>serial</strong> which are used for some very different tasks and both specify the same module name. </p>
+<h3>Installing from Github</h3>
+<p>One of the advantages of creating <strong>setup.py</strong> files is that you can directly install packages available on Github (or on any other online repository). For example, if you would like to install the code of this tutorial, which can be <a href="https://github.com/PFTL/website_example_code">found here</a>, you can run:</p>
+<pre><code class="language-bash">pip install git+https://github.com/PFTL/website_example_code.git#subdirectory=code/38_creating_setup_py
+</code></pre>
+<p>There are several things to note on the code above. First, it will not work on Windows as it is written. You will need to enclose the repository address with <code>"</code> so it understands it is the path to a repository. Note that we have used <code>git+https</code> because it is the simplest way of making it work. If you have configured your ssh keys properly, you can also use <code>pip install git+git</code>, which can give you access to private repositories as well. We have used <code>github.com</code>, but you can use any other version control platform you like, including Gitlab and bitbucket. The path up to <code>website_example_code.git</code> is simply the location of the repository, but in our case, the <strong>setup</strong> file is inside of a subdirectory, that is why we appended the <code>#subdirectory=code/38_creating_setup_py</code> information. But if it is not the case, you can skip that extra information. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In most repositories, the <strong>setup.py</strong> is at the top level, and thus you won't need to specify a subdirectory to use it.</p>
+</div>
+<p>Now you see that it is very easy to share with others, you just need to put the code in a place that can be accessed by others. However, when you start sharing code, there are other things you need to be aware of. Imagine you update your code. In our case, we changed what <strong>function_c</strong> does. If we upload the code to Github, and then you run the same command as above, buried within a lot of information, there will be a line saying:</p>
+<pre><code class="language-bash">Requirement already satisfied (use --upgrade to upgrade)
+</code></pre>
+<p>This means that the code was not changed, because pip found that the package was already installed. You can run the same code with the extra <code>--upgrade</code> argument, and you will see that indeed it updates the code. </p>
+<p>Just to close the discussion with pip installations, there is a very nice feature that allows you to install the package in editable mode, meaning that you can make changes and submit them to version control. This is ideal if you are willing to contribute to a package that is part of the requirements of your current project. In that case, you can run pip like this:</p>
+<pre><code class="language-bash">pip install -e git+git://github.com/PFTL/website_example_code.git#egg=my_test_package-1.0\&amp;subdirectory=code/38_creating_setup_py
+</code></pre>
+<p>And if you explore your virtual environment, you will find a folder called <strong>src</strong> in which the package is available. Not only that, but the package itself is a git repository you can use as any other repository. You will also find a file within <em>site-packages</em> linking to the directory where the code is, including its subdirectory.  </p>
+<h2>Adding an entry point</h2>
+<p>So far everything is working great, and probably you have plenty of ideas in your head about what can be done with a setup file. But what we have seen up to now is only the beginning. In the examples above, we have always installed a package that could be imported from other packages. This is great for a lot of applications, but in a lot of situations, you would like to be able to run your program directly, without the need to import from another script. That is when entry points become your best friends. </p>
+<p>Let's creat a new file, called <strong>start.py</strong> at the top directory, <strong>my_package</strong>, and let's add the following:</p>
+<pre><code class="language-python">from .mod_c.file_c import function_c
 
 
 def main():
     function_c()
     print('This is main')
-</code></pre><p>This file in itself does not do anything, but the function <code>main</code> will generate an output of we run it. If we go back to <strong>setup.py</strong>, we can add the following:<pre><code class=language-python>from setuptools import setup, find_packages
+</code></pre>
+<p>This file in itself does not do anything, but the function <code>main</code> will generate an output of we run it. If we go back to <strong>setup.py</strong>, we can add the following:</p>
+<pre><code class="language-python">from setuptools import setup, find_packages
 
 setup(
     name='My First Setup File',
@@ -92,15 +478,28 @@ setup(
         ]
     }
 )
-</code></pre><p>Note that we have added a new argument, called <code>entry_points</code>. We want to have a console script, meaning something we can run as a command from the terminal. We call it <code>my_start</code>, and then we specify the path to it in the form <code>module.file:function</code>. The last argument must be a callable, something we can execute. If you install our package again:<pre><code class=language-bash>python setup.py develop
-</code></pre><p>We will be able to run <code>my_start</code> directly from the terminal:<pre><code class=language-bash>$ my_start
+</code></pre>
+<p>Note that we have added a new argument, called <code>entry_points</code>. We want to have a console script, meaning something we can run as a command from the terminal. We call it <code>my_start</code>, and then we specify the path to it in the form <code>module.file:function</code>. The last argument must be a callable, something we can execute. If you install our package again:</p>
+<pre><code class="language-bash">python setup.py develop
+</code></pre>
+<p>We will be able to run <code>my_start</code> directly from the terminal:</p>
+<pre><code class="language-bash">$ my_start
 This is New function_b
 This is main
-</code></pre><p>If you want to know where the command is located, you can run (Linux and Mac, not Windows):<pre><code class=language-bash>which my_start
+</code></pre>
+<p>If you want to know where the command is located, you can run (Linux and Mac, not Windows):</p>
+<pre><code class="language-bash">which my_start
 []/venv/bin/my_start
-</code></pre><p><strong>Windows</strong> users need to run:<pre><code>where my_start
+</code></pre>
+<p><strong>Windows</strong> users need to run:</p>
+<pre><code>where my_start
 []/venv/Scripts/my_start.exe
-</code></pre><p>So, the script is located inside the <code>bin</code> folder of your virtual environment. One of the nicest things of doing this is that if you are on Windows it will also work. You see that it creates an executable <code>.exe</code> file. The function you run as an entry point can be further extended with arguments, etc. but this is for another discussion.<p>If you are building an application with a user interface, instead of using <code>console_scripts</code> you can use <code>gui_scripts</code>. On Windows, this will allow you to run the program without opening a terminal in the background, and this will look more professional. But is nothing you can't live without.<p>Remember that you can add as many entry points as you wish. If your program can perform very different tasks, perhaps you would prefer to have different entry points instead of an endless list of arguments which alter the behavior. It is up to you to choose what you believe is the best approach.<p>For consistency, there is one extra thing to mention. Right now, with the entry point, we have a script that runs a specific task, but we can't run our package directly from Python. Thus, let's create a file at the top-level directory of the package, called <strong><strong>main</strong>.py</strong>, with the following:<pre><code class=language-python>from .mod_c.file_c import function_c
+</code></pre>
+<p>So, the script is located inside the <code>bin</code> folder of your virtual environment. One of the nicest things of doing this is that if you are on Windows it will also work. You see that it creates an executable <code>.exe</code> file. The function you run as an entry point can be further extended with arguments, etc. but this is for another discussion. </p>
+<p>If you are building an application with a user interface, instead of using <code>console_scripts</code> you can use <code>gui_scripts</code>. On Windows, this will allow you to run the program without opening a terminal in the background, and this will look more professional. But is nothing you can't live without. </p>
+<p>Remember that you can add as many entry points as you wish. If your program can perform very different tasks, perhaps you would prefer to have different entry points instead of an endless list of arguments which alter the behavior. It is up to you to choose what you believe is the best approach. </p>
+<p>For consistency, there is one extra thing to mention. Right now, with the entry point, we have a script that runs a specific task, but we can't run our package directly from Python. Thus, let's create a file at the top-level directory of the package, called <strong><strong>main</strong>.py</strong>, with the following:</p>
+<pre><code class="language-python">from .mod_c.file_c import function_c
 
 
 def main():
@@ -110,17 +509,32 @@ def main():
 
 if __name__ == '__main__':
     main()
-</code></pre><p>It's the same as our start file, but with the extra two lines at the end. Now, we can run our package directly:<pre><code class=language-bash>python -m my_package
-</code></pre><p>If you look around other packages, you will see that many define a <code>__main__</code> file and then an entry point using it. We could redefine our entry point, and it will look like:<pre><code class=language-python>entry_points={
+</code></pre>
+<p>It's the same as our start file, but with the extra two lines at the end. Now, we can run our package directly:</p>
+<pre><code class="language-bash">python -m my_package
+</code></pre>
+<p>If you look around other packages, you will see that many define a <code>__main__</code> file and then an entry point using it. We could redefine our entry point, and it will look like:</p>
+<pre><code class="language-python">entry_points={
         'console_scripts': [
             'my_start=my_package.__main__:main',
         ]
     }
-</code></pre><h2>Adding dependencies</h2><p>Right now we have a package that is completely independent of anything else around. Therefore, the next step is to add dependencies to the setup.py file. As an example, let's assume we want to have numpy (regardless of its version) and Django before version 3.0. We can add the following to the <strong>setup.py</strong> file:<pre><code class=language-python>install_requires=[
+</code></pre>
+<h2>Adding dependencies</h2>
+<p>Right now we have a package that is completely independent of anything else around. Therefore, the next step is to add dependencies to the setup.py file. As an example, let's assume we want to have numpy (regardless of its version) and Django before version 3.0. We can add the following to the <strong>setup.py</strong> file:</p>
+<pre><code class="language-python">install_requires=[
         'numpy',
-        'django&LT3.0'
+        'django&lt;3.0'
     ]
-</code></pre><p>You will see that if we run the setup script, python will automatically fetch the latest numpy version and Django 2.2 (even though 3.0 is available). Working with dependencies can be a nightmare, and pip is not great at solving conflicts. Imagine you have two packages which require different versions of some libraries, the one you install the latest is the one that prevails. And this is even without considering that those libraries have other requirements, etc. There are other package managers which are more powerful than pip and take into account all the dependencies to find the sweet spot that satisfies all the requirements.<h3>Difference with requirements files</h3><p>A common issue when people start working with setup files is that they wonder what is the role requirement files have if you can specify everything in the setup file. The general answer is that requirement files are normally used to keep track of an environment, and therefore they normally include the specific version of the libraries used. This ensures that you can reproduce almost the same environment that the person developing the code had. Setup files, on the other hand, should be more accommodating. In the end, what we want is to make it simple for users to get our code running. Therefore, normally they include the minimum version of libraries to run, or the maximum version, in case future changes of a library would break things.<p>The reality is that there are no hard-written rules. You have to put yourself in the shoes of your users and decide what would make their life easier. Is it pin-pointing the versions of every library in the environment, or is it giving flexibility? If it would be a developer looking into your code, one of the options is to always download the code, install everything from <strong>requirements.txt</strong> and then run setup.py. If things are well configured, the last step won't download anything, since all the dependencies will be present in our environment. And then you know both people have the same versions installed while developing.<p>There is also the option of not adding any requirements in your setup and asking users to install everything in the requirements file to use your library. This approach is very user-unfriendly, but it also works. So, you see, there is a lot of flexibility for you to decide what approach you think is best in your particular situation.<h2>Extra Dependencies</h2><p>Setup files also give us the option to define extra dependencies, which are not always necessary, but which can enhance the functionality of our program in some cases. We simply define them as an extra argument for the setup function:<pre><code class=language-python>from setuptools import setup, find_packages
+</code></pre>
+<p>You will see that if we run the setup script, python will automatically fetch the latest numpy version and Django 2.2 (even though 3.0 is available). Working with dependencies can be a nightmare, and pip is not great at solving conflicts. Imagine you have two packages which require different versions of some libraries, the one you install the latest is the one that prevails. And this is even without considering that those libraries have other requirements, etc. There are other package managers which are more powerful than pip and take into account all the dependencies to find the sweet spot that satisfies all the requirements. </p>
+<h3>Difference with requirements files</h3>
+<p>A common issue when people start working with setup files is that they wonder what is the role requirement files have if you can specify everything in the setup file. The general answer is that requirement files are normally used to keep track of an environment, and therefore they normally include the specific version of the libraries used. This ensures that you can reproduce almost the same environment that the person developing the code had. Setup files, on the other hand, should be more accommodating. In the end, what we want is to make it simple for users to get our code running. Therefore, normally they include the minimum version of libraries to run, or the maximum version, in case future changes of a library would break things. </p>
+<p>The reality is that there are no hard-written rules. You have to put yourself in the shoes of your users and decide what would make their life easier. Is it pin-pointing the versions of every library in the environment, or is it giving flexibility? If it would be a developer looking into your code, one of the options is to always download the code, install everything from <strong>requirements.txt</strong> and then run setup.py. If things are well configured, the last step won't download anything, since all the dependencies will be present in our environment. And then you know both people have the same versions installed while developing. </p>
+<p>There is also the option of not adding any requirements in your setup and asking users to install everything in the requirements file to use your library. This approach is very user-unfriendly, but it also works. So, you see, there is a lot of flexibility for you to decide what approach you think is best in your particular situation. </p>
+<h2>Extra Dependencies</h2>
+<p>Setup files also give us the option to define extra dependencies, which are not always necessary, but which can enhance the functionality of our program in some cases. We simply define them as an extra argument for the setup function:</p>
+<pre><code class="language-python">from setuptools import setup, find_packages
 
 setup(
     name='My First Setup File',
@@ -132,15 +546,278 @@ setup(
         ]
     },
     install_requires=[
-        'numpy>1.18',
-        'django&LT3.0'
+        'numpy&gt;1.18',
+        'django&lt;3.0'
     ],
     extras_require={
         'opt1': ['serial'],
         'opt2': ['pyserial'],
     }
 )
-</code></pre><p>And to install them, we can run a pip command:<pre><code class=language-bash>pip install .[opt1]
-</code></pre><p>or<pre><code class=language-bash>pip install .[opt2]
-</code></pre><p>Note that this works also with libraries available on PyPI, for example, <code>scikit-learn</code> can be installed with extra dependencies:<pre><code class=language-bash>pip install scikit-learn[alldeps]
-</code></pre><p>Extra dependencies are a great feature when you have dependencies that are hard to install in some systems, or which take a lot of resources, or which are conflicting, just like serial and pyserial above. Note that nothing prevents you from installing both <code>opt1</code> <strong>and</strong> <code>opt2</code>, thus the conflict can still arise.<h2>Where to next</h2><p>This was an introduction to develop your first <strong>setup.py</strong> file. The topic is far from over, but with what you have up to now, you can go a long way. Something very useful is to pay attention to the libraries you use and how they behave. For example, you can check the <a href=https://github.com/scikit-learn/scikit-learn/blob/master/setup.py>setup file of scikit-learn</a>, or of <a href=https://github.com/django/django/blob/master/setup.py>Django</a>. They can be much more complex than what you need, but they can also point you in the right direction if you are looking for inspiration on how to structure your code. If you are curious about more down-to-earth examples, you can see the one I've developed for the <a href=https://github.com/PFTL/SimpleDaq/blob/master/setup.py>Python for the Lab workshop</a>, or for <a href=https://github.com/aquilesC/DisperPy/blob/master/setup.py>the startup in which I'm working</a>. Many of the arguments of setup.py which are available (and almost trivial), such as <code>author</code>, <code>website</code> were skipped in this tutorial, since they don't bring much to the discussion, and you can quickly add them.<p>An obvious step once you have your setup file in order is to release your code through <strong>PyPI</strong>. This topic will be covered soon. Something we didn't discuss, and which I hope grabbed your attention is that when you run <code>python setup.py install</code> some folders are created, such as <code>build</code> and <code>dist</code>. Go ahead and explore them, see what is inside and try to understand what is happening when you install the package as we have just done.<p>Finally, another very interesting topic is what happens if you want to release your package to be installed through <strong>conda</strong> instead of <strong>pip</strong>. Conda is a great package manager, that allows you to install also non-python libraries and manage dependencies much more efficiently than what pip does. However, developing a package which is conda-installable requires some extra steps, which will also be covered later.</main><div class=info-list><span class="item author">Article written by Aquiles Carattino</span></div><div class=similar-posts><h3>Related Articles:</h3><ul><li><a class=item href=https://pythonforthelab.com/blog/complete-guide-to-imports-in-python-absolute-relative-and-more> <img alt src=/images/imports-blog-illustration.png> <span class=date>2019-10-04</span> <span class=name>Complete Guide to Imports in Python: Absolute, Relative, and More</span> </a></ul></div><div class=bottom-section><h4>Share your thoughts with us!</h4><div class=comments><script async crossorigin issue-term=pathname label=Comment repo=PFTL/pftl_discussions src=https://utteranc.es/client.js theme=github-light></script></div></div></div><div class=rightside><div class=support-box><h3>Support Us</h3><p>If you like the content of this website, consider buying a copy of the book <strong>Python For The Lab</strong></p><a class=button href=https://pythonforthelab.com/books>Check out the book</a></div><div class=latest-posts><h3>Latest Articles</h3><ul><li><a href=https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/>Instructions to build the Python for the Lab DAQ.</a> <span>by Aquiles Carattino, 2021-03-27</span><li><a href=https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed>Using slots in Python: limit dynamic attribute creation and improve speed</a> <span>by Aquiles Carattino, 2021-03-21</span><li><a href=https://pythonforthelab.com/blog/getting-started-with-basler-cameras>Acquiring images from Basler Cameras</a> <span>by Aquiles Carattino, 2021-02-27</span><li><a href=https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once>Singletons: Instantiate objects only once</a> <span>by Aquiles Carattino, 2021-01-16</span><li><a href=https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux>Differences of Multiprocessing on Windows and Linux</a> <span>by Aquiles Carattino, 2020-06-13</span><li><a href=https://pythonforthelab.com/blog/python-tip-using-else-loops>Python Tip: Using Else with Loops</a> <span>by Aquiles Carattino, 2020-05-25</span><li><a href=https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures>Python Tip: Ready to Publish Matplotlib Figures</a> <span>by Aquiles Carattino, 2020-05-18</span><li><a href=https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level>Data Descriptors: Bringing Attributes to the Next level</a> <span>by Aquiles Carattino, 2020-05-16</span><li><a href=https://pythonforthelab.com/blog/python-tips-using-sets>Python Tips: Using Sets</a> <span>by Aquiles Carattino, 2020-05-11</span><li><a href=https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where>Generators, Iterables, Iterators in Python: When and Where</a> <span>by Aquiles Carattino, 2020-04-10</span></ul></div><div class=subscribe-fixed><button class=action>Never Stop Learning</button><div class=cnt><p>Join over 1000 Python developers and don't miss any updates!<form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form><p>Or check out our <a href=/books>books</a>! <br> <a href=#>Privacy Policy</a></div></div></div></div><div class=mobile-sb-form><div class=sb-form><h4>Get all the information directly to your inbox</h4><form action=https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&id=8a0ca536e8&f_id=00dfebe6f0 class=validate id=mc-embedded-subscribe-form method=post name=mc-embedded-subscribe-form novalidate><div class=field-wp id=mc_embed_signup><input class="field required email" placeholder="Your E-Mail" id=mce-EMAIL name=EMAIL required type=email></div><div class="clear foot" id=mce-responses><div class=response id=mce-error-response style=display:none></div><div class=response id=mce-success-response style=display:none></div></div><div aria-hidden=true style=position:absolute;left:-5000px>/* real people should not fill this in and expect good things - do not remove this or risk form bot signups */ <input name=b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8 tabindex=-1></div><input value="Subscribe to the Newsletter" class=send-btn id=mc-embedded-subscribe name=subscribe type=submit></form></div></div></div></div></section><div class=footer><div class=container><div class=footer-cnt><p class=left>© Python For The Lab <span class=current-year>2023</span><p class=center><a href=http://creativecommons.org/licenses/by-nc-sa/4.0/ rel=license> <img alt="Creative Commons License" src=https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png style=border:0></a>.<p class=right><a href=https://pythonforthelab.com/cookie-policy>Cookie Policy</a> <a href=https://pythonforthelab.com/privacy-policy>Privacy Policy</a></div></div></div><script src=https://pythonforthelab.com/theme/js/prism.js></script><script src=https://files.stork-search.net/releases/v1.5.0/stork.js></script><script>stork.register("sitesearch","https://pythonforthelab.com/search-index.st")</script>
+</code></pre>
+<p>And to install them, we can run a pip command:</p>
+<pre><code class="language-bash">pip install .[opt1]
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash">pip install .[opt2]
+</code></pre>
+<p>Note that this works also with libraries available on PyPI, for example, <code>scikit-learn</code> can be installed with extra dependencies:</p>
+<pre><code class="language-bash">pip install scikit-learn[alldeps]
+</code></pre>
+<p>Extra dependencies are a great feature when you have dependencies that are hard to install in some systems, or which take a lot of resources, or which are conflicting, just like serial and pyserial above. Note that nothing prevents you from installing both <code>opt1</code> <strong>and</strong> <code>opt2</code>, thus the conflict can still arise. </p>
+<h2>Where to next</h2>
+<p>This was an introduction to develop your first <strong>setup.py</strong> file. The topic is far from over, but with what you have up to now, you can go a long way. Something very useful is to pay attention to the libraries you use and how they behave. For example, you can check the <a href="https://github.com/scikit-learn/scikit-learn/blob/master/setup.py">setup file of scikit-learn</a>, or of <a href="https://github.com/django/django/blob/master/setup.py">Django</a>. They can be much more complex than what you need, but they can also point you in the right direction if you are looking for inspiration on how to structure your code. If you are curious about more down-to-earth examples, you can see the one I've developed for the <a href="https://github.com/PFTL/SimpleDaq/blob/master/setup.py">Python for the Lab workshop</a>, or for <a href="https://github.com/aquilesC/DisperPy/blob/master/setup.py">the startup in which I'm working</a>. Many of the arguments of setup.py which are available (and almost trivial), such as <code>author</code>, <code>website</code> were skipped in this tutorial, since they don't bring much to the discussion, and you can quickly add them. </p>
+<p>An obvious step once you have your setup file in order is to release your code through <strong>PyPI</strong>. This topic will be covered soon. Something we didn't discuss, and which I hope grabbed your attention is that when you run <code>python setup.py install</code> some folders are created, such as <code>build</code> and <code>dist</code>. Go ahead and explore them, see what is inside and try to understand what is happening when you install the package as we have just done. </p>
+<p>Finally, another very interesting topic is what happens if you want to release your package to be installed through <strong>conda</strong> instead of <strong>pip</strong>. Conda is a great package manager, that allows you to install also non-python libraries and manage dependencies much more efficiently than what pip does. However, developing a package which is conda-installable requires some extra steps, which will also be covered later. </p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+        <div class="lg:mt-6">
+          <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
+          <div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/complete-guide-to-imports-in-python-absolute-relative-and-more" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/imports-blog-illustration.png"
+                           alt="Illustration of Complete Guide to Imports in Python: Absolute, Relative, and More">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-10-04</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Complete Guide to Imports in Python: Absolute, Relative, and More</h3>
+                      <div class="font-sans ">Importing is not only a matter of using external libraries, it also allows you to keep your code clean and organized. In this tutorial, we are going to discuss from the very basics of importing to complex topics such as lazy loading of modules in packages. Introduction to importing In …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>
