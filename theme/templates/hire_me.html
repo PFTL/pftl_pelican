@@ -1,105 +1,128 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+{% extends 'base.html' %}
+{% block title %}Hire expert advice for your projects{% endblock %}
+{% block meta_header %}
+<meta name="description"
+      content="Python workshops to level up your programming skills. We work with small groups in hands-on courses to speed up your development journey.">
+<link rel="canonical" href="{{ SITEURL }}/courses">
+{% endblock %}
 
-  gtag('config', 'G-CYPVPEJ4PK');
-</script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Hire Aquiles Carattino and bring your Python projects to the next level</title>
-    <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/tw_style.css">
-    <link rel="canonical" href="{{ SITEURL }}/hire-me" >
-    <meta property="og:site_name" content="Python for the Lab">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="{{ SITEURL }}/hire-me">
-    <meta property="og:title" content="Hire Aquiles Carattino as a consultant">
-  <meta property="og:description" content="Python consultant and mentor. Control your instruments more effectively.">
-  <meta property="og:image" content="{{ SITEURL }}/static/img/pftl_OG.png">
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="{{ SITEURL }}/hire-me">
-  <meta property="twitter:title" content="Hire Aquiles Carattino as a consultant">
-  <meta property="twitter:description" content="Python consultant and mentor. Control your instruments more effectively.">
-  <meta property="twitter:image" content="{{ SITEURL }}/static/img/pftl_OG.png">
-  <meta name="twitter:creator" content="@aquicarattino">
-</head>
-<body class="font-sans">
-<div class="bg-white md:pt-24 md:pb-12 py-6 leading-normal">
-    <div class="mx-auto max-w-8xl px-6 lg:px-8">
-        <div class="mx-auto md:max-w-3xl lg:text-center">
-            <h2 class="text-base font-semibold leading-7 text-sky-800">Achieve more, faster</h2>
-            <h1 class="mt-4 bg-gradient-to-tl bg-clip-text text-transparent from-cyan-500 to-blue-500 font-serif md:text-5xl font-black tracking-tight text-gray-900 text-4xl">
-                It's never just code, get access to over a decade of experience</h1>
-            <p class="mt-6 text-lg leading-8 text-gray-600">I can help you achieve results, faster. Unlock your team's
-                power by establishing clear best practices, leverage my experience to validate the best path
-                forward. </p>
+{% block body %}
+<header class="relative bg-gray-800 md:h-32 lg:flex h-16">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+        <nav class="lg:pr-8 w-full lg:pt-4">
+            <div class="flex p-3 items-center justify-between">
+                <a class="flex-none" href="{{ SITEURL }}">
+                    <img id="site-logo" class="h-12"
+                         src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/logo-red.svg"/>
+                </a>
+                <div id="menu_sm"
+                     class="pr-0 pl-4 z-50 grow hidden lg:block">
+                    {% include "nav_menu.html" %}
+                </div>
+                <div class="">
+                    <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+                        <img id="hamburger" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/hamburger.svg"
+                             class="h-8 w-8"/>
+                    </button>
+                </div>
+            </div>
+            <div id="menu"
+                 class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-50 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+                {% include "index_wide_menu.html" %}
+            </div>
+        </nav>
+        <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
         </div>
     </div>
-</div>
-<div class="grid max-w-xl mx-auto mt-8 md:px-8 md:mt-8 md:max-w-full sm:mt-20 lg:mt-24 lg:max-w-5xl grid-cols-1 gap-x-8
-            gap-y-6 md:grid-cols-2 lg:gap-y-16 md:gap-x-4">
-    <div class="relative pl-4">
-        <div class="text-base font-semibold leading-7 text-gray-900 md:text-xl">
-            Book a 30-minute introductory meeting
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+        <div class="mb-8 shadow-2xl">
+            <form action="#" class="w-full pr-8 pt-4 text-xs">
+                <label for="search" class="relative block">
+                    <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                         src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/search.svg">
+                    <input id="search" data-stork="sitesearch" type="text"
+                           class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                           placeholder="Type to Search">
+                </label>
+            </form>
+            <div data-stork="sitesearch-output"></div>
         </div>
-        <div class="mt-2 text-base text-gray-600">
-            <img alt="Photo of Aquiles Carattino in South Africa"
-                 src=https://pythonforthelab.com/images/new_picture.jpg>
-            <p class="mb-4">Use the link below to schedule a 30-minute call (free of charge) to discuss
-                your project. With that information, I will come up with a plan of action to achieve the
-                results you are after.</p>
+    </div>
+</header>
+<div class="mt-4 md:mt-16 max-w-6xl mx-auto md:min-h-screen items-center lg:mb-16 mb-8">
+    <div class="py-8">
+        <span class="text-sm text-teal-700">It's never just code</span>
+        <h1 class="font-serif text-gray-800 text-6xl font-black py-2">I help you achieve more, faster</h1>
+        <p class="mb-6 text-xl font-sans leading-tight py-8">With more than a decade of experience in software
+            development,
+            project management, and entrepreneurship, I can help you make faster and smarter decisions. Unlock the power
+            of your team by implementing better workflows, best practices, and modern management approaches.
+        </p>
+    </div>
+    <div class="md:grid md:grid-cols-2 md:gap-x-4 gap-y-4">
+        <div>
+            <h2 class="font-serif text-3xl font-bold leading-tight py-4">Book a 30-minute introductory call</h2>
+            <img class="p-4 shadow-lg"
+                 src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/aquiles_carattino_formal.jpg"
+                 alt="Aquiles Carattino wearing a formal suit, with a dark background">
+            <p class="font-sans text-xl my-4">You can schedule an initial, free of charge, 30-minute call to discuss
+                your
+                project. My rates are <span class="font-bold">$150/hour</span> (€140/hour) for 1:1 coaching, code
+                review,
+                and short-commitment projects, and <span class="font-bold">$110/hour</span> (€100/hour) for longer term
+                applications, such as project or program management.
+            </p>
             <a href="https://calendly.com/aquiles-pftl/30min">
                 <button class="transition ease-in-out delay-50 duration-300 hover:scale-110 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Book a 30-minute introductory call
                 </button>
             </a>
         </div>
-    </div>
-    <div class="relative pl-4">
-        <div class="text-base font-semibold leading-7 text-gray-900 md:text-xl">
-            What to Expect
-        </div>
-        <div class="mt-2 text-base text-gray-600 mb-8">
-            <p class="mb-2">After the initial consultation, and based on your feedback, I will propose you a
-                course of action. I can help individuals (coaching and mentoring) or advise companies. </p>
-            <p>My rate for 1:1 sessions is <strong>$150/hour</strong> (€140/hour), and
-                <strong>$110/hour</strong> (€100/hour) for longer term commitments. Book a slot to discuss
-                your requirements and decide how to move forward.</p>
-        </div>
-    </div>
-    <div class="relative px-4">
-        <div class="text-base font-semibold text-gray-900 md:text-xl">
-            Why Me
-        </div>
-        <div class="mt-2 text-base text-gray-600">
-            <p>I have more than a decade of experience developing software for complex scientific
-                instruments.
-                From automating measurement benches, to building software for microscopy.</p>
-            <p>I also have a background as an <span class="text-bold text-sky-800">entrepreneur</span>, which means
-                I can help you
-                focus on the key features your customers want. Are you building an <span
-                        class="text-bold text-sky-800">MVP</span>?
-                Rest assured we speak the same language.
+        <div>
+            <h2 class="font-serif text-3xl font-bold leading-tight py-4">Why Me</h2>
+            <p class="font-sans text-xl pb-3">
+                I have more than a decade of experience developing software for complex
+                scientific instruments, with real-time data analysis options, and User-Interface design. <br/>
+                I have worked on projects ranging from automating <span class="font-bold text-sky-800">measurement benches</span>,
+                to building software for <span class="font-bold text-sky-800">microscopy</span>.
+            </p>
+            <p class="font-sans text-xl">
+                I also have a background as an <span class="font-bold text-sky-800">entrepreneur</span>, which means I
+                can help you focus on the key features your
+                customers want. Are you building an <span class="font-bold text-sky-800">MVP</span>? Rest assured we
+                speak the same language.</p>
             </p>
         </div>
-    </div>
-    <div class="relative px-4">
-        <div class="text-base font-semibold leading-7 text-gray-900 md:text-xl">
-            I can help you with
+        <div>
+            <h2 class="font-serif text-3xl font-bold leading-tight py-4">How I work</h2>
+            <p class="font-sans text-xl pb-3">
+                After the initial discussion, we lay out a plan. It includes milestones and timelines. It is also
+                important
+                to have clear deliverables, such as reports, presentations, or meetings with different stakeholders.
+            </p>
+            <p class="font-sans text-xl pb-3">
+                Most projects (but not all) specify the total number of hours allocated. I will keep you informed on the
+                progress, and remaining time budget so you can prioritize tasks according to your needs. <span
+                    class="font-bold text-sky-800">Transparency</span> is a core tenant of my way of working.
+            </p>
+            <p class="font-sans pb-3">
+                I am based in <span class="font-bold text-sky-800">Paris, France</span>. Depending on the size of the
+                project, I am willing to periodically commute to your location. Ideally, most of the time I'll engage in
+                remote interactions with your team members.
+            </p>
+            <p class="font-sans text-xl pb-3"></p>
         </div>
-        <div class="mt-2 text-base text-gray-600">
+        <div>
+            <h2 class="font-serif text-3xl font-bold leading-tight py-4">What I can do for you</h2>
+            <p class="font-sans text-xl pb-1">These are some of the topics I have experience with.</p>
+            <p class="font-sans pb-3">Feel free to challenge me with new questions!</p>
             <ul class="list-inside marker:text-sky-700 list-square">
-                <li><span class="font-semibold text-sky-800">Code review</span> and improvements</li>
-                <li><span class="font-semibold text-sky-800">Architecture</span> design and implementation</li>
-                <li>Transition to Python <span class="font-semibold text-sky-800">from other languages</span></li>
-                <li><span class="font-semibold text-sky-800">Team</span> assessment</li>
-                <li>Development of <span class="font-semibold text-sky-800">best practices</span></li>
+                <li>1:1 <span class="font-bold text-sky-800">Mentoring</span></li>
+                <li><span class="font-bold text-sky-800">Architecture</span> and implementation</li>
+                <li><span class="font-bold text-sky-800">Code Review</span> and improvements</li>
+                <li>Transition from <span class="font-bold text-sky-800">LabView to Python</span></li>
+                <li><span class="font-bold text-sky-800">Team</span> assesment</li>
+                <li><span class="font-bold text-sky-800">Project management</span> in complex scenarios</li>
             </ul>
         </div>
     </div>
@@ -107,120 +130,79 @@
 
 <div class="max-w-full my-8 h-2 bg-gradient-to-r from-cyan-300 to-sky-500"></div>
 
-<div class="bg-white md:pt-8 md:pb-12 py-6 leading-normal">
-    <div class="mx-auto max-w-8xl px-6 lg:px-8">
-        <div class="mx-auto md:max-w-3xl lg:text-center">
-            <h2 class="text-base font-semibold leading-7 text-sky-800">What you get</h2>
-        </div>
-        <div class="grid max-w-xl lg:max-w-none md:max-w-full md:grid-cols-2 md:gap-x-4 lg:gap-y-16">
-            <div class="md:mx-auto mt-2 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-                <h2 class="font-bold text-3xl leading-7 text-gray-900 mb-8 md:pr-8">
-                    Expert advice to individuals and companies
-                </h2>
-                <div class="relative">
-                    <div class="text-base font-semibold leading-7 text-gray-900">
-                        1:1 Coaching ($150/hour)
-                    </div>
-                    <div class="mt-2 text-base leading-7 text-gray-600">
-                        <p class="mb-2">I focus my undivided attention on you as an individual and your personal
-                            challenges as a Python developer. I have advised professors who needed to decide on
-                            tools
-                            and how to manage their group, and <span class="font-bold text-sky-800">CEO's</span>
-                            that want their companies to transition from LabView
-                            to Python.</p>
-                        <p class="mb-8">These sessions have a different rate because they are intense. Most of the
-                            time
-                            we will be interacting in real time. On the other hand, most people need sporadic
-                            consultations, or short-term engagement. For longer term projects, let's discuss!</p>
-                        <a href="https://calendly.com/aquiles-pftl/30min">
-                            <button class="transition ease-in-out delay-50 duration-300 hover:scale-110 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                Book a 30-minute introductory call
-                            </button>
-                        </a>
-                    </div>
-                    <div class="text-base font-semibold leading-7 text-gray-900 mt-8 ">
-                        Consultancy ($110/hour)
-                    </div>
-                    <div class="mt-2 text-base leading-7 text-gray-600">
-                        <p class="mb-2">As a consultant for a company, I focus on understanding the problem in all
-                            its
-                            dimensions. Expect the first sessions to be exploratory, to get to know the team and
-                            responsibilities. I will provide a course of action based on your needs, and I will be
-                            flexible to adapt to specific requirements in time and commitment. </p>
-                        <p class="mb-2">As a deep-tech entrepreneur, I am aware of the challenges most startups and
-                            scale ups face when it comes to generating sustainable software practices. I can deliver
-                            solutions taking into account not only the technical aspects, but also the business side
-                            of
-                            things.</p>
-                        <p class="mb-2">I am able to discuss and advise on business models associated with software,
-                            or
-                            customer-perceived value, and integrate it into the roadmap. We can use the free
-                            30-minute
-                            discovery call to lay the foundations of the collaboration.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="md:mx-auto mt-2 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-                <a href="/courses" <h2 class="font-bold text-3xl leading-7 text-gray-900 mb-8 md:pr-8">
-                    Python for the Lab Workshops
-                </h2></a>
-                <div class="mt-2 mb-16 text-base leading-normal text-gray-600">
-                    <p class="mb-3">I have organized workshops all over Europe, at universities and companies. They
-                        are ideal to
-                        get the entire team on the same page, and to speed up the adoption of best practices in
-                        Python</p>
-                    <p class="mb-3">There are three standard workshops:
-                    </p>
-                    <ul class="ml-3 mb-3 marker:text-sky-500 list-disc font-bold">
-                        <li>Python for the Lab</li>
-                        <li>Advanced Python for the Lab</li>
-                        <li>Introduction to Python for Scientists</li>
-                    </ul>
-                    <p>Each workshop can be adapted to different group needs. They are normally held with groups
-                        between 5 and 10 people.
-                    </p>
-                    <a href="/courses">
-                        <button class="transition ease-in-out delay-50 duration-300 hover:scale-110 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Read more
-                        </button>
-                    </a></div>
-                </div>
-                <h2 class="font-bold text-3xl leading-7 text-gray-900 mb-8 md:pr-8">
-                    Special access for startups and academics
-                </h2>
-                <div class="mt-2 text-base leading-normal text-gray-600">
-                    <p class="mb-3">If you work at a startup, that resources may be limited. That's why I offer
-                        special discounts for startups and academics.</p>
-                    <p class="mb-3">If you have been in business for less than 3 years, and you haven't raised more
-                        than $3M, I am willing to offer up to a 50% discount on my hourly rate. The same discount
-                        applies to academics with groups of less than 10 people (without counting master and
-                        bachelor
-                        students).</p>
-                    <a href="https://calendly.com/aquiles-pftl/30min">
-                        <button class="transition ease-in-out delay-50 duration-300 hover:scale-110 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                            Book a 30-minute introductory call
-                        </button>
-                    </a>
-                </div>
-            </div>
-        </div>
+<div class="mt-4 md:mt-16 max-w-6xl mx-auto md:min-h-screen items-center lg:mb-16 mb-8">
+    <div class="py-8">
+        <h1 class="font-serif text-gray-800 text-6xl font-black py-2">Case studies</h1>
+        <p class="mb-6 text-xl font-sans leading-tight py-8">
+            Below you can find some examples of how I have helped individuals, companies, and teams. Perhaps these
+            scenarios can serve as inspiration for other projects.
+        </p>
+    </div>
+    <div class="py-4">
+        <h2 class="font-serif text-sky-800 text-4xl font-black py-2">Python in regulated environments</h2>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+           I was contacted by the CEO of a company that works in instruments for medical equipment testing, a highly
+            regulated environment. The question was very concrete: what is the <span class="font-bold text-sky-800">smartest way to transition to Python</span>.
+        </p>
+        <h3 class="font-bold font-serif text-2xl pb-1">The process</h3>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+        we set up the project as weekly meetings over a period of a month. During those meetings, we would discuss about
+            the current implementation, and I would use the in between time to research and prototype some solutions. </p>
+        <h3 class="font-bold font-serif text-2xl pb-1">The solution</h3>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+        Implementing the acquisition software directly in the instruments, leveraging FastAPI, and multi-processing. A
+            server with access to the LAN would keep experiment records and data, ensuring compliance.
+        </p>
+    </div>
+    <div class="py-4">
+        <h2 class="font-serif text-sky-800 text-4xl font-black py-2">Code assessment</h2>
+        <h3 class="font-bold font-serif text-2xl pb-1">The Problem</h3>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+            A <span class="font-bold text-sky-800">microscopy company</span> needed a reality check to ensure that their
+            software development efforts were aligned with best practices and future-proof.
+        </p>
+        <h3 class="font-bold font-serif text-2xl pb-1">The process</h3>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+            We set up a couple of sessions with the in-house developers to discuss the code, the management, and
+            the future. In total, we spent about 10 hours going through the code base and the challenges.
+        </p>
+        <h3 class="font-bold font-serif text-2xl pb-1">The deliverables</h3>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+            I delivered a detailed report on the team composition and future threats such as lack of engagement, lack of
+            long-term vision.<br />
+            I also provided an overview of elements to improve in the code architecture, efficiency, and documentation. <br />
+            More importantly, I also delivered a <span class="font-bold text-sky-800">strategic plan</span> focusing on
+            a detailed SWOT analysis, and alternative paths.
+        </p>
+    </div>
+    <div class="py-4">
+        <h2 class="font-serif text-sky-800 text-4xl font-black py-2">Project Management</h2>
+        <h3 class="font-bold font-serif text-2xl pb-1">The Challenge</h3>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+            A startup needed software to control a complex instrument. The challenge included electronics control, fast
+            data acquisition, analysis, and storage.
+        </p>
+        <h3 class="font-bold font-serif text-2xl pb-1">The process</h3>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+            The company didn't have a software developer, but the CTO was a capable programmer. <br />
+            Since this was an ambitious project, we organized it as a long-term commitment, with a dedicated number of
+            hours per week. I estimated the total length of the project, and there would be a half-way evaluation.
+        </p>
+        <h3 class="font-bold font-serif text-3xl pb-1">The Outcome</h3>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+            Together with the CTO of the company, we defined the specifications of the software, and agreed on a multi-step
+            approach to quickly test with users and iterate based on their feedback.<br />
+            Instead of developing software myself, we agreed that hiring a developer in-house would be the best solution.<br />
+            I focused on coaching and managing the person and project. This was the best approach to keep costs constraint,
+            and achieve a speedy delivery.
+        </p>
+        <p class="mb-6 text-xl font-sans leading-tight pb-1">
+            In just over 2 months, a first version of the software was ready to test with users. The initial feedback
+            was instrumental to plan improvements on the UX, and to implement them as quickly as possible. <br />
+            The production version of the code was completed and shipped to customers in just under 6 months, much
+            earlier than the expected 1-year timeline the company initially had.
+        </p>
     </div>
 </div>
 
-<footer class="pt-6 pb-12 max-w-full bg-black text-gray-50 px-8">
-    <div class="mx-auto max-w-4xl mb-8">
-        <p class="text-center">Copyright © Aquiles Carattino</p>
-    </div>
-    <div class="mx-auto max-w-4xl grid md:grid-cols-2">
-        <ul class="list-inside marker:text-sky-200 list-square">
-            <li class="hover:translate-x-1.5 transition ease-in-out duration-100"><a href="/books">Get the <span class="font-semibold text-sky-300">Books</span></a></li>
-            <li class="hover:translate-x-1.5 transition ease-in-out duration-100"><a href="/blog">Check the <span class="font-semibold text-sky-300">Tutorials</span></a></li>
-        </ul>
-        <ul class="list-inside marker:text-sky-200 list-square">
-            <li class="hover:translate-x-1.5 transition ease-in-out duration-100"><a href="https://github.com/PFTL/pftl_discussions/discussions">Visit the <span class="font-semibold text-sky-300">Forum</span></a></li>
-            <li class="hover:translate-x-1.5 transition ease-in-out duration-100"><a href="/about">Read <span class="font-semibold text-sky-300">about us</span></a></li>
-        </ul>
-    </div>
-</footer>
-</body>
-</html>
+{% endblock %}
