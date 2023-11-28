@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Building a CRM with Jupyter Notebooks | Python For The Lab</title>
+
+  <meta name="tags" content="CRM, Jupyter, Databases, Relational, SQLAlchemy, SQLite, Customers, email, ">
+  <meta name="description" content="Manage customer relationships with Python">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="https://pythonforthelab.com/blog/building-a-crm-with-jupyter-notebooks">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://pythonforthelab.com/blog/building-a-crm-with-jupyter-notebooks">
+  <meta property="og:title" content="Building a CRM with Jupyter Notebooks">
+  <meta property="og:description" content="Manage customer relationships with Python">
+  <meta property="og:image" content="/images/rawpixel-760036-unsplash_linkedin.width-800.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://pythonforthelab.com/blog/building-a-crm-with-jupyter-notebooks">
+  <meta property="twitter:title" content="Building a CRM with Jupyter Notebooks">
+  <meta property="twitter:description" content="Manage customer relationships with Python">
+  <meta property="twitter:image" content="/images/rawpixel-760036-unsplash_linkedin.width-800.jpg">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/rawpixel-760036-unsplash_linkedin.width-800.jpg" alt="Building a CRM with Jupyter Notebooks" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">Building a CRM with Jupyter Notebooks</h1>
+        <div class="font-sans font-bold text-xl">Manage customer relationships with Python</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2019-02-12</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">CRM</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Jupyter</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Databases</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Relational</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">SQLAlchemy</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">SQLite</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Customers</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">email</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>This tutorial is going to be off-topic compared to the others on the
+website. It was born out of a question regarding how to send
+personalized e-mails to several people on a list, and I thought it could
+be useful to post a tutorial online. This will help people interested in
+building a simple Customer Relationship Manager (CRM) and it will also
+show scientists that the skills they develop while working in the lab
+can be used in various contexts.</p>
+<p>Let's first discuss what we want to achieve. A CRM is a tool that allows
+users to send e-mails to customers and keep track of their answers. It
+could be much more complex than that, integrating with a phone, social
+media accounts, billing platforms, etc. but for our purposes, we will
+keep it to what a normal person (like me) needs. It should be able to
+send the same e-mail to several people but with a certain degree of
+personalization, for example, saying <em>Dear John</em> instead of a generic
+<em>Dear Customer</em>.</p>
+<p>The CRM should prevent me from sending the same e-mail twice to the same
+person and should be able to show me all the e-mails I have exchanged
+with that person. It should also allow me to segment customers, making
+it possible for me to send e-mails just to groups of people, for
+example, the ones who took the Python For The Lab course and those who
+are interested in it. The ones who bought the book and those who only
+asked for the free chapter, etc. Let's get started!</p>
+<h2>The Choices</h2>
+<p>First, we will need a way of sending and receiving e-mail. If you are a
+GMail user, you can check <a href="https://support.google.com/mail/answer/7104828?hl=en">this
+guide</a> and <a href="https://www.digitalocean.com/community/tutorials/how-to-use-google-s-smtp-server">this
+other
+one</a>
+on how to set up the server (you will need this information later on, so
+keep it in hand). If you want to use a custom domain to send and receive
+e-mail, I strongly suggest you use
+<a href="https://www.dreamhost.com/r.cgi?181470/promo/dreamsavings50/">Dreamhost</a>
+which is what I use myself (if you use the link, you will get a 50U\$
+discount and at the same time you will help me keep this website
+running). If you expect to send more than 100 e-mails per hour, I
+suggest you check <a href="https://aws.amazon.com/ses/">Amazon SES</a> which is
+very easy to set up and has reasonable pricing.</p>
+<p>Next, we need to define how to send e-mails. The fact that we are going
+to use Python is out of the question. But here we have several choices
+to make. I believe the best is to use Jupyter notebooks. They have the
+advantage of allowing you to run different pieces of code, see the
+output inline, etc. It is easier to have interaction through a Jupyter
+notebook than through plain scripts. Building a user interface (either a
+desktop app or a web app) would be too time-consuming for a minimum
+increase in usability.</p>
+<p>We have now a web server, a platform, we only need to define how to
+store the data. For this, I will choose SQLite. I have written in the
+past about how to <a href="15_Storing_data_3.rst.md">store data using SQLite</a>, but
+in this article, we are going one step further by introducing an ORM, or
+Object Relational Mapping, which will greatly simplify our work when
+defining tables, accessing data, etc.</p>
+<h2>Jupyter Notebooks</h2>
+<p>If you are familiar with the Jupyter notebooks, just skip this section
+and head to the next one. If you are not familiar with them, I will give
+you a very quick introduction. First, you need to install the needed
+package. If you are an Anaconda user, you have Jupyter by default. If
+you are not, you should start by creating a <a href="03_Virtual_Environment.rst.md">Virtual
+Environment</a>, and then do the following:</p>
+<pre><code class="language-bash">pip install jupyter
+</code></pre>
+<p>The installation will take some time because there are many packages to
+download, but don't worry, it will be over soon. Then, you can simply
+run the following command:</p>
+<pre><code class="language-bash">jupyter notebook
+</code></pre>
+<p>If you are not inside a virtual environment, or the command above fails,
+you can also try the following command, directly on your terminal:</p>
+<pre><code class="language-bash">python -m jupyter notebook
+</code></pre>
+<p>After you run the command, your web browser should open. Bear in mind
+that you will use as base folder the folder where you run the command
+above. Just select new from the top-right button and start a new Python
+3 notebook.</p>
+<p>You should be welcomed by a screen like this:</p>
+<p><img alt="Empty Jupyter Notebook" class="center-img" src="/images/27_images/01_jupyter.jpg"></p>
+<p>The arrow indicates the name of the notebook. You can edit it to
+something more descriptive than Untitled. For example,
+<strong>Test_Notebook</strong>. The line that you see in green is where your input
+should go. Let's try a simple print statement, like what you see in the
+image below. To run the code, you can either press Shift+Enter or click
+the play button that says run, while the cursor is still in the cell.</p>
+<p><img alt="First Cell" class="center-img" src="/images/27_images/02_jupyter.png"></p>
+<p>The advantage of Jupyter notebooks is that they also keep the output
+when you share them. You can see <a href="https://github.com/PFTL/website/blob/master/example_code/27_CRM/Test_Notebook.ipynb">this example
+notebook</a>
+on Github. And they allow you to embed markdown text in order to
+document what you are doing.</p>
+<p>If you haven't used Jupyter notebooks before, now it is a great chance
+to get started. They are very useful for prototyping code that later can
+become an independent program. From now on, I will not stress every
+single time that the code should go into a notebook, but you should
+assume it.</p>
+<p>As always, all the code for this project <a href="https://github.com/PFTL/website/tree/master/example_code/27_CRM">can be found
+here</a>.
+The majority of the code that goes into the Jupyter notebooks can also
+be copy-pasted into plain Python script files. Just keep in mind that
+the order in which you can run cells is up to you and not necessarily
+from top to bottom as is the case for scripts.</p>
+<h2>Sending Email</h2>
+<p>The most basic function of any customer relationship manager is to be
+able to send e-mails. Having just this functionality is already useful
+in a lot of different situations, not only professionally but also for
+private tasks. For example, you can invite your friends to a party by
+addressing them by name: '<em>Dear Brian,</em>'. In order to be able to send
+e-mails, you need to be able to configure an SMTP server.</p>
+<p>If you are a Google User you can check <a href="https://www.digitalocean.com/community/tutorials/how-to-use-google-s-smtp-server">this
+guide</a>,
+or you can <a href="https://www.dreamhost.com/r.cgi?181470/promo/dreamsavings50/">sign up to
+Dreamhost</a>
+or <a href="https://aws.amazon.com/ses/">Amazon Services</a>. If you want to use a
+custom domain, the Dreamhost way is the easiest and quickest. You can
+read the <a href="https://help.dreamhost.com/hc/en-us/articles/214918038-Email-client-configuration-overview">documentation for configuring your
+e-mail</a>.</p>
+<p>Let's start by creating a configuration file in which we will store some
+useful parameters. Create an empty file in the same directory where you
+will be working and call it <strong>config.yml</strong>. You can use Jupyter to
+create this file, just select <em>Text File</em> after clicking on <em>New</em>. And
+in the file, put the following:</p>
+<pre><code class="language-yaml">EMAIL:
+  username: my_username
+  password: my_password
+  port: 1234
+  smtp_server: smtp.server
+</code></pre>
+<p>The format of this file is called YAML, which is a very simple markup
+language in which blocks are indented by <strong>2 spaces</strong>. Replace the
+different variables by what you need, i.e., replace <code>my_username</code> with
+the username of your server, etc. My choice of putting this information
+on a different file is that now I can share my Jupyter notebooks without
+exposing my password. In order to work with YAML files in Python, you
+will need to install <code>pyyaml</code>:</p>
+<pre><code class="language-bash">pip install pyyaml
+</code></pre>
+<p>Now we are ready to start. Let's create a new Python notebook. Let's
+call it, for example, <strong>simple_crm</strong>. The first thing to do is to load
+the configuration:</p>
+<pre><code class="language-ipython3">import pyyaml
+
+with open('config.yml', 'r') as config_file:
+    config = yaml.load(config_file)
+</code></pre>
+<p>If you are not familiar with the <code>with</code> command you can check <a href="16_context_manager.rst.md">this
+article about the context manager</a>. If you want
+to explore how your variable <code>config</code> looks like, you can simply write
+it in a different cell and press Ctrl+Enter. The result is a dictionary
+with the needed parameters for sending e-mail. So, let's get to it.</p>
+<p>First, let's compose a short message and subject:</p>
+<pre><code class="language-ipython3">msg_sbj = 'Testing my brand new CRM with Jupyter notebooks'
+msg_text = '''This is the body of the message that will be sent.\n
+Even if basic, it will prove the point.\n\n
+Hope to hear again from you!'''
+</code></pre>
+<p>Now, the way of composing the message requires to import a special
+module of Python called <code>email</code>. The code would look like this:</p>
+<pre><code class="language-ipython3">from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+me = &quot;Aquiles &lt;my@from.com&gt;&quot;
+you = &quot;Aquiles &lt;your@to.com&gt;&quot;
+msg = MIMEMultipart()
+msg['From'] = me
+msg['To'] = you
+msg['Subject'] = msg_sbj
+msg.attach(MIMEText(msg_text, 'plain'))
+</code></pre>
+<p>We first create a <code>msg</code>, which will be ready to send both plain and HTML
+e-mails. We specify the <code>from</code>, <code>to</code>, and <code>subject</code> of the email.
+Remember that if you specify the wrong <code>from</code>, your message has a high
+chance of being filtered either by your SMTP provider or the receiver's
+server as spam. Be sure you use the proper e-mail from-address that you
+have configured.</p>
+<p>The last line attaches the plain version of the e-mail to the message.
+We will see that it is also possible to send more complex messages, with
+a plain text version and an HTML version. Now that we have our e-mail
+ready, we need to send it.</p>
+<pre><code class="language-ipython3">import smtplib
+
+with smtplib.SMTP(config['EMAIL']['smtp_server'], config['EMAIL']['port']) as s:
+    s.ehlo()
+    s.login(config['EMAIL']['username'],config['EMAIL']['password'])
+    s.sendmail(me, you, msg.as_string())
+    s.quit()
+</code></pre>
+<p>First, you see that we start the SMTP connection using the configuration
+parameters that were defined on the <strong>config.yml</strong> file. The <code>ehlo</code>
+command is a way of telling the server <em>hello</em> and start the exchange of
+information. We then log in and finally send the message. See that we
+defined both the sender and receiver twice: they are used in the
+<code>sendmail</code> command, but also they are defined within the <code>msg</code> object.</p>
+<p>If you used real e-mails, you should by now receive the example message.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Sometimes GMail does not deliver messages that you send to yourself from
+different aliases. If nothing arrives, you can try to send an e-mail to
+a different address which you control.</p>
+</div>
+<p>Now, imagine you would like to personalize the message before sending
+it. For example, we would like to address the recipient by name. We can
+improve our message, to make it look like a template, like this:</p>
+<pre><code class="language-ipython3">msg_text = '''Hello {name},
+This is the body of the message that will be sent.
+Even if basic, it will prove the point.
+Hope to hear again from you!'''
+</code></pre>
+<p>And you can use it like this:</p>
+<pre><code class="language-ipython3">msg_text.format(name='Aquiles')
+</code></pre>
+<p>Which will output the message exactly as you expected. If you now would
+like to send a message to different people, you could simply do a
+for-loop. Remember that before generating the message body, you replace
+the name by the name of your contact as shown in the code above.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>I will not go into the details of how to implement the loop because we
+will work on this later on, in a much more complete solution.</p>
+</div>
+<h2>Adding HTML to the message</h2>
+<p>Now it is time to make your messages more beautiful by adding HTML to
+them. Coding HTML e-mails is a complicated subject because there are
+many things to take into account. First, e-mail clients work differently
+from each other, meaning that the way your e-mail is displayed depends
+on how it is opened. Screen sizes change, and therefore your e-mail
+should have a fixed width or it will look very ugly on some devices.
+Being aware of these problems, I would suggest you check ready-made
+templates developed by designers who took care of all of this.</p>
+<p>In this tutorial, we are going to use
+<a href="https://tedgoas.github.io/Cerberus/">Cerberus</a> which, among other
+things, is open source and free. If you unzip the contents, you will
+find 3 important files: <strong>cerberus-fluid.html</strong>,
+<strong>cerberus-responsive.html</strong>, and <strong>cerberus-hybrid.html</strong>. Those are
+three different templates which you can use. We are going to use the
+responsive version.</p>
+<p>You should open the files with your browser in order to have an idea of
+how they look. Also, check the source code to understand how you can
+utilize different elements, change the color, etc. The documentation is
+your best friend. I have stripped down a bit the template. You can find
+it
+<a href="https://github.com/PFTL/website/blob/master/example_code/27_CRM/base_email.html">here</a>.
+For practical purposes it doesn't really matter, you can use the
+original also.</p>
+<p>What we will do is keep the e-mail template as a separated file, so we
+don't pollute the notebook that much. In order to add it to our message,
+we need to do the following:</p>
+<pre><code class="language-ipython3">with open('base_email.html') as f:
+    msg_html = f.read()
+</code></pre>
+<p>And then, the only two things we need to add to the message is the
+following:</p>
+<pre><code class="language-ipython3">msg = MIMEMultipart('alternative')
+msg.attach(MIMEText(msg_html, 'html'))
+</code></pre>
+<p>Pay attention that we need to initialize the message with the argument
+<code>'alternative'</code>. If we fail to do this, the message will include both
+the text and the HTML versions one after the other.</p>
+<p>The idea of attaching both the text and the HTML version of the e-mail
+is that we keep in mind that not all people accept HTML messages. You
+can configure most e-mail clients to use only plain text messages. This
+is a good way of preventing trackers from spying on you and makes
+e-mails easier to read. Moreover, it can make phishing attempts easier
+to spot.</p>
+<p>The e-mail, if you attach both versions, will be shown as HTML if the
+client supports it and will fall back to the text version if it doesn't.
+In general lines, we can say that adding HTML versions of your messages
+is up to you, adding the text version should be mandatory.</p>
+<h2>Receiving Email</h2>
+<p>Sending e-mails is half of what a CRM should do. The other half is
+checking e-mails. This will allow the system to store messages
+associated with the people with whom you interact. This will allow you
+to check, for example, who never replied to your questions. We will
+start by updating the configuration file since we now need to add the
+POP3 server:</p>
+<pre><code class="language-yaml">EMAIL:
+  username: my_username
+  password: my_password
+  port: 1234
+  smtp_server: smtp.server
+  pop_server: pop.server
+</code></pre>
+<p>If you would need a different username or password for the POP server,
+you can add them also to the config file. Remember that you will need to
+reload the configuration file in order to have the new variable
+available.</p>
+<p>Reading from the server is relatively easy:</p>
+<pre><code class="language-ipython3">import poplib
+server = poplib.POP3(config['EMAIL']['pop_server'])
+server.user(config['EMAIL']['username'])
+server.pass_(config['EMAIL']['password'])
+</code></pre>
+<p>If you run the block again and it works out correctly, you will see the
+following message:</p>
+<pre><code class="language-ipython3">b'+OK Logged in.'
+</code></pre>
+<p>Now we need to download the list of messages that are available on the
+server:</p>
+<pre><code class="language-ipython3">resp, items, octets = server.list()
+</code></pre>
+<p>Bear in mind that if there are no messages available, you won't be able
+to do anything else. You can always send one or more e-mails to yourself
+in order to test the code. Items will hold information regarding the
+available messages. If you explore the <code>items</code> variable, you will see an
+output like the following:</p>
+<pre><code class="language-ipython3">[b'1 34564', b'2 23746', b'3 56465']
+</code></pre>
+<p>In this case, the server has 3 available messages. The first number is
+the id of the message, while the second is its size. If we want to
+retrieve the first message, for example, we can do the following:</p>
+<pre><code class="language-ipython3">msg = server.retr('1')
+</code></pre>
+<p>If you explore the <code>msg</code>, you will see it is a tuple with 3 elements.
+The message itself is stored in <code>msg[1]</code>. However, it is a list, full of
+information regarding the message you have downloaded. Without going
+into too much detail, first, you need to transform the list into a
+single array, and then we can use the mail tools to parse the
+information into a usable format:</p>
+<pre><code class="language-ipython3">import email
+
+raw_email = b'\n'.join(msg[1])
+parsed_email = email.message_from_bytes(raw_email)
+</code></pre>
+<p>You are free to explore each step independently to try to understand
+what is available in your message. The <code>parsed_email</code> has a lot of
+information, not only regarding who sent the message and to whom but
+also the server used, spam filtering options, etc. We would like to show
+the contents of the e-mail, both the HTML and the text formats, so we
+can do the following:</p>
+<pre><code class="language-ipython3">for part in parsed_email.walk():
+    if part.get_content_type() == 'text/plain':
+        print(part.get_payload()) # prints the raw text
+</code></pre>
+<p>This will go through all the available information in the message, and
+if it finds it is of type <code>text/plain</code>, it will print it to the screen.
+You can change it to <code>text/html</code> and it will show the other version, if
+available.</p>
+<p>As you can see, retrieving e-mails is relatively more complex than
+sending e-mails. There are also some other concerns regarding what you
+do with the messages you downloaded. For example, you can leave them on
+the server, thus they will be available from other clients as well. You
+can also choose to delete them from the server after reading, etc. Each
+pattern has advantages and disadvantages, so that will be up to the
+workflow you are considering.</p>
+<p>The code up to here can be found on <a href="https://github.com/PFTL/website/blob/master/example_code/27_CRM/simple_CRM_01.ipynb">this
+notebook</a>.
+Now we are going to focus a bit more onto expanding the usability of our
+tools.</p>
+<h2>Using a Database</h2>
+<p>In the previous sections, we have seen how you can send and receive
+e-mails with Python directly from a Jupyter notebook. Now it is time to
+focus onto a different topic. It is important when you want to establish
+relationships with customers, to have a way of storing information
+persistently. For example, you would like to keep an agenda of contacts,
+you would like to know when was the last time you contacted someone,
+etc.</p>
+<p>In order to achieve a high level of flexibility, we are going to use a
+database to store all our information. Fortunately, Python supports
+SQLite databases out of the box. We have discussed about them in a
+<a href="https://pythonforthelab.com/blog/storing-data-with-sqlite">different article</a> that may be
+useful for you to check if you want to dig into the details. We are
+going to use a library called SQLAlchemy, which will allow us to define
+relationships between elements much faster. You can install it like any
+other Python package:</p>
+<pre><code class="language-bash">pip install sqlalchemy
+</code></pre>
+<p>The first thing we will do is creating a new notebook to explore how to
+use the database from within Jupyter. Let's start by importing all the
+needed modules:</p>
+<pre><code class="language-ipython3">from sqlalchemy import create_engine
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
+</code></pre>
+<p>Next, we create the database engine:</p>
+<pre><code class="language-ipython3">engine = create_engine('sqlite:///crm.db', echo=True)
+</code></pre>
+<p>Note that the engine supports other types of databases, not only SQLite.
+However, SQLite is by far the easiest to work with for small
+applications such as ours.</p>
+<p>We also define a declarative base, that will allow us to define classes
+that will be mapped to tables:</p>
+<pre><code class="language-ipython3">Base = declarative_base()
+</code></pre>
+<p>Now it is time to define what information we want to store to the
+database. For the CRM it seems reasonable to start by defining
+customers. The advantage of using SQLAlchemy is that instead of working
+directly on the database, we can do that through the engine and the
+base. To define what information we want to store, we have to define a
+class:</p>
+<pre><code class="language-ipython3">class Customer(Base):
+    __tablename__ = 'customers'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    last_name = Column(String)
+    email = Column(String)
+
+    def __repr__(self):
+        return &quot;&lt;Customer(name='{}', last_name='{}', email='{}')&gt;&quot;.format(
+        self.name, self.last_name, self.email)
+</code></pre>
+<p>I think the code above it is self-explanatory. We define the name of the
+table we want to use. Each attribute defined with <code>Column</code> will be
+transformed into a column in the table, of the specified type, in our
+case we have <code>Integer</code> for <code>id</code> and <code>String</code> for all the rest. In order
+to create the table, we have to run the following command:</p>
+<pre><code class="language-ipython3">Base.metadata.create_all(engine)
+</code></pre>
+<p>You will see a lot of content appearing on the screen. If you are
+familiar with SQL you will notice the commands that are being executed.
+Now what we have is a very nice relationship between a class
+(<code>Customer</code>) and a table (<code>customers</code>) on our database. Let's create our
+first customer:</p>
+<pre><code class="language-ipython3">first_customer = Customer(name='Aquiles', last_name='Carattino', email='aquiles@uetke.com')
+</code></pre>
+<p>And now we need to add it to the database. This is achieved through the
+creation of a session:</p>
+<pre><code class="language-ipython3">from sqlalchemy.orm import sessionmaker
+Session = sessionmaker(bind=engine)
+session = Session()
+</code></pre>
+<p>The last step is to add the customer to the database:</p>
+<pre><code class="language-ipython3">session.add(ed_user)
+session.commit()
+</code></pre>
+<p>And that is all. If you know how to explore the database with an
+external tool, you will see the data that we have just added. You can
+follow the steps above for as many customers as you want. To retrieve
+information from the database, we can use the session and the <code>Customer</code>
+class directly. For example:</p>
+<pre><code class="language-ipython3">one_customer = session.query(Customer).filter_by(name='Aquiles').first()
+print(one_customer)
+</code></pre>
+<p>It will give you as output the information of your customer. Pay
+attention to the fact that when you filter in this way, the options are
+case sensitive. We will not cover all the details regarding how to use
+SQLAlchemy, especially because <a href="https://docs.sqlalchemy.org/en/latest/index.html">their
+documentation</a> is very
+extensive, but it is important to see how to search with partial
+information, for example looking by parts of the name:</p>
+<pre><code class="language-ipython3">one_customer = session.query(Customer).filter(Customer.name.like('aqui%')).first()
+</code></pre>
+<p>This will find all customers with a name that starts with <code>aqui</code>,
+regardless of their case. There is a detail that it is also very
+important and that I haven't mentioned yet, the <code>first()</code> that appears
+at the end. Let's see what happens if you have two customers in the
+database, and they have similar names so that the command above gets
+both of them:</p>
+<pre><code class="language-ipython3">second_customer = Customer(name='Aquileo', last_name='Doe', email='aquileo@doe.com')
+session.add(second_customer)
+session.commit()
+</code></pre>
+<p>Let's remove the <code>first()</code>, and let's run the same command as before:</p>
+<pre><code class="language-ipython3">answer = session.query(Customer).filter(Customer.name.like('aqui%'))
+print(answer)
+</code></pre>
+<p>Will give you as output:</p>
+<pre><code class="language-ipython3">&lt;sqlalchemy.orm.query.Query at 0x7f003da05390&gt;
+</code></pre>
+<p>The answer is not a list of customers, but an object called Query. If
+you want to go through each element, you can do the following:</p>
+<pre><code class="language-ipython3">for c in answer:
+    print(c)
+</code></pre>
+<p>The idea of the query is that it knows how many elements are there but
+it didn't load the information to memory. This makes it incredibly handy
+if you are working with very large databases.</p>
+<p>With a bit of creativity, you can already merge what we learned before
+in order to send e-mails to all the customers in your database. Before
+discussing how to implement that, I would like to focus on one more
+topic, which is how to add tags to the customers and keep track of the
+sent messages.</p>
+<h2>Database Relationships</h2>
+<p>One of the features we want to have in our CRM is to be able to keep
+track of the sent messages, so we can avoid sending twice the same
+e-mail to the same person, or we can check how long it was since we sent
+the last message, etc. We will define a new class called <code>Message</code> in
+which we will hold the information of every message sent. It will look
+like this:</p>
+<pre><code class="language-ipython3">from sqlalchemy import Text, Date, ForeignKey
+from sqlalchemy.orm import relationship
+
+class Message(Base):
+    __tablename__ = 'messages'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    text = Column(Text)
+    date = Column(Date)
+
+    customer_id = Column(Integer, ForeignKey('customers.id'))
+    customer = relationship(&quot;Customer&quot;, back_populates=&quot;messages&quot;)
+
+    def __repr__(self):
+        return &quot;&lt;Message(name='{}', date='{}', customer='{}')&gt;&quot;.format(
+        self.name, self.date, self.customer)
+</code></pre>
+<p>Bear in mind that the imports complement the ones of the previous
+section, they do not replace the others but are new for this piece of
+code. The beginning is very similar to the previous class, but the main
+difference is the part referring to the customers. Each message will be
+sent to a specific customer. To make this bridge, we use the
+<code>ForeignKey</code>. This means that the value that is going to be stored in
+<code>customer_id</code> has to be an existing customer id. In this way, we can add
+more dimensions to our plain tables.</p>
+<p>The <code>relationship</code> is a way of telling SQLAlchemy where the data is
+going to be accessed. Having the id of the customer is handy, but it is
+better if we have direct access to the information. In such a case, if
+we would like to know the name of the customer who got the message, we
+can do something like <code>message.customer.name</code>. The opposite relationship
+is also valid, and we need to add it. We can simply do:</p>
+<pre><code class="language-ipython3">Customer.messages = relationship('Message', order_by=Message.id, back_populates='customer').
+</code></pre>
+<p>And then you just need to update the engine:</p>
+<pre><code class="language-ipython3">Base.metadata.create_all(engine)
+</code></pre>
+<p>Now, let's create some messages to understand how we can use this new
+strategy. We first need to get at least one customer, so we can assign
+the messages to it:</p>
+<pre><code class="language-ipython3">from datetime import datetime
+
+c = session.query(Customer).first()
+new_message = Message(name='Welcome', text='Welcome to the new CRM', date=datetime.now(), customer=c)
+session.add(new_message)
+session.commit()
+</code></pre>
+<p>We get the first customer from the table, and then we create a new
+message. This is just an example, but in principle, the variable <code>text</code>
+could be much longer. If we want to retrieve this message from the
+database, we can do the following:</p>
+<pre><code class="language-ipython3">message = session.query(Message).first()
+print(message)
+</code></pre>
+<p>And now you will see that you have the information not only about this
+message but also about the customer to whom the message was sent. You
+can also try the other way around, see all the messages sent to a
+particular customer, by doing the following:</p>
+<pre><code class="language-ipython3">c = session.query(Customer).first()
+print(c.messages)
+</code></pre>
+<p>And you will get a list of all the messages that were sent. Now you have
+an idea of how this can very quickly start to be a useful tool, not just
+a mere exercise.</p>
+<p>The relationship between messages and customers is called many-to-one
+because a customer can have many messages associated with it, but each
+message will be associated with a single customer. There is also another
+relationship possible, which is called many-to-many. This would be the
+case of having lists of customers. A customer can belong to several
+lists, and at the same time, each list can contain several customers.</p>
+<p>If you think that a database is nothing more than a collection of tables
+in which each entry has a unique identifier, you will realize that there
+is no way of making this many-to-many between two tables directly. We
+will need to define an intermediate table which will hold these
+relationships. First, let's start by the list itself:</p>
+<pre><code class="language-ipython3">class List(Base):
+    __tablename__ = 'lists'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+
+Base.metadata.create_all(engine)
+</code></pre>
+<p>And now we need to create the intermediate table:</p>
+<pre><code class="language-ipython3">from sqlalchemy import Table
+
+association_table = Table('list_customer', Base.metadata,
+    Column('left_id', Integer, ForeignKey('customers.id')),
+    Column('right_id', Integer, ForeignKey('lists.id'))
+)
+
+Base.metadata.create_all(engine)
+</code></pre>
+<p>See, that it is a table that has two columns each with a foreign key,
+one for the customer and one for the list.</p>
+<p>We can do the same we did earlier in order to be able to use
+<code>customer.lists</code> to get the lists to which the customer is subscribed:</p>
+<pre><code class="language-ipython3">Customer.lists = relationship(&quot;List&quot;,
+                    secondary=association_table,
+                    backref=&quot;customers&quot;)
+
+Base.metadata.create_all(engine)
+</code></pre>
+<p>And now, it is time to create a list, append a user and save it:</p>
+<pre><code class="language-ipython3">c_list = List(name='New List')
+customer = session.query(Customer).first()
+c_list.customers.append(customer)
+session.add(c_list)
+session.commit()
+</code></pre>
+<p>Remember not to use a plain <code>list</code> variable, since it is a Python
+keyword. I think it is pretty clear what is going on. Finally, if you
+want to retrieve a list and find the customers subscribed to it, you
+would do:</p>
+<pre><code class="language-ipython3">las_list = session.query(List).first()
+print(las_list.customers)
+</code></pre>
+<p>On the other hand, you can check the lists to which a user is
+subscribed:</p>
+<pre><code class="language-ipython3">print(customer.lists)
+</code></pre>
+<p>See that the output of this last command is not particularly nice. This
+is because we haven't defined a specific <code>__repr__</code> method as we have
+done for the other classes.</p>
+<p>With this, we are done regarding how to use databases to store
+information. Now it is time to get into the action. The full code
+discussed in this section can be found on <a href="https://github.com/PFTL/website/blob/master/example_code/27_CRM/simple_crm_02.ipynb">this
+notebook</a>.
+Now it is time to clean up the code in order to make more usable and
+extendable.</p>
+<h2>Sending To All Customers</h2>
+<p>The notebook that we have developed in the previous section is very
+dirty. We have been adding features on the fly, without really worrying
+about how easy it is to understand it. Imports were scattered all over
+the place, classes get modified at runtime, etc. An example of a cleaned
+up notebook can be <a href="https://github.com/PFTL/website/blob/master/example_code/27_CRM/simple_CRM_03_clean_db.ipynb">found
+here</a>.
+I won't enter into the details, you are free to use it.</p>
+<p>We are going to focus now a bit more on usability. How can we send the
+e-mail to all our customers, using what we've learned in the first
+section and combining it with what we've developed in the previous one?
+We will start a new notebook. The first thing we need is to have
+available all the classes to interface with the database. We start the
+new notebook like this:</p>
+<pre><code class="language-ipython3">%run clean_db.ipynb
+</code></pre>
+<p>in this case, you need to change <code>clean_db</code> by whatever name you have
+given to the notebook that created the database. The command above is
+equivalent to inserting the notebook at the beginning and running it.
+Therefore, all the variables, classes, functions, etc. that you have
+developed are going to be available.</p>
+<p>Now we need to be able to send a message to all our customers. We can
+develop a function that will take care of the sending of e-mails:</p>
+<pre><code class="language-python">def send_all():
+    customers = session.query(Customer)
+    for customer in customers:
+        message = customer.create_msg('Message_name', 'template_file')
+        message.send(config)
+        session.add(message)
+        session.commit()
+</code></pre>
+<p>At this stage this is not sending any message, it is just showing how it
+would look like. The code above implements a lot of different choices on
+how to find a solution. One is that we would like the <code>Customer</code> class
+that creates a message, and the message is able to send itself. Then we
+store that message into the database. This prevents adding messages to
+the database if the sending fails. The <code>Customer</code> class will look like
+this:</p>
+<pre><code class="language-python">class Customer(Base):
+    __tablename__ = 'customers'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    last_name = Column(String)
+    email = Column(String)
+
+    def create_msg(self, message_name, template_file):
+        with open(template_file, 'r') as template:
+            text = template.format(name=self.name)
+        message = Message(name=message_name, text=text, customer=self, date=datetime.now())
+        return message
+
+    def __repr__(self):
+        return &quot;&lt;Customer(name='{}', last_name='{}', email='{}')&gt;&quot;.format(
+        self.name, self.last_name, self.email)
+</code></pre>
+<p>You see that we have only added the method <code>create_msg</code> which returns a
+new message, after formatting the test. Then, we need to update the
+message class to be able to send itself to a customer. We can do the
+following:</p>
+<pre><code class="language-python">class Message(Base):
+    __tablename__ = 'messages'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    text = Column(Text)
+    date = Column(Date)
+
+    customer_id = Column(Integer, ForeignKey('customers.id'))
+    customer = relationship(&quot;Customer&quot;, back_populates=&quot;messages&quot;)
+
+    def send(self, config):
+        me = config['me']
+        you = '{} &lt;{}&gt;'.format(self.customer.name, self.customer.email)
+        msg = MIMEMultipart('alternative')
+        msg['From'] = me
+        msg['To'] = you
+        msg['Subject'] = self.name
+        msg.attach(MIMEText(self.text, 'plain'))
+        with smtplib.SMTP(config['EMAIL']['smtp_server'], config['EMAIL']['port']) as s:
+            s.ehlo()
+            s.login(config['EMAIL']['username'],config['EMAIL']['password'])
+            s.sendmail(me, you, msg.as_string())
+
+    def __repr__(self):
+        return &quot;&lt;Message(name='{}', date='{}', customer='{}')&gt;&quot;.format(
+            self.name, self.date, self.customer)
+</code></pre>
+<p>You can see that I have moved the <code>me</code> option into the config file. This
+is something you will need to add by yourself in order to make it
+compatible. It should look like:</p>
+<pre><code class="language-yaml">me: My Name &lt;my@email.com&gt;
+</code></pre>
+<p>And should be top-level (i.e. not inside the <code>EMAIL</code> block). Since
+sending the message needs to have the config available, we will run the
+code like this:</p>
+<pre><code class="language-python">with open('config.yml', 'r') as config_file:
+    config = yaml.load(config_file)
+send_all()
+</code></pre>
+<p>Remember that when you change notebooks you need to save them, and then
+you need to run the first block with the <code>%run</code> command again in order
+to reflect the changes. We still need to work a bit on the <code>send_all</code>.
+In the example above, we have fake names for the subject and the
+template. We can improve that:</p>
+<pre><code class="language-python">def send_all(subject, template):
+    customers = session.query(Customer)
+    for customer in customers:
+        message = customer.create_msg(subject, template)
+        message.send(config)
+        session.add(message)
+        session.commit()
+        print('Sent message {} to: {}'.format(subject, customer.email))
+</code></pre>
+<p>Now, let's create a text file called <strong>test_email.txt</strong> with the
+following content:</p>
+<pre><code class="language-text">Hello {name},
+Welcome to the test CRM.
+Hope you are enjoying it!
+</code></pre>
+<p>And now, if we want to send the message to all our customers, we can do
+the following:</p>
+<pre><code class="language-python">with open('config.yml', 'r') as config_file:
+    config = yaml.load(config_file)
+send_all('Testing the CMR', 'test_email.txt')
+</code></pre>
+<p>And now, you should see your messages being sent. You should also see
+that the messages are personalized, replacing the name in the template
+by the name of the customer getting the message. You can get as creative
+as you want with these options. However, there is still an important
+feature missing: send to a group of customers.</p>
+<h2>Refactoring: Send to a list</h2>
+<p>Since the amount of code we have developed is not that much, you can
+still go through it and change it in all the needed places. But imagine
+someone else has developed code that depends on what you have done. If
+you change something as important as the number of arguments a function
+takes, you will break the downstream code. In our case, we want to
+change the <code>send_all</code> function in order to accept the name of a list as
+an argument. However, we don't want to break the code that already uses
+<code>send_all</code> with just two arguments (subject and template).</p>
+<p>If you want to add a new argument to a function while making it
+optional, there are two ways. One is to use the <code>*args</code> syntax, the
+other is to use a default value. The latter is slightly easier to
+understand for novice programmers. If we do the following to our
+function:</p>
+<pre><code class="language-python">def send_all(subject, template, list_name='all'):
+</code></pre>
+<p>You will see that the code
+<code>send_all('Testing the CMR', 'test_email.txt')</code> still works fine. So we
+can now improve the function to get the customers that belong to a
+certain list.</p>
+<pre><code class="language-python">def send_all(subject, template, list_name='all'):
+    if list_name == 'all':
+        customers = session.query(Customer)
+    else:
+        customer_list = session.query(List).filter_by(name=list_name).first()
+        customers = customer_list.customers
+    for customer in customers:
+        message = customer.create_msg(subject, template)
+        message.send(config)
+        session.add(message)
+        session.commit()
+        print('Sent message {} to: {}'.format(subject, customer.email))
+</code></pre>
+<p>So now, if you create a list of customers named <code>'Initial Customers'</code>,
+for example, you can send a message to them by simply doing the
+following:</p>
+<pre><code class="language-python">send_all('Testing the CMR', 'test_email.txt', 'Initial Customers')
+</code></pre>
+<h2>Avoid repeating messages</h2>
+<p>What you have seen up to now, should open the doors to a lot of very
+nice creative approaches not only to CRM but to a variety of tasks that
+you can automate with Python. The last feature that I would like to show
+you is how to avoid sending the same message to the same person. You can
+check it either when you create the message with the customer class, or
+before sending it. Since it is normally a good idea to catch problems as
+early as possible, let's improve the <code>Customer</code> class:</p>
+<pre><code class="language-python">class Customer(Base):
+    __tablename__ = 'customers'
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+    last_name = Column(String)
+    email = Column(String)
+
+    def create_msg(self, message_name, template_file):
+        message_count = session.query(Message).filter_by(name=message_name, customer=self).count()
+        if message_count &gt; 0:
+            raise Exception('Message already sent')
+        with open(template_file, 'r') as template:
+            template = template.read()
+            text = template.format(name=self.name)
+        message = Message(name=message_name, text=text, customer=self, date=datetime.now())
+        return message
+</code></pre>
+<p>The highlighted line is the important change to the <code>Customer</code> class.
+Pay attention to the syntax. We filter both by the message name and the
+customer who received the message. Then, we use the <code>count()</code> method,
+which is the proper way of knowing how many results are available in the
+database. It is much more efficient than getting all the results with
+<code>all()</code> and then using the <code>len()</code> function. Anyways, if you try again
+the <code>send_all</code> function, you will see that it fails if you try to send
+the same message twice. Now, this is not exactly what we need. If you
+want to send the message to the people who didn't get the message yet,
+you would like to skip the people, not stop the execution.</p>
+<p>In order to achieve that, we can <a href="https://pythonforthelab.com/blog/learning-not-to-handle-exceptions">handle the
+exception</a>. But since we are
+using a generic exception, we will handle everything in the same way,
+regardless of whether it was raised because of an error in the database
+or because the message was repeated. The best strategy is therefore to
+create a custom exception:</p>
+<pre><code class="language-ipython3">class MessageAlreadySent(Exception):
+    pass
+</code></pre>
+<p>And then the <code>Customer</code> can use:</p>
+<pre><code class="language-ipython3">if message_count &gt; 0:
+    raise MessageAlreadySent('Message {} already sent to {}'.format(message_name, self.email))
+</code></pre>
+<p>Finally, we can change the <code>send_all</code> in order to catch this specific
+exception:</p>
+<pre><code class="language-python">def send_all(subject, template, list_name='all'):
+    if list_name == 'all':
+        customers = session.query(Customer)
+    else:
+        customer_list = session.query(List).filter_by(name=list_name).first()
+        customers = customer_list.customers
+    for customer in customers:
+        try:
+            message = customer.create_msg(subject, template)
+            message.send(config)
+            session.add(message)
+            session.commit()
+            print('Sent message {} to: {}'.format(subject, customer.email))
+        except MessageAlreadySent:
+            print('Skipping {} because message already sent'.format(customer.email))
+</code></pre>
+<p>If the exception is <code>MessageAlreadySent</code> we will deal with it and will
+skip the user. Bear in mind that since the exception appears with the
+<code>customer.create_msg</code> line, the rest of the block is not executed, the
+message is not created, nor added to the database. This guarantees that
+if the exception is of a different kind, for example, the SMTP server is
+not working, the database is broken, etc. the exception will not be
+handled and the proper error will appear on the screen.</p>
+<p>The final version of the definition of classes can be found on <a href="https://github.com/PFTL/website/blob/master/example_code/27_CRM/simple_CRM_05_clean_db_2.ipynb">this
+notebook</a>,
+while the final version for the sending e-mail is <a href="https://github.com/PFTL/website/blob/master/example_code/27_CRM/simple_CRM_04_send_all.ipynb">this
+notebook</a>.</p>
+<h2>Conclusions</h2>
+<p>This tutorial aims at showing you how you can quickly prototype
+solutions by using <strong>Jupyter notebooks</strong>. They are not the proper tool
+if you want to distribute the code as a package for others to use, but
+it is very quick to find problems, run just what you need, etc.</p>
+<p>Regarding the CRM itself, it is not complete yet. You can see it as a
+minimum-viable-product. You can send e-mails to your customers, keep
+track of what messages were sent when etc. Considering the amount of
+work it took to set it up, you should be very satisfied.</p>
+<p>The main objective of this tutorial was to show you how you can combine
+different tools in order to build a new project. Of course, many things
+can be improved, made more efficient, etc. The reality is that if you
+need to handle communication with some hundreds of customers, you don't
+need much more than what we did. Perhaps you can make it more
+functional, prettier, etc. But that is more customization than core
+development.</p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+        <div class="lg:mt-6">
+          <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
+          <div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/storing-data-with-sqlite" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of Storing Data with SQLite">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2018-08-12</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Storing Data with SQLite</h3>
+                      <div class="font-sans ">Using databases for storing data may sound much more complicated than what it actually is. In this article, we are going to cover how to use databases to store different types of data. We will quickly review how you can search for specific parameters and how to get exactly what …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/storing-binary-data-and-serializing" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of Storing Binary Data and Serializing">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2018-08-11</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Storing Binary Data and Serializing</h3>
+                      <div class="font-sans ">Last week we have seen how to store data into plain text files that can be read by any editor or by other programs. We have also seen that if you separate your data with commas your file will follow a standard and it will be automatically compatible with other …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/introduction-to-storing-data-in-files" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/pietro-jeng-266017-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of Introduction to Storing Data in Files">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2018-08-10</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Introduction to Storing Data in Files</h3>
+                      <div class="font-sans ">Storing data to reuse it later is a central part in most Python applications. Whether you are doing a measurement in the lab or developing a web application, you will need to save information in a persistent way. For example, you would like to analyze your results after you have …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

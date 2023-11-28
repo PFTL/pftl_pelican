@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Controlling a National Instruments Card with Python | Python For The Lab</title>
+
+  <meta name="tags" content="National Instruments, DAQ, Control, NI DAQ, PyDAQmx, ">
+  <meta name="description" content="Don't depend on Labview; learn how to control National Instruments cards
+directly with Python.
+">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="https://pythonforthelab.com/blog/controlling-a-national-instruments-card-with-python">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://pythonforthelab.com/blog/controlling-a-national-instruments-card-with-python">
+  <meta property="og:title" content="Controlling a National Instruments Card with Python">
+  <meta property="og:description" content="Don't depend on Labview; learn how to control National Instruments cards
+directly with Python.
+">
+  <meta property="og:image" content="/images/writing-machine_linkedin.width-800.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://pythonforthelab.com/blog/controlling-a-national-instruments-card-with-python">
+  <meta property="twitter:title" content="Controlling a National Instruments Card with Python">
+  <meta property="twitter:description" content="Don't depend on Labview; learn how to control National Instruments cards
+directly with Python.
+">
+  <meta property="twitter:image" content="/images/writing-machine_linkedin.width-800.jpg">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/writing-machine_linkedin.width-800.jpg" alt="Controlling a National Instruments Card with Python" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">Controlling a National Instruments Card with Python</h1>
+        <div class="font-sans font-bold text-xl">Don't depend on Labview; learn how to control National Instruments cards
+directly with Python.
+</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2018-02-21</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">National Instruments</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">DAQ</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">Control</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">NI DAQ</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">PyDAQmx</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>One of the most common devices in a lab is a National Instruments
+acquisition card, also called a DAQ. As you probably know by now, the
+default programming environment for such cards is Lab View, but what you
+may not be aware is that there are libraries for interfacing with other
+languages. NI provides a common driver to all of their devices called
+<em>NI-DAQmx</em> and how to use their hardware through the C programming
+language is <a href="http://zone.ni.com/reference/en-XX/help/370471AA-01/">well
+documented</a>.</p>
+<p>Once there is good documentation for one programming language, there are
+no limits for developers to expand the toolbox into other languages. For
+National Instruments devices, there is a project called
+<a href="https://pythonhosted.org/PyDAQmx/">PyDAQmx</a> that ported all the
+functions to be Python compatible. Since it is a port of the C code,
+what you should always bear in mind is that you have to check the
+<a href="http://zone.ni.com/reference/en-XX/help/370471AA-01/">National Instruments
+documentation</a> and
+adapt the code to Python.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Since the writing of this article, a new Python package supporting
+NI-DAQmx was released by National Instruments itself. You can see the
+<a href="https://nidaqmx-python.readthedocs.io/en/latest/">documentation here</a>.
+I didn't have time to test it yet, but looks very promising. Keep an eye
+on the <a href="https://github.com/ni/nidaqmx-python/issues">bugs and issues</a>
+because they may be a good source of information.</p>
+</div>
+<p>Let's see how to get started. Remember that each card has different
+specifications and therefore some of the options may not be present in
+your current configuration. Let's assume we want to read an analog input
+from our device; you need to know the number that was assigned to your
+card in order to communicate with it; normally you should have National
+Instruments software that allows you to configure the number of your
+card.</p>
+<pre><code class="language-python">import PyDAQmx as nidaq
+
+
+t = nidaq.Task()
+t.CreateAIVoltageChan(&quot;Dev1/ai0&quot;, None, nidaq.DAQmx_Val_Diff, 0, 10, nidaq.DAQmx_Val_Volts, None)
+t.CfgSampClkTiming(&quot;&quot;, 1000, nidaq.DAQmx_Val_Rising, nidaq.DAQmx_Val_FiniteSamps, 5000)
+t.StartTask()
+</code></pre>
+<p>In these few lines of code we have created a new Task and called it <code>t</code>;
+we have defined an analog input channel for <code>Dev1</code> and port number
+<code>ai0</code>. We also configured the timing to be internal, with 1000 samples
+per second and in total, we want to acquire 5000 samples. We finally
+trigger the task to start acquiring samples. It is interesting to
+compare our code to what is documented, so you can learn how to adapt
+the code to Python.</p>
+<p>We first go to the documentation of the method
+<a href="http://zone.ni.com/reference/en-XX/help/370471AA-01/daqmxcfunc/daqmxcreateaivoltagechan/">CreateAIVoltageChan</a>
+and the first thing you should notice is that the name is actually
+different; it is <strong>DAQmxCreateAIVoltageChan</strong>. The first thing to note
+is that the <em>DAQmx</em> prefix is dropped in PyDAQmx. Then we can see the
+arguments that the function takes:</p>
+<pre><code class="language-c">int32 DAQmxCreateAIVoltageChan (
+   TaskHandle taskHandle,
+   const char physicalChannel[],
+   const char nameToAssignToChannel[],
+   int32 terminalConfig,
+   float64 minVal,
+   float64 maxVal,
+   int32 units,
+   const char customScaleName[]);
+</code></pre>
+<p>Since we are using the task as Python object, we drop the first argument
+of the function; PyDAQmx takes care of it (notice that we are using the
+syntax <code>t.CreateAIVoltageChan</code>. Then we have to pass all the other
+arguments, paying attention to their types. So, where it says <code>char</code> we
+should pass a <code>String</code>; that is what we do for the channel. In this
+example, we don't assign a name to the channel and therefore we leave it
+as <code>None</code>. Next, we have to define the <code>terminalConfig</code>; if you look at
+the documentation, you will see that there are different options, for
+example <code>DAQmx_Val_RSE</code>, <code>DAQmx_Val_Diff</code>, etc. PyDAQmx has all these
+configurations already defined and we can use them directly as in the
+example above: <code>nidaq.DAQmx_Val_Diff</code>.</p>
+<p>Then it asks for the limits of our analog input; remember that the DAQmx
+works with units that can be different from volts and that will be
+defined later on; the limits that we establish here are in those
+specific units. Setting the limits allows the DAQ card to automatically
+set a gain to our measurement, therefore increasing the effective
+resolution of the measurement. The values are automatically converted to
+the requested type, provided that they are numbers.</p>
+<p>When performing a measurement with an NI Card we have to explicitly set
+its units; it may very well be that you have a thermocouple connected to
+the analog input and therefore you want to measure Kelvins instead of
+Volts, or that you have any other transducer plugged. Defining custom
+scales is an entire chapter and therefore it is much easier to leave
+them here as volts and do the transformation directly in our code. We
+use again a built-in option of DAQmx, the <code>nidaq.DAQmx_Val_Volts</code> and
+the last option is left to <code>None</code> because it is what the documentation
+asks for in case we set the scale to Volts.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Converting variable types from Python to C or the other way around is
+handled in different ways by different libraries. PyDAQmx is doing all
+the work under to hood and that is why we can use an integer instead of
+a float, for example. But be aware that it will not always be the same;
+some libraries require to define very specific types.</p>
+</div>
+<p>The other method,
+<a href="http://zone.ni.com/reference/en-XX/help/370471AA-01/daqmxcfunc/daqmxcfgsampclktiming/">CfgSampClkTiming</a>
+is used for configuring the clock used to acquire the samples. I leave
+it up to you to check the documentation and to understand what each
+argument of the function is doing. In short, I set it to use an internal
+clock at a rate of 1000 samples per second for a total of 5000 samples
+(i.e. 5 seconds total acquisition time). The last line simply triggers
+the task.</p>
+<p>The next step is to read the data that was acquired. Remember that it
+takes 5 seconds for the acquisition to complete; the DAQmx functions are
+non-blocking, meaning that the execution of your program will not halt
+at each execution. For reading from the card we will use another method
+defined within the Task object; you will also need to use numpy for this
+example to work.</p>
+<pre><code class="language-python">import numpy as np
+
+[...]
+
+data = np.zeros((5000,), dtype=np.float64)
+read = nidaq.int32()
+t.ReadAnalogF64(5000, 5, nidaq.DAQmx_Val_GroupByChannel,
+   data, len(data), nidaq.byref(read), None)
+</code></pre>
+<p>Reading from the NI DAQ has a structure more similar to how proper C
+code looks like and is quite different from how Python code works. The
+first thing to note is that there is no return; we are not doing
+anything like <code>data = t.ReadAnalogF64()</code>. Let's see it step by step. The
+<a href="http://zone.ni.com/reference/en-XX/help/370471AA-01/daqmxcfunc/daqmxreadanalogf64/">documentation</a>
+is useful but doesn't explain how the actual syntax works. Again, we
+skip the first argument, the <code>task handler</code> because we are using the
+object-oriented-style.</p>
+<p>We define how many data points <em>per channel</em> we want to read; if we were
+acquiring more than one channel, it is important to notice that it is
+not the total number of points. We set the timeout in seconds, in order
+for the function to stop waiting in case there are not enough data
+points available. Then we set how to group the values in case we are
+reading from more than one channel. Remember that each channel is read
+sequentially, so it would be Chan1_1 -&gt; Chan2_1 -&gt; Chan3_1
+-&gt; Chan1_2 -&gt; Chan2_2 -&gt; Chan3_2 -&gt; Chan1_3 -&gt; etc.
+If we group them by channel, they will be returned as all the
+measurements from Chan1, all the measurements from Chan2, etc. I prefer
+it this way because it works well with numpy's reshape.</p>
+<p>Now, the interesting part; we pass as an argument <code>data</code>, which was
+defined few lines before as an empty numpy array. In the documentation,
+it is defined as The array to read samples into. This is a very common
+way of working with functions in C; we first create the memory structure
+that will hold the output of the function, in this case, a numpy array
+with 5000 elements. Whatever is present in the array will be overwritten
+by the read function. The next argument is the
+actual number of samples read from each channel; in other words, the
+length of the data array.</p>
+<p>The final argument is the <code>read</code> integer, that was also defined few
+lines before. It will hold the total number of data points read per
+channel. Note that we are not simply passing the read integer as an
+argument to the function, but we are using a method called <code>byref</code>. This
+is typical when working with external libraries written in C. It
+basically means that you are passing the reference to an object and not
+the object itself; you are letting the function know where in the memory
+is located that specific variable. In the end, the effect is the same:
+the variable will hold the information you need.</p>
+<p>Now you can plot your <code>data</code>, save it or do whatever you like with it.
+The read function has a lot of options that I haven't fully covered, but
+that you can easily check the documentation. The complexity arises
+because the function covers a lot of different scenarios with few
+inputs. For example, when you are continuously acquiring and you wish to
+download as many data points as there are available but you cannot know
+beforehand how many. It can also take care when you use an external
+trigger and you don't know how long it will take to complete an
+acquisition.</p>
+<p>Even though National Instruments cards were not designed to be used with
+Python, there can still be used in a variety of projects without many
+complications. The use of a common API for all the cards makes them
+ideal because exchanging them doesn't require a single change in the
+code. However, each card can have very different capabilities, for
+example, the acquisition rate or the number of simultaneous tasks that
+it can handle.</p>
+<p>More Information: <a href="https://pythonhosted.org/PyDAQmx/usage.html">PyDAQmx
+Tutorial</a>, <a href="http://zone.ni.com/reference/en-XX/help/370471AA-01/">NI-DAQmx C
+Reference Help</a></p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+        <div class="lg:mt-6">
+          <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
+          <div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/instructions-to-build-the-python-for-the-lab-daq/" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/python-arduino-fullsize.width-800.jpg"
+                           alt="Illustration of Instructions to build the Python for the Lab DAQ.">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2021-03-27</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Instructions to build the Python for the Lab DAQ.</h3>
+                      <div class="font-sans ">The PFTL DAQ is the ideal companion to follow the book Python for the Lab. Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

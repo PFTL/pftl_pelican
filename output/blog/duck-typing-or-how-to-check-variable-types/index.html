@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Duck Typing, or how to check variable types | Python For The Lab</title>
+
+  <meta name="tags" content="functions, methods, dynamic language, typing, types, ">
+  <meta name="description" content="What duck typing means how can it affect your program architecture">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="https://pythonforthelab.com/blog/duck-typing-or-how-to-check-variable-types">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://pythonforthelab.com/blog/duck-typing-or-how-to-check-variable-types">
+  <meta property="og:title" content="Duck Typing, or how to check variable types">
+  <meta property="og:description" content="What duck typing means how can it affect your program architecture">
+  <meta property="og:image" content="/images/joshua-coleman-655076-unsplash_linkedin.width-800.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://pythonforthelab.com/blog/duck-typing-or-how-to-check-variable-types">
+  <meta property="twitter:title" content="Duck Typing, or how to check variable types">
+  <meta property="twitter:description" content="What duck typing means how can it affect your program architecture">
+  <meta property="twitter:image" content="/images/joshua-coleman-655076-unsplash_linkedin.width-800.jpg">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/joshua-coleman-655076-unsplash_linkedin.width-800.jpg" alt="Duck Typing, or how to check variable types" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">Duck Typing, or how to check variable types</h1>
+        <div class="font-sans font-bold text-xl">What duck typing means how can it affect your program architecture</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2019-06-11</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">functions</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">methods</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">dynamic language</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">typing</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">types</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>The name duck typing has its root in <a href="https://en.wikipedia.org/wiki/Duck_typing">the
+expression</a> <em>If it walks like
+a duck and it quacks like a duck, then it must be a duck</em>. Which means
+that if you want to know whether you are dealing with a duck or not, you
+only care about how it looks like and how it behaves rather than
+actually checking to what species the animal belongs.</p>
+<p>The code that we develop in this article is available <a href="https://github.com/PFTL/website/tree/master/example_code/33_duck_typing">on
+Github</a>.</p>
+<p>The analogy translates <em>almost</em> literally to Python. Python is a
+dynamically typed language. This means that you don't need to specify
+what type of variables you are dealing with. The following lines are
+perfectly valid Python code:</p>
+<pre><code class="language-python">var1 = 'This is a string'
+var1 = 1
+</code></pre>
+<p>As you can see above, <code>var1</code> changed from a string to an integer without
+any problems. We didn't need to specify whether <code>var1</code> was going to be
+of either type. Without going to the details about what variables truly
+mean in Python, we can see that it is very convenient because it saves
+us from a lot of typing. On the other hand, it means that we can't be
+sure what variable type a function will receive until an error is
+raised, for example:</p>
+<pre><code class="language-python">def increase_by_one(value)
+    return value + 1
+</code></pre>
+<p>If we run the function <code>increase_by_one</code> with <code>var1</code> it will work only
+if <code>var1</code> is a number (integer or float), but it will give us a
+<code>TypeError</code> if we run it with a string. Statically typed languages would
+have warned us about this problem at compilation time and would have
+prevented us from some headaches down the line.</p>
+<p>One easy solution would be to check whether the <code>value</code> is either an
+integer or a float. We can improve our function, like this:</p>
+<pre><code class="language-python">def increase_by_one(value):
+    if isinstance(value, int) or isinstance(value, float):
+        return value + 1
+</code></pre>
+<p>If we try to run the function with a string, it will not do anything and
+it will return <code>None</code>. If we run the function with either an integer or
+a float, it will return the value increased by one. This behavior is
+more or less what we would expect.</p>
+<h2>What is duck typing?</h2>
+<p>So, you may wonder after this long preamble, what is actually duck
+typing. Imagine that we now have a numpy array, and we use the function
+<code>increase_by_one</code> with it, what do you expect to happen?</p>
+<pre><code class="language-python">import numpy as np
+
+var1 = np.array((0, 1, 2))
+print(increase_by_one(var1))
+</code></pre>
+<p>You get <code>None</code>, but is that what you were expecting? If you think about
+it, we forced the output because we designed the function to only work
+on integers and floats, while an array is neither of them. However, if
+we go back to the old version of the function before we implemented the
+verification, we would get:</p>
+<pre><code class="language-python">def increase_by_one(value):
+    return value + 1
+
+print(increase_by_one(var1))
+# [1, 2, 3]
+</code></pre>
+<p>You can see that the function <code>increase_by_one</code> works also on arrays.
+The idea of <strong>duck typing</strong> is that we don't care about what type of
+variable <code>value</code> is, provided that we can add 1 to it. In Python, this
+is translated to try to add 1 to <code>value</code> and if an exception is raised,
+we deal with it:</p>
+<pre><code class="language-python">def increase_by_one(value):
+    try:
+        value += 1
+    except TypeError:
+        return None
+    return value
+</code></pre>
+<p>Now, the function will run with all types of variables which accept
+being added by one. At the beginning we assumed only floats and integers
+were able to be added by one, then we found that numpy arrays are also
+working, and you can find that there are even more possibilities around.</p>
+<h2>Custom Classes</h2>
+<p>Duck typing becomes crucial when you develop your custom classes. Python
+exposes a lot of syntactic sugar which allow you to customize how things
+behave under certain operations. To keep up with the example above,
+let's develop a class which allows being increased by one:</p>
+<pre><code class="language-python">class AddOne:
+    def __init__(self, value):
+        self.value = str(value)
+
+    def __add__(self, other):
+        self.value += str(other)
+        return self
+
+    def __str__(self):
+        return self.value
+</code></pre>
+<p>And we can use it like this:</p>
+<pre><code class="language-python">var1 = AddOne('0')
+print(increase_by_one(var1))
+# 01
+</code></pre>
+<p>What you see now, is that our class defines the behavior of adding. In
+this case, the class will concatenate whatever value we add to the
+initial string that we have defined. That is why we see that the output
+is <code>01</code>.</p>
+<p>Duck typing means that our function will run every time there is a way
+of adding a <code>1</code> to the object. The example in these sections is almost
+trivial, so we can see something which is much more relevant.</p>
+<h2>Complex Data Structures</h2>
+<p>When you develop larger programs, it is almost impossible not to need
+configuration variables. Storing configuration parameters in
+dictionaries is very handy because it is very explicit. Let's make it
+very simple:</p>
+<pre><code class="language-python">configuration = {
+    'param1': 10,
+    'param2': 5
+}
+</code></pre>
+<p>And we also develop an Experiment class, which will use the
+configuration and will verify whether we have supplied all the needed
+parameters:</p>
+<pre><code class="language-python">class Experiment:
+    def __init__(self, config):
+        self.configuration = config
+
+    def check_config(self):
+        if not {'param1', 'param2'} &lt;= set(self.configuration.keys()):
+            raise Exception('The configuration does not include the mandatory fields')
+        print('Config seems OK')
+</code></pre>
+<p>You see that we have developed <code>check_config</code> which uses sets to check
+whether both parameters are within the keys of the dictionary. In other
+words, we verify whether the set <code>{'param1', 'param2'}</code> is a subset of
+all the keys in the configuration.</p>
+<p>We can add one last method to check whether the parameters are within an
+acceptable range:</p>
+<pre><code class="language-python">def check_config_range(self):
+    if self.configuration['param1'] &gt; 10:
+        raise Exception('param1 cannot be larger than 10')
+    if self.configuration['param2'] &gt; 5:
+        raise Exception('param2 cannot be larger than 5')
+    print('Range seems OK')
+</code></pre>
+<p>You can test the code by running:</p>
+<pre><code class="language-python">exp = Experiment(configuration)
+exp.check_config()
+exp.check_config_range()
+</code></pre>
+<p>So, where does duck typing come into effect?. In the code above we have
+assumed that the configuration would be a dictionary, but we are not
+bound to that. Imagine that we want to improve how we deal with
+configurations. We can develop our custom class to handle the reading
+from a file, perhaps logging changes to parameters, etc. And we want it
+to be compatible with the <code>Experiment</code> class that we have already
+developed. Therefore, the duck-typing here works the other way around.
+We know what the class needs in order to work properly, we just develop
+a solution around it.</p>
+<p>If you look at the code of <code>Experiment</code>, you see that it uses the
+configuration in two different places. First, when it checks that both
+<code>param1</code> and <code>param2</code> are present, through the method <code>keys</code>. We know
+that we will need a class that supports that method:</p>
+<pre><code class="language-python">class Config:
+    def __init__(self):
+        ...
+
+    def keys(self):
+        ...
+</code></pre>
+<p>We also know that when we want to use the parameters, we access them
+through <code>configuration['param1']</code>, and to achieve this, we will need to
+tweak the magic method <code>__getitem__</code>. Let's add one more requirement,
+and is that we want to instantiate this class with a filename, which
+will be read by the class and the data will be loaded. For simplicity,
+we force the configuration file to be in YAML format. Thus, our <code>Config</code>
+class will look like this (you need pyyaml installed for this to work):</p>
+<pre><code class="language-python">import yaml
+
+class Config:
+    def __init__(self, filename):
+        with open(filename, 'r') as f:
+            self._config = yaml.load(f.read(), Loader=yaml.FullLoader)
+
+    def keys(self):
+        return self._config.keys()
+
+    def __getitem__(self, item):
+        return self._config[item]
+</code></pre>
+<p>If we go step by step, you can see that when we instantiate the class,
+we ask for a filename, which we will open and we will load its contents
+into an attribute called <code>_config</code>. Note that Python doesn't have true
+private attributes for classes (i.e. attributes that can be accessed
+only within the class but not from outside). As a convention, attributes
+starting with an underscore, such as <code>_config</code> signal that they are not
+supposed to be used directly, but we can't easily enforce it.</p>
+<p>Since <code>_config</code> will be a dictionary, the implementation of the <code>keys</code>
+method will be trivial, we just use the default dictionary method.
+<code>__getitem__</code> is, however much more interesting. The <code>__getitem__</code>
+method in Python is the one that regulates what happens when you do
+something like <code>c['param1']</code>. <code>item</code> in this case will be <code>param1</code>, and
+we want to retrieve that item from the <code>_config</code> dictionary. If you want
+to test this implementation, first, you need to create a file
+<strong>config.yml</strong> with the following:</p>
+<pre><code class="language-yaml">param1: 10
+param2: 5
+</code></pre>
+<p>And then you can run:</p>
+<pre><code class="language-python">c = Config('config.yml')
+print(c['param1'])
+print(c['[param2'])
+</code></pre>
+<p>Of course, if you would like to change the value of 'param1' or
+'param2', you will get an error. Covering this topic is beyond duck
+typing, so keep tuned because we are going to discuss it in a later
+tutorial.</p>
+<p>Now we can put everything together, our custom configuration class and
+the experiment class:</p>
+<pre><code class="language-python">c = Config('config.yml')
+exp = Experiment(c)
+exp.check_config()
+exp.check_config_range()
+</code></pre>
+<p>Now you see that you are running the <code>Experiment</code> with a configuration
+which is not a dictionary but a custom designed class, and it works as
+expected.</p>
+<h2>Conclusions</h2>
+<p>If you look for the definition of duck typing, you will typically find
+that in Python, it is common not to verify to which data type a variable
+belongs. If those variables behave as expected, then you shouldn't
+worry. In the beginning, we saw that this is very handy because it
+allowed us to use a function on variables which we didn't originally
+intend, such as numpy array or custom classes.</p>
+<p>In the second part, we saw that you can plan your code the other way
+around. If you assume that duck typing is a common practice (i.e. that
+the libraries you use don't verify the type of variables, but only their
+functioning), you can design your own classes in such a way that they
+behave as a specific data type. Our example was a class that mimics how
+dictionaries work, and which we used as an argument in a different
+object, which had no idea of our custom data type.</p>
+<p>Header image by <a href="https://unsplash.com/@joshstyle?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">JOSHUA
+COLEMAN</a>
+on Unsplash</p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+        <div class="lg:mt-6">
+          <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
+          <div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/intro-to-python-lambda-functions" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of Introduction to Python Lambda Functions">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-03-17</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Introduction to Python Lambda Functions</h3>
+                      <div class="font-sans ">Some time ago, Python introduced in its syntax the possibility to define functions using lambda instead of def. These functions are called anonymous and are very common in other languages such as Javascript. However, in Python, they seem a bit obscure and are often either overlooked or misused. In this …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/what-are-args-and-kwargs-and-when-to-use-them" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/luca-bravo-217276-unsplash_linkedin.width-800.jpg"
+                           alt="Illustration of What are args and kwargs and when to use them">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-03-10</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">What are args and kwargs and when to use them</h3>
+                      <div class="font-sans ">If you have worked with Python for long enough, probably you have encountered code that uses *args and **kwargs as arguments in functions. Even if you haven't, it is a very neat feature that allows you to achieve great flexibility while developing code. In this article, we are going to …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/monkey-patching-and-its-consequences" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png"
+                           alt="Illustration of Monkey Patching and its consequences">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2019-06-18</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Monkey Patching and its consequences</h3>
+                      <div class="font-sans ">Monkey patching is a technique that allows you to alter the behavior of objects at runtime. Even though it can be a very useful feature, it can also make your code much harder to understand and debug, and therefore you have to be careful with how you implement monkey patching …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>

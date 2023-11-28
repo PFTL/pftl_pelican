@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CYPVPEJ4PK"></script>
+  <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-CYPVPEJ4PK');
+
+  </script>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+
+  <title>Singletons: Instantiate objects only once | Python For The Lab</title>
+
+  <meta name="tags" content="instance, objects, pattern, object oriented, singleton, ">
+  <meta name="description" content="Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code">
+  <meta name="author" content="Aquiles Carattino">
+  <link rel="canonical" href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">
+  <meta property="og:title" content="Singletons: Instantiate objects only once">
+  <meta property="og:description" content="Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code">
+  <meta property="og:image" content="/images/mirrors.width-800.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once">
+  <meta property="twitter:title" content="Singletons: Instantiate objects only once">
+  <meta property="twitter:description" content="Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code">
+  <meta property="twitter:image" content="/images/mirrors.width-800.jpg">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+  <link rel="apple-touch-icon" sizes="57x57"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180"
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16"
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link
+      href="https://fonts.googleapis.com/css2?family=Markazi+Text:wght@400;700&family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;700&display=swap"
+      rel="stylesheet">
+
+  <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+</head>
+
+<body class="text-gray-800">
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="https://pythonforthelab.com">
+            <img id="site-logo" class="h-12"
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+<ul
+        class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/blog"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/courses"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/books"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://pythonforthelab.com/about"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item md:grow align-middle ">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+<ul
+        class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/blog"
+           class="before:content-blogIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Blog</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/courses"
+           class="before:content-coursesIcon md:w-full
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Courses</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/hire-me"
+           class="before:content-hireIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Hire Me</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/books"
+           class="before:content-booksIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Books</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://pythonforthelab.com/about"
+           class="before:content-aboutIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">About</span>
+        </a>
+    </li>
+    <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
+        <a href="https://github.com/PFTL/pftl_discussions/discussions"
+           class="before:content-forumIcon
+            before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
+            before:md:h-8 before:md:w-8">
+            <span class="">Forum</span>
+        </a>
+    </li>
+    <li class="pt-4 md:hidden">
+        <form action="#" class="w-full pr-8">
+            <label for="search" class="relative block">
+                <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                <input id="search" data-stork="sitesearch" type="text"
+                       class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
+                       placeholder="Type to Search">
+            </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+    </li>
+</ul>        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <div class="md:-mt-32 lg:-mt-56 -mt-36 lg:mb-8">
+          <img src="/images/mirrors.width-800.jpg" alt="Singletons: Instantiate objects only once" class="shadow-md lg:shadow-lg"/>
+        </div>
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2">Singletons: Instantiate objects only once</h1>
+        <div class="font-sans font-bold text-xl">Let's explore how Python deals with objects such as True, False, None, and why we use the syntax is True instead of == True in our code</div>
+        <div class="text-sm text-gray-400">
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2021-01-16</span>
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">instance</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">objects</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">pattern</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">object oriented</span>
+              <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">singleton</span>
+        </span>
+        </div>
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          <p>When developing more extensive programs, being aware of different patterns can significantly help us solve problems even before they arise. One of those patterns is the creation of singletons, which are nothing else but objects that can be instantiated only once. In Python, we are exposed to singletons since the beginning, even if we are not aware of them. This article will discuss how singletons permeate our everyday programming and how we can bring them a step further. </p>
+<h2>Every Day Singletons</h2>
+<p>Before we dive into singletons, it is important to remember how Python behaves when it comes to mutable and immutable data types. A list, for example, is mutable, which means we can change its contents without creating a new object. For example:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [1, 2, 3]
+&gt;&gt;&gt; var2 = var1
+&gt;&gt;&gt; var1[0] = 0
+&gt;&gt;&gt; print(var2)
+[0, 2, 3]
+</code></pre>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the output of the code above puzzles you, I strongly advise you to check out the article on mutable and immutable data types. </p>
+</div>
+<p>When we have two lists like <code>var1</code> and <code>var2</code>, we can see whether they have the same content:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 == var2 
+True
+</code></pre>
+<p>But we can also see if they are the same object:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 is var2
+True
+</code></pre>
+<p>However, we can also do the following: </p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [1, 2, 3]
+&gt;&gt;&gt; var2 = [1, 2, 3]
+&gt;&gt;&gt; var1 == var2
+True
+&gt;&gt;&gt; var1 is var2
+False
+</code></pre>
+<p>In this case, both <code>var1</code> and <code>var2</code> have the same values <code>[1, 2, 3]</code> but they are not the same object. That is why <code>var1 is var2</code> returns <code>False</code>. </p>
+<p>However, Python programmers are likely exposed to the following syntax very early on:</p>
+<pre><code class="language-python">if var is None:
+    print('Var is none')
+</code></pre>
+<p>At first sight the question that could pop anyone's mind is why can we use <code>ìs</code> in the example above. And the answer is that <code>None</code> is a special type of object, one that can be instantiated only once. Let's see some examples:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = None
+&gt;&gt;&gt; var2 = None
+&gt;&gt;&gt; var1 == var2
+True
+&gt;&gt;&gt; var1 is var2
+True
+&gt;&gt;&gt; var3 = var2
+&gt;&gt;&gt; var3 is var1
+True
+&gt;&gt;&gt; var3 is None
+True
+</code></pre>
+<p>It means that through our code, there can be only one <code>None</code>, and any variable that references it will reference the same object, unlike what happened when we created two lists that had the same values. Together with <code>None</code>, the other two common singletons are <code>True</code> and <code>False</code>:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; [1, 2, 3] is [1, 2, 3]
+False
+&gt;&gt;&gt; None is None
+True
+&gt;&gt;&gt; False is False
+True
+&gt;&gt;&gt; True is true
+True
+</code></pre>
+<p>That completes the triad of singletons that Python programmers encounter daily. It explains why we can use the <code>is</code> syntax when checking if a variable is <code>None</code>, <code>True</code> or <code>False</code>. The examples above are only the beginning regarding singletons.</p>
+<h2>Small integer singletons</h2>
+<p>Python defines other singletons that are not that obvious and are mostly there because of memory and speed efficiency. Such is the case of small integers in the range -5 to 256. Therefore, we can do something like this:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = 1
+&gt;&gt;&gt; var2 = 1
+&gt;&gt;&gt; var1 is var2
+True
+</code></pre>
+<p>Or, more interestingly:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [1, 2, 3]
+&gt;&gt;&gt; var2 = [1, 2, 3]
+&gt;&gt;&gt; var1 is var2
+False
+&gt;&gt;&gt; for i, j in zip(var1, var2):
+...     i is j
+... 
+True
+True
+True
+</code></pre>
+<p>In the example above, you see two lists with the same elements. They are not the same list as we saw earlier, but each element is the same. If we want to get fancier with Python's syntax (just because we can), we can also run the following:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = [i for i in range(250, 260)]
+&gt;&gt;&gt; var2 = [i for i in range(250, 260)]
+&gt;&gt;&gt; for i, j in zip(var1, var2):
+...     print(i, i is j)
+... 
+250 True
+251 True
+252 True
+253 True
+254 True
+255 True
+256 True
+257 False
+258 False
+259 False
+</code></pre>
+<p>And we see that up to 256 integers are the same, but from 257 onwards, they are not. </p>
+<h2>Short strings singletons</h2>
+<p>Small integers are not the only unexpected singletons in Python. Short strings are, sometimes, also singletons. We can try something like the following:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = 'abc'
+&gt;&gt;&gt; var2 = 'abc'
+&gt;&gt;&gt; var1 is var2
+True
+</code></pre>
+<p>However, with strings, the reality is somewhat different. The process is called <strong>string interning</strong> and is described on <a href="https://en.wikipedia.org/wiki/String_interning">Wikipedia</a>. Python decides whether to allocate memory for strings as singletons based on some rules. First, strings must be defined at <em>compile-time</em>. It means that they should not be the output of a formatting task or a function. In the example above, <code>var1 = 'abc'</code> qualifies. </p>
+<p>Python tries its best at being efficient, and it will intern other strings that it considers will help save memory (and/or time). For example, function names are interned by default:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; def test_func():
+...     print('test func')
+... 
+&gt;&gt;&gt; var1 = 'test_func'
+&gt;&gt;&gt; test_func.__name__ is var1
+True
+</code></pre>
+<p>Empty strings and some single-character strings are interned by default, as is the case with small integers:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = chr(255)
+&gt;&gt;&gt; var2 = chr(255)
+&gt;&gt;&gt; var3 = chr(256)
+&gt;&gt;&gt; var4 = chr(256)
+&gt;&gt;&gt; var1 is var2
+True
+&gt;&gt;&gt; var3 is var4
+False
+</code></pre>
+<p>The fact that some strings are interned, does not mean we can get too confident about it. For example:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; var1 = 'Test String'
+&gt;&gt;&gt; var2 = 'Test String'
+&gt;&gt;&gt; var1 is var2
+False
+&gt;&gt;&gt; var2 = 'TestString'
+&gt;&gt;&gt; var1 = 'TestString'
+&gt;&gt;&gt; var1 is var2
+True
+</code></pre>
+<p>As we can see in the example above, being a short string is not the only requirement. The string must also be made of a limited set of characters, and spaces are not part of it. </p>
+<p>Therefore, the fact that Python is interning strings does not mean we should use the <code>is</code> syntax instead of the <code>==</code>. It just means that Python is running some optimizations under the hood. Perhaps one day, those optimizations become relevant for our code, but likely they will go completely unnoticed (but enjoyed). </p>
+<h2>Why singletons</h2>
+<p>What we have seen up to now is interesting, but it does not answer why going through the trouble of defining singletons. One clear answer is that by having singletons, we can save memory. In Python, what we usually call variables, can also be considered labels, pointing to the underlying data. If we have several labels pointing to the same data, it would be very memory efficient. There's no duplication of the information. </p>
+<p>However, if we ask ourselves when to add a singleton to our code, most likely, we won't find good examples. A singleton is a class that is instantiated only once. All other instances refer to the first, and therefore <em>are</em> the same. If you think about it, singletons and global variables are easy to mistake one for the other. However, a global variable does not imply anything about how it is instantiated. We could have a global variable pointing to an instance of a class and a local variable pointing to a different instance of the same class. </p>
+<p>Singletons are a programming pattern, and as such, they can be useful, but there's nothing we can do with them that can't be done without them. A standard example of singletons is a <strong>logger</strong>. Several parts of the program share information with the logger. The handler then decides whether to print to the terminal, save to a file, or don't do anything.</p>
+<h2>Defining a singleton</h2>
+<p>The crucial point of singletons is preventing multiple instantiations. Let's start by checking what happens when we instantiate a class twice:</p>
+<pre><code class="language-python">class MySingleton:
+    pass
+
+
+ms1 = MySingleton()
+ms2 = MySingleton()
+print(ms1 is ms2)
+# False
+</code></pre>
+<p>As expected, both instances are different objects. To prevent the second instantiation, we must keep track of whether a class was instantiated. We can use a variable in the class itself to do it and return the same object. A possibility is to use the <code>__new__</code> method of the class:</p>
+<pre><code class="language-python">class MySingleton:
+    instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not isinstance(cls.instance, cls):
+            cls.instance = object.__new__(cls)
+        return cls.instance
+</code></pre>
+<p>And we can test it:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; ms1 = MySingleton()
+&gt;&gt;&gt; ms2 = MySingleton()
+&gt;&gt;&gt; ms1 is ms2
+True
+</code></pre>
+<p>This approach is relatively straightforward. We only need to check whether the <code>instance</code> was defined and create it if it does not exist. Sure, we could use <code>__instance</code>, or fancier ways of checking if the variable exists. The result would be the same. </p>
+<p>Singletons are a pattern which, in the end, is hard to justify. So we can see one example on which we open a file more than once. Our singleton class would look like this:</p>
+<pre><code class="language-python">class MyFile:
+    _instance = None
+    file = None
+
+    def __init__(self, filename):
+        if self.file is None:
+            self.file = open(filename, 'w')
+
+    def write(self, line):
+        self.file.write(line + '\n')
+
+    def __new__(cls, *args, **kwargs):
+        if not isinstance(cls._instance, cls):
+            cls._instance = object.__new__(cls)
+
+        return cls._instance
+</code></pre>
+<p>Note a couple of things. First, we have defined <code>file</code> as a class attribute. We do this because the <code>__init__</code> method will be executed as often as the class is instantiated. Therefore, we open the file only once. We can achieve the same behavior directly in the <code>__new__</code> method after checking the <code>_instance</code> attribute. Note that we open the file in <code>w</code> mode, which means that we will overwrite the file's content each time. </p>
+<p>We can use the singleton like this:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; f = MyFile('test.txt')
+&gt;&gt;&gt; f.write('test1')
+&gt;&gt;&gt; f.write('test2')
+
+&gt;&gt;&gt; f2 = MyFile('test.txt')
+&gt;&gt;&gt; f2.write('test3')
+&gt;&gt;&gt; f2.write('test4')
+</code></pre>
+<p>And the contents of the file would be:</p>
+<pre><code>test1
+test2
+test3
+test4
+</code></pre>
+<p>It is clear from the example above that it does not matter if we first define <code>f</code> or <code>f2</code>. The file to which we are going to write is opened only once. The contents get erased only once, and every time we write to it through the program, we will append lines. </p>
+<p>We can also check if it is a singleton:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; f is f2
+True
+</code></pre>
+<p>However, in the way we defined our class above, there is one huge problem. What would be the output of the following?</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; f = MyFile('test.txt')
+&gt;&gt;&gt; f.write('test1')
+&gt;&gt;&gt; f.write('test2')
+&gt;&gt;&gt; f2 = MyFile('test2.txt')
+&gt;&gt;&gt; f2.write('test3')
+&gt;&gt;&gt; f2.write('test4')
+</code></pre>
+<p>The code is valid, but the program will create only the first file (<code>test.txt</code>) and ignore the second instantiation argument. Another fascinating point is what happens if we removed completely the <code>__new__</code> method:</p>
+<pre><code class="language-python">class MyFile:
+    file = []
+
+    def __init__(self, filename):
+        if len(self.file) == 0:
+            self.file.append(open(filename, 'w'))
+
+    def write(self, line):
+        self.file[0].write(line + '\n')
+</code></pre>
+<p>By definition this class is not a singleton, since each time we instantiate it we will get a different object:</p>
+<pre><code class="language-pycon">&gt;&gt;&gt; f = MyFile('test.txt')
+&gt;&gt;&gt; f2 = MyFile('test.txt')
+&gt;&gt;&gt; f is f2
+False
+&gt;&gt;&gt; f.write('test1')
+&gt;&gt;&gt; f.write('test2')
+&gt;&gt;&gt; f2.write('test3')
+&gt;&gt;&gt; f2.write('test4')
+</code></pre>
+<p>We are slightly cheating now because we changed the <code>file</code> attribute from <code>None</code> to an empty list. We do this because lists are mutable. When we append the opened file, the list is still the same and therefore shared among the other instances. In any case, the end effect is the same. The file is opened only once, and the lines get written in the same fashion as before. </p>
+<p>The idea of this quick example is that opening the file only once is not a feature exclusive of singletons. Just by smartly using mutability, we can achieve the same effect in even fewer lines of code. </p>
+<h2>Conclusions</h2>
+<p>The singleton pattern can be of great help when designing lower-level applications or frameworks. Python uses singletons to speed up its execution and to be more memory efficient. If we compare the time it takes to resolve <code>f == f2</code> and <code>f is f2</code> in the singleton and not-singleton cases, we can see some time improvements in the first. Whether the modifications impact the costs and limitations of the implementation will depend on how often we check equality. </p>
+<p>For higher-level solutions, however, the singleton pattern is harder to come by. I have tried to dig examples in other projects, but the only answer that comes back is the <em>logger</em> implementation. If anyone has an excellent example of using singletons in higher-level programs, I would be very grateful to hear it. </p>
+<h3>Singletons can break unit tests</h3>
+<p>A side note that is worth mentioning is that the singleton pattern can easily break unit tests' idea. In the singleton example above, we could have modified the <code>MyFile</code> object by doing something like <code>f.new_file = open('another_file')</code>. This change would have been persistent and can potentially alter other tests. The spirit behind unit tests is that each one is responsible for one thing and one thing only. If tests can impact each other, they are no longer <em>unit</em> tests. </p>
+        </main>
+      </div>
+      <div class="flex border-t text-lg px-4 pt-6 lg:pt-12 lg:mb-12">
+        <div
+            class="before:inset-y-1/2 before:inset-x-1 before:content-article before:h-6 before:w-6 before:inline-block before:align-middle"></div>
+        <div class="pl-8 text-gray-600 font-light">Article written by Aquiles Carattino</div>
+      </div>
+
+      <div class="pt-4 pb-6 md:px-4 border-t border-gray-200 justify-center">
+        <div class="bg-gray-300 font-serif text-2xl md:text-4xl text-center md:p-6 p-2">Join our newsletter!</div>
+        <div class="py-4">If you liked the content, sign up to never miss an update.
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:flex md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-gray-100 ring-red-500 p-4 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 w-full focus:bg-emerald-300 text-white p-4 mt-2 md:ml-4 md:mt-0 md:w-40">
+          </form>
+        </div>
+      </div>
+
+        <div class="lg:mt-6">
+          <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
+          <div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/data-descriptors-bringing-attributes-next-level" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/42_decorators.width-800.png"
+                           alt="Illustration of Data Descriptors: Bringing Attributes to the Next level">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2020-05-16</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Data Descriptors: Bringing Attributes to the Next level</h3>
+                      <div class="font-sans ">Descriptors in Python allow us to control how attributes of classes are accessed or modified. A pattern often encountered is defining properties to use setter and getter methods encapsulated as if they were a single attribute. In this article, we will dig into how the property decorator works, to understand …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              <div class="group border-b border-b-gray-400 mb-4">
+                <a href="blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="text-gray-700 hover:text-gray-900">
+                  <div class="sm:flex">
+                    <div class="flex-none sm:w-64 md:w-96">
+                      <img class="px-2 pb-4" src="/images/python1-01_gq7Qcbn.width-800.png"
+                           alt="Illustration of Using slots in Python: limit dynamic attribute creation and improve speed">
+                    </div>
+                    <div class="px-4 sm:flex-auto">
+                      <div class="text-gray-600 text-xs p-0.5">2021-03-21</div>
+                      <h3 class="font-serif leading-tight text-lg font-semibold pb-2">Using slots in Python: limit dynamic attribute creation and improve speed</h3>
+                      <div class="font-sans ">When we create classes, one of the biggest challenges is understanding how to handle dynamic attribute creation. Slots have the benefit of limiting attribute creation at runtime. In this article, we will explore how slots work, including a quick overview of how classes store attributes internally. Dynamic attribute creation One …</div>
+                      <div class="p-2 inline-block font-sm"><span
+                          class="after:transition-all after:ease-in-out hover:after:translate-x-2.5 after:inline-block after:translate-x-1.5 after:w-5 group-hover:after:content-arrowBlue">Read more</span>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+          </div>
+        </div>
+      <div class="px-2 lg:text-center lg:mt-8">
+        <h4 class="text-2xl leading-tight lg:mx-auto lg:text-4xl">Share your thoughts with us!</h4>
+        <div class="comments">
+          <!-- Comment -->
+          <script src="https://utteranc.es/client.js"
+                  repo="PFTL/pftl_discussions"
+                  issue-term="pathname"
+                  label="Comment"
+                  theme="github-light"
+                  crossorigin="anonymous"
+                  async>
+          </script>
+        </div>
+      </div>
+    </div>
+    <div id="col-right" class="lg:w-72">
+      <div class="bg-gray-300 place-items-center mt-3 p-6">
+        <h3 class="font-serif text-2xl text-center mb-2 font-semibold mx-auto lg:text-xl">Support Us</h3>
+        <p class="font-serif lg:text-sm leading-tight mb-2">If you like the content of this website, consider buying a
+          copy of
+          the book
+          <strong>Python For The
+            Lab</strong></p>
+        <a href="https://pythonforthelab.com/books">
+          <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+            Check out the books
+          </button>
+        </a>
+      </div>
+
+      <div class="mt-3 border border-gray-400  place-items-center">
+          <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
+          <ul class="mt-4">
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                  <div>Instructions to build the Python for the Lab DAQ.</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                  <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-03-21</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                  <div>Acquiring images from Basler Cameras</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-02-27</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                  <div>Singletons: Instantiate objects only once</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2021-01-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                  <div>Differences of Multiprocessing on Windows and Linux</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-06-13</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Using Else with Loops</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-25</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tip: Ready to Publish Matplotlib Figures</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-18</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                  <div>Data Descriptors: Bringing Attributes to the Next level</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-16</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                  <div>Python Tips: Using Sets</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-05-11</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
+                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2020-04-10</div>
+                </a>
+              </li>
+          </ul>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Footer -->
+<footer class="w-full bg-black text-white p-8">
+  <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
+      <li>
+        <a
+          href="https://pythonforthelab.com/about"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          About Us
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/cookie-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Cookie Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/privacy-policy"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Privacy Policy
+        </a>
+      </li>
+      <li>
+        <a
+          href="https://pythonforthelab.com/contact-us"
+          class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
+        >
+          Contact Us
+        </a>
+      </li>
+    </ul>
+  </div>
+  <hr class="my-8 border-blue-gray-50" />
+  <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
+    © 2023 Python for the Lab
+  </p>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+<script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
+<script>
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+</script>
+
+<script>
+    $(document).ready(function () {
+        responsive_menu = $('#menu');
+        nav = $('nav');
+        $('#menu-button').on('click', function (e) {
+            e.preventDefault();
+            if (responsive_menu.is(':hidden')) {
+                responsive_menu.slideToggle();
+                nav.addClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $('hamburger').slideToggle();
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+            } else {
+                responsive_menu.slideToggle();
+                nav.removeClass('bg-white');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+            }
+        });
+        position = $(window).height();
+        $(window).scroll(function () {
+            var currentScroll = $(window).scrollTop();
+            if (currentScroll >= position) {
+                $('#sticky_menu').addClass('lg:block');
+            } else {
+                $('#sticky_menu').removeClass('lg:block');
+            }
+        });
+    });
+</script></body>
+</html>
