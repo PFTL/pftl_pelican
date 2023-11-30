@@ -175,7 +175,7 @@
           <div>
             {% for similar in article.similar_posts %}
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="{{ similar.url }}" class="text-gray-700 hover:text-gray-900">
+                <a href="{{ SITEURL }}/{{ similar.url }}" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="{{ similar.image }}"
