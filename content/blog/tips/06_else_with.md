@@ -3,7 +3,7 @@ author: Aquiles Carattino
 slug: python-tip-using-else-loops
 date: 2020-05-25
 description: Learn how to use the else block with for and while loops
-image: '/images/Tips_02_Python-Tips-Matplotlib-Saving.width-800.png'
+image: '/images/else_in_loops.png'
 subtitle: Learn how to use the else block with for and while loops
 tags: [loops, for, while, else, tips] 
 title: "Python Tip: Using Else with Loops"

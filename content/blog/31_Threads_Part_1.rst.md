@@ -3,7 +3,7 @@ author: Aquiles Carattino
 slug: starting-and-synchronizing-threads
 date: '2019-08-06'
 description: Learn how threads in Python can help you develop better code
-image: '/images/python1-01_JBbb9vt.width-800.png'
+image: '/images/synchronizing_threads.png'
 subtitle: Learn how threads in Python can help you develop better code
 tags: [threads, async, multithreading, parallel]
 title: Starting and Synchronizing Threads

@@ -3,7 +3,7 @@ author: Aquiles Carattino
 slug: python-tip-ready-publish-matplotlib-figures
 date: 2020-05-18
 description: Learn how to make figures with proper font size and resolution, ready to be published
-image: '/images/Tips_02_Python-Tips-Matplotlib-Saving.width-800.png'
+image: '/images/matplotlib_ready_figures.png'
 subtitle: Learn how to make figures with proper font size and resolution, ready to be published
 tags: [matplotlib, resolution, figure, plot, saving] 
 title: "Python Tip: Ready to Publish Matplotlib Figures"
