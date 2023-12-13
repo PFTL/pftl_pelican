@@ -4457,9 +4457,6 @@ program.&lt;/p&gt;
 &lt;p&gt;Exactly how to achieve this behavior will depend on your situation, but
 with the examples above you already have a clear picture of what the
 strategy could be.&lt;/p&gt;
-&lt;p&gt;Header Photo by &lt;a href="https://unsplash.com/@shashanksahay?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Shashank
-Sahay&lt;/a&gt;
-on Unsplash&lt;/p&gt;
 &lt;p&gt;The code found in this article is &lt;a href="https://github.com/PFTL/website/tree/master/example_code/34_monkey_patching"&gt;available on
 Github&lt;/a&gt;.
 Any comment, improvement, or suggestion can be &lt;a href="https://github.com/PFTL/website/issues/new"&gt;submitted
@@ -4701,10 +4698,7 @@ the libraries you use don't verify the type of variables, but only their
 functioning), you can design your own classes in such a way that they
 behave as a specific data type. Our example was a class that mimics how
 dictionaries work, and which we used as an argument in a different
-object, which had no idea of our custom data type.&lt;/p&gt;
-&lt;p&gt;Header image by &lt;a href="https://unsplash.com/@joshstyle?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;JOSHUA
-COLEMAN&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="functions"></category><category term="methods"></category><category term="dynamic language"></category><category term="typing"></category><category term="types"></category></entry><entry><title>Introduction to Python Lambda Functions</title><link href="https://pythonforthelab.com/blog/intro-to-python-lambda-functions" rel="alternate"></link><published>2019-03-17T00:00:00+01:00</published><updated>2019-03-17T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-03-17:/blog/intro-to-python-lambda-functions</id><summary type="html">&lt;p&gt;Some time ago, Python introduced in its syntax the possibility to define
+object, which had no idea of our custom data type.&lt;/p&gt;</content><category term="blog"></category><category term="functions"></category><category term="methods"></category><category term="dynamic language"></category><category term="typing"></category><category term="types"></category></entry><entry><title>Introduction to Python Lambda Functions</title><link href="https://pythonforthelab.com/blog/intro-to-python-lambda-functions" rel="alternate"></link><published>2019-03-17T00:00:00+01:00</published><updated>2019-03-17T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-03-17:/blog/intro-to-python-lambda-functions</id><summary type="html">&lt;p&gt;Some time ago, Python introduced in its syntax the possibility to define
 functions using &lt;code&gt;lambda&lt;/code&gt; instead of &lt;code&gt;def&lt;/code&gt;. These functions are called
 anonymous and are very common in other languages such as Javascript.
 However, in Python, they seem a bit obscure and are often either
@@ -4918,10 +4912,7 @@ are used very often and have a much richer syntax than in Python. I
 don't believe Python will head the same way, but in any case, they are a
 tool that can help you not only with your current programs but they can
 also help you understand what is going on if you ever tinker with other
-languages.&lt;/p&gt;
-&lt;p&gt;Header Photo by &lt;a href="https://unsplash.com/photos/YkYcdn4EbDs?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Ivana
-Cajina&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"></category><category term="functions"></category><category term="methods"></category><category term="arguments"></category><category term="packing"></category><category term="unpacking"></category><category term="args"></category><category term="kwargs"></category></entry><entry><title>What are args and kwargs and when to use them</title><link href="https://pythonforthelab.com/blog/what-are-args-and-kwargs-and-when-to-use-them" rel="alternate"></link><published>2019-03-10T00:00:00+01:00</published><updated>2019-03-10T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-03-10:/blog/what-are-args-and-kwargs-and-when-to-use-them</id><summary type="html">&lt;p&gt;If you have worked with Python for long enough, probably you have
+languages.&lt;/p&gt;</content><category term="blog"></category><category term="functions"></category><category term="methods"></category><category term="arguments"></category><category term="packing"></category><category term="unpacking"></category><category term="args"></category><category term="kwargs"></category></entry><entry><title>What are args and kwargs and when to use them</title><link href="https://pythonforthelab.com/blog/what-are-args-and-kwargs-and-when-to-use-them" rel="alternate"></link><published>2019-03-10T00:00:00+01:00</published><updated>2019-03-10T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-03-10:/blog/what-are-args-and-kwargs-and-when-to-use-them</id><summary type="html">&lt;p&gt;If you have worked with Python for long enough, probably you have
 encountered code that uses &lt;code&gt;*args&lt;/code&gt; and &lt;code&gt;**kwargs&lt;/code&gt; as arguments in
 functions. Even if you haven't, it is a very neat feature that allows
 you to achieve great flexibility while developing code. In this article,
