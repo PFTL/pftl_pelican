@@ -3,7 +3,7 @@ author: Aquiles Carattino
 slug: duck-typing-or-how-to-check-variable-types
 date: '2019-06-11'
 description: What duck typing means how can it affect your program architecture
-image: '/images/joshua-coleman-655076-unsplash_linkedin.width-800.jpg'
+image: '/images/duck_typing.png'
 subtitle: What duck typing means how can it affect your program architecture
 tags: [functions, methods, dynamic language, typing, types]
 title: 'Duck Typing, or how to check variable types'
@@ -308,7 +308,3 @@ functioning), you can design your own classes in such a way that they
 behave as a specific data type. Our example was a class that mimics how
 dictionaries work, and which we used as an argument in a different
 object, which had no idea of our custom data type.
-
-Header image by [JOSHUA
-COLEMAN](https://unsplash.com/@joshstyle?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-on Unsplash

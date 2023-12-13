@@ -3,7 +3,7 @@ author: Aquiles Carattino
 slug: intro-to-python-lambda-functions
 date: '2019-03-17'
 description: 'Anonymous functions are powerful, but they are hard to understand'
-image: '/images/ivana-cajina-324103-unsplash_linkedin.width-800.jpg'
+image: '/images/lambda_functions.png'
 subtitle: 'Anonymous functions are powerful, but they are hard to understand'
 tags: [functions, methods, arguments, packing, unpacking, args, kwargs]
 title: Introduction to Python Lambda Functions
@@ -287,7 +287,3 @@ don't believe Python will head the same way, but in any case, they are a
 tool that can help you not only with your current programs but they can
 also help you understand what is going on if you ever tinker with other
 languages.
-
-Header Photo by [Ivana
-Cajina](https://unsplash.com/photos/YkYcdn4EbDs?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-on Unsplash

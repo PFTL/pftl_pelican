@@ -3,7 +3,7 @@ author: Aquiles Carattino
 slug: monkey-patching-and-its-consequences
 date: '2019-06-18'
 description: Replacing methods and attributes at runtime
-image: '/images/aqui_c_monkey_patching_and_its_consequences._F.width-800.png'
+image: '/images/monkey_patching.png'
 subtitle: Replacing methods and attributes at runtime
 tags: [functions, methods, monkey patching, replacing, extending, mutable,
     immutable]
@@ -374,10 +374,6 @@ program.
 Exactly how to achieve this behavior will depend on your situation, but
 with the examples above you already have a clear picture of what the
 strategy could be.
-
-Header Photo by [Shashank
-Sahay](https://unsplash.com/@shashanksahay?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
-on Unsplash
 
 The code found in this article is [available on
 Github](https://github.com/PFTL/website/tree/master/example_code/34_monkey_patching).

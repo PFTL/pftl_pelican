@@ -5,7 +5,7 @@ date: '2018-12-17'
 description: |
     Introduction to using sockets for communication between different
     processes
-image: '/images/thomas-jensen-592813-unsplash_linkedin.width-800.jpg'
+image: '/images/zmq.png'
 subtitle: |
     Introduction to using sockets for communication between different
     processes
