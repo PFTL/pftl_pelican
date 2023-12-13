@@ -3,7 +3,7 @@ author: Aquiles Carattino
 slug: using-pyzmq-for-inter-process-communication-part-2
 date: '2019-03-05'
 description: ZeroMQ is a powerful library to exchange information between different processes in Python
-image: '/images/thomas-jensen-592813-unsplash_linkedin_elhzvKj.width-800.jpg'
+image: '/images/zmq_2.png'
 subtitle: ZeroMQ is a powerful library to exchange information between different processes in Python
 tags: [ZeroMQ, ZMQ, Socket, Communication, Parallel, Data]
 title: 'Using pyZMQ for inter-process communication: Part 2'
