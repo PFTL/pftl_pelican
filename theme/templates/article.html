@@ -115,8 +115,11 @@
         <div class="text-sm text-gray-400">
           <span
               class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">{{ article.author }}</span>
-          <span
               class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">{{ article.date.strftime('%Y-%m-%d') }}</span>
+          {% if article.modified %}
+          <span
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1 italic">Updated: {{ article.modified.strftime('%Y-%m-%d') }}</span>
+          {% endif %}
           <span
               class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
             {% for tag in article.tags %}

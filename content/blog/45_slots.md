@@ -4,6 +4,7 @@ slug: using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed
 date: '2021-03-21'
 description: Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make
 image: '/images/python1-01_gq7Qcbn.width-800.png'
+modified: '2026-01-20'
 subtitle: Limiting attribute creation in Python can be useful to limit the number of mistakes users of our code can make
 tags: [classes, object oriented, dictionary, memory, slots]
 title: "Using slots in Python: limit dynamic attribute creation and improve speed"
@@ -204,10 +205,10 @@ We saw that when we define slots for a class, its objects do not have a ``__dict
 class Person:
 __slots__ = 'age', 'name', '__dict__'
 
-def __init__(self, age, name):
-    self.age = age
-    self.name = name
-    self.birth_year = 1986
+    def __init__(self, age, name):
+        self.age = age
+        self.name = name
+        self.birth_year = 1986
 ```
 
 And we can now use it as we have always done:
@@ -227,10 +228,10 @@ The final important topic to cover about slots is how they behave with inheritan
 
 ```python
 class Person:
-__slots__ = 'age', 'name'
-def __init__(self, age, name):
-    self.age = age
-    self.name = name
+    __slots__ = 'age', 'name'
+    def __init__(self, age, name):
+        self.age = age
+        self.name = name
 
 class Student(Person):
     def __init__(self, age, name, course):
@@ -257,9 +258,9 @@ The other possibility is to define slots in the child class but not in the paren
 
 ```python
 class Person:
-def __init__(self, age, name):
-    self.age = age
-    self.name = name
+    def __init__(self, age, name):
+        self.age = age
+        self.name = name
 
 class Student(Person):
     __slots__ = 'course'

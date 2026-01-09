@@ -2,6 +2,7 @@
 title: Privacy Policy
 slug: privacy-policy
 description: Python for the Lab privacy description
+template: policy_page
 ---
 
 At Python For The Lab, accessible from https://www.pythonforthelab.com, one of our main priorities is the privacy of our visitors. This Privacy Policy document contains types of information that is collected and recorded by Python For The Lab and how we use it.

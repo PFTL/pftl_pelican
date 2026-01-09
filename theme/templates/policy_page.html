@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}{{ page.title }}{% endblock %}
+{% block meta_header %}
+  <meta name="description" content="{{ page.description }}">
+  {% if page.author %}
+  <meta name="author" content="{{ page.author }}">
+  {% endif %}
+  <link rel="canonical" href="{{ SITEURL }}/{{ page.url }}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:site_name" content="Python for the Lab">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="{{ SITEURL }}/{{ page.url }}">
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:description" content="{{ page.description }}">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="{{ SITEURL }}/{{ page.url }}">
+  <meta property="twitter:title" content="{{ page.title }}">
+  <meta property="twitter:description" content="{{ page.description }}">
+  <meta name="twitter:creator" content="@aquicarattino">
+
+{% endblock %}
+{% block head_scripts %}
+  <link rel="stylesheet" href="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/prism.css"/>
+{% endblock %}
+
+{% block body %}
+  <header class="relative bg-gray-800 md:h-80 lg:flex h-64">
+    <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
+      <nav class="lg:pr-8 w-full lg:pt-4">
+        <div class="flex p-3 items-center justify-between">
+          <a class="flex-none" href="{{ SITEURL }}">
+            <img id="site-logo" class="h-12"
+                 src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/logo-red.svg"/>
+          </a>
+          <div id="menu_sm"
+               class="pr-0 pl-4 grow hidden lg:block">
+            {% include "nav_menu.html" %}
+          </div>
+          <div class="">
+            <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
+              <img id="hamburger" src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/hamburger.svg"
+                   class="h-8 w-8"/>
+            </button>
+          </div>
+        </div>
+        <div id="menu"
+             class="pr-0 pb-8 mx-0 pt-8 pl-12 basis-full grow bg-white z-30 min-w-full hidden drop-shadow-lg border-b-8 border-b-red-700">
+          {% include "index_wide_menu.html" %}
+        </div>
+      </nav>
+      <div class="md:flex text-gray-200 lg:min-w-full lg:pt-4 pb-8">
+      </div>
+    </div>
+    <div class="hidden lg:block lg:w-72 ml-1 pl-2 mr-2 pt-4 w-72">
+      <div class="mb-8 shadow-2xl">
+        <form action="#" class="w-full pr-8 pt-4 text-xs">
+          <label for="search" class="relative block">
+            <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
+                 src="{{ SITEURL }}/{{ THEME_STATIC_DIR }}/css/images/search.svg">
+            <input id="search" data-stork="sitesearch" type="text"
+                   class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
+                   placeholder="Type to Search">
+          </label>
+        </form>
+        <div data-stork="sitesearch-output"></div>
+      </div>
+      <div class="py-2 shadow-2xl">
+        <div class="text-gray-300">
+          <span class="font-semibold text-sm">Get all the information directly to your inbox.</span>
+        </div>
+        <div id="mc_embed_signup" class="">
+          <form
+              action="https://pythonforthelab.us21.list-manage.com/subscribe/post?u=f0d9bfa6188cdcc67890a07f6&amp;id=8a0ca536e8&amp;f_id=00dfebe6f0"
+              method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form"
+              class="validate my-3 md:max-w-lg"
+              target="_self" novalidate="">
+            <div class="field-wp">
+              <input type="email" name="EMAIL" placeholder="Your E-Mail" id="mce-EMAIL" required=""
+                     value=""
+                     class="required email bg-white ring-red-500 p-2 w-full md:max-w-2/3">
+            </div>
+            <div id="mce-responses" class="clear foot">
+              <div class="response" id="mce-error-response" style="display: none;"></div>
+              <div class="response" id="mce-success-response" style="display: none;"></div>
+            </div>
+            <div style="position: absolute; left: -5000px;" aria-hidden="true">
+              /* real people should not fill this in and expect good things - do not remove this or risk
+              form
+              bot
+              signups */
+              <input type="text" name="b_f0d9bfa6188cdcc67890a07f6_8a0ca536e8" tabindex="-1" value="">
+            </div>
+            <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+                   class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
+          </form>
+          <span class="text-gray-400 text-xs">Unsubscribe any time.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="lg:mx-auto lg:flex lg:ml-16">
+
+    <div id="col-left" class="md:content-stretch lg:w-[880px]">
+      <div class="relative text-gray-800 mx-2 z-40">
+        <!-- Image removed -->
+        <h1 class="font-serif font-extrabold text-4xl leading-tight pb-2 mt-8 lg:mt-12">{{ page.title }}</h1>
+        <div class="font-sans font-bold text-xl">{{ page.description }}</div>
+        <!-- Metadata removed or simplified? Policy pages often don't need author/date displayed the same way -->
+      </div>
+
+      <div class="article-content mt-4 mx-2">
+        <main>
+          {{ page.content }}
+        </main>
+      </div>
+      
+      <!-- Newsletter, related articles, and comments removed -->
+
+    </div>
+    <!-- Right sidebar removed -->
+  </div>
+
+
+{% endblock %}
