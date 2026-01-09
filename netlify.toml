@@ -1,5 +1,5 @@
 [build]
-  command = "wget -q -O stork https://files.stork-search.net/releases/v1.6.0/stork-ubuntu-20-04 && chmod +x stork && export PATH=$PATH:$(pwd) && make publish"
+  command = "wget http://security.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2_amd64.deb && dpkg -x libssl1.1_1.1.1f-1ubuntu2_amd64.deb . && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$(pwd)/usr/lib/x86_64-linux-gnu && wget -q -O stork https://files.stork-search.net/releases/v1.6.0/stork-ubuntu-20-04 && chmod +x stork && export PATH=$PATH:$(pwd) && make publish"
   publish = "output"
 
 [build.environment]
