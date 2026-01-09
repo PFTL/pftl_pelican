@@ -191,7 +191,7 @@ with h5py.File('complex_read.hdf5', 'r') as f:
         if d1[i] > 0:
             data.append(d2[i])
 
-print('The length of data with a for loop: {}'.format(len(data)))
+print(f'The length of data with a for loop: {len(data)}')
 ```
 
 Of course, there are efficiency concerns regarding reading an array
@@ -626,7 +626,7 @@ def get_objects(name, obj):
 with h5py.File('groups.hdf5', 'r') as f:
    group = f.visititems(get_objects)
    data = group['default']
-   print('First data element: {}'.format(data[0]))
+   print(f'First data element: {data[0]}')
 ```
 
 The main difference when using ``visititems`` is that we have accessed the name of the object that is being analyzed and the object
@@ -661,10 +661,10 @@ with h5py.File('groups.hdf5', 'w') as f:
     d.attrs['OS'] = os.name
 
     for k in g.attrs.keys():
-        print('{} => {}'.format(k, g.attrs[k]))
+        print(f'{k} => {g.attrs[k]}')
 
     for j in d.attrs.keys():
-      print('{} => {}'.format(j, d.attrs[j]))
+      print(f'{j} => {d.attrs[j]}')
 ```
 
 In the code above you can see that the ``attrs`` is like a dictionary. In
@@ -686,7 +686,7 @@ with h5py.File('groups.hdf5', 'w') as f:
    f.attrs.update(metadata)
 
    for m in f.attrs.keys():
-      print('{} => {}'.format(m, f.attrs[m]))
+      print(f'{m} => {f.attrs[m]}')
 ```
 
 Remember that the data types that hdf5 supports are limited. For
@@ -721,7 +721,7 @@ transform it back to a dictionary using `json.loads`:
 with h5py.File('groups_dict.hdf5', 'r') as f:
     metadata = json.loads(f['Base_Group/metadata'][()])
     for k in metadata:
-        print('{} => {}'.format(k, metadata[k]))
+        print(f'{k} => {metadata[k]}')
 ```
 
 When you use json to encode your data, you are defining a specific
