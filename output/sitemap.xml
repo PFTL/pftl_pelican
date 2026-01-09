@@ -6,77 +6,77 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://localhost:8000/</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/404.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/about/</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/archives.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/author/aquiles-carattino.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/author/aquiles-carattino2.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/author/aquiles-carattino3.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/author/aquiles-carattino4.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/author/aquiles-carattino5.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/authors.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/blog/</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -223,28 +223,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://localhost:8000/blog/index2.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/blog/index3.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/blog/index4.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/blog/index5.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
@@ -419,35 +419,35 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://localhost:8000/books/</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/courses/</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/hire-me/</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>weekly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/pages/cookie-policy.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
 
 <url>
 <loc>http://localhost:8000/pages/privacy-policy.html</loc>
-<lastmod>2026-01-09T22:16:57-00:00</lastmod>
+<lastmod>2026-01-09T22:22:33-00:00</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.5</priority>
 </url>
