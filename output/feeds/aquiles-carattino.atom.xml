@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Python For The Lab - Aquiles Carattino</title><link href="http://localhost:8000/" rel="alternate"/><link href="https://www.pythonforthelab.com/feeds/aquiles-carattino.atom.xml" rel="self"/><id>http://localhost:8000/</id><updated>2021-03-27T00:00:00+01:00</updated><entry><title>Instructions to build the Python for the Lab DAQ.</title><link href="http://localhost:8000/blog/instructions-to-build-the-python-for-the-lab-daq/" rel="alternate"/><published>2021-03-27T00:00:00+01:00</published><updated>2021-03-27T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2021-03-27:/blog/instructions-to-build-the-python-for-the-lab-daq/</id><summary type="html">&lt;p&gt;The PFTL DAQ is the ideal companion to follow the book &lt;a href="https://pythonforthelab.com/books/"&gt;Python for the Lab&lt;/a&gt;. Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The PFTL DAQ is the ideal companion to follow the book &lt;a href="https://pythonforthelab.com/books/"&gt;Python for the Lab&lt;/a&gt;. Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to follow the book to its fullest. &lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Python For The Lab - Aquiles Carattino</title><link href="https://pythonforthelab.com/" rel="alternate"/><link href="https://www.pythonforthelab.com/feeds/aquiles-carattino.atom.xml" rel="self"/><id>https://pythonforthelab.com/</id><updated>2021-03-27T00:00:00+01:00</updated><entry><title>Instructions to build the Python for the Lab DAQ.</title><link href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" rel="alternate"/><published>2021-03-27T00:00:00+01:00</published><updated>2021-03-27T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2021-03-27:/blog/instructions-to-build-the-python-for-the-lab-daq/</id><summary type="html">&lt;p&gt;The PFTL DAQ is the ideal companion to follow the book &lt;a href="https://pythonforthelab.com/books/"&gt;Python for the Lab&lt;/a&gt;. Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The PFTL DAQ is the ideal companion to follow the book &lt;a href="https://pythonforthelab.com/books/"&gt;Python for the Lab&lt;/a&gt;. Building the device itself is not part of the book because it focuses on Python best practices and not on lower-level electronics. In this article, we will quickly see how to build the device to follow the book to its fullest. &lt;/p&gt;
 &lt;h2&gt;Materials&lt;/h2&gt;
 &lt;p&gt;The device is built on an &lt;strong&gt;Arduino DUE&lt;/strong&gt;, which can be purchased directly from &lt;a href="https://store.arduino.cc/arduino-due"&gt;Arduino's webstore&lt;/a&gt; or any other supplier. The DUE choice was driven because it is the only board that provides analog outputs (also known as DAC). However, boards evolve over time, and there may be others available with the same options. &lt;/p&gt;
 &lt;p&gt;Arduino also provides a program called &lt;a href="https://www.arduino.cc/en/software"&gt;Arduino IDE&lt;/a&gt;, which we need to load programs to the boards. However, the DUE is not available by default. To add the DUE to the list of compatible boards, we'll need to open the board manager. &lt;/p&gt;
@@ -16,7 +16,7 @@
 &lt;p&gt;&lt;img alt="Schematics of the circuit for Python for the Lab" src="/images/46_pftl_daq/PFTL_DAQ_Schematic_bb.png"&gt;&lt;/p&gt;
 &lt;p&gt;Sourcing the electronics components will depend on the country. There are some suppliers like Farnell and RS Electronics that may be available. Still, in general, any electronics do-it-yourself shop will be able to provide the elements. &lt;/p&gt;
 &lt;h2&gt;Understanding the Arduino code&lt;/h2&gt;
-&lt;p&gt;Although not part of the book, it can be useful to look at the code loaded to the Arduino. The approach is very similar to what is discussed on &lt;a href="http://localhost:8000/blog/how-control-arduino-computer-using-python"&gt;how to control an Arduino from Python&lt;/a&gt;. Besides some boilerplate initialization of variables, we encounter the &lt;code&gt;setup&lt;/code&gt; function. This function is called only once when the Arduino is boot up, which makes it the ideal place to initialize the communication with the computer or set the initial value of some outputs:&lt;/p&gt;
+&lt;p&gt;Although not part of the book, it can be useful to look at the code loaded to the Arduino. The approach is very similar to what is discussed on &lt;a href="https://pythonforthelab.com/blog/how-control-arduino-computer-using-python"&gt;how to control an Arduino from Python&lt;/a&gt;. Besides some boilerplate initialization of variables, we encounter the &lt;code&gt;setup&lt;/code&gt; function. This function is called only once when the Arduino is boot up, which makes it the ideal place to initialize the communication with the computer or set the initial value of some outputs:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-c"&gt;void setup() {
   Serial.begin(9600);
   while (!Serial);
@@ -50,7 +50,7 @@
       Serial.print(val);
       Serial.print(&amp;quot;\n&amp;quot;);
     }
-&lt;/code&gt;&lt;/pre&gt;</content><category term="blog"/><category term="DAQ"/><category term="PFTL"/><category term="darduino due"/></entry><entry><title>Using slots in Python: limit dynamic attribute creation and improve speed</title><link href="http://localhost:8000/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" rel="alternate"/><published>2021-03-21T00:00:00+01:00</published><updated>2021-03-21T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2021-03-21:/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed</id><summary type="html">&lt;p&gt;When we create classes, one of the biggest challenges is understanding how to handle dynamic attribute creation. Slots have the benefit of limiting attribute creation at runtime. In this article, we will explore how slots work, including a quick overview of how classes store attributes internally. &lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;</content><category term="blog"/><category term="DAQ"/><category term="PFTL"/><category term="darduino due"/></entry><entry><title>Using slots in Python: limit dynamic attribute creation and improve speed</title><link href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" rel="alternate"/><published>2021-03-21T00:00:00+01:00</published><updated>2021-03-21T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2021-03-21:/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed</id><summary type="html">&lt;p&gt;When we create classes, one of the biggest challenges is understanding how to handle dynamic attribute creation. Slots have the benefit of limiting attribute creation at runtime. In this article, we will explore how slots work, including a quick overview of how classes store attributes internally. &lt;/p&gt;
 &lt;h2&gt;Dynamic attribute creation&lt;/h2&gt;
 &lt;p&gt;One …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When we create classes, one of the biggest challenges is understanding how to handle dynamic attribute creation. Slots have the benefit of limiting attribute creation at runtime. In this article, we will explore how slots work, including a quick overview of how classes store attributes internally. &lt;/p&gt;
 &lt;h2&gt;Dynamic attribute creation&lt;/h2&gt;
@@ -277,7 +277,7 @@ AttributeError: 'Student' object has no attribute 'new_var'
 &lt;h2&gt;Conclusions: Deciding when is worth using slots&lt;/h2&gt;
 &lt;p&gt;Slots are a feature worth keeping in mind when developing code and, more importantly, when studying other's code. Using them for speed and memory improvements is likely to be far-fetched for most programs. It is essential to keep in mind that if a program was optimized using slots, we could easily ruin those optimizations by careless inheritance. &lt;/p&gt;
 &lt;p&gt;On the other hand, limiting the attribute creation at runtime can have a broad set of application contexts, even if it was not the original motivation for implementing slots in Python. For example, when developing code to control hardware, such as a camera, users may make mistakes such as using &lt;code&gt;exposure&lt;/code&gt; instead of &lt;code&gt;exposure_time&lt;/code&gt; to change a parameter. Due to dynamic attribute creation, there won't be any error shown on the screen. &lt;/p&gt;
-&lt;p&gt;Slots are not the only way of solving these issues, but they are straightforward to implement. &lt;/p&gt;</content><category term="blog"/><category term="classes"/><category term="object oriented"/><category term="dictionary"/><category term="memory"/><category term="slots"/></entry><entry><title>Acquiring images from Basler Cameras</title><link href="http://localhost:8000/blog/getting-started-with-basler-cameras" rel="alternate"/><published>2021-02-27T00:00:00+01:00</published><updated>2021-02-27T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2021-02-27:/blog/getting-started-with-basler-cameras</id><summary type="html">&lt;p&gt;Basler offers a wide range of cameras that can be used for microscopy, computer vision, or even as security cameras. One of the cameras' advantages is that they come with a software development kit that makes them easy to integrate into our projects. Basler puts continuous effort into maintaining PyPylon …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Basler offers a wide range of cameras that can be used for microscopy, computer vision, or even as security cameras. One of the cameras' advantages is that they come with a software development kit that makes them easy to integrate into our projects. Basler puts continuous effort into maintaining PyPylon, the Python bindings for their drivers. This tutorial will focus on learning how to get started with the cameras and how to leverage the existing Pylon Viewer to speed up our development. &lt;/p&gt;
+&lt;p&gt;Slots are not the only way of solving these issues, but they are straightforward to implement. &lt;/p&gt;</content><category term="blog"/><category term="classes"/><category term="object oriented"/><category term="dictionary"/><category term="memory"/><category term="slots"/></entry><entry><title>Acquiring images from Basler Cameras</title><link href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" rel="alternate"/><published>2021-02-27T00:00:00+01:00</published><updated>2021-02-27T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2021-02-27:/blog/getting-started-with-basler-cameras</id><summary type="html">&lt;p&gt;Basler offers a wide range of cameras that can be used for microscopy, computer vision, or even as security cameras. One of the cameras' advantages is that they come with a software development kit that makes them easy to integrate into our projects. Basler puts continuous effort into maintaining PyPylon …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Basler offers a wide range of cameras that can be used for microscopy, computer vision, or even as security cameras. One of the cameras' advantages is that they come with a software development kit that makes them easy to integrate into our projects. Basler puts continuous effort into maintaining PyPylon, the Python bindings for their drivers. This tutorial will focus on learning how to get started with the cameras and how to leverage the existing Pylon Viewer to speed up our development. &lt;/p&gt;
 &lt;h2&gt;Installing&lt;/h2&gt;
 &lt;p&gt;To work with Basler cameras using Python, we must install the PyPylon package, which is the Python wrapper for the Pylon SDK. Basler's team improved the installation scripts of the package in the last few months, and it is now possible to install like any other package:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-bash"&gt;pip install pypylon
@@ -541,7 +541,7 @@ if grab and grab.GrabSucceeded():
 &lt;p&gt;All these topics are covered in detail in the documentation that can be accessed from the Pylon viewer's help menu. Once the essential topics are understood, it is easier to start implementing other features. &lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;Basler did a great job by open-sourcing its wrapper for Python. I've seen swift replies on &lt;a href="https://github.com/basler/pypylon"&gt;the repository&lt;/a&gt; where the code is hosted. I have been using PyPylon for some years already. It is nice to see a company that invests time and effort in adding Python support to its hardware. It takes a while to grasp the flow behind Pylon to build efficient solutions, but overall it is a very well-designed tool. It clearly shows that it was thought through and polished over the years. &lt;/p&gt;
-&lt;p&gt;In my opinion, the jewel of the crown is the PylonViewer. Having a program that exposes all the parameters of the hardware as well as their documentation is priceless. Leveraging the viewer to understand the effect the parameters have, their limits, etc., was a significant game-changer for me. Instead of starting from the manual seeking out terms, I always start with the viewer and only go to the manual if I have doubts or need extra contextual information. &lt;/p&gt;</content><category term="blog"/><category term="microscopy"/><category term="video"/><category term="pypylon"/><category term="camera"/><category term="basler"/></entry><entry><title>Singletons: Instantiate objects only once</title><link href="http://localhost:8000/blog/singletons-instantiate-objects-only-once" rel="alternate"/><published>2021-01-16T00:00:00+01:00</published><updated>2021-01-16T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2021-01-16:/blog/singletons-instantiate-objects-only-once</id><summary type="html">&lt;p&gt;When developing more extensive programs, being aware of different patterns can significantly help us solve problems even before they arise. One of those patterns is the creation of singletons, which are nothing else but objects that can be instantiated only once. In Python, we are exposed to singletons since the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When developing more extensive programs, being aware of different patterns can significantly help us solve problems even before they arise. One of those patterns is the creation of singletons, which are nothing else but objects that can be instantiated only once. In Python, we are exposed to singletons since the beginning, even if we are not aware of them. This article will discuss how singletons permeate our everyday programming and how we can bring them a step further. &lt;/p&gt;
+&lt;p&gt;In my opinion, the jewel of the crown is the PylonViewer. Having a program that exposes all the parameters of the hardware as well as their documentation is priceless. Leveraging the viewer to understand the effect the parameters have, their limits, etc., was a significant game-changer for me. Instead of starting from the manual seeking out terms, I always start with the viewer and only go to the manual if I have doubts or need extra contextual information. &lt;/p&gt;</content><category term="blog"/><category term="microscopy"/><category term="video"/><category term="pypylon"/><category term="camera"/><category term="basler"/></entry><entry><title>Singletons: Instantiate objects only once</title><link href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" rel="alternate"/><published>2021-01-16T00:00:00+01:00</published><updated>2021-01-16T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2021-01-16:/blog/singletons-instantiate-objects-only-once</id><summary type="html">&lt;p&gt;When developing more extensive programs, being aware of different patterns can significantly help us solve problems even before they arise. One of those patterns is the creation of singletons, which are nothing else but objects that can be instantiated only once. In Python, we are exposed to singletons since the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When developing more extensive programs, being aware of different patterns can significantly help us solve problems even before they arise. One of those patterns is the creation of singletons, which are nothing else but objects that can be instantiated only once. In Python, we are exposed to singletons since the beginning, even if we are not aware of them. This article will discuss how singletons permeate our everyday programming and how we can bring them a step further. &lt;/p&gt;
 &lt;h2&gt;Every Day Singletons&lt;/h2&gt;
 &lt;p&gt;Before we dive into singletons, it is important to remember how Python behaves when it comes to mutable and immutable data types. A list, for example, is mutable, which means we can change its contents without creating a new object. For example:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-pycon"&gt;&amp;gt;&amp;gt;&amp;gt; var1 = [1, 2, 3]
@@ -779,7 +779,7 @@ False
 &lt;p&gt;The singleton pattern can be of great help when designing lower-level applications or frameworks. Python uses singletons to speed up its execution and to be more memory efficient. If we compare the time it takes to resolve &lt;code&gt;f == f2&lt;/code&gt; and &lt;code&gt;f is f2&lt;/code&gt; in the singleton and not-singleton cases, we can see some time improvements in the first. Whether the modifications impact the costs and limitations of the implementation will depend on how often we check equality. &lt;/p&gt;
 &lt;p&gt;For higher-level solutions, however, the singleton pattern is harder to come by. I have tried to dig examples in other projects, but the only answer that comes back is the &lt;em&gt;logger&lt;/em&gt; implementation. If anyone has an excellent example of using singletons in higher-level programs, I would be very grateful to hear it. &lt;/p&gt;
 &lt;h3&gt;Singletons can break unit tests&lt;/h3&gt;
-&lt;p&gt;A side note that is worth mentioning is that the singleton pattern can easily break unit tests' idea. In the singleton example above, we could have modified the &lt;code&gt;MyFile&lt;/code&gt; object by doing something like &lt;code&gt;f.new_file = open('another_file')&lt;/code&gt;. This change would have been persistent and can potentially alter other tests. The spirit behind unit tests is that each one is responsible for one thing and one thing only. If tests can impact each other, they are no longer &lt;em&gt;unit&lt;/em&gt; tests. &lt;/p&gt;</content><category term="blog"/><category term="instance"/><category term="objects"/><category term="pattern"/><category term="object oriented"/><category term="singleton"/></entry><entry><title>Differences of Multiprocessing on Windows and Linux</title><link href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux" rel="alternate"/><published>2020-06-13T00:00:00+02:00</published><updated>2020-06-13T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-06-13:/blog/differences-between-multiprocessing-windows-and-linux</id><summary type="html">&lt;p&gt;Multiprocessing is an excellent package if you ever want to speed up your code without leaving Python. When I started working with multiprocessing, I was unaware of the differences between Windows and Linux, which set me back several weeks of development time on a relatively big project. Let's quickly see …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Multiprocessing is an excellent package if you ever want to speed up your code without leaving Python. When I started working with multiprocessing, I was unaware of the differences between Windows and Linux, which set me back several weeks of development time on a relatively big project. Let's quickly see how multiprocessing works and where Windows and Linux diverge. &lt;/p&gt;
+&lt;p&gt;A side note that is worth mentioning is that the singleton pattern can easily break unit tests' idea. In the singleton example above, we could have modified the &lt;code&gt;MyFile&lt;/code&gt; object by doing something like &lt;code&gt;f.new_file = open('another_file')&lt;/code&gt;. This change would have been persistent and can potentially alter other tests. The spirit behind unit tests is that each one is responsible for one thing and one thing only. If tests can impact each other, they are no longer &lt;em&gt;unit&lt;/em&gt; tests. &lt;/p&gt;</content><category term="blog"/><category term="instance"/><category term="objects"/><category term="pattern"/><category term="object oriented"/><category term="singleton"/></entry><entry><title>Differences of Multiprocessing on Windows and Linux</title><link href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" rel="alternate"/><published>2020-06-13T00:00:00+02:00</published><updated>2020-06-13T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2020-06-13:/blog/differences-between-multiprocessing-windows-and-linux</id><summary type="html">&lt;p&gt;Multiprocessing is an excellent package if you ever want to speed up your code without leaving Python. When I started working with multiprocessing, I was unaware of the differences between Windows and Linux, which set me back several weeks of development time on a relatively big project. Let's quickly see …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Multiprocessing is an excellent package if you ever want to speed up your code without leaving Python. When I started working with multiprocessing, I was unaware of the differences between Windows and Linux, which set me back several weeks of development time on a relatively big project. Let's quickly see how multiprocessing works and where Windows and Linux diverge. &lt;/p&gt;
 &lt;p&gt;The quickest way of showing how to use multiprocessing is to run a simple function without blocking the main program:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;import multiprocessing as mp
 from time import sleep
@@ -952,7 +952,7 @@ TypeError: cannot serialize '_io.TextIOWrapper' object
 &lt;p&gt;So, if you ever encounter these discrepancies, you will have to re-think the design of your program. I had objects with non-pickable attributes, especially drivers for devices and ZMQ sockets. &lt;/p&gt;
 &lt;h2&gt;Speed is another factor&lt;/h2&gt;
 &lt;p&gt;Even though processes usually speed up the speed of a program by leveraging multiple cores on a computer, starting each process can be time-consuming. The fact that on Windows and Mac Python needs to &lt;em&gt;pickle&lt;/em&gt; the objects to create child processes adds an overhead that may offset the benefits of running on separated processes. It is especially relevant when you have many small tasks to perform, instead of a couple of long-running ones. &lt;/p&gt;
-&lt;p&gt;Therefore, when using processes, improving the speed of the program is not a granted outcome. You should always benchmark your application to understand where and how different components can affect its behavior. &lt;/p&gt;</content><category term="tips"/><category term="multiprocessing"/><category term="windows"/><category term="linux"/><category term="tips"/></entry><entry><title>Python Tip: Using Else with Loops</title><link href="http://localhost:8000/blog/python-tip-using-else-loops" rel="alternate"/><published>2020-05-25T00:00:00+02:00</published><updated>2020-05-25T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-05-25:/blog/python-tip-using-else-loops</id><summary type="html">&lt;p&gt;Most likely, you are aware of how to use the &lt;code&gt;else&lt;/code&gt; statement with an &lt;code&gt;if&lt;/code&gt; clause. However, Python also allows us to use them with loops. They are straightforward to understand and open some exciting possibilities. Before continuing, remember that &lt;code&gt;else&lt;/code&gt; in this context should be called &lt;code&gt;no-break&lt;/code&gt;. &lt;/p&gt;
+&lt;p&gt;Therefore, when using processes, improving the speed of the program is not a granted outcome. You should always benchmark your application to understand where and how different components can affect its behavior. &lt;/p&gt;</content><category term="tips"/><category term="multiprocessing"/><category term="windows"/><category term="linux"/><category term="tips"/></entry><entry><title>Python Tip: Using Else with Loops</title><link href="https://pythonforthelab.com/blog/python-tip-using-else-loops" rel="alternate"/><published>2020-05-25T00:00:00+02:00</published><updated>2020-05-25T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2020-05-25:/blog/python-tip-using-else-loops</id><summary type="html">&lt;p&gt;Most likely, you are aware of how to use the &lt;code&gt;else&lt;/code&gt; statement with an &lt;code&gt;if&lt;/code&gt; clause. However, Python also allows us to use them with loops. They are straightforward to understand and open some exciting possibilities. Before continuing, remember that &lt;code&gt;else&lt;/code&gt; in this context should be called &lt;code&gt;no-break&lt;/code&gt;. &lt;/p&gt;
 &lt;p&gt;Let's quickly …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Most likely, you are aware of how to use the &lt;code&gt;else&lt;/code&gt; statement with an &lt;code&gt;if&lt;/code&gt; clause. However, Python also allows us to use them with loops. They are straightforward to understand and open some exciting possibilities. Before continuing, remember that &lt;code&gt;else&lt;/code&gt; in this context should be called &lt;code&gt;no-break&lt;/code&gt;. &lt;/p&gt;
 &lt;p&gt;Let's quickly see how a for-loop works:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;start = 0
@@ -1000,7 +1000,7 @@ else:
     raise Exception('Line not Found')
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Perhaps raising an exception is a bit extreme, but you see the pattern. It saves you from checking whether we found the line in the file or not using some extra variable to verify it. &lt;/p&gt;
-&lt;p&gt;If you have used this pattern and have any helpful examples, you can always share it in the discussion below.&lt;/p&gt;</content><category term="tips"/><category term="loops"/><category term="for"/><category term="while"/><category term="else"/><category term="tips"/></entry><entry><title>Python Tip: Ready to Publish Matplotlib Figures</title><link href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures" rel="alternate"/><published>2020-05-18T00:00:00+02:00</published><updated>2020-05-18T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-05-18:/blog/python-tip-ready-publish-matplotlib-figures</id><summary type="html">&lt;p&gt;Saving figures for publications, presentations, books, or websites can be a cumbersome task but doesn't need to be. In this &lt;strong&gt;Python Tip&lt;/strong&gt;, we will see how to create images using Matplotlib that are ready to be embedded. We will take care of the most important aspects: shape, font sizes, and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Saving figures for publications, presentations, books, or websites can be a cumbersome task but doesn't need to be. In this &lt;strong&gt;Python Tip&lt;/strong&gt;, we will see how to create images using Matplotlib that are ready to be embedded. We will take care of the most important aspects: shape, font sizes, and resolution. You won't have to tinker ever again with random parameters until the result is right. &lt;/p&gt;
+&lt;p&gt;If you have used this pattern and have any helpful examples, you can always share it in the discussion below.&lt;/p&gt;</content><category term="tips"/><category term="loops"/><category term="for"/><category term="while"/><category term="else"/><category term="tips"/></entry><entry><title>Python Tip: Ready to Publish Matplotlib Figures</title><link href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" rel="alternate"/><published>2020-05-18T00:00:00+02:00</published><updated>2020-05-18T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2020-05-18:/blog/python-tip-ready-publish-matplotlib-figures</id><summary type="html">&lt;p&gt;Saving figures for publications, presentations, books, or websites can be a cumbersome task but doesn't need to be. In this &lt;strong&gt;Python Tip&lt;/strong&gt;, we will see how to create images using Matplotlib that are ready to be embedded. We will take care of the most important aspects: shape, font sizes, and …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Saving figures for publications, presentations, books, or websites can be a cumbersome task but doesn't need to be. In this &lt;strong&gt;Python Tip&lt;/strong&gt;, we will see how to create images using Matplotlib that are ready to be embedded. We will take care of the most important aspects: shape, font sizes, and resolution. You won't have to tinker ever again with random parameters until the result is right. &lt;/p&gt;
 &lt;p&gt;Once you understand the options that Matplotlib offers, and what they mean, you will realize that generating publication-ready figures can be a breeze. We will focus mostly on plots for papers, but once you get the gist, you can extrapolate to other formats such as posters, books, or websites.  &lt;/p&gt;
 &lt;h2&gt;Size&lt;/h2&gt;
 &lt;p&gt;First, we need to discuss size and resolution, two independent, but related magnitudes. Size is the physical dimensions of an image. If we were preparing a plot for a paper, for example, we should first check the column width. &lt;a href="https://www.sciencemag.org/sites/default/files/Figure_prep_guide.pdf"&gt;Science uses a width&lt;/a&gt; of 9cm, or 3.54 inches. The height of the image will depend on the content we are displaying. For simplicity, I will assume a square image, so we have 3.54x3.54 inches. &lt;/p&gt;
@@ -1068,7 +1068,7 @@ plt.ylabel('Y label (V)', fontsize=18)
 &lt;p&gt;You can go ahead and try changing the &lt;em&gt;dpi&lt;/em&gt; of the image before saving, and try to notice if there are any differences. &lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;If you are preparing figures for a publication, the best you can do is finding out the size figures should have. Most journals give you the dimensions of the columns. If you can't find them, you can always default to the size of &lt;a href="https://www.sciencemag.org/sites/default/files/Figure_prep_guide.pdf"&gt;Science&lt;/a&gt;. Once you know the size of your figures, fix the &lt;em&gt;dpi&lt;/em&gt;. If it is for a paper, a thesis, or a poster, &lt;strong&gt;600dpi&lt;/strong&gt; should be good enough. Then, set the font size of the labels and the axes to match the font size of the text around them. You can make labels and ticks slightly bigger or smaller than the text, depending on your style preferences. &lt;/p&gt;
-&lt;p&gt;In &lt;a href="https://www.pythonforthelab.com/documents/1/image_sizes.pdf"&gt;this PDF&lt;/a&gt;, I have included figures generated at different &lt;em&gt;dpi&lt;/em&gt; but scaled to the sizes recommended by Science.&lt;/p&gt;</content><category term="tips"/><category term="matplotlib"/><category term="resolution"/><category term="figure"/><category term="plot"/><category term="saving"/></entry><entry><title>Data Descriptors: Bringing Attributes to the Next level</title><link href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level" rel="alternate"/><published>2020-05-16T00:00:00+02:00</published><updated>2020-05-16T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-05-16:/blog/data-descriptors-bringing-attributes-next-level</id><summary type="html">&lt;p&gt;Descriptors in Python allow us to control how attributes of classes are accessed or modified. A pattern often encountered is defining properties to use setter and getter methods encapsulated as if they were a single attribute. In this article, we will dig into how the property decorator works, to understand …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Descriptors in Python allow us to control how attributes of classes are accessed or modified. A pattern often encountered is defining properties to use setter and getter methods encapsulated as if they were a single attribute. In this article, we will dig into how the property decorator works, to understand how to implement our solutions. &lt;/p&gt;
+&lt;p&gt;In &lt;a href="https://www.pythonforthelab.com/documents/1/image_sizes.pdf"&gt;this PDF&lt;/a&gt;, I have included figures generated at different &lt;em&gt;dpi&lt;/em&gt; but scaled to the sizes recommended by Science.&lt;/p&gt;</content><category term="tips"/><category term="matplotlib"/><category term="resolution"/><category term="figure"/><category term="plot"/><category term="saving"/></entry><entry><title>Data Descriptors: Bringing Attributes to the Next level</title><link href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" rel="alternate"/><published>2020-05-16T00:00:00+02:00</published><updated>2020-05-16T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2020-05-16:/blog/data-descriptors-bringing-attributes-next-level</id><summary type="html">&lt;p&gt;Descriptors in Python allow us to control how attributes of classes are accessed or modified. A pattern often encountered is defining properties to use setter and getter methods encapsulated as if they were a single attribute. In this article, we will dig into how the property decorator works, to understand …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Descriptors in Python allow us to control how attributes of classes are accessed or modified. A pattern often encountered is defining properties to use setter and getter methods encapsulated as if they were a single attribute. In this article, we will dig into how the property decorator works, to understand how to implement our solutions. &lt;/p&gt;
 &lt;p&gt;The descriptor interface also allows attributes to access the class where they are defined. For example, this is useful in registering all the attributes of a specific type in the parent class. With this tool, we can have a clear interface to update all the settings of a class. We will cover not only how to define this type of attributes, but also how to deal with inheritance. &lt;/p&gt;
 &lt;h2&gt;Properties are Descriptors&lt;/h2&gt;
 &lt;p&gt;Once you fully embrace the object-oriented nature of Python, there is a high chance that you cross interesting tools, such as the @propery decorator. Let's quickly see an example of how it works and what it can do for us:&lt;/p&gt;
@@ -1520,7 +1520,7 @@ print(my_other_class._descriptors)
 &lt;p&gt;So now you see that inheritance is working only from parent to children, as expected. &lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;We have focused this article on using descriptors as decorators, similar to how @property works. We do believe this is one of the most common patterns for descriptors, but it is by no means the only one. First, you don't need to use them as decorators for methods; they could be attributes directly defined in classes. If you check the &lt;a href="https://docs.python.org/3/howto/descriptor.html#static-methods-and-class-methods"&gt;official documentation&lt;/a&gt; you can see examples that drill deeper into manipulating the &lt;code&gt;__dict__&lt;/code&gt; of the objects. This degree of complexity is, however, seldom required, but please let us know in the comments if it can be useful for you. &lt;/p&gt;
-&lt;p&gt;The &lt;em&gt;descriptor protocol&lt;/em&gt; is an incredibly useful tool when you need to manipulate the class where attributes are defined. A very common situation is what we showed in the last section: registering specific attributes in a list. We could go one step further and define a cache, timeouts, and more. It is not something everyone needs every time. Still, when you wonder how to have access to the owner class when you are defining an attribute, descriptors are the solution. &lt;/p&gt;</content><category term="blog"/><category term="data"/><category term="decorator"/><category term="pattern"/><category term="description"/><category term="property"/></entry><entry><title>Python Tips: Using Sets</title><link href="http://localhost:8000/blog/python-tips-using-sets" rel="alternate"/><published>2020-05-11T00:00:00+02:00</published><updated>2020-05-11T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-05-11:/blog/python-tips-using-sets</id><summary type="html">&lt;p&gt;Most people are familiar with lists, tuples, and dictionaries as the basic data types for grouping information. However, there is another convenient option: &lt;strong&gt;sets&lt;/strong&gt;. They are directly linked to the mathematical idea of a &lt;em&gt;set&lt;/em&gt;. To define them, we can use the following syntax:&lt;/p&gt;
+&lt;p&gt;The &lt;em&gt;descriptor protocol&lt;/em&gt; is an incredibly useful tool when you need to manipulate the class where attributes are defined. A very common situation is what we showed in the last section: registering specific attributes in a list. We could go one step further and define a cache, timeouts, and more. It is not something everyone needs every time. Still, when you wonder how to have access to the owner class when you are defining an attribute, descriptors are the solution. &lt;/p&gt;</content><category term="blog"/><category term="data"/><category term="decorator"/><category term="pattern"/><category term="description"/><category term="property"/></entry><entry><title>Python Tips: Using Sets</title><link href="https://pythonforthelab.com/blog/python-tips-using-sets" rel="alternate"/><published>2020-05-11T00:00:00+02:00</published><updated>2020-05-11T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2020-05-11:/blog/python-tips-using-sets</id><summary type="html">&lt;p&gt;Most people are familiar with lists, tuples, and dictionaries as the basic data types for grouping information. However, there is another convenient option: &lt;strong&gt;sets&lt;/strong&gt;. They are directly linked to the mathematical idea of a &lt;em&gt;set&lt;/em&gt;. To define them, we can use the following syntax:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;var = {1, 2, 3, 4}
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Most people are familiar with lists, tuples, and dictionaries as the basic data types for grouping information. However, there is another convenient option: &lt;strong&gt;sets&lt;/strong&gt;. They are directly linked to the mathematical idea of a &lt;em&gt;set&lt;/em&gt;. To define them, we can use the following syntax:&lt;/p&gt;
@@ -1667,7 +1667,7 @@ print(id(var1))
 var1 |= var3
 print(id(var1))
 # 139836371992136
-&lt;/code&gt;&lt;/pre&gt;</content><category term="tips"/><category term="data types"/><category term="tips"/><category term="iterables"/></entry><entry><title>Generators, Iterables, Iterators in Python: When and Where</title><link href="http://localhost:8000/blog/generators-iterables-iterators-python-when-and-where" rel="alternate"/><published>2020-04-10T00:00:00+02:00</published><updated>2020-04-10T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-04-10:/blog/generators-iterables-iterators-python-when-and-where</id><summary type="html">&lt;p&gt;Generators, Iterables, and Iterators are some of the most used tools in Python. However, we don't often stop to think about how they work, how we can develop our generators and iterables. Once you learn what you can do with them, it is possible to expand your toolbox and make …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Generators, Iterables, and Iterators are some of the most used tools in Python. However, we don't often stop to think about how they work, how we can develop our generators and iterables. Once you learn what you can do with them, it is possible to expand your toolbox and make your code much more efficient and pythonic. &lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;</content><category term="tips"/><category term="data types"/><category term="tips"/><category term="iterables"/></entry><entry><title>Generators, Iterables, Iterators in Python: When and Where</title><link href="https://pythonforthelab.com/blog/generators-iterables-iterators-python-when-and-where" rel="alternate"/><published>2020-04-10T00:00:00+02:00</published><updated>2020-04-10T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2020-04-10:/blog/generators-iterables-iterators-python-when-and-where</id><summary type="html">&lt;p&gt;Generators, Iterables, and Iterators are some of the most used tools in Python. However, we don't often stop to think about how they work, how we can develop our generators and iterables. Once you learn what you can do with them, it is possible to expand your toolbox and make …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Generators, Iterables, and Iterators are some of the most used tools in Python. However, we don't often stop to think about how they work, how we can develop our generators and iterables. Once you learn what you can do with them, it is possible to expand your toolbox and make your code much more efficient and pythonic. &lt;/p&gt;
 &lt;h2&gt;Iterables&lt;/h2&gt;
 &lt;p&gt;One of the very first things you learn about Python is that if you have a list, for example, you can go through all the elements with a convenient syntax:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-pycon"&gt;&amp;gt;&amp;gt;&amp;gt; var = [1, 2, 3]
@@ -2124,7 +2124,7 @@ considerations this
 &lt;p&gt;For example, if I am acquiring images from a Camera, I would say I am using a generator. The images are not available beforehand, nor I know how they are going to look like. On the other hand, if I am reviewing the frames of data stored on the hard drive, I would try to use the word iterator. The data is already there, and I am not altering it. &lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;Iterators and Generators are two tools that are very handy to keep in your repository of strategies when planning code. They are especially handy when you are dealing with streams of data that may exceed the memory you have available. In the past, we have seen how to create &lt;a href="https://www.pythonforthelab.com/blog/the-with-command-and-custom-classes/"&gt;your classes supporting context managers&lt;/a&gt;, with generators and iterators now you can support loops and iterations. &lt;/p&gt;
-&lt;p&gt;Understanding generators is essential not only to be able to add it to your code but also to be able to understand the logic behind other packages. If you quickly search around, Django uses &lt;a href="https://github.com/django/django/search?q=yield&amp;amp;unscoped_q=yield"&gt;plenty of generators in its code base&lt;/a&gt;. Once you can understand generators, it will give you a hint to how the developer was expecting you to use their code. &lt;/p&gt;</content><category term="blog"/><category term="driver"/><category term="arduino"/><category term="control"/></entry><entry><title>How to control an Arduino from the computer using Python</title><link href="http://localhost:8000/blog/how-control-arduino-computer-using-python" rel="alternate"/><published>2020-02-04T00:00:00+01:00</published><updated>2020-02-04T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-02-04:/blog/how-control-arduino-computer-using-python</id><summary type="html">&lt;p&gt;Arduinos may be one of the most disruptive electronic developments of the past decade. They opened a world of possibilities to quickly prototype solutions in professional settings but also opened the door for enthusiasts to learn about electronics and microcontrollers. In this article, we are going to see how to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Arduinos may be one of the most disruptive electronic developments of the past decade. They opened a world of possibilities to quickly prototype solutions in professional settings but also opened the door for enthusiasts to learn about electronics and microcontrollers. In this article, we are going to see how to get started with an Arduino board and how to control it from a computer using Python. &lt;/p&gt;
+&lt;p&gt;Understanding generators is essential not only to be able to add it to your code but also to be able to understand the logic behind other packages. If you quickly search around, Django uses &lt;a href="https://github.com/django/django/search?q=yield&amp;amp;unscoped_q=yield"&gt;plenty of generators in its code base&lt;/a&gt;. Once you can understand generators, it will give you a hint to how the developer was expecting you to use their code. &lt;/p&gt;</content><category term="blog"/><category term="driver"/><category term="arduino"/><category term="control"/></entry><entry><title>How to control an Arduino from the computer using Python</title><link href="https://pythonforthelab.com/blog/how-control-arduino-computer-using-python" rel="alternate"/><published>2020-02-04T00:00:00+01:00</published><updated>2020-02-04T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2020-02-04:/blog/how-control-arduino-computer-using-python</id><summary type="html">&lt;p&gt;Arduinos may be one of the most disruptive electronic developments of the past decade. They opened a world of possibilities to quickly prototype solutions in professional settings but also opened the door for enthusiasts to learn about electronics and microcontrollers. In this article, we are going to see how to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Arduinos may be one of the most disruptive electronic developments of the past decade. They opened a world of possibilities to quickly prototype solutions in professional settings but also opened the door for enthusiasts to learn about electronics and microcontrollers. In this article, we are going to see how to get started with an Arduino board and how to control it from a computer using Python. &lt;/p&gt;
 &lt;p&gt;An Arduino is an electronics board packaging a micro-controller unit plus passive elements to ensure proper functioning, and headers to be able to interface with the real world very simply. But Arduinos are not just the electronics, they are also the ecosystem around them, including the software needed to program them as one sees fit.&lt;/p&gt;
 &lt;p&gt;To get started, we assume you have access to an Arduino, such as the Uno, but most of the available ones are going to work fine. The Nano, Micro, Due, Mega, they all have different specifications, but the way you program and interface with them is more or less the same. In this article, we are not going to discuss electronics and how to build circuits, but just about the software side, so you can follow along even if you don't have an Arduino board at hand. &lt;/p&gt;
 &lt;p&gt;The main goal of this tutorial is to show you how you can communicate with an Arduino using Python. This involves cleverly programming the Arduino and understanding some basic Python libraries which will allow you to build solutions very quickly. &lt;/p&gt;
@@ -2489,7 +2489,7 @@ pyvisa.errors.VisaIOError: VI_ERROR_TMO (-1073807339): Timeout expired before op
 &lt;p&gt;Another useful strategy to make your commands clear is to use a separator, such as &lt;code&gt;:&lt;/code&gt;. Imagine you want to read a digital channel, a command could be &lt;code&gt;DI:1&lt;/code&gt;, of Digital Input, number 1. To set a digital output: &lt;code&gt;DO:2:1&lt;/code&gt; meaning setting the Digital Output number 2 to the value of &lt;code&gt;1&lt;/code&gt;. However, you see that they start to be harder to read. What about &lt;code&gt;DO:CH2:1&lt;/code&gt;. Then, I believe is much clearer. This means you should update the input command to &lt;code&gt;DI:CH1&lt;/code&gt;. This allows you to grow the commands without conflicts if you know what you will need at a later stage. &lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;Arduinos open a completely new world of possibilities. The main difficulty is that you have to plan your code from two different perspectives: the board and the computer. You need to decide what information you want to take out of your board and into the computer, and how you are going to ask for that information. The more complex the expectation, the more important it is to structure your code smartly. &lt;/p&gt;
-&lt;p&gt;The examples we have shown in this article are extremely basic and do not follow best practices. For example, you can check the &lt;a href="https://github.com/PFTL/SimpleDaq/blob/master/extras/arduino_firmware/arduino_firmware.ino"&gt;Arduino code&lt;/a&gt; that runs on the devices I use for the &lt;a href="https://www.pythonforthelab.com/courses/python-for-the-lab"&gt;Python for the Lab Workshops&lt;/a&gt;. Or &lt;a href="https://github.com/aquilesC/DisperPy/blob/master/dispertech/controller/devices/arduino/arduino_driver/arduino_driver.ino"&gt;this example&lt;/a&gt; in which I control several LEDs, two temperature sensors and a two-axis piezo stage. If you are working with an Arduino and want to learn more on how you can communicate with it from Python, leave a message below, I would really like to hear about what you are doing and how I can help you achieve it!&lt;/p&gt;</content><category term="blog"/><category term="driver"/><category term="arduino"/><category term="control"/></entry><entry><title>How to create a setup file for your project</title><link href="http://localhost:8000/blog/how-create-setup-file-your-project" rel="alternate"/><published>2020-01-20T00:00:00+01:00</published><updated>2020-01-20T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2020-01-20:/blog/how-create-setup-file-your-project</id><summary type="html">&lt;p&gt;When you develop software, at some point you will want other people to be able to use what you have built. Sometimes it is handy if you can quickly use the code you developed yourself in the past on a new machine or a different virtual environment. We have already …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When you develop software, at some point you will want other people to be able to use what you have built. Sometimes it is handy if you can quickly use the code you developed yourself in the past on a new machine or a different virtual environment. We have already seen that &amp;lt;:Complete Guide to Imports in Python: Absolute, Relative, and More|for importing&amp;gt; to work properly, it is very important to have well-defined packages, and that Python knows where to find them. &lt;/p&gt;
+&lt;p&gt;The examples we have shown in this article are extremely basic and do not follow best practices. For example, you can check the &lt;a href="https://github.com/PFTL/SimpleDaq/blob/master/extras/arduino_firmware/arduino_firmware.ino"&gt;Arduino code&lt;/a&gt; that runs on the devices I use for the &lt;a href="https://www.pythonforthelab.com/courses/python-for-the-lab"&gt;Python for the Lab Workshops&lt;/a&gt;. Or &lt;a href="https://github.com/aquilesC/DisperPy/blob/master/dispertech/controller/devices/arduino/arduino_driver/arduino_driver.ino"&gt;this example&lt;/a&gt; in which I control several LEDs, two temperature sensors and a two-axis piezo stage. If you are working with an Arduino and want to learn more on how you can communicate with it from Python, leave a message below, I would really like to hear about what you are doing and how I can help you achieve it!&lt;/p&gt;</content><category term="blog"/><category term="driver"/><category term="arduino"/><category term="control"/></entry><entry><title>How to create a setup file for your project</title><link href="https://pythonforthelab.com/blog/how-create-setup-file-your-project" rel="alternate"/><published>2020-01-20T00:00:00+01:00</published><updated>2020-01-20T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2020-01-20:/blog/how-create-setup-file-your-project</id><summary type="html">&lt;p&gt;When you develop software, at some point you will want other people to be able to use what you have built. Sometimes it is handy if you can quickly use the code you developed yourself in the past on a new machine or a different virtual environment. We have already …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When you develop software, at some point you will want other people to be able to use what you have built. Sometimes it is handy if you can quickly use the code you developed yourself in the past on a new machine or a different virtual environment. We have already seen that &amp;lt;:Complete Guide to Imports in Python: Absolute, Relative, and More|for importing&amp;gt; to work properly, it is very important to have well-defined packages, and that Python knows where to find them. &lt;/p&gt;
 &lt;p&gt;With a proper setup file, Python will quickly understand where to find the package, and thus importing from other places becomes trivial. It will also be possible to quickly distribute the code with other people, diminishing the barrier of adoption. Having a &lt;strong&gt;setup.py&lt;/strong&gt; file is the first step into being able to switch from scripts to a package on which to rely. &lt;/p&gt;
 &lt;h2&gt;Your first setup file&lt;/h2&gt;
 &lt;p&gt;The examples we are going to develop are toy examples, very similar to the ones on &amp;lt;:Complete Guide to Imports in Python: Absolute, Relative, and More|the article about importing&amp;gt;. But they will prove the point. You should start on an empty directory, the name doesn't matter, but it is important not to mix it with other things, so you can follow this article without complications. &lt;/p&gt;
@@ -2761,7 +2761,7 @@ setup(
 &lt;h2&gt;Where to next&lt;/h2&gt;
 &lt;p&gt;This was an introduction to develop your first &lt;strong&gt;setup.py&lt;/strong&gt; file. The topic is far from over, but with what you have up to now, you can go a long way. Something very useful is to pay attention to the libraries you use and how they behave. For example, you can check the &lt;a href="https://github.com/scikit-learn/scikit-learn/blob/master/setup.py"&gt;setup file of scikit-learn&lt;/a&gt;, or of &lt;a href="https://github.com/django/django/blob/master/setup.py"&gt;Django&lt;/a&gt;. They can be much more complex than what you need, but they can also point you in the right direction if you are looking for inspiration on how to structure your code. If you are curious about more down-to-earth examples, you can see the one I've developed for the &lt;a href="https://github.com/PFTL/SimpleDaq/blob/master/setup.py"&gt;Python for the Lab workshop&lt;/a&gt;, or for &lt;a href="https://github.com/aquilesC/DisperPy/blob/master/setup.py"&gt;the startup in which I'm working&lt;/a&gt;. Many of the arguments of setup.py which are available (and almost trivial), such as &lt;code&gt;author&lt;/code&gt;, &lt;code&gt;website&lt;/code&gt; were skipped in this tutorial, since they don't bring much to the discussion, and you can quickly add them. &lt;/p&gt;
 &lt;p&gt;An obvious step once you have your setup file in order is to release your code through &lt;strong&gt;PyPI&lt;/strong&gt;. This topic will be covered soon. Something we didn't discuss, and which I hope grabbed your attention is that when you run &lt;code&gt;python setup.py install&lt;/code&gt; some folders are created, such as &lt;code&gt;build&lt;/code&gt; and &lt;code&gt;dist&lt;/code&gt;. Go ahead and explore them, see what is inside and try to understand what is happening when you install the package as we have just done. &lt;/p&gt;
-&lt;p&gt;Finally, another very interesting topic is what happens if you want to release your package to be installed through &lt;strong&gt;conda&lt;/strong&gt; instead of &lt;strong&gt;pip&lt;/strong&gt;. Conda is a great package manager, that allows you to install also non-python libraries and manage dependencies much more efficiently than what pip does. However, developing a package which is conda-installable requires some extra steps, which will also be covered later. &lt;/p&gt;</content><category term="blog"/><category term="environment"/><category term="path"/><category term="setup"/><category term="install"/><category term="package"/></entry><entry><title>Complete Guide to Imports in Python: Absolute, Relative, and More</title><link href="http://localhost:8000/blog/complete-guide-to-imports-in-python-absolute-relative-and-more" rel="alternate"/><published>2019-10-04T00:00:00+02:00</published><updated>2019-10-04T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-10-04:/blog/complete-guide-to-imports-in-python-absolute-relative-and-more</id><summary type="html">&lt;p&gt;Importing is not only a matter of using external libraries, it also allows you to keep your code clean and organized. In
+&lt;p&gt;Finally, another very interesting topic is what happens if you want to release your package to be installed through &lt;strong&gt;conda&lt;/strong&gt; instead of &lt;strong&gt;pip&lt;/strong&gt;. Conda is a great package manager, that allows you to install also non-python libraries and manage dependencies much more efficiently than what pip does. However, developing a package which is conda-installable requires some extra steps, which will also be covered later. &lt;/p&gt;</content><category term="blog"/><category term="environment"/><category term="path"/><category term="setup"/><category term="install"/><category term="package"/></entry><entry><title>Complete Guide to Imports in Python: Absolute, Relative, and More</title><link href="https://pythonforthelab.com/blog/complete-guide-to-imports-in-python-absolute-relative-and-more" rel="alternate"/><published>2019-10-04T00:00:00+02:00</published><updated>2019-10-04T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-10-04:/blog/complete-guide-to-imports-in-python-absolute-relative-and-more</id><summary type="html">&lt;p&gt;Importing is not only a matter of using external libraries, it also allows you to keep your code clean and organized. In
 this tutorial, we are going to discuss from the very basics of importing to complex topics such as lazy loading of
 modules in packages.&lt;/p&gt;
 &lt;h2&gt;Introduction to importing&lt;/h2&gt;
@@ -3362,7 +3362,7 @@ imports. If we have many modules with similar names, sometimes the explicit path
 really up to the developer to have enough sensitivity to decide
 whether the absolute import or the relative import makes the code clearer and the execution easier.&lt;/p&gt;
 &lt;p&gt;The example code for this article can be
-found &lt;a href="https://github.com/PFTL/website_example_code/tree/master/pftl_code/code/37_imports"&gt;on Github&lt;/a&gt;&lt;/p&gt;</content><category term="blog"/><category term="importing"/><category term="import"/><category term="relative"/><category term="absolute"/><category term="package"/></entry><entry><title>Handling and Sharing Data Between Threads</title><link href="http://localhost:8000/blog/handling-and-sharing-data-between-threads" rel="alternate"/><published>2019-08-06T00:00:00+02:00</published><updated>2019-08-06T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-08-06:/blog/handling-and-sharing-data-between-threads</id><summary type="html">&lt;p&gt;When working with threads in Python, you will find very useful to be
+found &lt;a href="https://github.com/PFTL/website_example_code/tree/master/pftl_code/code/37_imports"&gt;on Github&lt;/a&gt;&lt;/p&gt;</content><category term="blog"/><category term="importing"/><category term="import"/><category term="relative"/><category term="absolute"/><category term="package"/></entry><entry><title>Handling and Sharing Data Between Threads</title><link href="https://pythonforthelab.com/blog/handling-and-sharing-data-between-threads" rel="alternate"/><published>2019-08-06T00:00:00+02:00</published><updated>2019-08-06T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-08-06:/blog/handling-and-sharing-data-between-threads</id><summary type="html">&lt;p&gt;When working with threads in Python, you will find very useful to be
 able to share data between different tasks. One of the advantages of
 threads in Python is that they share the same memory space, and thus
 exchanging information is relatively easy. However, some structures can
@@ -3371,12 +3371,12 @@ able to share data between different tasks. One of the advantages of
 threads in Python is that they share the same memory space, and thus
 exchanging information is relatively easy. However, some structures can
 help you achieve more specific goals.&lt;/p&gt;
-&lt;p&gt;In the previous article, we have covered &lt;a href="http://localhost:8000/blog/starting-and-synchronizing-threads"&gt;how to start and synchronize
+&lt;p&gt;In the previous article, we have covered &lt;a href="https://pythonforthelab.com/blog/starting-and-synchronizing-threads"&gt;how to start and synchronize
 threads&lt;/a&gt; and now it is time to
 expand the toolbox to handle the exchange of information between them.&lt;/p&gt;
 &lt;h2&gt;Shared Memory&lt;/h2&gt;
 &lt;p&gt;The first and most naive approach is to use the same variables in
-different threads. We have already used this feature in the &lt;a href="http://localhost:8000/blog/starting-and-synchronizing-threads"&gt;previous
+different threads. We have already used this feature in the &lt;a href="https://pythonforthelab.com/blog/starting-and-synchronizing-threads"&gt;previous
 tutorial&lt;/a&gt;, but without discussing
 it explicitly. Let's see how we can use shared memory through a very
 simple example:&lt;/p&gt;
@@ -3413,7 +3413,7 @@ feature. We start a new thread by passing an argument, &lt;code&gt;my_var&lt;/co
 is a list of numbers. The thread will increase the values of the numbers
 by one, with a certain delay. In this example we use events to
 graciously finish the thread, if you are not familiar with them, check
-the &lt;a href="http://localhost:8000/blog/starting-and-synchronizing-threads"&gt;previous tutorial&lt;/a&gt;.&lt;/p&gt;
+the &lt;a href="https://pythonforthelab.com/blog/starting-and-synchronizing-threads"&gt;previous tutorial&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The important piece of code in this example is the &lt;code&gt;print(my_var)&lt;/code&gt; line.
 That print statement lives in the main thread, however, it has access to
 the information being generated within a child thread. This behavior is
@@ -3492,7 +3492,7 @@ operation. The other thing to note is that the values are no consecutive
 to each other! And this is a very important behavior that can appear
 when working with multiple threads in Python. If you think really hard,
 can you explain where this issue is coming from?&lt;/p&gt;
-&lt;p&gt;In the &lt;a href="http://localhost:8000/blog/starting-and-synchronizing-threads"&gt;previous tutorial&lt;/a&gt;, we
+&lt;p&gt;In the &lt;a href="https://pythonforthelab.com/blog/starting-and-synchronizing-threads"&gt;previous tutorial&lt;/a&gt;, we
 discussed that threads are handled by the operating system, which
 decides when to spin one on or off. We have no control over what the
 operating system decides to do. In the example above, since there is no
@@ -3756,9 +3756,9 @@ documentation&lt;/a&gt;.
 What I find more useful about &lt;code&gt;Queues&lt;/code&gt; is that they are written in pure
 Python. If you visit their &lt;a href="https://github.com/python/cpython/blob/3.7/Lib/queue.py"&gt;source
 code&lt;/a&gt;, you can
-learn a lot about synchronization in threads, &lt;a href="http://localhost:8000/blog/learning-not-to-handle-exceptions"&gt;custom
+learn a lot about synchronization in threads, &lt;a href="https://pythonforthelab.com/blog/learning-not-to-handle-exceptions"&gt;custom
 exceptions&lt;/a&gt;, and
-&lt;a href="http://localhost:8000/blog/documenting-with-sphinx-and-readthedocs"&gt;documenting&lt;/a&gt;.&lt;/p&gt;
+&lt;a href="https://pythonforthelab.com/blog/documenting-with-sphinx-and-readthedocs"&gt;documenting&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;What is important to note, is that when you work with multiple Threads,
 sometimes you want to wait (i.e. block the execution), sometimes you
 don't. In the examples above, we have always been checking whether the
@@ -4009,7 +4009,7 @@ print(f'Finished downloading {len(website_list)} websites')
 you run the program, you can see the list of 10 files created, with the
 HTML of 10 different Wikipedia homepages.&lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
-&lt;p&gt;In the &lt;a href="http://localhost:8000/blog/starting-and-synchronizing-threads"&gt;previous article&lt;/a&gt;, we have
+&lt;p&gt;In the &lt;a href="https://pythonforthelab.com/blog/starting-and-synchronizing-threads"&gt;previous article&lt;/a&gt;, we have
 seen how you can use threading to run different functions at the same
 time, and some of the most useful tools you have available to control
 the flow of different threads. In this article we have discussed how you
@@ -4025,12 +4025,12 @@ between the main thread and child threads as between child threads.&lt;/p&gt;
 &lt;p&gt;To finish, we have shown a very simple example of how to use threads to
 download data from a website and save it to disk. The example is very
 basic, but we will expand it in the following article. Other IO
-(input-output) tasks that can be explored are &lt;a href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui"&gt;acquisition from
+(input-output) tasks that can be explored are &lt;a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui"&gt;acquisition from
 devices&lt;/a&gt; such as a camera, waiting
-for user input, &lt;a href="http://localhost:8000/blog/introduction-to-storing-data-in-files"&gt;reading from disk&lt;/a&gt;,
+for user input, &lt;a href="https://pythonforthelab.com/blog/introduction-to-storing-data-in-files"&gt;reading from disk&lt;/a&gt;,
 etc.&lt;/p&gt;
 &lt;p&gt;Header Illustration by &lt;a href="https://dribbble.com/tsvety-designs"&gt;Tsvetelina
-Stoynova&lt;/a&gt;&lt;/p&gt;</content><category term="blog"/><category term="threading"/><category term="data"/><category term="queue"/><category term="sharing"/><category term="threads"/><category term="async"/><category term="multithreading"/></entry><entry><title>Starting and Synchronizing Threads</title><link href="http://localhost:8000/blog/starting-and-synchronizing-threads" rel="alternate"/><published>2019-08-06T00:00:00+02:00</published><updated>2019-08-06T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-08-06:/blog/starting-and-synchronizing-threads</id><summary type="html">&lt;p&gt;If you have developed code for long enough, probably you have faced the
+Stoynova&lt;/a&gt;&lt;/p&gt;</content><category term="blog"/><category term="threading"/><category term="data"/><category term="queue"/><category term="sharing"/><category term="threads"/><category term="async"/><category term="multithreading"/></entry><entry><title>Starting and Synchronizing Threads</title><link href="https://pythonforthelab.com/blog/starting-and-synchronizing-threads" rel="alternate"/><published>2019-08-06T00:00:00+02:00</published><updated>2019-08-06T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-08-06:/blog/starting-and-synchronizing-threads</id><summary type="html">&lt;p&gt;If you have developed code for long enough, probably you have faced the
 situation in which a task takes longer to complete and in the meantime,
 your program can't perform any other task. Most likely you can't even
 politely cancel what the program is doing, you will have to resort …&lt;/p&gt;</summary><content type="html">&lt;p&gt;If you have developed code for long enough, probably you have faced the
@@ -4041,8 +4041,8 @@ the Ctrl+C strategy. Fortunately, Python has different approaches to
 overcome these issues.&lt;/p&gt;
 &lt;p&gt;In this introduction, we are going to cover how you can use Threads to
 develop a more flexible program. We have already discussed about
-&lt;a href="http://localhost:8000/blog/implementing-threads-for-measurements"&gt;threads&lt;/a&gt;, and we have used
-them when &lt;a href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui"&gt;developing a user
+&lt;a href="https://pythonforthelab.com/blog/implementing-threads-for-measurements"&gt;threads&lt;/a&gt;, and we have used
+them when &lt;a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui"&gt;developing a user
 interface&lt;/a&gt;. In this article, we
 are going to organize the information available for you to learn how to
 be creative with threads in your own programs.&lt;/p&gt;
@@ -4064,7 +4064,7 @@ and the computer has the freedom to switch, very quickly, between them.
 For a short time, it is checking your spelling, for a short time, it
 renders a website, for a short time it writes to the hard drive, etc.
 This is what gives programs a smooth feeling, and it is exactly what we
-did to &lt;a href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui"&gt;avoid the window freezing&lt;/a&gt;
+did to &lt;a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui"&gt;avoid the window freezing&lt;/a&gt;
 when dealing with Qt.&lt;/p&gt;
 &lt;p&gt;However, when the computation in one of the threads is very complex,
 there won't be enough time to switch from one to the other. Downloading
@@ -4188,7 +4188,7 @@ takes one argument and increases its value by one. If the argument is a
 numpy array, it will increase the value of each element by one. What is
 important to note, is that the function is not returning any value. This
 can be done because arrays are mutable. You can check the article about
-&lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;mutable and immutable data
+&lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;mutable and immutable data
 types&lt;/a&gt; in case you are
 curious.&lt;/p&gt;
 &lt;p&gt;Pay attention to the fact that if instead of an array, you use a number
@@ -4348,7 +4348,7 @@ starts by acquiring the lock. If it was already acquired, it will wait
 there until it is released. This means that the for-loop which increases
 each element by one or which divides each element needs to finish before
 the other will be able to run.&lt;/p&gt;
-&lt;p&gt;By using &lt;a href="http://localhost:8000/blog/the-with-command-and-custom-classes"&gt;context managers&lt;/a&gt; the
+&lt;p&gt;By using &lt;a href="https://pythonforthelab.com/blog/the-with-command-and-custom-classes"&gt;context managers&lt;/a&gt; the
 syntax can become much simpler:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;def increase_by_one(array):
     with lock:
@@ -4592,11 +4592,11 @@ expensive.&lt;/p&gt;
 &lt;p&gt;The examples that we have seen in this tutorial are almost trivial and
 most are based on performing highly inefficient tasks, such as
 increasing the values in an array one by one. If you want to continue
-learning about threads, you can head to the following tutorial on &lt;a href="http://localhost:8000/blog/handling-and-sharing-data-between-threads"&gt;how
+learning about threads, you can head to the following tutorial on &lt;a href="https://pythonforthelab.com/blog/handling-and-sharing-data-between-threads"&gt;how
 to handle data with threads in
 Python&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Header Illustration by &lt;a href="https://dribbble.com/tsvety-designs"&gt;Tsvetelina
-Stoynova&lt;/a&gt;&lt;/p&gt;</content><category term="blog"/><category term="threads"/><category term="async"/><category term="multithreading"/><category term="parallel"/></entry><entry><title>Monkey Patching and its consequences</title><link href="http://localhost:8000/blog/monkey-patching-and-its-consequences" rel="alternate"/><published>2019-06-18T00:00:00+02:00</published><updated>2019-06-18T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-06-18:/blog/monkey-patching-and-its-consequences</id><summary type="html">&lt;p&gt;Monkey patching is a technique that allows you to alter the behavior of
+Stoynova&lt;/a&gt;&lt;/p&gt;</content><category term="blog"/><category term="threads"/><category term="async"/><category term="multithreading"/><category term="parallel"/></entry><entry><title>Monkey Patching and its consequences</title><link href="https://pythonforthelab.com/blog/monkey-patching-and-its-consequences" rel="alternate"/><published>2019-06-18T00:00:00+02:00</published><updated>2019-06-18T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-06-18:/blog/monkey-patching-and-its-consequences</id><summary type="html">&lt;p&gt;Monkey patching is a technique that allows you to alter the behavior of
 objects at runtime. Even though it can be a very useful feature, it can
 also make your code much harder to understand and debug, and therefore
 you have to be careful with how you implement monkey patching …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Monkey patching is a technique that allows you to alter the behavior of
@@ -4607,7 +4607,7 @@ article, we are going to see some examples of how you can use monkey
 patching to solve quickly specific problems. We are also going to
 discuss the consequences of monkey patching in the context of larger
 projects.&lt;/p&gt;
-&lt;p&gt;Monkey patching is tightly related to the idea of &lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;mutability in
+&lt;p&gt;Monkey patching is tightly related to the idea of &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;mutability in
 Python&lt;/a&gt;. Custom objects are
 mutable, and therefore their attributes can be replaced without creating
 a new copy of the object. To quickly recap those ideas, we can do the
@@ -4668,7 +4668,7 @@ print(var2.a)
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Even if you change the attribute &lt;code&gt;a&lt;/code&gt; to &lt;code&gt;3&lt;/code&gt;, you don't see this change
 appearing on the instances of the class. The root cause of this lays in
-the ideas behind &lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;mutable and
+the ideas behind &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;mutable and
 immutable&lt;/a&gt; data types in
 Python. Since you altered the value of &lt;code&gt;var1.a&lt;/code&gt;, now the attribute is
 pointing to an object different from the object the class attribute
@@ -4896,7 +4896,7 @@ strategy could be.&lt;/p&gt;
 &lt;p&gt;The code found in this article is &lt;a href="https://github.com/PFTL/website/tree/master/example_code/34_monkey_patching"&gt;available on
 Github&lt;/a&gt;.
 Any comment, improvement, or suggestion can be &lt;a href="https://github.com/PFTL/website/issues/new"&gt;submitted
-here&lt;/a&gt;&lt;/p&gt;</content><category term="blog"/><category term="functions"/><category term="methods"/><category term="monkey patching"/><category term="replacing"/><category term="extending"/><category term="mutable"/><category term="immutable"/></entry><entry><title>Duck Typing, or how to check variable types</title><link href="http://localhost:8000/blog/duck-typing-or-how-to-check-variable-types" rel="alternate"/><published>2019-06-11T00:00:00+02:00</published><updated>2019-06-11T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-06-11:/blog/duck-typing-or-how-to-check-variable-types</id><summary type="html">&lt;p&gt;The name duck typing has its root in &lt;a href="https://en.wikipedia.org/wiki/Duck_typing"&gt;the
+here&lt;/a&gt;&lt;/p&gt;</content><category term="blog"/><category term="functions"/><category term="methods"/><category term="monkey patching"/><category term="replacing"/><category term="extending"/><category term="mutable"/><category term="immutable"/></entry><entry><title>Duck Typing, or how to check variable types</title><link href="https://pythonforthelab.com/blog/duck-typing-or-how-to-check-variable-types" rel="alternate"/><published>2019-06-11T00:00:00+02:00</published><updated>2019-06-11T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-06-11:/blog/duck-typing-or-how-to-check-variable-types</id><summary type="html">&lt;p&gt;The name duck typing has its root in &lt;a href="https://en.wikipedia.org/wiki/Duck_typing"&gt;the
 expression&lt;/a&gt; &lt;em&gt;If it walks like
 a duck and it quacks like a duck, then it must be a duck&lt;/em&gt;. Which means
 that if you want to know whether you are dealing with a duck or not, you
@@ -5134,7 +5134,7 @@ the libraries you use don't verify the type of variables, but only their
 functioning), you can design your own classes in such a way that they
 behave as a specific data type. Our example was a class that mimics how
 dictionaries work, and which we used as an argument in a different
-object, which had no idea of our custom data type.&lt;/p&gt;</content><category term="blog"/><category term="functions"/><category term="methods"/><category term="dynamic language"/><category term="typing"/><category term="types"/></entry><entry><title>Introduction to Python Lambda Functions</title><link href="http://localhost:8000/blog/intro-to-python-lambda-functions" rel="alternate"/><published>2019-03-17T00:00:00+01:00</published><updated>2019-03-17T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-03-17:/blog/intro-to-python-lambda-functions</id><summary type="html">&lt;p&gt;Some time ago, Python introduced in its syntax the possibility to define
+object, which had no idea of our custom data type.&lt;/p&gt;</content><category term="blog"/><category term="functions"/><category term="methods"/><category term="dynamic language"/><category term="typing"/><category term="types"/></entry><entry><title>Introduction to Python Lambda Functions</title><link href="https://pythonforthelab.com/blog/intro-to-python-lambda-functions" rel="alternate"/><published>2019-03-17T00:00:00+01:00</published><updated>2019-03-17T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-03-17:/blog/intro-to-python-lambda-functions</id><summary type="html">&lt;p&gt;Some time ago, Python introduced in its syntax the possibility to define
 functions using &lt;code&gt;lambda&lt;/code&gt; instead of &lt;code&gt;def&lt;/code&gt;. These functions are called
 anonymous and are very common in other languages such as Javascript.
 However, in Python, they seem a bit obscure and are often either
@@ -5270,7 +5270,7 @@ documentation&lt;/a&gt;
 you will see that lambdas are used quite often.&lt;/p&gt;
 &lt;h2&gt;Qt Slots&lt;/h2&gt;
 &lt;p&gt;Another common example of using lambdas is in combination with the Qt
-library. We have written an &lt;a href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui"&gt;introductory article on
+library. We have written an &lt;a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui"&gt;introductory article on
 Qt&lt;/a&gt; in the past. Feel free to
 browse through it if you are not familiar with how building user
 interfaces work. A very minimal example, that just shows a button, it
@@ -5348,7 +5348,7 @@ are used very often and have a much richer syntax than in Python. I
 don't believe Python will head the same way, but in any case, they are a
 tool that can help you not only with your current programs but they can
 also help you understand what is going on if you ever tinker with other
-languages.&lt;/p&gt;</content><category term="blog"/><category term="functions"/><category term="methods"/><category term="arguments"/><category term="packing"/><category term="unpacking"/><category term="args"/><category term="kwargs"/></entry><entry><title>What are args and kwargs and when to use them</title><link href="http://localhost:8000/blog/what-are-args-and-kwargs-and-when-to-use-them" rel="alternate"/><published>2019-03-10T00:00:00+01:00</published><updated>2019-03-10T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-03-10:/blog/what-are-args-and-kwargs-and-when-to-use-them</id><summary type="html">&lt;p&gt;If you have worked with Python for long enough, probably you have
+languages.&lt;/p&gt;</content><category term="blog"/><category term="functions"/><category term="methods"/><category term="arguments"/><category term="packing"/><category term="unpacking"/><category term="args"/><category term="kwargs"/></entry><entry><title>What are args and kwargs and when to use them</title><link href="https://pythonforthelab.com/blog/what-are-args-and-kwargs-and-when-to-use-them" rel="alternate"/><published>2019-03-10T00:00:00+01:00</published><updated>2019-03-10T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-03-10:/blog/what-are-args-and-kwargs-and-when-to-use-them</id><summary type="html">&lt;p&gt;If you have worked with Python for long enough, probably you have
 encountered code that uses &lt;code&gt;*args&lt;/code&gt; and &lt;code&gt;**kwargs&lt;/code&gt; as arguments in
 functions. Even if you haven't, it is a very neat feature that allows
 you to achieve great flexibility while developing code. In this article,
@@ -5544,7 +5544,7 @@ can be read and quickly understood.&lt;/p&gt;
 &lt;p&gt;Keeping in mind that it is impossible to make a comprehensive list of
 situations when it is worth using kwargs and args, we can discuss some
 examples. The first that comes to mind is when you are dealing with
-&lt;a href="http://localhost:8000/blog/how-to-use-decorators-part-2"&gt;decorators&lt;/a&gt;. To give a
+&lt;a href="https://pythonforthelab.com/blog/how-to-use-decorators-part-2"&gt;decorators&lt;/a&gt;. To give a
 very short summary, a decorator is a function that wraps another one in
 order to extend its functionality without changing the core behavior.
 Going back to the example of the area, the function&lt;/p&gt;
@@ -5571,7 +5571,7 @@ def check_positive(func):
     return func_wrapper
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;If you are not familiar with decorators or the code above seems
-confusing, I recommend you check &lt;a href="http://localhost:8000/blog/how-to-use-decorators-part-2"&gt;this
+confusing, I recommend you check &lt;a href="https://pythonforthelab.com/blog/how-to-use-decorators-part-2"&gt;this
 article&lt;/a&gt;. To use this
 decorator, we would simply do the following:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;@check_positive
@@ -5600,7 +5600,7 @@ when you are working with classes. In order to expand the functionality
 of classes developed by others, a common pattern is to inherit them and
 override the methods you would like to change. This is very frequent
 when you are dealing with large libraries or frameworks. For example, if
-you are developing a &lt;a href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui"&gt;Qt
+you are developing a &lt;a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui"&gt;Qt
 application&lt;/a&gt;, you will find
 yourself with code like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;class MainWindow(QMainWindow):
@@ -5667,17 +5667,17 @@ useful, especially when you are not in control of the functions that you
 are using.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/XJXWbfSo2f0?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Luca
 Bravo&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="functions"/><category term="methods"/><category term="arguments"/><category term="packing"/><category term="unpacking"/><category term="args"/><category term="kwargs"/></entry><entry><title>Using pyZMQ for inter-process communication: Part 2</title><link href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-2" rel="alternate"/><published>2019-03-05T00:00:00+01:00</published><updated>2019-03-05T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-03-05:/blog/using-pyzmq-for-inter-process-communication-part-2</id><summary type="html">&lt;p&gt;In this article, we are going to cover how you can leverage the
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="functions"/><category term="methods"/><category term="arguments"/><category term="packing"/><category term="unpacking"/><category term="args"/><category term="kwargs"/></entry><entry><title>Using pyZMQ for inter-process communication: Part 2</title><link href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-2" rel="alternate"/><published>2019-03-05T00:00:00+01:00</published><updated>2019-03-05T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-03-05:/blog/using-pyzmq-for-inter-process-communication-part-2</id><summary type="html">&lt;p&gt;In this article, we are going to cover how you can leverage the
 possibilities of ZMQ to exchange data between different processes in
-Python. We have covered the &lt;a href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-1"&gt;basics of pyZMQ&lt;/a&gt;
+Python. We have covered the &lt;a href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-1"&gt;basics of pyZMQ&lt;/a&gt;
 in part 1. This is a fairly advanced tutorial, in which we are not only
 going to use pyZMQ …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this article, we are going to cover how you can leverage the
 possibilities of ZMQ to exchange data between different processes in
-Python. We have covered the &lt;a href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-1"&gt;basics of pyZMQ&lt;/a&gt;
+Python. We have covered the &lt;a href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-1"&gt;basics of pyZMQ&lt;/a&gt;
 in part 1. This is a fairly advanced tutorial, in which we are not only
 going to use pyZMQ, but also the multiprocessing library,
-&lt;a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python"&gt;HDF5&lt;/a&gt;, and
-&lt;a href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui"&gt;openCV&lt;/a&gt;. We are going to acquire
+&lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;HDF5&lt;/a&gt;, and
+&lt;a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui"&gt;openCV&lt;/a&gt;. We are going to acquire
 images from the webcam as fast as possible, we are going to save the
 data to disk during the acquisition, and we are going to perform some
 basic analysis.&lt;/p&gt;
@@ -6303,7 +6303,7 @@ more robust, faster, etc. Remember that premature optimization may be a
 liability more than a feature.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/ISG-rUel0Uw?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Thomas
 Jensen&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="ZeroMQ"/><category term="ZMQ"/><category term="Socket"/><category term="Communication"/><category term="Parallel"/><category term="Data"/></entry><entry><title>Building a CRM with Jupyter Notebooks</title><link href="http://localhost:8000/blog/building-a-crm-with-jupyter-notebooks" rel="alternate"/><published>2019-02-12T00:00:00+01:00</published><updated>2019-02-12T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-02-12:/blog/building-a-crm-with-jupyter-notebooks</id><summary type="html">&lt;p&gt;This tutorial is going to be off-topic compared to the others on the
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="ZeroMQ"/><category term="ZMQ"/><category term="Socket"/><category term="Communication"/><category term="Parallel"/><category term="Data"/></entry><entry><title>Building a CRM with Jupyter Notebooks</title><link href="https://pythonforthelab.com/blog/building-a-crm-with-jupyter-notebooks" rel="alternate"/><published>2019-02-12T00:00:00+01:00</published><updated>2019-02-12T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-02-12:/blog/building-a-crm-with-jupyter-notebooks</id><summary type="html">&lt;p&gt;This tutorial is going to be off-topic compared to the others on the
 website. It was born out of a question regarding how to send
 personalized e-mails to several people on a list, and I thought it could
 be useful to post a tutorial online. This will help people interested …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This tutorial is going to be off-topic compared to the others on the
@@ -6661,7 +6661,7 @@ etc.&lt;/p&gt;
 &lt;p&gt;In order to achieve a high level of flexibility, we are going to use a
 database to store all our information. Fortunately, Python supports
 SQLite databases out of the box. We have discussed about them in a
-&lt;a href="http://localhost:8000/blog/storing-data-with-sqlite"&gt;different article&lt;/a&gt; that may be
+&lt;a href="https://pythonforthelab.com/blog/storing-data-with-sqlite"&gt;different article&lt;/a&gt; that may be
 useful for you to check if you want to dig into the details. We are
 going to use a library called SQLAlchemy, which will allow us to define
 relationships between elements much faster. You can install it like any
@@ -7110,7 +7110,7 @@ the &lt;code&gt;send_all&lt;/code&gt; function, you will see that it fails if yo
 the same message twice. Now, this is not exactly what we need. If you
 want to send the message to the people who didn't get the message yet,
 you would like to skip the people, not stop the execution.&lt;/p&gt;
-&lt;p&gt;In order to achieve that, we can &lt;a href="http://localhost:8000/blog/learning-not-to-handle-exceptions"&gt;handle the
+&lt;p&gt;In order to achieve that, we can &lt;a href="https://pythonforthelab.com/blog/learning-not-to-handle-exceptions"&gt;handle the
 exception&lt;/a&gt;. But since we are
 using a generic exception, we will handle everything in the same way,
 regardless of whether it was raised because of an error in the database
@@ -7167,7 +7167,7 @@ can be improved, made more efficient, etc. The reality is that if you
 need to handle communication with some hundreds of customers, you don't
 need much more than what we did. Perhaps you can make it more
 functional, prettier, etc. But that is more customization than core
-development.&lt;/p&gt;</content><category term="blog"/><category term="CRM"/><category term="Jupyter"/><category term="Databases"/><category term="Relational"/><category term="SQLAlchemy"/><category term="SQLite"/><category term="Customers"/><category term="email"/></entry><entry><title>Deep and Shallow Copies of Objects</title><link href="http://localhost:8000/blog/deep-and-shallow-copies-of-objects" rel="alternate"/><published>2019-02-04T00:00:00+01:00</published><updated>2019-02-04T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-02-04:/blog/deep-and-shallow-copies-of-objects</id><summary type="html">&lt;p&gt;Copying objects in Python seems like a trivial task, but it can have
+development.&lt;/p&gt;</content><category term="blog"/><category term="CRM"/><category term="Jupyter"/><category term="Databases"/><category term="Relational"/><category term="SQLAlchemy"/><category term="SQLite"/><category term="Customers"/><category term="email"/></entry><entry><title>Deep and Shallow Copies of Objects</title><link href="https://pythonforthelab.com/blog/deep-and-shallow-copies-of-objects" rel="alternate"/><published>2019-02-04T00:00:00+01:00</published><updated>2019-02-04T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-02-04:/blog/deep-and-shallow-copies-of-objects</id><summary type="html">&lt;p&gt;Copying objects in Python seems like a trivial task, but it can have
 unexpected implications in your programs. Copying data may be achieved
 by either duplicating the data or by storing references to the objects,
 having a much lower impact on the memory. In this article, we are going
@@ -7178,7 +7178,7 @@ having a much lower impact on the memory. In this article, we are going
 to review the differences between deep and shallow copies of objects in
 Python, including custom classes.&lt;/p&gt;
 &lt;p&gt;The discussion of deep and shallow copies is only worth having in the
-context of &lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;mutable data
+context of &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;mutable data
 types&lt;/a&gt;, so if you are not
 sure of what that means, you can check the linked article. To refresh
 your memory, let's see quickly what happens when you copy a list, for
@@ -7456,9 +7456,9 @@ exactly the same time to the same device through the same interface. You
 may also like to protect private attributes, etc.&lt;/p&gt;
 &lt;h2&gt;Last Warning&lt;/h2&gt;
 &lt;p&gt;It is very important to point out that, if are worried about copying and
-deep copying of custom objects, you should understand what are &lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;mutable
+deep copying of custom objects, you should understand what are &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;mutable
 and immutable&lt;/a&gt; objects in
-Python, and what are &lt;a href="http://localhost:8000/blog/what-are-hashable-objects"&gt;hashable
+Python, and what are &lt;a href="https://pythonforthelab.com/blog/what-are-hashable-objects"&gt;hashable
 objects&lt;/a&gt;. When you have immutable
 data types, such as an integer or a string, all the discussion above
 doesn't work. If you change an immutable attribute in a class, that
@@ -7473,7 +7473,7 @@ between different processes is not a trivial task and therefore you
 can't rely on mutable objects to share information.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/Dff-4JbYq0Y?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Rebecca
 Georgia&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Types"/><category term="Mutable"/><category term="Immutable"/><category term="Objects"/><category term="Copy"/><category term="Memory"/></entry><entry><title>The with command and custom classes</title><link href="http://localhost:8000/blog/the-with-command-and-custom-classes" rel="alternate"/><published>2019-02-02T00:00:00+01:00</published><updated>2019-02-02T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2019-02-02:/blog/the-with-command-and-custom-classes</id><summary type="html">&lt;p&gt;There is a common pattern when programming that is opening a resource,
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Types"/><category term="Mutable"/><category term="Immutable"/><category term="Objects"/><category term="Copy"/><category term="Memory"/></entry><entry><title>The with command and custom classes</title><link href="https://pythonforthelab.com/blog/the-with-command-and-custom-classes" rel="alternate"/><published>2019-02-02T00:00:00+01:00</published><updated>2019-02-02T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2019-02-02:/blog/the-with-command-and-custom-classes</id><summary type="html">&lt;p&gt;There is a common pattern when programming that is opening a resource,
 doing something with it and closing it. This is what you normally do
 with a file, a network connection or a device. Python offers you a
 command to handle this pattern: the 'with' context manager. In this
@@ -7613,7 +7613,7 @@ This is an Exception
 &amp;lt;traceback object at 0x7fa88e46b588&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is enough to make decisions based on the kind of information that
-the exception is providing. You can check the &lt;a href="http://localhost:8000/blog/learning-not-to-handle-exceptions"&gt;previous article on
+the exception is providing. You can check the &lt;a href="https://pythonforthelab.com/blog/learning-not-to-handle-exceptions"&gt;previous article on
 exceptions&lt;/a&gt; to have an idea of
 the kind of things you can accomplish.&lt;/p&gt;
 &lt;h2&gt;With and Constructors&lt;/h2&gt;
@@ -7714,7 +7714,7 @@ and ensure that closing methods are executed, I believe, offsets the
 work of implementing them. If you want to see a real-world example, you
 can check how
 &lt;a href="https://github.com/pyserial/pyserial/blob/a27715f322bb08b1fccffebab776c94df50057e9/serial/serialutil.py#L561"&gt;pyserial&lt;/a&gt;
-has implemented the &lt;code&gt;__enter__&lt;/code&gt; and &lt;code&gt;__exit__&lt;/code&gt; methods.&lt;/p&gt;</content><category term="blog"/><category term="Context Manager"/><category term="With"/><category term="Custom Classes"/><category term="Patterns"/></entry><entry><title>Using pyZMQ for inter-process communication: Part 1</title><link href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-1" rel="alternate"/><published>2018-12-17T00:00:00+01:00</published><updated>2018-12-17T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-12-17:/blog/using-pyzmq-for-inter-process-communication-part-1</id><summary type="html">&lt;p&gt;Working with threads and processes in Python (and in any other language)
+has implemented the &lt;code&gt;__enter__&lt;/code&gt; and &lt;code&gt;__exit__&lt;/code&gt; methods.&lt;/p&gt;</content><category term="blog"/><category term="Context Manager"/><category term="With"/><category term="Custom Classes"/><category term="Patterns"/></entry><entry><title>Using pyZMQ for inter-process communication: Part 1</title><link href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-1" rel="alternate"/><published>2018-12-17T00:00:00+01:00</published><updated>2018-12-17T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-12-17:/blog/using-pyzmq-for-inter-process-communication-part-1</id><summary type="html">&lt;p&gt;Working with threads and processes in Python (and in any other language)
 always posses the challenge on how to exchange information between them.
 We are not talking about parallelizing code in a traditional way, where
 an expensive computation is spread through different cores, but rather
@@ -7724,7 +7724,7 @@ We are not talking about parallelizing code in a traditional way, where
 an expensive computation is spread through different cores, but rather
 being able to share the computational load among different cores with an
 architecture that allows changes at runtime.&lt;/p&gt;
-&lt;p&gt;For example, I have recently &lt;a href="http://localhost:8000/blog/pynta-nanoparticle-tracking-analysis"&gt;released
+&lt;p&gt;For example, I have recently &lt;a href="https://pythonforthelab.com/blog/pynta-nanoparticle-tracking-analysis"&gt;released
 PyNTA&lt;/a&gt;, a program to acquire
 images from a camera with the option to analyze them in real time or to
 store them to the hard drive or both. The core idea is that a central
@@ -7739,7 +7739,7 @@ library, focusing on practical examples and discussing the benefits and
 limitations of them. The examples are going to be the base of the next
 part of this tutorial, in which we are going to focus on how to
 implement the same patterns using the multi-threading and
-multi-processing libraries of Python. On &lt;a href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-2"&gt;Part
+multi-processing libraries of Python. On &lt;a href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-2"&gt;Part
 2&lt;/a&gt; of this tutorial we are going to develop a
 real-world example using the topics learned here.&lt;/p&gt;
 &lt;h2&gt;ZMQ&lt;/h2&gt;
@@ -7897,7 +7897,7 @@ client request.&lt;/p&gt;
 be useful when dealing with a device. Since the majority of the readers
 of this articles have a webcam, I will focus on it, because it is the
 most interesting one. The same principles work with any other device or
-task. We have already used a camera when we discussed &lt;a href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui"&gt;building a
+task. We have already used a camera when we discussed &lt;a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui"&gt;building a
 GUI&lt;/a&gt; for it. I suggest you to give
 it a quick read if you are not familiar with open CV.&lt;/p&gt;
 &lt;p&gt;First, let's install two handy libraries: opencv and numpy&lt;/p&gt;
@@ -7953,7 +7953,7 @@ convenience method of pyZMQ. If the message is &lt;code&gt;read&lt;/code&gt;, th
 the camera, while if the message is stop, we just close the server.&lt;/p&gt;
 &lt;p&gt;Check that in order to send the frame (which is a numpy array), we use
 &lt;code&gt;send_pyobj&lt;/code&gt;, which allows sending any data structure which is
-serializable with Pickle. We have covered this topic on &lt;a href="http://localhost:8000/blog/storing-binary-data-and-serializing"&gt;How to Store
+serializable with Pickle. We have covered this topic on &lt;a href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing"&gt;How to Store
 Data with Python&lt;/a&gt;. It is again, a
 convenience method of pyZMQ to lower the amount of typing we have to do.&lt;/p&gt;
 &lt;p&gt;The client will be very similar to what we have done, but now we can
@@ -8147,7 +8147,7 @@ different datasets.&lt;/p&gt;
 pattern. What we want to achieve is to have 3 processes. One that
 continuously acquires from a camera and publishes the frames. Two more
 processes independent from each other, one that calculates the Fourier
-Transform, as we did before and another one that saves the images &lt;a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python"&gt;to an
+Transform, as we did before and another one that saves the images &lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;to an
 HDF5 file&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Let's start by developing the publisher. It is going to be an infinite
 loop that sends images one after the other. It will look like this:&lt;/p&gt;
@@ -8216,7 +8216,7 @@ right into the subscriber. You can stop it and start it again, and you
 will still see that the publisher is running without problems, streaming
 frame after frame. You can see what happens if you start two subscribers
 (or more). You will notice that they all get the same information. Let's
-see a quick example of how to save data to the hard drive, &lt;a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python"&gt;using
+see a quick example of how to save data to the hard drive, &lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;using
 hdf5&lt;/a&gt;. Let's create a new subscriber,
 &lt;strong&gt;subscriber_2.py&lt;/strong&gt;, with the following:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;from datetime import datetime
@@ -8260,7 +8260,7 @@ with h5py.File('camera_data.hdf5', 'a') as file:
 The only difference now is that the loop is encapsulated together with
 the opening of the HDF file in order to save data to &lt;code&gt;camera_data&lt;/code&gt;. If
 you are not familiar with how hdf5 works, I recommend you to check out
-&lt;a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python"&gt;this article&lt;/a&gt;. Remember that frames
+&lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;this article&lt;/a&gt;. Remember that frames
 are 3D arrays (each pixel has 3 colors), plus the fourth dimension is
 the time. In these cases is where the power of &lt;code&gt;h5py&lt;/code&gt; becomes evident
 and why it is worth controlling data saving at a lower level than what
@@ -8290,12 +8290,12 @@ on different computers connected to the same network.&lt;/p&gt;
 &lt;p&gt;In the following article, we are going to explore how to trigger
 different processes and threads from the same Python program. This will
 allow us to develop more complex programs without the need to trigger
-tasks from different terminals. We are going to combine &lt;a href="http://localhost:8000/blog/implementing-threads-for-measurements"&gt;Threads and
+tasks from different terminals. We are going to combine &lt;a href="https://pythonforthelab.com/blog/implementing-threads-for-measurements"&gt;Threads and
 Multiprocessing&lt;/a&gt;, together
 with socket communication.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/ISG-rUel0Uw?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Thomas
 Jensen&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="ZMQ"/><category term="Socket"/><category term="Communication"/><category term="Parallel"/><category term="Data"/></entry><entry><title>PyNTA: Nanoparticle Tracking Analysis</title><link href="http://localhost:8000/blog/pynta-nanoparticle-tracking-analysis" rel="alternate"/><published>2018-12-14T00:00:00+01:00</published><updated>2018-12-14T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-12-14:/blog/pynta-nanoparticle-tracking-analysis</id><summary type="html">&lt;p&gt;&lt;a href="https://pypi.org/project/pynta/"&gt;PyNTA&lt;/a&gt; is a program that aims at
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="ZMQ"/><category term="Socket"/><category term="Communication"/><category term="Parallel"/><category term="Data"/></entry><entry><title>PyNTA: Nanoparticle Tracking Analysis</title><link href="https://pythonforthelab.com/blog/pynta-nanoparticle-tracking-analysis" rel="alternate"/><published>2018-12-14T00:00:00+01:00</published><updated>2018-12-14T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-12-14:/blog/pynta-nanoparticle-tracking-analysis</id><summary type="html">&lt;p&gt;&lt;a href="https://pypi.org/project/pynta/"&gt;PyNTA&lt;/a&gt; is a program that aims at
 bridging the gap between data acquisition and analysis for experiments
 of nanoparticle tracking. PyNTA is my first public release of a package
 on PyPI, the Python repository. It is a desktop application that can be
@@ -8431,7 +8431,7 @@ way that a user sitting on the computer in the lab.&lt;/p&gt;
 &lt;p&gt;The documentation is available &lt;a href="https://nanoepics.github.io/pynta/"&gt;on
 Github&lt;/a&gt;. It is still a work in
 progress, but it is already quite complete. The code is in &lt;a href="https://github.com/nanoepics/pynta"&gt;this
-repository&lt;/a&gt;.&lt;/p&gt;</content><category term="blog"/><category term="Nanoparticle"/><category term="Tracking"/><category term="Analysis"/><category term="Release"/><category term="Package"/><category term="Desktop"/><category term="Experiment"/></entry><entry><title>Step by Step Guide to Building a GUI</title><link href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui" rel="alternate"/><published>2018-08-27T00:00:00+02:00</published><updated>2018-08-27T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-08-27:/blog/step-by-step-guide-to-building-a-gui</id><summary type="html">&lt;p&gt;In this tutorial, we are going to build a Graphical User Interface (GUI)
+repository&lt;/a&gt;.&lt;/p&gt;</content><category term="blog"/><category term="Nanoparticle"/><category term="Tracking"/><category term="Analysis"/><category term="Release"/><category term="Package"/><category term="Desktop"/><category term="Experiment"/></entry><entry><title>Step by Step Guide to Building a GUI</title><link href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui" rel="alternate"/><published>2018-08-27T00:00:00+02:00</published><updated>2018-08-27T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-08-27:/blog/step-by-step-guide-to-building-a-gui</id><summary type="html">&lt;p&gt;In this tutorial, we are going to build a Graphical User Interface (GUI)
 to acquire images from your webcam. We are going to use OpenCV to
 quickly acquire an image from your camera and PyQt5 to build the user
 interface. You may find a lot of tutorials online on how …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In this tutorial, we are going to build a Graphical User Interface (GUI)
@@ -8465,7 +8465,7 @@ potential this library has. To install OpenCV, the simplest is to run
 the following command:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-bash"&gt;pip install opencv-contrib-python
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Remember that the best practice is to be working in a &lt;a href="http://localhost:8000/blog/virtual-environment-is-a-must-have-tool"&gt;virtual
+&lt;p&gt;Remember that the best practice is to be working in a &lt;a href="https://pythonforthelab.com/blog/virtual-environment-is-a-must-have-tool"&gt;virtual
 environment&lt;/a&gt; to avoid
 conflicts with other libraries, etc. The installation procedure should
 also install numpy. If you run into issues while installing OpenCV, you
@@ -8879,7 +8879,7 @@ devices, then the meanings of each element in the MVC structure change.
 For instance, a controller would be the driver that is able to
 communicate with a device, which in our case is the camera. The driver
 was developed by OpenCV, but it is very likely that at some point we
-would &lt;a href="http://localhost:8000/blog/how-to-write-a-driver-with-lantz"&gt;develop our own drivers&lt;/a&gt;.&lt;/p&gt;
+would &lt;a href="https://pythonforthelab.com/blog/how-to-write-a-driver-with-lantz"&gt;develop our own drivers&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In the model, we would place all the logic of how we use the device,
 which is not necessarily how the device was designed to work. For
 instance, with the camera, we could implement a method called &lt;code&gt;movie&lt;/code&gt;
@@ -9320,7 +9320,7 @@ the movie&lt;/strong&gt;.&lt;/p&gt;
 &lt;p&gt;Finally, the model is accumulating all the data into an attribute. It
 could be nice to have the option to save the movie or the picture
 somewhere. You can add an extra button to achieve it, and if you are
-willing, you can use &lt;a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python"&gt;HDF5 files&lt;/a&gt; to
+willing, you can use &lt;a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python"&gt;HDF5 files&lt;/a&gt; to
 store the data.&lt;/p&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;In this article, you have seen everything that it takes to start
@@ -9337,7 +9337,7 @@ which we cover many more details about designing software and building
 user interfaces.&lt;/p&gt;
 &lt;p&gt;Header Photo by &lt;a href="https://unsplash.com/photos/qWwpHwip31M?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Alvaro
 Reyes&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="PyQt"/><category term="PyQt5"/><category term="Qt"/><category term="GUI"/><category term="OpenCV"/><category term="webcam"/><category term="User Interface"/></entry><entry><title>What are Hashable Objects</title><link href="http://localhost:8000/blog/what-are-hashable-objects" rel="alternate"/><published>2018-08-27T00:00:00+02:00</published><updated>2018-08-27T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-08-27:/blog/what-are-hashable-objects</id><summary type="html">&lt;p&gt;To understand hashable objects in Python, it is important to review what
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="PyQt"/><category term="PyQt5"/><category term="Qt"/><category term="GUI"/><category term="OpenCV"/><category term="webcam"/><category term="User Interface"/></entry><entry><title>What are Hashable Objects</title><link href="https://pythonforthelab.com/blog/what-are-hashable-objects" rel="alternate"/><published>2018-08-27T00:00:00+02:00</published><updated>2018-08-27T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-08-27:/blog/what-are-hashable-objects</id><summary type="html">&lt;p&gt;To understand hashable objects in Python, it is important to review what
 a hash table is. Following &lt;a href="https://en.wikipedia.org/wiki/Hash_table"&gt;the article on
 Wikipedia&lt;/a&gt;, a hash table is a
 data structure that can map keys to values and that implements a hash
@@ -9438,7 +9438,7 @@ happens if we use them in a dictionary, let's try it to find out:&lt;/p&gt;
 &lt;p&gt;As you can see in the snippet above, Python is relying on more than just
 the hash value of an object when using it as keys for a dictionary.&lt;/p&gt;
 &lt;h2&gt;Hash Values of Custom Classes&lt;/h2&gt;
-&lt;p&gt;We have seen &lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;before&lt;/a&gt; that
+&lt;p&gt;We have seen &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;before&lt;/a&gt; that
 there are differences between mutable and immutable types in Python.
 Built-in immutable types have always a hash method, while mutable types
 don't. However, this leaves outside custom defined classes. By default,
@@ -9553,12 +9553,12 @@ under-the-hood things work in Python. They may also give you a hint into
 why things work or stop working at apparently random places.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/BkqUJQiucKY?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Yeo
 Khee&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Hashable"/><category term="Objects"/><category term="Dictionaries"/><category term="Hash"/></entry><entry><title>Mutable and Immutable Attributes of Classes</title><link href="http://localhost:8000/blog/mutable-and-immutable-attributes-of-classes" rel="alternate"/><published>2018-08-24T00:00:00+02:00</published><updated>2018-08-24T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-08-24:/blog/mutable-and-immutable-attributes-of-classes</id><summary type="html">&lt;p&gt;We have seen how to leverage the differences between &lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;mutable and
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Hashable"/><category term="Objects"/><category term="Dictionaries"/><category term="Hash"/></entry><entry><title>Mutable and Immutable Attributes of Classes</title><link href="https://pythonforthelab.com/blog/mutable-and-immutable-attributes-of-classes" rel="alternate"/><published>2018-08-24T00:00:00+02:00</published><updated>2018-08-24T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-08-24:/blog/mutable-and-immutable-attributes-of-classes</id><summary type="html">&lt;p&gt;We have seen how to leverage the differences between &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;mutable and
 immutable objects&lt;/a&gt; and what
 happens when you use mutable types as default function arguments.
 However, we haven't discussed what happens when you use mutable types as
 default attributes of classes.&lt;/p&gt;
-&lt;p&gt;Default values for attributes can be defined in different …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We have seen how to leverage the differences between &lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;mutable and
+&lt;p&gt;Default values for attributes can be defined in different …&lt;/p&gt;</summary><content type="html">&lt;p&gt;We have seen how to leverage the differences between &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;mutable and
 immutable objects&lt;/a&gt; and what
 happens when you use mutable types as default function arguments.
 However, we haven't discussed what happens when you use mutable types as
@@ -9621,7 +9621,7 @@ print(id(my_class_2))
 &lt;p&gt;The same pattern that appeared while using mutable variables as defaults
 with functions will appear when using mutable default arguments of
 methods in custom classes. If you want to avoid this from happening, you
-can always check what &lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;we have done when working with
+can always check what &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;we have done when working with
 functions&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Of course, the same pattern will appear if you use a mutable variable
 defined outside of the class, for example:&lt;/p&gt;
@@ -9760,14 +9760,14 @@ when dealing with user interaction on programs that run for hours or
 days.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/mgaS4FlsYxQ?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Dan
 Gold&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Types"/><category term="Mutable"/><category term="Immutable"/><category term="Tuples"/></entry><entry><title>Mutable or Immutable Tuples</title><link href="http://localhost:8000/blog/mutable-or-immutable-tuples" rel="alternate"/><published>2018-08-24T00:00:00+02:00</published><updated>2018-08-24T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-08-24:/blog/mutable-or-immutable-tuples</id><summary type="html">&lt;p&gt;Broadly speaking, Python variables belong to one of two types:
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Types"/><category term="Mutable"/><category term="Immutable"/><category term="Tuples"/></entry><entry><title>Mutable or Immutable Tuples</title><link href="https://pythonforthelab.com/blog/mutable-or-immutable-tuples" rel="alternate"/><published>2018-08-24T00:00:00+02:00</published><updated>2018-08-24T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-08-24:/blog/mutable-or-immutable-tuples</id><summary type="html">&lt;p&gt;Broadly speaking, Python variables belong to one of two types:
 &lt;strong&gt;mutable&lt;/strong&gt; and &lt;strong&gt;immutable&lt;/strong&gt;. We have discussed this yesterday, in the
-&lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;Introduction To Mutable and Immutable Data
+&lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;Introduction To Mutable and Immutable Data
 Types&lt;/a&gt;. The first one refers
 to those elements that can be changed without the need of creating a new
 one, while the latter refers …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Broadly speaking, Python variables belong to one of two types:
 &lt;strong&gt;mutable&lt;/strong&gt; and &lt;strong&gt;immutable&lt;/strong&gt;. We have discussed this yesterday, in the
-&lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;Introduction To Mutable and Immutable Data
+&lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;Introduction To Mutable and Immutable Data
 Types&lt;/a&gt;. The first one refers
 to those elements that can be changed without the need of creating a new
 one, while the latter refers to those that cannot be changed after
@@ -9894,7 +9894,7 @@ article.&lt;/p&gt;
 &lt;/div&gt;
 &lt;h2&gt;Conclusions&lt;/h2&gt;
 &lt;p&gt;This is a short article triggered by some comments that appear on the
-&lt;a href="http://localhost:8000/blog/mutable-and-immutable-objects"&gt;discussion about mutable and immutable
+&lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-objects"&gt;discussion about mutable and immutable
 types&lt;/a&gt;. Wrapping your mind
 around this level of details may be hard at the beginning, but when you
 know these differences exist, you will be able to make better code, less
@@ -9902,7 +9902,7 @@ prone to bugs. You may also start realizing why so many packages use
 tuples as default arguments instead of lists, etc.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/O6XDQCNo4Hc?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Michal
 Pechardo&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Types"/><category term="Mutable"/><category term="Immutable"/><category term="Tuples"/></entry><entry><title>Mutable and Immutable Objects</title><link href="http://localhost:8000/blog/mutable-and-immutable-objects" rel="alternate"/><published>2018-08-23T00:00:00+02:00</published><updated>2018-08-23T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-08-23:/blog/mutable-and-immutable-objects</id><summary type="html">&lt;p&gt;People who start programming in Python quickly stumble upon the
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Types"/><category term="Mutable"/><category term="Immutable"/><category term="Tuples"/></entry><entry><title>Mutable and Immutable Objects</title><link href="https://pythonforthelab.com/blog/mutable-and-immutable-objects" rel="alternate"/><published>2018-08-23T00:00:00+02:00</published><updated>2018-08-23T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-08-23:/blog/mutable-and-immutable-objects</id><summary type="html">&lt;p&gt;People who start programming in Python quickly stumble upon the
 existence of lists and tuples. They are defined in a similar way, they
 look the same. Sometimes they are even used interchangeably. The obvious
 question is, therefore, why do you have two different types of elements
@@ -10240,7 +10240,7 @@ in the &lt;code&gt;cache&lt;/code&gt; dictionary, but if we execute the function
 once, &lt;code&gt;cache&lt;/code&gt; will start changing, appending the new values to it. If we
 run calculate again with the same arguments, they are going to be
 present and their known value will be returned. Notice that we are
-leveraging the &lt;a href="http://localhost:8000/blog/learning-not-to-handle-exceptions"&gt;exception
+leveraging the &lt;a href="https://pythonforthelab.com/blog/learning-not-to-handle-exceptions"&gt;exception
 handling&lt;/a&gt; in order to avoid
 checking explicitly whether the combination of values already exists in
 memory.&lt;/p&gt;
@@ -10324,11 +10324,11 @@ unexpected ways if you are not careful. When projects start to grow,
 small mistakes can pile up to disastrous problems.&lt;/p&gt;
 &lt;p&gt;If you want to keep learning, you can read more about
 why tuples may seem to change &amp;lt;{filename}18_mutable_tuples.rst&amp;gt;_
-and what happens when you use &lt;a href="http://localhost:8000/blog/mutable-and-immutable-attributes-of-classes"&gt;mutable or immutable variables as class
+and what happens when you use &lt;a href="https://pythonforthelab.com/blog/mutable-and-immutable-attributes-of-classes"&gt;mutable or immutable variables as class
 attributes&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Header Photo by
 &lt;a href="https://unsplash.com/photos/EF8Jr-uPS2Y?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;rawpixel&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Types"/><category term="Mutable"/><category term="Immutable"/><category term="Objects"/></entry><entry><title>Storing Data with SQLite</title><link href="http://localhost:8000/blog/storing-data-with-sqlite" rel="alternate"/><published>2018-08-12T00:00:00+02:00</published><updated>2018-08-12T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-08-12:/blog/storing-data-with-sqlite</id><summary type="html">&lt;p&gt;Using databases for storing data may sound much more complicated than
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Types"/><category term="Mutable"/><category term="Immutable"/><category term="Objects"/></entry><entry><title>Storing Data with SQLite</title><link href="https://pythonforthelab.com/blog/storing-data-with-sqlite" rel="alternate"/><published>2018-08-12T00:00:00+02:00</published><updated>2018-08-12T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-08-12:/blog/storing-data-with-sqlite</id><summary type="html">&lt;p&gt;Using databases for storing data may sound much more complicated than
 what it actually is. In this article, we are going to cover how to use
 databases to store different types of data. We will quickly review how
 you can search for specific parameters and how to get exactly what …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using databases for storing data may sound much more complicated than
@@ -10678,7 +10678,7 @@ the following code:&lt;/p&gt;
 specify only some data types and numpy arrays are not between them. This
 means that we have to convert the arrays into something that can be
 stored in a database. Since SQLite specifies only 4 major data types, we
-should stick to one of them. In the &lt;a href="http://localhost:8000/blog/storing-binary-data-and-serializing"&gt;previous
+should stick to one of them. In the &lt;a href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing"&gt;previous
 article&lt;/a&gt; we have discussed a lot
 about serialization. The same ideas can be used to store an array in a
 database.&lt;/p&gt;
@@ -10841,7 +10841,7 @@ high portability (sharing data is sharing just a file) and an easy way
 to search through the collection of metadata stored onto a database.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/PkbZahEG2Ng?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Tobias
 Fischer&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Storing"/><category term="SQLite"/><category term="HDF5"/><category term="ascii"/><category term="json"/><category term="Data Storage"/></entry><entry><title>Storing Binary Data and Serializing</title><link href="http://localhost:8000/blog/storing-binary-data-and-serializing" rel="alternate"/><published>2018-08-11T00:00:00+02:00</published><updated>2018-08-11T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-08-11:/blog/storing-binary-data-and-serializing</id><summary type="html">&lt;p&gt;Last week we have seen how to store data into plain text files that can
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Storing"/><category term="SQLite"/><category term="HDF5"/><category term="ascii"/><category term="json"/><category term="Data Storage"/></entry><entry><title>Storing Binary Data and Serializing</title><link href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing" rel="alternate"/><published>2018-08-11T00:00:00+02:00</published><updated>2018-08-11T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-08-11:/blog/storing-binary-data-and-serializing</id><summary type="html">&lt;p&gt;Last week we have seen how to store data into plain text files that can
 be read by any editor or by other programs. We have also seen that if
 you separate your data with commas your file will follow a standard and
 it will be automatically compatible with other …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Last week we have seen how to store data into plain text files that can
@@ -11449,7 +11449,7 @@ different formats, but the topic is far from complete. Keep tuned to
 find more articles regarding how to save data with Python.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/LqKhnDzSF-8?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Joshua
 Sortino&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Storing"/><category term="SQLite"/><category term="HDF5"/><category term="ascii"/><category term="json"/><category term="Data Storage"/></entry><entry><title>Introduction to Storing Data in Files</title><link href="http://localhost:8000/blog/introduction-to-storing-data-in-files" rel="alternate"/><published>2018-08-10T00:00:00+02:00</published><updated>2018-08-10T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-08-10:/blog/introduction-to-storing-data-in-files</id><summary type="html">&lt;p&gt;Storing data to reuse it later is a central part in most Python
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Storing"/><category term="SQLite"/><category term="HDF5"/><category term="ascii"/><category term="json"/><category term="Data Storage"/></entry><entry><title>Introduction to Storing Data in Files</title><link href="https://pythonforthelab.com/blog/introduction-to-storing-data-in-files" rel="alternate"/><published>2018-08-10T00:00:00+02:00</published><updated>2018-08-10T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-08-10:/blog/introduction-to-storing-data-in-files</id><summary type="html">&lt;p&gt;Storing data to reuse it later is a central part in most Python
 applications. Whether you are doing a measurement in the lab or
 developing a web application, you will need to save information in a
 persistent way. For example, you would like to analyze your results
@@ -11587,7 +11587,7 @@ use and how busy the computer is. Python puts the writing instructions
 into a queue, which means that the writing itself can be executed much
 later in time. If you want to be sure that changes are being written,
 especially when you are aware that your program may give rise to
-&lt;a href="http://localhost:8000/blog/learning-not-to-handle-exceptions"&gt;unhandled exceptions&lt;/a&gt;, you
+&lt;a href="https://pythonforthelab.com/blog/learning-not-to-handle-exceptions"&gt;unhandled exceptions&lt;/a&gt;, you
 can add the &lt;code&gt;flush&lt;/code&gt; command. Simply like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;f = open('AD_data.dat', 'wb')
 for i in range(201):
@@ -11993,7 +11993,7 @@ more to come.&lt;/p&gt;
 here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/n6B49lTx7NM?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Pietro
 Jeng&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Storing"/><category term="SQLite"/><category term="HDF5"/><category term="ascii"/><category term="json"/><category term="Data Storage"/></entry><entry><title>Learning (not) to Handle Exceptions</title><link href="http://localhost:8000/blog/learning-not-to-handle-exceptions" rel="alternate"/><published>2018-06-04T00:00:00+02:00</published><updated>2018-06-04T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-06-04:/blog/learning-not-to-handle-exceptions</id><summary type="html">&lt;p&gt;When you develop code, it is almost impossible not to run into an
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Data"/><category term="Storing"/><category term="SQLite"/><category term="HDF5"/><category term="ascii"/><category term="json"/><category term="Data Storage"/></entry><entry><title>Learning (not) to Handle Exceptions</title><link href="https://pythonforthelab.com/blog/learning-not-to-handle-exceptions" rel="alternate"/><published>2018-06-04T00:00:00+02:00</published><updated>2018-06-04T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-06-04:/blog/learning-not-to-handle-exceptions</id><summary type="html">&lt;p&gt;When you develop code, it is almost impossible not to run into an
 error. Some problems are going to arise as soon as you start your
 program, for example, if you forgot to close a parenthesis, or forgot
 the &lt;code&gt;:&lt;/code&gt; after an if-statement. However, errors at runtime are also
@@ -12460,7 +12460,7 @@ appropriate. Let's see an example. Imagine that you want to write a
 function that calculates the average between two numbers, but you want
 both numbers to be positive. This is the same example that we have seen
 when working with
-&lt;a href="http://localhost:8000/blog/how-to-use-decorators-part-2"&gt;decorators&lt;/a&gt;. We start by
+&lt;a href="https://pythonforthelab.com/blog/how-to-use-decorators-part-2"&gt;decorators&lt;/a&gt;. We start by
 defining the function:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;def average(x, y):
     return (x + y)/2
@@ -12641,7 +12641,7 @@ Django&lt;/a&gt;,
 a much more complex package.&lt;/p&gt;
 &lt;p&gt;Photo by &lt;a href="https://unsplash.com/photos/5E5N49RWtbA?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Cody
 Davis&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Exceptions"/><category term="Errors"/><category term="Try"/><category term="Except"/><category term="Catch"/><category term="Handling"/></entry><entry><title>Documenting with Sphinx and Readthedocs</title><link href="http://localhost:8000/blog/documenting-with-sphinx-and-readthedocs" rel="alternate"/><published>2018-05-31T00:00:00+02:00</published><updated>2018-05-31T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-05-31:/blog/documenting-with-sphinx-and-readthedocs</id><summary type="html">&lt;p&gt;If you have ever followed a guide on how to start programming, most
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Exceptions"/><category term="Errors"/><category term="Try"/><category term="Except"/><category term="Catch"/><category term="Handling"/></entry><entry><title>Documenting with Sphinx and Readthedocs</title><link href="https://pythonforthelab.com/blog/documenting-with-sphinx-and-readthedocs" rel="alternate"/><published>2018-05-31T00:00:00+02:00</published><updated>2018-05-31T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-05-31:/blog/documenting-with-sphinx-and-readthedocs</id><summary type="html">&lt;p&gt;If you have ever followed a guide on how to start programming, most
 likely you have encounter reflections about the importance of adding
 comments to your code. Comments allow you to understand what the
 developer was thinking when programming, maybe left some traces of what
@@ -12661,7 +12661,7 @@ how to host it for free on &lt;a href="https://readthedocs.org/"&gt;Read The Doc
 &lt;h2&gt;Building a Simple Module&lt;/h2&gt;
 &lt;p&gt;To start with this tutorial, we will need to build a simple module, with
 some classes and functions. My recommendation is to work inside a
-&lt;a href="http://localhost:8000/blog/virtual-environment-is-a-must-have-tool"&gt;Virtual Environment&lt;/a&gt;. Start
+&lt;a href="https://pythonforthelab.com/blog/virtual-environment-is-a-must-have-tool"&gt;Virtual Environment&lt;/a&gt;. Start
 by creating a folder to hold your project. Inside create a new folder
 called my_module and add an empty &lt;strong&gt;__init__.py&lt;/strong&gt; file. Create a
 file called &lt;strong&gt;factorial.py&lt;/strong&gt; and add the following code:&lt;/p&gt;
@@ -13163,7 +13163,7 @@ numpy but it is not installed, the import process will fail.&lt;/p&gt;
 for your program to work, Read The Docs can automatically install them
 in a virtual environment and then build the documentation. That is what
 the &lt;strong&gt;requirements.txt&lt;/strong&gt; file is for. You can see how to generate one by
-reading &lt;a href="http://localhost:8000/blog/virtual-environment-is-a-must-have-tool"&gt;our article on the Virtual
+reading &lt;a href="https://pythonforthelab.com/blog/virtual-environment-is-a-must-have-tool"&gt;our article on the Virtual
 Environment&lt;/a&gt;. The other
 important parameter is the location of the &lt;strong&gt;conf.py&lt;/strong&gt; file. Normally
 you would place it in &lt;strong&gt;docs/source/conf.py&lt;/strong&gt;, but that can change from
@@ -13214,7 +13214,7 @@ you quickly through the installation process and some examples. Just for
 you to get started.&lt;/p&gt;
 &lt;p&gt;Heder photo by
 &lt;a href="https://unsplash.com/photos/AG2Ct_DqCh0?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;chuttersnap&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Threads"/><category term="Processes"/><category term="Parallel"/><category term="Speed"/><category term="Async"/><category term="Advanced"/></entry><entry><title>Implementing Threads for Measurements</title><link href="http://localhost:8000/blog/implementing-threads-for-measurements" rel="alternate"/><published>2018-05-29T00:00:00+02:00</published><updated>2018-05-29T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-05-29:/blog/implementing-threads-for-measurements</id><summary type="html">&lt;p&gt;Probably you have run into the problem of wanting to update a plot while
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Threads"/><category term="Processes"/><category term="Parallel"/><category term="Speed"/><category term="Async"/><category term="Advanced"/></entry><entry><title>Implementing Threads for Measurements</title><link href="https://pythonforthelab.com/blog/implementing-threads-for-measurements" rel="alternate"/><published>2018-05-29T00:00:00+02:00</published><updated>2018-05-29T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-05-29:/blog/implementing-threads-for-measurements</id><summary type="html">&lt;p&gt;Probably you have run into the problem of wanting to update a plot while
 acquiring a signal, but finding that Python is busy during the
 acquisition. This happens, for example, when functions or methods take
 long to execute and you can't regain control until it is done. Python
@@ -13895,7 +13895,7 @@ programming, but I found the syntax much harder to understand in order
 to propose solutions.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/TYhEoWbbayQ?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;frank
 mckenna&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Threads"/><category term="Processes"/><category term="Parallel"/><category term="Speed"/><category term="Async"/><category term="Advanced"/></entry><entry><title>A Primer on Classes in Python</title><link href="http://localhost:8000/blog/a-primer-on-classes-in-python" rel="alternate"/><published>2018-05-22T00:00:00+02:00</published><updated>2018-05-22T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-05-22:/blog/a-primer-on-classes-in-python</id><summary type="html">&lt;p&gt;Python is an object-oriented programming (OOP) language. Object-oriented
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Threads"/><category term="Processes"/><category term="Parallel"/><category term="Speed"/><category term="Async"/><category term="Advanced"/></entry><entry><title>A Primer on Classes in Python</title><link href="https://pythonforthelab.com/blog/a-primer-on-classes-in-python" rel="alternate"/><published>2018-05-22T00:00:00+02:00</published><updated>2018-05-22T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-05-22:/blog/a-primer-on-classes-in-python</id><summary type="html">&lt;p&gt;Python is an object-oriented programming (OOP) language. Object-oriented
 programming is a programming design that allows developers not only to
 define the type of data of a variable but also the operations that can
 act on that data. For example, a variable can be of type integer, float,
@@ -14285,7 +14285,7 @@ you can always leave a comment below and we will expand the article
 according to your needs. &lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/ZqqlOZyGG7g?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;Daniel
 Cheung&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Classes"/><category term="Object oriented"/><category term="beginner"/></entry><entry><title>How to use decorators Part 2</title><link href="http://localhost:8000/blog/how-to-use-decorators-part-2" rel="alternate"/><published>2018-05-18T00:00:00+02:00</published><updated>2018-05-18T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-05-18:/blog/how-to-use-decorators-part-2</id><summary type="html">&lt;p&gt;Decorators are a very useful programming pattern that allows changing
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Classes"/><category term="Object oriented"/><category term="beginner"/></entry><entry><title>How to use decorators Part 2</title><link href="https://pythonforthelab.com/blog/how-to-use-decorators-part-2" rel="alternate"/><published>2018-05-18T00:00:00+02:00</published><updated>2018-05-18T00:00:00+02:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-05-18:/blog/how-to-use-decorators-part-2</id><summary type="html">&lt;p&gt;Decorators are a very useful programming pattern that allows changing
 the behavior of functions with little refactoring. Decorators allow
 developers to abstract common options from functions, but mastering
 their use in Python can be challenging. In this article, we are going to
@@ -14295,7 +14295,7 @@ developers to abstract common options from functions, but mastering
 their use in Python can be challenging. In this article, we are going to
 go in depth regarding different options when implementing decorators.
 The topics covered are:&lt;/p&gt;
-&lt;p&gt;In a &lt;a href="http://localhost:8000/blog/how-to-use-decorators-to-validate-input"&gt;previous article on the use of decorators to validate user
+&lt;p&gt;In a &lt;a href="https://pythonforthelab.com/blog/how-to-use-decorators-to-validate-input"&gt;previous article on the use of decorators to validate user
 input&lt;/a&gt;, we have seen just
 the very beginning of what decorators are able to provide to the
 developer. Let's first recap what we saw earlier. We can define a
@@ -14325,7 +14325,7 @@ print(b)
 &lt;p&gt;In the first case, the function would work, giving as output &lt;code&gt;1.5&lt;/code&gt;,
 while in the second case it would raise an exception because one of the
 arguments is not positive. If you can't understand the code above, you
-should check the &lt;a href="http://localhost:8000/blog/how-to-use-decorators-to-validate-input"&gt;first article published on
+should check the &lt;a href="https://pythonforthelab.com/blog/how-to-use-decorators-to-validate-input"&gt;first article published on
 decorators&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Docstrings with decorators&lt;/h2&gt;
 &lt;p&gt;This example works fine, but it already shows an issue that for larger
@@ -14710,13 +14710,13 @@ going to be used by other developers.&lt;/p&gt;
 &lt;a href="http://flask.pocoo.org/"&gt;Flask&lt;/a&gt; and
 &lt;a href="https://github.com/lantzproject/"&gt;Lantz&lt;/a&gt;. Therefore, even if you don't
 develop your own decorators, it is always important to understand how
-they work.&lt;/p&gt;</content><category term="blog"/><category term="Decorators"/><category term="Tricks"/><category term="Validation"/><category term="Data"/><category term="Intermediate"/></entry><entry><title>How to use HDF5 files in Python</title><link href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python" rel="alternate"/><published>2018-03-19T00:00:00+01:00</published><updated>2018-03-19T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-03-19:/blog/how-to-use-hdf5-files-in-python</id><summary type="html">&lt;p&gt;When dealing with large amounts of data, either experimental or simulated, saving it to several text files is not very efficient. Sometimes you need to access a specific subset of the dataset, and you don't want to load it all to memory. If you are looking for a solution that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When dealing with large amounts of data, either experimental or simulated, saving it to several text files is not very efficient. Sometimes you need to access a specific subset of the dataset, and you don't want to load it all to memory. If you are looking for a solution that integrates nicely with numpy and pandas, then the HDF5 format may be the solution you were seeking. &lt;/p&gt;
+they work.&lt;/p&gt;</content><category term="blog"/><category term="Decorators"/><category term="Tricks"/><category term="Validation"/><category term="Data"/><category term="Intermediate"/></entry><entry><title>How to use HDF5 files in Python</title><link href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python" rel="alternate"/><published>2018-03-19T00:00:00+01:00</published><updated>2018-03-19T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-03-19:/blog/how-to-use-hdf5-files-in-python</id><summary type="html">&lt;p&gt;When dealing with large amounts of data, either experimental or simulated, saving it to several text files is not very efficient. Sometimes you need to access a specific subset of the dataset, and you don't want to load it all to memory. If you are looking for a solution that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;When dealing with large amounts of data, either experimental or simulated, saving it to several text files is not very efficient. Sometimes you need to access a specific subset of the dataset, and you don't want to load it all to memory. If you are looking for a solution that integrates nicely with numpy and pandas, then the HDF5 format may be the solution you were seeking. &lt;/p&gt;
 &lt;p&gt;Each HDF5 file has an internal structure that allows you to search for a specific dataset. You can think of it as a single file with its hierarchical structure, just like a collection of folders and subfolders. By default, the data is stored in binary format, and the library is compatible with different data types. One essential option of the HDF5 format is that it allows attaching metadata to every element in the structure, making it ideal for generating self-explanatory files.&lt;/p&gt;
 &lt;p&gt;In Python, there are two libraries that can interface with the HDF5 format: &lt;a href="https://www.pytables.org/index.html"&gt;PyTables&lt;/a&gt; and &lt;a href="https://h5py.readthedocs.io/en/stable/index.html"&gt;h5py&lt;/a&gt;. The first one is the one employed by Pandas under-the-hood, while the second is the one that maps the features of the HDF5 specification to numpy arrays. While PyTables can be thought of as implementing database-like features on top of the HDF5 specification, &lt;strong&gt;h5py&lt;/strong&gt; is the natural choice when dealing with N-dimensional numpy arrays (not just tables). Some of the features are the same with both libraries, but we will focus on &lt;strong&gt;h5py&lt;/strong&gt;. &lt;/p&gt;
 &lt;p&gt;One of the most exciting features of the HDF5 format is that data is read from the hard drive only when it is needed. Imagine you have a large array that doesn't fit in the available RAM. A clear example would be a movie, which is a series of 2D arrays. Maybe you would like to look only at a smaller region and not the full-frame. Instead of loading each frame to memory, you could directly access the required data. H5py allows you to work with data on the hard drive just as you would with an array. &lt;/p&gt;
 &lt;p&gt;In this article, we will see how you can use &lt;strong&gt;h5py&lt;/strong&gt; to store and retrieve data from files. We will discuss different ways of storing and organizing data and how to optimize the reading process. All the examples that appear in this article are also &lt;a href="https://github.com/PFTL/website_example_code/tree/master/code/02_HDF5"&gt;available on our Github repository&lt;/a&gt;.&lt;/p&gt;
 &lt;h2&gt;Installing&lt;/h2&gt;
-&lt;p&gt;The HDF5 format is supported by the &lt;a href="https://www.hdfgroup.org/"&gt;HDF Group&lt;/a&gt;, and it is based on open source standards, meaning that your data will always be accessible, even if the group disappears. We can install the &lt;a href="https://www.h5py.org/"&gt;h5py package&lt;/a&gt; through &lt;code&gt;pip&lt;/code&gt;. Remember that you should be using a &lt;a href="http://localhost:8000/blog/virtual-environment-is-a-must-have-tool"&gt;virtual environment&lt;/a&gt; to perform tests:&lt;/p&gt;
+&lt;p&gt;The HDF5 format is supported by the &lt;a href="https://www.hdfgroup.org/"&gt;HDF Group&lt;/a&gt;, and it is based on open source standards, meaning that your data will always be accessible, even if the group disappears. We can install the &lt;a href="https://www.h5py.org/"&gt;h5py package&lt;/a&gt; through &lt;code&gt;pip&lt;/code&gt;. Remember that you should be using a &lt;a href="https://pythonforthelab.com/blog/virtual-environment-is-a-must-have-tool"&gt;virtual environment&lt;/a&gt; to perform tests:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-shell"&gt;pip install h5py
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;the command will also install numpy, in case you don't have it already in your environment. &lt;/p&gt;
@@ -14738,7 +14738,7 @@ with h5py.File('random.hdf5', 'w') as f:
 &lt;p&gt;We import the packages h5py and numpy and create an array with random values. We open a file called &lt;code&gt;random.hdf5&lt;/code&gt; with write permission, &lt;code&gt;w&lt;/code&gt; which means that if there is already a file with the same name, it will be overwritten. If you would like to preserve the file and still write to it, you can open it with the &lt;code&gt;a&lt;/code&gt; attribute instead of &lt;code&gt;w&lt;/code&gt;. We create a dataset called &lt;code&gt;default&lt;/code&gt;, and we set the data as the random array created earlier. Datasets are holders of our data, basically the building blocks of the HDF5 format.&lt;/p&gt;
 &lt;div class="admonition note"&gt;
 &lt;p class="admonition-title"&gt;Note&lt;/p&gt;
-&lt;p&gt;If you are not familiar with the &lt;code&gt;with&lt;/code&gt; statement, you can check out &lt;a href="http://localhost:8000/blog/the-with-command-and-custom-classes"&gt;this tutorial&lt;/a&gt;. In a nutshell, it is a convenient way of opening and closing a file. Even if there is an error within the &lt;code&gt;with&lt;/code&gt;, the file will be closed. If, for some reason, you don't use the &lt;code&gt;with&lt;/code&gt;, never forget to add the command &lt;code&gt;f.close()&lt;/code&gt; at the end. &lt;/p&gt;
+&lt;p&gt;If you are not familiar with the &lt;code&gt;with&lt;/code&gt; statement, you can check out &lt;a href="https://pythonforthelab.com/blog/the-with-command-and-custom-classes"&gt;this tutorial&lt;/a&gt;. In a nutshell, it is a convenient way of opening and closing a file. Even if there is an error within the &lt;code&gt;with&lt;/code&gt;, the file will be closed. If, for some reason, you don't use the &lt;code&gt;with&lt;/code&gt;, never forget to add the command &lt;code&gt;f.close()&lt;/code&gt; at the end. &lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;To read the data back, we can do it in a very similar way to when we read a numpy file:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;with h5py.File('random.hdf5', 'r') as f:
@@ -15350,7 +15350,7 @@ single binary file.&lt;/p&gt;
 It takes a bit of time to get used to, and you will need to experiment
 for a while until you find a way in which it can help you store your
 data. HDF5 is a good format if you need to establish transversal rules
-in your lab on how to store data and metadata.&lt;/p&gt;</content><category term="blog"/><category term="pyhdf"/><category term="HDF5"/><category term="data"/><category term="file"/><category term="storing"/></entry><entry><title>How to Use Decorators to Validate Input</title><link href="http://localhost:8000/blog/how-to-use-decorators-to-validate-input" rel="alternate"/><published>2018-03-12T00:00:00+01:00</published><updated>2018-03-12T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-03-12:/blog/how-to-use-decorators-to-validate-input</id><summary type="html">&lt;p&gt;Python is rich in resources that can shorten the time it takes to
+in your lab on how to store data and metadata.&lt;/p&gt;</content><category term="blog"/><category term="pyhdf"/><category term="HDF5"/><category term="data"/><category term="file"/><category term="storing"/></entry><entry><title>How to Use Decorators to Validate Input</title><link href="https://pythonforthelab.com/blog/how-to-use-decorators-to-validate-input" rel="alternate"/><published>2018-03-12T00:00:00+01:00</published><updated>2018-03-12T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-03-12:/blog/how-to-use-decorators-to-validate-input</id><summary type="html">&lt;p&gt;Python is rich in resources that can shorten the time it takes to
 develop new programs and simplify repetitive tasks. Decorators are one
 of such elements but more often than not they are not considered by less
 experienced developers. Adding decorators to the syntactic toolbox can
@@ -15603,7 +15603,7 @@ be greatly improved. If you have ever encountered decorators and didn't
 understand how to use them, or you are looking for more specific
 information, leave your message in the comment section below, and we will
 use your feedback to write a follow-up article specifically designed to
-answer your questions.&lt;/p&gt;</content><category term="blog"/><category term="Decorators"/><category term="Python"/><category term="Tricks"/><category term="Validation"/><category term="Data"/></entry><entry><title>Virtual Environment is a Must-Have Tool</title><link href="http://localhost:8000/blog/virtual-environment-is-a-must-have-tool" rel="alternate"/><published>2018-03-09T00:00:00+01:00</published><updated>2018-03-09T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-03-09:/blog/virtual-environment-is-a-must-have-tool</id><summary type="html">&lt;p&gt;When you start developing software, it is of utmost importance to have
+answer your questions.&lt;/p&gt;</content><category term="blog"/><category term="Decorators"/><category term="Python"/><category term="Tricks"/><category term="Validation"/><category term="Data"/></entry><entry><title>Virtual Environment is a Must-Have Tool</title><link href="https://pythonforthelab.com/blog/virtual-environment-is-a-must-have-tool" rel="alternate"/><published>2018-03-09T00:00:00+01:00</published><updated>2018-03-09T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-03-09:/blog/virtual-environment-is-a-must-have-tool</id><summary type="html">&lt;p&gt;When you start developing software, it is of utmost importance to have
 an isolated programming environment in which you can control precisely
 the packages installed. This will allow you, for example, to use
 experimental libraries without overwriting software that other programs
@@ -15768,7 +15768,7 @@ properly, regardless of their specific needs.&lt;/p&gt;
 &lt;p&gt;Remember, every time you are about to start a new project, regardless of
 what it is, you should start by creating an appropriate Virtual
 Environment for it. In this way, you can be certain of the long-term
-prosperity of the code you write, regardless of where it will bring you.&lt;/p&gt;</content><category term="blog"/><category term="Python"/><category term="Virtual Environment"/><category term="Development"/></entry><entry><title>How to Control a Device Through the Network</title><link href="http://localhost:8000/blog/how-to-control-a-device-through-the-network" rel="alternate"/><published>2018-02-28T00:00:00+01:00</published><updated>2018-02-28T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-02-28:/blog/how-to-control-a-device-through-the-network</id><summary type="html">&lt;p&gt;In the lab, it is common to find different computers connected to
+prosperity of the code you write, regardless of where it will bring you.&lt;/p&gt;</content><category term="blog"/><category term="Python"/><category term="Virtual Environment"/><category term="Development"/></entry><entry><title>How to Control a Device Through the Network</title><link href="https://pythonforthelab.com/blog/how-to-control-a-device-through-the-network" rel="alternate"/><published>2018-02-28T00:00:00+01:00</published><updated>2018-02-28T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-02-28:/blog/how-to-control-a-device-through-the-network</id><summary type="html">&lt;p&gt;In the lab, it is common to find different computers connected to
 specific devices. For example,when you keep older PCs which are able to
 communicate with very specific hardware. You may also have different
 computers when there are mobile instruments that you share among
@@ -15854,7 +15854,7 @@ memory or better processors, or you can even make a parallel execution
 of your code without leaving your Jupyter notebook.&lt;/p&gt;
 &lt;/div&gt;
 &lt;p&gt;Let's assume you have a device like the one we developed in our earlier
-post &lt;a href="http://localhost:8000/blog/how-to-write-a-driver-with-lantz"&gt;How to Write a Driver with
+post &lt;a href="https://pythonforthelab.com/blog/how-to-write-a-driver-with-lantz"&gt;How to Write a Driver with
 Lantz&lt;/a&gt;. The device is an
 oscilloscope with several built-in methods, including &lt;code&gt;idn&lt;/code&gt; for getting
 its serial number, and &lt;code&gt;datasource&lt;/code&gt; to set and get the channel used for
@@ -15886,7 +15886,7 @@ to a device, waiting for it to return a value and then we are sending it
 back to the browser. With this simple example, you can already see that
 we are doing virtually everything that a device can handle. Of course,
 devices also take inputs, and we should take into account this. Basing
-ourselves on the example of an &lt;a href="http://localhost:8000/blog/how-to-write-a-driver-with-lantz"&gt;oscilloscope with
+ourselves on the example of an &lt;a href="https://pythonforthelab.com/blog/how-to-write-a-driver-with-lantz"&gt;oscilloscope with
 Lantz&lt;/a&gt;, we could change the
 datasource property of the device like this:&lt;/p&gt;
 &lt;pre&gt;&lt;code class="language-python"&gt;[...]
@@ -16017,7 +16017,7 @@ about network communication and much more, you can also consider our
 Course&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/photos/l090uFWoPaI?utm_source=unsplash&amp;amp;utm_medium=referral&amp;amp;utm_content=creditCopyText"&gt;John
 Carlisle&lt;/a&gt;
-on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Network"/><category term="Communication"/><category term="Async"/><category term="Remote Control"/><category term="Devices"/><category term="Drivers"/><category term="Flask"/><category term="Internet"/></entry><entry><title>How to Write a Driver with Lantz</title><link href="http://localhost:8000/blog/how-to-write-a-driver-with-lantz" rel="alternate"/><published>2018-02-23T00:00:00+01:00</published><updated>2018-02-23T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-02-23:/blog/how-to-write-a-driver-with-lantz</id><summary type="html">&lt;p&gt;Lantz is a package written by several researchers who wanted to have a
+on Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Network"/><category term="Communication"/><category term="Async"/><category term="Remote Control"/><category term="Devices"/><category term="Drivers"/><category term="Flask"/><category term="Internet"/></entry><entry><title>How to Write a Driver with Lantz</title><link href="https://pythonforthelab.com/blog/how-to-write-a-driver-with-lantz" rel="alternate"/><published>2018-02-23T00:00:00+01:00</published><updated>2018-02-23T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-02-23:/blog/how-to-write-a-driver-with-lantz</id><summary type="html">&lt;p&gt;Lantz is a package written by several researchers who wanted to have a
 framework to build instrumentation on Python. It is open source and
 hosted &lt;a href="https://github.com/LabPy/lantz"&gt;on Github&lt;/a&gt;. Their description is
 very clear:&lt;/p&gt;
@@ -16237,7 +16237,7 @@ If you want to explore more I suggest you check also:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;Header photo by &lt;a href="https://unsplash.com/@pjswinburn"&gt;Philip Swinburn&lt;/a&gt; on
-Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Lantz"/><category term="Beginner"/><category term="Drivers"/><category term="Devices"/></entry><entry><title>Controlling a National Instruments Card with Python</title><link href="http://localhost:8000/blog/controlling-a-national-instruments-card-with-python" rel="alternate"/><published>2018-02-21T00:00:00+01:00</published><updated>2018-02-21T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:localhost,2018-02-21:/blog/controlling-a-national-instruments-card-with-python</id><summary type="html">&lt;p&gt;One of the most common devices in a lab is a National Instruments
+Unsplash&lt;/p&gt;</content><category term="blog"/><category term="Lantz"/><category term="Beginner"/><category term="Drivers"/><category term="Devices"/></entry><entry><title>Controlling a National Instruments Card with Python</title><link href="https://pythonforthelab.com/blog/controlling-a-national-instruments-card-with-python" rel="alternate"/><published>2018-02-21T00:00:00+01:00</published><updated>2018-02-21T00:00:00+01:00</updated><author><name>Aquiles Carattino</name></author><id>tag:pythonforthelab.com,2018-02-21:/blog/controlling-a-national-instruments-card-with-python</id><summary type="html">&lt;p&gt;One of the most common devices in a lab is a National Instruments
 acquisition card, also called a DAQ. As you probably know by now, the
 default programming environment for such cards is Lab View, but what you
 may not be aware is that there are libraries for interfacing with …&lt;/p&gt;</summary><content type="html">&lt;p&gt;One of the most common devices in a lab is a National Instruments
