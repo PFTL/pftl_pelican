@@ -13,6 +13,11 @@ url = "/pages/privacy-policy.html"
 title = "Privacy Policy"
 
 [[input.files]]
+path = "blog/how-to-use-hdf5-files-in-python/index.html"
+url = "/blog/how-to-use-hdf5-files-in-python"
+title = "How to use HDF5 files in Python"
+
+[[input.files]]
 path = "blog/instructions-to-build-the-python-for-the-lab-daq//index.html"
 url = "/blog/instructions-to-build-the-python-for-the-lab-daq/"
 title = "Instructions to build the Python for the Lab DAQ."
@@ -201,11 +206,6 @@ title = "A Primer on Classes in Python"
 path = "blog/how-to-use-decorators-part-2/index.html"
 url = "/blog/how-to-use-decorators-part-2"
 title = "How to use decorators Part 2"
-
-[[input.files]]
-path = "blog/how-to-use-hdf5-files-in-python/index.html"
-url = "/blog/how-to-use-hdf5-files-in-python"
-title = "How to use HDF5 files in Python"
 
 [[input.files]]
 path = "blog/how-to-use-decorators-to-validate-input/index.html"

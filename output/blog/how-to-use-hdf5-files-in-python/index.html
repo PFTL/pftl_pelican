@@ -21,53 +21,53 @@
   <meta name="tags" content="pyhdf, HDF5, data, file, storing, ">
   <meta name="description" content="Complete tutorial on using HDF5 files with Python">
   <meta name="author" content="Aquiles Carattino">
-  <link rel="canonical" href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python">
+  <link rel="canonical" href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:site_name" content="Python for the Lab">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="http://localhost:8000/blog/how-to-use-hdf5-files-in-python">
+  <meta property="og:url" content="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python">
   <meta property="og:title" content="How to use HDF5 files in Python">
   <meta property="og:description" content="Complete tutorial on using HDF5 files with Python">
   <meta property="og:image" content="/images/storing_data_hdf.png">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="http://localhost:8000/blog/how-to-use-hdf5-files-in-python">
+  <meta property="twitter:url" content="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python">
   <meta property="twitter:title" content="How to use HDF5 files in Python">
   <meta property="twitter:description" content="Complete tutorial on using HDF5 files with Python">
   <meta property="twitter:image" content="/images/storing_data_hdf.png">
   <meta name="twitter:creator" content="@aquicarattino">
 
   <link rel="apple-touch-icon" sizes="57x57"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="76x76"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
   <link rel="apple-touch-icon" sizes="114x114"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
   <link rel="apple-touch-icon" sizes="120x120"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
   <link rel="apple-touch-icon" sizes="144x144"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
   <link rel="icon" type="image/png" sizes="192x192"
-        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32"
-        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96"
-        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16"
-        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
   <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -76,11 +76,11 @@
       rel="stylesheet">
 
   <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
-  <link rel="stylesheet" href="http://localhost:8000/theme/css/tw_style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://http://localhost:8000/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
 
-	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
 </head>
 
 <body class="text-gray-800">
@@ -88,40 +88,40 @@
     <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
       <nav class="lg:pr-8 w-full lg:pt-4">
         <div class="flex p-3 items-center justify-between">
-          <a class="flex-none" href="http://localhost:8000">
+          <a class="flex-none" href="https://pythonforthelab.com">
             <img id="site-logo" class="h-12"
-                 src="http://localhost:8000/theme/css/images/logo-red.svg"/>
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
           </a>
           <div id="menu_sm"
                class="pr-0 pl-4 grow hidden lg:block">
 <ul
         class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/blog"
+        <a href="https://pythonforthelab.com/blog"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Blog</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/courses"
+        <a href="https://pythonforthelab.com/courses"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Courses</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/hire-me"
+        <a href="https://pythonforthelab.com/hire-me"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Hire Me</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/books"
+        <a href="https://pythonforthelab.com/books"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Books</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/about"
+        <a href="https://pythonforthelab.com/about"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">About</span>
         </a>
@@ -136,7 +136,7 @@
         <form action="#" class="w-full pr-8">
             <label for="search" class="relative block">
                 <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
-                     src="http://localhost:8000/theme/css/images/search.svg">
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
                 <input id="search" data-stork="sitesearch" type="text"
                        class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
                        placeholder="Type to Search">
@@ -147,7 +147,7 @@
 </ul>          </div>
           <div class="">
             <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
-              <img id="hamburger" src="http://localhost:8000/theme/css/images/hamburger.svg"
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
                    class="h-8 w-8"/>
             </button>
           </div>
@@ -157,7 +157,7 @@
 <ul
         class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/blog"
+        <a href="https://pythonforthelab.com/blog"
            class="before:content-blogIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -165,7 +165,7 @@
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/courses"
+        <a href="https://pythonforthelab.com/courses"
            class="before:content-coursesIcon md:w-full
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -173,7 +173,7 @@
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/hire-me"
+        <a href="https://pythonforthelab.com/hire-me"
            class="before:content-hireIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -181,7 +181,7 @@
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/books"
+        <a href="https://pythonforthelab.com/books"
            class="before:content-booksIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -189,7 +189,7 @@
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/about"
+        <a href="https://pythonforthelab.com/about"
            class="before:content-aboutIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -208,7 +208,7 @@
         <form action="#" class="w-full pr-8">
             <label for="search" class="relative block">
                 <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
-                     src="http://localhost:8000/theme/css/images/search.svg">
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
                 <input id="search" data-stork="sitesearch" type="text"
                        class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
                        placeholder="Type to Search">
@@ -226,7 +226,7 @@
         <form action="#" class="w-full pr-8 pt-4 text-xs">
           <label for="search" class="relative block">
             <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
-                 src="http://localhost:8000/theme/css/images/search.svg">
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
             <input id="search" data-stork="sitesearch" type="text"
                    class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
                    placeholder="Type to Search">
@@ -281,8 +281,7 @@
         <div class="text-sm text-gray-400">
           <span
               class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
-          <span
-              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2018-03-19</span>
+              class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2026-01-09</span>
           <span
               class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
               <span class="bg-gray-300 rounded text-white px-0.5 mr-0.5 ">pyhdf</span>
@@ -302,7 +301,7 @@
 <p>One of the most exciting features of the HDF5 format is that data is read from the hard drive only when it is needed. Imagine you have a large array that doesn't fit in the available RAM. A clear example would be a movie, which is a series of 2D arrays. Maybe you would like to look only at a smaller region and not the full-frame. Instead of loading each frame to memory, you could directly access the required data. H5py allows you to work with data on the hard drive just as you would with an array. </p>
 <p>In this article, we will see how you can use <strong>h5py</strong> to store and retrieve data from files. We will discuss different ways of storing and organizing data and how to optimize the reading process. All the examples that appear in this article are also <a href="https://github.com/PFTL/website_example_code/tree/master/code/02_HDF5">available on our Github repository</a>.</p>
 <h2>Installing</h2>
-<p>The HDF5 format is supported by the <a href="https://www.hdfgroup.org/">HDF Group</a>, and it is based on open source standards, meaning that your data will always be accessible, even if the group disappears. We can install the <a href="https://www.h5py.org/">h5py package</a> through <code>pip</code>. Remember that you should be using a <a href="http://localhost:8000/blog/virtual-environment-is-a-must-have-tool">virtual environment</a> to perform tests:</p>
+<p>The HDF5 format is supported by the <a href="https://www.hdfgroup.org/">HDF Group</a>, and it is based on open source standards, meaning that your data will always be accessible, even if the group disappears. We can install the <a href="https://www.h5py.org/">h5py package</a> through <code>pip</code>. Remember that you should be using a <a href="https://pythonforthelab.com/blog/virtual-environment-is-a-must-have-tool">virtual environment</a> to perform tests:</p>
 <pre><code class="language-shell">pip install h5py
 </code></pre>
 <p>the command will also install numpy, in case you don't have it already in your environment. </p>
@@ -315,19 +314,23 @@
 <p>The best way to get started is to dive into the use of the HDF5 library. Let's create a new file and save a numpy random array to it:</p>
 <pre><code class="language-python">import h5py
 import numpy as np
+from pathlib import Path
 
 arr = np.random.randn(1000)
+path = Path('random.hdf5')
 
-with h5py.File('random.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
     dset = f.create_dataset(&quot;default&quot;, data=arr)
 </code></pre>
 <p>We import the packages h5py and numpy and create an array with random values. We open a file called <code>random.hdf5</code> with write permission, <code>w</code> which means that if there is already a file with the same name, it will be overwritten. If you would like to preserve the file and still write to it, you can open it with the <code>a</code> attribute instead of <code>w</code>. We create a dataset called <code>default</code>, and we set the data as the random array created earlier. Datasets are holders of our data, basically the building blocks of the HDF5 format.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are not familiar with the <code>with</code> statement, you can check out <a href="http://localhost:8000/blog/the-with-command-and-custom-classes">this tutorial</a>. In a nutshell, it is a convenient way of opening and closing a file. Even if there is an error within the <code>with</code>, the file will be closed. If, for some reason, you don't use the <code>with</code>, never forget to add the command <code>f.close()</code> at the end. </p>
+<p>If you are not familiar with the <code>with</code> statement, you can check out <a href="https://pythonforthelab.com/blog/the-with-command-and-custom-classes">this tutorial</a>. In a nutshell, it is a convenient way of opening and closing a file. Even if there is an error within the <code>with</code>, the file will be closed. If, for some reason, you don't use the <code>with</code>, never forget to add the command <code>f.close()</code> at the end. </p>
 </div>
 <p>To read the data back, we can do it in a very similar way to when we read a numpy file:</p>
-<pre><code class="language-python">with h5py.File('random.hdf5', 'r') as f:
+<pre><code class="language-python">path = Path('random.hdf5')
+
+with h5py.File(path, 'r') as f:
    data = f['default']
    print(min(data))
    print(max(data))
@@ -340,7 +343,8 @@ with h5py.File('random.hdf5', 'w') as f:
 </code></pre>
 <p>In the example above, you can see that the HDF5 file behaves similarly to a dictionary, in which each key is a dataset. We have only one dataset called <code>default</code>, and we can access it by calling <code>f['default']</code>. These simple examples, however, hyde many things under the hood. We need to discuss further to understand the full potential of HDF5.</p>
 <p>In the example above, you can use <code>data</code> as an array. For example, you can address the third element by typing <code>data[2]</code>, or you could get a range of values with <code>data[1:3]</code>. Note, however, that <code>data</code> is not an array but a dataset. You can see it by typing <code>print(type(data))</code>. Datasets work in a completely different way than arrays because their information is stored on the hard drive, and they don't load it to RAM if we don't use them. The following code, for example, will not work:</p>
-<pre><code class="language-python">f = h5py.File('random.hdf5', 'r')
+<pre><code class="language-python">path = Path('random.hdf5')
+f = h5py.File(path, 'r')
 data = f['default']
 f.close()
 print(data[1])
@@ -350,7 +354,8 @@ print(data[1])
 ValueError: Not a dataset (not a dataset)
 </code></pre>
 <p>The error means that we are trying to access a dataset, but we no longer have access to it. When we start with HDF5 files, it may seem confusing, but once we understand what is going on, everything makes sense. When we assign <code>f['default']</code> to the variable <code>data</code>. We are not reading the data from the file. Instead, we are generating a pointer to where the data is located on the hard drive. On the other hand, this code will work:</p>
-<pre><code class="language-python">f = h5py.File('random.hdf5', 'r')
+<pre><code class="language-python">path = Path('random.hdf5')
+f = h5py.File(path, 'r')
 data = f['default'][()]
 f.close()
 print(data[10])
@@ -360,7 +365,8 @@ print(data[10])
 <p>So far, we have seen that we are not yet reading data from the disk when we read a dataset. Instead, we are creating a link to a specific
 location on the hard drive. We can see what happens if, for example, we
 explicitly read the first ten elements of a dataset:</p>
-<pre><code class="language-python">with h5py.File('random.hdf5', 'r') as f:
+<pre><code class="language-python">path = Path('random.hdf5')
+with h5py.File(path, 'r') as f:
    data_set = f['default']
    data = data_set[:10]
 
@@ -383,11 +389,13 @@ based on the elements of the other. Let's start by creating a new file
 and storing data; that part is the easiest one:</p>
 <pre><code class="language-python">import h5py
 import numpy as np
+from pathlib import Path
 
 arr1 = np.random.randn(10000)
 arr2 = np.random.randn(10000)
+path = Path('complex_read.hdf5')
 
-with h5py.File('complex_read.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
     f.create_dataset('array_1', data=arr1)
     f.create_dataset('array_2', data=arr2)
 </code></pre>
@@ -395,7 +403,8 @@ with h5py.File('complex_read.hdf5', 'w') as f:
 numpy array stored in it. We want to read the values of <code>array_2</code> that
 correspond to the elements where the values of <code>array_1</code> are positive.
 We can try to do something like this:</p>
-<pre><code class="language-python">with h5py.File('complex_read.hdf5', 'r') as f:
+<pre><code class="language-python">path = Path('complex_read.hdf5')
+with h5py.File(path, 'r') as f:
     d1 = f['array_1']
     d2 = f['array_2']
 
@@ -404,7 +413,8 @@ We can try to do something like this:</p>
 <p>But it will not work. <code>d1</code> is a dataset and can't be compared to an
 integer. The only way is to actually read the data from the disk and
 then compare it. Therefore, we will end up with something like this:</p>
-<pre><code class="language-python">with h5py.File('complex_read.hdf5', 'r') as f:
+<pre><code class="language-python">path = Path('complex_read.hdf5')
+with h5py.File(path, 'r') as f:
     d1 = f['array_1']
     d2 = f['array_2']
 
@@ -412,7 +422,8 @@ then compare it. Therefore, we will end up with something like this:</p>
 </code></pre>
 <p>The first dataset, <code>d1</code> is completely loaded into memory when we do
 <code>d1[()]</code>, but we grab only some elements from the second dataset, <code>d2</code>. If the <code>d1</code> dataset had been too large to be loaded into memory all at once, we could have worked inside a loop.</p>
-<pre><code class="language-python">with h5py.File('complex_read.hdf5', 'r') as f:
+<pre><code class="language-python">path = Path('complex_read.hdf5')
+with h5py.File(path, 'r') as f:
     d1 = f['array_1']
     d2 = f['array_2']
 
@@ -422,7 +433,7 @@ then compare it. Therefore, we will end up with something like this:</p>
         if d1[i] &gt; 0:
             data.append(d2[i])
 
-print('The length of data with a for loop: {}'.format(len(data)))
+print(f'The length of data with a for loop: {len(data)}')
 </code></pre>
 <p>Of course, there are efficiency concerns regarding reading an array
 element by element and appending it to a list, but it is a very good
@@ -444,8 +455,9 @@ while it is being generated. HDF5 allows you to save data in a very
 similar way to how you read it back. Let's see how to create an empty
 dataset and add some data to it.</p>
 <pre><code class="language-python">arr = np.random.randn(100)
+path = Path('random.hdf5')
 
-with h5py.File('random.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
    dset = f.create_dataset(&quot;default&quot;, (1000,))
    dset[10:20] = arr[50:60]
 </code></pre>
@@ -460,8 +472,9 @@ just to a subset of the array, the indexes 10 to 19.</p>
 </div>
 <p>If you read the file back and print the first 20 values of the dataset, you will see that they are all zeros except for the indexes 10 to 19. There is a <strong>common mistake</strong> that can give you a lot of headaches. The following code will not save anything to disk:</p>
 <pre><code class="language-python">arr = np.random.randn(1000)
+path = Path('random.hdf5')
 
-with h5py.File('random.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
    dset = f.create_dataset(&quot;default&quot;, (1000,))
    dset = arr
 </code></pre>
@@ -492,10 +505,11 @@ documentation</a> provides a list
 of all the supported types, here we are going to show just a couple of
 them. We are going to work with several datasets in the same file at the
 same time.</p>
-<pre><code class="language-python">with h5py.File('several_datasets.hdf5', 'w') as f:
-   dset_int_1 = f.create_dataset('integers', (10, ), dtype='i1')
-   dset_int_8 = f.create_dataset('integers8', (10, ), dtype='i8')
-   dset_complex = f.create_dataset('complex', (10, ), dtype='c16')
+<pre><code class="language-python">path = Path('several_datasets.hdf5')
+with h5py.File(path, 'w') as f:
+   dset_int_1 = f.create_dataset('integers', (10, ), dtype=np.int8)
+   dset_int_8 = f.create_dataset('integers8', (10, ), dtype=np.int64)
+   dset_complex = f.create_dataset('complex', (10, ), dtype=np.complex128)
 
    dset_int_1[0] = 1200
    dset_int_8[0] = 1200.1
@@ -527,18 +541,18 @@ fill the memory. Remember that data will be converted to the format
 specified in the dataset.</p>
 <pre><code class="language-python">arr = np.random.randn(100000)
 
-f = h5py.File('integer_1.hdf5', 'w')
-d = f.create_dataset('dataset', (100000,), dtype='i1')
+f = h5py.File(Path('integer_1.hdf5'), 'w')
+d = f.create_dataset('dataset', (100000,), dtype=np.int8)
 d[:] = arr
 f.close()
 
-f = h5py.File('integer_8.hdf5', 'w')
-d = f.create_dataset('dataset', (100000,), dtype='i8')
+f = h5py.File(Path('integer_8.hdf5'), 'w')
+d = f.create_dataset('dataset', (100000,), dtype=np.int64)
 d[:] = arr
 f.close()
 
-f = h5py.File('float.hdf5', 'w')
-d = f.create_dataset('dataset', (100000,), dtype='f16')
+f = h5py.File(Path('float.hdf5'), 'w')
+d = f.create_dataset('dataset', (100000,), dtype=np.float16)
 d[:] = arr
 f.close()
 </code></pre>
@@ -605,19 +619,20 @@ downstream. We can repeat the same experiment, storing different data
 types, but using a compression filter. Our code looks like this:</p>
 <pre><code class="language-python">import h5py
 import numpy as np
+from pathlib import Path
 
 arr = np.random.randn(100000)
 
-with h5py.File('integer_1_compr.hdf5', 'w') as f:
-    d = f.create_dataset('dataset', (100000,), dtype='i1', compression=&quot;gzip&quot;, compression_opts=9)
+with h5py.File(Path('integer_1_compr.hdf5'), 'w') as f:
+    d = f.create_dataset('dataset', (100000,), dtype=np.int8, compression=&quot;gzip&quot;, compression_opts=9)
     d[:] = arr
 
-with h5py.File('integer_8_compr.hdf5', 'w') as f:
-    d = f.create_dataset('dataset', (100000,), dtype='i8', compression=&quot;gzip&quot;, compression_opts=9)
+with h5py.File(Path('integer_8_compr.hdf5'), 'w') as f:
+    d = f.create_dataset('dataset', (100000,), dtype=np.int64, compression=&quot;gzip&quot;, compression_opts=9)
     d[:] = arr
 
-with h5py.File('float_compr.hdf5', 'w') as f:
-    d = f.create_dataset('dataset', (100000,), dtype='f16', compression=&quot;gzip&quot;, compression_opts=9)
+with h5py.File(Path('float_compr.hdf5'), 'w') as f:
+    d = f.create_dataset('dataset', (100000,), dtype=np.float16, compression=&quot;gzip&quot;, compression_opts=9)
     d[:] = arr
 </code></pre>
 <p>We chose gzip because it is supported in all platforms. The parameters
@@ -669,14 +684,17 @@ test and find the optimum.</p>
 <p>When you are working on an experiment, it may be impossible to know how big your data is going to be. Imagine you are recording a movie, perhaps you stop it after one second, perhaps after an hour. Fortunately, HDF5 allows resizing datasets on the fly and with little computational cost. Datasets can be resized once created up to a maximum size. You specify this maximum size when creating the dataset, via the keyword <code>maxshape</code>:</p>
 <pre><code class="language-python">import h5py
 import numpy as np
+from pathlib import Path
 
-with h5py.File('resize_dataset.hdf5', 'w') as f:
+path = Path('resize_dataset.hdf5')
+
+with h5py.File(path, 'w') as f:
     d = f.create_dataset('dataset', (100, ),  maxshape=(500, ))
     d[:100] = np.random.randn(100)
     d.resize((200,))
     d[100:200] = np.random.randn(100)
 
-with h5py.File('resize_dataset.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
     dset = f['dataset']
     print(dset[99])
     print(dset[199])
@@ -692,13 +710,13 @@ reading back the file and printing two elements to the command line.</p>
 the same session when you created the file. For example, you can do
 something it like this (pay attention to the fact that we open the file
 with an <code>a</code> attribute in order not to destroy the previous file):</p>
-<pre><code class="language-python">with h5py.File('resize_dataset.hdf5', 'a') as f:
+<pre><code class="language-python">with h5py.File(path, 'a') as f:
     dset = f['dataset']
     dset.resize((300,))
     dset[:200] = 0
     dset[200:300] = np.random.randn(100)
 
-with h5py.File('resize_dataset.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
     dset = f['dataset']
     print(dset[99])
     print(dset[199])
@@ -713,7 +731,8 @@ be. An image is a 2D array, each element being a pixel, and a movie is
 nothing more than stacking several 2D arrays. To store movies, we have to define a 3-dimensional array in our HDF file, but we don't want to set a
 limit to the duration. To be able to expand the third axis of our
 dataset without a fixed maximum, we can do as follows:</p>
-<pre><code class="language-python">with h5py.File('movie_dataset.hdf5', 'w') as f:
+<pre><code class="language-python">path = Path('movie_dataset.hdf5')
+with h5py.File(path, 'w') as f:
    d = f.create_dataset('dataset', (1024, 1024, 1),  maxshape=(1024, 1024, None ))
    d[:,:,0] = first_frame
    d.resize((1024,1024,2))
@@ -752,10 +771,12 @@ groups, that behave in a similar way to how directories do. We can
 create a group first and then add a dataset to it:</p>
 <pre><code class="language-python">import numpy as np
 import h5py
+from pathlib import Path
 
 arr = np.random.randn(1000)
+path = Path('groups.hdf5')
 
-with h5py.File('groups.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
     g = f.create_group('Base_Group')
     gg = g.create_group('Sub_Group')
 
@@ -766,7 +787,8 @@ with h5py.File('groups.hdf5', 'w') as f:
 one called <code>Sub_Group</code>. In each one of the groups, we create a dataset
 called <code>default</code> and save the random array into them. When you read back
 the files, you will notice how data is structured:</p>
-<pre><code class="language-python">with h5py.File('groups.hdf5', 'r') as f:
+<pre><code class="language-python">path = Path('groups.hdf5')
+with h5py.File(path, 'r') as f:
    d = f['Base_Group/default']
    dd = f['Base_Group/Sub_Group/default']
    print(d[1])
@@ -776,7 +798,7 @@ the files, you will notice how data is structured:</p>
 file: <code>Base_Group/default</code> or <code>Base_Group/Sub_Group/default</code>. When you
 are reading a file, perhaps you don't know how groups were called and
 you need to list them. The easiest way is using <code>keys()</code>:</p>
-<pre><code class="language-python">with h5py.File('groups.hdf5', 'r') as f:
+<pre><code class="language-python">with h5py.File(path, 'r') as f:
     for k in f.keys():
         print(k)
 </code></pre>
@@ -787,7 +809,7 @@ this:</p>
 <pre><code class="language-python">def get_all(name):
    print(name)
 
-with h5py.File('groups.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
    f.visit(get_all)
 </code></pre>
 <p>Notice that we define a function <code>get_all</code> that takes one argument,
@@ -798,7 +820,7 @@ iterating. For example, imagine we are looking for an element called
     if 'Sub_Group' in name:
         return name
 
-with h5py.File('groups.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
     g = f.visit(get_all)
     print(g)
 </code></pre>
@@ -808,7 +830,7 @@ return the value that <code>get_all</code> generated. Since we are looking for t
 <code>Sub_Group</code>, we make the <code>get_all</code> return the group's name when it finds <code>Sub_Group</code> as part of the name that is analyzing. Bear in mind
 that <code>g</code> is a string, if you want actually to get the group, you should
 do:</p>
-<pre><code class="language-python">with h5py.File('groups.hdf5', 'r') as f:
+<pre><code class="language-python">with h5py.File(path, 'r') as f:
    g_name = f.visit(get_all)
    group = f[g_name]
 </code></pre>
@@ -819,10 +841,10 @@ arguments: name and object. We can do:</p>
    if 'Sub_Group' in name:
       return obj
 
-with h5py.File('groups.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
    group = f.visititems(get_objects)
    data = group['default']
-   print('First data element: {}'.format(data[0]))
+   print(f'First data element: {data[0]}')
 </code></pre>
 <p>The main difference when using <code>visititems</code> is that we have accessed the name of the object that is being analyzed and the object
 itself. You can see that what the function returns is the object and not
@@ -839,10 +861,12 @@ The official one is by adding attributes to groups and datasets.</p>
 import numpy as np
 import h5py
 import os
+from pathlib import Path
 
 arr = np.random.randn(1000)
+path = Path('groups.hdf5')
 
-with h5py.File('groups.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
     g = f.create_group('Base_Group')
     d = g.create_dataset('default', data=arr)
 
@@ -852,10 +876,10 @@ with h5py.File('groups.hdf5', 'w') as f:
     d.attrs['OS'] = os.name
 
     for k in g.attrs.keys():
-        print('{} =&gt; {}'.format(k, g.attrs[k]))
+        print(f'{k} =&gt; {g.attrs[k]}')
 
     for j in d.attrs.keys():
-      print('{} =&gt; {}'.format(j, d.attrs[j]))
+      print(f'{j} =&gt; {d.attrs[j]}')
 </code></pre>
 <p>In the code above you can see that the <code>attrs</code> is like a dictionary. In
 principle, you shouldn't use attributes to store data, keep them as
@@ -863,7 +887,8 @@ small as you can. However, you are not limited to single values, you can
 also store arrays. If you happen to have metadata stored in a dictionary
 and you want to add it automatically to the attributes, you can use
 <code>update</code>:</p>
-<pre><code class="language-python">with h5py.File('groups.hdf5', 'w') as f:
+<pre><code class="language-python">path = Path('groups.hdf5')
+with h5py.File(path, 'w') as f:
    g = f.create_group('Base_Group')
    d = g.create_dataset('default', data=arr)
 
@@ -874,7 +899,7 @@ and you want to add it automatically to the attributes, you can use
    f.attrs.update(metadata)
 
    for m in f.attrs.keys():
-      print('{} =&gt; {}'.format(m, f.attrs[m]))
+      print(f'{m} =&gt; {f.attrs[m]}')
 </code></pre>
 <p>Remember that the data types that hdf5 supports are limited. For
 example, dictionaries are not supported. If you want to add a dictionary
@@ -883,8 +908,11 @@ serialize a dictionary in different ways. In the example below, we are
 going to do it with JSON because it is very popular in different fields,
 but you are free to use whatever you like, including pickle.</p>
 <pre><code class="language-python">import json
+from pathlib import Path
 
-with h5py.File('groups_dict.hdf5', 'w') as f:
+path = Path('groups_dict.hdf5')
+
+with h5py.File(path, 'w') as f:
     g = f.create_group('Base_Group')
     d = g.create_dataset('default', data=arr)
 
@@ -900,10 +928,11 @@ define the data, we use <code>json.dumps</code> that will transform a dictionary
 into a long string. We are actually storing a string and not a
 dictionary into HDF5. To load it back we need to read the data set and
 transform it back to a dictionary using <code>json.loads</code>:</p>
-<pre><code class="language-python">with h5py.File('groups_dict.hdf5', 'r') as f:
+<pre><code class="language-python">path = Path('groups_dict.hdf5')
+with h5py.File(path, 'r') as f:
     metadata = json.loads(f['Base_Group/metadata'][()])
     for k in metadata:
-        print('{} =&gt; {}'.format(k, metadata[k]))
+        print(f'{k} =&gt; {metadata[k]}')
 </code></pre>
 <p>When you use json to encode your data, you are defining a specific
 format. You could have used YAML, XML, etc. Since it may not be obvious
@@ -981,7 +1010,7 @@ in your lab on how to store data and metadata.</p>
           <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
           <div>
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level" class="text-gray-700 hover:text-gray-900">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="/images/42_decorators.width-800.png"
@@ -999,7 +1028,7 @@ in your lab on how to store data and metadata.</p>
                 </a>
               </div>
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="http://localhost:8000/blog/storing-data-with-sqlite" class="text-gray-700 hover:text-gray-900">
+                <a href="https://pythonforthelab.com/blog/storing-data-with-sqlite" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="/images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg"
@@ -1017,7 +1046,7 @@ in your lab on how to store data and metadata.</p>
                 </a>
               </div>
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="http://localhost:8000/blog/storing-binary-data-and-serializing" class="text-gray-700 hover:text-gray-900">
+                <a href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="/images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg"
@@ -1059,7 +1088,7 @@ in your lab on how to store data and metadata.</p>
           the book
           <strong>Python For The
             Lab</strong></p>
-        <a href="http://localhost:8000/books">
+        <a href="https://pythonforthelab.com/books">
           <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
             Check out the books
           </button>
@@ -1070,28 +1099,28 @@ in your lab on how to store data and metadata.</p>
           <h3 class="bg-gray-300 font-serif text-2xl text-center py-4">Saving Data series</h3>
           <ol class="mt-4">
               <li class="mx-4 p-3 border-b border-b-gray-400 ">
-                <a href="http://localhost:8000/blog/introduction-to-storing-data-in-files" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/introduction-to-storing-data-in-files" class="font-lg leading-tight hover:font-bold">
                   <div>Introduction to Storing Data in Files</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2018-08-10</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400 ">
-                <a href="http://localhost:8000/blog/storing-binary-data-and-serializing" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing" class="font-lg leading-tight hover:font-bold">
                   <div>Storing Binary Data and Serializing</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2018-08-11</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400 border-b-2 border-b-emerald-400 ">
-                <a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python" class="font-lg leading-tight hover:font-bold">
                   <div>How to use HDF5 files in Python</div>
                   <div class="font-light text-gray-600 text-sm">
-                    by Aquiles Carattino, 2018-03-19</div>
+                    by Aquiles Carattino, 2026-01-09</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400 ">
-                <a href="http://localhost:8000/blog/storing-data-with-sqlite" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/storing-data-with-sqlite" class="font-lg leading-tight hover:font-bold">
                   <div>Storing Data with SQLite</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2018-08-12</div>
@@ -1106,11 +1135,11 @@ in your lab on how to store data and metadata.</p>
 <!-- Footer -->
 <footer class="w-full bg-black text-white p-8">
   <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
-    <img src="http://localhost:8000/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
     <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
       <li>
         <a
-          href="http://localhost:8000/about"
+          href="https://pythonforthelab.com/about"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           About Us
@@ -1118,7 +1147,7 @@ in your lab on how to store data and metadata.</p>
       </li>
       <li>
         <a
-          href="http://localhost:8000/cookie-policy"
+          href="https://pythonforthelab.com/cookie-policy"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           Cookie Policy
@@ -1126,7 +1155,7 @@ in your lab on how to store data and metadata.</p>
       </li>
       <li>
         <a
-          href="http://localhost:8000/privacy-policy"
+          href="https://pythonforthelab.com/privacy-policy"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           Privacy Policy
@@ -1134,7 +1163,7 @@ in your lab on how to store data and metadata.</p>
       </li>
       <li>
         <a
-          href="http://localhost:8000/contact-us"
+          href="https://pythonforthelab.com/contact-us"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           Contact Us
@@ -1146,10 +1175,10 @@ in your lab on how to store data and metadata.</p>
   <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
     © 2026 Python for the Lab
   </p>
-</footer><script src="http://localhost:8000/theme/js/prism.js"></script>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
 <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
 <script>
-    stork.register("sitesearch", "http://localhost:8000/search-index.st");
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
 </script>
 
 <script>
@@ -1161,14 +1190,14 @@ in your lab on how to store data and metadata.</p>
             if (responsive_menu.is(':hidden')) {
                 responsive_menu.slideToggle();
                 nav.addClass('bg-white');
-                $("#site-logo").attr("src", "http://localhost:8000/theme/css/images/logo-classic.svg");
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
                 $('hamburger').slideToggle();
-                $('#hamburger').attr('src', 'http://localhost:8000/theme/css/images/cross.svg');
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
             } else {
                 responsive_menu.slideToggle();
                 nav.removeClass('bg-white');
-                $("#site-logo").attr("src", "http://localhost:8000/theme/css/images/logo-red.svg");
-                $('#hamburger').attr('src', 'http://localhost:8000/theme/css/images/hamburger.svg');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
             }
         });
         position = $(window).height();

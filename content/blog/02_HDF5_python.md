@@ -3,7 +3,7 @@ title: "How to use HDF5 files in Python"
 subtitle: "HDF5 allows you to store large amounts of data efficiently"
 slug: how-to-use-hdf5-files-in-python
 image: '/images/storing_data_hdf.png'
-date: 2018-03-19
+date: 2026-01-09
 author: Aquiles Carattino
 description: Complete tutorial on using HDF5 files with Python
 tags:     
@@ -50,10 +50,12 @@ The best way to get started is to dive into the use of the HDF5 library. Let's c
 ```python
 import h5py
 import numpy as np
+from pathlib import Path
 
 arr = np.random.randn(1000)
+path = Path('random.hdf5')
 
-with h5py.File('random.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
     dset = f.create_dataset("default", data=arr)
 ```
 
@@ -65,7 +67,9 @@ We import the packages h5py and numpy and create an array with random values. We
 To read the data back, we can do it in a very similar way to when we read a numpy file:
 
 ```python
-with h5py.File('random.hdf5', 'r') as f:
+path = Path('random.hdf5')
+
+with h5py.File(path, 'r') as f:
    data = f['default']
    print(min(data))
    print(max(data))
@@ -86,7 +90,8 @@ In the example above, you can see that the HDF5 file behaves similarly to a dict
 In the example above, you can use ``data`` as an array. For example, you can address the third element by typing ``data[2]``, or you could get a range of values with ``data[1:3]``. Note, however, that ``data`` is not an array but a dataset. You can see it by typing ``print(type(data))``. Datasets work in a completely different way than arrays because their information is stored on the hard drive, and they don't load it to RAM if we don't use them. The following code, for example, will not work:
 
 ```python
-f = h5py.File('random.hdf5', 'r')
+path = Path('random.hdf5')
+f = h5py.File(path, 'r')
 data = f['default']
 f.close()
 print(data[1])
@@ -102,7 +107,8 @@ ValueError: Not a dataset (not a dataset)
 The error means that we are trying to access a dataset, but we no longer have access to it. When we start with HDF5 files, it may seem confusing, but once we understand what is going on, everything makes sense. When we assign ``f['default']`` to the variable ``data``. We are not reading the data from the file. Instead, we are generating a pointer to where the data is located on the hard drive. On the other hand, this code will work:
 
 ```python
-f = h5py.File('random.hdf5', 'r')
+path = Path('random.hdf5')
+f = h5py.File(path, 'r')
 data = f['default'][()]
 f.close()
 print(data[10])
@@ -116,7 +122,8 @@ location on the hard drive. We can see what happens if, for example, we
 explicitly read the first ten elements of a dataset:
 
 ```python
-with h5py.File('random.hdf5', 'r') as f:
+path = Path('random.hdf5')
+with h5py.File(path, 'r') as f:
    data_set = f['default']
    data = data_set[:10]
 
@@ -143,11 +150,13 @@ and storing data; that part is the easiest one:
 ```python
 import h5py
 import numpy as np
+from pathlib import Path
 
 arr1 = np.random.randn(10000)
 arr2 = np.random.randn(10000)
+path = Path('complex_read.hdf5')
 
-with h5py.File('complex_read.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
     f.create_dataset('array_1', data=arr1)
     f.create_dataset('array_2', data=arr2)
 ```
@@ -158,7 +167,8 @@ correspond to the elements where the values of `array_1` are positive.
 We can try to do something like this:
 
 ```python
-with h5py.File('complex_read.hdf5', 'r') as f:
+path = Path('complex_read.hdf5')
+with h5py.File(path, 'r') as f:
     d1 = f['array_1']
     d2 = f['array_2']
 
@@ -170,7 +180,8 @@ integer. The only way is to actually read the data from the disk and
 then compare it. Therefore, we will end up with something like this:
 
 ```python
-with h5py.File('complex_read.hdf5', 'r') as f:
+path = Path('complex_read.hdf5')
+with h5py.File(path, 'r') as f:
     d1 = f['array_1']
     d2 = f['array_2']
 
@@ -181,7 +192,8 @@ The first dataset, ``d1`` is completely loaded into memory when we do
 ``d1[()]``, but we grab only some elements from the second dataset, ``d2``. If the ``d1`` dataset had been too large to be loaded into memory all at once, we could have worked inside a loop.
 
 ```python
-with h5py.File('complex_read.hdf5', 'r') as f:
+path = Path('complex_read.hdf5')
+with h5py.File(path, 'r') as f:
     d1 = f['array_1']
     d2 = f['array_2']
 
@@ -218,8 +230,9 @@ dataset and add some data to it.
 
 ```python
 arr = np.random.randn(100)
+path = Path('random.hdf5')
 
-with h5py.File('random.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
    dset = f.create_dataset("default", (1000,))
    dset[10:20] = arr[50:60]
 ```
@@ -237,8 +250,9 @@ If you read the file back and print the first 20 values of the dataset, you will
 
 ```python
 arr = np.random.randn(1000)
+path = Path('random.hdf5')
 
-with h5py.File('random.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
    dset = f.create_dataset("default", (1000,))
    dset = arr
 ```
@@ -280,10 +294,11 @@ them. We are going to work with several datasets in the same file at the
 same time.
 
 ```python
-with h5py.File('several_datasets.hdf5', 'w') as f:
-   dset_int_1 = f.create_dataset('integers', (10, ), dtype='i1')
-   dset_int_8 = f.create_dataset('integers8', (10, ), dtype='i8')
-   dset_complex = f.create_dataset('complex', (10, ), dtype='c16')
+path = Path('several_datasets.hdf5')
+with h5py.File(path, 'w') as f:
+   dset_int_1 = f.create_dataset('integers', (10, ), dtype=np.int8)
+   dset_int_8 = f.create_dataset('integers8', (10, ), dtype=np.int64)
+   dset_complex = f.create_dataset('complex', (10, ), dtype=np.complex128)
 
    dset_int_1[0] = 1200
    dset_int_8[0] = 1200.1
@@ -320,18 +335,18 @@ specified in the dataset.
 ```python
 arr = np.random.randn(100000)
 
-f = h5py.File('integer_1.hdf5', 'w')
-d = f.create_dataset('dataset', (100000,), dtype='i1')
+f = h5py.File(Path('integer_1.hdf5'), 'w')
+d = f.create_dataset('dataset', (100000,), dtype=np.int8)
 d[:] = arr
 f.close()
 
-f = h5py.File('integer_8.hdf5', 'w')
-d = f.create_dataset('dataset', (100000,), dtype='i8')
+f = h5py.File(Path('integer_8.hdf5'), 'w')
+d = f.create_dataset('dataset', (100000,), dtype=np.int64)
 d[:] = arr
 f.close()
 
-f = h5py.File('float.hdf5', 'w')
-d = f.create_dataset('dataset', (100000,), dtype='f16')
+f = h5py.File(Path('float.hdf5'), 'w')
+d = f.create_dataset('dataset', (100000,), dtype=np.float16)
 d[:] = arr
 f.close()
 ```
@@ -390,19 +405,20 @@ types, but using a compression filter. Our code looks like this:
 ```python
 import h5py
 import numpy as np
+from pathlib import Path
 
 arr = np.random.randn(100000)
 
-with h5py.File('integer_1_compr.hdf5', 'w') as f:
-    d = f.create_dataset('dataset', (100000,), dtype='i1', compression="gzip", compression_opts=9)
+with h5py.File(Path('integer_1_compr.hdf5'), 'w') as f:
+    d = f.create_dataset('dataset', (100000,), dtype=np.int8, compression="gzip", compression_opts=9)
     d[:] = arr
 
-with h5py.File('integer_8_compr.hdf5', 'w') as f:
-    d = f.create_dataset('dataset', (100000,), dtype='i8', compression="gzip", compression_opts=9)
+with h5py.File(Path('integer_8_compr.hdf5'), 'w') as f:
+    d = f.create_dataset('dataset', (100000,), dtype=np.int64, compression="gzip", compression_opts=9)
     d[:] = arr
 
-with h5py.File('float_compr.hdf5', 'w') as f:
-    d = f.create_dataset('dataset', (100000,), dtype='f16', compression="gzip", compression_opts=9)
+with h5py.File(Path('float_compr.hdf5'), 'w') as f:
+    d = f.create_dataset('dataset', (100000,), dtype=np.float16, compression="gzip", compression_opts=9)
     d[:] = arr
 ```
 
@@ -437,14 +453,17 @@ When you are working on an experiment, it may be impossible to know how big your
 ```python
 import h5py
 import numpy as np
+from pathlib import Path
 
-with h5py.File('resize_dataset.hdf5', 'w') as f:
+path = Path('resize_dataset.hdf5')
+
+with h5py.File(path, 'w') as f:
     d = f.create_dataset('dataset', (100, ),  maxshape=(500, ))
     d[:100] = np.random.randn(100)
     d.resize((200,))
     d[100:200] = np.random.randn(100)
 
-with h5py.File('resize_dataset.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
     dset = f['dataset']
     print(dset[99])
     print(dset[199])
@@ -464,13 +483,13 @@ something it like this (pay attention to the fact that we open the file
 with an ``a`` attribute in order not to destroy the previous file):
 
 ```python
-with h5py.File('resize_dataset.hdf5', 'a') as f:
+with h5py.File(path, 'a') as f:
     dset = f['dataset']
     dset.resize((300,))
     dset[:200] = 0
     dset[200:300] = np.random.randn(100)
 
-with h5py.File('resize_dataset.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
     dset = f['dataset']
     print(dset[99])
     print(dset[199])
@@ -489,7 +508,8 @@ limit to the duration. To be able to expand the third axis of our
 dataset without a fixed maximum, we can do as follows:
 
 ```python
-with h5py.File('movie_dataset.hdf5', 'w') as f:
+path = Path('movie_dataset.hdf5')
+with h5py.File(path, 'w') as f:
    d = f.create_dataset('dataset', (1024, 1024, 1),  maxshape=(1024, 1024, None ))
    d[:,:,0] = first_frame
    d.resize((1024,1024,2))
@@ -538,10 +558,12 @@ create a group first and then add a dataset to it:
 ```python
 import numpy as np
 import h5py
+from pathlib import Path
 
 arr = np.random.randn(1000)
+path = Path('groups.hdf5')
 
-with h5py.File('groups.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
     g = f.create_group('Base_Group')
     gg = g.create_group('Sub_Group')
 
@@ -555,7 +577,8 @@ called `default` and save the random array into them. When you read back
 the files, you will notice how data is structured:
 
 ```python
-with h5py.File('groups.hdf5', 'r') as f:
+path = Path('groups.hdf5')
+with h5py.File(path, 'r') as f:
    d = f['Base_Group/default']
    dd = f['Base_Group/Sub_Group/default']
    print(d[1])
@@ -568,7 +591,7 @@ are reading a file, perhaps you don't know how groups were called and
 you need to list them. The easiest way is using `keys()`:
 
 ```python
-with h5py.File('groups.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
     for k in f.keys():
         print(k)
 ```
@@ -582,7 +605,7 @@ this:
 def get_all(name):
    print(name)
 
-with h5py.File('groups.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
    f.visit(get_all)
 ```
 
@@ -596,7 +619,7 @@ def get_all(name):
     if 'Sub_Group' in name:
         return name
 
-with h5py.File('groups.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
     g = f.visit(get_all)
     print(g)
 ```
@@ -609,7 +632,7 @@ that ``g`` is a string, if you want actually to get the group, you should
 do:
 
 ```python
-with h5py.File('groups.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
    g_name = f.visit(get_all)
    group = f[g_name]
 ```
@@ -623,7 +646,7 @@ def get_objects(name, obj):
    if 'Sub_Group' in name:
       return obj
 
-with h5py.File('groups.hdf5', 'r') as f:
+with h5py.File(path, 'r') as f:
    group = f.visititems(get_objects)
    data = group['default']
    print(f'First data element: {data[0]}')
@@ -648,10 +671,12 @@ import time
 import numpy as np
 import h5py
 import os
+from pathlib import Path
 
 arr = np.random.randn(1000)
+path = Path('groups.hdf5')
 
-with h5py.File('groups.hdf5', 'w') as f:
+with h5py.File(path, 'w') as f:
     g = f.create_group('Base_Group')
     d = g.create_dataset('default', data=arr)
 
@@ -675,7 +700,8 @@ and you want to add it automatically to the attributes, you can use
 ``update``:
 
 ```python
-with h5py.File('groups.hdf5', 'w') as f:
+path = Path('groups.hdf5')
+with h5py.File(path, 'w') as f:
    g = f.create_group('Base_Group')
    d = g.create_dataset('default', data=arr)
 
@@ -698,8 +724,11 @@ but you are free to use whatever you like, including pickle.
 
 ```python
 import json
+from pathlib import Path
 
-with h5py.File('groups_dict.hdf5', 'w') as f:
+path = Path('groups_dict.hdf5')
+
+with h5py.File(path, 'w') as f:
     g = f.create_group('Base_Group')
     d = g.create_dataset('default', data=arr)
 
@@ -718,7 +747,8 @@ dictionary into HDF5. To load it back we need to read the data set and
 transform it back to a dictionary using `json.loads`:
 
 ```python
-with h5py.File('groups_dict.hdf5', 'r') as f:
+path = Path('groups_dict.hdf5')
+with h5py.File(path, 'r') as f:
     metadata = json.loads(f['Base_Group/metadata'][()])
     for k in metadata:
         print(f'{k} => {metadata[k]}')

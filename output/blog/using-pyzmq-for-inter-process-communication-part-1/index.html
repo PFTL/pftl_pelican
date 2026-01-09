@@ -23,12 +23,12 @@
 processes
 ">
   <meta name="author" content="Aquiles Carattino">
-  <link rel="canonical" href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-1">
+  <link rel="canonical" href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-1">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:site_name" content="Python for the Lab">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-1">
+  <meta property="og:url" content="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-1">
   <meta property="og:title" content="Using pyZMQ for inter-process communication: Part 1">
   <meta property="og:description" content="Introduction to using sockets for communication between different
 processes
@@ -37,7 +37,7 @@ processes
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-1">
+  <meta property="twitter:url" content="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-1">
   <meta property="twitter:title" content="Using pyZMQ for inter-process communication: Part 1">
   <meta property="twitter:description" content="Introduction to using sockets for communication between different
 processes
@@ -46,34 +46,34 @@ processes
   <meta name="twitter:creator" content="@aquicarattino">
 
   <link rel="apple-touch-icon" sizes="57x57"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="76x76"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
   <link rel="apple-touch-icon" sizes="114x114"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
   <link rel="apple-touch-icon" sizes="120x120"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
   <link rel="apple-touch-icon" sizes="144x144"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180"
-        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
+        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
   <link rel="icon" type="image/png" sizes="192x192"
-        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
+        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32"
-        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96"
-        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16"
-        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
+        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
   <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -82,11 +82,11 @@ processes
       rel="stylesheet">
 
   <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
-  <link rel="stylesheet" href="http://localhost:8000/theme/css/tw_style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://http://localhost:8000/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
+  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
 
-	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
+	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
 </head>
 
 <body class="text-gray-800">
@@ -94,40 +94,40 @@ processes
     <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
       <nav class="lg:pr-8 w-full lg:pt-4">
         <div class="flex p-3 items-center justify-between">
-          <a class="flex-none" href="http://localhost:8000">
+          <a class="flex-none" href="https://pythonforthelab.com">
             <img id="site-logo" class="h-12"
-                 src="http://localhost:8000/theme/css/images/logo-red.svg"/>
+                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
           </a>
           <div id="menu_sm"
                class="pr-0 pl-4 grow hidden lg:block">
 <ul
         class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/blog"
+        <a href="https://pythonforthelab.com/blog"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Blog</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/courses"
+        <a href="https://pythonforthelab.com/courses"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Courses</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/hire-me"
+        <a href="https://pythonforthelab.com/hire-me"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Hire Me</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/books"
+        <a href="https://pythonforthelab.com/books"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Books</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="http://localhost:8000/about"
+        <a href="https://pythonforthelab.com/about"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">About</span>
         </a>
@@ -142,7 +142,7 @@ processes
         <form action="#" class="w-full pr-8">
             <label for="search" class="relative block">
                 <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
-                     src="http://localhost:8000/theme/css/images/search.svg">
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
                 <input id="search" data-stork="sitesearch" type="text"
                        class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
                        placeholder="Type to Search">
@@ -153,7 +153,7 @@ processes
 </ul>          </div>
           <div class="">
             <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
-              <img id="hamburger" src="http://localhost:8000/theme/css/images/hamburger.svg"
+              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
                    class="h-8 w-8"/>
             </button>
           </div>
@@ -163,7 +163,7 @@ processes
 <ul
         class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/blog"
+        <a href="https://pythonforthelab.com/blog"
            class="before:content-blogIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -171,7 +171,7 @@ processes
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/courses"
+        <a href="https://pythonforthelab.com/courses"
            class="before:content-coursesIcon md:w-full
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -179,7 +179,7 @@ processes
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/hire-me"
+        <a href="https://pythonforthelab.com/hire-me"
            class="before:content-hireIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -187,7 +187,7 @@ processes
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/books"
+        <a href="https://pythonforthelab.com/books"
            class="before:content-booksIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -195,7 +195,7 @@ processes
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="http://localhost:8000/about"
+        <a href="https://pythonforthelab.com/about"
            class="before:content-aboutIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -214,7 +214,7 @@ processes
         <form action="#" class="w-full pr-8">
             <label for="search" class="relative block">
                 <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
-                     src="http://localhost:8000/theme/css/images/search.svg">
+                     src="https://pythonforthelab.com/theme/css/images/search.svg">
                 <input id="search" data-stork="sitesearch" type="text"
                        class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
                        placeholder="Type to Search">
@@ -232,7 +232,7 @@ processes
         <form action="#" class="w-full pr-8 pt-4 text-xs">
           <label for="search" class="relative block">
             <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
-                 src="http://localhost:8000/theme/css/images/search.svg">
+                 src="https://pythonforthelab.com/theme/css/images/search.svg">
             <input id="search" data-stork="sitesearch" type="text"
                    class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
                    placeholder="Type to Search">
@@ -289,7 +289,6 @@ processes
         <div class="text-sm text-gray-400">
           <span
               class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-profile mr-1 pr-1 py-1">Aquiles Carattino</span>
-          <span
               class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-calendar mr-1 pr-1 py-1">2018-12-17</span>
           <span
               class="inline-block before:inline-block before:mx-1 before:align-middle before:h-4 before:w-4 before:content-tag mr-1 pr-1 py-1">
@@ -310,7 +309,7 @@ We are not talking about parallelizing code in a traditional way, where
 an expensive computation is spread through different cores, but rather
 being able to share the computational load among different cores with an
 architecture that allows changes at runtime.</p>
-<p>For example, I have recently <a href="http://localhost:8000/blog/pynta-nanoparticle-tracking-analysis">released
+<p>For example, I have recently <a href="https://pythonforthelab.com/blog/pynta-nanoparticle-tracking-analysis">released
 PyNTA</a>, a program to acquire
 images from a camera with the option to analyze them in real time or to
 store them to the hard drive or both. The core idea is that a central
@@ -325,7 +324,7 @@ library, focusing on practical examples and discussing the benefits and
 limitations of them. The examples are going to be the base of the next
 part of this tutorial, in which we are going to focus on how to
 implement the same patterns using the multi-threading and
-multi-processing libraries of Python. On <a href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-2">Part
+multi-processing libraries of Python. On <a href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-2">Part
 2</a> of this tutorial we are going to develop a
 real-world example using the topics learned here.</p>
 <h2>ZMQ</h2>
@@ -483,7 +482,7 @@ client request.</p>
 be useful when dealing with a device. Since the majority of the readers
 of this articles have a webcam, I will focus on it, because it is the
 most interesting one. The same principles work with any other device or
-task. We have already used a camera when we discussed <a href="http://localhost:8000/blog/step-by-step-guide-to-building-a-gui">building a
+task. We have already used a camera when we discussed <a href="https://pythonforthelab.com/blog/step-by-step-guide-to-building-a-gui">building a
 GUI</a> for it. I suggest you to give
 it a quick read if you are not familiar with open CV.</p>
 <p>First, let's install two handy libraries: opencv and numpy</p>
@@ -539,7 +538,7 @@ convenience method of pyZMQ. If the message is <code>read</code>, then we read f
 the camera, while if the message is stop, we just close the server.</p>
 <p>Check that in order to send the frame (which is a numpy array), we use
 <code>send_pyobj</code>, which allows sending any data structure which is
-serializable with Pickle. We have covered this topic on <a href="http://localhost:8000/blog/storing-binary-data-and-serializing">How to Store
+serializable with Pickle. We have covered this topic on <a href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing">How to Store
 Data with Python</a>. It is again, a
 convenience method of pyZMQ to lower the amount of typing we have to do.</p>
 <p>The client will be very similar to what we have done, but now we can
@@ -733,7 +732,7 @@ different datasets.</p>
 pattern. What we want to achieve is to have 3 processes. One that
 continuously acquires from a camera and publishes the frames. Two more
 processes independent from each other, one that calculates the Fourier
-Transform, as we did before and another one that saves the images <a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python">to an
+Transform, as we did before and another one that saves the images <a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python">to an
 HDF5 file</a>.</p>
 <p>Let's start by developing the publisher. It is going to be an infinite
 loop that sends images one after the other. It will look like this:</p>
@@ -802,7 +801,7 @@ right into the subscriber. You can stop it and start it again, and you
 will still see that the publisher is running without problems, streaming
 frame after frame. You can see what happens if you start two subscribers
 (or more). You will notice that they all get the same information. Let's
-see a quick example of how to save data to the hard drive, <a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python">using
+see a quick example of how to save data to the hard drive, <a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python">using
 hdf5</a>. Let's create a new subscriber,
 <strong>subscriber_2.py</strong>, with the following:</p>
 <pre><code class="language-python">from datetime import datetime
@@ -846,7 +845,7 @@ with h5py.File('camera_data.hdf5', 'a') as file:
 The only difference now is that the loop is encapsulated together with
 the opening of the HDF file in order to save data to <code>camera_data</code>. If
 you are not familiar with how hdf5 works, I recommend you to check out
-<a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python">this article</a>. Remember that frames
+<a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python">this article</a>. Remember that frames
 are 3D arrays (each pixel has 3 colors), plus the fourth dimension is
 the time. In these cases is where the power of <code>h5py</code> becomes evident
 and why it is worth controlling data saving at a lower level than what
@@ -876,7 +875,7 @@ on different computers connected to the same network.</p>
 <p>In the following article, we are going to explore how to trigger
 different processes and threads from the same Python program. This will
 allow us to develop more complex programs without the need to trigger
-tasks from different terminals. We are going to combine <a href="http://localhost:8000/blog/implementing-threads-for-measurements">Threads and
+tasks from different terminals. We are going to combine <a href="https://pythonforthelab.com/blog/implementing-threads-for-measurements">Threads and
 Multiprocessing</a>, together
 with socket communication.</p>
 <p>Header photo by <a href="https://unsplash.com/photos/ISG-rUel0Uw?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Thomas
@@ -926,7 +925,7 @@ on Unsplash</p>
           <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
           <div>
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="http://localhost:8000/blog/using-pyzmq-for-inter-process-communication-part-2" class="text-gray-700 hover:text-gray-900">
+                <a href="https://pythonforthelab.com/blog/using-pyzmq-for-inter-process-communication-part-2" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="/images/zmq_2.png"
@@ -944,7 +943,7 @@ on Unsplash</p>
                 </a>
               </div>
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="http://localhost:8000/blog/documenting-with-sphinx-and-readthedocs" class="text-gray-700 hover:text-gray-900">
+                <a href="https://pythonforthelab.com/blog/documenting-with-sphinx-and-readthedocs" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="/images/chuttersnap-553860-unsplash_linkedin.width-800.jpg"
@@ -962,7 +961,7 @@ on Unsplash</p>
                 </a>
               </div>
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="http://localhost:8000/blog/implementing-threads-for-measurements" class="text-gray-700 hover:text-gray-900">
+                <a href="https://pythonforthelab.com/blog/implementing-threads-for-measurements" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="/images/frank-mckenna-122867-unsplash_linkedin.width-800.jpg"
@@ -1004,7 +1003,7 @@ on Unsplash</p>
           the book
           <strong>Python For The
             Lab</strong></p>
-        <a href="http://localhost:8000/books">
+        <a href="https://pythonforthelab.com/books">
           <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
             Check out the books
           </button>
@@ -1015,73 +1014,73 @@ on Unsplash</p>
           <h3 class="bg-gray-300 font-serif text-2xl lg:text-xl lg:font-bold text-center py-4">Latest Articles</h3>
           <ul class="mt-4">
               <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python" class="font-lg leading-tight hover:font-bold">
+                  <div>How to use HDF5 files in Python</div>
+                  <div class="font-light text-gray-600 text-sm">
+                    by Aquiles Carattino, 2026-01-09</div>
+                </a>
+              </li>
+              <li class="mx-4 p-3 border-b border-b-gray-400">
+                <a href="https://pythonforthelab.com/blog/instructions-to-build-the-python-for-the-lab-daq/" class="font-lg leading-tight hover:font-bold">
                   <div>Instructions to build the Python for the Lab DAQ.</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2021-03-27</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/using-slots-in-python-limit-dynamic-attribute-creation-and-improve-speed" class="font-lg leading-tight hover:font-bold">
                   <div>Using slots in Python: limit dynamic attribute creation and improve speed</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2021-03-21</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/getting-started-with-basler-cameras" class="font-lg leading-tight hover:font-bold">
                   <div>Acquiring images from Basler Cameras</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2021-02-27</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/singletons-instantiate-objects-only-once" class="font-lg leading-tight hover:font-bold">
                   <div>Singletons: Instantiate objects only once</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2021-01-16</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/differences-between-multiprocessing-windows-and-linux" class="font-lg leading-tight hover:font-bold">
                   <div>Differences of Multiprocessing on Windows and Linux</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2020-06-13</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/python-tip-using-else-loops" class="font-lg leading-tight hover:font-bold">
                   <div>Python Tip: Using Else with Loops</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2020-05-25</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/python-tip-ready-publish-matplotlib-figures" class="font-lg leading-tight hover:font-bold">
                   <div>Python Tip: Ready to Publish Matplotlib Figures</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2020-05-18</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="font-lg leading-tight hover:font-bold">
                   <div>Data Descriptors: Bringing Attributes to the Next level</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2020-05-16</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
+                <a href="https://pythonforthelab.com/blog/python-tips-using-sets" class="font-lg leading-tight hover:font-bold">
                   <div>Python Tips: Using Sets</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2020-05-11</div>
-                </a>
-              </li>
-              <li class="mx-4 p-3 border-b border-b-gray-400">
-                <a href="http://localhost:8000/blog/generators-iterables-iterators-python-when-and-where" class="font-lg leading-tight hover:font-bold">
-                  <div>Generators, Iterables, Iterators in Python: When and Where</div>
-                  <div class="font-light text-gray-600 text-sm">
-                    by Aquiles Carattino, 2020-04-10</div>
                 </a>
               </li>
           </ul>
@@ -1093,11 +1092,11 @@ on Unsplash</p>
 <!-- Footer -->
 <footer class="w-full bg-black text-white p-8">
   <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
-    <img src="http://localhost:8000/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
     <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
       <li>
         <a
-          href="http://localhost:8000/about"
+          href="https://pythonforthelab.com/about"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           About Us
@@ -1105,7 +1104,7 @@ on Unsplash</p>
       </li>
       <li>
         <a
-          href="http://localhost:8000/cookie-policy"
+          href="https://pythonforthelab.com/cookie-policy"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           Cookie Policy
@@ -1113,7 +1112,7 @@ on Unsplash</p>
       </li>
       <li>
         <a
-          href="http://localhost:8000/privacy-policy"
+          href="https://pythonforthelab.com/privacy-policy"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           Privacy Policy
@@ -1121,7 +1120,7 @@ on Unsplash</p>
       </li>
       <li>
         <a
-          href="http://localhost:8000/contact-us"
+          href="https://pythonforthelab.com/contact-us"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           Contact Us
@@ -1133,10 +1132,10 @@ on Unsplash</p>
   <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
     © 2026 Python for the Lab
   </p>
-</footer><script src="http://localhost:8000/theme/js/prism.js"></script>
+</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
 <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
 <script>
-    stork.register("sitesearch", "http://localhost:8000/search-index.st");
+    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
 </script>
 
 <script>
@@ -1148,14 +1147,14 @@ on Unsplash</p>
             if (responsive_menu.is(':hidden')) {
                 responsive_menu.slideToggle();
                 nav.addClass('bg-white');
-                $("#site-logo").attr("src", "http://localhost:8000/theme/css/images/logo-classic.svg");
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
                 $('hamburger').slideToggle();
-                $('#hamburger').attr('src', 'http://localhost:8000/theme/css/images/cross.svg');
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
             } else {
                 responsive_menu.slideToggle();
                 nav.removeClass('bg-white');
-                $("#site-logo").attr("src", "http://localhost:8000/theme/css/images/logo-red.svg");
-                $('#hamburger').attr('src', 'http://localhost:8000/theme/css/images/hamburger.svg');
+                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
             }
         });
         position = $(window).height();
