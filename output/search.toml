@@ -1,6 +1,6 @@
 [input]
 html_selector = "main"
-base_directory = "output"
+base_directory = "/Users/aquiles/Documents/Web/pftl_pelican/output"
 
 [[input.files]]
 path = "cookie-policy/index.html"

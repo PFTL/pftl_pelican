@@ -21,53 +21,53 @@
   <meta name="tags" content="pyhdf, HDF5, data, file, storing, ">
   <meta name="description" content="Complete tutorial on using HDF5 files with Python">
   <meta name="author" content="Aquiles Carattino">
-  <link rel="canonical" href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python">
+  <link rel="canonical" href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:site_name" content="Python for the Lab">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python">
+  <meta property="og:url" content="http://localhost:8000/blog/how-to-use-hdf5-files-in-python">
   <meta property="og:title" content="How to use HDF5 files in Python">
   <meta property="og:description" content="Complete tutorial on using HDF5 files with Python">
   <meta property="og:image" content="/images/storing_data_hdf.png">
 
   <!-- Twitter -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python">
+  <meta property="twitter:url" content="http://localhost:8000/blog/how-to-use-hdf5-files-in-python">
   <meta property="twitter:title" content="How to use HDF5 files in Python">
   <meta property="twitter:description" content="Complete tutorial on using HDF5 files with Python">
   <meta property="twitter:image" content="/images/storing_data_hdf.png">
   <meta name="twitter:creator" content="@aquicarattino">
 
   <link rel="apple-touch-icon" sizes="57x57"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-57x57.png">
+        href="http://localhost:8000/theme/css/favicon/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-60x60.png">
+        href="http://localhost:8000/theme/css/favicon/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-72x72.png">
+        href="http://localhost:8000/theme/css/favicon/apple-icon-72x72.png">
   <link rel="apple-touch-icon" sizes="76x76"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-76x76.png">
+        href="http://localhost:8000/theme/css/favicon/apple-icon-76x76.png">
   <link rel="apple-touch-icon" sizes="114x114"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-114x114.png">
+        href="http://localhost:8000/theme/css/favicon/apple-icon-114x114.png">
   <link rel="apple-touch-icon" sizes="120x120"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-120x120.png">
+        href="http://localhost:8000/theme/css/favicon/apple-icon-120x120.png">
   <link rel="apple-touch-icon" sizes="144x144"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-144x144.png">
+        href="http://localhost:8000/theme/css/favicon/apple-icon-144x144.png">
   <link rel="apple-touch-icon" sizes="152x152"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-152x152.png">
+        href="http://localhost:8000/theme/css/favicon/apple-icon-152x152.png">
   <link rel="apple-touch-icon" sizes="180x180"
-        href="https://pythonforthelab.com/theme/css/favicon/apple-icon-180x180.png">
+        href="http://localhost:8000/theme/css/favicon/apple-icon-180x180.png">
   <link rel="icon" type="image/png" sizes="192x192"
-        href="https://pythonforthelab.com/theme/css/favicon/android-icon-192x192.png">
+        href="http://localhost:8000/theme/css/favicon/android-icon-192x192.png">
   <link rel="icon" type="image/png" sizes="32x32"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-32x32.png">
+        href="http://localhost:8000/theme/css/favicon/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-96x96.png">
+        href="http://localhost:8000/theme/css/favicon/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16"
-        href="https://pythonforthelab.com/theme/css/favicon/favicon-16x16.png">
-  <link rel="manifest" href="https://pythonforthelab.com/theme/css/favicon/manifest.json"/>
+        href="http://localhost:8000/theme/css/favicon/favicon-16x16.png">
+  <link rel="manifest" href="http://localhost:8000/theme/css/favicon/manifest.json"/>
   <meta name="msapplication-TileColor" content="#ffffff">
-  <meta name="msapplication-TileImage" content="https://pythonforthelab.com/theme/css/favicon/ms-icon-144x144.png">
+  <meta name="msapplication-TileImage" content="http://localhost:8000/theme/css/favicon/ms-icon-144x144.png">
   <meta name="theme-color" content="#ffffff">
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -76,11 +76,11 @@
       rel="stylesheet">
 
   <link rel="stylesheet" href="https://files.stork-search.net/basic.css"/>
-  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/tw_style.css">
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://https://pythonforthelab.com/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="https://pythonforthelab.com/theme/js/jquery-migrate-1.2.1.js"></script>
+  <link rel="stylesheet" href="http://localhost:8000/theme/css/tw_style.css">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="https://http://localhost:8000/feed.rss">	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="http://localhost:8000/theme/js/jquery-migrate-1.2.1.js"></script>
 
-	<script src="https://pythonforthelab.com/theme/js/functions.js"></script>  <link rel="stylesheet" href="https://pythonforthelab.com/theme/css/prism.css"/>
+	<script src="http://localhost:8000/theme/js/functions.js"></script>  <link rel="stylesheet" href="http://localhost:8000/theme/css/prism.css"/>
 </head>
 
 <body class="text-gray-800">
@@ -88,40 +88,40 @@
     <div class="lg:flex-col lg:lg:w-[880px] lg:ml-16">
       <nav class="lg:pr-8 w-full lg:pt-4">
         <div class="flex p-3 items-center justify-between">
-          <a class="flex-none" href="https://pythonforthelab.com">
+          <a class="flex-none" href="http://localhost:8000">
             <img id="site-logo" class="h-12"
-                 src="https://pythonforthelab.com/theme/css/images/logo-red.svg"/>
+                 src="http://localhost:8000/theme/css/images/logo-red.svg"/>
           </a>
           <div id="menu_sm"
                class="pr-0 pl-4 grow hidden lg:block">
 <ul
         class="w-full font-semibold text-3xl lg:flex lg:pl-16 lg:text-white md:text-base md:font-medium z-50">
     <li class="nav-item md:grow align-middle ">
-        <a href="https://pythonforthelab.com/blog"
+        <a href="http://localhost:8000/blog"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Blog</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="https://pythonforthelab.com/courses"
+        <a href="http://localhost:8000/courses"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Courses</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="https://pythonforthelab.com/hire-me"
+        <a href="http://localhost:8000/hire-me"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Hire Me</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="https://pythonforthelab.com/books"
+        <a href="http://localhost:8000/books"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">Books</span>
         </a>
     </li>
     <li class="nav-item md:grow align-middle ">
-        <a href="https://pythonforthelab.com/about"
+        <a href="http://localhost:8000/about"
            class="md:pt-6 md:pb-2 hover:border-b-2 hover:border-red-400">
             <span class="">About</span>
         </a>
@@ -136,7 +136,7 @@
         <form action="#" class="w-full pr-8">
             <label for="search" class="relative block">
                 <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
-                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                     src="http://localhost:8000/theme/css/images/search.svg">
                 <input id="search" data-stork="sitesearch" type="text"
                        class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
                        placeholder="Type to Search">
@@ -147,7 +147,7 @@
 </ul>          </div>
           <div class="">
             <button id="menu-button" class="z-50 border-1 border-red-500 lg:hidden">
-              <img id="hamburger" src="https://pythonforthelab.com/theme/css/images/hamburger.svg"
+              <img id="hamburger" src="http://localhost:8000/theme/css/images/hamburger.svg"
                    class="h-8 w-8"/>
             </button>
           </div>
@@ -157,7 +157,7 @@
 <ul
         class="w-full font-semibold text-3xl md:grid md:grid-cols-6 md:px-16 md:text-base md:font-medium">
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="https://pythonforthelab.com/blog"
+        <a href="http://localhost:8000/blog"
            class="before:content-blogIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -165,7 +165,7 @@
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="https://pythonforthelab.com/courses"
+        <a href="http://localhost:8000/courses"
            class="before:content-coursesIcon md:w-full
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -173,7 +173,7 @@
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="https://pythonforthelab.com/hire-me"
+        <a href="http://localhost:8000/hire-me"
            class="before:content-hireIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -181,7 +181,7 @@
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="https://pythonforthelab.com/books"
+        <a href="http://localhost:8000/books"
            class="before:content-booksIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -189,7 +189,7 @@
         </a>
     </li>
     <li class="nav-item align-middle md:h-16 md:pl-8  md:shadow-xl md:hover:shadow-2xl md:active:shadow-none">
-        <a href="https://pythonforthelab.com/about"
+        <a href="http://localhost:8000/about"
            class="before:content-aboutIcon
             before:inline-block before:align-middle before:h-6 before:w-6 md:py-6 md:pr-12
             before:md:h-8 before:md:w-8">
@@ -208,7 +208,7 @@
         <form action="#" class="w-full pr-8">
             <label for="search" class="relative block">
                 <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
-                     src="https://pythonforthelab.com/theme/css/images/search.svg">
+                     src="http://localhost:8000/theme/css/images/search.svg">
                 <input id="search" data-stork="sitesearch" type="text"
                        class="text-base placeholder-gray-500 pl-10 py-4 w-full shadow-sm ring-1 ring-inset ring-gray-300 focus:border-2 focus:border-red-500 focus:ring-red-500"
                        placeholder="Type to Search">
@@ -226,7 +226,7 @@
         <form action="#" class="w-full pr-8 pt-4 text-xs">
           <label for="search" class="relative block">
             <img class="absolute w-4 h-4 top-1/2 -translate-y-1/2 left-3"
-                 src="https://pythonforthelab.com/theme/css/images/search.svg">
+                 src="http://localhost:8000/theme/css/images/search.svg">
             <input id="search" data-stork="sitesearch" type="text"
                    class="text-gray-800 pl-10 bg-white py-2 placeholder-gray-500 w-full border border-gray-600"
                    placeholder="Type to Search">
@@ -302,7 +302,7 @@
 <p>One of the most exciting features of the HDF5 format is that data is read from the hard drive only when it is needed. Imagine you have a large array that doesn't fit in the available RAM. A clear example would be a movie, which is a series of 2D arrays. Maybe you would like to look only at a smaller region and not the full-frame. Instead of loading each frame to memory, you could directly access the required data. H5py allows you to work with data on the hard drive just as you would with an array. </p>
 <p>In this article, we will see how you can use <strong>h5py</strong> to store and retrieve data from files. We will discuss different ways of storing and organizing data and how to optimize the reading process. All the examples that appear in this article are also <a href="https://github.com/PFTL/website_example_code/tree/master/code/02_HDF5">available on our Github repository</a>.</p>
 <h2>Installing</h2>
-<p>The HDF5 format is supported by the <a href="https://www.hdfgroup.org/">HDF Group</a>, and it is based on open source standards, meaning that your data will always be accessible, even if the group disappears. We can install the <a href="https://www.h5py.org/">h5py package</a> through <code>pip</code>. Remember that you should be using a <a href="https://pythonforthelab.com/blog/virtual-environment-is-a-must-have-tool">virtual environment</a> to perform tests:</p>
+<p>The HDF5 format is supported by the <a href="https://www.hdfgroup.org/">HDF Group</a>, and it is based on open source standards, meaning that your data will always be accessible, even if the group disappears. We can install the <a href="https://www.h5py.org/">h5py package</a> through <code>pip</code>. Remember that you should be using a <a href="http://localhost:8000/blog/virtual-environment-is-a-must-have-tool">virtual environment</a> to perform tests:</p>
 <pre><code class="language-shell">pip install h5py
 </code></pre>
 <p>the command will also install numpy, in case you don't have it already in your environment. </p>
@@ -324,7 +324,7 @@ with h5py.File('random.hdf5', 'w') as f:
 <p>We import the packages h5py and numpy and create an array with random values. We open a file called <code>random.hdf5</code> with write permission, <code>w</code> which means that if there is already a file with the same name, it will be overwritten. If you would like to preserve the file and still write to it, you can open it with the <code>a</code> attribute instead of <code>w</code>. We create a dataset called <code>default</code>, and we set the data as the random array created earlier. Datasets are holders of our data, basically the building blocks of the HDF5 format.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are not familiar with the <code>with</code> statement, you can check out <a href="https://pythonforthelab.com/blog/the-with-command-and-custom-classes">this tutorial</a>. In a nutshell, it is a convenient way of opening and closing a file. Even if there is an error within the <code>with</code>, the file will be closed. If, for some reason, you don't use the <code>with</code>, never forget to add the command <code>f.close()</code> at the end. </p>
+<p>If you are not familiar with the <code>with</code> statement, you can check out <a href="http://localhost:8000/blog/the-with-command-and-custom-classes">this tutorial</a>. In a nutshell, it is a convenient way of opening and closing a file. Even if there is an error within the <code>with</code>, the file will be closed. If, for some reason, you don't use the <code>with</code>, never forget to add the command <code>f.close()</code> at the end. </p>
 </div>
 <p>To read the data back, we can do it in a very similar way to when we read a numpy file:</p>
 <pre><code class="language-python">with h5py.File('random.hdf5', 'r') as f:
@@ -981,7 +981,7 @@ in your lab on how to store data and metadata.</p>
           <h2 class="font-serif font-semibold text-2xl leading-tight">Related Articles</h2>
           <div>
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="https://pythonforthelab.com/blog/data-descriptors-bringing-attributes-next-level" class="text-gray-700 hover:text-gray-900">
+                <a href="http://localhost:8000/blog/data-descriptors-bringing-attributes-next-level" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="/images/42_decorators.width-800.png"
@@ -999,7 +999,7 @@ in your lab on how to store data and metadata.</p>
                 </a>
               </div>
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="https://pythonforthelab.com/blog/storing-data-with-sqlite" class="text-gray-700 hover:text-gray-900">
+                <a href="http://localhost:8000/blog/storing-data-with-sqlite" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="/images/tobias-fischer-185901-unsplash_linkedin.width-800.jpg"
@@ -1017,7 +1017,7 @@ in your lab on how to store data and metadata.</p>
                 </a>
               </div>
               <div class="group border-b border-b-gray-400 mb-4">
-                <a href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing" class="text-gray-700 hover:text-gray-900">
+                <a href="http://localhost:8000/blog/storing-binary-data-and-serializing" class="text-gray-700 hover:text-gray-900">
                   <div class="sm:flex">
                     <div class="flex-none sm:w-64 md:w-96">
                       <img class="px-2 pb-4" src="/images/joshua-sortino-215039-unsplash_linkedin.width-800.jpg"
@@ -1059,7 +1059,7 @@ in your lab on how to store data and metadata.</p>
           the book
           <strong>Python For The
             Lab</strong></p>
-        <a href="https://pythonforthelab.com/books">
+        <a href="http://localhost:8000/books">
           <button class="bg-emerald-500 hover:scale-105 focus:bg-emerald-300 text-white p-4 mt-2 w-full md:max-w-2/3">
             Check out the books
           </button>
@@ -1070,28 +1070,28 @@ in your lab on how to store data and metadata.</p>
           <h3 class="bg-gray-300 font-serif text-2xl text-center py-4">Saving Data series</h3>
           <ol class="mt-4">
               <li class="mx-4 p-3 border-b border-b-gray-400 ">
-                <a href="https://pythonforthelab.com/blog/introduction-to-storing-data-in-files" class="font-lg leading-tight hover:font-bold">
+                <a href="http://localhost:8000/blog/introduction-to-storing-data-in-files" class="font-lg leading-tight hover:font-bold">
                   <div>Introduction to Storing Data in Files</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2018-08-10</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400 ">
-                <a href="https://pythonforthelab.com/blog/storing-binary-data-and-serializing" class="font-lg leading-tight hover:font-bold">
+                <a href="http://localhost:8000/blog/storing-binary-data-and-serializing" class="font-lg leading-tight hover:font-bold">
                   <div>Storing Binary Data and Serializing</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2018-08-11</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400 border-b-2 border-b-emerald-400 ">
-                <a href="https://pythonforthelab.com/blog/how-to-use-hdf5-files-in-python" class="font-lg leading-tight hover:font-bold">
+                <a href="http://localhost:8000/blog/how-to-use-hdf5-files-in-python" class="font-lg leading-tight hover:font-bold">
                   <div>How to use HDF5 files in Python</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2018-03-19</div>
                 </a>
               </li>
               <li class="mx-4 p-3 border-b border-b-gray-400 ">
-                <a href="https://pythonforthelab.com/blog/storing-data-with-sqlite" class="font-lg leading-tight hover:font-bold">
+                <a href="http://localhost:8000/blog/storing-data-with-sqlite" class="font-lg leading-tight hover:font-bold">
                   <div>Storing Data with SQLite</div>
                   <div class="font-light text-gray-600 text-sm">
                     by Aquiles Carattino, 2018-08-12</div>
@@ -1106,11 +1106,11 @@ in your lab on how to store data and metadata.</p>
 <!-- Footer -->
 <footer class="w-full bg-black text-white p-8">
   <div class="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 text-center md:justify-between">
-    <img src="https://pythonforthelab.com/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
+    <img src="http://localhost:8000/theme/css/images/logo-red.svg" alt="logo-ct" class="w-20" />
     <ul class="flex flex-wrap items-center gap-y-2 gap-x-8">
       <li>
         <a
-          href="https://pythonforthelab.com/about"
+          href="http://localhost:8000/about"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           About Us
@@ -1118,7 +1118,7 @@ in your lab on how to store data and metadata.</p>
       </li>
       <li>
         <a
-          href="https://pythonforthelab.com/cookie-policy"
+          href="http://localhost:8000/cookie-policy"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           Cookie Policy
@@ -1126,7 +1126,7 @@ in your lab on how to store data and metadata.</p>
       </li>
       <li>
         <a
-          href="https://pythonforthelab.com/privacy-policy"
+          href="http://localhost:8000/privacy-policy"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           Privacy Policy
@@ -1134,7 +1134,7 @@ in your lab on how to store data and metadata.</p>
       </li>
       <li>
         <a
-          href="https://pythonforthelab.com/contact-us"
+          href="http://localhost:8000/contact-us"
           class="block font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased transition-colors hover:text-pink-500 focus:text-pink-500"
         >
           Contact Us
@@ -1146,10 +1146,10 @@ in your lab on how to store data and metadata.</p>
   <p class="block text-center font-sans text-base font-normal leading-relaxed text-blue-gray-200 antialiased">
     © 2023 Python for the Lab
   </p>
-</footer><script src="https://pythonforthelab.com/theme/js/prism.js"></script>
+</footer><script src="http://localhost:8000/theme/js/prism.js"></script>
 <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
 <script>
-    stork.register("sitesearch", "https://pythonforthelab.com/search-index.st");
+    stork.register("sitesearch", "http://localhost:8000/search-index.st");
 </script>
 
 <script>
@@ -1161,14 +1161,14 @@ in your lab on how to store data and metadata.</p>
             if (responsive_menu.is(':hidden')) {
                 responsive_menu.slideToggle();
                 nav.addClass('bg-white');
-                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-classic.svg");
+                $("#site-logo").attr("src", "http://localhost:8000/theme/css/images/logo-classic.svg");
                 $('hamburger').slideToggle();
-                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/cross.svg');
+                $('#hamburger').attr('src', 'http://localhost:8000/theme/css/images/cross.svg');
             } else {
                 responsive_menu.slideToggle();
                 nav.removeClass('bg-white');
-                $("#site-logo").attr("src", "https://pythonforthelab.com/theme/css/images/logo-red.svg");
-                $('#hamburger').attr('src', 'https://pythonforthelab.com/theme/css/images/hamburger.svg');
+                $("#site-logo").attr("src", "http://localhost:8000/theme/css/images/logo-red.svg");
+                $('#hamburger').attr('src', 'http://localhost:8000/theme/css/images/hamburger.svg');
             }
         });
         position = $(window).height();

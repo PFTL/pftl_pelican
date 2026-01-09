@@ -1,0 +1,7 @@
+pelican==4.8.0
+pelican-featured-image==1.0.0
+pelican-search==1.1.0
+pelican-series==2.1.0
+pelican-similar-posts==1.0.0
+pelican-sitemap==1.1.0
+pelican-yaml-metadata==2.1.2
